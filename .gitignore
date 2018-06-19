@@ -108,12 +108,12 @@ org.eclipse.core.resources/*.snap
 !SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin
 !SampleCode/StdDriver/FMC_IAP/KEIL/obj/
 !SampleCode/StdDriver/FMC_IAP/KEIL/obj/fmc_ld_iap.bin
-!SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap.bin
+!SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin
 
 !SampleCode/RegBased/FMC_IAP/IAR/Release/
 !SampleCode/RegBased/FMC_IAP/IAR/Release/Exe/
 !SampleCode/RegBased/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin
 !SampleCode/RegBased/FMC_IAP/KEIL/obj/
 !SampleCode/RegBased/FMC_IAP/KEIL/obj/fmc_ld_iap.bin
-!SampleCode/RegBased/FMC_IAP/GCC/LDROM_iap.bin
+!SampleCode/RegBased/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin
 
