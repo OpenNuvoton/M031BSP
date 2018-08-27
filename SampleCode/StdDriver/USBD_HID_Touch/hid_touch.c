@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     hid_touch.c
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/04/03 1:09p $
+ * $Revision: 8 $
+ * $Date: 18/07/18 4:55p $
  * @brief    M031 series USBD driver Sample file
  *
  * @note
@@ -13,18 +13,17 @@
 #include "NuMicro.h"
 #include "hid_touch.h"
 
-
 uint8_t volatile g_u8EP2Ready = 0;
+uint8_t volatile g_u8Suspend = 0;
 
 void USBD_IRQHandler(void)
 {
-    uint32_t u32IntSts = USBD_GET_INT_FLAG();
-    uint32_t u32State = USBD_GET_BUS_STATE();
+    uint32_t volatile u32IntSts = USBD_GET_INT_FLAG();
+    uint32_t volatile u32State = USBD_GET_BUS_STATE();
 
-//------------------------------------------------------------------
     if (u32IntSts & USBD_INTSTS_FLDET)
     {
-        // Floating detect
+        /* Floating detect */
         USBD_CLR_INT_FLAG(USBD_INTSTS_FLDET);
 
         if (USBD_IS_ATTACHED())
@@ -39,7 +38,6 @@ void USBD_IRQHandler(void)
         }
     }
 
-//------------------------------------------------------------------
     if (u32IntSts & USBD_INTSTS_BUS)
     {
         /* Clear event flag */
@@ -50,9 +48,13 @@ void USBD_IRQHandler(void)
             /* Bus reset */
             USBD_ENABLE_USB();
             USBD_SwReset();
+            g_u8Suspend = 0;
         }
         if (u32State & USBD_STATE_SUSPEND)
         {
+            /* Enter power down to wait USB attached */
+            g_u8Suspend = 1;
+
             /* Enable USB but disable PHY */
             USBD_DISABLE_PHY();
         }
@@ -60,10 +62,16 @@ void USBD_IRQHandler(void)
         {
             /* Enable USB and enable PHY */
             USBD_ENABLE_USB();
+            g_u8Suspend = 0;
         }
     }
 
-//------------------------------------------------------------------
+    if(u32IntSts & USBD_INTSTS_SOF)
+    {
+        /* Clear SOF flag */
+        USBD_CLR_INT_FLAG(USBD_INTSTS_SOF);
+    }
+
     if(u32IntSts & USBD_INTSTS_WAKEUP)
     {
         /* Clear event flag */
@@ -72,10 +80,10 @@ void USBD_IRQHandler(void)
 
     if (u32IntSts & USBD_INTSTS_USB)
     {
-        // USB event
+        /* USB event */
         if (u32IntSts & USBD_INTSTS_SETUP)
         {
-            // Setup packet
+            /* Setup packet */
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_SETUP);
 
@@ -86,12 +94,12 @@ void USBD_IRQHandler(void)
             USBD_ProcessSetupPacket();
         }
 
-        // EP events
+        /* EP events */
         if (u32IntSts & USBD_INTSTS_EP0)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP0);
-            // control IN
+            /* control IN */
             USBD_CtrlIn();
         }
 
@@ -99,8 +107,7 @@ void USBD_IRQHandler(void)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP1);
-
-            // control OUT
+            /* control OUT */
             USBD_CtrlOut();
         }
 
@@ -108,7 +115,7 @@ void USBD_IRQHandler(void)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP2);
-            // Interrupt IN
+            /* Interrupt IN */
             EP2_Handler();
         }
 
@@ -179,7 +186,7 @@ void HID_Init(void)
     /* Buffer range for EP2 */
     USBD_SET_EP_BUF_ADDR(EP2, EP2_BUF_BASE);
 
-    /* Start to send IN data */
+    /* start to IN data - The first interrupt is trigger by program */
     g_u8EP2Ready = 1;
 }
 
@@ -191,7 +198,7 @@ void HID_ClassRequest(void)
 
     if (buf[0] & 0x80)   /* request data transfer direction */
     {
-        // Device to host
+        /* Device to host */
         switch (buf[1])
         {
         case GET_REPORT:
@@ -218,7 +225,8 @@ void HID_ClassRequest(void)
             {
                 // DBG_PRINTF(" - Unknown\n");
                 /* Setup error, stall the device */
-                USBD_SetStall(0);
+                USBD_SetStall(EP0);
+                USBD_SetStall(EP1);
             }
             break;
         }
@@ -233,14 +241,15 @@ void HID_ClassRequest(void)
         default:
         {
             /* Setup error, stall the device */
-            USBD_SetStall(0);
+            USBD_SetStall(EP0);
+            USBD_SetStall(EP1);
             break;
         }
         }
     }
     else
     {
-        // Host to device
+        /* Host to device */
         switch (buf[1])
         {
         case SET_REPORT:
@@ -272,9 +281,10 @@ void HID_ClassRequest(void)
 //             }
         default:
         {
-            // Stall
+            /* Stall */
             /* Setup error, stall the device */
-            USBD_SetStall(0);
+            USBD_SetStall(EP0);
+            USBD_SetStall(EP1);
             break;
         }
         }
@@ -302,7 +312,7 @@ void HID_UpdateTouchData(void)
 
         ReportCount++;
 
-        if ((X1 >= 0x0200) && (X1 <= 0x0400))   // touchDown
+        if ((X1 >= 0x0200) && (X1 <= 0x0400))   /* touchDown */
         {
             bIsX1Send04 = 1;
 
@@ -318,7 +328,7 @@ void HID_UpdateTouchData(void)
             buf[12] = ((Y1+0x20) >> 8) & 0xff;
             buf[13] = 2;
         }
-        else if (bIsX1Send04)     // touchUp
+        else if (bIsX1Send04)     /* touchUp */
         {
             bIsX1Send04 = 0;
             buf[1] = 0x04;

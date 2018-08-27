@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/05/31 11:47a $
+ * $Revision: 6 $
+ * $Date: 18/07/10 11:21a $
  * @brief
  *           Demonstrate how to cause WDT time-out reset system event while WDT time-out reset delay period expired.
  *
@@ -55,36 +55,33 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC clock */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
+    /* Waiting for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
-    /* Switch HCLK clock source to HIRC */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC ;
-
-    /* Switch UART0 clock source to XTAL */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HXT;
-
-    /* Switch WDT clock source to LIRC */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_WDTSEL_Msk) | CLK_CLKSEL1_WDTSEL_LIRC;
+    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
-    CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk ;
+    CLK_EnableModuleClock(UART0_MODULE);
+
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
+
+    /* Switch WDT clock source to LIRC */
+    CLK_SetModuleClock(WDT_MODULE, CLK_CLKSEL1_WDTSEL_LIRC, 0);
 
     /* Enable WDT clock */
-    CLK->APBCLK0 |= CLK_APBCLK0_WDTCKEN_Msk ;
+    CLK_EnableModuleClock(WDT_MODULE);
 
     /* Update System Core Clock */
     SystemCoreClockUpdate();
 
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))
+                    |(SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -135,11 +132,9 @@ int main(void)
     printf("    we will not reset WDT counter value and system will be reset immediately by WDT time-out reset signal.\n");
 
     /* Use PA.0 to check WWDT compare match interrupt period time */
-    PA->MODE = 0xFFFFFFFD;
-    PA0 = 1;
+    GPIO_SetMode(PA, BIT0, GPIO_MODE_OUTPUT);
 
-    /* Enable WDT NVIC */
-    NVIC_EnableIRQ(WDT_IRQn);
+    PA0 = 1;
 
     /* Because of all bits can be written in WDT Control Register are write-protected;
        To program it needs to disable register protection first. */
@@ -148,6 +143,9 @@ int main(void)
     /* Configure WDT settings and start WDT counting */
     g_u32WDTINTCounts = g_u8IsWDTWakeupINT = 0;
     WDT_Open(WDT_TIMEOUT_2POW14, WDT_RESET_DELAY_18CLK, TRUE, TRUE);
+
+    /* Enable WDT NVIC */
+    NVIC_EnableIRQ(WDT_IRQn);
 
     /* Enable WDT interrupt function */
     WDT_EnableInt();
@@ -160,6 +158,7 @@ int main(void)
         printf("\nSystem enter to power-down mode ...\n");
         /* To check if all the debug messages are finished */
         while(IsDebugFifoEmpty() == 0);
+
         CLK_PowerDown();
 
         /* Check if WDT time-out interrupt and wake-up occurred or not */

@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     hid_kb.h
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/04/03 9:55a $
+ * $Revision: 5 $
+ * $Date: 18/07/13 11:21a $
  * @brief    M031 series USB HID keyboard header file
  *
  * @note
@@ -67,6 +67,7 @@ extern uint8_t volatile g_u8EP2Ready;
 void HID_Init(void);
 void HID_ClassRequest(void);
 void EP2_Handler(void);
+void HID_UpdateKbData(void);
 
 #endif  /* __USBD_HID_H_ */
 

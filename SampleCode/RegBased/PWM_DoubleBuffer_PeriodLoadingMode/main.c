@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V1.00
- * $Revision: 5 $
- * $Date: 18/06/01 3:25p $
+ * $Revision: 9 $
+ * $Date: 18/07/19 2:22p $
  * @brief
  *           Change duty cycle and period of output waveform by PWM Double Buffer function(Period loading mode).
  *
@@ -12,11 +12,6 @@
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
-
-/*---------------------------------------------------------------------------------------------------------*/
-/* Macro, type and constant definitions                                                                    */
-/*---------------------------------------------------------------------------------------------------------*/
-#define PLLCTL_SETTING  CLK_PLLCTL_96MHz_HXT
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -56,15 +51,6 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
     /* Enable HIRC clock */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
@@ -74,11 +60,8 @@ void SYS_Init(void)
     /* Switch HCLK clock source to HIRC */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk) | CLK_CLKSEL0_HCLKSEL_HIRC;
 
-    /* Switch UART0 clock source to XTAL */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HXT;
-
-    /* Switch STCLK source to HCLK/2 */
-    CLK->CLKSEL0 = CLK_CLKSEL0_STCLKSEL_HCLK_DIV2;
+    /* Switch UART0 clock source to HIRC */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HIRC;
 
     /* Enable PLL and Set PLL frequency (only rev. D & E support PLL) */
 //    CLK->PLLCTL = PLLCTL_SETTING;
@@ -93,7 +76,7 @@ void SYS_Init(void)
     /* PWM clock frequency configuration                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Select HCLK clock divider as 2 */
-    CLK->CLKDIV0 = (CLK->CLKDIV0 & ~CLK_CLKDIV0_HCLKDIV_Msk) | CLK_CLKDIV0_HCLK(2);
+//    CLK->CLKDIV0 = (CLK->CLKDIV0 & ~CLK_CLKDIV0_HCLKDIV_Msk) | CLK_CLKDIV0_HCLK(2);
 
     /* PWM clock frequency can be set equal or double to HCLK by choosing case 1 or case 2 */
     /* case 1.PWM clock frequency is set equal to HCLK: select PWM module clock source as PCLK */
@@ -117,14 +100,12 @@ void SYS_Init(void)
     /* Init I/O Multi-function                                                                                 */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    /* Set PB multi-function pins for PWM0 Channel 0 and 2 */
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB5MFP_Msk));
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB5MFP_PWM0_CH0;
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB3MFP_Msk));
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB3MFP_PWM0_CH2;
+    /* Set PB multi-function pins for PWM0 Channel 0 */
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB5MFP_Msk)) |
+                    SYS_GPB_MFPL_PB5MFP_PWM0_CH0;
 }
 
 void UART0_Init()
@@ -137,10 +118,9 @@ void UART0_Init()
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 baud rate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
-
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Main Function                                                                                          */
@@ -166,7 +146,7 @@ int32_t main(void)
     UART0_Init();
 
     printf("\n\nCPU @ %dHz(PLL@ %dHz)\n", SystemCoreClock, PllClock);
-    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "CPU" : "PLL");
+    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "PCLK" : "PLL");
     printf("+------------------------------------------------------------------------+\n");
     printf("|                          PWM Driver Sample Code                        |\n");
     printf("|                                                                        |\n");
@@ -193,7 +173,7 @@ int32_t main(void)
       Configure PWM0 channel 0 init period and duty(up counter type).
       Period is PLL / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
-      Period = 48 MHz / (2 * (199 + 1)) = 120000 Hz
+      Period = 48 MHz / (2 * (199 + 1)) = 120,000 Hz
       Duty ratio = (100) / (199 + 1) = 50%
     */
 

@@ -63,29 +63,30 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC clock (Internal RC 48MHz) */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
+    /* Wait for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
-    /* Switch HCLK clock source to HIRC */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC ;
-
-    /* Switch UART0 clock source to HIRC */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HIRC;
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
-    CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk ;
+    CLK_EnableModuleClock(UART0_MODULE);
 
-    CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk | CLK_APBCLK0_TMR1CKEN_Msk;
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
+
+    /* Enable IP clock */
+    CLK_EnableModuleClock(TMR1_MODULE);
+
+    /* Select IP clock source */
+    CLK_SetModuleClock(TMR0_MODULE, CLK_CLKSEL1_TMR1SEL_HIRC, 0);
 
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))    |       \
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Update System Core Clock */
     SystemCoreClockUpdate();

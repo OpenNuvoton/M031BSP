@@ -152,7 +152,6 @@
           <name>OGUseCmsisDspLib</name>
           <state>0</state>
         </option>
-        
       </data>
     </settings>
     <settings>
@@ -388,7 +387,6 @@
           <name>IccFloatSemantics</name>
           <state>0</state>
         </option>
-        
       </data>
     </settings>
     <settings>
@@ -551,7 +549,6 @@
           <name>AExtraOptionsV2</name>
           <state />
         </option>
-        
       </data>
     </settings>
     <settings>
@@ -871,7 +868,6 @@
           <name>IlinkOptForceVfe</name>
           <state>0</state>
         </option>
-        
       </data>
     </settings>
     <settings>
@@ -932,3 +928,4 @@
     </file>
   </group>
 </project>
+

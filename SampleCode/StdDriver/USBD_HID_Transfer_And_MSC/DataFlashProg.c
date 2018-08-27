@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     DataFlashProg.c
  * @version  V1.00
- * $Revision: 5 $
- * $Date: 18/04/03 1:17p $
+ * $Revision: 6 $
+ * $Date: 18/07/13 1:28p $
  * @brief    Data Flash Access API
  *
  * @note
@@ -121,7 +121,7 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
             if (size < len)
                 len = size;
 
-            for (i = 0; i < len / 4; i++)
+            for (i=0; i<len/4; i++)
             {
                 g_sectorBuf[offset / 4 + i] = pu32[i];
             }

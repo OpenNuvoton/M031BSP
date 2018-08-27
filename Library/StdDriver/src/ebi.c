@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     ebi.c
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/04/25 11:43a $
+ * $Revision: 5 $
+ * $Date: 18/08/20 11:48a $
  * @brief    M031 series External Bus Interface(EBI) driver source file
  *
  * @note
@@ -76,10 +76,10 @@ void EBI_Open(uint32_t u32Bank, uint32_t u32DataWidth, uint32_t u32TimingClass, 
 
     case EBI_TIMING_VERYFAST:
         *pu32EBICTL = (*pu32EBICTL & ~(EBI_CTL_MCLKDIV_Msk | EBI_CTL_TALE_Msk)) |
-                      (EBI_MCLKDIV_1 << EBI_CTL_MCLKDIV_Pos) |
+                      (EBI_MCLKDIV_4 << EBI_CTL_MCLKDIV_Pos) |
                       (u32CSActiveLevel << EBI_CTL_CSPOLINV_Pos) | EBI_CTL_EN_Msk |
                       (0x3 << EBI_CTL_TALE_Pos) ;
-        *pu32EBITCTL = 0x03003318;
+        *pu32EBITCTL = 0x0;
         break;
 
     case EBI_TIMING_FAST:

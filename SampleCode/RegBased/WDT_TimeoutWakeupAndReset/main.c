@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/05/31 3:02p $
+ * $Revision: 7 $
+ * $Date: 18/07/10 11:22a $
  * @brief
  *           Demonstrate how to cause WDT time-out reset system event while WDT time-out reset delay period expired.
  *
@@ -55,26 +55,23 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC clock */
+    CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
     /* Switch HCLK clock source to HIRC */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC ;
 
-    /* Switch UART0 clock source to XTAL */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Enable UART0 clock */
+    CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk ;
+
+    /* Switch UART0 clock source to HIRC */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HIRC;
 
     /* Switch WDT clock source to LIRC */
     CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_WDTSEL_Msk) | CLK_CLKSEL1_WDTSEL_LIRC;
-
-    /* Enable UART0 clock */
-    CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk ;
 
     /* Enable WDT clock */
     CLK->APBCLK0 |= CLK_APBCLK0_WDTCKEN_Msk ;
@@ -83,8 +80,8 @@ void SYS_Init(void)
     SystemCoreClockUpdate();
 
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))
+                    |(SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -111,7 +108,7 @@ int main(void)
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 baud rate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 
     printf("\n\nCPU @ %d Hz\n", SystemCoreClock);
@@ -144,9 +141,6 @@ int main(void)
     PA->MODE = 0xFFFFFFFD;
     PA0 = 1;
 
-    /* Enable WDT NVIC */
-    NVIC_EnableIRQ(WDT_IRQn);
-
     /* Because of all bits can be written in WDT Control Register are write-protected;
        To program it needs to disable register protection first. */
     SYS_UnlockReg();
@@ -159,6 +153,9 @@ int main(void)
     WDT->CTL = WDT_TIMEOUT_2POW14 | WDT_CTL_WDTEN_Msk |
                (1 << WDT_CTL_RSTEN_Pos) |
                (1 << WDT_CTL_WKEN_Pos);
+
+    /* Enable WDT NVIC */
+    NVIC_EnableIRQ(WDT_IRQn);
 
     /* Enable WDT interrupt function */
     WDT->CTL |= WDT_CTL_INTEN_Msk;

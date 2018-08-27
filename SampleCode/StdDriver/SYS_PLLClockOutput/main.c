@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V3.00
- * @brief    Change system clock to different PLL frequency and output system clock from CLKO pin.
+ * @brief    Change system clock to different PLL frequency and output system clock to CLKO pin.
  *
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *
@@ -106,6 +106,8 @@ void SYS_PLL_Test(void)
     /*---------------------------------------------------------------------------------------------------------*/
 
     printf("\n-------------------------[ Test PLL ]-----------------------------\n");
+    printf("  Select HCLK clock source from PLL/2.\n");
+    printf("  Please measure HCLK on CLKO pin (PB.14) by scope ...\n");
 
     for(i = 0; i < sizeof(g_au32PllSetting) / sizeof(g_au32PllSetting[0]) ; i++)
     {
@@ -116,11 +118,11 @@ void SYS_PLL_Test(void)
 
         printf("  Change system clock to %d Hz ...................... ", SystemCoreClock);
 
-        /* Output selected clock to CKO, CKO Clock = HCLK / 2^(1 + 1) */
-        CLK_EnableCKO(CLK_CLKSEL1_CLKOSEL_HCLK, 1, 0);
+        /* Output HCLK to CKO, CKO Clock = HCLK / 1 */
+        CLK_EnableCKO(CLK_CLKSEL1_CLKOSEL_HCLK, 0, 1);
 
         /* The delay loop is used to check if the CPU speed is increasing */
-        Delay(0x400000);
+        Delay(0x1000000);
 
         if(pi())
         {
@@ -141,23 +143,23 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
     /* Switch HCLK clock source to HIRC */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC;
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
-    /* Enable UART clock */
+    /* Set both PCLK0 and PCLK1 as HCLK/2 */
+    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
+
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
+
+    /* Enable UART peripheral clock */
     CLK_EnableModuleClock(UART0_MODULE);
-
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
@@ -166,13 +168,10 @@ void SYS_Init(void)
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
     /*----------------------------------------------------------------------*/
-
     /* Set PB multi-function pins for UART0 RXD and TXD */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
-
     /* Set PB multi-function pins for CLKO(PB.14) */
-    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~SYS_GPB_MFPH_PB14MFP_Msk) | SYS_GPB_MFPH_PB14MFP_CLKO;
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk | SYS_GPB_MFPH_PB14MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD | SYS_GPB_MFPH_PB14MFP_CLKO);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -253,8 +252,7 @@ int32_t main(void)
     UART_WAIT_TX_EMPTY(UART0);
 
     /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
-    CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(1);
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Set PLL to Power down mode and HW will also clear PLLSTB bit in CLK_STATUS register */
     CLK_DisablePLL();

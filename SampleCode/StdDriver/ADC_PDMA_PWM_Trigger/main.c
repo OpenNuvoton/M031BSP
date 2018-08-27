@@ -24,26 +24,23 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
     /* Switch HCLK clock source to HIRC */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC;
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
-    /* Set PCLK0 = PCLK1 = HCLK/2 */
+    /* Set both PCLK0 and PCLK1 as HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
-    /* Enable UART module clock */
-    CLK_EnableModuleClock(UART0_MODULE);
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Enable UART peripheral clock */
+    CLK_EnableModuleClock(UART0_MODULE);
 
     /* Enable PWM0 module clock */
     CLK_EnableModuleClock(PWM0_MODULE);
@@ -54,8 +51,8 @@ void SYS_Init(void)
     /* Enable ADC module clock */
     CLK_EnableModuleClock(ADC_MODULE);
 
-    /* ADC clock source is HXT 12MHz, set divider to 8, ADC clock is 12/8 MHz */
-    CLK_SetModuleClock(ADC_MODULE, CLK_CLKSEL2_ADCSEL_HXT, CLK_CLKDIV0_ADC(8));
+    /* ADC clock source is PCLK1, set divider to 1 */
+    CLK_SetModuleClock(ADC_MODULE, CLK_CLKSEL2_ADCSEL_PCLK1, CLK_CLKDIV0_ADC(1));
 
     /* Enable PDMA clock source */
     CLK_EnableModuleClock(PDMA_MODULE);
@@ -67,18 +64,16 @@ void SYS_Init(void)
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
     /*----------------------------------------------------------------------*/
-
     /* Set GPB multi-function pins for UART0 RXD and TXD */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    /* Set PB.2 ~ PB.3 to input mode */
-    PB->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-    /* Configure the GPB2 - GPB3 ADC analog input pins.  */
-    SYS->GPB_MFPL &= ~(SYS_GPB_MFPL_PB2MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk);
-    SYS->GPB_MFPL |= (SYS_GPB_MFPL_PB2MFP_ADC_CH2 | SYS_GPB_MFPL_PB3MFP_ADC_CH3);
-
-    /* Disable the GPB2 digital input path to avoid the leakage current. */
+    /* Set PB.2 - PB.3 to input mode */
+    GPIO_SetMode(PB, BIT2|BIT3, GPIO_MODE_INPUT);
+    /* Configure the PB.2 - PB.3 ADC analog input pins.  */
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB2MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk)) |
+                    (SYS_GPB_MFPL_PB2MFP_ADC_CH2 | SYS_GPB_MFPL_PB3MFP_ADC_CH3);
+    /* Disable the PB.2 - PB.3 digital input path to avoid the leakage current. */
     GPIO_DISABLE_DIGITAL_PATH(PB, BIT2|BIT3);
 
     /* Lock protected registers */
@@ -118,8 +113,8 @@ void PDMA_Init()
     /* transfer width is half word(16 bit) and transfer count is 6 */
     PDMA_SetTransferCnt(PDMA, 1, PDMA_WIDTH_16, 6);
 
-    /* Set source address as ADC data register (no increment) and destination address as g_i32ConversionData array (increment) */
-    PDMA_SetTransferAddr(PDMA, 1, (uint32_t)&ADC->ADDR[2], PDMA_SAR_FIX, (uint32_t)g_i32ConversionData, PDMA_DAR_INC);
+    /* Set source address as ADC PDMA Current Transfer Data register (no increment) and destination address as g_i32ConversionData array (increment) */
+    PDMA_SetTransferAddr(PDMA, 1, (uint32_t)&ADC->ADPDMA, PDMA_SAR_FIX, (uint32_t)g_i32ConversionData, PDMA_DAR_INC);
 
     /* Select PDMA request source as ADC RX */
     PDMA_SetTransferMode(PDMA, 1, PDMA_ADC_RX, FALSE, 0);
@@ -161,7 +156,7 @@ void ADC_FunctionTest()
 
         printf("Select input mode:\n");
         printf("  [1] Single end input (channel 2 only)\n");
-        printf("  [2] Differential input (channel pair 1 only(channel 2 and 3))\n");
+        printf("  [2] Differential input (channel pair 1 only (channel 2 and 3))\n");
         printf("  Other keys: exit single mode test\n");
         u8Option = getchar();
         if(u8Option == '1')
@@ -178,7 +173,7 @@ void ADC_FunctionTest()
             printf("Conversion result of channel 2:\n");
 
             /* Enable PWM0 channel 0 counter */
-            PWM_Start(PWM0, PWM_CH_0_MASK); // PWM0 channel 0 counter start running.
+            PWM_Start(PWM0, PWM_CH_0_MASK);
 
             while(1)
             {
@@ -208,7 +203,7 @@ void ADC_FunctionTest()
             printf("Conversion result of channel 2:\n");
 
             /* Enable PWM0 channel 0 counter */
-            PWM_Start(PWM0, PWM_CH_0_MASK); // PWM0 channel 0 counter start running.
+            PWM_Start(PWM0, PWM_CH_0_MASK);
 
             while(1)
             {

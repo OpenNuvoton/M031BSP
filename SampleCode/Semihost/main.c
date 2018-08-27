@@ -28,14 +28,14 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC clock (Internal RC 48MHz) */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
+    /* Wait for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Waiting for 32MHz clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Set core clock as PLL_CLOCK from PLL */
     CLK_SetCoreClock(PLL_CLOCK);

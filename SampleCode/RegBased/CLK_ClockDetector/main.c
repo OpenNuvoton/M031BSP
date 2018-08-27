@@ -73,15 +73,11 @@ void SYS_Init(void)
     SYS_UnlockReg();
 
     /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
     /* Set X32_OUT(PF.4) and X32_IN(PF.5) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE4_Msk | GPIO_MODE_MODE5_Msk);
+    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk | GPIO_MODE_MODE4_Msk | GPIO_MODE_MODE5_Msk);
 
     /* Enable HIRC, HXT and LXT clock */
-    CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-    CLK->PWRCTL |= CLK_PWRCTL_LXTEN_Msk;
+    CLK->PWRCTL |= (CLK_PWRCTL_HIRCEN_Msk | CLK_PWRCTL_HXTEN_Msk | CLK_PWRCTL_LXTEN_Msk);
 
     /* Wait for HIRC, HXT and LXT clock ready */
     while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
@@ -109,17 +105,14 @@ void SYS_Init(void)
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
     /*----------------------------------------------------------------------*/
-
     /* Set PB multi-function pins for UART0 RXD and TXD */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
-
     /* Set PB multi-function pins for CLKO(PB.14) */
-    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~SYS_GPB_MFPH_PB14MFP_Msk) | SYS_GPB_MFPH_PB14MFP_CLKO;
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk | SYS_GPB_MFPH_PB14MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD | SYS_GPB_MFPH_PB14MFP_CLKO);
 
     /* Set PF multi-function pins for X32_OUT(PF.4) and X32_IN(PF.5) */
-    SYS->GPF_MFPL &= ~(SYS_GPF_MFPL_PF4MFP_Msk | SYS_GPF_MFPL_PF5MFP_Msk);
-    SYS->GPF_MFPL |= (SYS_GPF_MFPL_PF4MFP_X32_OUT | SYS_GPF_MFPL_PF5MFP_X32_IN);
+    SYS->GPF_MFPL = (SYS->GPF_MFPL & ~(SYS_GPF_MFPL_PF4MFP_Msk | SYS_GPF_MFPL_PF5MFP_Msk)) |
+                    (SYS_GPF_MFPL_PF4MFP_X32_OUT | SYS_GPF_MFPL_PF5MFP_X32_IN);
 
     /* Lock protected registers */
     SYS_LockReg();

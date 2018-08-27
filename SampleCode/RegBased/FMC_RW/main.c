@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 10 $
- * $Date: 18/06/20 3:39p $
+ * $Revision: 12 $
+ * $Date: 18/07/18 3:21p $
  * @brief    Show FMC read flash IDs, erase, read, and write functions.
  *
  * @note
@@ -20,35 +20,33 @@ uint32_t APROM_TEST_END  = 0x00004000UL;        /* 16KB */
 uint32_t LDROM_TEST_SIZE = 0x00000800UL;        /*  2KB */
 uint32_t LDROM_TEST_END  = 0x00100800UL;
 
+int IsDebugFifoEmpty(void);
 void SYS_Init(void)
 {
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC clock */
+    CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
     /* Switch HCLK clock source to HIRC */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC ;
 
-    /* Switch UART0 clock source to XTAL */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HXT;
-
     /* Enable UART0 clock */
     CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk ;
+
+    /* Switch UART0 clock source to HIRC */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HIRC;
 
     /* Update System Core Clock */
     SystemCoreClockUpdate();
 
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))
+                    |(SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -72,13 +70,13 @@ static int  set_data_flash_base(uint32_t u32DFBA)
     while (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk) { }
     au32Config[1] = FMC->ISPDAT;
 
-    /* Check if Data Flash is enabled and is expected address. */
+    /* Check if Data Flash is enabled (CONFIG0[0]) and is expected address (CONFIG1) */
     if ((!(au32Config[0] & 0x1)) && (au32Config[1] == u32DFBA))
         return 0;
 
     FMC->ISPCTL |=  FMC_ISPCTL_CFGUEN_Msk;
 
-    au32Config[0] &= ~0x1;
+    au32Config[0] &= ~0x1;         /* CONFIG0[0] = 0 (Enabled) / 1 (Disabled) */
     au32Config[1] = u32DFBA;
 
     /* Update User Configuration settings. */
@@ -106,6 +104,9 @@ static int  set_data_flash_base(uint32_t u32DFBA)
     FMC->ISPCTL &= ~FMC_ISPCTL_CFGUEN_Msk;
 
     printf("\nSet Data Flash base as 0x%x.\n", DATA_FLASH_TEST_BASE);
+
+    /* To check if all the debug messages are finished */
+    while(!IsDebugFifoEmpty());
 
     // Perform chip reset to make new User Config take effect
     SYS->IPRST0 = SYS_IPRST0_CHIPRST_Msk;
@@ -333,7 +334,7 @@ int main()
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 baud rate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 
     printf("\n\n");

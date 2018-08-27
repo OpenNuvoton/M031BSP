@@ -1,14 +1,16 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 2 $
- * $Date: 18/05/31 10:00a $
+ * $Revision: 3 $
+ * $Date: 18/07/12 9:32a $
  * @brief    Use PDMA channel 1 to transfer data from memory to memory.
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
+
+#define PDMA_CH    1
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -62,29 +64,20 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable HIRC clock */
+    /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable PDMA clock */
     CLK_EnableModuleClock(PDMA_MODULE);
@@ -148,25 +141,25 @@ int main()
     ------------------------------------------------------------------------------------------------------*/
 
     /* Open Channel 1 */
-    PDMA_Open(PDMA, 1 << 1);
+    PDMA_Open(PDMA, 1 << PDMA_CH);
     /* Transfer count is PDMA_TEST_LENGTH, transfer width is 32 bits(one word) */
-    PDMA_SetTransferCnt(PDMA, 1, PDMA_WIDTH_32, PDMA_TEST_LENGTH);
+    PDMA_SetTransferCnt(PDMA, PDMA_CH, PDMA_WIDTH_32, PDMA_TEST_LENGTH);
     /* Set source address is au8SrcArray, destination address is au8DestArray, Source/Destination increment size is 32 bits(one word) */
-    PDMA_SetTransferAddr(PDMA, 1, (uint32_t)au8SrcArray, PDMA_SAR_INC, (uint32_t)au8DestArray, PDMA_DAR_INC);
+    PDMA_SetTransferAddr(PDMA, PDMA_CH, (uint32_t)au8SrcArray, PDMA_SAR_INC, (uint32_t)au8DestArray, PDMA_DAR_INC);
     /* Request source is memory to memory */
-    PDMA_SetTransferMode(PDMA, 1, PDMA_MEM, FALSE, 0);
+    PDMA_SetTransferMode(PDMA, PDMA_CH, PDMA_MEM, FALSE, 0);
     /* Transfer type is burst transfer and burst size is 4 */
-    PDMA_SetBurstType(PDMA, 1, PDMA_REQ_BURST, PDMA_BURST_4);
+    PDMA_SetBurstType(PDMA, PDMA_CH, PDMA_REQ_BURST, PDMA_BURST_4);
 
     /* Enable interrupt */
-    PDMA_EnableInt(PDMA, 1, PDMA_INT_TRANS_DONE);
+    PDMA_EnableInt(PDMA, PDMA_CH, PDMA_INT_TRANS_DONE);
 
     /* Enable NVIC for PDMA */
     NVIC_EnableIRQ(PDMA_IRQn);
     g_u32IsTestOver = 0;
 
     /* Generate a software request to trigger transfer with PDMA channel 1  */
-    PDMA_Trigger(PDMA, 1);
+    PDMA_Trigger(PDMA, PDMA_CH);
 
     /* Waiting for transfer done */
     while (g_u32IsTestOver == 0);

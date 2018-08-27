@@ -1,11 +1,11 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 3 $
- * $Date: 18/05/31 5:43p $
+ * $Revision: 4 $
+ * $Date: 18/07/12 9:42a $
  * @brief
- *          Configure USCI_SPI0 as Master mode and demonstrate how to communicate with an off-chip SPI Slave device.
- *          Needs to work with USCI_SPI_SlaveMode sample code.
+ *          Configure USCI_SPI0 as Master mode and demonstrate how to communicate with an off-chip SPI slave device.
+ *          This sample code needs to work with USCI_SPI_SlaveMode.
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
@@ -32,29 +32,20 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable HIRC clock */
+    /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable USPI0 clock */
     CLK_EnableModuleClock(USCI0_MODULE);
@@ -70,10 +61,10 @@ void SYS_Init(void)
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    SYS->GPA_MFPH = SYS->GPA_MFPH & ~(SYS_GPA_MFPH_PA9MFP_Msk | SYS_GPA_MFPH_PA10MFP_Msk | SYS_GPA_MFPH_PA11MFP_Msk);
-    SYS->GPA_MFPH |= (SYS_GPA_MFPH_PA9MFP_USCI0_DAT1 | SYS_GPA_MFPH_PA10MFP_USCI0_DAT0 | SYS_GPA_MFPH_PA11MFP_USCI0_CLK);
-    SYS->GPC_MFPH = SYS->GPC_MFPH & ~SYS_GPC_MFPH_PC14MFP_Msk;
-    SYS->GPC_MFPH = SYS->GPC_MFPH | SYS_GPC_MFPH_PC14MFP_USCI0_CTL0;
+    /* Set USCI_SPI0 multi-function pins */
+    SYS->GPA_MFPH = (SYS->GPA_MFPH & ~(SYS_GPA_MFPH_PA9MFP_Msk | SYS_GPA_MFPH_PA10MFP_Msk | SYS_GPA_MFPH_PA11MFP_Msk)) |
+                    (SYS_GPA_MFPH_PA9MFP_USCI0_DAT1 | SYS_GPA_MFPH_PA10MFP_USCI0_DAT0 | SYS_GPA_MFPH_PA11MFP_USCI0_CLK);
+    SYS->GPC_MFPH = (SYS->GPC_MFPH & ~(SYS_GPC_MFPH_PC14MFP_Msk)) | (SYS_GPC_MFPH_PC14MFP_USCI0_CTL0);
 
     /* Lock protected registers */
     SYS_LockReg();

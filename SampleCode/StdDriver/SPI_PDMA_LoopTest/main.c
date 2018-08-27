@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V1.0
- * $Revision: 10 $
- * $Date: 18/05/31 3:19p $
+ * $Revision: 12 $
+ * $Date: 18/07/19 2:19p $
  * @brief
  *           Demonstrate SPI data transfer with PDMA.
  *           SPI0 will be configured as Master mode and connect MISO_0 pin and
@@ -17,8 +17,12 @@
 
 #define SPI_MASTER_TX_DMA_CH 0
 #define SPI_MASTER_RX_DMA_CH 1
+#define SPI_OPENED_CH   ((1 << SPI_MASTER_TX_DMA_CH) | (1 << SPI_MASTER_RX_DMA_CH))
 
-#define TEST_COUNT 64
+#define DATA_COUNT      64
+#define TEST_CYCLE      10000
+#define TEST_PATTERN    0x55000000
+#define SPI_CLK_FREQ    2000000
 
 /* Function prototype declaration */
 void SYS_Init(void);
@@ -26,8 +30,8 @@ void SPI_Init(void);
 void SpiLoopTest_WithPDMA(void);
 
 /* Global variable declaration */
-uint32_t g_au32MasterToSlaveTestPattern[TEST_COUNT];
-uint32_t g_au32MasterRxBuffer[TEST_COUNT];
+uint32_t g_au32MasterToSlaveTestPattern[DATA_COUNT];
+uint32_t g_au32MasterRxBuffer[DATA_COUNT];
 
 int main(void)
 {
@@ -74,26 +78,17 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for HXT clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable Internal RC 48MHz clock */
+    /* Enable HIRC clock */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for Internal RC clock ready */
+    /* Waiting for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to Internal RC and HCLK source divide 1 */
+    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
-    /* Select HXT as the clock source of UART0 */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Select HIRC as the clock source of UART0 */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Select PCLK1 as the clock source of SPI0 */
     CLK_SetModuleClock(SPI0_MODULE, CLK_CLKSEL2_SPI0SEL_PCLK1, MODULE_NoMsk);
@@ -111,22 +106,20 @@ void SYS_Init(void)
     /* Init I/O Multi-function                                                                                 */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD;
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Setup SPI0 multi-function pins */
-    /* PA.3 is SPI0_SS */
-    SYS->GPA_MFPL &= ~SYS_GPA_MFPL_PA3MFP_Msk;
-    SYS->GPA_MFPL |= SYS_GPA_MFPL_PA3MFP_SPI0_SS;
-    /* PA.2 is SPI0_CLK */
-    SYS->GPA_MFPL &= ~SYS_GPA_MFPL_PA2MFP_Msk;
-    SYS->GPA_MFPL |= SYS_GPA_MFPL_PA2MFP_SPI0_CLK;
-    /* PA.1 is SPI0_MISO */
-    SYS->GPA_MFPL &= ~SYS_GPA_MFPL_PA1MFP_Msk;
-    SYS->GPA_MFPL |= SYS_GPA_MFPL_PA1MFP_SPI0_MISO;
-    /* PA.0 is SPI0_MOSI */
-    SYS->GPA_MFPL &= ~SYS_GPA_MFPL_PA0MFP_Msk;
-    SYS->GPA_MFPL |= SYS_GPA_MFPL_PA0MFP_SPI0_MOSI;
+    /* PA.3 is SPI0_SS,   PA.2 is SPI0_CLK,
+       PA.1 is SPI0_MISO, PA.0 is SPI0_MOSI*/
+    SYS->GPA_MFPL = (SYS->GPA_MFPL & ~(SYS_GPA_MFPL_PA3MFP_Msk |
+                                       SYS_GPA_MFPL_PA2MFP_Msk |
+                                       SYS_GPA_MFPL_PA1MFP_Msk |
+                                       SYS_GPA_MFPL_PA0MFP_Msk)) |
+                    (SYS_GPA_MFPL_PA3MFP_SPI0_SS |
+                     SYS_GPA_MFPL_PA2MFP_SPI0_CLK |
+                     SYS_GPA_MFPL_PA1MFP_SPI0_MISO |
+                     SYS_GPA_MFPL_PA0MFP_SPI0_MOSI);
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate SystemCoreClock and CyclesPerUs automatically. */
@@ -139,8 +132,8 @@ void SPI_Init(void)
     /* Init SPI                                                                                                */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Configure as a master, clock idle low, 32-bit transaction, drive output on falling clock edge and latch input on rising edge. */
-    /* Set IP clock divider. SPI clock rate = 2MHz */
-    SPI_Open(SPI0, SPI_MASTER, SPI_MODE_0, 32, 2000000);
+    /* Set IP clock divider. SPI clock rate = 2 MHz */
+    SPI_Open(SPI0, SPI_MASTER, SPI_MODE_0, 32, SPI_CLK_FREQ);
 
     /* Enable the automatic hardware slave select function. Select the SS pin and configure as low-active. */
     SPI_EnableAutoSS(SPI0, SPI_SS, SPI_SS_ACTIVE_LOW);
@@ -155,22 +148,22 @@ void SpiLoopTest_WithPDMA(void)
     printf("\nSPI0 Loopback test with PDMA ");
 
     /* Source data initiation */
-    for(u32DataCount = 0; u32DataCount < TEST_COUNT; u32DataCount++)
+    for(u32DataCount = 0; u32DataCount < DATA_COUNT; u32DataCount++)
     {
-        g_au32MasterToSlaveTestPattern[u32DataCount] = 0x55000000 | (u32DataCount + 1);
+        g_au32MasterToSlaveTestPattern[u32DataCount] = TEST_PATTERN | (u32DataCount + 1);
     }
 
     /* Reset PDMA module */
     SYS_ResetModule(PDMA_RST);
 
     /* Enable PDMA channels */
-    PDMA_Open(PDMA, (1 << SPI_MASTER_TX_DMA_CH) | (1 << SPI_MASTER_RX_DMA_CH));
+    PDMA_Open(PDMA, SPI_OPENED_CH);
 
     /*=======================================================================
       SPI master PDMA TX channel configuration:
       -----------------------------------------------------------------------
         Word length = 32 bits
-        Transfer Count = TEST_COUNT
+        Transfer Count = DATA_COUNT
         Source = g_au32MasterToSlaveTestPattern
         Source Address = Incresing
         Destination = SPI0->TX
@@ -178,7 +171,7 @@ void SpiLoopTest_WithPDMA(void)
         Burst Type = Single Transfer
     =========================================================================*/
     /* Set transfer width (32 bits) and transfer count */
-    PDMA_SetTransferCnt(PDMA, SPI_MASTER_TX_DMA_CH, PDMA_WIDTH_32, TEST_COUNT);
+    PDMA_SetTransferCnt(PDMA, SPI_MASTER_TX_DMA_CH, PDMA_WIDTH_32, DATA_COUNT);
     /* Set source/destination address and attributes */
     PDMA_SetTransferAddr(PDMA, SPI_MASTER_TX_DMA_CH, (uint32_t)g_au32MasterToSlaveTestPattern, PDMA_SAR_INC, (uint32_t)&SPI0->TX, PDMA_DAR_FIX);
     /* Set request source; set basic mode. */
@@ -192,7 +185,7 @@ void SpiLoopTest_WithPDMA(void)
       SPI master PDMA RX channel configuration:
       -----------------------------------------------------------------------
         Word length = 32 bits
-        Transfer Count = TEST_COUNT
+        Transfer Count = DATA_COUNT
         Source = SPI0->RX
         Source Address = Fixed
         Destination = g_au32MasterRxBuffer
@@ -200,7 +193,7 @@ void SpiLoopTest_WithPDMA(void)
         Burst Type = Single Transfer
     =========================================================================*/
     /* Set transfer width (32 bits) and transfer count */
-    PDMA_SetTransferCnt(PDMA, SPI_MASTER_RX_DMA_CH, PDMA_WIDTH_32, TEST_COUNT);
+    PDMA_SetTransferCnt(PDMA, SPI_MASTER_RX_DMA_CH, PDMA_WIDTH_32, DATA_COUNT);
     /* Set source/destination address and attributes */
     PDMA_SetTransferAddr(PDMA, SPI_MASTER_RX_DMA_CH, (uint32_t)&SPI0->RX, PDMA_SAR_FIX, (uint32_t)g_au32MasterRxBuffer, PDMA_DAR_INC);
     /* Set request source; set basic mode. */
@@ -215,7 +208,7 @@ void SpiLoopTest_WithPDMA(void)
     SPI_TRIGGER_RX_PDMA(SPI0);
 
     i32Err = 0;
-    for(u32TestCycle = 0; u32TestCycle < 10000; u32TestCycle++)
+    for(u32TestCycle = 0; u32TestCycle < TEST_CYCLE; u32TestCycle++)
     {
         if((u32TestCycle & 0x1FF) == 0)
             putchar('.');
@@ -228,16 +221,15 @@ void SpiLoopTest_WithPDMA(void)
             if(u32RegValue & PDMA_INTSTS_TDIF_Msk)
             {
                 /* Check the PDMA transfer done flags */
-                if((PDMA_GET_TD_STS(PDMA) & ((1 << SPI_MASTER_TX_DMA_CH) | (1 << SPI_MASTER_RX_DMA_CH))) ==
-                        ((1 << SPI_MASTER_TX_DMA_CH) | (1 << SPI_MASTER_RX_DMA_CH)))
+                if((PDMA_GET_TD_STS(PDMA) & SPI_OPENED_CH) == SPI_OPENED_CH)
                 {
                     /* Clear the PDMA transfer done flags */
-                    PDMA_CLR_TD_FLAG(PDMA, (1 << SPI_MASTER_TX_DMA_CH) | (1 << SPI_MASTER_RX_DMA_CH));
+                    PDMA_CLR_TD_FLAG(PDMA, SPI_OPENED_CH);
                     /* Disable SPI master's PDMA transfer function */
                     SPI_DISABLE_TX_PDMA(SPI0);
                     SPI_DISABLE_RX_PDMA(SPI0);
                     /* Check the transfer data */
-                    for(u32DataCount = 0; u32DataCount < TEST_COUNT; u32DataCount++)
+                    for(u32DataCount = 0; u32DataCount < DATA_COUNT; u32DataCount++)
                     {
                         if(g_au32MasterToSlaveTestPattern[u32DataCount] != g_au32MasterRxBuffer[u32DataCount])
                         {
@@ -246,24 +238,24 @@ void SpiLoopTest_WithPDMA(void)
                         }
                     }
 
-                    if(u32TestCycle >= 10000)
+                    if(u32TestCycle >= TEST_CYCLE)
                         break;
 
                     /* Source data initiation */
-                    for(u32DataCount = 0; u32DataCount < TEST_COUNT; u32DataCount++)
+                    for(u32DataCount = 0; u32DataCount < DATA_COUNT; u32DataCount++)
                     {
                         g_au32MasterToSlaveTestPattern[u32DataCount]++;
                     }
                     /* Re-trigger */
                     /* Master PDMA TX channel configuration */
                     /* Set transfer width (32 bits) and transfer count */
-                    PDMA_SetTransferCnt(PDMA, SPI_MASTER_TX_DMA_CH, PDMA_WIDTH_32, TEST_COUNT);
+                    PDMA_SetTransferCnt(PDMA, SPI_MASTER_TX_DMA_CH, PDMA_WIDTH_32, DATA_COUNT);
                     /* Set request source; set basic mode. */
                     PDMA_SetTransferMode(PDMA, SPI_MASTER_TX_DMA_CH, PDMA_SPI0_TX, FALSE, 0);
 
                     /* Master PDMA RX channel configuration */
                     /* Set transfer width (32 bits) and transfer count */
-                    PDMA_SetTransferCnt(PDMA, SPI_MASTER_RX_DMA_CH, PDMA_WIDTH_32, TEST_COUNT);
+                    PDMA_SetTransferCnt(PDMA, SPI_MASTER_RX_DMA_CH, PDMA_WIDTH_32, DATA_COUNT);
                     /* Set request source; set basic mode. */
                     PDMA_SetTransferMode(PDMA, SPI_MASTER_RX_DMA_CH, PDMA_SPI0_RX, FALSE, 0);
 
@@ -283,11 +275,12 @@ void SpiLoopTest_WithPDMA(void)
                 i32Err = 1;
                 break;
             }
+
             /* Check the DMA time-out interrupt flag */
-            if(u32RegValue & 0x00000300)
+            if(u32RegValue & (PDMA_INTSTS_REQTOF0_Msk | PDMA_INTSTS_REQTOF1_Msk))
             {
                 /* Clear the time-out flag */
-                PDMA->INTSTS = u32RegValue & 0x00000300;
+                PDMA->INTSTS = u32RegValue & (PDMA_INTSTS_REQTOF0_Msk | PDMA_INTSTS_REQTOF1_Msk);
                 i32Err = 1;
                 break;
             }

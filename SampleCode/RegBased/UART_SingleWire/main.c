@@ -52,33 +52,20 @@ void SYS_Init(void)
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(1);
 
-    /* Enable external 12MHz XTAL */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for clock ready */
-    while(!(CLK->STATUS & CLK_STATUS_HXTSTB_Msk));
-
-    /* Set core clock as PLL_CLOCK from PLL */
-    //CLK_SetCoreClock(PLL_CLOCK );
-
-    /* Set both PCLK0 and PCLK1 as HCLK/2 */
-    //CLK->PCLKDIV = CLK_PCLKDIV_APB0DIV_DIV2 |CLK_PCLKDIV_APB1DIV_DIV2;
-
-
     /* Enable UART0/1/2 peripheral clock */
     CLK->APBCLK0 |= (CLK_APBCLK0_UART0CKEN_Msk | CLK_APBCLK0_UART1CKEN_Msk | CLK_APBCLK0_UART2CKEN_Msk);
 
     /* Select IP clock source */
-    /* Select UART0 clock source is HXT */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Select UART0 clock source is HIRC */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART0DIV_Msk)) | CLK_CLKDIV0_UART0(1);
 
-    /* Select UART1 clock source is HXT */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART1SEL_Msk)) | CLK_CLKSEL1_UART1SEL_HXT;
+    /* Select UART1 clock source is HIRC */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART1SEL_Msk)) | CLK_CLKSEL1_UART1SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART1DIV_Msk)) | CLK_CLKDIV0_UART1(1);
 
-    /* Select UART2 clock source is HXT */
-    CLK->CLKSEL3 = (CLK->CLKSEL3 & (~CLK_CLKSEL3_UART2SEL_Msk)) | CLK_CLKSEL3_UART2SEL_HXT;
+    /* Select UART2 clock source is HIRC */
+    CLK->CLKSEL3 = (CLK->CLKSEL3 & (~CLK_CLKSEL3_UART2SEL_Msk)) | CLK_CLKSEL3_UART2SEL_HIRC;
     CLK->CLKDIV4 = (CLK->CLKDIV4 & (~CLK_CLKDIV4_UART2DIV_Msk)) | CLK_CLKDIV4_UART2(1);
 
     /* Update System Core Clock */
@@ -89,25 +76,20 @@ void SYS_Init(void)
     /* Init I/O Multi-function                                                                                 */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD;
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) | \
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    /* Set PA multi-function pins for UART1 TXD, RXD */
-    SYS->GPA_MFPL &= ~(SYS_GPA_MFPL_PA2MFP_Msk) ;
-    SYS->GPA_MFPL |= SYS_GPA_MFPL_PA2MFP_UART1_RXD ;
+    /* Set PA multi-function pins for UART1 RXD */
+    SYS->GPA_MFPL = (SYS->GPA_MFPL & ~(SYS_GPA_MFPL_PA2MFP_Msk)) | SYS_GPA_MFPL_PA2MFP_UART1_RXD;
 
-    /* Set PB multi-function pins for UART2 TXD and RXD */
-    SYS->GPB_MFPL &= ~(SYS_GPB_MFPL_PB0MFP_Msk);
-    SYS->GPB_MFPL |= (SYS_GPB_MFPL_PB0MFP_UART2_RXD);
+    /* Set PB multi-function pins for UART2 RXD */
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB0MFP_Msk)) | SYS_GPB_MFPL_PB0MFP_UART2_RXD;
 
     /* The RX pin needs to pull-high for single-wire */
     /* If the external circuit doesn't pull-high, set GPIO pin as Quasi-directional mode for this purpose here */
-    PA->MODE &= ~GPIO_MODE_MODE2_Msk;
-    PA->MODE |= (GPIO_MODE_QUASI << GPIO_MODE_MODE2_Pos);
+    PA->MODE &= (PA->MODE & ~GPIO_MODE_MODE2_Msk) | (GPIO_MODE_QUASI << GPIO_MODE_MODE2_Pos);
 
-    PB->MODE &= ~GPIO_MODE_MODE0_Msk;
-    PB->MODE |= (GPIO_MODE_QUASI << GPIO_MODE_MODE0_Pos);
-
+    PB->MODE = (PB->MODE & ~GPIO_MODE_MODE0_Msk) | (GPIO_MODE_QUASI << GPIO_MODE_MODE0_Pos);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -120,7 +102,7 @@ void UART0_Init()
 {
 
     /* Configure UART0 and set UART0 baud rate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 
 }
@@ -131,7 +113,7 @@ void UART0_Init()
 void UART1_Init()
 {
     /* Configure Single Wire(UART1) and set Single Wire(UART1) baud rate */
-    UART1->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART1->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART1->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 
     UART1->FUNCSEL = ((UART1->FUNCSEL & (~UART_FUNCSEL_FUNCSEL_Msk)) | UART_FUNCSEL_SINGLE_WIRE);
@@ -145,7 +127,7 @@ void UART1_Init()
 void UART2_Init()
 {
     /* Configure Single Wire(UART2) and set Single Wire(UART2) baud rate */
-    UART2->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART2->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART2->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 
     UART2->FUNCSEL = ((UART2->FUNCSEL & (~UART_FUNCSEL_FUNCSEL_Msk)) | UART_FUNCSEL_SINGLE_WIRE);
@@ -378,7 +360,7 @@ void UART_FunctionTest()
             Build_Src_Pattern((uint32_t)g_u8TxData, UART_WORD_LEN_8, BUFSIZE);
 
             /* Check the Rx status is Idel */
-            while (!UART_RX_IDEL(UART1)) {};
+            while (!UART_RX_IDLE(UART1)) {};
 
             /* Send data */
             for(u32i = 0; u32i < BUFSIZE; u32i++)
@@ -406,7 +388,7 @@ void UART_FunctionTest()
             Build_Src_Pattern((uint32_t)g_u8TxData, UART_WORD_LEN_8, BUFSIZE);
 
             /* Check the Rx status is Idel */
-            while (!UART_RX_IDEL(UART2)) {};
+            while (!UART_RX_IDLE(UART2)) {};
 
             /* Send data */
             for(u32i = 0; u32i < BUFSIZE; u32i++)

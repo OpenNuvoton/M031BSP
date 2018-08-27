@@ -1,10 +1,10 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 3 $
- * $Date: 18/05/31 4:56p $
+ * $Revision: 4 $
+ * $Date: 18/07/09 7:02p $
  * @brief
- *           Show a Master how to access Slave using PDMA Tx and PDMA Rx mode (Loopback)
+ *           Show how a master accesses a slave using PDMA TX and PDMA RX mode (Loopback).
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
@@ -14,15 +14,16 @@
 #define I2C_PDMA_CH        1
 #define I2C_PDMA_TX_LENGTH 100
 #define I2C_PDMA_RX_LENGTH I2C_PDMA_TX_LENGTH - 3  //I2C1 will receive 97 bytes data (only data)
+#define I2C_TEST_LENGTH    256
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
 volatile uint32_t slave_buff_addr;
-volatile uint8_t g_au8SlvData[256];
+volatile uint8_t g_au8SlvData[I2C_TEST_LENGTH];
 volatile uint8_t g_au8SlvRxData[3];
 volatile uint8_t g_u8DeviceAddr;
-volatile uint8_t g_au8MstTxData[256] = {0};
-volatile uint8_t g_au8MstRxData[256] = {0};
+volatile uint8_t g_au8MstTxData[I2C_TEST_LENGTH] = {0};
+volatile uint8_t g_au8MstRxData[I2C_TEST_LENGTH] = {0};
 volatile uint8_t g_u8MstRxData;
 volatile uint8_t g_u8MstDataLen;
 volatile uint8_t g_u8MstEndFlag = 0;
@@ -127,7 +128,7 @@ void I2C_SlaveTRx(uint32_t u32Status)
         else if(g_u16SlvDataLen >= 2)
         {
             g_au8SlvData[slave_buff_addr++] = u8data;
-            if(slave_buff_addr == 256)
+            if(slave_buff_addr == I2C_TEST_LENGTH)
             {
                 slave_buff_addr = 0;
             }
@@ -342,29 +343,20 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable HIRC clock */
+    /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable I2C0 clock */
     CLK_EnableModuleClock(I2C0_MODULE);
@@ -501,7 +493,7 @@ int main()
     I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI_AA);
 
     /* Clear Slave receive data buffer */
-    for(i = 0; i < 0x100; i++)
+    for(i = 0; i < I2C_TEST_LENGTH; i++)
     {
         g_au8SlvData[i] = 0;
     }
@@ -518,7 +510,7 @@ int main()
     g_au8MstTxData[1] = 0x00;                             //2 bytes Data address
     g_au8MstTxData[2] = 0x00;
 
-    for(i = 3; i < 100; i++)                              //Prepare others are transmit Data from 3 to 99 (97 bytes)
+    for(i = 3; i < I2C_PDMA_TX_LENGTH; i++)                              //Prepare others are transmit Data from 3 to 99 (97 bytes)
         g_au8MstTxData[i] = i;
 
     /* Enable interrupt */
@@ -557,7 +549,7 @@ int main()
     g_u8MstEndFlag = 0;
 
     /* Clear Master receive data buffer */
-    for(i = 1; i < 200; i++)
+    for(i = 1; i < I2C_TEST_LENGTH; i++)
         g_au8MstRxData[i] = 0;
 
     /* Init Master PDMA Rx */

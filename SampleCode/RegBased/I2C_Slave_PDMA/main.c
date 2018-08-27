@@ -1,10 +1,10 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 5 $
- * $Date: 18/06/01 2:15p $
+ * $Revision: 7 $
+ * $Date: 18/07/24 11:35a $
  * @brief
- *           Demonstrate how a Slave use PDMA Rx mode receive data from a Master(Loopback).
+ *           Demonstrate how a slave uses PDMA RX mode to receive data from a master (Loopback).
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
@@ -13,6 +13,7 @@
 
 #define I2C_PDMA_CH        1
 #define I2C_PDMA_RX_LENGTH 100
+#define I2C_TEST_LENGTH    256
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -27,9 +28,9 @@ volatile uint8_t g_u8EndFlag = 0;
 volatile uint8_t g_u8DataLen1;
 volatile uint8_t g_u8SlvTestLen;
 volatile uint8_t g_u8SlvDataLen;
-volatile uint8_t g_au8SlvData[256];
+volatile uint8_t g_au8SlvData[I2C_TEST_LENGTH];
 volatile int32_t g_u32IsTestOver;
-volatile uint8_t g_au8MstTxData[256];
+volatile uint8_t g_au8MstTxData[I2C_TEST_LENGTH];
 volatile uint8_t g_u8MstDataLen;
 volatile uint8_t g_u8MstEndFlag = 0;
 
@@ -129,7 +130,7 @@ void I2C_MasterTx(uint32_t u32Status)
     }
     else if(u32Status == 0x28)                  /* DATA has been transmitted and ACK has been received */
     {
-        if(g_u8MstDataLen != 100)
+        if(g_u8MstDataLen != I2C_PDMA_RX_LENGTH)
         {
             I2C_SET_DATA(I2C0, g_au8MstTxData[g_u8MstDataLen++]);
             I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI);
@@ -227,22 +228,13 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
     /* Wait for HIRC clock ready */
     while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK clock divider as 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(1);
 
@@ -252,8 +244,8 @@ void SYS_Init(void)
     /* PDMA Clock Enable */
     CLK->AHBCLK |= CLK_AHBCLK_PDMACKEN_Msk;
 
-    /* Switch UART0 clock source to XTAL and UART0 clock divider as 1 */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Switch UART0 clock source to HIRC and UART0 clock divider as 1 */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART0DIV_Msk)) | CLK_CLKDIV0_UART0(1);
 
     /* Update System Core Clock */
@@ -289,7 +281,7 @@ void UART0_Init(void)
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 Baudrate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
 
@@ -396,7 +388,7 @@ void I2C1_Close(void)
     I2C1->CTL0 &= ~I2C_CTL0_INTEN_Msk;
     NVIC_DisableIRQ(I2C1_IRQn);
 
-    /* Disable I2C1 and close I2C0 clock */
+    /* Disable I2C1 and close I2C1 clock */
     I2C1->CTL0 &= ~I2C_CTL0_I2CEN_Msk;
     CLK->APBCLK0 &= ~CLK_APBCLK0_I2C1CKEN_Msk;
 }
@@ -410,7 +402,7 @@ void I2C_Write_to_SLAVE_PDMA_RX(uint8_t slvaddr)
     g_u8DeviceAddr = slvaddr;
 
     /* I2C0 prepare transmit data bytes */
-    for(i = 1; i < 200; i++)
+    for(i = 1; i < I2C_TEST_LENGTH; i++)
     {
         g_au8MstTxData[i] = i;
     }
@@ -469,7 +461,7 @@ int main()
     I2C_SET_CONTROL_REG(I2C1, I2C_CTL_SI_AA);
 
     /* Clear Slave receive data buffer */
-    for(i = 0; i < 0x100; i++)
+    for(i = 0; i < I2C_TEST_LENGTH; i++)
     {
         g_au8SlvData[i] = 0;
     }

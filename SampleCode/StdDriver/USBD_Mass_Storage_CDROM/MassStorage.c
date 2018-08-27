@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     MassStorage.c
  * @version  V1.00
- * $Revision: 7 $
- * $Date: 18/04/03 1:26p $
+ * $Revision: 13 $
+ * $Date: 18/07/23 11:02a $
  * @brief    M031 series USBD driver Sample file
  *
  * @note
@@ -20,6 +20,7 @@ int32_t g_TotalSectors = 0;
 uint8_t volatile g_u8EP2Ready = 0;
 uint8_t volatile g_u8EP3Ready = 0;
 uint8_t volatile g_u8Remove = 0;
+uint8_t volatile g_u8Suspend = 0;
 
 /* USB flow control variables */
 uint8_t g_u8BulkState;
@@ -62,7 +63,7 @@ uint8_t g_au8InquiryID[36] =
     '1', '.', '0', '0'
 };
 
-// code = 5Ah, Mode Sense 10
+/* code = 5Ah, Mode Sense 10 */
 static uint8_t g_au8ModePage_01[12] =
 {
     0x01, 0x0A, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00,
@@ -90,17 +91,17 @@ static uint8_t g_au8ModePage_1C[8] =
 
 static uint8_t  g_au8ReadTOC_LBA0[] =
 {
-    // TOC response header
+    /* TOC response header */
     0x00, 0x12,
     0x01,
     0x01,
-    // track descriptor 1
+    /* track descriptor 1 */
     0x00,
     0x14,
     0x01,
     0x00,
     0x00, 0x00, 0x00, 0x00,
-    // track descriptor 2
+    /* track descriptor 2 */
     0x00,
     0x14,
     0xAA,
@@ -110,11 +111,11 @@ static uint8_t  g_au8ReadTOC_LBA0[] =
 
 static uint8_t g_au8ReadTOC_LBA1[] =
 {
-    // TOC response header
+    /* TOC response header */
     0x00, 0x0A,
     0x01,
     0x01,
-    // track descriptor
+    /* track descriptor */
     0x00,
     0x14,
     0x01,
@@ -124,17 +125,17 @@ static uint8_t g_au8ReadTOC_LBA1[] =
 
 static uint8_t g_au8ReadTOC_MSF0[] =
 {
-    // TOC response header
+    /* TOC response header */
     0x00, 0x12,
     0x01,
     0x01,
-    // track descriptor 1
+    /* track descriptor 1 */
     0x00,
     0x14,
     0x01,
     0x00,
     0x00, 0x00, 0x02, 0x00,
-    // track descriptor 2
+    /* track descriptor 2 */
     0x00,
     0x14,
     0xAA,
@@ -144,12 +145,12 @@ static uint8_t g_au8ReadTOC_MSF0[] =
 
 static uint8_t g_au8ReadTOC_MSF2[] =
 {
-    // TOC response header
-    0x00, 0x2E,             // Data Length
-    0x01,                   // First Track
-    0x01,                   // Last Track
-    // track descriptors
-    // Session ADR/CTRL  TNO   POINT  Min Sec Frame  ZERO PMIN PSEC PFRAME
+    /* TOC response header */
+    0x00, 0x2E,             /* Data Length */
+    0x01,                   /* First Track */
+    0x01,                   /* Last Track */
+    /* track descriptors */
+    /* Session ADR/CTRL  TNO   POINT  Min Sec Frame  ZERO PMIN PSEC PFRAME */
     0x01,    0x14,   0x00, 0xA0, 0x00,0x00,0x00, 0x00,0x01,0x00,0x00,
     0x01,    0x14,   0x00, 0xA1, 0x00,0x00,0x00, 0x00,0x01,0x00,0x00,
     0x01,    0x14,   0x00, 0xA2, 0x00,0x00,0x00, 0x00,0x00,0x1d,0x17,
@@ -158,62 +159,62 @@ static uint8_t g_au8ReadTOC_MSF2[] =
 
 const uint8_t g_au8GetConfiguration[] =
 {
-    // Feature Header
-    0x00, 0x00, 0x00, 0x4C, // Data Length
-    0x00, 0x00,             // Reserved
-    0x00, 0x00,             // Current Profile
-    // Profile List
-    0x00, 0x00,             // Feature Code (0000h = Profile List)
-    0x03,                   // Version(0) /Persistent(1) /Current(1)
-    0x04,                   // Additional Length (= number of profile descriptor x 4)
-    // Profile Descriptor
-    0x00, 0x08,             // Profile Number (CD-ROM)
-    0x00,                   // CurrentP
-    0x00,                   // Reserved
-    // Features
-    0x00, 0x01,             // Core Feature
-    0x0B,                   // Version(2) /Persistent(1) /Current(1)
-    0x08,                   // Additional Length
-    0x00, 0x00, 0x00, 0x02, // Physical Interface Standard (0x00000002: ATAPI)
-    0x01,                   // INQ2(0) / Device Busy Event(1)
-    0x00, 0x00, 0x00,       // Reserved
+    /* Feature Header */
+    0x00, 0x00, 0x00, 0x4C, /* Data Length */
+    0x00, 0x00,             /* Reserved */
+    0x00, 0x00,             /* Current Profile */
+    /* Profile List */
+    0x00, 0x00,             /* Feature Code (0000h = Profile List) */
+    0x03,                   /* Version(0) /Persistent(1) /Current(1) */
+    0x04,                   /* Additional Length (= number of profile descriptor x 4) */
+    /* Profile Descriptor */
+    0x00, 0x08,             /* Profile Number (CD-ROM) */
+    0x00,                   /* CurrentP */
+    0x00,                   /* Reserved */
+    /* Features */
+    0x00, 0x01,             /* Core Feature */
+    0x0B,                   /* Version(2) /Persistent(1) /Current(1) */
+    0x08,                   /* Additional Length */
+    0x00, 0x00, 0x00, 0x02, /* Physical Interface Standard (0x00000002: ATAPI) */
+    0x01,                   /* INQ2(0) / Device Busy Event(1) */
+    0x00, 0x00, 0x00,       /* Reserved */
 
-    0x00, 0x02,             // Morphing Feature
-    0x07,                   // Version(2) /Persistent(1) /Current(1)
-    0x04,                   // Additional Length
-    0x02,                   // OCEvent(1) / ASYNC(0)
-    0x00, 0x00, 0x00,       // Reserved
+    0x00, 0x02,             /* Morphing Feature */
+    0x07,                   /* Version(2) /Persistent(1) /Current(1) */
+    0x04,                   /* Additional Length */
+    0x02,                   /* OCEvent(1) / ASYNC(0) */
+    0x00, 0x00, 0x00,       /* Reserved */
 
-    0x00, 0x03,             // Removable Medium Feature
-    0x0B,                   // Version(0) /Persistent(1) /Current(1)
-    0x04,                   // Additional Length
-    0x29,                   // Loading mechanism (Tray:001h) /Eject(1) / Pvnt Jmpr(0) / Lock(1)
-    0x00, 0x00, 0x00,       // Reserved
+    0x00, 0x03,             /* Removable Medium Feature */
+    0x0B,                   /* Version(0) /Persistent(1) /Current(1) */
+    0x04,                   /* Additional Length */
+    0x29,                   /* Loading mechanism (Tray:001h) /Eject(1) / Pvnt Jmpr(0) / Lock(1) */
+    0x00, 0x00, 0x00,       /* Reserved */
 
-    0x00, 0x10,             // Random Readable Feature
-    0x00,                   // Version(0) /Persistent(0) /Current(0)
-    0x08,                   // Additional Length
-    0x00, 0x00, 0x08, 0x00, // Logical Block Size
-    0x00, 0x01,             // Blocking
-    0x00,                   // Page Present
-    0x00,                   // Reserved
+    0x00, 0x10,             /* Random Readable Feature */
+    0x00,                   /* Version(0) /Persistent(0) /Current(0) */
+    0x08,                   /* Additional Length */
+    0x00, 0x00, 0x08, 0x00, /* Logical Block Size */
+    0x00, 0x01,             /* Blocking */
+    0x00,                   /* Page Present */
+    0x00,                   /* Reserved */
 
-    0x00, 0x1E,             // CD Read Feature
-    0x08,                   // Version(2) /Persistent(0) /Current(0)
-    0x04,                   // Additional Length
-    0x00,                   // DAP(0) / C2 Flags(0) / CD-Text(0)
-    0x00, 0x00, 0x00,       // Reserved
+    0x00, 0x1E,             /* CD Read Feature */
+    0x08,                   /* Version(2) /Persistent(0) /Current(0) */
+    0x04,                   /* Additional Length */
+    0x00,                   /* DAP(0) / C2 Flags(0) / CD-Text(0) */
+    0x00, 0x00, 0x00,       /* Reserved */
 
-    0x01, 0x00,             // Power Management Feature
-    0x03,                   // Version(0) /Persistent(1) /Current(1)
-    0x00,                   // Additional Length
+    0x01, 0x00,             /* Power Management Feature */
+    0x03,                   /* Version(0) /Persistent(1) /Current(1) */
+    0x00,                   /* Additional Length */
 
-    0x01, 0x05,             // Timeout Feature
-    0x07,                   // Version(1) /Persistent(1) /Current(1)
-    0x04,                   // Additional Length
-    0x00,                   // Group3
-    0x00,                   // Reserved
-    0x00, 0x00,             // Unit Length
+    0x01, 0x05,             /* Timeout Feature */
+    0x07,                   /* Version(1) /Persistent(1) /Current(1) */
+    0x04,                   /* Additional Length */
+    0x00,                   /* Group3 */
+    0x00,                   /* Reserved */
+    0x00, 0x00,             /* Unit Length */
 };
 
 static uint8_t g_au8GetEventStatusNotification_01[8] =
@@ -223,13 +224,12 @@ static uint8_t g_au8GetEventStatusNotification_01[8] =
 
 void USBD_IRQHandler(void)
 {
-    uint32_t u32IntSts = USBD_GET_INT_FLAG();
-    uint32_t u32State = USBD_GET_BUS_STATE();
+    uint32_t volatile u32IntSts = USBD_GET_INT_FLAG();
+    uint32_t volatile u32State = USBD_GET_BUS_STATE();
 
-//------------------------------------------------------------------
     if (u32IntSts & USBD_INTSTS_FLDET)
     {
-        // Floating detect
+        /* Floating detect */
         USBD_CLR_INT_FLAG(USBD_INTSTS_FLDET);
 
         if (USBD_IS_ATTACHED())
@@ -244,7 +244,6 @@ void USBD_IRQHandler(void)
         }
     }
 
-//------------------------------------------------------------------
     if (u32IntSts & USBD_INTSTS_BUS)
     {
         /* Clear event flag */
@@ -256,9 +255,13 @@ void USBD_IRQHandler(void)
             USBD_ENABLE_USB();
             USBD_SwReset();
             g_u8Remove = 0;
+            g_u8Suspend = 0;
         }
         if (u32State & USBD_STATE_SUSPEND)
         {
+            /* Enter power down to wait USB attached */
+            g_u8Suspend = 1;
+
             /* Enable USB but disable PHY */
             USBD_DISABLE_PHY();
         }
@@ -266,10 +269,16 @@ void USBD_IRQHandler(void)
         {
             /* Enable USB and enable PHY */
             USBD_ENABLE_USB();
+            g_u8Suspend = 0;
         }
     }
 
-//------------------------------------------------------------------
+    if(u32IntSts & USBD_INTSTS_SOF)
+    {
+        /* Clear SOF flag */
+        USBD_CLR_INT_FLAG(USBD_INTSTS_SOF);
+    }
+
     if(u32IntSts & USBD_INTSTS_WAKEUP)
     {
         /* Clear event flag */
@@ -278,10 +287,10 @@ void USBD_IRQHandler(void)
 
     if (u32IntSts & USBD_INTSTS_USB)
     {
-        // USB event
+        /* USB event */
         if (u32IntSts & USBD_INTSTS_SETUP)
         {
-            // Setup packet
+            /* Setup packet */
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_SETUP);
 
@@ -292,12 +301,12 @@ void USBD_IRQHandler(void)
             USBD_ProcessSetupPacket();
         }
 
-        // EP events
+        /* EP events */
         if (u32IntSts & USBD_INTSTS_EP0)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP0);
-            // control IN
+            /* control IN */
             USBD_CtrlIn();
         }
 
@@ -305,8 +314,7 @@ void USBD_IRQHandler(void)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP1);
-
-            // control OUT
+            /* control OUT */
             USBD_CtrlOut();
         }
 
@@ -314,7 +322,7 @@ void USBD_IRQHandler(void)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP2);
-            // Bulk IN
+            /* Bulk IN */
             EP2_Handler();
         }
 
@@ -322,7 +330,7 @@ void USBD_IRQHandler(void)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP3);
-            // Bulk OUT
+            /* Bulk OUT */
             EP3_Handler();
         }
 
@@ -413,7 +421,7 @@ void MSC_ClassRequest(void)
 
     if (buf[0] & 0x80)   /* request data transfer direction */
     {
-        // Device to host
+        /* Device to host */
         switch (buf[1])
         {
         case GET_MAX_LUN:
@@ -430,21 +438,23 @@ void MSC_ClassRequest(void)
             }
             else     /* Invalid Get MaxLun command */
             {
-                USBD_SetStall(0);
+                USBD_SetStall(EP0);
+                USBD_SetStall(EP1);
             }
             break;
         }
         default:
         {
             /* Setup error, stall the device */
-            USBD_SetStall(0);
+            USBD_SetStall(EP0);
+            USBD_SetStall(EP1);
             break;
         }
         }
     }
     else
     {
-        // Host to device
+        /* Host to device */
         switch (buf[1])
         {
         case BULK_ONLY_MASS_STORAGE_RESET:
@@ -471,15 +481,17 @@ void MSC_ClassRequest(void)
             }
             else     /* Invalid Reset command */
             {
-                USBD_SetStall(0);
+                USBD_SetStall(EP0);
+                USBD_SetStall(EP1);
             }
             break;
         }
         default:
         {
-            // Stall
+            /* Stall */
             /* Setup error, stall the device */
-            USBD_SetStall(0);
+            USBD_SetStall(EP0);
+            USBD_SetStall(EP1);
             break;
         }
         }
@@ -583,15 +595,15 @@ void MSC_GetConfiguration(uint32_t len, uint8_t *buff)
     {
         memcpy( buff, g_au8GetConfiguration, 8);
         u32feature_len = 0;
-        // the first feature on the array
+        /* the first feature on the array */
         u32index = 8;
 
-        // find the specified feature
+        /* find the specified feature */
         while ( u32index < sizeof(g_au8GetConfiguration) )
         {
             if ((g_au8GetConfiguration[u32index] == g_sCBW.au8Data[0]) && (g_au8GetConfiguration[u32index + 1] == g_sCBW.au8Data[1]))
             {
-                // copy the feature
+                /* copy the feature */
                 u32feature_len = g_au8GetConfiguration[u32index + 3] + 4;
                 memcpy(buff + 8, &g_au8GetConfiguration[u32index], u32feature_len);
                 break;
@@ -601,7 +613,7 @@ void MSC_GetConfiguration(uint32_t len, uint8_t *buff)
                 u32index += (g_au8GetConfiguration[u32index + 3] + 4);
             }
         }
-        // fix up return length
+        /* fix up return length */
         len = 8 + u32feature_len;
         buff[3] = len - 4;
     }
@@ -610,14 +622,14 @@ void MSC_GetConfiguration(uint32_t len, uint8_t *buff)
         memcpy(buff, g_au8GetConfiguration, 8);
         ptr = buff + 8;
 
-        // the first feature on the array
+        /* the first feature on the array */
         u32index = 8;
 
-        // find current features
+        /* find current features */
         while ( u32index < sizeof(g_au8GetConfiguration))
         {
             u32feature_len = g_au8GetConfiguration[u32index + 3] + 4;
-            if (g_au8GetConfiguration[u32index + 2] & 0x01)    // check current bit
+            if (g_au8GetConfiguration[u32index + 2] & 0x01)    /* check current bit */
             {
                 memcpy( ptr, &g_au8GetConfiguration[u32index], u32feature_len);
                 ptr += u32feature_len;
@@ -950,7 +962,7 @@ void MSC_ProcessCmd(void)
             {
                 if (g_sCBW.au8Data[2] & 0x01)
                 {
-                    g_au8SenseKey[0] = 0x05;  //INVALID COMMAND
+                    g_au8SenseKey[0] = 0x05;  /* INVALID COMMAND */
                     g_au8SenseKey[1] = 0x24;
                     g_au8SenseKey[2] = 0;
                     g_u8Prevent = 1;
@@ -1178,14 +1190,19 @@ void MSC_ProcessCmd(void)
                 if (i > STORAGE_BUFFER_SIZE)
                     i = STORAGE_BUFFER_SIZE;
 
-                if(g_u32LbaAddress >= (16 * CDROM_BLOCK_SIZE))
+                if(g_u32LbaAddress >= (16 * CDROM_BLOCK_SIZE))   /* Logical Block Address > 32KB */
                 {
+                    /*
+                        Because first 32KB of the ISO file are all '0', remove first 32KB data from ISO file to
+                        to reduce the code size instead of including ISO file directly.
+                        The array - eprom is the data of ISO file with offset 32768
+                     */
                     g_u32Address = (uint32_t)(&eprom[g_u32LbaAddress - 32768]);
                     g_u32LbaAddress += i;
                 }
-                else
+                else                                             /* Logical Block Address > 32KB */
                 {
-                    memset((uint32_t*)Storage_Block, 0, i);
+                    memset((uint32_t*)Storage_Block, 0, i);      /* First 32KB of ISO file are all 0 */
                     g_u32Address = STORAGE_DATA_BUF;
                 }
                 g_u32BytesInStorageBuf = i;
@@ -1290,7 +1307,7 @@ void MSC_ProcessCmd(void)
             {
                 if (g_u32Length == 0)
                 {
-                    // LBA
+                    /* LBA */
                     g_u32Address = get_be32(&g_sCBW.au8Data[0]);
                     g_u32Length = g_sCBW.dCBWDataTransferLength;
                     MSC_GetConfiguration(g_u32Length, (uint8_t *)MassBlock);

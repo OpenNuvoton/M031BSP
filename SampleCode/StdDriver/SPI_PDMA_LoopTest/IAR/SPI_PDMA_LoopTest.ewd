@@ -810,9 +810,6 @@
           <name>OCXDS100AttachSlave</name>
           <state>1</state>
         </option>
-        
-        
-        
       </data>
     </settings>
     <debuggerPlugins>

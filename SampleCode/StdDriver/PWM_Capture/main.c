@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V1.00
- * $Revision: 5 $
- * $Date: 18/05/31 4:04p $
+ * $Revision: 9 $
+ * $Date: 18/07/19 2:15p $
  * @brief    Capture the PWM0 Channel 0 waveform by PWM0 Channel 2.
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
@@ -98,26 +98,17 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for HXT clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable Internal RC 48MHz clock */
+    /* Enable HIRC clock */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for Internal RC clock ready */
+    /* Waiting for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to Internal RC and HCLK source divide 1 */
+    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
-    /* Select HXT as the clock source of UART0 */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Select HIRC as the clock source of UART0 */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Set core clock as PLL_CLOCK from PLL (no PLL in rev. B & C) */
 //    CLK_SetCoreClock(PLL_CLOCK);
@@ -155,14 +146,12 @@ void SYS_Init(void)
     /* Init I/O Multi-function                                                                                 */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Set PB multi-function pins for PWM0 Channel 0 and 2 */
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB5MFP_Msk));
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB5MFP_PWM0_CH0;
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB3MFP_Msk));
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB3MFP_PWM0_CH2;
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB5MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk)) |
+                    (SYS_GPB_MFPL_PB5MFP_PWM0_CH0 | SYS_GPB_MFPL_PB3MFP_PWM0_CH2);
 }
 
 void UART0_Init()
@@ -176,7 +165,6 @@ void UART0_Init()
     /* Configure UART0 and set UART0 baud rate */
     UART_Open(UART0, 115200);
 }
-
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Main Function                                                                                          */
@@ -202,7 +190,7 @@ int32_t main(void)
     UART0_Init();
 
     printf("\n\nCPU @ %dHz(PLL@ %dHz)\n", SystemCoreClock, PllClock);
-    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "CPU" : "PLL");
+    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "PCLK" : "PLL");
     printf("+------------------------------------------------------------------------+\n");
     printf("|                          PWM Driver Sample Code                        |\n");
     printf("|                                                                        |\n");
@@ -218,7 +206,7 @@ int32_t main(void)
         getchar();
 
         /*--------------------------------------------------------------------------------------*/
-        /* Set the PWM1 Channel 0 as PWM output function.                                       */
+        /* Set the PWM0 Channel 0 as PWM output function.                                       */
         /*--------------------------------------------------------------------------------------*/
 
         /* Assume PWM output frequency is 250Hz and duty ratio is 30%, user can calculate PWM settings by follows.
@@ -245,7 +233,7 @@ int32_t main(void)
         PWM_Start(PWM0, PWM_CH_0_MASK);
 
         /*--------------------------------------------------------------------------------------*/
-        /* Set the PWM1 channel 2 for capture function                                          */
+        /* Set the PWM0 channel 2 for capture function                                          */
         /*--------------------------------------------------------------------------------------*/
         /* If input minimum frequency is 250Hz, user can calculate capture settings by follows.
            Capture clock source frequency = PLL = 48,000,000 in the sample code.

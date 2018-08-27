@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     micro_printer_and_hid_transfer.c
  * @version  V1.00
- * $Revision: 6 $
- * $Date: 18/04/03 1:37p $
+ * $Revision: 10 $
+ * $Date: 18/07/18 4:49p $
  * @brief    M031 series USBD driver Sample file
  *
  * @note
@@ -13,17 +13,17 @@
 #include "NuMicro.h"
 #include "micro_printer_and_hid_transfer.h"
 
+uint8_t volatile g_u8Suspend = 0;
 
 /*--------------------------------------------------------------------------*/
 void USBD_IRQHandler(void)
 {
-    uint32_t u32IntSts = USBD_GET_INT_FLAG();
-    uint32_t u32State = USBD_GET_BUS_STATE();
+    uint32_t volatile u32IntSts = USBD_GET_INT_FLAG();
+    uint32_t volatile u32State = USBD_GET_BUS_STATE();
 
-//------------------------------------------------------------------
     if (u32IntSts & USBD_INTSTS_FLDET)
     {
-        // Floating detect
+        /* Floating detect */
         USBD_CLR_INT_FLAG(USBD_INTSTS_FLDET);
 
         if (USBD_IS_ATTACHED())
@@ -38,7 +38,6 @@ void USBD_IRQHandler(void)
         }
     }
 
-//------------------------------------------------------------------
     if (u32IntSts & USBD_INTSTS_BUS)
     {
         /* Clear event flag */
@@ -49,9 +48,13 @@ void USBD_IRQHandler(void)
             /* Bus reset */
             USBD_ENABLE_USB();
             USBD_SwReset();
+            g_u8Suspend = 0;
         }
         if (u32State & USBD_STATE_SUSPEND)
         {
+            /* Enter power down to wait USB attached */
+            g_u8Suspend = 1;
+
             /* Enable USB but disable PHY */
             USBD_DISABLE_PHY();
         }
@@ -59,10 +62,16 @@ void USBD_IRQHandler(void)
         {
             /* Enable USB and enable PHY */
             USBD_ENABLE_USB();
+            g_u8Suspend = 0;
         }
     }
 
-//------------------------------------------------------------------
+    if(u32IntSts & USBD_INTSTS_SOF)
+    {
+        /* Clear SOF flag */
+        USBD_CLR_INT_FLAG(USBD_INTSTS_SOF);
+    }
+
     if(u32IntSts & USBD_INTSTS_WAKEUP)
     {
         /* Clear event flag */
@@ -71,10 +80,10 @@ void USBD_IRQHandler(void)
 
     if (u32IntSts & USBD_INTSTS_USB)
     {
-        // USB event
+        /* USB event */
         if (u32IntSts & USBD_INTSTS_SETUP)
         {
-            // Setup packet
+            /* Setup packet */
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_SETUP);
 
@@ -85,13 +94,12 @@ void USBD_IRQHandler(void)
             USBD_ProcessSetupPacket();
         }
 
-        // EP events
+        /* EP events */
         if (u32IntSts & USBD_INTSTS_EP0)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP0);
-
-            // control IN
+            /* control IN */
             USBD_CtrlIn();
         }
 
@@ -99,8 +107,7 @@ void USBD_IRQHandler(void)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP1);
-
-            // control OUT
+            /* control OUT */
             USBD_CtrlOut();
         }
 
@@ -114,7 +121,7 @@ void USBD_IRQHandler(void)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP3);
-            // Bulk Out -> receive printer data
+            /* Bulk Out -> receive printer data */
             PTR_Data_Receive();
         }
 
@@ -128,7 +135,7 @@ void USBD_IRQHandler(void)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP5);
-            // Interrupt IN
+            /* Interrupt IN */
             EP5_Handler();
         }
 
@@ -136,7 +143,7 @@ void USBD_IRQHandler(void)
         {
             /* Clear event flag */
             USBD_CLR_INT_FLAG(USBD_INTSTS_EP6);
-            // Interrupt OUT
+            /* Interrupt OUT */
             EP6_Handler();
         }
 
@@ -225,7 +232,7 @@ void PTR_ClassRequest(void)
 
     if (buf[0] & 0x80)   /* request data transfer direction */
     {
-        // Device to host
+        /* Device to host */
         switch (buf[1])
         {
         case GET_PORT_STATUS:
@@ -240,14 +247,15 @@ void PTR_ClassRequest(void)
         default:
         {
             /* Setup error, stall the device */
-            USBD_SetStall(0);
+            USBD_SetStall(EP0);
+            USBD_SetStall(EP1);
             break;
         }
         }
     }
     else
     {
-        // Host to device
+        /* Host to device */
         switch (buf[1])
         {
         case SET_REPORT:
@@ -273,9 +281,10 @@ void PTR_ClassRequest(void)
 //             }
         default:
         {
-            // Stall
+            /* Stall */
             /* Setup error, stall the device */
-            USBD_SetStall(0);
+            USBD_SetStall(EP0);
+            USBD_SetStall(EP1);
             break;
         }
         }

@@ -42,9 +42,6 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
@@ -53,12 +50,6 @@ void SYS_Init(void)
 
     /* Select HCLK clock source as HIRC and and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
-
-    /* Enable external 32MHz XTAL */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
 
     /* Set both PCLK0 and PCLK1 as HCLK */
     CLK->PCLKDIV = CLK_PCLKDIV_APB0DIV_DIV1 | CLK_PCLKDIV_APB1DIV_DIV1;
@@ -69,10 +60,10 @@ void SYS_Init(void)
     CLK_EnableModuleClock(UART1_MODULE);
 
     /* Select IP clock source */
-    /* Select UART0 clock source is HXT */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
-    /* Select UART1 clock source is HXT */
-    CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART1SEL_HXT, CLK_CLKDIV0_UART1(1));
+    /* Select UART0 clock source is HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
+    /* Select UART1 clock source is HIRC */
+    CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART1SEL_HIRC, CLK_CLKDIV0_UART1(1));
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
@@ -82,14 +73,12 @@ void SYS_Init(void)
     /* Init I/O Multi-function                                                                                 */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD;
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))    |       \
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    /* Set PA multi-function pins for UART1 TXD, RXD, CTS and RTS */
-    SYS->GPA_MFPL &= ~(SYS_GPA_MFPL_PA0MFP_Msk | SYS_GPA_MFPL_PA1MFP_Msk |
-                       SYS_GPA_MFPL_PA2MFP_Msk | SYS_GPA_MFPL_PA3MFP_Msk);
-    SYS->GPA_MFPL |= (SYS_GPA_MFPL_PA0MFP_UART1_nRTS | SYS_GPA_MFPL_PA1MFP_UART1_nCTS |
-                      SYS_GPA_MFPL_PA2MFP_UART1_RXD | SYS_GPA_MFPL_PA3MFP_UART1_TXD);
+    /* Set PA multi-function pins for UART1 TXD, RXD and RTS */
+    SYS->GPA_MFPL = (SYS->GPA_MFPL & ~(SYS_GPA_MFPL_PA0MFP_Msk | SYS_GPA_MFPL_PA2MFP_Msk | SYS_GPA_MFPL_PA3MFP_Msk)) |   \
+                    (SYS_GPA_MFPL_PA0MFP_UART1_nRTS | SYS_GPA_MFPL_PA2MFP_UART1_RXD | SYS_GPA_MFPL_PA3MFP_UART1_TXD);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -154,11 +143,11 @@ void RS485_HANDLE()
     volatile uint32_t regRX = 0xFF;
     volatile uint32_t u32IntSts = UART1->INTSTS;
 
-    if ((u32IntSts & UART_INTSTS_RLSINT_Msk) && (u32IntSts & UART_INTSTS_RDAINT_Msk))           /* RLS INT & RDA INT */ //For RS485 Detect Address
+    if (UART_GET_INT_FLAG(UART1,UART_INTSTS_RLSINT_Msk ) && UART_GET_INT_FLAG(UART1, UART_INTSTS_RDAINT_Msk))       /* RLS INT & RDA INT */ //For RS485 Detect Address
     {
-        if (UART1->FIFOSTS & UART_FIFOSTS_ADDRDETF_Msk)   /* ADD_IF, RS485 mode */
+        if (UART_RS485_GET_ADDR_FLAG(UART1))   /* ADD_IF, RS485 mode */
         {
-            addr = UART1->DAT;
+            addr = UART_READ(UART1);
             UART_RS485_CLEAR_ADDR_FLAG(UART1);        /* clear ADD_IF flag */
             printf("\nAddr=0x%x,Get:", addr);
 
@@ -181,14 +170,14 @@ void RS485_HANDLE()
 #endif
         }
     }
-    else if ((u32IntSts & UART_INTSTS_RDAINT_Msk) || (u32IntSts & UART_INTSTS_RXTOINT_Msk))     /* Rx Ready or Time-out INT*/
+    else if (UART_GET_INT_FLAG(UART1,UART_INTSTS_RDAINT_Msk ) || UART_GET_INT_FLAG(UART1,UART_INTSTS_RXTOINT_Msk ))     /* Rx Ready or Time-out INT*/
     {
         /* Handle received data */
         while (!UART_GET_RX_EMPTY(UART1))
-            printf("%2d,", UART1->DAT);
+            printf("%2d,", UART_READ(UART1));
 
     }
-    else if (u32IntSts & UART_INTSTS_BUFERRINT_Msk)     /* Buffer Error INT */
+    else if (UART_GET_INT_FLAG(UART1,UART_INTSTS_BUFERRINT_Msk ))     /* Buffer Error INT */
     {
         printf("\nBuffer Error...\n");
         UART_ClearIntFlag(UART1, UART_INTSTS_BUFERRINT_Msk);
@@ -340,11 +329,11 @@ void RS485_FunctionTest()
     printf("+-------------------------------------------------------------+\n");
     printf("|            IO Setting                                       |\n");
     printf("+-------------------------------------------------------------+\n");
-    printf("|  ______                        _______                      |\n");
-    printf("| |      |                      |       |                     |\n");
-    printf("| |Master|---TXD1 <====> RXD1---| Slave |                     |\n");
-    printf("| |      |---RTS1 <====> RTS1---|       |                     |\n");
-    printf("| |______|                      |_______|                     |\n");
+    printf("|  ______                                 _______             |\n");
+    printf("| |      |                               |       |            |\n");
+    printf("| |Master|---TXD(PB.3) <===> RXD(PA.2)---| Slave |            |\n");
+    printf("| |      |---RTS(PA.0) <===> RTS(PA.0)---|       |            |\n");
+    printf("| |______|                               |_______|            |\n");
     printf("|                                                             |\n");
     printf("+-------------------------------------------------------------+\n\n");
     printf("+-------------------------------------------------------------+\n");

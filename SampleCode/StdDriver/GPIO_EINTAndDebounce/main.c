@@ -67,26 +67,23 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
     /* Switch HCLK clock source to HIRC */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC;
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
-    /* Set PCLK0/PCLK1 to HCLK/2 */
+    /* Set both PCLK0 and PCLK1 as HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
-    /* Enable UART module clock */
-    CLK_EnableModuleClock(UART0_MODULE);
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Enable UART peripheral clock */
+    CLK_EnableModuleClock(UART0_MODULE);
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
@@ -95,22 +92,17 @@ void SYS_Init(void)
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
     /*----------------------------------------------------------------------*/
+    /* Set GPB multi-function pins for UART0 RXD and TXD */
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    /* Set PB multi-function pins for UART0 RXD and TXD */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    /* Set PA multi-function pin for EINT0(PA.6) and EINT1(PA.7) */
+    SYS->GPA_MFPL = (SYS->GPA_MFPL & ~(SYS_GPA_MFPL_PA6MFP_Msk | SYS_GPA_MFPL_PA7MFP_Msk)) |
+                    (SYS_GPA_MFPL_PA6MFP_INT0 | SYS_GPA_MFPL_PA7MFP_INT1);
 
-    /* Set PA multi-function pin for EINT0(PA.6) */
-    SYS->GPA_MFPL = (SYS->GPA_MFPL & (~SYS_GPA_MFPL_PA6MFP_Msk)) | SYS_GPA_MFPL_PA6MFP_INT0;
-
-    /* Set PB multi-function pin for EINT0(PB.5) */
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB5MFP_Msk)) | SYS_GPB_MFPL_PB5MFP_INT0;
-
-    /* Set PA multi-function pin for EINT1(PA.7) */
-    SYS->GPA_MFPL = (SYS->GPA_MFPL & (~SYS_GPA_MFPL_PA7MFP_Msk)) | SYS_GPA_MFPL_PA7MFP_INT1;
-
-    /* Set PB multi-function pin for EINT1(PB.4) */
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB4MFP_Msk)) | SYS_GPB_MFPL_PB4MFP_INT1;
+    /* Set PB multi-function pin for EINT0(PB.5) and EINT1(PB.4) */
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB5MFP_Msk | SYS_GPB_MFPL_PB4MFP_Msk)) |
+                    (SYS_GPB_MFPL_PB5MFP_INT0 | SYS_GPB_MFPL_PB4MFP_INT1);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -170,10 +162,8 @@ int main(void)
 
     /* Enable interrupt de-bounce function and select de-bounce sampling cycle time is 1024 clocks of LIRC clock */
     GPIO_SET_DEBOUNCE_TIME(GPIO_DBCTL_DBCLKSRC_LIRC, GPIO_DBCTL_DBCLKSEL_1024);
-    GPIO_ENABLE_DEBOUNCE(PA, BIT6);
-    GPIO_ENABLE_DEBOUNCE(PB, BIT5);
-    GPIO_ENABLE_DEBOUNCE(PA, BIT7);
-    GPIO_ENABLE_DEBOUNCE(PB, BIT4);
+    GPIO_ENABLE_DEBOUNCE(PA, BIT6 | BIT7);
+    GPIO_ENABLE_DEBOUNCE(PB, BIT4 | BIT5);
 
     /* Waiting for interrupts */
     while(1);

@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/06/01 3:29p $
+ * $Revision: 8 $
+ * $Date: 18/07/19 2:22p $
  * @brief    Demonstrate how to use PWM output waveform.
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
@@ -10,11 +10,6 @@
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
-
-/*---------------------------------------------------------------------------------------------------------*/
-/* Macro, type and constant definitions                                                                    */
-/*---------------------------------------------------------------------------------------------------------*/
-#define PLLCTL_SETTING  CLK_PLLCTL_96MHz_HXT
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -39,15 +34,6 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
     /* Enable HIRC clock */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
@@ -57,11 +43,8 @@ void SYS_Init(void)
     /* Switch HCLK clock source to HIRC */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk) | CLK_CLKSEL0_HCLKSEL_HIRC;
 
-    /* Switch UART0 clock source to XTAL */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HXT;
-
-    /* Switch STCLK source to HCLK/2 */
-    CLK->CLKSEL0 = CLK_CLKSEL0_STCLKSEL_HCLK_DIV2;
+    /* Switch UART0 clock source to HIRC */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HIRC;
 
     /* Enable PWM0 module clock */
     CLK->APBCLK1 |= CLK_APBCLK1_PWM0CKEN_Msk;
@@ -75,23 +58,18 @@ void SYS_Init(void)
     /* Enable PWM0 module clock */
     CLK->APBCLK1 |= CLK_APBCLK1_PWM0CKEN_Msk;
 
-    /* Enable PWM1 module clock */
-    CLK->APBCLK1 |= CLK_APBCLK1_PWM1CKEN_Msk;
-
     /*---------------------------------------------------------------------------------------------------------*/
     /* PWM clock frequency configuration                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Select HCLK clock divider as 2 */
-    CLK->CLKDIV0 = (CLK->CLKDIV0 & ~CLK_CLKDIV0_HCLKDIV_Msk) | CLK_CLKDIV0_HCLK(2);
+//    CLK->CLKDIV0 = (CLK->CLKDIV0 & ~CLK_CLKDIV0_HCLKDIV_Msk) | CLK_CLKDIV0_HCLK(2);
 
     /* PWM clock frequency can be set equal or double to HCLK by choosing case 1 or case 2 */
     /* case 1.PWM clock frequency is set equal to HCLK: select PWM module clock source as PCLK */
     CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_PWM0SEL_Msk) | CLK_CLKSEL2_PWM0SEL_PCLK0;
-    CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_PWM1SEL_Msk) | CLK_CLKSEL2_PWM1SEL_PCLK1;
 
     /* case 2.PWM clock frequency is set double to HCLK: select PWM module clock source as PLL */
     //CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_PWM0SEL_Msk) | CLK_CLKSEL2_PWM0SEL_PLL;
-    //CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_PWM1SEL_Msk) | CLK_CLKSEL2_PWM1SEL_PLL;
     /*---------------------------------------------------------------------------------------------------------*/
 
     /* Enable UART clock */
@@ -101,10 +79,6 @@ void SYS_Init(void)
     SYS->IPRST2 |= SYS_IPRST2_PWM0RST_Msk;
     SYS->IPRST2 &= ~SYS_IPRST2_PWM0RST_Msk;
 
-    /* Reset PWM1 module */
-    SYS->IPRST2 |= SYS_IPRST2_PWM1RST_Msk;
-    SYS->IPRST2 &= ~SYS_IPRST2_PWM1RST_Msk;
-
     /* Update System Core Clock */
     SystemCoreClockUpdate();
 
@@ -112,36 +86,22 @@ void SYS_Init(void)
     /* Init I/O Multi-function                                                                                 */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Set PB multi-function pins for PWM0 Channel 0~5 */
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB5MFP_Msk));
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB5MFP_PWM0_CH0;
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB4MFP_Msk));
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB4MFP_PWM0_CH1;
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB3MFP_Msk));
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB3MFP_PWM0_CH2;
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB2MFP_Msk));
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB2MFP_PWM0_CH3;
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB1MFP_Msk));
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB1MFP_PWM0_CH4;
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB0MFP_Msk));
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB0MFP_PWM0_CH5;
-
-    /* Set PB/PC/PA multi-function pins for PWM1 Channel 0~5 */
-    SYS->GPB_MFPH = (SYS->GPB_MFPH & (~SYS_GPB_MFPH_PB15MFP_Msk));
-    SYS->GPB_MFPH |= SYS_GPB_MFPH_PB15MFP_PWM1_CH0;
-    SYS->GPB_MFPH = (SYS->GPB_MFPH & (~SYS_GPB_MFPH_PB14MFP_Msk));
-    SYS->GPB_MFPH |= SYS_GPB_MFPH_PB14MFP_PWM1_CH1;
-    SYS->GPC_MFPL = (SYS->GPC_MFPL & (~SYS_GPC_MFPL_PC7MFP_Msk));
-    SYS->GPC_MFPL |= SYS_GPC_MFPL_PC7MFP_PWM1_CH2;
-    SYS->GPC_MFPL = (SYS->GPC_MFPL & (~SYS_GPC_MFPL_PC6MFP_Msk ));
-    SYS->GPC_MFPL |= SYS_GPC_MFPL_PC6MFP_PWM1_CH3;
-    SYS->GPA_MFPL = (SYS->GPA_MFPL & (~SYS_GPA_MFPL_PA7MFP_Msk));
-    SYS->GPA_MFPL |= SYS_GPA_MFPL_PA7MFP_PWM1_CH4;
-    SYS->GPA_MFPL = (SYS->GPA_MFPL & (~SYS_GPA_MFPL_PA6MFP_Msk ));
-    SYS->GPA_MFPL |= SYS_GPA_MFPL_PA6MFP_PWM1_CH5;
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB5MFP_Msk |
+                                       SYS_GPB_MFPL_PB4MFP_Msk |
+                                       SYS_GPB_MFPL_PB3MFP_Msk |
+                                       SYS_GPB_MFPL_PB2MFP_Msk |
+                                       SYS_GPB_MFPL_PB1MFP_Msk |
+                                       SYS_GPB_MFPL_PB0MFP_Msk)) |
+                    (SYS_GPB_MFPL_PB5MFP_PWM0_CH0 |
+                     SYS_GPB_MFPL_PB4MFP_PWM0_CH1 |
+                     SYS_GPB_MFPL_PB3MFP_PWM0_CH2 |
+                     SYS_GPB_MFPL_PB2MFP_PWM0_CH3 |
+                     SYS_GPB_MFPL_PB1MFP_PWM0_CH4 |
+                     SYS_GPB_MFPL_PB0MFP_PWM0_CH5);
 }
 
 void UART0_Init()
@@ -154,10 +114,9 @@ void UART0_Init()
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 baud rate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
-
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Main Function                                                                                          */
@@ -183,13 +142,12 @@ int32_t main(void)
     UART0_Init();
 
     printf("\n\nCPU @ %dHz(PLL@ %dHz)\n", SystemCoreClock, PllClock);
-    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "CPU" : "PLL");
-    printf("PWM1 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM1SEL_Msk) ? "CPU" : "PLL");
+    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "PCLK" : "PLL");
     printf("+------------------------------------------------------------------------+\n");
     printf("|                          PWM Driver Sample Code                        |\n");
     printf("|                                                                        |\n");
     printf("+------------------------------------------------------------------------+\n");
-    printf("  This sample code will output waveform with PWM0 and PWM1 channel 0~5.\n");
+    printf("  This sample code will output waveform with PWM0 channel 0~5.\n");
     printf("  I/O configuration:\n");
     printf("  PWM0 channel 0: 240000 Hz, duty 90%%.\n");
     printf("  PWM0 channel 1: 240000 Hz, duty 80%%.\n");
@@ -197,16 +155,9 @@ int32_t main(void)
     printf("  PWM0 channel 3: 240000 Hz, duty 70%%.\n");
     printf("  PWM0 channel 4: 240000 Hz, duty 60%%.\n");
     printf("  PWM0 channel 5: 240000 Hz, duty 50%%.\n");
-    printf("  PWM1 channel 0: 240000 Hz, duty 50%%.\n");
-    printf("  PWM1 channel 1: 240000 Hz, duty 40%%.\n");
-    printf("  PWM1 channel 2: 240000 Hz, duty 30%%.\n");
-    printf("  PWM1 channel 3: 240000 Hz, duty 25%%.\n");
-    printf("  PWM1 channel 4: 240000 Hz, duty 20%%.\n");
-    printf("  PWM1 channel 5: 240000 Hz, duty 10%%.\n");
     printf("    waveform output pin: PWM0_CH0(PB.5), PWM0_CH1(PB.4), PWM0_CH2(PB.3), PWM0_CH3(PB.2), PWM0_CH4(PB.1), PWM0_CH5(PB.0)\n");
-    printf("                         PWM1_CH0(PB.15), PWM1_CH1(PB.14), PWM1_CH2(PC.7), PWM1_CH3(PC.7), PWM1_CH4(PA.7), PWM1_CH5(PA.6)\n");
 
-    /* PWM0 and PWM1 channel 0~5 frequency and duty configuration are as follows */
+    /* PWM0 channel 0~5 frequency and duty configuration are as follows */
 
     /* Set PWM to up counter type(edge aligned) */
     PWM0->CTL1 &= ~PWM_CTL1_CNTTYPE0_Msk;
@@ -304,118 +255,17 @@ int32_t main(void)
     /* Enable output of PWM0 channel 0 ~ 5 */
     PWM0->POEN |= 0x3F;
 
-    /* Set PWM to up counter type(edge aligned) */
-    PWM1->CTL1 &= ~PWM_CTL1_CNTTYPE0_Msk;
-
-    /*
-      Configure PWM1 channel 0 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
-      Duty ratio = (CMR) / (CNR + 1)
-      Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
-      Duty ratio = (100) / (200) = 50%
-    */
-    /* PWM1 channel 0 frequency and duty configuration */
-    /* Set PWM Timer clock prescaler */
-    PWM_SET_PRESCALER(PWM1, 0, 0); /* Divided by 1 */
-    /* Set PWM Timer duty */
-    PWM_SET_CMR(PWM1, 0, 100);
-    /* Set PWM Timer period */
-    PWM_SET_CNR(PWM1, 0, 199);
-
-    /*
-      Configure PWM1 channel 1 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
-      Duty ratio = (CMR) / (CNR + 1)
-      Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
-      Duty ratio = (80) / (200) = 40%
-    */
-    /* PWM1 channel 1 frequency and duty configuration */
-    /* PWM Timer clock prescaler of Channel 1 is share with Channel 0 */
-    /* Set PWM Timer duty */
-    PWM_SET_CMR(PWM1, 1, 80);
-    /* Set PWM Timer period */
-    PWM_SET_CNR(PWM1, 1, 199);
-
-    /*
-      Configure PWM1 channel 2 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
-      Duty ratio = (CMR) / (CNR + 1)
-      Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
-      Duty ratio = (60) / (200) = 30%
-    */
-    /* PWM1 channel 2 frequency and duty configuration */
-    /* Set PWM Timer clock prescaler */
-    PWM_SET_PRESCALER(PWM1, 2, 0); /* Divided by 1 */
-    /* Set PWM Timer duty */
-    PWM_SET_CMR(PWM1, 2, 60);
-    /* Set PWM Timer period */
-    PWM_SET_CNR(PWM1, 2, 199);
-
-    /*
-      Configure PWM1 channel 3 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
-      Duty ratio = (CMR) / (CNR + 1)
-      Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
-      Duty ratio = (50) / (200) = 25%
-    */
-    /* PWM1 channel 3 frequency and duty configuration */
-    /* PWM Timer clock prescaler of Channel 3 is share with Channel 2 */
-    /* Set PWM Timer duty */
-    PWM_SET_CMR(PWM1, 3, 50);
-    /* Set PWM Timer period */
-    PWM_SET_CNR(PWM1, 3, 199);
-
-    /*
-      Configure PWM1 channel 4 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
-      Duty ratio = (CMR) / (CNR + 1)
-      Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
-      Duty ratio = (40) / (200) = 20%
-    */
-    /* PWM1 channel 4 frequency and duty configuration */
-    /* Set PWM Timer clock prescaler */
-    PWM_SET_PRESCALER(PWM1, 4, 0); /* Divided by 1 */
-    /* Set PWM Timer duty */
-    PWM_SET_CMR(PWM1, 4, 40);
-    /* Set PWM Timer period */
-    PWM_SET_CNR(PWM1, 4, 199);
-
-    /*
-      Configure PWM1 channel 5 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
-      Duty ratio = (CMR) / (CNR + 1)
-      Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
-      Duty ratio = (20) / (200) = 10%
-    */
-    /* PWM1 channel 5 frequency and duty configuration */
-    /* PWM Timer clock prescaler of Channel 5 is share with Channel 4 */
-    /* Set PWM Timer duty */
-    PWM_SET_CMR(PWM1, 5, 20);
-    /* Set PWM Timer period */
-    PWM_SET_CNR(PWM1, 5, 199);
-
-    /* Set waveform generation */
-    PWM_SET_OUTPUT_LEVEL(PWM1, 0x3F, PWM_OUTPUT_HIGH, PWM_OUTPUT_LOW, PWM_OUTPUT_NOTHING, PWM_OUTPUT_NOTHING);
-
-    /* Enable output of PWM1 channel 0 ~ 5 */
-    PWM1->POEN |= 0x3F;
-
-    /* Enable counter synchronous start function for PWM0 and PWM1 channel 0~5 */
+    /* Enable counter synchronous start function for PWM0 channel 0~5 */
     PWM0->SSCTL = 0x3F | PWM_SSCTL_SSRC_PWM0;
-    PWM1->SSCTL = 0x3F | PWM_SSCTL_SSRC_PWM0;
 
     /* Start PWM0 counter */
     PWM0->CNTEN = 0x3F;
-    /* Start PWM1 counter */
-    PWM1->CNTEN = 0x3F;
 
     printf("Press any key to stop.\n");
     getchar();
 
     /* Stop PWM0 counter */
     PWM0->CNTEN &= ~0x3F;
-    /* Stop PWM1 counter */
-    PWM1->CNTEN &= ~0x3F;
 
     printf("Done.\n");
 

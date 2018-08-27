@@ -1,16 +1,18 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/05/31 4:56p $
+ * $Revision: 6 $
+ * $Date: 18/07/23 4:30p $
  * @brief
- *           Show a Master how to access Slave.
+ *           Show how a master accesses a slave.
  *           This sample code needs to work with I2C_Slave.
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
+
+#define TEST_LENGTH    256
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -147,29 +149,20 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable HIRC clock */
+    /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable I2C0 clock */
     CLK_EnableModuleClock(I2C0_MODULE);
@@ -230,7 +223,7 @@ int32_t I2C0_Read_Write_SLAVE(uint8_t slvaddr)
 
     g_u8DeviceAddr = slvaddr;
 
-    for(i = 0; i < 0x100; i++)
+    for(i = 0; i < TEST_LENGTH; i++)
     {
         g_au8MstTxData[0] = (uint8_t)((i & 0xFF00) >> 8);
         g_au8MstTxData[1] = (uint8_t)(i & 0x00FF);
@@ -301,7 +294,7 @@ int main()
     printf("Press any key to continue.\n");
     getchar();
 
-    /* Access Slave with no address */
+    /* Access Slave with no address mask */
     printf("\n");
     printf(" == No Mask Address ==\n");
     I2C0_Read_Write_SLAVE(0x15);

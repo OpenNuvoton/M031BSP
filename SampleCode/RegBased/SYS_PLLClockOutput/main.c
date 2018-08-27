@@ -1,15 +1,13 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V3.00
- * @brief    Change system clock to different PLL frequency and output system clock from CLKO pin.
+ * @brief    Change system clock to different PLL frequency and output system clock to CLKO pin.
  *
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/
 #include "stdio.h"
 #include "NuMicro.h"
-
-#define PLL_CLOCK       96000000
 
 #define SIGNATURE       0x125ab234
 #define FLAG_ADDR       0x20000FFC
@@ -101,7 +99,7 @@ uint32_t g_au32PllSetting[] =
 
 void SetCoreClockPLL(uint32_t u32Hclk)
 {
-    uint32_t u32NF;
+    uint32_t u32NO, u32NR, u32NF;
 
     /* Switch HCLK clock source to HIRC clock for safe */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk) | CLK_CLKSEL0_HCLKSEL_HIRC;
@@ -114,10 +112,12 @@ void SetCoreClockPLL(uint32_t u32Hclk)
     /* FOUT = (FIN * NF) / (NR * NO)
        --> NF = (FOUT * NR * NO) / FIN
        FOUT = (u32Hclk * 2) since the HCLK divider will be 2 */
-    u32NF = ((u32Hclk * 2) * 4 * 4) / __HXT;
-    CLK->PLLCTL = CLK_PLLCTL_PLLSRC_HXT |               // PLL source clock is from HXT
-                  (3 << CLK_PLLCTL_OUTDIV_Pos) |        // NO = 4
-                  ((4 - 2) << CLK_PLLCTL_INDIV_Pos) |   // NR = 4
+    u32NO = 4;
+    u32NR = 3;
+    u32NF = ((u32Hclk * 2) * u32NR * u32NO) / (__HIRC/4);
+    CLK->PLLCTL = CLK_PLLCTL_PLLSRC_HIRC_DIV4 |         /* PLL source clock is from HIRC/4 */
+                  (3 << CLK_PLLCTL_OUTDIV_Pos) |        /* assign 3 for NO = 4 */
+                  ((u32NR - 2) << CLK_PLLCTL_INDIV_Pos) |
                   ((u32NF - 2) << CLK_PLLCTL_FBDIV_Pos);
 
     /* Wait for PLL clock stable */
@@ -141,6 +141,8 @@ void SYS_PLL_Test(void)
     /*---------------------------------------------------------------------------------------------------------*/
 
     printf("\n-------------------------[ Test PLL ]-----------------------------\n");
+    printf("  Select HCLK clock source from PLL/2.\n");
+    printf("  Please measure HCLK on CLKO pin (PB.14) by scope ...\n");
 
     for(i = 0; i < sizeof(g_au32PllSetting) / sizeof(g_au32PllSetting[0]) ; i++)
     {
@@ -151,17 +153,15 @@ void SYS_PLL_Test(void)
 
         printf("  Change system clock to %d Hz ...................... ", SystemCoreClock);
 
-        /* Output selected clock to CKO, CKO Clock = HCLK / 2^(1 + 1) */
-        /* CKO = clock source / 2^(u32ClkDiv + 1) */
-        CLK->CLKOCTL = CLK_CLKOCTL_CLKOEN_Msk | 1 | (0 << CLK_CLKOCTL_DIV1EN_Pos);
+        /* Output HCLK to CKO, CKO Clock = HCLK / 1 */
+        CLK->CLKOCTL = CLK_CLKOCTL_CLKOEN_Msk | 0 | (1 << CLK_CLKOCTL_DIV1EN_Pos);
         /* Enable CKO clock source */
         CLK->APBCLK0 |= CLK_APBCLK0_CLKOCKEN_Msk;
         /* Select CKO clock source */
         CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_CLKOSEL_Msk)) | (CLK_CLKSEL1_CLKOSEL_HCLK);
 
-
         /* The delay loop is used to check if the CPU speed is increasing */
-        Delay(0x400000);
+        Delay(0x1000000);
 
         if(pi())
         {
@@ -182,14 +182,11 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC */
+    CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
     /* Switch HCLK clock source to HIRC */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk) | CLK_CLKSEL0_HCLKSEL_HIRC;
@@ -198,15 +195,12 @@ void SYS_Init(void)
     /* Set both PCLK0 and PCLK1 as HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Switch UART0 clock source to HIRC */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & ~CLK_CLKDIV0_UART0DIV_Msk) | CLK_CLKDIV0_UART0(1);
 
     /* Enable UART0 peripheral clock */
     CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk;
-
-    /* Set core clock as PLL_CLOCK from PLL */
-    SetCoreClockPLL(PLL_CLOCK);
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
@@ -215,13 +209,10 @@ void SYS_Init(void)
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
     /*----------------------------------------------------------------------*/
-
     /* Set PB multi-function pins for UART0 RXD and TXD */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
-
     /* Set PB multi-function pins for CLKO(PB.14) */
-    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~SYS_GPB_MFPH_PB14MFP_Msk) | SYS_GPB_MFPH_PB14MFP_CLKO;
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk | SYS_GPB_MFPH_PB14MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD | SYS_GPB_MFPH_PB14MFP_CLKO);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -237,7 +228,7 @@ void UART0_Init(void)
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 baud rate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
 
@@ -250,7 +241,6 @@ int32_t main(void)
 
     /* Init UART0 for printf */
     UART0_Init();
-    printf("CLK->PLLCTL = 0x%08X\n", CLK->PLLCTL);
 
     printf("\n\nCPU @ %dHz\n", SystemCoreClock);
     printf("+---------------------------------------+\n");
@@ -288,13 +278,9 @@ int32_t main(void)
         printf("Protected Address is Unlocked\n");
     }
 
-    /* Enable Brown-Out Detector and Low Voltage Reset function, and set Brown-Out Detector voltage 3.0V */
-    /* Enable Brown-out Detector function */
-    SYS->BODCTL |= SYS_BODCTL_BODEN_Msk;
-    /* Enable Brown-out interrupt or reset function */
-    SYS->BODCTL = (SYS->BODCTL & ~SYS_BODCTL_BODRSTEN_Msk) | SYS_BODCTL_BOD_INTERRUPT_EN;
-    /* Select Brown-out Detector threshold voltage */
-    SYS->BODCTL = (SYS->BODCTL & ~SYS_BODCTL_BODVL_Msk) | SYS_BODCTL_BODVL_2_5V;
+    /* Enable Brown-Out Detector and Low Voltage Reset function, and set Brown-Out Detector voltage 2.5V */
+    SYS->BODCTL = (SYS->BODCTL & ~(SYS_BODCTL_BODRSTEN_Msk | SYS_BODCTL_BODVL_Msk)) |
+                  (SYS_BODCTL_BOD_INTERRUPT_EN | SYS_BODCTL_BODEN_Msk | SYS_BODCTL_BODVL_2_5V);
 
     /* Enable BOD interrupt */
     NVIC_EnableIRQ(BOD_IRQn);

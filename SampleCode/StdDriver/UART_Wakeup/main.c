@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V3.00
- * $Revision: 3 $
- * $Date: 18/05/30 3:53p $
+ * $Revision: 6 $
+ * $Date: 18/07/16 10:31a $
  * @brief    Show how to wake up system form Power-down mode by UART interrupt.
  * @note
  * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
@@ -40,22 +40,19 @@ void PowerDownFunction(void)
 void SYS_Init(void)
 {
 
-    /* Set PF multi-function pins for X32_OUT(PF.0) and X32_IN(PF.1) */
-    //SYS->GPF_MFPL = (SYS->GPF_MFPL & (~SYS_GPF_MFPL_PF0MFP_Msk)) | SYS_GPF_MFPL_PF0MFP_X32_OUT;
-    //SYS->GPF_MFPL = (SYS->GPF_MFPL & (~SYS_GPF_MFPL_PF1MFP_Msk)) | SYS_GPF_MFPL_PF1MFP_X32_IN;
+    /* Set X32_OUT(PF.4) and X32_IN(PF.5) to input mode */
+    GPIO_SetMode(PF, (BIT4 | BIT5), GPIO_MODE_INPUT);
 
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
 
-    /* Enable HIRC, HXT and LXT clock */
+    /* Enable HIRC and LXT clock */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
     CLK_EnableXtalRC(CLK_PWRCTL_LXTEN_Msk);
 
-    /* Wait for HIRC, HXT and LXT clock ready */
+    /* Wait for HIRC and LXT clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
     CLK_WaitClockReady(CLK_STATUS_LXTSTB_Msk);
 
     /* Select HCLK clock source as HIRC and HCLK clock divider as 1 */
@@ -69,7 +66,7 @@ void SYS_Init(void)
     CLK_EnableModuleClock(UART1_MODULE);
 
     /* Select UART module clock source as HIRC and UART module clock divider as 1 */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
     CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART1SEL_HIRC, CLK_CLKDIV0_UART1(1));
 
     /*---------------------------------------------------------------------------------------------------------*/
@@ -77,14 +74,14 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
 
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))    |   \
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Set PA multi-function pins for UART1 TXD, RXD, CTS and RTS */
-    SYS->GPA_MFPL &= ~(SYS_GPA_MFPL_PA0MFP_Msk | SYS_GPA_MFPL_PA1MFP_Msk |
-                       SYS_GPA_MFPL_PA2MFP_Msk | SYS_GPA_MFPL_PA3MFP_Msk);
-    SYS->GPA_MFPL |= (SYS_GPA_MFPL_PA0MFP_UART1_nRTS | SYS_GPA_MFPL_PA1MFP_UART1_nCTS |
-                      SYS_GPA_MFPL_PA2MFP_UART1_RXD | SYS_GPA_MFPL_PA3MFP_UART1_TXD);
+    SYS->GPA_MFPL = (SYS->GPA_MFPL & ~(SYS_GPA_MFPL_PA0MFP_Msk | SYS_GPA_MFPL_PA1MFP_Msk |  \
+                                       SYS_GPA_MFPL_PA2MFP_Msk | SYS_GPA_MFPL_PA3MFP_Msk)) |   \
+                    (SYS_GPA_MFPL_PA0MFP_UART1_nRTS | SYS_GPA_MFPL_PA1MFP_UART1_nCTS |  \
+                     SYS_GPA_MFPL_PA2MFP_UART1_RXD | SYS_GPA_MFPL_PA3MFP_UART1_TXD);
 
 
 }
@@ -231,8 +228,7 @@ void UART_RxThresholdWakeUp(void)
     UART1->FIFO = (UART1->FIFO & (~UART_FIFO_RFITL_Msk)) | UART_FIFO_RFITL_4BYTES;
 
     /* Enable UART Rx time-out function */
-    UART1->INTEN |= UART_INTEN_TOCNTEN_Msk;
-    UART1->TOUT = (UART1->TOUT & (~UART_TOUT_TOIC_Msk)) | (40);
+    UART_SetTimeoutCnt(UART1, 40);
 
     printf("System enter to Power-down mode.\n");
     printf("Send data with baud rate 9600bps to UART1 to wake-up system.\n\n");

@@ -1,14 +1,16 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 3 $
- * $Date: 18/06/01 2:42p $
+ * $Revision: 4 $
+ * $Date: 18/07/13 4:20p $
  * @brief    Use PDMA channel 1 to transfer data from memory to memory.
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
+
+#define PDMA_CH    1
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -62,22 +64,13 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
     /* Wait for HIRC clock ready */
     while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK clock divider as 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(1);
 
@@ -87,8 +80,8 @@ void SYS_Init(void)
     /* PDMA Clock Enable */
     CLK->AHBCLK |= CLK_AHBCLK_PDMACKEN_Msk;
 
-    /* Switch UART0 clock source to XTAL and UART0 clock divider as 1 */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Switch UART0 clock source to HIRC and UART0 clock divider as 1 */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART0DIV_Msk)) | CLK_CLKDIV0_UART0(1);
 
     /* Update System Core Clock */
@@ -116,7 +109,7 @@ void UART0_Init(void)
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 Baudrate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
 
@@ -164,28 +157,28 @@ int main()
     ------------------------------------------------------------------------------------------------------*/
 
     /* Open Channel 1 */
-    PDMA->CHCTL |= (1 << 1);
+    PDMA->CHCTL |= (1 << PDMA_CH);
 
     /* Transfer configuration of Channel 1 */
-    PDMA->DSCT[1].CTL = ((PDMA_TEST_LENGTH - 1) << PDMA_DSCT_CTL_TXCNT_Pos) | /* Transfer count is PDMA_TEST_LENGTH */ \
-                        PDMA_WIDTH_32 |  /* Transfer width is 32 bits(one word) */ \
-                        PDMA_SAR_INC |   /* Source increment size is 32 bits(one word) */ \
-                        PDMA_DAR_INC |   /* Destination increment size is 32 bits(one word) */ \
-                        PDMA_REQ_BURST | /* Transfer type is burst transfer type */ \
-                        PDMA_BURST_4 |   /* Burst size is 4. No effect in single transfer type */ \
-                        PDMA_OP_BASIC;   /* Operation mode is basic mode */
+    PDMA->DSCT[PDMA_CH].CTL = ((PDMA_TEST_LENGTH - 1) << PDMA_DSCT_CTL_TXCNT_Pos) | /* Transfer count is PDMA_TEST_LENGTH */ \
+                              PDMA_WIDTH_32 |  /* Transfer width is 32 bits(one word) */ \
+                              PDMA_SAR_INC |   /* Source increment size is 32 bits(one word) */ \
+                              PDMA_DAR_INC |   /* Destination increment size is 32 bits(one word) */ \
+                              PDMA_REQ_BURST | /* Transfer type is burst transfer type */ \
+                              PDMA_BURST_4 |   /* Burst size is 4. No effect in single transfer type */ \
+                              PDMA_OP_BASIC;   /* Operation mode is basic mode */
 
     /* Configure source address */
-    PDMA->DSCT[1].SA = (uint32_t)au8SrcArray;
+    PDMA->DSCT[PDMA_CH].SA = (uint32_t)au8SrcArray;
 
     /* Configure destination address */
-    PDMA->DSCT[1].DA = (uint32_t)au8DestArray;
+    PDMA->DSCT[PDMA_CH].DA = (uint32_t)au8DestArray;
 
     /* Configure PDMA channel 1 as memory to memory transfer */
     PDMA->REQSEL0_3 = (PDMA->REQSEL0_3 & ~PDMA_REQSEL0_3_REQSRC1_Msk) | (PDMA_MEM << PDMA_REQSEL0_3_REQSRC1_Pos);
 
     /* Enable interrupt */
-    PDMA->INTEN |= (1 << 1);
+    PDMA->INTEN |= (1 << PDMA_CH);
 
     /* Enable NVIC for PDMA */
     NVIC_EnableIRQ(PDMA_IRQn);
@@ -193,7 +186,7 @@ int main()
     g_u32IsTestOver = 0;
 
     /* Generate a software request to trigger transfer with PDMA channel 1  */
-    PDMA->SWREQ = (1 << 1);
+    PDMA->SWREQ = (1 << PDMA_CH);
 
     /* Waiting for transfer done */
     while (g_u32IsTestOver == 0);

@@ -8,7 +8,8 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
-#define PLL_CLOCK       FREQ_96MHZ
+#define PDMA_CH     0
+
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global Interface Variables Declarations                                                                 */
 /*---------------------------------------------------------------------------------------------------------*/
@@ -18,46 +19,80 @@ void AccessEBIWithPDMA(void);
 void Configure_EBI_16BIT_Pins(void)
 {
     /* EBI AD0~5 pins on PC.0~5 */
-    SYS->GPC_MFPL |= SYS_GPC_MFPL_PC0MFP_EBI_AD0 | SYS_GPC_MFPL_PC1MFP_EBI_AD1 |
-                     SYS_GPC_MFPL_PC2MFP_EBI_AD2 | SYS_GPC_MFPL_PC3MFP_EBI_AD3 |
-                     SYS_GPC_MFPL_PC4MFP_EBI_AD4 | SYS_GPC_MFPL_PC5MFP_EBI_AD5;
+    /* EBI AD8, AD9 pins on PC.6, PC.7 */
+    SYS->GPC_MFPL = (SYS->GPC_MFPL & ~(SYS_GPC_MFPL_PC0MFP_Msk |
+                                       SYS_GPC_MFPL_PC1MFP_Msk |
+                                       SYS_GPC_MFPL_PC2MFP_Msk |
+                                       SYS_GPC_MFPL_PC3MFP_Msk |
+                                       SYS_GPC_MFPL_PC4MFP_Msk |
+                                       SYS_GPC_MFPL_PC5MFP_Msk |
+                                       SYS_GPC_MFPL_PC6MFP_Msk |
+                                       SYS_GPC_MFPL_PC7MFP_Msk)) |
+                    (SYS_GPC_MFPL_PC0MFP_EBI_AD0 |
+                     SYS_GPC_MFPL_PC1MFP_EBI_AD1 |
+                     SYS_GPC_MFPL_PC2MFP_EBI_AD2 |
+                     SYS_GPC_MFPL_PC3MFP_EBI_AD3 |
+                     SYS_GPC_MFPL_PC4MFP_EBI_AD4 |
+                     SYS_GPC_MFPL_PC5MFP_EBI_AD5 |
+                     SYS_GPC_MFPL_PC6MFP_EBI_AD8 |
+                     SYS_GPC_MFPL_PC7MFP_EBI_AD9);
 
     /* EBI AD6, AD7 pins on PA.6, PA.7 */
-    SYS->GPA_MFPL |= SYS_GPA_MFPL_PA6MFP_EBI_AD6 | SYS_GPA_MFPL_PA7MFP_EBI_AD7;
-
-    /* EBI AD8, AD9 pins on PC.6, PC.7 */
-    SYS->GPC_MFPL |= SYS_GPC_MFPL_PC6MFP_EBI_AD8 | SYS_GPC_MFPL_PC7MFP_EBI_AD9;
-
-    /* EBI AD10 pins on PD.3 */
-    SYS->GPD_MFPL |= SYS_GPD_MFPL_PD3MFP_EBI_AD10;
-
-    /* EBI AD11 pins on PD.2 */
-    SYS->GPD_MFPL |= SYS_GPD_MFPL_PD2MFP_EBI_AD11 ;
-
-    /* EBI AD12, AD13 pins on PB.15, PB.14 */
-    SYS->GPB_MFPH |= SYS_GPB_MFPH_PB15MFP_EBI_AD12 | SYS_GPB_MFPH_PB14MFP_EBI_AD13;
-
-    /* EBI AD14, AD15 pins on PB.13, PB.12 */
-    SYS->GPB_MFPH |= SYS_GPB_MFPH_PB13MFP_EBI_AD14 | SYS_GPB_MFPH_PB12MFP_EBI_AD15;
-
-    /* EBI ADR16~18 pins on PB.11, PB.10, PB.9 and PB.8 */
-    SYS->GPB_MFPH |= SYS_GPB_MFPH_PB11MFP_EBI_ADR16 | SYS_GPB_MFPH_PB10MFP_EBI_ADR17
-                     | SYS_GPB_MFPH_PB9MFP_EBI_ADR18 | SYS_GPB_MFPH_PB8MFP_EBI_ADR19;
+    SYS->GPA_MFPL = (SYS->GPA_MFPL & ~(SYS_GPA_MFPL_PA6MFP_Msk |
+                                       SYS_GPA_MFPL_PA7MFP_Msk)) |
+                    (SYS_GPA_MFPL_PA6MFP_EBI_AD6 |
+                     SYS_GPA_MFPL_PA7MFP_EBI_AD7);
 
     /* EBI RD and WR pins on PA.11 and PA.10 */
-    SYS->GPA_MFPH |= SYS_GPA_MFPH_PA10MFP_EBI_nWR | SYS_GPA_MFPH_PA11MFP_EBI_nRD;
+    SYS->GPA_MFPH = (SYS->GPA_MFPH & ~(SYS_GPA_MFPH_PA10MFP_Msk |
+                                       SYS_GPA_MFPH_PA11MFP_Msk)) |
+                    (SYS_GPA_MFPH_PA10MFP_EBI_nWR |
+                     SYS_GPA_MFPH_PA11MFP_EBI_nRD);
+
+    /* EBI AD10, AD11 pins on PD.3, PD2*/
+    SYS->GPD_MFPL = (SYS->GPD_MFPL & ~(SYS_GPD_MFPL_PD2MFP_Msk |
+                                       SYS_GPD_MFPL_PD3MFP_Msk)) |
+                    (SYS_GPD_MFPL_PD3MFP_EBI_AD10 |
+                     SYS_GPD_MFPL_PD2MFP_EBI_AD11);
+
+    /* EBI AD12, AD13 pins on PB.15, PB.14 */
+    /* EBI AD14, AD15 pins on PB.13, PB.12 */
+    /* EBI ADR16~18 pins on PB.11, PB.10, PB.9 and PB.8 */
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB8MFP_Msk |
+                                       SYS_GPB_MFPH_PB9MFP_Msk |
+                                       SYS_GPB_MFPH_PB10MFP_Msk |
+                                       SYS_GPB_MFPH_PB11MFP_Msk |
+                                       SYS_GPB_MFPH_PB12MFP_Msk |
+                                       SYS_GPB_MFPH_PB13MFP_Msk |
+                                       SYS_GPB_MFPH_PB14MFP_Msk |
+                                       SYS_GPB_MFPH_PB15MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB8MFP_EBI_ADR19 |
+                     SYS_GPB_MFPH_PB9MFP_EBI_ADR18 |
+                     SYS_GPB_MFPH_PB10MFP_EBI_ADR17 |
+                     SYS_GPB_MFPH_PB11MFP_EBI_ADR16 |
+                     SYS_GPB_MFPH_PB12MFP_EBI_AD15 |
+                     SYS_GPB_MFPH_PB13MFP_EBI_AD14 |
+                     SYS_GPB_MFPH_PB14MFP_EBI_AD13 |
+                     SYS_GPB_MFPH_PB15MFP_EBI_AD12);
 
     /* EBI WRL and WRH pins on PB.7 and PB.6 */
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB6MFP_EBI_nWRH | SYS_GPB_MFPL_PB7MFP_EBI_nWRL;
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB6MFP_Msk |
+                                       SYS_GPB_MFPL_PB7MFP_Msk)) |
+                    (SYS_GPB_MFPL_PB6MFP_EBI_nWRH |
+                     SYS_GPB_MFPL_PB7MFP_EBI_nWRL);
 
     /* EBI CS0~1 pins on PF3 and PF2 */
-    SYS->GPF_MFPL |= SYS_GPF_MFPL_PF3MFP_EBI_nCS0 | SYS_GPF_MFPL_PF2MFP_EBI_nCS1;
+    SYS->GPF_MFPL = (SYS->GPF_MFPL & ~(SYS_GPF_MFPL_PF2MFP_Msk |
+                                       SYS_GPF_MFPL_PF3MFP_Msk)) |
+                    (SYS_GPF_MFPL_PF3MFP_EBI_nCS0 |
+                     SYS_GPF_MFPL_PF2MFP_EBI_nCS1);
 
     /* EBI ALE pin on PA.8 */
-    SYS->GPA_MFPH |= SYS_GPA_MFPH_PA8MFP_EBI_ALE;
-
     /* EBI MCLK pin on PA.9 */
-    SYS->GPA_MFPH |= SYS_GPA_MFPH_PA9MFP_EBI_MCLK;
+    SYS->GPA_MFPH = (SYS->GPA_MFPH & ~(SYS_GPA_MFPH_PA8MFP_Msk |
+                                       SYS_GPA_MFPH_PA9MFP_Msk)) |
+                    (SYS_GPA_MFPH_PA8MFP_EBI_ALE |
+                     SYS_GPA_MFPH_PA9MFP_EBI_MCLK);
 }
 
 void SYS_Init(void)
@@ -65,41 +100,22 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable Internal RC 48MHz clock */
+    /* Enable HIRC clock */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for Internal RC clock ready */
+    /* Waiting for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to Internal RC and HCLK source divide 1 */
+    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
+    /* Select HIRC as the clock source of UART0 */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
-    /* Waiting for HXT clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Set core clock as PLL_CLOCK from PLL */
-    CLK_SetCoreClock(PLL_CLOCK);
-
-    /* Waiting for PLL clock ready */
-    CLK_WaitClockReady(CLK_STATUS_PLLSTB_Msk);
-
-    /* Set SysTick source to HCLK/2*/
-    CLK_SetSysTickClockSrc(CLK_CLKSEL0_STCLKSEL_HCLK_DIV2);
-
-    /* Set PCLK0/PCLK1 to HCLK/2 */
-    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
-
-    /* Select HXT as the clock source of UART0 */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
-
-    /* Enable peripheral clock */
+    /* Enable UART peripheral clock */
     CLK_EnableModuleClock(UART0_MODULE);
+
+    /* Enable EBI peripheral clock */
     CLK_EnableModuleClock(EBI_MODULE);
 
     /* Enable PDMA peripheral clock */
@@ -109,8 +125,8 @@ void SYS_Init(void)
     /* Init I/O Multi-function                                                                                 */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Set PA multi-function pins for UART0 RXD=PA.15 and TXD=PA.14 */
-    SYS->GPA_MFPH &= ~(SYS_GPA_MFPH_PA14MFP_Msk | SYS_GPA_MFPH_PA15MFP_Msk);
-    SYS->GPA_MFPH |= (SYS_GPA_MFPH_PA15MFP_UART0_RXD | SYS_GPA_MFPH_PA14MFP_UART0_TXD);
+    SYS->GPA_MFPH = (SYS->GPA_MFPH & ~(SYS_GPA_MFPH_PA14MFP_Msk | SYS_GPA_MFPH_PA15MFP_Msk)) |
+                    (SYS_GPA_MFPH_PA15MFP_UART0_RXD | SYS_GPA_MFPH_PA14MFP_UART0_TXD);
 }
 
 void UART0_Init(void)
@@ -214,17 +230,17 @@ void PDMA_IRQHandler(void)
 
     if (status & PDMA_INTSTS_ABTIF_Msk)   /* abort */
     {
-        if (PDMA_GET_ABORT_STS(PDMA) & PDMA_ABTSTS_ABTIF2_Msk)
+        if (PDMA_GET_ABORT_STS(PDMA) & PDMA_ABTSTS_ABTIF0_Msk)
             u32IsTestOver = 2;
 
-        PDMA_CLR_ABORT_FLAG(PDMA, PDMA_ABTSTS_ABTIF2_Msk);
+        PDMA_CLR_ABORT_FLAG(PDMA, PDMA_ABTSTS_ABTIF0_Msk);
     }
     else if (status & PDMA_INTSTS_TDIF_Msk)     /* done */
     {
-        if (PDMA_GET_TD_STS(PDMA) & PDMA_TDSTS_TDIF2_Msk)
+        if (PDMA_GET_TD_STS(PDMA) & PDMA_TDSTS_TDIF0_Msk)
             u32IsTestOver = 1;
 
-        PDMA_CLR_TD_FLAG(PDMA, PDMA_TDSTS_TDIF2_Msk);
+        PDMA_CLR_TD_FLAG(PDMA, PDMA_TDSTS_TDIF0_Msk);
     }
     else
         printf("unknown interrupt !!\n");
@@ -246,22 +262,22 @@ void AccessEBIWithPDMA(void)
         u32Result0 += SrcArray[i];
     }
 
-    /* Open Channel 2 */
-    PDMA_Open(PDMA, (1 << 2));
+    /* Open Channel 0 */
+    PDMA_Open(PDMA, (1 << PDMA_CH));
 
     //burst size is 4
-    PDMA_SetBurstType(PDMA, 2, PDMA_REQ_BURST, PDMA_BURST_4);
+    PDMA_SetBurstType(PDMA, PDMA_CH, PDMA_REQ_BURST, PDMA_BURST_4);
 
     /* transfer width is one word(32 bit) */
-    PDMA_SetTransferCnt(PDMA, 2, PDMA_WIDTH_32, PDMA_TEST_LENGTH);
-    PDMA_SetTransferAddr(PDMA, 2, (uint32_t)SrcArray, PDMA_SAR_INC, EBI_BANK0_BASE_ADDR, PDMA_DAR_INC);
-    PDMA_SetTransferMode(PDMA, 2, PDMA_MEM, FALSE, 0);
+    PDMA_SetTransferCnt(PDMA, PDMA_CH, PDMA_WIDTH_32, PDMA_TEST_LENGTH);
+    PDMA_SetTransferAddr(PDMA, PDMA_CH, (uint32_t)SrcArray, PDMA_SAR_INC, EBI_BANK0_BASE_ADDR, PDMA_DAR_INC);
+    PDMA_SetTransferMode(PDMA, PDMA_CH, PDMA_MEM, FALSE, 0);
 
-    PDMA_EnableInt(PDMA, 2, PDMA_INT_TRANS_DONE);
+    PDMA_EnableInt(PDMA, PDMA_CH, PDMA_INT_TRANS_DONE);
     NVIC_EnableIRQ(PDMA_IRQn);
 
     u32IsTestOver = 0;
-    PDMA_Trigger(PDMA, 2);
+    PDMA_Trigger(PDMA, PDMA_CH);
 
     while (u32IsTestOver == 0);
 
@@ -274,12 +290,12 @@ void AccessEBIWithPDMA(void)
     }
 
     /* transfer width is one word(32 bit) */
-    PDMA_SetTransferCnt(PDMA, 2, PDMA_WIDTH_32, PDMA_TEST_LENGTH);
-    PDMA_SetTransferAddr(PDMA, 2, EBI_BANK0_BASE_ADDR, PDMA_SAR_INC, (uint32_t)SrcArray, PDMA_DAR_INC);
-    PDMA_SetTransferMode(PDMA, 2, PDMA_MEM, FALSE, 0);
+    PDMA_SetTransferCnt(PDMA, PDMA_CH, PDMA_WIDTH_32, PDMA_TEST_LENGTH);
+    PDMA_SetTransferAddr(PDMA, PDMA_CH, EBI_BANK0_BASE_ADDR, PDMA_SAR_INC, (uint32_t)SrcArray, PDMA_DAR_INC);
+    PDMA_SetTransferMode(PDMA, PDMA_CH, PDMA_MEM, FALSE, 0);
 
     u32IsTestOver = 0;
-    PDMA_Trigger(PDMA, 2);
+    PDMA_Trigger(PDMA, PDMA_CH);
 
     while (u32IsTestOver == 0);
 

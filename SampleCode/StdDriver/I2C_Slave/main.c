@@ -1,23 +1,24 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 5 $
- * $Date: 18/05/31 4:57p $
+ * $Revision: 6 $
+ * $Date: 18/07/09 7:03p $
  * @brief
- *           Demonstrate how to set I2C in slave mode to receive the data from a Master.
- *           This sample code is EEPROM like, only support 256 bytes.
- *           Needs to work with I2C_Master sample code.
+ *           Demonstrate how to set I2C in Slave mode to receive 256 bytes data from a master.
+ *           This sample code needs to work with I2C_Master.
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
 
+#define TEST_LENGTH    256
+
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
 volatile uint32_t slave_buff_addr;
-volatile uint8_t g_au8SlvData[256];
+volatile uint8_t g_au8SlvData[TEST_LENGTH];
 volatile uint8_t g_au8SlvRxData[3];
 
 volatile uint8_t g_u8DeviceAddr;
@@ -72,7 +73,7 @@ void I2C_SlaveTRx(uint32_t u32Status)
         else
         {
             g_au8SlvData[slave_buff_addr++] = u8data;
-            if(slave_buff_addr == 256)
+            if(slave_buff_addr == TEST_LENGTH)
             {
                 slave_buff_addr = 0;
             }
@@ -124,29 +125,20 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable HIRC clock */
+    /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable I2C0 clock */
     CLK_EnableModuleClock(I2C0_MODULE);
@@ -237,7 +229,7 @@ int main()
     /* I2C enter no address SLV mode */
     I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI_AA);
 
-    for(i = 0; i < 0x100; i++)
+    for(i = 0; i < TEST_LENGTH; i++)
     {
         g_au8SlvData[i] = 0;
     }

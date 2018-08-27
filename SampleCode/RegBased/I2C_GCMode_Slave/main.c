@@ -1,10 +1,10 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/06/01 2:13p $
+ * $Revision: 6 $
+ * $Date: 18/07/23 4:59p $
  * @brief
- *           Show a Slave how to receive data from Master in GC (General Call) mode.
+ *           Show how a slave receives data from a master in GC (General Call) mode.
  *           This sample code needs to work with I2C_GCMode_Master.
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
@@ -12,13 +12,14 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
+#define TEST_LENGTH    256
+
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
 volatile uint32_t slave_buff_addr;
-volatile uint8_t g_au8SlvData[256];
+volatile uint8_t g_au8SlvData[TEST_LENGTH];
 volatile uint8_t g_au8SlvRxData[3];
-
 volatile uint8_t g_au8SlvTxData[3];
 volatile uint8_t g_u8RxData;
 volatile uint8_t g_u8SlvDataLen;
@@ -26,7 +27,7 @@ volatile uint8_t g_u8SlvEndFlag = 0;
 
 typedef void (*I2C_FUNC)(uint32_t u32Status);
 
-static I2C_FUNC s_I2C0HandlerFn = NULL;
+volatile static I2C_FUNC s_I2C0HandlerFn = NULL;
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  I2C0 IRQ Handler                                                                                       */
@@ -112,30 +113,21 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
     /* Wait for HIRC clock ready */
     while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK clock divider as 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(1);
 
     /* Enable UART0 clock and I2C controller */
     CLK->APBCLK0 |= (CLK_APBCLK0_UART0CKEN_Msk | CLK_APBCLK0_I2C0CKEN_Msk);
 
-    /* Switch UART0 clock source to XTAL and UART0 clock divider as 1 */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Switch UART0 clock source to HIRC and UART0 clock divider as 1 */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART0DIV_Msk)) | CLK_CLKDIV0_UART0(1);
 
     /* Update System Core Clock */
@@ -167,7 +159,7 @@ void UART0_Init(void)
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 Baudrate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
 
@@ -250,7 +242,7 @@ int main()
     I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI_AA);
 
     /* Clear receive buffer */
-    for (i = 0; i < 0x100; i++)
+    for (i = 0; i < TEST_LENGTH; i++)
     {
         g_au8SlvData[i] = 0;
     }
@@ -266,7 +258,7 @@ int main()
     while (g_u8SlvEndFlag == 0);
 
     /* Check receive data correct or not */
-    for (i = 0; i < 0x100; i++)
+    for (i = 0; i < TEST_LENGTH; i++)
     {
         g_au8SlvTxData[0] = (uint8_t)((i & 0xFF00) >> 8);
         g_au8SlvTxData[1] = (uint8_t)(i & 0x00FF);

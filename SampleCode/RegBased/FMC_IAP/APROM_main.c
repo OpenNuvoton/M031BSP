@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     APROM_main.c
  * @version  V1.00
- * $Revision: 7 $
- * $Date: 18/06/20 9:48a $
+ * $Revision: 9 $
+ * $Date: 18/07/13 3:58p $
  * @brief    This sample code includes LDROM image (fmc_ld_iap)
  *           and APROM image (fmc_ap_main).
  *           It shows how to branch between APROM and LDROM. To run
@@ -22,34 +22,30 @@ extern uint32_t  loaderImage1Base, loaderImage1Limit;
 
 void SYS_Init(void)
 {
-
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC clock */
+    CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
     /* Switch HCLK clock source to HIRC */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC ;
 
-    /* Switch UART0 clock source to XTAL */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HXT;
-
     /* Enable UART0 clock */
     CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk ;
+
+    /* Switch UART0 clock source to HIRC */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HIRC;
 
     /* Update System Core Clock */
     SystemCoreClockUpdate();
 
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))
+                    |(SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -319,7 +315,8 @@ int main()
             printf("\n\nChange VECMAP and branch to LDROM...\n");
             printf("LDROM code SP = 0x%x\n", *(uint32_t *)(FMC_LDROM_BASE));
             printf("LDROM code ResetHandler = 0x%x\n", *(uint32_t *)(FMC_LDROM_BASE+4));
-            while (!(UART0->FIFOSTS & UART_FIFOSTS_TXEMPTY_Msk));
+            /* To check if all the debug messages are finished */
+            while((DEBUG_PORT->FIFOSTS & UART_FIFOSTS_TXEMPTYF_Msk) == 0);
 
             /*  NOTE!
              *     Before change VECMAP, user MUST disable all interrupts.

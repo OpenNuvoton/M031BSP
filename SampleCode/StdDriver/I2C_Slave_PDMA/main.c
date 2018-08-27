@@ -1,10 +1,10 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/05/31 4:57p $
+ * $Revision: 5 $
+ * $Date: 18/07/09 7:03p $
  * @brief
- *           Demonstrate how a Slave use PDMA Rx mode receive data from a Master(Loopback).
+ *           Demonstrate how a slave uses PDMA RX mode to receive data from a master (Loopback).
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
@@ -13,6 +13,7 @@
 
 #define I2C_PDMA_CH        1
 #define I2C_PDMA_RX_LENGTH 100
+#define I2C_TEST_LENGTH    256
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -27,9 +28,9 @@ volatile uint8_t g_u8EndFlag = 0;
 volatile uint8_t g_u8DataLen1;
 volatile uint8_t g_u8SlvTestLen;
 volatile uint8_t g_u8SlvDataLen;
-volatile uint8_t g_au8SlvData[256];
+volatile uint8_t g_au8SlvData[I2C_TEST_LENGTH];
 volatile int32_t g_u32IsTestOver;
-volatile uint8_t g_au8MstTxData[256];
+volatile uint8_t g_au8MstTxData[I2C_TEST_LENGTH];
 volatile uint8_t g_u8MstDataLen;
 volatile uint8_t g_u8MstEndFlag = 0;
 
@@ -231,29 +232,20 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable HIRC clock */
+    /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable I2C0 clock */
     CLK_EnableModuleClock(I2C0_MODULE);
@@ -369,7 +361,7 @@ void I2C_Write_to_Slave_PDMA_RX(uint8_t slvaddr)
     g_u8DeviceAddr = slvaddr;
 
     /* I2C0 prepare transmit data bytes */
-    for(i = 1; i < 200; i++)
+    for(i = 1; i < I2C_TEST_LENGTH; i++)
     {
         g_au8MstTxData[i] = i;
     }
@@ -428,7 +420,7 @@ int main()
     I2C_SET_CONTROL_REG(I2C1, I2C_CTL_SI_AA);
 
     /* Clear Slave receive data buffer */
-    for(i = 0; i < 0x100; i++)
+    for(i = 0; i < I2C_TEST_LENGTH; i++)
     {
         g_au8SlvData[i] = 0;
     }

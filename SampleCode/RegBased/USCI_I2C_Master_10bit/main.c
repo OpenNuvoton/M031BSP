@@ -1,10 +1,10 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 3 $
- * $Date: 18/06/01 3:20p $
- * @brief    Show a Master how to access 10-bit address Slave
- *           This sample code need works with USCI_I2C_Slave_10bit sample code
+ * $Revision: 4 $
+ * $Date: 18/07/16 3:05p $
+ * @brief    Show how a master accesses a 10-bit address slave.
+ *           This sample code need works with USCI_I2C_Slave_10bit.
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
@@ -12,6 +12,7 @@
 #include "NuMicro.h"
 
 #define SLV_10BIT_ADDR (0x1E<<2)             //1111+0xx+r/w
+#define TEST_LENGTH    256
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -231,22 +232,13 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
     /* Wait for HIRC clock ready */
     while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK clock divider as 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(1);
 
@@ -256,8 +248,8 @@ void SYS_Init(void)
     /* Enable UI2C0 clock */
     CLK->APBCLK1 |= CLK_APBCLK1_USCI0CKEN_Msk;
 
-    /* Switch UART0 clock source to XTAL and UART0 clock divider as 1 */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Switch UART0 clock source to HIRC and UART0 clock divider as 1 */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART0DIV_Msk)) | CLK_CLKDIV0_UART0(1);
 
     /* Update System Core Clock */
@@ -289,7 +281,7 @@ void UART0_Init(void)
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 Baudrate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
 
@@ -342,7 +334,7 @@ int32_t Read_Write_SLAVE(uint16_t slvaddr)
     g_u8DeviceHAddr = (slvaddr >> 8) | SLV_10BIT_ADDR;
     g_u8DeviceLAddr = slvaddr & 0xFF;
 
-    for (i = 0; i < 0x100; i++)
+    for (i = 0; i < TEST_LENGTH; i++)
     {
         g_au8MstTxData[0] = (uint8_t)((i & 0xFF00) >> 8);
         g_au8MstTxData[1] = (uint8_t)(i & 0x00FF);

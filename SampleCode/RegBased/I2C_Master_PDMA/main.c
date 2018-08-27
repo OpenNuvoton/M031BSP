@@ -1,10 +1,10 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/06/01 2:14p $
+ * $Revision: 5 $
+ * $Date: 18/07/13 3:28p $
  * @brief
- *           Show a Master how to access Slave using PDMA Tx and PDMA Rx mode (Loopback)
+ *           Show how a master accesses a slave using PDMA TX and PDMA RX mode (Loopback).
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
@@ -14,16 +14,17 @@
 #define I2C_PDMA_CH        1
 #define I2C_PDMA_TX_LENGTH 100 //Master transmit 3+97=100bytes data length
 #define I2C_PDMA_RX_LENGTH I2C_PDMA_TX_LENGTH - 3  //I2C0 will receive 97 bytes data (only data)
+#define I2C_TEST_LENGTH    256
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
 volatile uint32_t slave_buff_addr;
-volatile uint8_t g_au8SlvData[256];
+volatile uint8_t g_au8SlvData[I2C_TEST_LENGTH];
 volatile uint8_t g_au8SlvRxData[3];
 volatile uint8_t g_u8DeviceAddr;
-volatile uint8_t g_au8MstTxData[256] = {0};
-volatile uint8_t g_au8MstRxData[256] = {0};
+volatile uint8_t g_au8MstTxData[I2C_TEST_LENGTH] = {0};
+volatile uint8_t g_au8MstRxData[I2C_TEST_LENGTH] = {0};
 volatile uint8_t g_u8MstRxData;
 volatile uint8_t g_u8MstDataLen;
 volatile uint8_t g_u8MstEndFlag = 0;
@@ -129,7 +130,7 @@ void I2C_SlaveTRx(uint32_t u32Status)
         else if(g_u16SlvDataLen >= 2)
         {
             g_au8SlvData[slave_buff_addr++] = u8data;
-            if(slave_buff_addr == 256)
+            if(slave_buff_addr == I2C_TEST_LENGTH)
             {
                 slave_buff_addr = 0;
             }
@@ -340,22 +341,13 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
     /* Wait for HIRC clock ready */
     while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK clock divider as 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(1);
 
@@ -365,8 +357,8 @@ void SYS_Init(void)
     /* PDMA Clock Enable */
     CLK->AHBCLK |= CLK_AHBCLK_PDMACKEN_Msk;
 
-    /* Switch UART0 clock source to XTAL and UART0 clock divider as 1 */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Switch UART0 clock source to HIRC and UART0 clock divider as 1 */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART0DIV_Msk)) | CLK_CLKDIV0_UART0(1);
 
     /* Update System Core Clock */
@@ -402,7 +394,7 @@ void UART0_Init(void)
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 Baudrate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
 
@@ -528,7 +520,7 @@ int main()
     I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI_AA);
 
     /* Clear Slave receive data buffer */
-    for(i = 0; i < 0x100; i++)
+    for(i = 0; i < I2C_TEST_LENGTH; i++)
     {
         g_au8SlvData[i] = 0;
     }
@@ -545,7 +537,7 @@ int main()
     g_au8MstTxData[1] = 0x00;                             //2 bytes Data address
     g_au8MstTxData[2] = 0x00;
 
-    for(i = 3; i < 100; i++)                              //Prepare others are transmit Data from 3 to 99 (97 bytes)
+    for(i = 3; i < I2C_PDMA_TX_LENGTH; i++)                              //Prepare others are transmit Data from 3 to 99 (97 bytes)
         g_au8MstTxData[i] = i;
 
     /* Enable PDMA Channel 1 INT */
@@ -582,7 +574,7 @@ int main()
     g_u8MstEndFlag = 0;
 
     /* Clear Master receive data buffer */
-    for(i = 1; i < 200; i++)
+    for(i = 1; i < I2C_TEST_LENGTH; i++)
         g_au8MstRxData[i] = 0;
 
     /* Init Master PDMA Rx */

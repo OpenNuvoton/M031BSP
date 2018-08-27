@@ -1,8 +1,8 @@
 /******************************************************************************
 * @file     main.c
 * @version  V3.00
-* $Revision: 8 $
-* $Date: 18/06/20 1:27p $
+* $Revision: 9 $
+* $Date: 18/07/16 3:45p $
 * @brief    Demonstrate how to use LXT to trim HIRC
 *
 * @note
@@ -12,7 +12,7 @@
 #include "NuMicro.h"
 
 /**
- * @brief       RCTrim IRQ
+ * @brief       HIRC Trim IRQ
  *
  * @param       None
  *
@@ -33,10 +33,10 @@ void CKFAIL_IRQHandler()
 
     if (SYS->HIRCTRIMSTS & SYS_HIRCTRIMSTS_CLKERIF_Msk)
     {
-        /* Get LXT Clock Error Interrupt */
+        /* Get Clock Error Interrupt */
         /* Display HIRC trim status */
-        printf("LXT Clock Error Interrupt\n");
-        /* Clear LXT Clock Error Interrupt */
+        printf("Clock Error Interrupt\n");
+        /* Clear Clock Error Interrupt */
         SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_CLKERIF_Msk;
     }
 
@@ -50,35 +50,26 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
+    /* Enable HIRC clock */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
     /* Enable External Low speed crystal (LXT) */
-    CLK->PWRCTL |= CLK_PWRCTL_LXTEN_Msk;
+    CLK_EnableXtalRC(CLK_PWRCTL_LXTEN_Msk);
 
-    /* Enable Internal High speed RC oscillator (HIRC) */
-    CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
     /* Waiting for External Low speed clock ready */
-    while((CLK->STATUS & CLK_STATUS_LXTSTB_Msk) != CLK_STATUS_LXTSTB_Msk);
+    CLK_WaitClockReady(CLK_STATUS_LXTSTB_Msk);
 
-    /* Waiting for Internal High speed RC clock ready */
-    while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
+    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
-    /* Switch HCLK clock source to HIRC */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC ;
-
-    /* Switch UART0 clock source to XTAL */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable UART0 clock */
-    CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk ;
+    CLK_EnableModuleClock(UART0_MODULE);
 
     /* Update System Core Clock */
     SystemCoreClockUpdate();
@@ -86,9 +77,6 @@ void SYS_Init(void)
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
     SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
     SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
-
-    /* Set PB multi-function pins for CLKO(PB.14) */
-    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~SYS_GPB_MFPH_PB14MFP_Msk) | SYS_GPB_MFPH_PB14MFP_CLKO;
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -112,10 +100,6 @@ void TrimHIRC()
             break;
         }
     }
-
-    /* Enable CLKO and output frequency = HIRC  */
-    CLK_EnableCKO(CLK_CLKSEL1_CLKOSEL_HIRC, 0, 1);
-
 }
 
 int32_t main(void)
@@ -141,7 +125,7 @@ int32_t main(void)
 
     /* Disable IRC Trim */
     SYS->HIRCTRIMCTL = 0;
-    printf("Disable IRC Trim\n");
+    printf("Disable HIRC Trim\n");
 
     while (1);
 }

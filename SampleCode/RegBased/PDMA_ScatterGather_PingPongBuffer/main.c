@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 3 $
- * $Date: 18/06/01 2:43p $
+ * $Revision: 4 $
+ * $Date: 18/07/13 4:20p $
  * @brief    Use PDMA to implement Ping-Pong buffer
  *           by scatter-gather mode(memory to memory).
  * @note
@@ -10,6 +10,8 @@
 *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
+
+#define PDMA_CH    1
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -72,22 +74,13 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
     /* Wait for HIRC clock ready */
     while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK clock divider as 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(1);
 
@@ -97,8 +90,8 @@ void SYS_Init(void)
     /* PDMA Clock Enable */
     CLK->AHBCLK |= CLK_AHBCLK_PDMACKEN_Msk;
 
-    /* Switch UART0 clock source to XTAL and UART0 clock divider as 1 */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Switch UART0 clock source to HIRC and UART0 clock divider as 1 */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART0DIV_Msk)) | CLK_CLKDIV0_UART0(1);
 
     /* Update System Core Clock */
@@ -126,7 +119,7 @@ void UART0_Init(void)
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 Baudrate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
 
@@ -168,16 +161,16 @@ int main()
     --------------------------------------------------------------------------------------------------*/
 
     /* Open Channel 1 */
-    PDMA->CHCTL |= BIT1;
+    PDMA->CHCTL |= (1 << PDMA_CH);
 
     /* Set transfer mode as memory to memory */
     PDMA->REQSEL0_3 = (PDMA->REQSEL0_3 & ~PDMA_REQSEL0_3_REQSRC1_Msk) | (PDMA_MEM << PDMA_REQSEL0_3_REQSRC1_Pos);
 
     /* Enable Scatter Gather mode and set the descriptor table address in SRAM */
     /* Enable Scatter Gather mode */
-    PDMA->DSCT[1].CTL = PDMA_OP_SCATTER;
+    PDMA->DSCT[PDMA_CH].CTL = PDMA_OP_SCATTER;
     /* Assign the first scatter-gather descriptor table is table 1 */
-    PDMA->DSCT[1].NEXT = (uint32_t)&DMA_DESC[0] - (PDMA->SCATBA);
+    PDMA->DSCT[PDMA_CH].NEXT = (uint32_t)&DMA_DESC[0] - (PDMA->SCATBA);
 
 
     /* Scatter-Gather descriptor table configuration in SRAM */
@@ -262,12 +255,12 @@ int main()
 
 
     /* Enable transfer done interrupt */
-    PDMA->INTEN |= BIT1;
+    PDMA->INTEN |= (1 << PDMA_CH);
     NVIC_EnableIRQ(PDMA_IRQn);
     g_u32IsTestOver = 0;
 
     /* Start PDMA operatin */
-    PDMA->SWREQ = BIT1;
+    PDMA->SWREQ = (1 << PDMA_CH);
 
     while(1)
     {
@@ -277,7 +270,7 @@ int main()
             printf("test done...\n");
 
             /* Close channel 1 */
-            PDMA->CHCTL &= ~BIT1;
+            PDMA->CHCTL &= ~(1 << PDMA_CH);
         }
     }
 }

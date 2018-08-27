@@ -70,36 +70,36 @@ void SYS_Init(void)
     SYS_UnlockReg();
 
     /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    GPIO_SetMode(PF, BIT2|BIT3, GPIO_MODE_INPUT);
 
     /* Set X32_OUT(PF.4) and X32_IN(PF.5) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE4_Msk | GPIO_MODE_MODE5_Msk);
+    GPIO_SetMode(PF, BIT4|BIT5, GPIO_MODE_INPUT);
 
-    /* Enable External XTAL (4~32 MHz) */
+    /* Enable HXT */
     CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
 
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HXT clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
 
-    /* Enable HIRC (48 MHz) */
+    /* Enable HIRC */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for 48MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Enable External XTAL (32.768KHz) */
+    /* Enable LXT */
     CLK_EnableXtalRC(CLK_PWRCTL_LXTEN_Msk);
 
-    /* Waiting for 32.768KHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_LXTSTB_Msk) != CLK_STATUS_LXTSTB_Msk);
+    /* Waiting for LXT clock ready */
+    CLK_WaitClockReady(CLK_STATUS_LXTSTB_Msk);
 
     /* Switch HCLK clock source to HXT */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HXT;
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HXT, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART module clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Select UART module clock source as HIRC and UART module clock divider as 1 */
+    /* Switch UART0 clock source to HIRC */
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Update System Core Clock */
@@ -109,17 +109,14 @@ void SYS_Init(void)
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
     /*----------------------------------------------------------------------*/
-
     /* Set PB multi-function pins for UART0 RXD and TXD */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
-
     /* Set PB multi-function pins for CLKO(PB.14) */
-    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~SYS_GPB_MFPH_PB14MFP_Msk) | SYS_GPB_MFPH_PB14MFP_CLKO;
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk | SYS_GPB_MFPH_PB14MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD | SYS_GPB_MFPH_PB14MFP_CLKO);
 
     /* Set PF multi-function pins for X32_OUT(PF.4) and X32_IN(PF.5) */
-    SYS->GPF_MFPL &= ~(SYS_GPF_MFPL_PF4MFP_Msk | SYS_GPF_MFPL_PF5MFP_Msk);
-    SYS->GPF_MFPL |= (SYS_GPF_MFPL_PF4MFP_X32_OUT | SYS_GPF_MFPL_PF5MFP_X32_IN);
+    SYS->GPF_MFPL = (SYS->GPF_MFPL & ~(SYS_GPF_MFPL_PF4MFP_Msk | SYS_GPF_MFPL_PF5MFP_Msk)) |
+                    (SYS_GPF_MFPL_PF4MFP_X32_OUT | SYS_GPF_MFPL_PF5MFP_X32_IN);
 
     /* Lock protected registers */
     SYS_LockReg();

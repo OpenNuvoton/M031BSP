@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 4 $
- * $Date: 18/05/31 5:44p $
+ * $Revision: 6 $
+ * $Date: 18/07/16 10:20a $
  * @brief
  *           This is a USCI_UART PDMA demo and need to connect USCI_UART TX and RX.
  *
@@ -13,6 +13,8 @@
 #include "NuMicro.h"
 
 #define PDMA_TEST_LENGTH   128
+#define PDMA_TX_CH   0
+#define PDMA_RX_CH   1
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -31,22 +33,22 @@ void PDMA_IRQHandler(void)
 {
     uint32_t status = PDMA_GET_INT_STATUS(PDMA);
 
-    if (status & 0x1)   /* abort */
+    if (status & PDMA_INTSTS_ABTIF_Msk)   /* abort */
     {
         printf("target abort interrupt !!\n");
         u32IsTestOver = 2;
 
         PDMA_CLR_ABORT_FLAG(PDMA, PDMA_GET_ABORT_STS(PDMA));
     }
-    else if (status & 0x2)     /* done */
+    else if (status & PDMA_INTSTS_TDIF_Msk)     /* done */
     {
-        if ((PDMA_GET_TD_STS(PDMA) & (1 << 0)) && (PDMA_GET_TD_STS(PDMA) & (1 << 1)))
+        if ((PDMA_GET_TD_STS(PDMA) & (1 << PDMA_TX_CH)) && (PDMA_GET_TD_STS(PDMA) & (1 << PDMA_RX_CH)))
         {
             u32IsTestOver = 1;
             PDMA_CLR_TD_FLAG(PDMA, PDMA_GET_TD_STS(PDMA));
         }
     }
-    else if (status & 0x300)     /* channel timeout */
+    else if (status & (PDMA_INTSTS_REQTOF0_Msk | PDMA_INTSTS_REQTOF1_Msk))     /* channel timeout */
     {
         printf("timeout interrupt !!\n");
         u32IsTestOver = 3;
@@ -66,29 +68,20 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable HIRC clock */
+    /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable UUART0 clock */
     CLK_EnableModuleClock(USCI0_MODULE);
@@ -108,8 +101,8 @@ void SYS_Init(void)
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Set UUART0 multi-function pins */
-    SYS->GPA_MFPH = (SYS->GPA_MFPH & ~(SYS_GPA_MFPH_PA9MFP_Msk)) | SYS_GPA_MFPH_PA9MFP_USCI0_DAT1;
-    SYS->GPA_MFPH = (SYS->GPA_MFPH & ~(SYS_GPA_MFPH_PA10MFP_Msk)) | SYS_GPA_MFPH_PA10MFP_USCI0_DAT0;
+    SYS->GPA_MFPH = (SYS->GPA_MFPH & ~(SYS_GPA_MFPH_PA9MFP_Msk | SYS_GPA_MFPH_PA10MFP_Msk)) |
+                    (SYS_GPA_MFPH_PA9MFP_USCI0_DAT1 | SYS_GPA_MFPH_PA10MFP_USCI0_DAT0);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -128,24 +121,24 @@ void USCI0_Init()
 void PDMA_Init(void)
 {
     /* Open PDMA Channel */
-    PDMA_Open(PDMA, 1 << 0); // Channel 0 for UUART0 TX
-    PDMA_Open(PDMA, 1 << 1); // Channel 1 for UUART0 RX
+    PDMA_Open(PDMA, 1 << PDMA_TX_CH); // Channel 0 for UUART0 TX
+    PDMA_Open(PDMA, 1 << PDMA_RX_CH); // Channel 1 for UUART0 RX
     // Select basic mode
-    PDMA_SetTransferMode(PDMA, 0, PDMA_USCI0_TX, 0, 0);
-    PDMA_SetTransferMode(PDMA, 1, PDMA_USCI0_RX, 0, 0);
+    PDMA_SetTransferMode(PDMA, PDMA_TX_CH, PDMA_USCI0_TX, 0, 0);
+    PDMA_SetTransferMode(PDMA, PDMA_RX_CH, PDMA_USCI0_RX, 0, 0);
     // Set data width and transfer count
-    PDMA_SetTransferCnt(PDMA, 0, PDMA_WIDTH_8, PDMA_TEST_LENGTH);
-    PDMA_SetTransferCnt(PDMA, 1, PDMA_WIDTH_8, PDMA_TEST_LENGTH);
+    PDMA_SetTransferCnt(PDMA, PDMA_TX_CH, PDMA_WIDTH_8, PDMA_TEST_LENGTH);
+    PDMA_SetTransferCnt(PDMA, PDMA_RX_CH, PDMA_WIDTH_8, PDMA_TEST_LENGTH);
     //Set PDMA Transfer Address
-    PDMA_SetTransferAddr(PDMA, 0, ((uint32_t)(&g_u8Tx_Buffer[0])), PDMA_SAR_INC, (uint32_t)(&(UUART0->TXDAT)), PDMA_DAR_FIX);
-    PDMA_SetTransferAddr(PDMA, 1, (uint32_t)(&(UUART0->RXDAT)), PDMA_SAR_FIX, ((uint32_t)(&g_u8Rx_Buffer[0])), PDMA_DAR_INC);
+    PDMA_SetTransferAddr(PDMA, PDMA_TX_CH, ((uint32_t)(&g_u8Tx_Buffer[0])), PDMA_SAR_INC, (uint32_t)(&(UUART0->TXDAT)), PDMA_DAR_FIX);
+    PDMA_SetTransferAddr(PDMA, PDMA_RX_CH, (uint32_t)(&(UUART0->RXDAT)), PDMA_SAR_FIX, ((uint32_t)(&g_u8Rx_Buffer[0])), PDMA_DAR_INC);
     //Select Single Request
-    PDMA_SetBurstType(PDMA, 0, PDMA_REQ_SINGLE, 0);
-    PDMA_SetBurstType(PDMA, 1, PDMA_REQ_SINGLE, 0);
+    PDMA_SetBurstType(PDMA, PDMA_TX_CH, PDMA_REQ_SINGLE, 0);
+    PDMA_SetBurstType(PDMA, PDMA_RX_CH, PDMA_REQ_SINGLE, 0);
 
 #ifdef ENABLE_PDMA_INTERRUPT
-    PDMA_EnableInt(PDMA, 0, PDMA_INT_TRANS_DONE);
-    PDMA_EnableInt(PDMA, 1, PDMA_INT_TRANS_DONE);
+    PDMA_EnableInt(PDMA, PDMA_TX_CH, PDMA_INT_TRANS_DONE);
+    PDMA_EnableInt(PDMA, PDMA_RX_CH, PDMA_INT_TRANS_DONE);
     NVIC_EnableIRQ(PDMA_IRQn);
     u32IsTestOver = 0;
 #endif
@@ -180,13 +173,13 @@ void USCI_UART_PDMATest()
 {
     uint32_t i;
 
-    printf("+-----------------------------------------------------------+\n");
-    printf("|  USCI UART PDMA Test                                       |\n");
-    printf("+-----------------------------------------------------------+\n");
-    printf("|  Description :                                            |\n");
-    printf("|    The sample code will demo USCI_UART PDMA function      |\n");
-    printf("|    Please connect USCI0_UART_TX and USCI0_UART_RX pin.    |\n");
-    printf("+-----------------------------------------------------------+\n");
+    printf("+---------------------------------------------------------------------+\n");
+    printf("|  USCI UART PDMA Test                                                |\n");
+    printf("+---------------------------------------------------------------------+\n");
+    printf("|  Description :                                                      |\n");
+    printf("|    The sample code will demo USCI_UART PDMA function                |\n");
+    printf("|    Please connect USCI0_UART_TX(PA.9) and USCI0_UART_RX(PA.10) pin. |\n");
+    printf("+---------------------------------------------------------------------+\n");
     printf("Please press any key to start test. \n\n");
 
     for (i = 0; i < PDMA_TEST_LENGTH; i++)
@@ -203,7 +196,8 @@ void USCI_UART_PDMATest()
     PDMA_Init();
 
     /* Enable UART DMA Tx and Rx */
-    UUART0->PDMACTL = UUART_PDMACTL_TXPDMAEN_Msk | UUART_PDMACTL_RXPDMAEN_Msk | UUART_PDMACTL_PDMAEN_Msk;
+    UUART_TRIGGER_RX_PDMA(UUART0);
+    UUART_TRIGGER_TX_PDMA(UUART0);
 
 #ifdef ENABLE_PDMA_INTERRUPT
 
@@ -218,7 +212,7 @@ void USCI_UART_PDMATest()
 
 #else
 
-    while ((!(PDMA_GET_TD_STS(PDMA) & (1 << 0))) || (!(PDMA_GET_TD_STS(PDMA) & (1 << 1))));
+    while ((!(PDMA_GET_TD_STS(PDMA) & (1 << PDMA_TX_CH))) || (!(PDMA_GET_TD_STS(PDMA) & (1 << PDMA_RX_CH))));
 
     PDMA_CLR_TD_FLAG(PDMA, PDMA_GET_TD_STS(PDMA));
 #endif

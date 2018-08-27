@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 2 $
- * $Date: 18/05/31 10:01a $
+ * $Revision: 3 $
+ * $Date: 18/07/12 9:32a $
  * @brief    Use PDMA channel 1 to transfer data
  *           from memory to memory by scatter-gather mode.
  * @note
@@ -10,6 +10,8 @@
 *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
+
+#define PDMA_CH    1
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -51,29 +53,20 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable HIRC clock */
+    /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable PDMA clock */
     CLK_EnableModuleClock(PDMA_MODULE);
@@ -136,10 +129,10 @@ int main()
     ----------------------------------------------------------------------------------*/
 
     /* Open Channel 1 */
-    PDMA_Open(PDMA, 1 << 1);
+    PDMA_Open(PDMA, 1 << PDMA_CH);
     /* Enable Scatter Gather mode, assign the first scatter-gather descriptor table is table 1,
        and set transfer mode as memory to memory */
-    PDMA_SetTransferMode(PDMA, 1, PDMA_MEM, TRUE, (uint32_t)&DMA_DESC[0]);
+    PDMA_SetTransferMode(PDMA, PDMA_CH, PDMA_MEM, TRUE, (uint32_t)&DMA_DESC[0]);
 
     /*------------------------------------------------------------------------------------------------------
 
@@ -231,10 +224,10 @@ int main()
 
 
     /* Generate a software request to trigger transfer with PDMA channel 1 */
-    PDMA_Trigger(PDMA, 1);
+    PDMA_Trigger(PDMA, PDMA_CH);
 
     /* Waiting for transfer done */
-    while (PDMA_IS_CH_BUSY(PDMA, 1));
+    while (PDMA_IS_CH_BUSY(PDMA, PDMA_CH));
 
     for (i = 0; i < sizeof(au8DestArray0) / sizeof(au8DestArray0[0]); i++)
     {

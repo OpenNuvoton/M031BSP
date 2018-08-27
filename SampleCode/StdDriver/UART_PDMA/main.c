@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V3.00
- * $Revision: 3 $
- * $Date: 18/05/29 8:26p $
+ * $Revision: 5 $
+ * $Date: 18/07/16 10:24a $
  * @brief
  *           Transmit and receive UART data with PDMA.
  *
@@ -61,7 +61,7 @@ void BuildSrcPattern(uint32_t u32Addr, uint32_t u32Length)
 
     do
     {
-        if(u32Length > 256)
+        if(u32Length > 256)     /* Pattern from 0 ~ 255 */
             loop = 256;
         else
             loop = u32Length;
@@ -95,7 +95,7 @@ void PDMA_UART_TxTest(void)
     PDMA_SetBurstType(PDMA, UART_TX_DMA_CH, PDMA_REQ_SINGLE, 0);
 
     /* Disable table interrupt */
-    PDMA->DSCT[UART_TX_DMA_CH].CTL |= PDMA_DSCT_CTL_TBINTDIS_Msk;
+    PDMA_DisableInt(PDMA,UART_TX_DMA_CH, PDMA_INT_TEMPTY );
 }
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -117,7 +117,7 @@ void PDMA_UART_RxTest(void)
     PDMA_SetBurstType(PDMA, UART_RX_DMA_CH, PDMA_REQ_SINGLE, 0);
 
     /* Disable table interrupt */
-    PDMA->DSCT[UART_RX_DMA_CH].CTL |= PDMA_DSCT_CTL_TBINTDIS_Msk;
+    PDMA_DisableInt(PDMA,UART_RX_DMA_CH, PDMA_INT_TEMPTY );
 }
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -135,7 +135,7 @@ void PDMA_Callback_0(void)
         PDMA_UART_RxTest();
 
         /* Enable UART Tx and Rx PDMA function */
-        UART1->INTEN |= (UART_INTEN_RXPDMAEN_Msk | UART_INTEN_TXPDMAEN_Msk);
+        UART_ENABLE_INT(UART1, (UART_INTEN_RXPDMAEN_Msk | UART_INTEN_TXPDMAEN_Msk));
     }
     else
     {
@@ -162,7 +162,7 @@ void PDMA_Callback_1(void)
         PDMA_UART_RxTest();
 
         /* Enable UART Rx PDMA function */
-        UART1->INTEN |= UART_INTEN_RXPDMAEN_Msk;
+        UART_ENABLE_INT(UART1, UART_INTEN_RXPDMAEN_Msk);
     }
     else
     {
@@ -192,7 +192,7 @@ void PDMA_IRQHandler(void)
             PDMA_CLR_TD_FLAG(PDMA, (1 << UART_TX_DMA_CH));
 
             /* Disable UART Tx PDMA function */
-            UART1->INTEN &= ~UART_INTEN_TXPDMAEN_Msk;
+            UART_DISABLE_INT(UART1, UART_INTEN_TXPDMAEN_Msk);
         }
 
         /* UART Rx PDMA transfer done interrupt flag */
@@ -202,7 +202,7 @@ void PDMA_IRQHandler(void)
             PDMA_CLR_TD_FLAG(PDMA, (1 << UART_RX_DMA_CH));
 
             /* Disable UART Rx PDMA function */
-            UART1->INTEN &= ~UART_INTEN_RXPDMAEN_Msk;
+            UART_DISABLE_INT(UART1, UART_INTEN_RXPDMAEN_Msk);
 
             /* Handle PDMA transfer done interrupt event */
             if(g_u32TwoChannelPdmaTest == 1)
@@ -228,7 +228,7 @@ void UART02_IRQHandler(void)
 {
     /* Get UART0 Rx data and send the data to UART1 Tx */
     if(UART_GET_INT_FLAG(UART0, UART_INTSTS_RDAIF_Msk))
-        UART1->DAT = UART0->DAT;
+        UART_WRITE(UART1,UART_READ(UART0));
 }
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -304,11 +304,11 @@ void PDMA_UART(int32_t i32option)
 
     /* Enable UART Tx and Rx PDMA function */
     if(g_u32TwoChannelPdmaTest == 1)
-        UART1->INTEN |= UART_INTEN_TXPDMAEN_Msk;
+        UART_ENABLE_INT(UART1,UART_INTEN_TXPDMAEN_Msk );
     else
-        UART1->INTEN &= ~UART_INTEN_TXPDMAEN_Msk;
+        UART_DISABLE_INT(UART1, UART_INTEN_TXPDMAEN_Msk);
 
-    UART1->INTEN |= UART_INTEN_RXPDMAEN_Msk;
+    UART_ENABLE_INT(UART1,UART_INTEN_RXPDMAEN_Msk );
 
     /* Wait for PDMA operation finish */
     while(IsTestOver == FALSE);
@@ -318,7 +318,7 @@ void PDMA_UART(int32_t i32option)
         printf("target abort...\n");
 
     /* Disable UART Tx and Rx PDMA function */
-    UART1->INTEN &= ~(UART_INTEN_TXPDMAEN_Msk | UART_INTEN_RXPDMAEN_Msk);
+    UART_DISABLE_INT(UART1, (UART_INTEN_TXPDMAEN_Msk | UART_INTEN_RXPDMAEN_Msk));
 
     /* Disable PDMA channel */
     PDMA_Close(PDMA);
@@ -341,9 +341,6 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
@@ -353,20 +350,14 @@ void SYS_Init(void)
     /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
-    /* Enable external 32MHz XTAL */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
     /* Set both PCLK0 and PCLK1 as HCLK */
     CLK->PCLKDIV = CLK_PCLKDIV_APB0DIV_DIV1 | CLK_PCLKDIV_APB1DIV_DIV1;
 
     /* Select IP clock source */
-    /* Select UART0 clock source is HXT */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
-    /* Select UART1 clock source is HXT */
-    CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART1SEL_HXT, CLK_CLKDIV0_UART1(1));
+    /* Select UART0 clock source is HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
+    /* Select UART1 clock source is HIRC */
+    CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART1SEL_HIRC, CLK_CLKDIV0_UART1(1));
 
     /* Enable UART0 peripheral clock */
     CLK_EnableModuleClock(UART0_MODULE);
@@ -384,12 +375,12 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
 
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD;
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))    |       \
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Set PB multi-function pins for UART1 RXD(PB.2) and TXD(PB.3) */
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB2MFP_Msk)) | SYS_GPB_MFPL_PB2MFP_UART1_RXD;
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & (~SYS_GPB_MFPL_PB3MFP_Msk)) | SYS_GPB_MFPL_PB3MFP_UART1_TXD;
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB2MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk))    |       \
+                    (SYS_GPB_MFPL_PB2MFP_UART1_RXD | SYS_GPB_MFPL_PB3MFP_UART1_TXD);
 
     /* Lock protected registers */
     SYS_LockReg();

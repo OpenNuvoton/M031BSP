@@ -1,16 +1,19 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 3 $
- * $Date: 18/05/31 4:56p $
+ * $Revision: 4 $
+ * $Date: 18/07/09 7:03p $
  * @brief
- *           Show how to set I2C use Multi bytes API Read and Write data to Slave.
- *           Needs to work with I2C_Slave sample code.
+ *           Show how to set I2C Multi bytes API Read and Write data to Slave.
+ *           This sample code needs to work with I2C_Slave.
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
+
+#define TEST_LENGTH    256
+#define WRITE_LENGTH    32
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
@@ -33,29 +36,20 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
-
-    /* Enable HIRC clock */
+    /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Waiting for HIRC clock ready */
+    /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable I2C0 clock */
     CLK_EnableModuleClock(I2C0_MODULE);
@@ -109,7 +103,7 @@ void I2C0_Close(void)
 int main()
 {
     uint32_t i;
-    uint8_t txbuf[256] = {0}, rDataBuf[256] = {0};
+    uint8_t txbuf[TEST_LENGTH] = {0}, rDataBuf[TEST_LENGTH] = {0};
 
     SYS_Init();
 
@@ -140,15 +134,15 @@ int main()
     g_u8DeviceAddr = 0x15;
 
     /* Prepare data for transmission */
-    for(i = 0; i < 256; i++)
+    for(i = 0; i < TEST_LENGTH; i++)
     {
         txbuf[i] = (uint8_t) i + 3;
     }
 
-    for(i = 0; i < 256; i += 32)
+    for(i = 0; i < TEST_LENGTH; i += WRITE_LENGTH)
     {
         /* Write 32 bytes data to Slave */
-        while(I2C_WriteMultiBytesTwoRegs(I2C0, g_u8DeviceAddr, i, &txbuf[i], 32) < 32);
+        while(I2C_WriteMultiBytesTwoRegs(I2C0, g_u8DeviceAddr, i, &txbuf[i], WRITE_LENGTH) < WRITE_LENGTH);
     }
 
     printf("Multi bytes Write access Pass.....\n");
@@ -156,10 +150,10 @@ int main()
     printf("\n");
 
     /* Use Multi Bytes Read from Slave (Two Registers) */
-    while(I2C_ReadMultiBytesTwoRegs(I2C0, g_u8DeviceAddr, 0x0000, rDataBuf, 256) < 256);
+    while(I2C_ReadMultiBytesTwoRegs(I2C0, g_u8DeviceAddr, 0x0000, rDataBuf, TEST_LENGTH) < TEST_LENGTH);
 
     /* Compare TX data and RX data */
-    for(i = 0; i < 256; i++)
+    for(i = 0; i < TEST_LENGTH; i++)
     {
         if(txbuf[i] != rDataBuf[i])
             printf("Data compare fail... R[%d] Data: 0x%X\n", i, rDataBuf[i]);

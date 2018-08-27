@@ -32,23 +32,20 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
     /* Switch HCLK clock source to HIRC */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC;
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Set both PCLK0 and PCLK1 as HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable UART peripheral clock */
     CLK_EnableModuleClock(UART0_MODULE);
@@ -63,24 +60,26 @@ void SYS_Init(void)
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
     /*----------------------------------------------------------------------*/
-
-    /* Set PA.11 and PB.4 to input mode */
-    PA->MODE &= ~GPIO_MODE_MODE11_Msk;
-    PB->MODE &= ~GPIO_MODE_MODE4_Msk;
-
-    /* Set PA11 multi-function pin for ACMP0 positive input pin */
-    SYS->GPA_MFPH |= SYS_GPA_MFPH_PA11MFP_ACMP0_P0;
-
-    /* Set PB4 multi-function pin for ACMP1 positive input pin */
-    SYS->GPB_MFPL |= SYS_GPB_MFPL_PB4MFP_ACMP1_P1;
-
     /* Set GPB multi-function pins for UART0 RXD and TXD */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    /* Disable digital input path of analog pin ACMP0_P0 and ACMP1_P1 to prevent leakage */
-    GPIO_DISABLE_DIGITAL_PATH(PA, (1ul << 11));
-    GPIO_DISABLE_DIGITAL_PATH(PB, (1ul << 4));
+
+    /* Set PA.11 multi-function pin for ACMP0_P0 positive input pin */
+    SYS->GPA_MFPH = (SYS->GPA_MFPH & ~(SYS_GPA_MFPH_PA11MFP_Msk)) |
+                    (SYS_GPA_MFPH_PA11MFP_ACMP0_P0);
+    /* Disable digital input path of analog pin ACMP0_P0 to prevent leakage */
+    GPIO_DISABLE_DIGITAL_PATH(PA, BIT11);
+    /* Set PA.11 to input mode for ACMP analog input pins */
+    GPIO_SetMode(PA, BIT11, GPIO_MODE_INPUT);
+
+    /* Set PB.4 multi-function pin for ACMP1_P1 positive input pin */
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB4MFP_Msk)) |
+                    (SYS_GPB_MFPL_PB4MFP_ACMP1_P1);
+    /* Disable digital input path of analog pin ACMP1_P1 to prevent leakage */
+    GPIO_DISABLE_DIGITAL_PATH(PB, BIT4);
+    /* Set PB.4 to input mode for ACMP analog input pins */
+    GPIO_SetMode(PB, BIT4, GPIO_MODE_INPUT);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -138,7 +137,7 @@ int32_t main(void)
     ACMP_CLR_INT_FLAG(ACMP01, 0);
     ACMP_CLR_INT_FLAG(ACMP01, 1);
 
-    // Give ACMP some time to settle
+    /* Give ACMP some time to settle */
     for(i = 0; i < 1000; i++);
 
     if(ACMP01->STATUS & ACMP_STATUS_ACMPWO_Msk)

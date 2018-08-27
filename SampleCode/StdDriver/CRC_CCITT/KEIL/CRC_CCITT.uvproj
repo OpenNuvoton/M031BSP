@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="project_proj.xsd">
 
   <SchemaVersion>1.1</SchemaVersion>
@@ -15,27 +15,27 @@
           <Device>M032SE3AE</Device>
           <Vendor>Nuvoton</Vendor>
           <Cpu>IRAM(0x20000000-0x20003FFF) IROM(0-0x1FFFF) CLOCK(48000000) CPUTYPE("Cortex-M0")</Cpu>
-          <FlashUtilSpec />
+          <FlashUtilSpec></FlashUtilSpec>
           <StartupFile>undefined</StartupFile>
-          <FlashDriverDll />
+          <FlashDriverDll></FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile />
-          <MemoryEnv />
-          <Cmp />
-          <Asm />
-          <Linker />
-          <OHString />
-          <InfinionOptionDll />
-          <SLE66CMisc />
-          <SLE66AMisc />
-          <SLE66LinkerMisc />
+          <RegisterFile></RegisterFile>
+          <MemoryEnv></MemoryEnv>
+          <Cmp></Cmp>
+          <Asm></Asm>
+          <Linker></Linker>
+          <OHString></OHString>
+          <InfinionOptionDll></InfinionOptionDll>
+          <SLE66CMisc></SLE66CMisc>
+          <SLE66AMisc></SLE66AMisc>
+          <SLE66LinkerMisc></SLE66LinkerMisc>
           <SFDFile>SFD\Nuvoton\M031AE_v1.SFR</SFDFile>
           <UseEnv>0</UseEnv>
-          <BinPath />
-          <IncludePath />
-          <LibPath />
-          <RegisterFilePath />
-          <DBRegisterFilePath />
+          <BinPath></BinPath>
+          <IncludePath></IncludePath>
+          <LibPath></LibPath>
+          <RegisterFilePath></RegisterFilePath>
+          <DBRegisterFilePath></DBRegisterFilePath>
           <TargetStatus>
             <Error>0</Error>
             <ExitCodeStop>0</ExitCodeStop>
@@ -57,8 +57,8 @@
           <BeforeCompile>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name />
-            <UserProg2Name />
+            <UserProg1Name></UserProg1Name>
+            <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
             <nStopU1X>0</nStopU1X>
@@ -67,8 +67,8 @@
           <BeforeMake>
             <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name />
-            <UserProg2Name />
+            <UserProg1Name></UserProg1Name>
+            <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
           </BeforeMake>
@@ -81,7 +81,7 @@
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
           </AfterMake>
           <SelectedForBatchBuild>1</SelectedForBatchBuild>
-          <SVCSIdString />
+          <SVCSIdString></SVCSIdString>
         </TargetCommonOption>
         <CommonProperty>
           <UseCPPCompiler>0</UseCPPCompiler>
@@ -95,18 +95,18 @@
           <AssembleAssemblyFile>0</AssembleAssemblyFile>
           <PublicsOnly>0</PublicsOnly>
           <StopOnExitCode>3</StopOnExitCode>
-          <CustomArgument />
-          <IncludeLibraryModules />
+          <CustomArgument></CustomArgument>
+          <IncludeLibraryModules></IncludeLibraryModules>
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
-          <SimDllArguments />
+          <SimDllArguments></SimDllArguments>
           <SimDlgDll>DARMCM1.DLL</SimDlgDll>
-          <SimDlgDllArguments />
+          <SimDlgDllArguments></SimDlgDllArguments>
           <TargetDllName>SARMCM3.DLL</TargetDllName>
-          <TargetDllArguments />
+          <TargetDllArguments></TargetDllArguments>
           <TargetDlgDll>TARMCM1.DLL</TargetDlgDll>
-          <TargetDlgDllArguments />
+          <TargetDlgDllArguments></TargetDlgDllArguments>
         </DllOption>
         <DebugOption>
           <OPTHX>
@@ -140,18 +140,18 @@
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>15</TargetSelection>
           <SimDlls>
-            <CpuDll />
-            <CpuDllArguments />
-            <PeripheralDll />
-            <PeripheralDllArguments />
-            <InitializationFile />
+            <CpuDll></CpuDll>
+            <CpuDllArguments></CpuDllArguments>
+            <PeripheralDll></PeripheralDll>
+            <PeripheralDllArguments></PeripheralDllArguments>
+            <InitializationFile></InitializationFile>
           </SimDlls>
           <TargetDlls>
-            <CpuDll />
-            <CpuDllArguments />
-            <PeripheralDll />
-            <PeripheralDllArguments />
-            <InitializationFile />
+            <CpuDll></CpuDll>
+            <CpuDllArguments></CpuDllArguments>
+            <PeripheralDll></PeripheralDll>
+            <PeripheralDllArguments></PeripheralDllArguments>
+            <InitializationFile></InitializationFile>
             <Driver>Bin\Nu_Link.dll</Driver>
           </TargetDlls>
         </DebugOption>
@@ -165,8 +165,8 @@
             <DriverSelection>4106</DriverSelection>
           </Flash1>
           <Flash2>Bin\Nu_Link.dll</Flash2>
-          <Flash3 />
-          <Flash4 />
+          <Flash3></Flash3>
+          <Flash4></Flash4>
         </Utilities>
         <TargetArmAds>
           <ArmAdsMisc>
@@ -198,7 +198,7 @@
             <RvctClst>0</RvctClst>
             <GenPPlst>1</GenPPlst>
             <AdsCpuType>"Cortex-M0"</AdsCpuType>
-            <RvctDeviceName />
+            <RvctDeviceName></RvctDeviceName>
             <mOS>0</mOS>
             <uocRom>0</uocRom>
             <uocRam>0</uocRam>
@@ -329,11 +329,11 @@
                 <Size>0x0</Size>
               </OCR_RVCT10>
             </OnChipMemories>
-            <RvctStartVector />
+            <RvctStartVector></RvctStartVector>
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>0</Optim>
+            <Optim>3</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -346,9 +346,9 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <VariousControls>
-              <MiscControls />
-              <Define />
-              <Undefine />
+              <MiscControls></MiscControls>
+              <Define></Define>
+              <Undefine></Undefine>
               <IncludePath>..\..\..\..\Library\CMSIS\Include;..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\Library\StdDriver\inc</IncludePath>
             </VariousControls>
           </Cads>
@@ -362,10 +362,10 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <VariousControls>
-              <MiscControls />
-              <Define />
-              <Undefine />
-              <IncludePath />
+              <MiscControls></MiscControls>
+              <Define></Define>
+              <Undefine></Undefine>
+              <IncludePath></IncludePath>
             </VariousControls>
           </Aads>
           <LDads>
@@ -377,12 +377,12 @@
             <useFile>0</useFile>
             <TextAddressRange>0x00000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
-            <ScatterFile />
-            <IncludeLibs />
-            <IncludeLibsPath />
+            <ScatterFile></ScatterFile>
+            <IncludeLibs></IncludeLibs>
+            <IncludeLibsPath></IncludeLibsPath>
             <Misc>--map --first='startup_M031Series.o(RESET)' --datacompressor=off --info=inline --entry Reset_Handler</Misc>
-            <LinkerInputFile />
-            <DisabledWarnings />
+            <LinkerInputFile></LinkerInputFile>
+            <DisabledWarnings></DisabledWarnings>
           </LDads>
         </TargetArmAds>
       </TargetOption>

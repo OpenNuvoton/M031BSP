@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     clk.c
  * @version  V3.00
- * $Revision: 5 $
- * $Date: 18/04/24 5:55p $
+ * $Revision: 6 $
+ * $Date: 18/07/05 4:42p $
  * @brief    M031 Series Clock Controller (CLK) Driver Source File
  *
  * @note
@@ -323,16 +323,19 @@ void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv)
   * |\ref UART0_MODULE   |\ref CLK_CLKSEL1_UART0SEL_LXT         |\ref CLK_CLKDIV0_UART0(x) |
   * |\ref UART0_MODULE   |\ref CLK_CLKSEL1_UART0SEL_HIRC        |\ref CLK_CLKDIV0_UART0(x) |
   * |\ref UART0_MODULE   |\ref CLK_CLKSEL1_UART0SEL_PCLK0       |\ref CLK_CLKDIV0_UART0(x) |
+  * |\ref UART0_MODULE   |\ref CLK_CLKSEL1_UART0SEL_LIRC        |\ref CLK_CLKDIV0_UART0(x) |
   * |\ref UART1_MODULE   |\ref CLK_CLKSEL1_UART1SEL_HXT         |\ref CLK_CLKDIV0_UART1(x) |
   * |\ref UART1_MODULE   |\ref CLK_CLKSEL1_UART1SEL_PLL         |\ref CLK_CLKDIV0_UART1(x) |
   * |\ref UART1_MODULE   |\ref CLK_CLKSEL1_UART1SEL_LXT         |\ref CLK_CLKDIV0_UART1(x) |
   * |\ref UART1_MODULE   |\ref CLK_CLKSEL1_UART1SEL_HIRC        |\ref CLK_CLKDIV0_UART1(x) |
   * |\ref UART1_MODULE   |\ref CLK_CLKSEL1_UART1SEL_PCLK1       |\ref CLK_CLKDIV0_UART1(x) |
+  * |\ref UART1_MODULE   |\ref CLK_CLKSEL1_UART1SEL_LIRC        |\ref CLK_CLKDIV0_UART1(x) |
   * |\ref UART2_MODULE   |\ref CLK_CLKSEL3_UART2SEL_HXT         |\ref CLK_CLKDIV4_UART2(x) |
   * |\ref UART2_MODULE   |\ref CLK_CLKSEL3_UART2SEL_PLL         |\ref CLK_CLKDIV4_UART2(x) |
   * |\ref UART2_MODULE   |\ref CLK_CLKSEL3_UART2SEL_LXT         |\ref CLK_CLKDIV4_UART2(x) |
   * |\ref UART2_MODULE   |\ref CLK_CLKSEL3_UART2SEL_HIRC        |\ref CLK_CLKDIV4_UART2(x) |
   * |\ref UART2_MODULE   |\ref CLK_CLKSEL3_UART2SEL_PCLK0       |\ref CLK_CLKDIV4_UART2(x) |
+  * |\ref UART2_MODULE   |\ref CLK_CLKSEL3_UART2SEL_LIRC        |\ref CLK_CLKDIV4_UART2(x) |
   * |\ref PWM0_MODULE    |\ref CLK_CLKSEL2_PWM0SEL_PLL          | x                        |
   * |\ref PWM0_MODULE    |\ref CLK_CLKSEL2_PWM0SEL_PCLK0        | x                        |
   * |\ref PWM1_MODULE    |\ref CLK_CLKSEL2_PWM1SEL_PLL          | x                        |
@@ -424,6 +427,7 @@ void CLK_DisableXtalRC(uint32_t u32ClkMask)
   *             - \ref PDMA_MODULE
   *             - \ref ISP_MODULE
   *             - \ref EBI_MODULE
+  *             - \ref HDIV_MODULE
   *             - \ref CRC_MODULE
   *             - \ref WDT_MODULE
   *             - \ref WWDT_MODULE
@@ -460,6 +464,7 @@ void CLK_EnableModuleClock(uint32_t u32ModuleIdx)
   *             - \ref PDMA_MODULE
   *             - \ref ISP_MODULE
   *             - \ref EBI_MODULE
+  *             - \ref HDIV_MODULE
   *             - \ref CRC_MODULE
   *             - \ref WDT_MODULE
   *             - \ref WWDT_MODULE

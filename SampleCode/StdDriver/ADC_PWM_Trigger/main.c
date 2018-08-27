@@ -21,26 +21,23 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
+    /* Waiting for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
     /* Switch HCLK clock source to HIRC */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC;
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
-    /* Set PCLK0 = PCLK1 = HCLK/2 */
+    /* Set both PCLK0 and PCLK1 as HCLK/2 */
     CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
 
-    /* Enable UART module clock */
-    CLK_EnableModuleClock(UART0_MODULE);
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
-    /* Switch UART0 clock source to XTAL */
-    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HXT, CLK_CLKDIV0_UART0(1));
+    /* Enable UART peripheral clock */
+    CLK_EnableModuleClock(UART0_MODULE);
 
     /* Enable PWM0 module clock */
     CLK_EnableModuleClock(PWM0_MODULE);
@@ -51,8 +48,8 @@ void SYS_Init(void)
     /* Enable ADC module clock */
     CLK_EnableModuleClock(ADC_MODULE);
 
-    /* ADC clock source is HXT 12MHz, set divider to 8, ADC clock is 12/8 MHz */
-    CLK_SetModuleClock(ADC_MODULE, CLK_CLKSEL2_ADCSEL_HXT, CLK_CLKDIV0_ADC(8));
+    /* ADC clock source is PCLK1, set divider to 1 */
+    CLK_SetModuleClock(ADC_MODULE, CLK_CLKSEL2_ADCSEL_PCLK1, CLK_CLKDIV0_ADC(1));
 
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
@@ -61,23 +58,21 @@ void SYS_Init(void)
     /*----------------------------------------------------------------------*/
     /* Init I/O Multi-function                                              */
     /*----------------------------------------------------------------------*/
-
     /* Set GPB multi-function pins for UART0 RXD and TXD */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
+                    (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    /* Set PB.2 ~ PB.3 to input mode */
-    PB->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-    /* Configure the GPB2 - GPB3 ADC analog input pins.  */
-    SYS->GPB_MFPL &= ~(SYS_GPB_MFPL_PB2MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk);
-    SYS->GPB_MFPL |= (SYS_GPB_MFPL_PB2MFP_ADC_CH2 | SYS_GPB_MFPL_PB3MFP_ADC_CH3);
-
-    /* Disable the GPB2 digital input path to avoid the leakage current. */
+    /* Set PB.2 - PB.3 to input mode */
+    GPIO_SetMode(PB, BIT2|BIT3, GPIO_MODE_INPUT);
+    /* Configure the PB.2 - PB.3 ADC analog input pins.  */
+    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB2MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk)) |
+                    (SYS_GPB_MFPL_PB2MFP_ADC_CH2 | SYS_GPB_MFPL_PB3MFP_ADC_CH3);
+    /* Disable the PB.2 - PB.3 digital input path to avoid the leakage current. */
     GPIO_DISABLE_DIGITAL_PATH(PB, BIT2|BIT3);
 
     /* Set PA multi-function pins for PWM0 Channel 0 */
-    SYS->GPA_MFPL = (SYS->GPA_MFPL & (~SYS_GPA_MFPL_PA0MFP_Msk));
-    SYS->GPA_MFPL |= SYS_GPA_MFPL_PA5MFP_PWM0_CH0;
+    SYS->GPA_MFPL = (SYS->GPA_MFPL & (~SYS_GPA_MFPL_PA0MFP_Msk)) |
+                    (SYS_GPA_MFPL_PA5MFP_PWM0_CH0);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -141,7 +136,7 @@ void ADC_FunctionTest()
             ADC_CLR_INT_FLAG(ADC, ADC_ADF_INT);
 
             /* Enable the sample module interrupt */
-            ADC_ENABLE_INT(ADC, ADC_ADF_INT);  // Enable sample module A/D interrupt.
+            ADC_ENABLE_INT(ADC, ADC_ADF_INT);  /* Enable sample module A/D interrupt. */
             NVIC_EnableIRQ(ADC_IRQn);
 
             printf("Conversion result of channel 2:\n");
@@ -149,7 +144,7 @@ void ADC_FunctionTest()
             /* Reset the ADC indicator and enable PWM0 channel 0 counter */
             g_u32AdcIntFlag = 0;
             g_u32COVNUMFlag = 0;
-            PWM_Start(PWM0, PWM_CH_0_MASK); // PWM0 channel 0 counter start running.
+            PWM_Start(PWM0, PWM_CH_0_MASK); /* PWM0 channel 0 counter start running. */
 
             while(1)
             {
@@ -167,7 +162,7 @@ void ADC_FunctionTest()
             }
 
             /* Disable PWM0 channel 0 counter */
-            PWM_ForceStop(PWM0, BIT0);  // PWM0 counter stop running.
+            PWM_ForceStop(PWM0, BIT0);  /* PWM0 counter stop running. */
 
             for(g_u32COVNUMFlag = 0; (g_u32COVNUMFlag) < 6; g_u32COVNUMFlag++)
                 printf("                                0x%X (%d)\n", i32ConversionData[g_u32COVNUMFlag], i32ConversionData[g_u32COVNUMFlag]);
@@ -184,7 +179,7 @@ void ADC_FunctionTest()
             ADC_CLR_INT_FLAG(ADC, ADC_ADF_INT);
 
             /* Enable the sample module interrupt */
-            ADC_ENABLE_INT(ADC, ADC_ADF_INT);  // Enable sample module A/D interrupt.
+            ADC_ENABLE_INT(ADC, ADC_ADF_INT);  /* Enable sample module A/D interrupt. */
             NVIC_EnableIRQ(ADC_IRQn);
 
             printf("Conversion result of channel 2:\n");
@@ -192,7 +187,7 @@ void ADC_FunctionTest()
             /* Reset the ADC indicator and enable PWM0 channel 0 counter */
             g_u32AdcIntFlag = 0;
             g_u32COVNUMFlag = 0;
-            PWM_Start(PWM0, PWM_CH_0_MASK); // PWM0 channel 0 counter start running.
+            PWM_Start(PWM0, PWM_CH_0_MASK); /* PWM0 channel 0 counter start running. */
 
             while(1)
             {
@@ -210,7 +205,7 @@ void ADC_FunctionTest()
             }
 
             /* Disable PWM0 channel 0 counter */
-            PWM_ForceStop(PWM0, BIT0);  // PWM0 counter stop running.
+            PWM_ForceStop(PWM0, BIT0);  /* PWM0 counter stop running. */
 
             for(g_u32COVNUMFlag = 0; (g_u32COVNUMFlag) < 6; g_u32COVNUMFlag++)
                 printf("                                0x%X (%d)\n", i32ConversionData[g_u32COVNUMFlag], i32ConversionData[g_u32COVNUMFlag]);

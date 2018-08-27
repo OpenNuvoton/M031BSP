@@ -1,8 +1,8 @@
 /******************************************************************************
  * @file     APROM_main.c
  * @version  V1.00
- * $Revision: 10 $
- * $Date: 18/06/20 9:13a $
+ * $Revision: 13 $
+ * $Date: 18/07/16 11:44a $
  * @brief    This sample code includes LDROM image (fmc_ld_iap)
  *           and APROM image (fmc_ap_main).
  *           It shows how to branch between APROM and LDROM. To run
@@ -19,37 +19,34 @@
 typedef void (FUNC_PTR)(void);
 
 extern uint32_t  loaderImage1Base, loaderImage1Limit;
-
+int IsDebugFifoEmpty(void);
 
 void SYS_Init(void)
 {
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
+    /* Enable HIRC clock */
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
+    /* Waiting for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
-    /* Switch HCLK clock source to HIRC */
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC ;
-
-    /* Switch UART0 clock source to XTAL */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
+    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Enable UART0 clock */
-    CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk ;
+    CLK_EnableModuleClock(UART0_MODULE);
+
+    /* Switch UART0 clock source to HIRC */
+    CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Update System Core Clock */
     SystemCoreClockUpdate();
 
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
-    SYS->GPB_MFPH &= ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk);
-    SYS->GPB_MFPH |= (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))
+                    |(SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -83,7 +80,14 @@ static int  set_IAP_boot_mode(void)
         return -1;
     }
 
-    if (au32Config[0] & 0x40)
+    /*
+        CONFIG0[7:6]
+        00 = Boot from LDROM with IAP mode.
+        01 = Boot from LDROM without IAP mode.
+        10 = Boot from APROM with IAP mode.
+        11 = Boot from APROM without IAP mode.
+    */
+    if (au32Config[0] & 0x40)      /* Boot from APROM with IAP mode */
     {
         FMC_ENABLE_CFG_UPDATE();
         au32Config[0] &= ~0x40;
@@ -246,18 +250,14 @@ int main()
             printf("\n\nChange VECMAP and branch to LDROM...\n");
             printf("LDROM code SP = 0x%x\n", *(uint32_t *)(FMC_LDROM_BASE));
             printf("LDROM code ResetHandler = 0x%x\n", *(uint32_t *)(FMC_LDROM_BASE+4));
-            while (!(UART0->FIFOSTS & UART_FIFOSTS_TXEMPTY_Msk));
-
+            /* To check if all the debug messages are finished */
+            while(IsDebugFifoEmpty() == 0);
             /*  NOTE!
              *     Before change VECMAP, user MUST disable all interrupts.
              *     The following code CANNOT locate in address 0x0 ~ 0x200.
              */
 
-            /* FMC_SetVectorPageAddr(FMC_LDROM_BASE) */
-            FMC->ISPCMD = FMC_ISPCMD_VECMAP;
-            FMC->ISPADDR = FMC_LDROM_BASE;
-            FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;
-            while (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk) ;
+            FMC_SetVectorPageAddr(FMC_LDROM_BASE);
 
             /*
              *  The reset handler address of an executable image is located at offset 0x4.

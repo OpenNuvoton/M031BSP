@@ -1,18 +1,18 @@
 /******************************************************************************
  * @file     main.c
  * @version  V1.00
- * $Revision: 3 $
- * $Date: 18/06/01 2:14p $
+ * $Revision: 5 $
+ * $Date: 18/07/23 2:08p $
  * @brief
- *           Demonstrate I2C PDMA mode and need to connect I2C0(Master) and I2C1(Slave).
+ *           Demonstrate I2C PDMA mode and need to connect I2C0 (master) and I2C1 (slave).
  * @note
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
 
-#define I2C_PDMA_TX_CH        0
-#define I2C_PDMA_RX_CH        1
+#define I2C_PDMA_TX_CH      0
+#define I2C_PDMA_RX_CH      1
 #define PDMA_TEST_LENGTH    5
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -41,14 +41,14 @@ void PDMA_IRQHandler(void)
     uint32_t u32Status = PDMA->TDSTS;
 
     //TX
-    if (u32Status & 0x1)
+    if (u32Status & (0x1 << I2C_PDMA_TX_CH))
     {
         printf("\n I2C0 Tx done  ");
         PDMA->TDSTS = 0x1;
     }
 
     //RX
-    if (u32Status & (0x1 << 1))
+    if (u32Status & (0x1 << I2C_PDMA_RX_CH))
     {
         printf("\n I2C1 Rx done  ");
         PDMA->TDSTS = 0x2;
@@ -88,7 +88,7 @@ void I2C1_IRQHandler(void)
 
     if (I2C_GET_TIMEOUT_FLAG(I2C1))
     {
-        /* Clear I2C0 Timeout Flag */
+        /* Clear I2C1 Timeout Flag */
         I2C1->TOCTL |= I2C_TOCTL_TOIF_Msk;
     }
     else
@@ -188,22 +188,13 @@ void SYS_Init(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set XT1_OUT(PF.2) and XT1_IN(PF.3) to input mode */
-    PF->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
-
-    /* Enable External XTAL (4~32 MHz) */
-    CLK->PWRCTL |= CLK_PWRCTL_HXTEN_Msk;
-
-    /* Waiting for 32MHz clock ready */
-    while((CLK->STATUS & CLK_STATUS_HXTSTB_Msk) != CLK_STATUS_HXTSTB_Msk);
-
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
 
     /* Wait for HIRC clock ready */
     while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC and HCLK clock divider as 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_HCLKDIV_Msk)) | CLK_CLKDIV0_HCLK(1);
 
@@ -213,8 +204,8 @@ void SYS_Init(void)
     /* PDMA Clock Enable */
     CLK->AHBCLK |= CLK_AHBCLK_PDMACKEN_Msk;
 
-    /* Switch UART0 clock source to XTAL and UART0 clock divider as 1 */
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HXT;
+    /* Switch UART0 clock source to HIRC and UART0 clock divider as 1 */
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART0DIV_Msk)) | CLK_CLKDIV0_UART0(1);
 
     /* Update System Core Clock */
@@ -250,7 +241,7 @@ void UART0_Init(void)
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
 
     /* Configure UART0 and set UART0 Baudrate */
-    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HXT, 115200);
+    UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
 
@@ -428,8 +419,16 @@ int main()
     */
 
     printf("+-------------------------------------------------------+\n");
-    printf("|       I2C Driver Sample Code for PDMA                 |\n");
+    printf("| I2C Driver Sample Code for PDMA                       |\n");
+    printf("|                                                       |\n");
+    printf("| I2C Master (I2C0) <---> I2C Slave(I2C1)               |\n");
     printf("+-------------------------------------------------------+\n");
+
+    printf("\n");
+    printf("Configure I2C0 as Master, and I2C1 as a slave.\n");
+    printf("The I/O connection I2C0 to I2C1:\n");
+    printf("I2C0_SDA(PB.4), I2C0_SCL(PB.5)\n");
+    printf("I2C1_SDA(PA.2), I2C1_SCL(PA.3)\n\n");
 
     /* Init I2C0 */
     I2C0_Init();

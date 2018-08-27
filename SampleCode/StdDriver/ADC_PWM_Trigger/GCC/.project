@@ -75,7 +75,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1527820792078</id>
+			<id>1531791613880</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -84,7 +84,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1531791613886</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -93,7 +93,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1527820792083</id>
+			<id>1531791613891</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -102,7 +102,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1527820792088</id>
+			<id>1531791613904</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -111,7 +111,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1527820792122</id>
+			<id>1531791613910</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -120,12 +120,21 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1527820792127</id>
+			<id>1531791613916</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-pwm.c</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1531791613921</id>
+			<name>Library/Library</name>
+			<type>5</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-gpio.c</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>
