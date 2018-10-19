@@ -64,6 +64,9 @@ void SYS_Init(void)
 
 void PowerDown()
 {
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
     printf("Enter power down ...\n");
     while(!IsDebugFifoEmpty());
 
@@ -78,6 +81,8 @@ void PowerDown()
 
     printf("device wakeup!\n");
 
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 
 /*---------------------------------------------------------------------------------------------------------*/

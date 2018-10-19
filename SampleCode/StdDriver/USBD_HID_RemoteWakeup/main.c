@@ -82,6 +82,9 @@ void GPCDEF_IRQHandler(void)
 
 void PowerDown()
 {
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
     printf("Enter power down ...\n");
     while(!IsDebugFifoEmpty());
 
@@ -109,6 +112,8 @@ void PowerDown()
 
     printf("device wakeup!\n");
 
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 
 int32_t main(void)

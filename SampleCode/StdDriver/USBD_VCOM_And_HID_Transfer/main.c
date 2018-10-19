@@ -98,6 +98,9 @@ void SYS_Init(void)
 
 void PowerDown()
 {
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
     printf("Enter power down ...\n");
     while(!IsDebugFifoEmpty());
 
@@ -111,8 +114,10 @@ void PowerDown()
         CLK->PWRCTL ^= CLK_PWRCTL_PDEN_Msk;
 
     printf("device wakeup!\n");
-}
 
+    /* Lock protected registers */
+    SYS_LockReg();
+}
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* UART Callback function                                                                                  */
