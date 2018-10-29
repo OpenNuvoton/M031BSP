@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_board>
+  <pass>
+    <loader>$TOOLKIT_DIR$\config\flashloader\Nuvoton\M031_LDROM.flash</loader>
+    <range>CODE 0x100000 0x101fff</range>
+    <abs_offset>0x100000</abs_offset>
+    <args>--config
+0xFFFFFF7E
+0xFFFFFFFF</args>
+  </pass>
+</flash_board>
+
+

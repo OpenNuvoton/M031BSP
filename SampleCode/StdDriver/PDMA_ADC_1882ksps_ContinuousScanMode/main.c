@@ -111,7 +111,7 @@ void ReloadPDMA()
     PDMA_SetTransferCnt(PDMA, PDMAchannel, PDMA_WIDTH_16, ADCDatalenght+1);
 
     /* Select PDMA request source as ADC RX */
-    PDMA_SetTransferMode(PDMA, PDMAchannel, PDMA_ADC_RX, FALSE, NULL);
+    PDMA_SetTransferMode(PDMA, PDMAchannel, PDMA_ADC_RX, FALSE, (uint32_t) NULL);
 }
 
 void ADC_FunctionTest()
@@ -137,10 +137,10 @@ void ADC_FunctionTest()
     CLK_SysTickDelay(10000);
 
     /* Set input mode as single-end, and Single mode*/
-    ADC_Open(ADC, ADC_ADCR_DIFFEN_SINGLE_END, ADC_ADCR_ADMD_CONTINUOUS, NULL);
+    ADC_Open(ADC, ADC_ADCR_DIFFEN_SINGLE_END, ADC_ADCR_ADMD_CONTINUOUS,(uint32_t) NULL);
 
     /* Set extend sampling time based on external resistor value.*/
-    ADC_SetExtendSampleTime(ADC, NULL, ADCextendSampling);
+    ADC_SetExtendSampleTime(ADC,(uint32_t) NULL, ADCextendSampling);
 
     while(1)
     {

@@ -204,9 +204,9 @@ int main(void)
     /* Set source address is au8SrcArray, Source increment size is 8 bits(one byte), destination address is PA->DOUT (no increment)*/
     PDMA_SetTransferAddr(PDMA, PDMAchannel, (uint32_t) &(TIMER1->CAP), PDMA_SAR_FIX, (uint32_t)g_au32CAPValue, PDMA_DAR_INC);
     /* Request source is timer 1 */
-    PDMA_SetTransferMode(PDMA, PDMAchannel, PDMA_TMR1, FALSE, NULL);
+    PDMA_SetTransferMode(PDMA, PDMAchannel, PDMA_TMR1, FALSE,(uint32_t) NULL);
     /* Transfer type is burst transfer and burst size is 4 */
-    PDMA_SetBurstType(PDMA, PDMAchannel, PDMA_REQ_SINGLE, NULL);
+    PDMA_SetBurstType(PDMA, PDMAchannel, PDMA_REQ_SINGLE,(uint32_t) NULL);
 
     /* Enable interrupt */
     PDMA_EnableInt(PDMA, PDMAchannel, PDMA_INT_TRANS_DONE);

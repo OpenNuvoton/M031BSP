@@ -6,7 +6,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 uint32_t GetApromSize()
 {
-    uint32_t size = 0x4000, data;
+	unsigned int size = 0x4000, data;
     int result;
 
     do
@@ -27,7 +27,7 @@ uint32_t GetApromSize()
 /*---------------------------------------------------------------------------------------------------------*/
 void GetDataFlashInfo(uint32_t *addr, uint32_t *size)
 {
-    uint32_t uData;
+	unsigned int uData;
 
     *size = 0;
 
