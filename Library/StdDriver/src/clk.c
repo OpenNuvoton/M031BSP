@@ -73,9 +73,16 @@ void CLK_EnableCKO(uint32_t u32ClkSrc, uint32_t u32ClkDiv, uint32_t u32ClkDivBy1
   * @return     None
   * @details    This function is used to let system enter to Power-down mode. \n
   *             The register write-protection function should be disabled before using this function.
+  * @note       Must be care of HIRC/MIRC auto trim is disabled when using this function.
   */
 void CLK_PowerDown(void)
 {
+    /* Check HIRC/MIRC auto trim function disable */
+    if(SYS->HIRCTRIMCTL & SYS_HIRCTRIMCTL_FREQSEL_Msk)
+    {
+        return;
+    }
+
     /* Set the processor uses deep sleep as its low power mode */
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
 
