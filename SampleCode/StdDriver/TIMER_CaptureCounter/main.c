@@ -209,7 +209,7 @@ int main(void)
     TIMER_Start(TIMER1);
 
     /* Check Timer1 capture trigger interrupt counts */
-    while(g_au32TMR1INTCount <= 10)
+    while ((g_au32TMR1INTCount <= 10) && (u32InitCount < 10))
     {
         if(g_au32TMR1INTCount != u32InitCount)
         {
