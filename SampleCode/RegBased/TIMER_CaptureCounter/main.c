@@ -155,7 +155,7 @@ int main(void)
     TIMER3->CTL |= TIMER_CTL_CNTEN_Msk;
 
     /* Check Timer1 capture trigger interrupt counts */
-    while(g_au32TMRINTCount <= 10)
+    while ((g_au32TMRINTCount <= 10) && (u32InitCount < 10))
     {
         if(g_au32TMRINTCount != u32InitCount)
         {
@@ -211,7 +211,7 @@ int main(void)
     TIMER1->CTL |= TIMER_CTL_CNTEN_Msk;
 
     /* Check Timer1 capture trigger interrupt counts */
-    while(g_au32TMRINTCount <= 10)
+    while ((g_au32TMRINTCount <= 10) && (u32InitCount < 10))
     {
         if(g_au32TMRINTCount != u32InitCount)
         {
