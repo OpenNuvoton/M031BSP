@@ -1,8 +1,7 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V3.00
- * @brief    Demonstrate A/D conversion with ADC single mode in 2 Msps.
- *           The ADC clock source is 34 MHz comes from PLL 68 MHz.
+ * @brief    Demonstrate how to use PLL as ADC clock source to achieve 2 Msps ADC conversion rate.
  *
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *
@@ -12,10 +11,22 @@
 
 #define PLL_CLOCK 68000000 /* PLL = 68MHz, HCLK = PLL/2 */
 #define PLL_HCLK PLL_CLOCK/2
+#define PDMA_CH     1
+
 /*---------------------------------------------------------------------------------------------------------*/
 /* Define global variables and constants                                                                   */
 /*---------------------------------------------------------------------------------------------------------*/
-volatile uint32_t g_u32AdcIntFlag;
+typedef struct dma_desc_t
+{
+    uint32_t ctl;
+    uint32_t src;
+    uint32_t dest;
+    uint32_t offset;
+} DMA_DESC_T;
+DMA_DESC_T DMA_DESC[2];
+
+uint32_t g_u32DMAConfig = 0;
+
 
 void SetClockPLL(uint32_t u32Hclk)
 {
@@ -83,6 +94,9 @@ void SYS_Init(void)
     CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_ADCSEL_Msk) | CLK_CLKSEL2_ADCSEL_PLL;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & ~CLK_CLKDIV0_ADCDIV_Msk) | CLK_CLKDIV0_ADC(2);
 
+    /* Enable PDMA clock source */
+    CLK->AHBCLK |= CLK_AHBCLK_PDMACKEN_Msk;
+
     /* Update System Core Clock */
     /* User can use SystemCoreClockUpdate() to calculate Pll Clock, SystemCoreClock and CycylesPerUs automatically. */
     SystemCoreClockUpdate();
@@ -105,9 +119,61 @@ void SYS_Init(void)
     /* Disable the GPB2 digital input path to avoid the leakage current. */
     PB->DINOFF |= ((BIT3|BIT2)<<GPIO_DINOFF_DINOFF0_Pos);
 
+    /* Set PA.0 ~ PA11 to GPIO output mode */
+    PA->MODE = (PA->MODE & ~(0x00FFFFFF)) | 0x00555555;
+    SYS->GPA_MFPL = 0;
+    SYS->GPA_MFPH = SYS->GPA_MFPH & (~0xFFFF);
+
     /* Lock protected registers */
     SYS_LockReg();
 }
+
+
+void PDMA_Init()
+{
+    /* Configure PDMA to Scatter Gather mode with ping-pong buffer */
+    /* to move ADC conversion data to GPIO output without PDMA interrupt. */
+
+    /* Open Channel 1 */
+    PDMA->CHCTL |= (1 << PDMA_CH);
+
+    /* Enable Scatter Gather mode, assign the first scatter-gather descriptor table is table 1,
+       and set transfer mode as ADC_RX to GPIO */
+    PDMA->REQSEL0_3 = (PDMA->REQSEL0_3 & ~PDMA_REQSEL0_3_REQSRC1_Msk) | (PDMA_ADC_RX << PDMA_REQSEL0_3_REQSRC1_Pos);
+    PDMA->DSCT[PDMA_CH].CTL = PDMA_OP_SCATTER;
+    PDMA->DSCT[PDMA_CH].NEXT = (uint32_t)&DMA_DESC[0] - (PDMA->SCATBA);
+
+    /* Scatter-Gather descriptor table configuration */
+    g_u32DMAConfig = \
+                     (1 << PDMA_DSCT_CTL_TXCNT_Pos) |   /* Transfer count is 2 */
+                     PDMA_WIDTH_16 |    /* Transfer width is 16 bits */
+                     PDMA_SAR_FIX |     /* Source increment size is fixed (no increment) */
+                     PDMA_DAR_FIX |     /* Destination increment size is fixed (no increment) */
+                     PDMA_REQ_SINGLE |  /* Transfer type is single transfer type */
+                     PDMA_BURST_1 |     /* Burst size is 128. No effect in single transfer type */
+                     PDMA_OP_SCATTER;   /* Operation mode is scatter-gather mode */
+
+    DMA_DESC[0].ctl = g_u32DMAConfig;
+    /* Configure source address */
+    DMA_DESC[0].src = (uint32_t)&ADC->ADPDMA;   /* Ping-Pong buffer 1 */
+    /* Configure destination address */
+    DMA_DESC[0].dest = (uint32_t)&PA->DOUT;
+    /* Configure next descriptor table address */
+    DMA_DESC[0].offset = (uint32_t)&DMA_DESC[1] - (PDMA->SCATBA);   /* next operation table is table 2 */
+
+    DMA_DESC[1].ctl = g_u32DMAConfig;
+    /* Configure source address */
+    DMA_DESC[1].src = (uint32_t)&ADC->ADPDMA;   /* Ping-Pong buffer 2 */
+    /* Configure destination address */
+    DMA_DESC[1].dest = (uint32_t)&PA->DOUT;
+    /* Configure next descriptor table address */
+    DMA_DESC[1].offset = (uint32_t)&DMA_DESC[0] - (PDMA->SCATBA);   /* next operation table is table 1 */
+
+    /* Don't enable any interrupt to make ADC SPS can up to 2MHz */
+    // PDMA_EnableInt(PDMA, PDMA_CH, PDMA_INT_TRANS_DONE);
+    // NVIC_EnableIRQ(PDMA_IRQn);
+}
+
 
 /*----------------------------------------------------------------------*/
 /* Init UART0                                                           */
@@ -123,18 +189,19 @@ void UART0_Init(void)
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 }
 
+
 void ADC_FunctionTest()
 {
-    uint8_t  u8Option;
-    int32_t  i32ConversionData;
-
     printf("\n");
     printf("+----------------------------------------------------------------------+\n");
-    printf("|       Demonstrate how to perform the ADC in 2 Msps single mode .     |\n");
+    printf("|       Demonstrate how to perform the ADC in 2 Msps continuous mode.  |\n");
     printf("|       ADC clock = PLL/2 = 68/2 MHz = 34 MHz                          |\n");
     printf("|       ADC conversion rate = 34 MHz / 17 = 2 Msps                     |\n");
     printf("+----------------------------------------------------------------------+\n");
-
+    printf("   ADC conversion data will be moved to GPIO pins PA11 ~ PA0 by PDMA.\n");
+    printf("   Please connect PB2 to 0V and PB3 to 3.3V\n");
+    printf("   and monitor PA11 (MSB of 12-bit ADC conversion data) on scope.\n");
+    printf("   The real ADC SPS shoule be (PA11 frequency * 2).\n");
 
     /* Enable ADC converter */
     ADC->ADCR |= ADC_ADCR_ADEN_Msk;
@@ -145,80 +212,24 @@ void ADC_FunctionTest()
     ADC_START_CONV(ADC);                        /* Start to calibration */
     while((ADC->ADCALSTSR & ADC_ADCALSTSR_CALIF_Msk) != ADC_ADCALSTSR_CALIF_Msk);
 
-    while(1)
-    {
-        printf("Select input mode:\n");
-        printf("  [1] Single end input (channel 2 only)\n");
-        printf("  [2] Differential input (channel pair 1 only)\n");
-        printf("  Other keys: exit single mode test\n");
-        u8Option = getchar();
+    /* Set input mode as single-end, continuous mode, and select channel 2 and 3 */
+    ADC->ADCR = (ADC->ADCR & (~(ADC_ADCR_DIFFEN_Msk | ADC_ADCR_ADMD_Msk))) |
+                (ADC_ADCR_DIFFEN_SINGLE_END) | (ADC_ADCR_ADMD_CONTINUOUS);
+    ADC->ADCHER = (ADC->ADCHER & ~ADC_ADCHER_CHEN_Msk) | (BIT2|BIT3);
 
-        if(u8Option == '1')
-        {
-            /* Set input mode as single-end, Single mode, and select channel 2 */
-            ADC->ADCR = (ADC->ADCR & ~(ADC_ADCR_DIFFEN_Msk | ADC_ADCR_ADMD_Msk)) |
-                        (ADC_ADCR_DIFFEN_SINGLE_END | ADC_ADCR_ADMD_CONTINUOUS);
-            ADC->ADCHER = (ADC->ADCHER & ~ADC_ADCHER_CHEN_Msk) | (BIT2);
+    /* ADC enable PDMA transfer */
+    ADC_ENABLE_PDMA(ADC);
 
-            /* Clear the A/D interrupt flag for safe */
-            ADC->ADSR0 = ADC_ADF_INT;
+    /* Start ADC conversion */
+    ADC_START_CONV(ADC);
 
-            /* Enable the sample module interrupt */
-            ADC->ADCR |= ADC_ADCR_ADIE_Msk;
-            NVIC_EnableIRQ(ADC_IRQn);
+    /* Don't interrupt ADC or PDMA in order to make ADC SPS can up to 2MHz */
 
-            /* Reset the ADC interrupt indicator and trigger sample module 0 to start A/D conversion */
-            g_u32AdcIntFlag = 0;
-            ADC->ADCR |= ADC_ADCR_ADST_Msk;
+    printf("press any key to stop ADC conversion ...\n");
+    getchar();
+    ADC_STOP_CONV(ADC);
 
-            /* Wait ADC interrupt (g_u32AdcIntFlag will be set at IRQ_Handler function) */
-            while(g_u32AdcIntFlag == 0);
-
-            /* Get the conversion result of ADC channel 2 */
-            i32ConversionData = ADC_GET_CONVERSION_DATA(ADC, 2);
-            printf("Conversion result of channel 2: 0x%X (%d)\n\n", i32ConversionData, i32ConversionData);
-        }
-        else if(u8Option == '2')
-        {
-
-            /* Set input mode as differential, Single mode, and select channel 2 */
-            ADC->ADCR = (ADC->ADCR & ~(ADC_ADCR_DIFFEN_Msk | ADC_ADCR_ADMD_Msk)) |
-                        (ADC_ADCR_DIFFEN_DIFFERENTIAL | ADC_ADCR_ADMD_CONTINUOUS);
-            ADC->ADCHER = (ADC->ADCHER & ~ADC_ADCHER_CHEN_Msk) | (BIT2);
-
-            /* Clear the A/D interrupt flag for safe */
-            ADC->ADSR0 = ADC_ADF_INT;
-
-            /* Enable the sample module interrupt */
-            ADC->ADCR |= ADC_ADCR_ADIE_Msk;
-            NVIC_EnableIRQ(ADC_IRQn);
-
-            /* Reset the ADC indicator and trigger sample module to start A/D conversion */
-            g_u32AdcIntFlag = 0;
-            ADC->ADCR |= ADC_ADCR_ADST_Msk;
-
-            /* Wait ADC interrupt (g_u32AdcIntFlag will be set at IRQ_Handler function) */
-            while(g_u32AdcIntFlag == 0);
-
-            /* Disable the sample module interrupt */
-            ADC->ADCR &= ~ADC_ADCR_ADIE_Msk;
-
-            /* Get the conversion result of channel 2 */
-            i32ConversionData = (ADC->ADDR[2] & ADC_ADDR_RSLT_Msk);
-            printf("Conversion result of channel pair 1: 0x%X (%d)\n\n", i32ConversionData, i32ConversionData);
-
-
-        }
-        else
-            return;
-    }
-}
-
-
-void ADC_IRQHandler(void)
-{
-    g_u32AdcIntFlag = 1;
-    ADC_CLR_INT_FLAG(ADC, ADC_ADF_INT); /* Clear the A/D interrupt flag */
+    return;
 }
 
 
@@ -230,6 +241,9 @@ int32_t main(void)
     /* Init UART0 for printf */
     UART0_Init();
 
+    /* Init PDMA for ADC */
+    PDMA_Init();
+
     printf("\nSystem clock rate: %d Hz", SystemCoreClock);
 
     /* ADC function test */
@@ -238,8 +252,8 @@ int32_t main(void)
     /* Disable ADC IP clock */
     CLK->APBCLK0 &= ~(CLK_APBCLK0_ADCCKEN_Msk);
 
-    /* Disable External Interrupt */
-    NVIC_DisableIRQ(ADC_IRQn);
+    /* Disable PDMA clock source */
+    CLK->AHBCLK &= ~(CLK_AHBCLK_PDMACKEN_Msk);
 
     printf("Exit ADC sample code\n");
 
