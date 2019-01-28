@@ -94,9 +94,6 @@ void SYS_Init(void)
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    /* Set PB multi-function pins for CLKO(PB.14) */
-    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB14MFP_Msk)) |SYS_GPB_MFPH_PB14MFP_CLKO;
-
     /* Lock protected registers */
     SYS_LockReg();
 }
@@ -120,9 +117,6 @@ int main(void)
 
     /* Init UART0 for printf */
     UART0_Init();
-
-    /* Output selected clock to CKO, CKO Clock = HCLK / 2^(1 + 1) */
-    CLK_EnableCKO(CLK_CLKSEL1_CLKOSEL_HIRC, 0, 1);
 
     printf("\n\nCPU @ %d Hz\n", SystemCoreClock);
     printf("+-------------------------------------------------------------+\n");
