@@ -35,6 +35,7 @@
   *                                 - \ref WDT_TIMEOUT_2POW14
   *                                 - \ref WDT_TIMEOUT_2POW16
   *                                 - \ref WDT_TIMEOUT_2POW18
+  *                                 - \ref WDT_TIMEOUT_2POW20  
   * @param[in]  u32ResetDelay       Configure WDT time-out reset delay period. Valid values are:
   *                                 - \ref WDT_RESET_DELAY_1026CLK
   *                                 - \ref WDT_RESET_DELAY_130CLK
