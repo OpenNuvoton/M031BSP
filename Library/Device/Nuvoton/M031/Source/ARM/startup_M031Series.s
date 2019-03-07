@@ -9,7 +9,7 @@
 ; * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 ; ******************************************************************************/
     IF :LNOT: :DEF: Stack_Size
-Stack_Size      EQU     0x00000400
+Stack_Size      EQU     0x00000200
     ENDIF
 
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3

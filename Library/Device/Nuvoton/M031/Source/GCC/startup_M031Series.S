@@ -17,7 +17,7 @@
 #ifdef __STACK_SIZE
 	.equ	Stack_Size, __STACK_SIZE
 #else
-	.equ	Stack_Size, 0x00000400
+	.equ	Stack_Size, 0x00000200
 #endif
 	.globl	__StackTop
 	.globl	__StackLimit
@@ -245,20 +245,15 @@ Reset_Handler:
 	ldr	r1, =0x88
 	str	r1, [r0]
 
-
-#ifndef __NO_SYSTEM_INIT
-	bl	SystemInit
-#endif
-
 /* Init POR */
-#if 0
+#if 1
 
 	ldr	r0, =0x40000024
-	movw r1, 0x00005AA5
+	ldr	r1, =0x00005AA5
 	str	r1, [r0]
 
-	ldr	r0, =0x400001EC
-	str	r1, [r0]
+//	ldr	r0, =0x400001EC
+//	str	r1, [r0]
 #endif
 
 /* Lock register */
@@ -266,6 +261,10 @@ Reset_Handler:
 	ldr	r1, =0
 	str	r1, [r0]
 
+#ifndef __NO_SYSTEM_INIT
+	bl	SystemInit
+#endif
+	
 #ifndef __START
 #define __START _start
 #endif
