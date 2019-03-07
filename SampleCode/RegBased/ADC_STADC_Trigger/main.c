@@ -60,7 +60,7 @@ void SYS_Init(void)
     PB->MODE &= ~(GPIO_MODE_MODE2_Msk | GPIO_MODE_MODE3_Msk);
     /* Configure the PB.0 - PB.3 ADC analog input pins. */
     SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB2MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk)) |
-                    (SYS_GPB_MFPL_PB2MFP_ADC_CH2 | SYS_GPB_MFPL_PB3MFP_ADC_CH3);
+                    (SYS_GPB_MFPL_PB2MFP_ADC0_CH2 | SYS_GPB_MFPL_PB3MFP_ADC0_CH3);
 
     /* Disable the GPB2 digital input path to avoid the leakage current. */
     PB->DINOFF |= ((BIT3|BIT2)<<GPIO_DINOFF_DINOFF0_Pos);
@@ -68,7 +68,7 @@ void SYS_Init(void)
     /* Set PF.5 to input mode */
     PF->MODE &= ~(GPIO_MODE_MODE5_Msk);
     /* Configure the GPF5 ADC trigger pins. */
-    SYS->GPF_MFPL = (SYS->GPF_MFPL & ~SYS_GPF_MFPL_PF5MFP_Msk) | (SYS_GPF_MFPL_PF5MFP_ADC_ST);
+    SYS->GPF_MFPL = (SYS->GPF_MFPL & ~SYS_GPF_MFPL_PF5MFP_Msk) | (SYS_GPF_MFPL_PF5MFP_ADC0_ST);
 
     /* Lock protected registers */
     SYS_LockReg();

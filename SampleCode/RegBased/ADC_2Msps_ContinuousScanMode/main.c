@@ -114,7 +114,7 @@ void SYS_Init(void)
 
     /* Configure the GPB2 - GPB3 ADC analog input pins.  */
     SYS->GPB_MFPL = ((SYS->GPB_MFPL & (~(SYS_GPB_MFPL_PB2MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk))) \
-                     | (SYS_GPB_MFPL_PB2MFP_ADC_CH2 | SYS_GPB_MFPL_PB3MFP_ADC_CH3));
+                     | (SYS_GPB_MFPL_PB2MFP_ADC0_CH2 | SYS_GPB_MFPL_PB3MFP_ADC0_CH3));
 
     /* Disable the GPB2 digital input path to avoid the leakage current. */
     PB->DINOFF |= ((BIT3|BIT2)<<GPIO_DINOFF_DINOFF0_Pos);

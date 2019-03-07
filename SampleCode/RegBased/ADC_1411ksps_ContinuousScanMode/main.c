@@ -63,8 +63,8 @@ void SYS_Init(void)
     /* Configure the GPB0 - GPB3 ADC analog input pins.  */
     SYS->GPB_MFPL &= ~(SYS_GPB_MFPL_PB0MFP_Msk | SYS_GPB_MFPL_PB1MFP_Msk |
                        SYS_GPB_MFPL_PB2MFP_Msk | SYS_GPB_MFPL_PB3MFP_Msk);
-    SYS->GPB_MFPL |= (SYS_GPB_MFPL_PB0MFP_ADC_CH0 | SYS_GPB_MFPL_PB1MFP_ADC_CH1 |
-                      SYS_GPB_MFPL_PB2MFP_ADC_CH2 | SYS_GPB_MFPL_PB3MFP_ADC_CH3);
+    SYS->GPB_MFPL |= (SYS_GPB_MFPL_PB0MFP_ADC0_CH0 | SYS_GPB_MFPL_PB1MFP_ADC0_CH1 |
+                      SYS_GPB_MFPL_PB2MFP_ADC0_CH2 | SYS_GPB_MFPL_PB3MFP_ADC0_CH3);
 
     /* Disable the GPB0 - GPB3 digital input path to avoid the leakage current. */
     PB->DINOFF |= ((BIT3|BIT2|BIT1|BIT0)<<GPIO_DINOFF_DINOFF0_Pos);
