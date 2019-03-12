@@ -32,7 +32,7 @@ __STATIC_INLINE uint32_t FMC_ReadBandGap(void)
 #endif                                            /* To make sure ISP/CPU be Synchronized */
     while(FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk) {}  /* Waiting for ISP Done */
 
-    return FMC->ISPDAT;
+    return FMC->ISPDAT & 0xFFF;
 }
 
 void SYS_Init(void)
@@ -149,16 +149,16 @@ void ADC_FunctionTest()
 
     /* Use Conversion result of Band-gap to calculating AVdd */
 
-    printf("      AVdd         i32ConversionData                  \n");
+    printf("      AVdd           i32BuiltInData                   \n");
     printf("   ---------- = -------------------------             \n");
-    printf("      3072          i32BuiltInData                    \n");
+    printf("      3072          i32ConversionData                 \n");
     printf("                                                      \n");
-    printf("AVdd =  3072 * i32ConversionData / i32BuiltInData     \n\n");
+    printf("AVdd =  3072 * i32BuiltInData / i32ConversionData     \n\n");
 
     printf("Built-in band-gap A/D conversion result: 0x%X (%d) \n", i32BuiltInData, i32BuiltInData);
     printf("Conversion result of Band-gap:           0x%X (%d) \n\n", i32ConversionData, i32ConversionData);
 
-    printf("AVdd = 3072 * %d / %d = %d mV \n\n", i32ConversionData, i32BuiltInData, 3072*i32ConversionData/i32BuiltInData);
+    printf("AVdd = 3072 * %d / %d = %d mV \n\n", i32BuiltInData, i32ConversionData, 3072*i32BuiltInData/i32ConversionData);
 }
 
 void ADC_IRQHandler(void)
