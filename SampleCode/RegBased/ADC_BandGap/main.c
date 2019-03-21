@@ -27,12 +27,12 @@ void SYS_Init(void)
     /* Waiting for HIRC clock ready */
     while((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
 
-    /* Switch HCLK clock source to HIRC */
+    /* Switch HCLK clock source to HIRC/1 */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk) | CLK_CLKSEL0_HCLKSEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & ~CLK_CLKDIV0_HCLKDIV_Msk) | CLK_CLKDIV0_HCLK(1);
 
-    /* Set both PCLK0 and PCLK1 as HCLK/2 */
-    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV2);
+    /* Set both PCLK0 and PCLK1 as HCLK/1 */
+    CLK->PCLKDIV = (CLK_PCLKDIV_APB0DIV_DIV2 | CLK_PCLKDIV_APB1DIV_DIV1);
 
     /* Switch UART0 clock source to HIRC */
     CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HIRC;
@@ -83,6 +83,15 @@ void ADC_FunctionTest()
     printf("|                  ADC for Band-gap test                               |\n");
     printf("+----------------------------------------------------------------------+\n");
 
+    printf("+----------------------------------------------------------------------+\n");
+    printf("|   ADC clock source -> PCLK1  = 48 MHz                                |\n");
+    printf("|   ADC clock divider          = 2                                     |\n");
+    printf("|   ADC clock                  = 48 MHz / 2 = 24 MHz                   |\n");
+    printf("|   ADC extended sampling time = 71                                    |\n");
+    printf("|   ADC conversion time = 17 + ADC extended sampling time = 88         |\n");
+    printf("|   ADC conversion rate = 24 MHz / 88 = 272.7 ksps                     |\n");
+    printf("+----------------------------------------------------------------------+\n");
+
     /* Enable ADC converter */
     ADC->ADCR |= ADC_ADCR_ADEN_Msk;
 
@@ -97,9 +106,12 @@ void ADC_FunctionTest()
                 (ADC_ADCR_DIFFEN_SINGLE_END | ADC_ADCR_ADMD_SINGLE | ADC_ADCR_ADIE_Msk);
     ADC->ADCHER = (ADC->ADCHER & ~ADC_ADCHER_CHEN_Msk) | (BIT29);
 
-    /* Set sample module external sampling time to 0xF */
+    /* To sample band-gap precisely, the ADC capacitor must be charged at least 3 us for charging the ADC capacitor ( Cin )*/
+    /* Sampling time = extended sampling time + 1 */
+    /* 1/24000000 * (Sampling time) = 3 us */
+    /* Set sample module external sampling time to 71 */
     ADC->ESMPCTL = (ADC->ESMPCTL & ~ADC_ESMPCTL_EXTSMPT_Msk) |
-                   (0xF << ADC_ESMPCTL_EXTSMPT_Pos);
+                   (71 << ADC_ESMPCTL_EXTSMPT_Pos);
 
     /* Clear the A/D interrupt flag for safe */
     ADC->ADSR0 = ADC_ADF_INT;
