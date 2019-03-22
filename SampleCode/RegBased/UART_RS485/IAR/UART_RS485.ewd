@@ -45,7 +45,7 @@
         </option>
         <option>
           <name>MemFile</name>
-          <state></state>
+          <state>$TOOLKIT_DIR$\CONFIG\debugger\Nuvoton\iom031ae.ddf</state>
         </option>
         <option>
           <name>RunToEnable</name>

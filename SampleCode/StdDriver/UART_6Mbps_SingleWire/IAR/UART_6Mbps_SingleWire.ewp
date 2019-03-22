@@ -153,6 +153,7 @@
           <name>OGUseCmsisDspLib</name>
           <state>0</state>
         </option>
+        
       </data>
     </settings>
     <settings>
@@ -388,6 +389,7 @@
           <name>IccFloatSemantics</name>
           <state>0</state>
         </option>
+        
       </data>
     </settings>
     <settings>
@@ -550,6 +552,7 @@
           <name>AExtraOptionsV2</name>
           <state></state>
         </option>
+        
       </data>
     </settings>
     <settings>
@@ -684,11 +687,11 @@
         </option>
         <option>
           <name>IlinkIcfOverride</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\CONFIG\generic_cortex.icf</state>
+          <state>$PROJ_DIR$\UART_6Mbps_SingleWire.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
@@ -869,6 +872,7 @@
           <name>IlinkOptForceVfe</name>
           <state>0</state>
         </option>
+        
       </data>
     </settings>
     <settings>
@@ -913,6 +917,9 @@
       <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\clk.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\gpio.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\retarget.c</name>
     </file>
     <file>
@@ -920,9 +927,6 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\uart.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\gpio.c</name>
     </file>
   </group>
   <group>

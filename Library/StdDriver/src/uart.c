@@ -203,7 +203,7 @@ void UART_EnableInt(UART_T  *uart, uint32_t u32InterruptFlag)
 void UART_Open(UART_T *uart, uint32_t u32baudrate)
 {
     uint32_t u32UartClkSrcSel = 0ul, u32UartClkDivNum = 0ul;
-    uint32_t u32ClkTbl[5ul] = {__HXT, 0ul, __LXT, __HIRC, 0ul};
+    uint32_t u32ClkTbl[6ul] = {__HXT, 0ul, __LXT, __HIRC, 0ul, __LIRC};
     uint32_t u32Baud_Div = 0ul;
 
 
@@ -351,7 +351,7 @@ uint32_t UART_Read(UART_T *uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes)
 void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_width, uint32_t u32parity, uint32_t  u32stop_bits)
 {
     uint32_t u32UartClkSrcSel = 0ul, u32UartClkDivNum = 0ul;
-    uint32_t u32ClkTbl[5ul] = {__HXT, 0ul, __LXT, __HIRC, 0};
+    uint32_t u32ClkTbl[6ul] = {__HXT, 0ul, __LXT, __HIRC, 0, __LIRC};
     uint32_t u32Baud_Div = 0ul;
 
 
@@ -453,7 +453,7 @@ void UART_SetTimeoutCnt(UART_T *uart, uint32_t u32TOC)
 void UART_SelectIrDAMode(UART_T *uart, uint32_t u32Buadrate, uint32_t u32Direction)
 {
     uint32_t u32UartClkSrcSel = 0ul, u32UartClkDivNum = 0ul;
-    uint32_t u32ClkTbl[5ul] = {__HXT, 0ul, __LXT, __HIRC, 0ul};
+    uint32_t u32ClkTbl[6ul] = {__HXT, 0ul, __LXT, __HIRC, 0ul, __LIRC};
     uint32_t u32Baud_Div;
 
     /* Select IrDA function mode */

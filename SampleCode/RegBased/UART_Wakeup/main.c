@@ -58,12 +58,12 @@ void SYS_Init(void)
     /* Set X32_OUT(PF.4) and X32_IN(PF.5) to input mode */
     PF->MODE &= ~(GPIO_MODE_MODE4_Msk | GPIO_MODE_MODE5_Msk);
 
-    /* Enable HIRC and LXT clock */
-    CLK->PWRCTL |= (CLK_PWRCTL_HIRCEN_Msk | CLK_PWRCTL_LXTEN_Msk );
+    /* Enable HIRC and LIRC clock */
+    CLK->PWRCTL |= (CLK_PWRCTL_HIRCEN_Msk | CLK_PWRCTL_LIRCEN_Msk );
 
-    /* Wait for HIRC and LXT clock ready */
+    /* Wait for HIRC and LIRC clock ready */
     while(!(CLK->STATUS & CLK_STATUS_HIRCSTB_Msk));
-    while(!(CLK->STATUS & CLK_STATUS_LXTSTB_Msk));
+    while(!(CLK->STATUS & CLK_STATUS_LIRCSTB_Msk));
 
     /* Select HCLK clock source as HIRC and HCLK clock divider as 1 */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
@@ -221,14 +221,14 @@ void UART_DataWakeUp(void)
 /*---------------------------------------------------------------------------------------------------------*/
 void UART_RxThresholdWakeUp(void)
 {
-    /* Wait data transmission is finished and select UART clock source as LXT */
+    /* Wait data transmission is finished and select UART clock source as LIRC */
     while((UART0->FIFOSTS & UART_FIFOSTS_TXEMPTYF_Msk) == 0);
     while((UART0->FIFOSTS & UART_FIFOSTS_RXIDLE_Msk) == 0);
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART1SEL_Msk)) | CLK_CLKSEL1_UART1SEL_LXT;
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART1SEL_Msk)) | CLK_CLKSEL1_UART1SEL_LIRC;
 
     /* Set UART baud rate and baud rate compensation */
-    UART1->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__LXT, 9600);
-    UART1->BRCOMP = 0xA5;
+    UART1->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__LIRC, 9600);
+    UART1->BRCOMP = 0x80000001;
 
     /* Enable UART Rx Threshold and Rx time-out wake-up frunction */
     UART1->WKCTL |= UART_WKCTL_WKRFRTEN_Msk | UART_WKCTL_WKTOUTEN_Msk;
@@ -249,14 +249,14 @@ void UART_RxThresholdWakeUp(void)
 /*---------------------------------------------------------------------------------------------------------*/
 void UART_RS485WakeUp(void)
 {
-    /* Wait data transmission is finished and select UART clock source as LXT */
+    /* Wait data transmission is finished and select UART clock source as LIRC */
     while((UART0->FIFOSTS & UART_FIFOSTS_TXEMPTYF_Msk) == 0);
     while((UART0->FIFOSTS & UART_FIFOSTS_RXIDLE_Msk) == 0);
-    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART1SEL_Msk)) | CLK_CLKSEL1_UART1SEL_LXT;
+    CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART1SEL_Msk)) | CLK_CLKSEL1_UART1SEL_LIRC;
 
     /* Set UART baud rate and baud rate compensation */
-    UART1->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__LXT, 9600);
-    UART1->BRCOMP = 0xA5;
+    UART1->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__LIRC, 9600);
+    UART1->BRCOMP = 0x80000001;
 
     /* RS485 address match (AAD mode) setting */
     UART1->FUNCSEL = (UART1->FUNCSEL & (~UART_FUNCSEL_FUNCSEL_Msk)) | UART_FUNCSEL_RS485;

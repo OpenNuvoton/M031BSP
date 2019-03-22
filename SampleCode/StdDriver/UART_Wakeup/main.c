@@ -47,13 +47,13 @@ void SYS_Init(void)
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
 
-    /* Enable HIRC and LXT clock */
+    /* Enable HIRC and LIRC clock */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
-    CLK_EnableXtalRC(CLK_PWRCTL_LXTEN_Msk);
+    CLK_EnableXtalRC(CLK_PWRCTL_LIRCEN_Msk);
 
-    /* Wait for HIRC and LXT clock ready */
+    /* Wait for HIRC and LIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
-    CLK_WaitClockReady(CLK_STATUS_LXTSTB_Msk);
+    CLK_WaitClockReady(CLK_STATUS_LIRCSTB_Msk);
 
     /* Select HCLK clock source as HIRC and HCLK clock divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
@@ -212,14 +212,14 @@ void UART_DataWakeUp(void)
 /*---------------------------------------------------------------------------------------------------------*/
 void UART_RxThresholdWakeUp(void)
 {
-    /* Wait data transmission is finished and select UART clock source as LXT */
+    /* Wait data transmission is finished and select UART clock source as LIRC */
     while((UART0->FIFOSTS & UART_FIFOSTS_TXEMPTYF_Msk) == 0);
     while((UART0->FIFOSTS & UART_FIFOSTS_RXIDLE_Msk) == 0);
-    CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART1SEL_LXT, CLK_CLKDIV0_UART1(1));
+    CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART1SEL_LIRC, CLK_CLKDIV0_UART1(1));
 
     /* Set UART baud rate and baud rate compensation */
     UART_Open(UART1, 9600);
-    UART1->BRCOMP = 0xA5;
+    UART1->BRCOMP = 0x80000001;
 
     /* Enable UART Rx Threshold and Rx time-out wake-up frunction */
     UART1->WKCTL |= UART_WKCTL_WKRFRTEN_Msk | UART_WKCTL_WKTOUTEN_Msk;
@@ -239,12 +239,12 @@ void UART_RxThresholdWakeUp(void)
 /*---------------------------------------------------------------------------------------------------------*/
 void UART_RS485WakeUp(void)
 {
-    /* Wait data transmission is finished and select UART clock source as LXT */
-    CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART1SEL_LXT, CLK_CLKDIV0_UART1(1));
+    /* Wait data transmission is finished and select UART clock source as LIRC */
+    CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART1SEL_LIRC, CLK_CLKDIV0_UART1(1));
 
     /* Set UART baud rate and baud rate compensation */
     UART_Open(UART1, 9600);
-    UART1->BRCOMP = 0xA5;
+    UART1->BRCOMP = 0x80000001;
 
     /* RS485 address match (AAD mode) setting */
     UART_SelectRS485Mode(UART1, UART_ALTCTL_RS485AAD_Msk, RS485_ADDRESS);
