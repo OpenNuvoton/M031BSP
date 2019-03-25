@@ -18,7 +18,7 @@
 #define SPI_MASTER_TX_DMA_CH 0
 #define SPI_MASTER_RX_DMA_CH 1
 
-#define DATA_COUNT      64
+#define DATA_COUNT      32
 #define TEST_CYCLE      10000
 #define TEST_PATTERN    0x55000000
 
@@ -59,7 +59,7 @@ int main(void)
     printf("Bit length of a transaction: 32\n");
     printf("The I/O connection for loopback test:\n");
     printf("    SPI0_MISO(PA.1) <--> SPI0_MOSI(PA.0)\n\n");
-    printf("Please press any key to start transmission ...");
+    printf("Please press any key to start transmission ...\n");
     getchar();
     printf("\n");
 
@@ -160,7 +160,7 @@ void SpiLoopTest_WithPDMA(void)
     int32_t i32Err;
 
 
-    printf("\nSPI0 Loop test with PDMA ");
+    printf("\nSPI0 Loop test with PDMA \n");
 
     /* Source data initiation */
     for(u32DataCount = 0; u32DataCount < DATA_COUNT; u32DataCount++)
