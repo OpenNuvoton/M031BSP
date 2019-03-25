@@ -52,7 +52,7 @@
 		<link>
 			<name>User/main.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT/main.c</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/main.c</locationURI>
 		</link>
 	</linkedResources>
 	<filteredResources>
@@ -75,7 +75,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1527680014331</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -84,7 +84,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1527680014336</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -93,7 +93,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1527680014341</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -102,7 +102,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1527680014347</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -111,10 +111,4 @@
 			</matcher>
 		</filter>
 	</filteredResources>
-	<variableList>
-		<variable>
-			<name>copy_PARENT</name>
-			<value>$%7BPARENT-3-PROJECT_LOC%7D/StdDriver/I2C_GCMode_Master</value>
-		</variable>
-	</variableList>
 </projectDescription>
