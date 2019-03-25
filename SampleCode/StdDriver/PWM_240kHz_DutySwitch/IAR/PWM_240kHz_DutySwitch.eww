@@ -2,7 +2,7 @@
 
 <workspace>
   <project>
-    <path>$WS_DIR$\PWM_250kHz_DutySwitch.ewp</path>
+    <path>$WS_DIR$\PWM_240kHz_DutySwitch.ewp</path>
   </project>
   <batchBuild/>
 </workspace>
