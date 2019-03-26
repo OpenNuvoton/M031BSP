@@ -17,7 +17,9 @@
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
-volatile uint8_t g_u8DeviceAddr;
+uint8_t g_u8DeviceAddr;
+uint8_t g_au8MstTxData[TEST_LENGTH];
+uint8_t g_u8MstRxData[TEST_LENGTH];
 
 void SYS_Init(void)
 {
@@ -92,7 +94,6 @@ void UI2C0_Close(void)
 int main()
 {
     uint32_t i;
-    uint8_t txbuf[TEST_LENGTH] = {0}, rDataBuf[TEST_LENGTH] = {0};
 
     SYS_Init();
 
@@ -127,13 +128,13 @@ int main()
     /* Prepare data for transmission */
     for (i = 0; i < TEST_LENGTH; i++)
     {
-        txbuf[i] = (uint8_t) i + 3;
+        g_au8MstTxData[i] = (uint8_t) i + 3;
     }
 
     for (i = 0; i < TEST_LENGTH; i += WRITE_LENGTH)
     {
         /* Write 32 bytes data to Slave */
-        while (UI2C_WriteMultiBytesTwoRegs(UI2C0, g_u8DeviceAddr, i, &txbuf[i], WRITE_LENGTH) < WRITE_LENGTH);
+        while (UI2C_WriteMultiBytesTwoRegs(UI2C0, g_u8DeviceAddr, i, &g_au8MstTxData[i], WRITE_LENGTH) < WRITE_LENGTH);
     }
 
     printf("Multi bytes Write access Pass.....\n");
@@ -141,13 +142,13 @@ int main()
     printf("\n");
 
     /* Use Multi Bytes Read from Slave (Two Registers) */
-    while (UI2C_ReadMultiBytesTwoRegs(UI2C0, g_u8DeviceAddr, 0x0000, rDataBuf, TEST_LENGTH) < TEST_LENGTH);
+    while (UI2C_ReadMultiBytesTwoRegs(UI2C0, g_u8DeviceAddr, 0x0000, g_u8MstRxData, TEST_LENGTH) < TEST_LENGTH);
 
     /* Compare TX data and RX data */
     for (i = 0; i < TEST_LENGTH; i++)
     {
-        if (txbuf[i] != rDataBuf[i])
-            printf("Data compare fail... R[%d] Data: 0x%X\n", i, rDataBuf[i]);
+        if (g_au8MstTxData[i] != g_u8MstRxData[i])
+            printf("Data compare fail... R[%d] Data: 0x%X\n", i, g_u8MstRxData[i]);
     }
 
     printf("Multi bytes Read access Pass.....\n");
