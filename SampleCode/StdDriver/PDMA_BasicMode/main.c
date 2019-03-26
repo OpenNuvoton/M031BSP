@@ -61,9 +61,6 @@ void SYS_Init(void)
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
 
-    /* Unlock protected registers */
-    SYS_UnlockReg();
-
     /* Enable HIRC clock (Internal RC 48MHz) */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
 
@@ -93,13 +90,17 @@ void SYS_Init(void)
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) |
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    /* Lock protected registers */
-    SYS_LockReg();
 }
 
 int main()
 {
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
     SYS_Init();
+
+    /* Lock protected registers */
+    SYS_LockReg();
 
     /* Init UART0 to 115200-8n1 for print message */
     UART_Open(UART0, 115200);
