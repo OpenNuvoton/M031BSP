@@ -144,7 +144,7 @@
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Release">
-			<resource resourceType="PROJECT" workspacePath="/USCI_SPI_Loopback"/>
+			<resource resourceType="PROJECT" workspacePath="/USCI_UART_AutoBaudRate"/>
 		</configuration>
 	</storageModule>
 </cproject>
