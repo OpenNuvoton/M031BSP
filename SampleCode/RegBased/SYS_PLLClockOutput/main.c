@@ -10,7 +10,7 @@
 #include "NuMicro.h"
 
 #define SIGNATURE       0x125ab234
-#define FLAG_ADDR       0x20000FFC
+#define FLAG_ADDR       0x200007FC
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Brown Out Detector IRQ Handler                                                                         */
