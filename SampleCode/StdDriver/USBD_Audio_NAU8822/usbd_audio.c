@@ -1047,7 +1047,7 @@ void VolumnControl(void)
     static int16_t volatile i16PreRecVolumeR = 0;
     uint8_t IsChange = 0;
     uint32_t volatile u32R52, u32R53;
-    uint32_t volatile u32R15, u32R16;
+    uint32_t volatile u32R15 = 0, u32R16 = 0;
     /*
         g_usbd_PlayMute is used for MUTE control. 0 = not MUTE. 1 = MUTE.
         g_usbd_PlayVolumeL is volume of left channel. Range is -32752(0xFFF0) ~ -25504(0xE3A0)

@@ -19,7 +19,7 @@
 #include "M031Series.h"
 #include "micro_printer_and_hid_transfer.h"
 
-#define CRYSTAL_LESS        0
+#define CRYSTAL_LESS        1    /* CRYSTAL_LESS must be 1 if USB clock source is HIRC */
 #define TRIM_INIT           (SYS_BASE+0x118)
 
 extern uint8_t volatile g_u8Suspend;

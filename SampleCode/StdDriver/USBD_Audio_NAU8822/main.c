@@ -12,6 +12,8 @@
 #include "NuMicro.h"
 #include "usbd_audio.h"
 
+#define CRYSTAL_LESS        1    /* CRYSTAL_LESS must be 1 if USB clock source is HIRC */
+#define TRIM_INIT           (SYS_BASE+0x118)
 
 void SYS_Init(void)
 {
@@ -32,7 +34,9 @@ void SYS_Init(void)
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Select PCLK1 as the clock source of SPI0 */
-    CLK_SetModuleClock(SPI0_MODULE, CLK_CLKSEL2_SPI0SEL_PCLK1, MODULE_NoMsk);
+    CLK_SetModuleClock(SPI0_MODULE, CLK_CLKSEL2_SPI0SEL_HIRC, MODULE_NoMsk);
+    /* Switch USB clock source to HIRC & USB Clock = HIRC / 1 */
+    CLK_SetModuleClock(USBD_MODULE, CLK_CLKSEL0_USBDSEL_HIRC, CLK_CLKDIV0_USB(1));
 
     /* Enable UART peripheral clock */
     CLK_EnableModuleClock(UART0_MODULE);
@@ -138,6 +142,9 @@ void I2C1_Init(void)
 /*---------------------------------------------------------------------------------------------------------*/
 int32_t main(void)
 {
+#if CRYSTAL_LESS
+    uint32_t u32TrimInit;
+#endif
     /* Unlock Protected Regsiter */
     SYS_UnlockReg();
 
@@ -177,7 +184,7 @@ int32_t main(void)
     SPII2S_SetFIFO(SPI0, 2, 2);
 
     /* Initialize NAU8822 codec */
-   NAU8822_Setup();
+    NAU8822_Setup();
 
     /* Set MCLK and enable MCLK (MCLK can provide clock source to NAU882) */
     SPII2S_EnableMCLK(SPI0, 12000000);
@@ -195,11 +202,29 @@ int32_t main(void)
     /* Enable I2S Tx function */
     SPII2S_ENABLE_TX(SPI0);
 
+    GPIO_SetMode(PA, BIT4, GPIO_MODE_OUTPUT);
+
+    PA4 = 0;
+
     USBD_Open(&gsInfo, UAC_ClassRequest, (SET_INTERFACE_REQ)UAC_SetInterface);
 
     /* Endpoint configuration */
     UAC_Init();
+
     USBD_Start();
+
+#if CRYSTAL_LESS
+    /* Backup init trim */
+    u32TrimInit = M32(TRIM_INIT);
+
+    /* Waiting for USB bus stable */
+    USBD_CLR_INT_FLAG(USBD_INTSTS_SOFIF_Msk);
+    while((USBD_GET_INT_FLAG() & USBD_INTSTS_SOFIF_Msk) == 0);
+
+    /* Enable USB crystal-less - Set reference clock from USB SOF packet & Enable HIRC auto trim function */
+    SYS->HIRCTRIMCTL |= (SYS_HIRCTRIMCTL_REFCKSEL_Msk | 0x1);
+#endif
+
     NVIC_EnableIRQ(USBD_IRQn);
     NVIC_EnableIRQ(SPI0_IRQn);
 
@@ -221,9 +246,27 @@ int32_t main(void)
 
         /* Set audio volume according USB volume control settings */
         VolumnControl();
+#if CRYSTAL_LESS
+        /* Re-start crystal-less when any error found */
+        if (SYS->HIRCTRIMSTS & (SYS_HIRCTRIMSTS_TFAILIF_Msk | SYS_HIRCTRIMSTS_CLKERIF_Msk))
+        {
+            SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_TFAILIF_Msk | SYS_HIRCTRIMSTS_CLKERIF_Msk;
 
+            /* Init TRIM */
+            M32(TRIM_INIT) = u32TrimInit;
+
+            /* Waiting for USB bus stable */
+            USBD_CLR_INT_FLAG(USBD_INTSTS_SOFIF_Msk);
+            while((USBD_GET_INT_FLAG() & USBD_INTSTS_SOFIF_Msk) == 0);
+
+            /* Re-enable crystal-less - Set reference clock from USB SOF packet & Enable HIRC auto trim function */
+            SYS->HIRCTRIMCTL |= (SYS_HIRCTRIMCTL_REFCKSEL_Msk | 0x1);
+            //printf("USB trim fail. Just retry. SYS->HIRCTRIMSTS = 0x%x, SYS->HIRCTRIMCTL = 0x%x\n", SYS->HIRCTRIMSTS, SYS->HIRCTRIMCTL);
+        }
+#endif
         /* User can change audio codec settings by I2C at run-time if necessary */
-        if (!kbhit()) {
+        if (!kbhit()) 
+        {
             printf("\nEnter codec setting:\n");
             /* Get Register number */
             ch = getchar();

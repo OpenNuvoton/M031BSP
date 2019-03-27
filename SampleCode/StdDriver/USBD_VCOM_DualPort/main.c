@@ -13,7 +13,7 @@
 #include "NuMicro.h"
 #include "vcom_serial.h"
 
-#define CRYSTAL_LESS        0
+#define CRYSTAL_LESS        1    /* CRYSTAL_LESS must be 1 if USB clock source is HIRC */
 #define TRIM_INIT           (SYS_BASE+0x118)
 
 
