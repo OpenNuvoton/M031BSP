@@ -78,30 +78,6 @@ void USCI0_Init()
     UUART_Open(UUART0, 115200);
 }
 
-int main()
-{
-    SYS_Init();
-
-    /* Init UART0 to 115200-8n1 for print message */
-    UART_Open(UART0, 115200);
-
-    /* Init USCI0 */
-    USCI0_Init();
-
-    /*---------------------------------------------------------------------------------------------------------*/
-    /* SAMPLE CODE                                                                                             */
-    /*---------------------------------------------------------------------------------------------------------*/
-
-    printf("\nUSCI UART Sample Program\n");
-
-    /* USCI UART auto baud rate sample function */
-    USCI_AutoBaudRate_Test();
-
-    printf("\nUSCI UART Sample Program End\n");
-
-    while (1);
-}
-
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Auto Baud Rate Function Test                                                                           */
 /*---------------------------------------------------------------------------------------------------------*/
@@ -246,6 +222,30 @@ void USCI_AutoBaudRate_RxTest()
         UUART_CLR_PROT_INT_FLAG(UUART0, UUART_PROTSTS_ABERRSTS_Msk);
         printf("Error!\n");
     }
+}
+
+int main()
+{
+    SYS_Init();
+
+    /* Init UART0 to 115200-8n1 for print message */
+    UART_Open(UART0, 115200);
+
+    /* Init USCI0 */
+    USCI0_Init();
+
+    /*---------------------------------------------------------------------------------------------------------*/
+    /* SAMPLE CODE                                                                                             */
+    /*---------------------------------------------------------------------------------------------------------*/
+
+    printf("\nUSCI UART Sample Program\n");
+
+    /* USCI UART auto baud rate sample function */
+    USCI_AutoBaudRate_Test();
+
+    printf("\nUSCI UART Sample Program End\n");
+
+    while (1);
 }
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/
