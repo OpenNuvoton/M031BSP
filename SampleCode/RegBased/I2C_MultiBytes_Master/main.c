@@ -170,7 +170,8 @@ uint32_t I2C_WriteMultiBytesTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u1
 
         case 0x38:                                                      /* Arbitration Lost */
         default:                                                        /* Unknow status */
-            u8Ctrl = I2C_CTL_STO_SI;                                  /* Clear SI and send STOP */
+            I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);                   /* Clear SI and send STOP */
+            u8Ctrl = I2C_CTL_SI;
             u8Err = 1;
             break;
         }
@@ -255,7 +256,8 @@ uint32_t I2C_ReadMultiBytesTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16
 
         case 0x38:                                                      /* Arbitration Lost */
         default:                                                        /* Unknow status */
-            u8Ctrl = I2C_CTL_STO_SI;                                  /* Clear SI and send STOP */
+            I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);                   /* Clear SI and send STOP */
+            u8Ctrl = I2C_CTL_SI;
             u8Err = 1;
             break;
         }
