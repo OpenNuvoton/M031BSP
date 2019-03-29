@@ -116,9 +116,14 @@ Reset_Handler   PROC
                 STR     R1, [R0]
 
                 ; Init POR
-				LDR     R2, =0x40000024
-				LDR     R1, =0x00005AA5
-				STR     R1, [R2]
+                LDR     R2, =0x40000024
+                LDR     R1, =0x00005AA5
+                STR     R1, [R2]
+				
+                ; Init LDO_RDY
+                LDR     R2, =0x40000280
+                LDR     R1, =0x00000001
+                STR     R1, [R2]				
 
                 ; Lock register
                 MOVS    R1, #0

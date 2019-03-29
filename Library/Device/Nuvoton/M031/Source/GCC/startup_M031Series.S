@@ -245,15 +245,16 @@ Reset_Handler:
 	ldr	r1, =0x88
 	str	r1, [r0]
 
-/* Init POR */
 #if 1
-
+/* Init POR */
 	ldr	r0, =0x40000024
 	ldr	r1, =0x00005AA5
 	str	r1, [r0]
-
-//	ldr	r0, =0x400001EC
-//	str	r1, [r0]
+	
+/* Init LDO_RDY */
+	ldr	r0, =0x40000280
+	ldr	r1, =0x00000001
+	str	r1, [r0]	
 #endif
 
 /* Lock register */
