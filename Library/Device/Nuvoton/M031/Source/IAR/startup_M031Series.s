@@ -100,6 +100,11 @@ Reset_Handler
         LDR     R1, =0x00005AA5
         STR     R1, [R2]
 
+        ; Init LDO_RDY
+        LDR     R2, =0x40000280
+        LDR     R1, =0x00000001
+        STR     R1, [R2]
+
         ; Disable NMI (Assign to reserved IRQ)
         LDR     R2, =0x40000380
         LDR     R1, =0x0000001F
