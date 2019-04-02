@@ -16,7 +16,7 @@
 #define PLLCTL_SETTING  CLK_PLLCTL_72MHz_HXT
 #define PLL_CLOCK       72000000
 
-#define RXBUFSIZE 1024
+#define RXBUFSIZE 256
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */

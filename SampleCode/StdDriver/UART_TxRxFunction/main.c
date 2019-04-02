@@ -13,7 +13,7 @@
 #include "stdio.h"
 #include "NuMicro.h"
 
-#define RXBUFSIZE   1024
+#define RXBUFSIZE   256
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */

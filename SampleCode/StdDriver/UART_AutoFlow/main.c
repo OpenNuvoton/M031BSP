@@ -11,7 +11,7 @@
 
 #define PLL_CLOCK   FREQ_96MHZ
 
-#define RXBUFSIZE 1024
+#define RXBUFSIZE 256
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
