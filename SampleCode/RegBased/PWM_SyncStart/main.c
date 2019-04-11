@@ -225,7 +225,7 @@ int32_t main(void)
     /* Trigger PWM counter synchronous start by PWM0 */
     PWM0->SSTRG = PWM_SSTRG_CNTSEN_Msk;
 
-    printf("Done.");
+    printf("Done.\n");
     while(1);
 
 }

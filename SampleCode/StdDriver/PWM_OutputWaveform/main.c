@@ -164,7 +164,7 @@ int32_t main(void)
     /* Start PWM0 counter */
     PWM_ForceStop(PWM0, 0x3F);
 
-    printf("Done.");
+    printf("Done.\n");
     while(1);
 
 }

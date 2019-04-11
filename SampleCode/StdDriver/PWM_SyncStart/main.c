@@ -157,7 +157,7 @@ int32_t main(void)
     /* Trigger PWM counter synchronous start by PWM0 */
     PWM_TRIGGER_SYNC_START(PWM0);
 
-    printf("Done.");
+    printf("Done.\n");
     while(1);
 
 }

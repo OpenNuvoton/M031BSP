@@ -200,7 +200,7 @@ int32_t main(void)
     while(1)
     {
         printf("\nDuty is equal to (duty level * 0.5) %% \n");
-        printf("Please enter new duty level (0 ~ 200): ");
+        printf("Please enter new duty level (0 ~ 200): \n");
         u8Duty = sysGetNum();
 
         if(u8Duty > 200)

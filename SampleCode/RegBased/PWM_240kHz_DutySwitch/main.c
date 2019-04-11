@@ -22,9 +22,10 @@
 /* Macro, type and constant definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
 #define PLL_CLOCK       96000000
+uint8_t InputString[16]= {0};
 uint32_t sysGetNum(void)
 {
-    uint8_t cInputTemp=0x00, InputString[16]= {0};
+	uint8_t cInputTemp=0x00;
     uint32_t nLoop = 0;
     while(cInputTemp != 0x0D)
     {
@@ -203,7 +204,7 @@ int32_t main(void)
     while(1)
     {
         printf("\nDuty is equal to (duty level * 0.5) %% \n");
-        printf("Please enter new duty level (0 ~ 200): ");
+        printf("Please enter new duty level (0 ~ 200): \n");
         u8Duty = sysGetNum();
 
         if(u8Duty > 200)
