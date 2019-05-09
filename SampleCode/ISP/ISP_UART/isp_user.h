@@ -44,4 +44,4 @@ extern volatile uint8_t bISPDataReady;
 
 extern __align(4) uint8_t usb_rcvbuf[];
 
-#endif	// #ifndef ISP_USER_H
+#endif  // #ifndef ISP_USER_H

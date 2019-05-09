@@ -58,7 +58,8 @@ int32_t main(void)
     g_apromSize = GetApromSize();
     GetDataFlashInfo(&g_dataFlashAddr, &g_dataFlashSize);
 
-    if (DetectPin != 0) {
+    if (DetectPin != 0)
+    {
         goto _APROM;
     }
 
@@ -71,8 +72,10 @@ int32_t main(void)
     /* Enable USB device interrupt */
     NVIC_EnableIRQ(USBD_IRQn);
 
-    while (DetectPin == 0) {
-        if (bUsbDataReady == TRUE) {
+    while (DetectPin == 0)
+    {
+        if (bUsbDataReady == TRUE)
+        {
             ParseCmd((uint8_t *)usb_rcvbuf, EP3_MAX_PKT_SIZE);
             EP2_Handler();
             bUsbDataReady = FALSE;
