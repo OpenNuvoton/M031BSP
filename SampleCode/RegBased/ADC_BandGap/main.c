@@ -131,7 +131,8 @@ void ADC_FunctionTest()
 
     /* Get the conversion result of the channel 29 */
     i32ConversionData = (ADC->ADDR[29] & ADC_ADDR_RSLT_Msk);
-    printf("Conversion result of Band-gap: 0x%X (%d)\n\n", i32ConversionData, i32ConversionData);
+    printf("ADC Conversion result of Band-gap: 0x%X (%d)\n", i32ConversionData, i32ConversionData);
+    printf("Band-gap voltage is %dmV if Reference voltage is 3.3V\n", (3300*i32ConversionData)/4095);
 }
 
 void ADC_IRQHandler(void)
