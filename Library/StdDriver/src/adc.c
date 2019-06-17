@@ -49,10 +49,8 @@ void ADC_Open(ADC_T *adc,
     if ((adc->ADCALSTSR & ADC_ADCALSTSR_CALIF_Msk) == 0)
     {
         /* Must reset ADC before ADC calibration */
-        SYS_UnlockReg();
         adc->ADCR |= ADC_ADCR_RESET_Msk;
         while((adc->ADCR & ADC_ADCR_RESET_Msk) == ADC_ADCR_RESET_Msk);
-        SYS_LockReg();
 
         adc->ADCALSTSR |= ADC_ADCALSTSR_CALIF_Msk;  /* Clear Calibration Finish Interrupt Flag */
         adc->ADCALR |= ADC_ADCALR_CALEN_Msk;        /* Enable Calibration function */
