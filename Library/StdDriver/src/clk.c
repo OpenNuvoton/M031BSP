@@ -171,6 +171,18 @@ uint32_t CLK_GetPCLK1Freq(void)
 }
 
 /**
+  * @brief      Get HCLK frequency
+  * @param      None
+  * @return     HCLK frequency
+  * @details    This function get HCLK frequency. The frequency unit is Hz.
+  */
+uint32_t CLK_GetHCLKFreq(void)
+{
+    SystemCoreClockUpdate();
+    return SystemCoreClock;
+}
+
+/**
   * @brief      Get CPU frequency
   * @param      None
   * @return     CPU frequency

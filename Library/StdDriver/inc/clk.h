@@ -393,47 +393,6 @@ static __INLINE uint32_t CLK_GetPLLClockFreq(void)
     return u32PllFreq;
 }
 
-
-/**
-  * @brief  Get current HCLK clock frquency.
-  * @param  None.
-  * @return HCLK clock frquency. The clock UNIT is in Hz.
-  * \hideinitializer
-  */
-static __INLINE uint32_t CLK_GetHCLKFreq(void)
-{
-    uint32_t u32Freqout, u32AHBDivider, u32ClkSel;
-
-    u32Freqout = 0;
-    u32ClkSel = CLK->CLKSEL0 & CLK_CLKSEL0_HCLKSEL_Msk;
-
-    if (u32ClkSel == CLK_CLKSEL0_HCLKSEL_HXT)
-    { /* external HXT crystal clock */
-        u32Freqout = __HXT;
-    }
-    else if (u32ClkSel == CLK_CLKSEL0_HCLKSEL_LXT)
-    {  /* external LXT crystal clock */
-        u32Freqout = __LXT;
-    }
-    else if (u32ClkSel == CLK_CLKSEL0_HCLKSEL_PLL)
-    {  /* PLL clock */
-        u32Freqout = CLK_GetPLLClockFreq();
-    }
-    else if (u32ClkSel == CLK_CLKSEL0_HCLKSEL_LIRC)
-    { /* internal LIRC oscillator clock */
-        u32Freqout = __LIRC;
-    }
-    else if (u32ClkSel == CLK_CLKSEL0_HCLKSEL_HIRC)
-    { /* internal HIRC oscillator clock */
-        u32Freqout = __HIRC;
-    }
-
-    u32AHBDivider = (CLK->CLKDIV0 & CLK_CLKDIV0_HCLKDIV_Msk) + 1;
-
-    return (u32Freqout / u32AHBDivider);
-}
-
-
 /**
   * @brief      This function execute delay function.
   * @param[in]  us  Delay time. The Max value is 2^24 / CPU Clock(MHz). Ex:
@@ -506,6 +465,7 @@ static __INLINE uint32_t CLK_GetUARTFreq(void)
 uint32_t CLK_WaitClockReady(uint32_t);
 void CLK_DisableCKO(void);
 void CLK_EnableCKO(uint32_t u32ClkSrc, uint32_t u32ClkDiv, uint32_t u32ClkDivBy1En);
+uint32_t CLK_GetHCLKFreq(void);
 uint32_t CLK_GetCPUFreq(void);
 uint32_t CLK_GetLXTFreq(void);
 uint32_t CLK_GetHXTFreq(void);
