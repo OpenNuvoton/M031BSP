@@ -206,34 +206,33 @@ int32_t main(void)
 
     PA4 = 0;
 
+    /* Open USB controller */
     USBD_Open(&gsInfo, UAC_ClassRequest, (SET_INTERFACE_REQ)UAC_SetInterface);
 
     /* Endpoint configuration */
     UAC_Init();
-
+     
+    /* Start USB device */
     USBD_Start();
 
-#if CRYSTAL_LESS
-    /* Backup init trim */
-    u32TrimInit = M32(TRIM_INIT);
-
-    /* Waiting for USB bus stable */
-    USBD_CLR_INT_FLAG(USBD_INTSTS_SOFIF_Msk);
-    while((USBD_GET_INT_FLAG() & USBD_INTSTS_SOFIF_Msk) == 0);
-
-    /* Enable USB crystal-less - Set reference clock from USB SOF packet & Enable HIRC auto trim function */
-    SYS->HIRCTRIMCTL |= (SYS_HIRCTRIMCTL_REFCKSEL_Msk | 0x1);
-#endif
-
     NVIC_EnableIRQ(USBD_IRQn);
+
     NVIC_EnableIRQ(SPI0_IRQn);
 
     /* SPI (I2S) interrupt has higher frequency then USBD interrupt.
        Therefore, we need to set SPI (I2S) with higher priority to avoid
        SPI (I2S) interrupt pending too long time when USBD interrupt happen. */
     NVIC_SetPriority(USBD_IRQn, 3);
+
     NVIC_SetPriority(SPI0_IRQn, 2);
 
+#if CRYSTAL_LESS
+    /* Backup default trim */
+    u32TrimInit = M32(TRIM_INIT);
+#endif
+
+    /* Clear SOF */
+    USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
 
     while (SYS->PDID) 
     {
@@ -241,29 +240,44 @@ int32_t main(void)
         uint32_t u32Reg, u32Data;
         extern int32_t kbhit(void);
 
+#if CRYSTAL_LESS
+       /* Start USB trim if it is not enabled. */
+        if((SYS->HIRCTRIMCTL & SYS_HIRCTRIMCTL_FREQSEL_Msk) != 1)
+        {
+            /* Start USB trim only when SOF */
+            if(USBD->INTSTS & USBD_INTSTS_SOFIF_Msk)
+            {
+                /* Clear SOF */
+                USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
+
+                /* Re-enable crystal-less */
+                SYS->HIRCTRIMCTL = 0x01;
+                SYS->HIRCTRIMCTL |= SYS_HIRCTRIMCTL_REFCKSEL_Msk;
+            }
+        }
+
+        /* Disable USB Trim when error */
+        if(SYS->HIRCTRIMSTS & (SYS_HIRCTRIMSTS_CLKERIF_Msk | SYS_HIRCTRIMSTS_TFAILIF_Msk))
+        {
+            /* Init TRIM */
+            M32(TRIM_INIT) = u32TrimInit;
+
+            /* Disable crystal-less */
+            SYS->HIRCTRIMCTL = 0;
+
+            /* Clear error flags */
+            SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_CLKERIF_Msk | SYS_HIRCTRIMSTS_TFAILIF_Msk;
+
+            /* Clear SOF */
+            USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
+        }
+#endif
         /* Adjust codec sampling rate to synch with USB. The adjustment range is +-0.005% */
         AdjFreq();
 
         /* Set audio volume according USB volume control settings */
         VolumnControl();
-#if CRYSTAL_LESS
-        /* Re-start crystal-less when any error found */
-        if (SYS->HIRCTRIMSTS & (SYS_HIRCTRIMSTS_TFAILIF_Msk | SYS_HIRCTRIMSTS_CLKERIF_Msk))
-        {
-            SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_TFAILIF_Msk | SYS_HIRCTRIMSTS_CLKERIF_Msk;
 
-            /* Init TRIM */
-            M32(TRIM_INIT) = u32TrimInit;
-
-            /* Waiting for USB bus stable */
-            USBD_CLR_INT_FLAG(USBD_INTSTS_SOFIF_Msk);
-            while((USBD_GET_INT_FLAG() & USBD_INTSTS_SOFIF_Msk) == 0);
-
-            /* Re-enable crystal-less - Set reference clock from USB SOF packet & Enable HIRC auto trim function */
-            SYS->HIRCTRIMCTL |= (SYS_HIRCTRIMCTL_REFCKSEL_Msk | 0x1);
-            //printf("USB trim fail. Just retry. SYS->HIRCTRIMSTS = 0x%x, SYS->HIRCTRIMCTL = 0x%x\n", SYS->HIRCTRIMSTS, SYS->HIRCTRIMCTL);
-        }
-#endif
         /* User can change audio codec settings by I2C at run-time if necessary */
         if (!kbhit()) 
         {

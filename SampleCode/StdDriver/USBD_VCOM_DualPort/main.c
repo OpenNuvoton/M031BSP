@@ -30,22 +30,22 @@ uint16_t gCtrlSignal0 = 0;     /* BIT0: DTR(Data Terminal Ready) , BIT1: RTS(Req
 uint16_t gCtrlSignal1 = 0;     /* BIT0: DTR(Data Terminal Ready) , BIT1: RTS(Request To Send) */
 
 /*--------------------------------------------------------------------------*/
-#define RXBUFSIZE           512 /* RX buffer size */
-#define TXBUFSIZE           512 /* RX buffer size */
+#define RX_BUFSIZE           512 /* RX buffer size */
+#define TX_BUFSIZE           512 /* RX buffer size */
 
-#define TX_FIFO_SIZE_0      16  /* TX Hardware FIFO size */
-#define TX_FIFO_SIZE_1      16  /* TX Hardware FIFO size */
+#define TX_FIFO_SIZE_0       16  /* TX Hardware FIFO size */
+#define TX_FIFO_SIZE_1       16  /* TX Hardware FIFO size */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
 /* UART0 */
-volatile uint8_t comRbuf0[RXBUFSIZE];
+volatile uint8_t comRbuf0[RX_BUFSIZE];
 volatile uint16_t comRbytes0 = 0;
 volatile uint16_t comRhead0 = 0;
 volatile uint16_t comRtail0 = 0;
 
-volatile uint8_t comTbuf0[TXBUFSIZE];
+volatile uint8_t comTbuf0[TX_BUFSIZE];
 volatile uint16_t comTbytes0 = 0;
 volatile uint16_t comThead0 = 0;
 volatile uint16_t comTtail0 = 0;
@@ -59,12 +59,12 @@ volatile int8_t gi8BulkOutReady0 = 0;
 extern uint8_t volatile g_u8Suspend;
 
 /* UART1 */
-volatile uint8_t comRbuf1[RXBUFSIZE];
+volatile uint8_t comRbuf1[RX_BUFSIZE];
 volatile uint16_t comRbytes1 = 0;
 volatile uint16_t comRhead1 = 0;
 volatile uint16_t comRtail1 = 0;
 
-volatile uint8_t comTbuf1[TXBUFSIZE];
+volatile uint8_t comTbuf1[TX_BUFSIZE];
 volatile uint16_t comTbytes1 = 0;
 volatile uint16_t comThead1 = 0;
 volatile uint16_t comTtail1 = 0;
@@ -122,6 +122,7 @@ void SYS_Init(void)
     /* Lock protected registers */
     SYS_LockReg();
 }
+
 
 void PowerDown()
 {
@@ -188,7 +189,7 @@ void UART02_IRQHandler(void)
 
     u32IntStatus = UART0->INTSTS;
 
-    if ((u32IntStatus & UART_INTSTS_RDAIF_Msk) || (u32IntStatus & UART_INTSTS_RXTOIF_Msk))
+    if((u32IntStatus & UART_INTSTS_RDAIF_Msk) || (u32IntStatus & UART_INTSTS_RXTOIF_Msk))
     {
         /* Receiver FIFO threshold level is reached or Rx time out */
 
@@ -199,11 +200,11 @@ void UART02_IRQHandler(void)
             bInChar = UART0->DAT;
 
             /* Check if buffer full */
-            if(comRbytes0 < RXBUFSIZE)
+            if(comRbytes0 < RX_BUFSIZE)
             {
                 /* Enqueue the character */
                 comRbuf0[comRtail0++] = bInChar;
-                if(comRtail0 >= RXBUFSIZE)
+                if(comRtail0 >= RX_BUFSIZE)
                     comRtail0 = 0;
                 comRbytes0++;
             }
@@ -230,7 +231,7 @@ void UART02_IRQHandler(void)
             {
                 bInChar = comTbuf0[comThead0++];
                 UART0->DAT = bInChar;
-                if(comThead0 >= TXBUFSIZE)
+                if(comThead0 >= TX_BUFSIZE)
                     comThead0 = 0;
                 comTbytes0--;
                 size--;
@@ -263,11 +264,11 @@ void UART1_IRQHandler(void)
             bInChar = UART1->DAT;
 
             /* Check if buffer full */
-            if(comRbytes1 < RXBUFSIZE)
+            if(comRbytes1 < RX_BUFSIZE)
             {
                 /* Enqueue the character */
                 comRbuf1[comRtail1++] = bInChar;
-                if(comRtail1 >= RXBUFSIZE)
+                if(comRtail1 >= RX_BUFSIZE)
                     comRtail1 = 0;
                 comRbytes1++;
             }
@@ -294,7 +295,7 @@ void UART1_IRQHandler(void)
             {
                 bInChar = comTbuf1[comThead1++];
                 UART1->DAT = bInChar;
-                if(comThead1 >= TXBUFSIZE)
+                if(comThead1 >= TX_BUFSIZE)
                     comThead1 = 0;
                 comTbytes1--;
                 size--;
@@ -325,7 +326,7 @@ void VCOM_TransferData(void)
             for(i = 0; i < i32Len; i++)
             {
                 gRxBuf0[i] = comRbuf0[comRhead0++];
-                if(comRhead0 >= RXBUFSIZE)
+                if(comRhead0 >= RX_BUFSIZE)
                     comRhead0 = 0;
             }
 
@@ -359,7 +360,7 @@ void VCOM_TransferData(void)
             for(i = 0; i < i32Len; i++)
             {
                 gRxBuf1[i] = comRbuf1[comRhead1++];
-                if(comRhead1 >= RXBUFSIZE)
+                if(comRhead1 >= RX_BUFSIZE)
                     comRhead1 = 0;
             }
 
@@ -382,12 +383,12 @@ void VCOM_TransferData(void)
     }
 
     /* Process the Bulk out data when bulk out data is ready. */
-    if(gi8BulkOutReady0 && (gu32RxSize0 <= TXBUFSIZE - comTbytes0))
+    if(gi8BulkOutReady0 && (gu32RxSize0 <= TX_BUFSIZE - comTbytes0))
     {
         for(i = 0; i < gu32RxSize0; i++)
         {
             comTbuf0[comTtail0++] = gpu8RxBuf0[i];
-            if(comTtail0 >= TXBUFSIZE)
+            if(comTtail0 >= TX_BUFSIZE)
                 comTtail0 = 0;
         }
 
@@ -402,12 +403,12 @@ void VCOM_TransferData(void)
         USBD_SET_PAYLOAD_LEN(EP3, EP3_MAX_PKT_SIZE);
     }
 
-    if(gi8BulkOutReady1 && (gu32RxSize1 <= TXBUFSIZE - comTbytes1))
+    if(gi8BulkOutReady1 && (gu32RxSize1 <= TX_BUFSIZE - comTbytes1))
     {
         for(i = 0; i < gu32RxSize1; i++)
         {
             comTbuf1[comTtail1++] = gpu8RxBuf1[i];
-            if(comTtail1>= TXBUFSIZE)
+            if(comTtail1>= TX_BUFSIZE)
                 comTtail1 = 0;
         }
 
@@ -430,7 +431,7 @@ void VCOM_TransferData(void)
         {
             /* Send one bytes out */
             UART0->DAT = comTbuf0[comThead0++];
-            if(comThead0 >= TXBUFSIZE)
+            if(comThead0 >= TX_BUFSIZE)
                 comThead0 = 0;
 
             __set_PRIMASK(1);
@@ -449,7 +450,7 @@ void VCOM_TransferData(void)
         {
             /* Send one bytes out */
             UART1->DAT = comTbuf1[comThead1++];
-            if(comThead1 >= TXBUFSIZE)
+            if(comThead1 >= TX_BUFSIZE)
                 comThead1 = 0;
 
             __set_PRIMASK(1);
@@ -489,24 +490,14 @@ int32_t main(void)
     printf("UART0 RXD=PB.12 and TXD=PB.13\n");
     printf("UART1 RXD=PB.2  and TXD=PB.3\n");
 
+    /* Open USB controller */
     USBD_Open(&gsInfo, VCOM_ClassRequest, NULL);
 
     /* Endpoint configuration */
     VCOM_Init();
 
+    /* Start USB device */
     USBD_Start();
-
-#if CRYSTAL_LESS
-    /* Backup init trim */
-    u32TrimInit = M32(TRIM_INIT);
-
-    /* Waiting for USB bus stable */
-    USBD_CLR_INT_FLAG(USBD_INTSTS_SOFIF_Msk);
-    while((USBD_GET_INT_FLAG() & USBD_INTSTS_SOFIF_Msk) == 0);
-
-    /* Enable USB crystal-less - Set reference clock from USB SOF packet & Enable HIRC auto trim function */
-    SYS->HIRCTRIMCTL |= (SYS_HIRCTRIMCTL_REFCKSEL_Msk | 0x1);
-#endif
 
     NVIC_EnableIRQ(USBD_IRQn);
 
@@ -514,32 +505,53 @@ int32_t main(void)
 
     NVIC_EnableIRQ(UART1_IRQn);
 
-    while (1)
+#if CRYSTAL_LESS
+    /* Backup default trim */
+    u32TrimInit = M32(TRIM_INIT);
+#endif
+
+    /* Clear SOF */
+    USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
+
+    while(1)
     {
+#if CRYSTAL_LESS
+       /* Start USB trim if it is not enabled. */
+        if((SYS->HIRCTRIMCTL & SYS_HIRCTRIMCTL_FREQSEL_Msk) != 1)
+        {
+            /* Start USB trim only when SOF */
+            if(USBD->INTSTS & USBD_INTSTS_SOFIF_Msk)
+            {
+                /* Clear SOF */
+                USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
+
+                /* Re-enable crystal-less */
+                SYS->HIRCTRIMCTL = 0x01;
+                SYS->HIRCTRIMCTL |= SYS_HIRCTRIMCTL_REFCKSEL_Msk;
+            }
+        }
+
+        /* Disable USB Trim when error */
+        if(SYS->HIRCTRIMSTS & (SYS_HIRCTRIMSTS_CLKERIF_Msk | SYS_HIRCTRIMSTS_TFAILIF_Msk))
+        {
+            /* Init TRIM */
+            M32(TRIM_INIT) = u32TrimInit;
+
+            /* Disable crystal-less */
+            SYS->HIRCTRIMCTL = 0;
+
+            /* Clear error flags */
+            SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_CLKERIF_Msk | SYS_HIRCTRIMSTS_TFAILIF_Msk;
+
+            /* Clear SOF */
+            USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
+        }
+#endif
         /* Enter power down when USB suspend */
         if(g_u8Suspend)
             PowerDown();
 
         VCOM_TransferData();
-
-#if CRYSTAL_LESS
-        /* Re-start crystal-less when any error found */
-        if (SYS->HIRCTRIMSTS & (SYS_HIRCTRIMSTS_TFAILIF_Msk | SYS_HIRCTRIMSTS_CLKERIF_Msk))
-        {
-            SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_TFAILIF_Msk | SYS_HIRCTRIMSTS_CLKERIF_Msk;
-
-            /* Init TRIM */
-            M32(TRIM_INIT) = u32TrimInit;
-
-            /* Waiting for USB bus stable */
-            USBD_CLR_INT_FLAG(USBD_INTSTS_SOFIF_Msk);
-            while((USBD_GET_INT_FLAG() & USBD_INTSTS_SOFIF_Msk) == 0);
-
-            /* Re-enable crystal-less - Set reference clock from USB SOF packet & Enable HIRC auto trim function */
-            SYS->HIRCTRIMCTL |= (SYS_HIRCTRIMCTL_REFCKSEL_Msk | 0x1);
-            //printf("USB trim fail. Just retry. SYS->HIRCTRIMSTS = 0x%x, SYS->HIRCTRIMCTL = 0x%x\n", SYS->HIRCTRIMSTS, SYS->HIRCTRIMCTL);
-        }
-#endif
     }
 }
 

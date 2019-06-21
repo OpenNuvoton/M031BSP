@@ -19,7 +19,6 @@
 extern uint8_t volatile g_u8Suspend;
 int IsDebugFifoEmpty(void);
 
-/*--------------------------------------------------------------------------*/
 void SYS_Init(void)
 {
     /* Unlock protected registers */
@@ -57,6 +56,7 @@ void SYS_Init(void)
     SYS_LockReg();
 }
 
+
 void PowerDown()
 {
     /* Unlock protected registers */
@@ -93,7 +93,6 @@ int32_t main(void)
         between PC and USB device.
         A demo window tool are also included in "WindowsTool" directory with this
         sample code. User can use it to test data transfer with this sample code.
-
     */
 
     /* Unlock protected registers */
@@ -113,54 +112,61 @@ int32_t main(void)
     /* Open USB controller */
     USBD_Open(&gsInfo, HID_ClassRequest, NULL);
 
-    /*Init Endpoint configuration for HID */
+    /* Endpoint configuration */
     HID_Init();
 
     /* Start USB device */
     USBD_Start();
 
-#if CRYSTAL_LESS
-    /* Backup init trim */
-    u32TrimInit = M32(TRIM_INIT);
-
-    /* Waiting for USB bus stable */
-    USBD_CLR_INT_FLAG(USBD_INTSTS_SOFIF_Msk);
-    while((USBD_GET_INT_FLAG() & USBD_INTSTS_SOFIF_Msk) == 0);
-
-    /* Enable USB crystal-less - Set reference clock from USB SOF packet & Enable HIRC auto trim function */
-    SYS->HIRCTRIMCTL |= (SYS_HIRCTRIMCTL_REFCKSEL_Msk | 0x1);
-#endif
-
-    /* Enable USB device interrupt */
     NVIC_EnableIRQ(USBD_IRQn);
 
-    while (SYS->PDID)
-    {
-        /* Enter power down when USB suspend */
-        if(g_u8Suspend)
-            PowerDown();
-
 #if CRYSTAL_LESS
-        /* Re-start crystal-less when any error found */
-        if (SYS->HIRCTRIMSTS & (SYS_HIRCTRIMSTS_TFAILIF_Msk | SYS_HIRCTRIMSTS_CLKERIF_Msk))
-        {
-            SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_TFAILIF_Msk | SYS_HIRCTRIMSTS_CLKERIF_Msk;
+    /* Backup default trim */
+    u32TrimInit = M32(TRIM_INIT);
+#endif
 
+    /* Clear SOF */
+    USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
+
+    while(1)
+    {
+#if CRYSTAL_LESS
+       /* Start USB trim if it is not enabled. */
+        if((SYS->HIRCTRIMCTL & SYS_HIRCTRIMCTL_FREQSEL_Msk) != 1)
+        {
+            /* Start USB trim only when SOF */
+            if(USBD->INTSTS & USBD_INTSTS_SOFIF_Msk)
+            {
+                /* Clear SOF */
+                USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
+
+                /* Re-enable crystal-less */
+                SYS->HIRCTRIMCTL = 0x01;
+                SYS->HIRCTRIMCTL |= SYS_HIRCTRIMCTL_REFCKSEL_Msk;
+            }
+        }
+
+        /* Disable USB Trim when error */
+        if(SYS->HIRCTRIMSTS & (SYS_HIRCTRIMSTS_CLKERIF_Msk | SYS_HIRCTRIMSTS_TFAILIF_Msk))
+        {
             /* Init TRIM */
             M32(TRIM_INIT) = u32TrimInit;
 
-            /* Waiting for USB bus stable */
-            USBD_CLR_INT_FLAG(USBD_INTSTS_SOFIF_Msk);
-            while((USBD_GET_INT_FLAG() & USBD_INTSTS_SOFIF_Msk) == 0);
+            /* Disable crystal-less */
+            SYS->HIRCTRIMCTL = 0;
 
-            /* Re-enable crystal-less - Set reference clock from USB SOF packet & Enable HIRC auto trim function */
-            SYS->HIRCTRIMCTL |= (SYS_HIRCTRIMCTL_REFCKSEL_Msk | 0x1);
-            //printf("USB trim fail. Just retry. SYS->HIRCTRIMSTS = 0x%x, SYS->HIRCTRIMCTL = 0x%x\n", SYS->HIRCTRIMSTS, SYS->HIRCTRIMCTL);
+            /* Clear error flags */
+            SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_CLKERIF_Msk | SYS_HIRCTRIMSTS_TFAILIF_Msk;
+
+            /* Clear SOF */
+            USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
         }
 #endif
+        /* Enter power down when USB suspend */
+        if(g_u8Suspend)
+            PowerDown();
     }
 }
-
 
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/
