@@ -49,7 +49,7 @@ __vector_table
     DCD     WDT_IRQHandler              ; Watch Dog Timer interrupt
     DCD     EINT024_IRQHandler
     DCD     EINT135_IRQHandler
-    DCD     GPAB_IRQHandler
+    DCD     GPABGH_IRQHandler
     DCD     GPCDEF_IRQHandler
     DCD     PWM0_IRQHandler             ; PWM0 or PWM2 interrupt
     DCD     PWM1_IRQHandler             ; PWM1 or PWM3 interrupt
@@ -57,26 +57,26 @@ __vector_table
     DCD     TMR1_IRQHandler             ; Timer 1 interrupt
     DCD     TMR2_IRQHandler             ; Timer 2 interrupt
     DCD     TMR3_IRQHandler             ; Timer 3 interrupt
-	DCD     UART02_IRQHandler
-	DCD     UART1_IRQHandler
-	DCD     SPI0_IRQHandler
-	DCD     Default_Handler
-	DCD     Default_Handler
-	DCD     Default_Handler
-	DCD     I2C0_IRQHandler
-	DCD     I2C1_IRQHandler
-	DCD     Default_Handler
-	DCD     Default_Handler
-	DCD     USCI_IRQHandler
-	DCD     USBD_IRQHandler
-	DCD     Default_Handler
-	DCD     ACMP01_IRQHandler
-    DCD     PDMA_IRQHandler
+    DCD     UART02_IRQHandler
+    DCD     UART13_IRQHandler
+    DCD     SPI0_IRQHandler
+    DCD     QSPI0_IRQHandler
     DCD     Default_Handler
+    DCD     UART57_IRQHandler
+    DCD     I2C0_IRQHandler
+    DCD     I2C1_IRQHandler
+    DCD     BPWM0_IRQHandler
+    DCD     BPWM1_IRQHandler
+    DCD     USCI01_IRQHandler
+    DCD     USBD_IRQHandler
+    DCD     Default_Handler
+    DCD     ACMP01_IRQHandler
+    DCD     PDMA_IRQHandler
+    DCD     UART46_IRQHandler
     DCD     PWRWU_IRQHandler            ; Clock controller interrupt for chip wake up from power-down
     DCD     ADC_IRQHandler              ; ADC interrupt
     DCD     CKFAIL_IRQHandler           ; Clock fail detect and IRC TRIM interrupt
-    DCD     Default_Handler
+    DCD     RTC_IRQHandler
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -128,7 +128,7 @@ Reset_Handler
     PUBWEAK WDT_IRQHandler
     PUBWEAK EINT024_IRQHandler
     PUBWEAK EINT135_IRQHandler
-    PUBWEAK GPAB_IRQHandler
+    PUBWEAK GPABGH_IRQHandler
     PUBWEAK GPCDEF_IRQHandler
     PUBWEAK PWM0_IRQHandler
     PUBWEAK PWM1_IRQHandler
@@ -136,18 +136,24 @@ Reset_Handler
     PUBWEAK TMR1_IRQHandler
     PUBWEAK TMR2_IRQHandler
     PUBWEAK TMR3_IRQHandler
-	PUBWEAK UART02_IRQHandler
-	PUBWEAK UART1_IRQHandler
-	PUBWEAK SPI0_IRQHandler
-	PUBWEAK I2C0_IRQHandler
-	PUBWEAK I2C1_IRQHandler
-	PUBWEAK USCI_IRQHandler
-	PUBWEAK USBD_IRQHandler
-	PUBWEAK ACMP01_IRQHandler
+    PUBWEAK UART02_IRQHandler
+    PUBWEAK UART13_IRQHandler
+    PUBWEAK SPI0_IRQHandler
+    PUBWEAK QSPI0_IRQHandler
+    PUBWEAK UART57_IRQHandler
+    PUBWEAK I2C0_IRQHandler
+    PUBWEAK I2C1_IRQHandler
+    PUBWEAK BPWM0_IRQHandler
+    PUBWEAK BPWM1_IRQHandler
+    PUBWEAK USCI01_IRQHandler
+    PUBWEAK USBD_IRQHandler
+    PUBWEAK ACMP01_IRQHandler
     PUBWEAK PDMA_IRQHandler
+    PUBWEAK UART46_IRQHandler
     PUBWEAK PWRWU_IRQHandler
     PUBWEAK ADC_IRQHandler
     PUBWEAK CKFAIL_IRQHandler
+    PUBWEAK RTC_IRQHandler
     SECTION .text:CODE:REORDER(2)
 
 HardFault_Handler
@@ -159,7 +165,7 @@ BOD_IRQHandler
 WDT_IRQHandler
 EINT024_IRQHandler
 EINT135_IRQHandler
-GPAB_IRQHandler
+GPABGH_IRQHandler
 GPCDEF_IRQHandler
 PWM0_IRQHandler
 PWM1_IRQHandler
@@ -168,17 +174,23 @@ TMR1_IRQHandler
 TMR2_IRQHandler
 TMR3_IRQHandler
 UART02_IRQHandler
-UART1_IRQHandler
+UART13_IRQHandler
 SPI0_IRQHandler
+QSPI0_IRQHandler
+UART57_IRQHandler
 I2C0_IRQHandler
 I2C1_IRQHandler
-USCI_IRQHandler
+BPWM0_IRQHandler
+BPWM1_IRQHandler
+USCI01_IRQHandler
 USBD_IRQHandler
 ACMP01_IRQHandler
 PDMA_IRQHandler
+UART46_IRQHandler
 PWRWU_IRQHandler
 ADC_IRQHandler
 CKFAIL_IRQHandler
+RTC_IRQHandler
 Default_Handler
 
     B Default_Handler

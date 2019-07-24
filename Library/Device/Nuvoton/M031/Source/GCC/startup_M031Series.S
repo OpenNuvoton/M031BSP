@@ -68,36 +68,36 @@ __Vectors:
 	/* External interrupts */
 	.long	BOD_IRQHandler        /*  0: BOD                        */
 	.long	WDT_IRQHandler        /*  1: WDT                        */
-	.long	EINT024_IRQHandler	  /*  2: EINT0                      */
+	.long	EINT024_IRQHandler    /*  2: EINT0                      */
 	.long	EINT135_IRQHandler    /*  3: EINT1                      */
-	.long	GPAB_IRQHandler       /*  4: GPAB                       */
+	.long	GPABGH_IRQHandler     /*  4: GPAB                       */
 	.long	GPCDEF_IRQHandler     /*  5: GPCDEF                     */
-	.long	PWM0_IRQHandler    	  /*  6: PWM0                       */
-	.long	PWM1_IRQHandler       /*  7: PWM1 	                    */
+	.long	PWM0_IRQHandler       /*  6: PWM0                       */
+	.long	PWM1_IRQHandler       /*  7: PWM1                       */
 	.long	TMR0_IRQHandler       /*  8: TIMER0                     */
 	.long	TMR1_IRQHandler       /*  9: TIMER1                     */
 	.long	TMR2_IRQHandler       /* 10: TIMER2                     */
 	.long	TMR3_IRQHandler       /* 11: TIMER3                     */
-	.long	UART02_IRQHandler      /* 12: UART02                     */
-	.long	UART1_IRQHandler      /* 13: UART1                      */
+	.long	UART02_IRQHandler     /* 12: UART02                     */
+	.long	UART13_IRQHandler     /* 13: UART13                     */
 	.long	SPI0_IRQHandler       /* 14: SPI0                       */
-	.long	Default_Handler       /* 15: Reserved                   */
+	.long	QSPI0_IRQHandler      /* 15: QSPI0                      */
 	.long	Default_Handler       /* 16: Reserved                   */
-	.long	Default_Handler       /* 17: Reserved                   */
+	.long	UART57_IRQHandler     /* 17: UART57                     */
 	.long	I2C0_IRQHandler       /* 18: I2C0                       */
 	.long	I2C1_IRQHandler       /* 19: I2C1                       */
-	.long	Default_Handler       /* 20: Reserved                   */
-	.long	Default_Handler       /* 21: Reserved                   */
-	.long	USCI_IRQHandler       /* 22: USCI                       */
+	.long	BPWM0_IRQHandler      /* 20: BPWM0                      */
+	.long	BPWM1_IRQHandler      /* 21: BPWM1                      */
+	.long	USCI01_IRQHandler     /* 22: USCI01                     */
 	.long	USBD_IRQHandler       /* 23: USBD                       */
 	.long	Default_Handler       /* 24: Reserved                   */
 	.long	ACMP01_IRQHandler     /* 25: ACMP01                     */
 	.long	PDMA_IRQHandler       /* 26: PDMA                       */
-	.long	Default_Handler       /* 27: Reserved                   */
+	.long	UART46_IRQHandler     /* 27: UART46                     */
 	.long	PWRWU_IRQHandler      /* 28: PWRWU                      */
-	.long	ADC_IRQHandler  	  /* 29: ADC                        */
+	.long	ADC_IRQHandler        /* 29: ADC                        */
 	.long	CKFAIL_IRQHandler     /* 30: CLK Fail Detect            */
-	.long	Default_Handler    	  /* 31: Reserved                   */
+	.long	RTC_IRQHandler        /* 31: RTC                        */
 
 	.size	__Vectors, . - __Vectors
 
@@ -293,7 +293,7 @@ Default_Handler:
 	.set	\handler_name, Default_Handler
 	.endm
 
-	def_irq_handler	NMI_Handler
+    def_irq_handler	NMI_Handler
     def_irq_handler	HardFault_Handler
     def_irq_handler	SVC_Handler
     def_irq_handler	PendSV_Handler
@@ -302,7 +302,7 @@ Default_Handler:
     def_irq_handler	WDT_IRQHandler
     def_irq_handler	EINT024_IRQHandler
     def_irq_handler	EINT135_IRQHandler
-    def_irq_handler	GPAB_IRQHandler
+    def_irq_handler	GPABGH_IRQHandler
     def_irq_handler	GPCDEF_IRQHandler
     def_irq_handler	PWM0_IRQHandler
     def_irq_handler	PWM1_IRQHandler
@@ -311,17 +311,23 @@ Default_Handler:
     def_irq_handler	TMR2_IRQHandler
     def_irq_handler	TMR3_IRQHandler
     def_irq_handler	UART02_IRQHandler
-    def_irq_handler	UART1_IRQHandler
+    def_irq_handler	UART13_IRQHandler
     def_irq_handler	SPI0_IRQHandler
+    def_irq_handler	QSPI0_IRQHandler
+    def_irq_handler	UART57_IRQHandler
     def_irq_handler	I2C0_IRQHandler
     def_irq_handler	I2C1_IRQHandler
-    def_irq_handler	USCI_IRQHandler
+    def_irq_handler	BPWM0_IRQHandler
+    def_irq_handler	BPWM1_IRQHandler
+    def_irq_handler	USCI01_IRQHandler
     def_irq_handler	USBD_IRQHandler
     def_irq_handler	ACMP01_IRQHandler
     def_irq_handler	PDMA_IRQHandler
+    def_irq_handler	UART46_IRQHandler
     def_irq_handler	PWRWU_IRQHandler
     def_irq_handler	ADC_IRQHandler
     def_irq_handler	CKFAIL_IRQHandler
+    def_irq_handler	RTC_IRQHandler
 
 
     .end

@@ -60,7 +60,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     WDT_IRQHandler
                 DCD     EINT024_IRQHandler
                 DCD     EINT135_IRQHandler
-                DCD     GPAB_IRQHandler
+                DCD     GPABGH_IRQHandler
                 DCD     GPCDEF_IRQHandler
                 DCD     PWM0_IRQHandler
                 DCD     PWM1_IRQHandler
@@ -69,25 +69,25 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     TMR2_IRQHandler
                 DCD     TMR3_IRQHandler
                 DCD     UART02_IRQHandler
-                DCD     UART1_IRQHandler
+                DCD     UART13_IRQHandler
                 DCD     SPI0_IRQHandler
+                DCD     QSPI0_IRQHandler
                 DCD     Default_Handler
-                DCD     Default_Handler
-                DCD     Default_Handler
+                DCD     UART57_IRQHandler
                 DCD     I2C0_IRQHandler
                 DCD     I2C1_IRQHandler
-                DCD     Default_Handler
-                DCD     Default_Handler
-                DCD     USCI_IRQHandler
+                DCD     BPWM0_IRQHandler
+                DCD     BPWM1_IRQHandler
+                DCD     USCI01_IRQHandler
                 DCD     USBD_IRQHandler
                 DCD     Default_Handler
                 DCD     ACMP01_IRQHandler
                 DCD     PDMA_IRQHandler
-                DCD     Default_Handler
+                DCD     UART46_IRQHandler
                 DCD     PWRWU_IRQHandler
                 DCD     ADC_IRQHandler
                 DCD     CKFAIL_IRQHandler
-                DCD     Default_Handler
+                DCD     RTC_IRQHandler
 
 
 
@@ -123,7 +123,7 @@ Reset_Handler   PROC
                 ; Init LDO_RDY
                 LDR     R2, =0x40000280
                 LDR     R1, =0x00000001
-                STR     R1, [R2]				
+                STR     R1, [R2]
 
                 ; Lock register
                 MOVS    R1, #0
@@ -167,7 +167,7 @@ Default_Handler PROC
                 EXPORT  WDT_IRQHandler            [WEAK]
                 EXPORT  EINT024_IRQHandler        [WEAK]
                 EXPORT  EINT135_IRQHandler        [WEAK]
-                EXPORT  GPAB_IRQHandler           [WEAK]
+                EXPORT  GPABGH_IRQHandler         [WEAK]
                 EXPORT  GPCDEF_IRQHandler         [WEAK]
                 EXPORT  PWM0_IRQHandler           [WEAK]
                 EXPORT  PWM1_IRQHandler           [WEAK]
@@ -176,23 +176,29 @@ Default_Handler PROC
                 EXPORT  TMR2_IRQHandler           [WEAK]
                 EXPORT  TMR3_IRQHandler           [WEAK]
                 EXPORT  UART02_IRQHandler         [WEAK]
-                EXPORT  UART1_IRQHandler          [WEAK]
+                EXPORT  UART13_IRQHandler         [WEAK]
                 EXPORT  SPI0_IRQHandler           [WEAK]
+                EXPORT  QSPI0_IRQHandler          [WEAK]
+                EXPORT  UART57_IRQHandler         [WEAK]
                 EXPORT  I2C0_IRQHandler           [WEAK]
                 EXPORT  I2C1_IRQHandler           [WEAK]
-				EXPORT  USCI_IRQHandler           [WEAK]
+                EXPORT  BPWM0_IRQHandler          [WEAK]
+                EXPORT  BPWM1_IRQHandler          [WEAK]
+                EXPORT  USCI01_IRQHandler         [WEAK]
                 EXPORT  USBD_IRQHandler           [WEAK]
                 EXPORT  ACMP01_IRQHandler         [WEAK]
                 EXPORT  PDMA_IRQHandler           [WEAK]
+                EXPORT  UART46_IRQHandler         [WEAK]
                 EXPORT  PWRWU_IRQHandler          [WEAK]
                 EXPORT  ADC_IRQHandler            [WEAK]
                 EXPORT  CKFAIL_IRQHandler         [WEAK]
+                EXPORT  RTC_IRQHandler            [WEAK]
 
 BOD_IRQHandler
 WDT_IRQHandler
 EINT024_IRQHandler
 EINT135_IRQHandler
-GPAB_IRQHandler
+GPABGH_IRQHandler
 GPCDEF_IRQHandler
 PWM0_IRQHandler
 PWM1_IRQHandler
@@ -201,17 +207,23 @@ TMR1_IRQHandler
 TMR2_IRQHandler
 TMR3_IRQHandler
 UART02_IRQHandler
-UART1_IRQHandler
+UART13_IRQHandler
 SPI0_IRQHandler
+QSPI0_IRQHandler
+UART57_IRQHandler
 I2C0_IRQHandler
 I2C1_IRQHandler
-USCI_IRQHandler
+BPWM0_IRQHandler
+BPWM1_IRQHandler
+USCI01_IRQHandler
 USBD_IRQHandler
 ACMP01_IRQHandler
 PDMA_IRQHandler
+UART46_IRQHandler
 PWRWU_IRQHandler
 ADC_IRQHandler
 CKFAIL_IRQHandler
+RTC_IRQHandler
                 B       .
                 ENDP
 
