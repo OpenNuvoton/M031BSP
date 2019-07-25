@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     adc.h
  * @version  V0.10
- * $Revision: 6 $
- * $Date: 18/06/07 2:18p $
+ * $Revision: 2 $
+ * $Date: 19/01/11 11:23a $
  * @brief    M031 Series ADC Driver Header File
  *
  * @note
@@ -51,6 +51,7 @@ extern "C"
 
 #define ADC_ADCR_TRGS_STADC             (0UL<<ADC_ADCR_TRGS_Pos)     /*!< A/D conversion is started by external STADC pin   \hideinitializer */
 #define ADC_ADCR_TRGS_TIMER             (1UL<<ADC_ADCR_TRGS_Pos)     /*!< A/D conversion is started by Timer    \hideinitializer */
+#define ADC_ADCR_TRGS_BPWM              (2UL<<ADC_ADCR_TRGS_Pos)     /*!< A/D conversion is started by BPWM     \hideinitializer */
 #define ADC_ADCR_TRGS_PWM               (3UL<<ADC_ADCR_TRGS_Pos)     /*!< A/D conversion is started by PWM      \hideinitializer */
 
 #define ADC_ADCR_TRGCOND_LOW_LEVEL      (0UL<<ADC_ADCR_TRGCOND_Pos)  /*!< STADC Low level active    \hideinitializer */

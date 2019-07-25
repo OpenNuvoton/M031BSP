@@ -84,8 +84,9 @@ typedef enum IRQn
     WDT_IRQn                  = 1,        /*!< Watch Dog Timer Interrupt                            */
     EINT024_IRQn              = 2,        /*!< EINT0, EINT2 and EINT4 Interrupt                     */
     EINT135_IRQn              = 3,        /*!< EINT1, EINT3 and EINT5 Interrupt                     */
-    GPIO_PAPB_IRQn            = 4,        /*!< GPIO_P0P1 Interrupt                                  */
-    GPIO_PCPDPEPF_IRQn        = 5,        /*!< GPIO_P2P3P4P5 Interrupt                              */
+    GPIO_PAPB_IRQn            = 4,        /*!< GPIO_PAPBPGPH Interrupt                              */
+    GPIO_PAPBPGPH_IRQn        = 4,        /*!< GPIO_PAPBPGPH Interrupt                              */
+    GPIO_PCPDPEPF_IRQn        = 5,        /*!< GPIO_PCPDPEPF Interrupt                              */
     PWM0_IRQn                 = 6,        /*!< PWM0 Interrupt                                       */
     PWM1_IRQn                 = 7,        /*!< PWM1 Interrupt                                       */
     TMR0_IRQn                 = 8,        /*!< TIMER0 Interrupt                                     */
@@ -93,17 +94,25 @@ typedef enum IRQn
     TMR2_IRQn                 = 10,       /*!< TIMER2 Interrupt                                     */
     TMR3_IRQn                 = 11,       /*!< TIMER3 Interrupt                                     */
     UART02_IRQn               = 12,       /*!< UART0 and UART2 Interrupt                            */
-    UART1_IRQn                = 13,       /*!< UART1 Interrupt                                      */
+    UART1_IRQn                = 13,       /*!< UART1 and UART3 Interrupt                            */
+    UART13_IRQn               = 13,       /*!< UART1 and UART3 Interrupt                            */
     SPI0_IRQn                 = 14,       /*!< SPI0 Interrupt                                       */
+    QSPI0_IRQn                = 15,       /*!< QSPI0 Interrupt                                      */
+    UART57_IRQn               = 17,       /*!< UART5 and UART7 Interrupt                            */
     I2C0_IRQn                 = 18,       /*!< I2C0 Interrupt                                       */
     I2C1_IRQn                 = 19,       /*!< I2C1 Interrupt                                       */
-    USCI_IRQn                 = 22,       /*!< USCI0, USCI1 and USCI2 interrupt                     */
+    BPWM0_IRQn                = 20,       /*!< BPWM0 Interrupt                                      */
+    BPWM1_IRQn                = 21,       /*!< BPWM1 Interrupt                                      */
+    USCI_IRQn                 = 22,       /*!< USCI0 and USCI1 interrupt                            */
+    USCI01_IRQn               = 22,       /*!< USCI0 and USCI1 interrupt                            */
     USBD_IRQn                 = 23,       /*!< USB Device Interrupt                                 */
     ACMP01_IRQn               = 25,       /*!< ACMP0/1 Interrupt                                    */
     PDMA_IRQn                 = 26,       /*!< PDMA Interrupt                                       */
+    UART46_IRQn               = 27,       /*!< UART4 and UART6 Interrupt                            */
     PWRWU_IRQn                = 28,       /*!< Power Down Wake Up Interrupt                         */
     ADC_IRQn                  = 29,       /*!< ADC Interrupt                                        */
     CKFAIL_IRQn               = 30,       /*!< Clock fail detect Interrupt                          */
+    RTC_IRQn                  = 31,       /*!< RTC Interrupt                                        */
 } IRQn_Type;
 
 
@@ -157,8 +166,11 @@ extern void SystemInit(void);
 #include "i2c_reg.h"
 #include "pdma_reg.h"
 #include "pwm_reg.h"
+//#include "bpwm_reg.h"
+//#include "qspi_reg.h"
 #include "spi_reg.h"
 #include "sys_reg.h"
+//#include "rtc_reg.h"
 #include "timer_reg.h"
 #include "uart_reg.h"
 #include "ui2c_reg.h"
@@ -197,6 +209,8 @@ extern void SystemInit(void);
 #define PD_BASE             (GPIO_BASE      + 0x00C0)                   /*!< GPIO PD Base Address                             */
 #define PE_BASE             (GPIO_BASE      + 0x0100)                   /*!< GPIO PE Base Address                             */
 #define PF_BASE             (GPIO_BASE      + 0x0140)                   /*!< GPIO PF Base Address                             */
+#define PG_BASE             (GPIO_BASE      + 0x0180)                   /*!< GPIO PG Base Address                             */
+#define PH_BASE             (GPIO_BASE      + 0x01C0)                   /*!< GPIO PH Base Address                             */
 #define GPIO_DBCTL_BASE     (GPIO_BASE      + 0x0440)                   /*!< GPIO De-bounce Cycle Control Base Address        */
 #define GPIO_PIN_DATA_BASE  (GPIO_BASE      + 0x0800)                   /*!< GPIO Pin Data Input/Output Control Base Address  */
 
@@ -208,6 +222,7 @@ extern void SystemInit(void);
 
 #define WDT_BASE            (APB1_BASE      + 0x40000)                  /*!< Watch Dog Timer Base Address                     */
 #define WWDT_BASE           (APB1_BASE      + 0x40100)                  /*!< Window Watch Dog Timer Base Address              */
+#define RTC_BASE            (APB1_BASE      + 0x41000)                  /*!< RTC Base Address                                 */
 #define ADC_BASE            (APB1_BASE      + 0x43000)                  /*!< ADC Base Address                                 */
 #define ACMP01_BASE         (APB1_BASE      + 0x45000)                  /*!< ACMP01 Base Address                              */
 
@@ -219,17 +234,28 @@ extern void SystemInit(void);
 #define PWM0_BASE           (APB1_BASE      + 0x58000)                  /*!< PWM0 Base Address                                */
 #define PWM1_BASE           (APB2_BASE      + 0x59000)                  /*!< PWM1 Base Address                                */
 
+#define BPWM0_BASE          (APB1_BASE      + 0x5A000)                  /*!< BPWM0 Base Address                               */
+#define BPWM1_BASE          (APB2_BASE      + 0x5B000)                  /*!< BPWM1 Base Address                               */
+
+#define QSPI0_BASE          (APB1_BASE      + 0x60000)                  /*!< QSPI0 Base Address                               */
 #define SPI0_BASE           (APB1_BASE      + 0x61000)                  /*!< SPI0 Base Address                                */
 
 #define UART0_BASE          (APB1_BASE      + 0x70000)                  /*!< UART0 Base Address                               */
 #define UART1_BASE          (APB2_BASE      + 0x71000)                  /*!< UART1 Base Address                               */
 #define UART2_BASE          (APB2_BASE      + 0x72000)                  /*!< UART2 Base Address                               */
+#define UART3_BASE          (APB2_BASE      + 0x73000)                  /*!< UART3 Base Address                               */
+#define UART4_BASE          (APB2_BASE      + 0x74000)                  /*!< UART4 Base Address                               */
+#define UART5_BASE          (APB2_BASE      + 0x75000)                  /*!< UART5 Base Address                               */
+#define UART6_BASE          (APB2_BASE      + 0x76000)                  /*!< UART6 Base Address                               */
+#define UART7_BASE          (APB2_BASE      + 0x77000)                  /*!< UART7 Base Address                               */
 
 #define I2C0_BASE           (APB1_BASE      + 0x80000)                  /*!< I2C0 Base Address                                */
 #define I2C1_BASE           (APB2_BASE      + 0x81000)                  /*!< I2C1 Base Address                                */
 
 #define USBD_BASE           (AHB_BASE       + 0xC0000)                  /*!< USBD1.1 Base Address                             */
 #define USCI0_BASE          (APB1_BASE      + 0xD0000)                  /*!< USCI0 Base Address                               */
+#define USCI1_BASE          (APB2_BASE      + 0xD1000)                  /*!< USCI1 Base Address                               */
+
 
 /**@}*/ /* PERIPHERAL */
 
@@ -247,11 +273,18 @@ extern void SystemInit(void);
 #define PD                  ((GPIO_T *) PD_BASE)                        /*!< GPIO PORTD Configuration Struct                        */
 #define PE                  ((GPIO_T *) PE_BASE)                        /*!< GPIO PORTE Configuration Struct                        */
 #define PF                  ((GPIO_T *) PF_BASE)                        /*!< GPIO PORTF Configuration Struct                        */
+#define PG                  ((GPIO_T *) PG_BASE)                        /*!< GPIO PORTG Configuration Struct                        */
+#define PH                  ((GPIO_T *) PH_BASE)                        /*!< GPIO PORTH Configuration Struct                        */
 #define GPIO                ((GPIO_DBCTL_T *) GPIO_DBCTL_BASE)          /*!< Interrupt De-bounce Cycle Control Configuration Struct */
 
 #define UART0               ((UART_T *) UART0_BASE)                     /*!< UART0 Configuration Struct                       */
 #define UART1               ((UART_T *) UART1_BASE)                     /*!< UART1 Configuration Struct                       */
 #define UART2               ((UART_T *) UART2_BASE)                     /*!< UART2 Configuration Struct                       */
+#define UART3               ((UART_T *) UART3_BASE)                     /*!< UART3 Configuration Struct                       */
+#define UART4               ((UART_T *) UART4_BASE)                     /*!< UART4 Configuration Struct                       */
+#define UART5               ((UART_T *) UART5_BASE)                     /*!< UART5 Configuration Struct                       */
+#define UART6               ((UART_T *) UART6_BASE)                     /*!< UART6 Configuration Struct                       */
+#define UART7               ((UART_T *) UART7_BASE)                     /*!< UART7 Configuration Struct                       */
 
 #define TIMER0              ((TIMER_T *) TIMER0_BASE)                   /*!< TIMER0 Configuration Struct                      */
 #define TIMER1              ((TIMER_T *) TIMER1_BASE)                   /*!< TIMER1 Configuration Struct                      */
@@ -263,6 +296,7 @@ extern void SystemInit(void);
 #define WWDT                ((WWDT_T *) WWDT_BASE)                      /*!< Window Watch Dog Timer Configuration Struct      */
 
 #define SPI0                ((SPI_T *) SPI0_BASE)                       /*!< SPI0 Configuration Struct                        */
+#define QSPI0               ((QSPI_T *) QSPI0_BASE)                     /*!< QSPI0 Configuration Struct                       */
 
 #define I2C0                ((I2C_T *) I2C0_BASE)                       /*!< I2C0 Configuration Struct                        */
 #define I2C1                ((I2C_T *) I2C1_BASE)                       /*!< I2C1 Configuration Struct                        */
@@ -282,6 +316,8 @@ extern void SystemInit(void);
 
 #define PWM0                ((PWM_T *) PWM0_BASE)                       /*!< PWM0 Configuration Struct                        */
 #define PWM1                ((PWM_T *) PWM1_BASE)                       /*!< PWM1 Configuration Struct                        */
+#define BPWM0               ((BPWM_T *) BPWM0_BASE)                     /*!< BPWM0 Configuration Struct                       */
+#define BPWM1               ((BPWM_T *) BPWM1_BASE)                     /*!< BPWM1 Configuration Struct                       */
 
 #define EBI                 ((EBI_T *) EBI_BASE)                        /*!< EBI Configuration Struct                         */
 
@@ -294,10 +330,15 @@ extern void SystemInit(void);
 #define PDMA                ((PDMA_T *) PDMA_BASE)                      /*!< PDMA Configuration Struct                        */
 
 #define UI2C0               ((UI2C_T *) USCI0_BASE)                     /*!< UI2C0 Configuration Struct                       */
+#define UI2C1               ((UI2C_T *) USCI1_BASE)                     /*!< UI2C1 Configuration Struct                       */
 
 #define USPI0               ((USPI_T *) USCI0_BASE)                     /*!< USPI0 Configuration Struct                       */
+#define USPI1               ((USPI_T *) USCI1_BASE)                     /*!< USPI1 Configuration Struct                       */
 
 #define UUART0              ((UUART_T *) USCI0_BASE)                    /*!< UUART0 Configuration Struct                      */
+#define UUART1              ((UUART_T *) USCI1_BASE)                    /*!< UUART1 Configuration Struct                      */
+
+#define RTC                 ((RTC_T *)   RTC_BASE)                      /*!< RTC Configuration Struct                         */
 
 /**@}*/ /* end of group PMODULE */
 
@@ -503,6 +544,15 @@ typedef volatile unsigned short vu16;
 #define GET_BYTE2(u32Param)    (((u32Param) & BYTE2_Msk) >> 16) /*!< Extract Byte 2 (Bit 16~23) from parameter u32Param */
 #define GET_BYTE3(u32Param)    (((u32Param) & BYTE3_Msk) >> 24) /*!< Extract Byte 3 (Bit 24~31) from parameter u32Param */
 
+/* Chip Series number definitions */
+#define GET_CHIP_SERIES_NUM    ((SYS->PDID & 0xF00) >> 8)       /*!< Extract chip series number from PDID */
+#define CHIP_SERIES_NUM_B      (0xBUL)                          /*!< Chip series number for M031_B */
+#define CHIP_SERIES_NUM_C      (0xCUL)                          /*!< Chip series number for M031_C */
+#define CHIP_SERIES_NUM_D      (0xDUL)                          /*!< Chip series number for M031_D */
+#define CHIP_SERIES_NUM_E      (0xEUL)                          /*!< Chip series number for M031_E */
+#define CHIP_SERIES_NUM_G      (0x6UL)                          /*!< Chip series number for M031_G */
+#define CHIP_SERIES_NUM_I      (0x1UL)                          /*!< Chip series number for M031_I */
+
 /*@}*/ /* end of group Legacy_Constants */
 
 /******************************************************************************/
@@ -519,7 +569,10 @@ typedef volatile unsigned short vu16;
 #include "i2c.h"
 #include "pdma.h"
 #include "pwm.h"
+//#include "bpwm.h"
+//#include "qspi.h"
 #include "spi.h"
+//#include "rtc.h"
 #include "hdiv.h"
 #include "timer.h"
 #include "uart.h"
