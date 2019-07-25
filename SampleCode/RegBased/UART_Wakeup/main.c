@@ -159,7 +159,7 @@ int32_t main(void)
 /*---------------------------------------------------------------------------------------------------------*/
 /* ISR to handle UART Channel 1 interrupt event                                                            */
 /*---------------------------------------------------------------------------------------------------------*/
-void UART1_IRQHandler(void)
+void UART13_IRQHandler(void)
 {
     uint32_t u32IntSts = UART1->INTSTS;
     uint32_t u32Data;

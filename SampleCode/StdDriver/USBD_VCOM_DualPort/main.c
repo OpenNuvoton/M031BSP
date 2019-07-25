@@ -245,7 +245,7 @@ void UART02_IRQHandler(void)
     }
 }
 
-void UART1_IRQHandler(void)
+void UART13_IRQHandler(void)
 {
     uint32_t u32IntStatus;
     uint8_t bInChar;
