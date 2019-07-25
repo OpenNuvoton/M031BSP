@@ -11,15 +11,15 @@
 
 
 /**
- * @brief       GPIO PA/PB IRQ
+ * @brief       GPIO PA/PB/PG/PH IRQ
  *
  * @param       None
  *
  * @return      None
  *
- * @details     The PA/PB default IRQ, declared in startup_M031Series.s.
+ * @details     The PA/PB/PG/PH default IRQ, declared in startup_M031Series.s.
  */
-void GPAB_IRQHandler(void)
+void GPABGH_IRQHandler(void)
 {
     volatile uint32_t temp;
 
@@ -51,11 +51,11 @@ void GPCDEF_IRQHandler(void)
 {
     volatile uint32_t temp;
 
-    /* To check if PC.5 interrupt occurred */
-    if(PC->INTSRC & BIT5)
+    /* To check if PC.1 interrupt occurred */
+    if(PC->INTSRC & BIT1)
     {
-        PC->INTSRC = BIT5;
-        printf("PC.5 INT occurred.\n");
+        PC->INTSRC = BIT1;
+        printf("PC.1 INT occurred.\n");
     }
     else
     {
@@ -130,15 +130,15 @@ int main(void)
 
     printf("\n\nCPU @ %d Hz\n", SystemCoreClock);
     printf("+------------------------------------------------+\n");
-    printf("|    GPIO PB.2 and PC.5 Interrupt Sample Code    |\n");
+    printf("|    GPIO PB.2 and PC.1 Interrupt Sample Code    |\n");
     printf("+------------------------------------------------+\n\n");
 
     /*-----------------------------------------------------------------------------------------------------*/
     /* GPIO Interrupt Function Test                                                                        */
     /*-----------------------------------------------------------------------------------------------------*/
-    printf("PB.2 and PC.5 are used to test interrupt ......\n");
+    printf("PB.2 and PC.1 are used to test interrupt ......\n");
     printf("    PB.2 is rising edge trigger.\n");
-    printf("    PC.5 is falling edge trigger.\n");
+    printf("    PC.1 is falling edge trigger.\n");
 
     /* Configure PB.2 as Input mode and enable interrupt by rising edge trigger */
     PB->MODE = (PB->MODE & ~(GPIO_MODE_MODE2_Msk)) | (GPIO_MODE_INPUT << GPIO_MODE_MODE2_Pos);
@@ -148,22 +148,22 @@ int main(void)
     PB->INTEN = (PB->INTEN & ~(BIT2)) |         /* disable falling edge trigger interrupt */
                 (BIT2<<GPIO_INTEN_RHIEN0_Pos);  /* enable  rising  edge trigger interrupt */
 
-    NVIC_EnableIRQ(GPIO_PAPB_IRQn);
+    NVIC_EnableIRQ(GPIO_PAPBPGPH_IRQn);
 
-    /* Configure PC.5 as Quasi-bidirection mode and enable interrupt by falling edge trigger */
-    PC->MODE = (PC->MODE & ~(GPIO_MODE_MODE5_Msk)) | (GPIO_MODE_QUASI << GPIO_MODE_MODE5_Pos);
+    /* Configure PC.1 as Quasi-bidirection mode and enable interrupt by falling edge trigger */
+    PC->MODE = (PC->MODE & ~(GPIO_MODE_MODE1_Msk)) | (GPIO_MODE_QUASI << GPIO_MODE_MODE1_Pos);
     /* Configure interrupt mode of specified pin */
-    PC->INTTYPE &= ~BIT5;   /* set PC5 to edge trigger interrupt */
+    PC->INTTYPE &= ~BIT1;   /* set PC1 to edge trigger interrupt */
     /* Enable interrupt function of specified pin */
     PC->INTEN = (PC->INTEN & ~(BIT5<<GPIO_INTEN_RHIEN0_Pos)) |  /* disable rising  edge trigger interrupt */
-                (BIT5);                                         /* enable  falling edge trigger interrupt */
+                (BIT1);                                         /* enable  falling edge trigger interrupt */
 
     NVIC_EnableIRQ(GPIO_PCPDPEPF_IRQn);
 
     /* Enable interrupt de-bounce function and select de-bounce sampling cycle time is 1024 clocks of LIRC clock */
     GPIO->DBCTL = GPIO_DBCTL_ICLKON_Msk | GPIO_DBCTL_DBCLKSRC_LIRC | GPIO_DBCTL_DBCLKSEL_1024;
     PB->DBEN |= BIT2;
-    PC->DBEN |= BIT5;
+    PC->DBEN |= BIT1;
 
     /* Waiting for interrupts */
     while(1);

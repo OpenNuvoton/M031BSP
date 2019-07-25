@@ -29,15 +29,15 @@ void PowerDownFunction(void)
 }
 
 /**
- * @brief       GPIO PA/PB IRQ
+ * @brief       GPIO PA/PB/PG/PH IRQ
  *
  * @param       None
  *
  * @return      None
  *
- * @details     The PA/PB default IRQ, declared in startup_M031Series.s.
+ * @details     The PA/PB/PG/PH default IRQ, declared in startup_M031Series.s.
  */
-void GPAB_IRQHandler(void)
+void GPABGH_IRQHandler(void)
 {
     volatile uint32_t temp;
 
@@ -131,7 +131,7 @@ int main(void)
     PB->INTEN = (PB->INTEN & ~(BIT3)) |         /* disable falling edge trigger interrupt */
                 (BIT3<<GPIO_INTEN_RHIEN0_Pos);  /* enable  rising  edge trigger interrupt */
 
-    NVIC_EnableIRQ(GPIO_PAPB_IRQn);
+    NVIC_EnableIRQ(GPIO_PAPBPGPH_IRQn);
 
     /* Enable interrupt de-bounce function and select de-bounce sampling cycle time is 1024 clocks of LIRC clock */
     GPIO->DBCTL = GPIO_DBCTL_ICLKON_Msk | GPIO_DBCTL_DBCLKSRC_LIRC | GPIO_DBCTL_DBCLKSEL_1024;
@@ -143,7 +143,7 @@ int main(void)
     /* Waiting for PB.3 rising-edge interrupt event */
     while(1)
     {
-        printf("Enter to Power-Down ......\n");
+        printf("Enter to Power-Down. Wait PB.3 rising edge interrupt to wake up ...\n");
 
         /* Enter to Power-down mode */
         PowerDownFunction();
