@@ -197,22 +197,30 @@ uint32_t CLK_GetCPUFreq(void)
 /**
   * @brief      Set HCLK frequency
   * @param[in]  u32Hclk is HCLK frequency. The range of u32Hclk is 25.5MHz ~ 48MHz.
+*               NOTE: For M031_G/I, the HCLK frequency up to 72MHz.
   * @return     HCLK frequency
   * @details    This function is used to set HCLK frequency. The frequency unit is Hz. \n
   *             It would configure PLL frequency to 51MHz ~ 96MHz,
   *             set HCLK clock divider as 2 and switch HCLK clock source to PLL. \n
   *             The register write-protection function should be disabled before using this function.
+  *             NOTE: For M031_G/I, the PLL frequency up to 144MHz.
   */
 uint32_t CLK_SetCoreClock(uint32_t u32Hclk)
 {
     uint32_t u32HIRCSTB;
+    uint32_t u32HCLK_UpperLimit;
 
     /* Read HIRC clock source stable flag */
     u32HIRCSTB = CLK->STATUS & CLK_STATUS_HIRCSTB_Msk;
 
-    /* The range of u32Hclk is 25.5 MHz ~ 48 MHz */
-    if(u32Hclk > FREQ_48MHZ)
-        u32Hclk = FREQ_48MHZ;
+    /* The range of u32Hclk is 25.5 MHz ~ 48 MHz or 72 MHz */
+    if ((GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I))
+        u32HCLK_UpperLimit = FREQ_72MHZ;
+    else
+        u32HCLK_UpperLimit = FREQ_48MHZ;
+
+    if(u32Hclk > u32HCLK_UpperLimit)
+        u32Hclk = u32HCLK_UpperLimit;
     if(u32Hclk < (FREQ_51MHZ >> 1))
         u32Hclk = (FREQ_51MHZ >> 1);
 
@@ -528,6 +536,7 @@ uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq)
 {
     uint32_t u32PllSrcClk, u32NR, u32NF, u32NO, u32CLK_SRC, u32Outdiv;
     uint32_t u32Tmp, u32Tmp2, u32Tmp3, u32Min, u32MinNF, u32MinNR;
+    uint32_t u32PLL_UpperLimit;
 
     /* Disable PLL first to avoid unstable when setting PLL */
     CLK_DisablePLL();
@@ -569,11 +578,25 @@ uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq)
     /* Select "NO" according to request frequency */
     /* Constraint: PLL output frequency must <= 96MHz */
     /*             PLL output frequency must > 50.14MHz to meet all constraints */
-    if((u32PllFreq <= FREQ_96MHZ) && (u32PllFreq >= FREQ_51MHZ))
+    if ((GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I))
+        u32PLL_UpperLimit = FREQ_144MHZ;
+    else
+        u32PLL_UpperLimit = FREQ_96MHZ;
+
+    if((u32PllFreq <= u32PLL_UpperLimit) && (u32PllFreq >= FREQ_51MHZ))
     {
-        u32NO = 4;
-        u32Outdiv = 3;
-        u32PllFreq = u32PllFreq << 2;   /* u32PllFreq = (FIN * NF / NR) now */
+        if (u32PllFreq <= FREQ_96MHZ)
+        {
+            u32NO = 4;
+            u32Outdiv = 3;
+            u32PllFreq = u32PllFreq << 2;   /* u32PllFreq = (FIN * NF / NR) now */
+        }
+        else
+        {
+            u32NO = 2;
+            u32Outdiv = 2;
+            u32PllFreq = u32PllFreq << 1;   /* u32PllFreq = (FIN * NF / NR) now */
+        }
     }
     else
     {

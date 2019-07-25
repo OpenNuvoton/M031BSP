@@ -247,21 +247,23 @@ typedef struct
      * |[0]     |CALIF     |Calibration Finish Interrupt Flag
      * |        |          |If calibration finish, this flag will be set to 1. It is cleared by writing 1 to it.
      */
-    __I  uint32_t ADDR[30];              /*!< [0x0000-0x0074] ADC Data Register 0 ~ 29                                         */
+    __I  uint32_t ADDR[30];              /*!< [0x0000-0x0074] ADC Data Register 0 ~ 29                                  */
     __I  uint32_t RESERVE1[2];
     __IO uint32_t ADCR;                  /*!< [0x0080] ADC Control Register                                             */
     __IO uint32_t ADCHER;                /*!< [0x0084] ADC Channel Enable Register                                      */
-    __IO uint32_t ADCMPR[2];             /*!< [0x0088-0x008c] ADC Compare Register 0/1                                           */
+    __IO uint32_t ADCMPR[2];             /*!< [0x0088-0x008c] ADC Compare Register 0/1                                  */
     __IO uint32_t ADSR0;                 /*!< [0x0090] ADC Status Register0                                             */
     __I  uint32_t ADSR1;                 /*!< [0x0094] ADC Status Register1                                             */
     __I  uint32_t ADSR2;                 /*!< [0x0098] ADC Status Register2                                             */
     __I  uint32_t RESERVE2[1];
     __IO uint32_t ESMPCTL;               /*!< [0x00a0] ADC Extend Sample Time Control Register                          */
-    __I  uint32_t RESERVE3[23];
+    __IO uint32_t CFDCTL;                /*!< [0x00a4] ADC Channel Floating Detect Control Register                     */
+    __I  uint32_t RESERVE3[22];
     __I  uint32_t ADPDMA;                /*!< [0x0100] ADC PDMA Current Transfer Data Register                          */
     __I  uint32_t RESERVE4[31];
     __IO uint32_t ADCALR;                /*!< [0x0180] ADC Calibration Mode Register                                    */
     __IO uint32_t ADCALSTSR;             /*!< [0x0184] ADC Calibration Status Register                                  */
+    __IO uint32_t ADCALDBR;              /*!< [0x0188] ADC Calibration Debug Mode Register                              */
 } ADC_T;
 
 /**
@@ -364,6 +366,15 @@ typedef struct
 
 #define ADC_ESMPCTL_EXTSMPT_Pos          (0)                                        /*!< ADC_T::ESMPCTL: EXTSMPT Position       */
 #define ADC_ESMPCTL_EXTSMPT_Msk          (0xfful << ADC_ESMPCTL_EXTSMPT_Pos)        /*!< ADC_T::ESMPCTL: EXTSMPT Mask           */
+
+#define ADC_CFDCTL_PRECHEN_Pos           (0)                                        /*!< ADC_T::CFDCTL: PRECHEN Position        */
+#define ADC_CFDCTL_PRECHEN_Msk           (0x1ul << ADC_CFDCTL_PRECHEN_Pos)          /*!< ADC_T::CFDCTL: PRECHEN Mask            */
+
+#define ADC_CFDCTL_DISCHEN_Pos           (1)                                        /*!< ADC_T::CFDCTL: DISCHEN Position        */
+#define ADC_CFDCTL_DISCHEN_Msk           (0x1ul << ADC_CFDCTL_DISCHEN_Pos)          /*!< ADC_T::CFDCTL: DISCHEN Mask            */
+
+#define ADC_CFDCTL_FDETCHEN_Pos          (8)                                        /*!< ADC_T::CFDCTL: FDETCHEN Position       */
+#define ADC_CFDCTL_FDETCHEN_Msk          (0x1ul << ADC_CFDCTL_FDETCHEN_Pos)         /*!< ADC_T::CFDCTL: FDETCHEN Mask           */
 
 #define ADC_ADPDMA_CURDAT_Pos            (0)                                        /*!< ADC_T::ADPDMA: CURDAT Position         */
 #define ADC_ADPDMA_CURDAT_Msk            (0x3fffful << ADC_ADPDMA_CURDAT_Pos)       /*!< ADC_T::ADPDMA: CURDAT Mask             */

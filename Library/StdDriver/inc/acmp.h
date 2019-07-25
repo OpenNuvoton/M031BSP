@@ -1,8 +1,8 @@
 /**************************************************************************//**
  * @file     acmp.h
  * @version  V0.10
- * $Revision: 5 $
- * $Date: 18/06/07 2:18p $
+ * $Revision: 2 $
+ * $Date: 18/12/21 10:53a $
  * @brief    M031 Series ACMP Driver Header File
  *
  * @note
@@ -39,32 +39,32 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /* ACMP_CTL constant definitions                                                                           */
 /*---------------------------------------------------------------------------------------------------------*/
-#define ACMP_CTL_FILTSEL_OFF         (0UL << 13) /*!< ACMP_CTL setting for filter function disabled. \hideinitializer */
-#define ACMP_CTL_FILTSEL_1PCLK       (1UL << 13) /*!< ACMP_CTL setting for 1 PCLK filter count. \hideinitializer */
-#define ACMP_CTL_FILTSEL_2PCLK       (2UL << 13) /*!< ACMP_CTL setting for 2 PCLK filter count. \hideinitializer */
-#define ACMP_CTL_FILTSEL_4PCLK       (3UL << 13) /*!< ACMP_CTL setting for 4 PCLK filter count. \hideinitializer */
-#define ACMP_CTL_FILTSEL_8PCLK       (4UL << 13) /*!< ACMP_CTL setting for 8 PCLK filter count. \hideinitializer */
-#define ACMP_CTL_FILTSEL_16PCLK      (5UL << 13) /*!< ACMP_CTL setting for 16 PCLK filter count. \hideinitializer */
-#define ACMP_CTL_FILTSEL_32PCLK      (6UL << 13) /*!< ACMP_CTL setting for 32 PCLK filter count. \hideinitializer */
-#define ACMP_CTL_FILTSEL_64PCLK      (7UL << 13) /*!< ACMP_CTL setting for 64 PCLK filter count. \hideinitializer */
-#define ACMP_CTL_INTPOL_RF           (0UL << 8)  /*!< ACMP_CTL setting for selecting rising edge and falling edge as interrupt condition. \hideinitializer */
-#define ACMP_CTL_INTPOL_R            (1UL << 8)  /*!< ACMP_CTL setting for selecting rising edge as interrupt condition. \hideinitializer */
-#define ACMP_CTL_INTPOL_F            (2UL << 8)  /*!< ACMP_CTL setting for selecting falling edge as interrupt condition. \hideinitializer */
-#define ACMP_CTL_POSSEL_P0           (0UL << 6)  /*!< ACMP_CTL setting for selecting ACMPx_P0 pin as the source of ACMP V+. \hideinitializer */
-#define ACMP_CTL_POSSEL_P1           (1UL << 6)  /*!< ACMP_CTL setting for selecting ACMPx_P1 pin as the source of ACMP V+. \hideinitializer */
-#define ACMP_CTL_POSSEL_P2           (2UL << 6)  /*!< ACMP_CTL setting for selecting ACMPx_P2 pin as the source of ACMP V+. \hideinitializer */
-#define ACMP_CTL_POSSEL_P3           (3UL << 6)  /*!< ACMP_CTL setting for selecting ACMPx_P3 pin as the source of ACMP V+. \hideinitializer */
-#define ACMP_CTL_NEGSEL_PIN          (0UL << 4)  /*!< ACMP_CTL setting for selecting the voltage of ACMP negative input pin as the source of ACMP V-. \hideinitializer */
-#define ACMP_CTL_NEGSEL_CRV          (1UL << 4)  /*!< ACMP_CTL setting for selecting internal comparator reference voltage as the source of ACMP V-. \hideinitializer */
-#define ACMP_CTL_NEGSEL_VBG          (2UL << 4)  /*!< ACMP_CTL setting for selecting internal Band-gap voltage as the source of ACMP V-. \hideinitializer */
-#define ACMP_CTL_HYSTERESIS_ENABLE   (1UL << 2)  /*!< ACMP_CTL setting for enabling the hysteresis function. \hideinitializer */
-#define ACMP_CTL_HYSTERESIS_DISABLE  (0UL << 2)  /*!< ACMP_CTL setting for disabling the hysteresis function. \hideinitializer */
+#define ACMP_CTL_FILTSEL_OFF         (0UL << ACMP_CTL_FILTSEL_Pos) /*!< ACMP_CTL setting for filter function disabled. \hideinitializer */
+#define ACMP_CTL_FILTSEL_1PCLK       (1UL << ACMP_CTL_FILTSEL_Pos) /*!< ACMP_CTL setting for 1 PCLK filter count. \hideinitializer */
+#define ACMP_CTL_FILTSEL_2PCLK       (2UL << ACMP_CTL_FILTSEL_Pos) /*!< ACMP_CTL setting for 2 PCLK filter count. \hideinitializer */
+#define ACMP_CTL_FILTSEL_4PCLK       (3UL << ACMP_CTL_FILTSEL_Pos) /*!< ACMP_CTL setting for 4 PCLK filter count. \hideinitializer */
+#define ACMP_CTL_FILTSEL_8PCLK       (4UL << ACMP_CTL_FILTSEL_Pos) /*!< ACMP_CTL setting for 8 PCLK filter count. \hideinitializer */
+#define ACMP_CTL_FILTSEL_16PCLK      (5UL << ACMP_CTL_FILTSEL_Pos) /*!< ACMP_CTL setting for 16 PCLK filter count. \hideinitializer */
+#define ACMP_CTL_FILTSEL_32PCLK      (6UL << ACMP_CTL_FILTSEL_Pos) /*!< ACMP_CTL setting for 32 PCLK filter count. \hideinitializer */
+#define ACMP_CTL_FILTSEL_64PCLK      (7UL << ACMP_CTL_FILTSEL_Pos) /*!< ACMP_CTL setting for 64 PCLK filter count. \hideinitializer */
+#define ACMP_CTL_INTPOL_RF           (0UL << ACMP_CTL_INTPOL_Pos)  /*!< ACMP_CTL setting for selecting rising edge and falling edge as interrupt condition. \hideinitializer */
+#define ACMP_CTL_INTPOL_R            (1UL << ACMP_CTL_INTPOL_Pos)  /*!< ACMP_CTL setting for selecting rising edge as interrupt condition. \hideinitializer */
+#define ACMP_CTL_INTPOL_F            (2UL << ACMP_CTL_INTPOL_Pos)  /*!< ACMP_CTL setting for selecting falling edge as interrupt condition. \hideinitializer */
+#define ACMP_CTL_POSSEL_P0           (0UL << ACMP_CTL_POSSEL_Pos)  /*!< ACMP_CTL setting for selecting ACMPx_P0 pin as the source of ACMP V+. \hideinitializer */
+#define ACMP_CTL_POSSEL_P1           (1UL << ACMP_CTL_POSSEL_Pos)  /*!< ACMP_CTL setting for selecting ACMPx_P1 pin as the source of ACMP V+. \hideinitializer */
+#define ACMP_CTL_POSSEL_P2           (2UL << ACMP_CTL_POSSEL_Pos)  /*!< ACMP_CTL setting for selecting ACMPx_P2 pin as the source of ACMP V+. \hideinitializer */
+#define ACMP_CTL_POSSEL_P3           (3UL << ACMP_CTL_POSSEL_Pos)  /*!< ACMP_CTL setting for selecting ACMPx_P3 pin as the source of ACMP V+. \hideinitializer */
+#define ACMP_CTL_NEGSEL_PIN          (0UL << ACMP_CTL_NEGSEL_Pos)  /*!< ACMP_CTL setting for selecting the voltage of ACMP negative input pin as the source of ACMP V-. \hideinitializer */
+#define ACMP_CTL_NEGSEL_CRV          (1UL << ACMP_CTL_NEGSEL_Pos)  /*!< ACMP_CTL setting for selecting internal comparator reference voltage as the source of ACMP V-. \hideinitializer */
+#define ACMP_CTL_NEGSEL_VBG          (2UL << ACMP_CTL_NEGSEL_Pos)  /*!< ACMP_CTL setting for selecting internal Band-gap voltage as the source of ACMP V-. \hideinitializer */
+#define ACMP_CTL_HYSTERESIS_ENABLE   (1UL << ACMP_CTL_HYSEN_Pos)   /*!< ACMP_CTL setting for enabling the hysteresis function. \hideinitializer */
+#define ACMP_CTL_HYSTERESIS_DISABLE  (0UL << ACMP_CTL_HYSEN_Pos)   /*!< ACMP_CTL setting for disabling the hysteresis function. \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* ACMP_VREF constant definitions                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/
-#define ACMP_VREF_CRVSSEL_VDDA       (0UL << 6)  /*!< ACMP_VREF setting for selecting analog supply voltage VDDA as the CRV source voltage \hideinitializer */
-#define ACMP_VREF_CRVSSEL_INTVREF    (1UL << 6)  /*!< ACMP_VREF setting for selecting internal reference voltage as the CRV source voltage \hideinitializer */
+#define ACMP_VREF_CRVSSEL_VDDA       (0UL << ACMP_VREF_CRVSSEL_Pos)  /*!< ACMP_VREF setting for selecting analog supply voltage VDDA as the CRV source voltage \hideinitializer */
+#define ACMP_VREF_CRVSSEL_INTVREF    (1UL << ACMP_VREF_CRVSSEL_Pos)  /*!< ACMP_VREF setting for selecting internal reference voltage as the CRV source voltage \hideinitializer */
 
 
 /*@}*/ /* end of group ACMP_EXPORTED_CONSTANTS */

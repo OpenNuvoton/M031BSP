@@ -125,9 +125,11 @@ typedef struct
      * |        |          |0 = AVDD is selected as CRV source voltage.
      * |        |          |1 = VREF is selected as as CRV source voltage.
      */
-    __IO uint32_t CTL[2];                /*!< [0x0000~0x0004] Analog Comparator 0/1 Control Register                             */
+    __IO uint32_t CTL[2];                /*!< [0x0000~0x0004] Analog Comparator 0/1 Control Register                    */
     __IO uint32_t STATUS;                /*!< [0x0008] Analog Comparator Status Register                                */
     __IO uint32_t VREF;                  /*!< [0x000c] Analog Comparator Reference Voltage Control Register             */
+    __IO uint32_t CALCTL;                /*!< [0x0010] Analog Comparator Calibration Control Register                   */
+    __I  uint32_t CALSR;                 /*!< [0x0014] Analog Comparator Calibration Status Register                    */
 
 } ACMP_T;
 
@@ -204,6 +206,42 @@ typedef struct
 
 #define ACMP_VREF_CRVSSEL_Pos            (6)                                            /*!< ACMP_T::VREF: CRVSSEL Position         */
 #define ACMP_VREF_CRVSSEL_Msk            (0x1ul << ACMP_VREF_CRVSSEL_Pos)               /*!< ACMP_T::VREF: CRVSSEL Mask             */
+
+#define ACMP_CALCTL_CALTRG0_Pos          (0)                                            /*!< ACMP_T::CALCTL: CALTRG0 Position       */
+#define ACMP_CALCTL_CALTRG0_Msk          (0x1ul << ACMP_CALCTL_CALTRG0_Pos)             /*!< ACMP_T::CALCTL: CALTRG0 Mask           */
+
+#define ACMP_CALCTL_CALTRG1_Pos          (1)                                            /*!< ACMP_T::CALCTL: CALTRG1 Position       */
+#define ACMP_CALCTL_CALTRG1_Msk          (0x1ul << ACMP_CALCTL_CALTRG1_Pos)             /*!< ACMP_T::CALCTL: CALTRG1 Mask           */
+
+#define ACMP_CALCTL_CALCLK0_Pos          (4)                                            /*!< ACMP_T::CALCTL: CALCLK0 Position       */
+#define ACMP_CALCTL_CALCLK0_Msk          (0x3ul << ACMP_CALCTL_CALCLK0_Pos)             /*!< ACMP_T::CALCTL: CALCLK0 Mask           */
+
+#define ACMP_CALCTL_CALCLK1_Pos          (6)                                            /*!< ACMP_T::CALCTL: CALCLK1 Position       */
+#define ACMP_CALCTL_CALCLK1_Msk          (0x3ul << ACMP_CALCTL_CALCLK1_Pos)             /*!< ACMP_T::CALCTL: CALCLK1 Mask           */
+
+#define ACMP_CALCTL_CALRVS0_Pos          (16)                                           /*!< ACMP_T::CALCTL: CALRVS0 Position       */
+#define ACMP_CALCTL_CALRVS0_Msk          (0x1ul << ACMP_CALCTL_CALRVS0_Pos)             /*!< ACMP_T::CALCTL: CALRVS0 Mask           */
+
+#define ACMP_CALCTL_CALRVS1_Pos          (17)                                           /*!< ACMP_T::CALCTL: CALRVS1 Position       */
+#define ACMP_CALCTL_CALRVS1_Msk          (0x1ul << ACMP_CALCTL_CALRVS1_Pos)             /*!< ACMP_T::CALCTL: CALRVS1 Mask           */
+
+#define ACMP_CALSR_DONE0_Pos             (0)                                            /*!< ACMP_T::CALSR: DONE0 Position          */
+#define ACMP_CALSR_DONE0_Msk             (0x1ul << ACMP_CALSR_DONE0_Pos)                /*!< ACMP_T::CALSR: DONE0 Mask              */
+
+#define ACMP_CALSR_CALNS0_Pos            (1)                                            /*!< ACMP_T::CALSR: CALNS0 Position         */
+#define ACMP_CALSR_CALNS0_Msk            (0x1ul << ACMP_CALSR_CALNS0_Pos)               /*!< ACMP_T::CALSR: CALNS0 Mask             */
+
+#define ACMP_CALSR_CALPS0_Pos            (2)                                            /*!< ACMP_T::CALSR: CALPS0 Position         */
+#define ACMP_CALSR_CALPS0_Msk            (0x1ul << ACMP_CALSR_CALPS0_Pos)               /*!< ACMP_T::CALSR: CALPS0 Mask             */
+
+#define ACMP_CALSR_DONE1_Pos             (4)                                            /*!< ACMP_T::CALSR: DONE1 Position          */
+#define ACMP_CALSR_DONE1_Msk             (0x1ul << ACMP_CALSR_DONE1_Pos)                /*!< ACMP_T::CALSR: DONE1 Mask              */
+
+#define ACMP_CALSR_CALNS1_Pos            (5)                                            /*!< ACMP_T::CALSR: CALNS1 Position         */
+#define ACMP_CALSR_CALNS1_Msk            (0x1ul << ACMP_CALSR_CALNS1_Pos)               /*!< ACMP_T::CALSR: CALNS1 Mask             */
+
+#define ACMP_CALSR_CALPS1_Pos            (6)                                            /*!< ACMP_T::CALSR: CALPS1 Position         */
+#define ACMP_CALSR_CALPS1_Msk            (0x1ul << ACMP_CALSR_CALPS1_Pos)               /*!< ACMP_T::CALSR: CALPS1 Mask             */
 
 /**@}*/ /* ACMP_CONST */
 /**@}*/ /* end of ACMP register group */

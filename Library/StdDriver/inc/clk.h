@@ -40,9 +40,11 @@ extern "C"
 #define FREQ_50MHZ         50000000     /*!< Define frequency macro  50MHz  \hideinitializer */
 #define FREQ_51MHZ         51000000     /*!< Define frequency macro  51MHz  \hideinitializer */
 #define FREQ_64MHZ         64000000     /*!< Define frequency macro  64MHz  \hideinitializer */
+#define FREQ_68MHZ         68000000     /*!< Define frequency macro  68MHz  \hideinitializer */
 #define FREQ_72MHZ         72000000     /*!< Define frequency macro  72MHz  \hideinitializer */
 #define FREQ_96MHZ         96000000     /*!< Define frequency macro  96MHz  \hideinitializer */
 #define FREQ_100MHZ       100000000     /*!< Define frequency macro 100MHz  \hideinitializer */
+#define FREQ_144MHZ       144000000     /*!< Define frequency macro 144MHz  \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  PWRCTL constant definitions.  (Write-protection)                                                      */
@@ -144,10 +146,21 @@ extern "C"
 #define CLK_CLKSEL2_PWM1SEL_PLL          (0x0UL<<CLK_CLKSEL2_PWM1SEL_Pos)       /*!< Setting PWM1 clock source as PLL   \hideinitializer */
 #define CLK_CLKSEL2_PWM1SEL_PCLK1        (0x1UL<<CLK_CLKSEL2_PWM1SEL_Pos)       /*!< Setting PWM1 clock source as PCLK1 \hideinitializer */
 
+#define CLK_CLKSEL2_QSPI0SEL_HXT         (0x0UL<<CLK_CLKSEL2_QSPI0SEL_Pos)      /*!< Setting QSPI clock source as HXT   \hideinitializer */
+#define CLK_CLKSEL2_QSPI0SEL_PLL         (0x1UL<<CLK_CLKSEL2_QSPI0SEL_Pos)      /*!< Setting QSPI clock source as PLL   \hideinitializer */
+#define CLK_CLKSEL2_QSPI0SEL_PCLK1       (0x2UL<<CLK_CLKSEL2_QSPI0SEL_Pos)      /*!< Setting QSPI clock source as PCLK1 \hideinitializer */
+#define CLK_CLKSEL2_QSPI0SEL_HIRC        (0x3UL<<CLK_CLKSEL2_QSPI0SEL_Pos)      /*!< Setting QSPI clock source as HIRC  \hideinitializer */
+
 #define CLK_CLKSEL2_SPI0SEL_HXT          (0x0UL<<CLK_CLKSEL2_SPI0SEL_Pos)       /*!< Setting SPI clock source as HXT    \hideinitializer */
 #define CLK_CLKSEL2_SPI0SEL_PLL          (0x1UL<<CLK_CLKSEL2_SPI0SEL_Pos)       /*!< Setting SPI clock source as PLL    \hideinitializer */
 #define CLK_CLKSEL2_SPI0SEL_PCLK1        (0x2UL<<CLK_CLKSEL2_SPI0SEL_Pos)       /*!< Setting SPI clock source as PCLK1  \hideinitializer */
 #define CLK_CLKSEL2_SPI0SEL_HIRC         (0x3UL<<CLK_CLKSEL2_SPI0SEL_Pos)       /*!< Setting SPI clock source as HIRC   \hideinitializer */
+
+#define CLK_CLKSEL2_BPWM0SEL_PLL         (0x0UL<<CLK_CLKSEL2_BPWM0SEL_Pos)      /*!< Setting BPWM0 clock source as PLL   \hideinitializer */
+#define CLK_CLKSEL2_BPWM0SEL_PCLK0       (0x1UL<<CLK_CLKSEL2_BPWM0SEL_Pos)      /*!< Setting BPWM0 clock source as PCLK0 \hideinitializer */
+
+#define CLK_CLKSEL2_BPWM1SEL_PLL         (0x0UL<<CLK_CLKSEL2_BPWM1SEL_Pos)      /*!< Setting BPWM1 clock source as PLL   \hideinitializer */
+#define CLK_CLKSEL2_BPWM1SEL_PCLK1       (0x1UL<<CLK_CLKSEL2_BPWM1SEL_Pos)      /*!< Setting BPWM1 clock source as PCLK1 \hideinitializer */
 
 #define CLK_CLKSEL2_ADCSEL_HXT           (0x0UL<<CLK_CLKSEL2_ADCSEL_Pos)        /*!< Setting ADC clock source as HXT    \hideinitializer */
 #define CLK_CLKSEL2_ADCSEL_PLL           (0x1UL<<CLK_CLKSEL2_ADCSEL_Pos)        /*!< Setting ADC clock source as PLL    \hideinitializer */
@@ -157,12 +170,48 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  CLKSEL3 constant definitions.                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/
+#define CLK_CLKSEL3_UART3SEL_HXT         (0x0UL<<CLK_CLKSEL3_UART3SEL_Pos)      /*!< Setting UART3 clock source as external X'tal   \hideinitializer */
+#define CLK_CLKSEL3_UART3SEL_PLL         (0x1UL<<CLK_CLKSEL3_UART3SEL_Pos)      /*!< Setting UART3 clock source as external PLL     \hideinitializer */
+#define CLK_CLKSEL3_UART3SEL_LXT         (0x2UL<<CLK_CLKSEL3_UART3SEL_Pos)      /*!< Setting UART3 clock source as external X'tal 32.768KHz \hideinitializer */
+#define CLK_CLKSEL3_UART3SEL_HIRC        (0x3UL<<CLK_CLKSEL3_UART3SEL_Pos)      /*!< Setting UART3 clock source as external internal high speed RC clock    \hideinitializer */
+#define CLK_CLKSEL3_UART3SEL_PCLK1       (0x4UL<<CLK_CLKSEL3_UART3SEL_Pos)      /*!< Setting UART3 clock source as external PCLK1   \hideinitializer */
+#define CLK_CLKSEL3_UART3SEL_LIRC        (0x5UL<<CLK_CLKSEL3_UART3SEL_Pos)      /*!< Setting UART3 clock source as external LIRC    \hideinitializer */
+
 #define CLK_CLKSEL3_UART2SEL_HXT         (0x0UL<<CLK_CLKSEL3_UART2SEL_Pos)      /*!< Setting UART2 clock source as external X'tal   \hideinitializer */
 #define CLK_CLKSEL3_UART2SEL_PLL         (0x1UL<<CLK_CLKSEL3_UART2SEL_Pos)      /*!< Setting UART2 clock source as external PLL     \hideinitializer */
 #define CLK_CLKSEL3_UART2SEL_LXT         (0x2UL<<CLK_CLKSEL3_UART2SEL_Pos)      /*!< Setting UART2 clock source as external X'tal 32.768KHz \hideinitializer */
 #define CLK_CLKSEL3_UART2SEL_HIRC        (0x3UL<<CLK_CLKSEL3_UART2SEL_Pos)      /*!< Setting UART2 clock source as external internal high speed RC clock    \hideinitializer */
 #define CLK_CLKSEL3_UART2SEL_PCLK0       (0x4UL<<CLK_CLKSEL3_UART2SEL_Pos)      /*!< Setting UART2 clock source as external PCLK0   \hideinitializer */
 #define CLK_CLKSEL3_UART2SEL_LIRC        (0x5UL<<CLK_CLKSEL3_UART2SEL_Pos)      /*!< Setting UART2 clock source as external LIRC    \hideinitializer */
+
+#define CLK_CLKSEL3_UART5SEL_HXT         (0x0UL<<CLK_CLKSEL3_UART5SEL_Pos)      /*!< Setting UART5 clock source as external X'tal   \hideinitializer */
+#define CLK_CLKSEL3_UART5SEL_PLL         (0x1UL<<CLK_CLKSEL3_UART5SEL_Pos)      /*!< Setting UART5 clock source as external PLL     \hideinitializer */
+#define CLK_CLKSEL3_UART5SEL_LXT         (0x2UL<<CLK_CLKSEL3_UART5SEL_Pos)      /*!< Setting UART5 clock source as external X'tal 32.768KHz \hideinitializer */
+#define CLK_CLKSEL3_UART5SEL_HIRC        (0x3UL<<CLK_CLKSEL3_UART5SEL_Pos)      /*!< Setting UART5 clock source as external internal high speed RC clock    \hideinitializer */
+#define CLK_CLKSEL3_UART5SEL_PCLK1       (0x4UL<<CLK_CLKSEL3_UART5SEL_Pos)      /*!< Setting UART5 clock source as external PCLK1   \hideinitializer */
+#define CLK_CLKSEL3_UART5SEL_LIRC        (0x5UL<<CLK_CLKSEL3_UART5SEL_Pos)      /*!< Setting UART5 clock source as external LIRC    \hideinitializer */
+
+#define CLK_CLKSEL3_UART4SEL_HXT         (0x0UL<<CLK_CLKSEL3_UART4SEL_Pos)      /*!< Setting UART4 clock source as external X'tal   \hideinitializer */
+#define CLK_CLKSEL3_UART4SEL_PLL         (0x1UL<<CLK_CLKSEL3_UART4SEL_Pos)      /*!< Setting UART4 clock source as external PLL     \hideinitializer */
+#define CLK_CLKSEL3_UART4SEL_LXT         (0x2UL<<CLK_CLKSEL3_UART4SEL_Pos)      /*!< Setting UART4 clock source as external X'tal 32.768KHz \hideinitializer */
+#define CLK_CLKSEL3_UART4SEL_HIRC        (0x3UL<<CLK_CLKSEL3_UART4SEL_Pos)      /*!< Setting UART4 clock source as external internal high speed RC clock    \hideinitializer */
+#define CLK_CLKSEL3_UART4SEL_PCLK0       (0x4UL<<CLK_CLKSEL3_UART4SEL_Pos)      /*!< Setting UART4 clock source as external PCLK0   \hideinitializer */
+#define CLK_CLKSEL3_UART4SEL_LIRC        (0x5UL<<CLK_CLKSEL3_UART4SEL_Pos)      /*!< Setting UART4 clock source as external LIRC    \hideinitializer */
+
+#define CLK_CLKSEL3_UART7SEL_HXT         (0x0UL<<CLK_CLKSEL3_UART7SEL_Pos)      /*!< Setting UART7 clock source as external X'tal   \hideinitializer */
+#define CLK_CLKSEL3_UART7SEL_PLL         (0x1UL<<CLK_CLKSEL3_UART7SEL_Pos)      /*!< Setting UART7 clock source as external PLL     \hideinitializer */
+#define CLK_CLKSEL3_UART7SEL_LXT         (0x2UL<<CLK_CLKSEL3_UART7SEL_Pos)      /*!< Setting UART7 clock source as external X'tal 32.768KHz \hideinitializer */
+#define CLK_CLKSEL3_UART7SEL_HIRC        (0x3UL<<CLK_CLKSEL3_UART7SEL_Pos)      /*!< Setting UART7 clock source as external internal high speed RC clock    \hideinitializer */
+#define CLK_CLKSEL3_UART7SEL_PCLK1       (0x4UL<<CLK_CLKSEL3_UART7SEL_Pos)      /*!< Setting UART7 clock source as external PCLK1   \hideinitializer */
+#define CLK_CLKSEL3_UART7SEL_LIRC        (0x5UL<<CLK_CLKSEL3_UART7SEL_Pos)      /*!< Setting UART7 clock source as external LIRC    \hideinitializer */
+
+#define CLK_CLKSEL3_UART6SEL_HXT         (0x0UL<<CLK_CLKSEL3_UART6SEL_Pos)      /*!< Setting UART6 clock source as external X'tal   \hideinitializer */
+#define CLK_CLKSEL3_UART6SEL_PLL         (0x1UL<<CLK_CLKSEL3_UART6SEL_Pos)      /*!< Setting UART6 clock source as external PLL     \hideinitializer */
+#define CLK_CLKSEL3_UART6SEL_LXT         (0x2UL<<CLK_CLKSEL3_UART6SEL_Pos)      /*!< Setting UART6 clock source as external X'tal 32.768KHz \hideinitializer */
+#define CLK_CLKSEL3_UART6SEL_HIRC        (0x3UL<<CLK_CLKSEL3_UART6SEL_Pos)      /*!< Setting UART6 clock source as external internal high speed RC clock    \hideinitializer */
+#define CLK_CLKSEL3_UART6SEL_PCLK0       (0x4UL<<CLK_CLKSEL3_UART6SEL_Pos)      /*!< Setting UART6 clock source as external PCLK0   \hideinitializer */
+#define CLK_CLKSEL3_UART6SEL_LIRC        (0x5UL<<CLK_CLKSEL3_UART6SEL_Pos)      /*!< Setting UART6 clock source as external LIRC    \hideinitializer */
+
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  CLKDIV0 constant definitions.                                                                          */
@@ -177,6 +226,11 @@ extern "C"
 /*  CLKDIV4 constant definitions.                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/
 #define CLK_CLKDIV4_UART2(x) (((x)-1) << CLK_CLKDIV4_UART2DIV_Pos)  /*!< CLKDIV Setting for UART2 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART3(x) (((x)-1) << CLK_CLKDIV4_UART3DIV_Pos)  /*!< CLKDIV Setting for UART3 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART4(x) (((x)-1) << CLK_CLKDIV4_UART4DIV_Pos)  /*!< CLKDIV Setting for UART4 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART5(x) (((x)-1) << CLK_CLKDIV4_UART5DIV_Pos)  /*!< CLKDIV Setting for UART5 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART6(x) (((x)-1) << CLK_CLKDIV4_UART6DIV_Pos)  /*!< CLKDIV Setting for UART6 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART7(x) (((x)-1) << CLK_CLKDIV4_UART7DIV_Pos)  /*!< CLKDIV Setting for UART7 clock divider. It could be 1~16   \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  PCLKDIV constant definitions.                                                                          */
@@ -202,16 +256,20 @@ extern "C"
 #define CLK_PLLCTL_NR(x)        ((x-2)<<CLK_PLLCTL_INDIV_Pos)   /*!< For PLL input divider. x must be constant and 2 <= x <= 7 since constraint 1.6MHz < FIN/NR < 16MHz and NR = INDIV+2 >= 2   \hideinitializer */
 #define CLK_PLLCTL_NF(x)        ((x-2)<<CLK_PLLCTL_FBDIV_Pos)   /*!< For PLL feedback divider. x must be constant and 17 <= x/NR <= 41 since constraint 200MHz < FIN*NF/NR < 500MHz.            \hideinitializer */
 
-#define CLK_PLLCTL_NO_1         0x0000UL        /*!< For PLL output divider is 1    \hideinitializer */
-#define CLK_PLLCTL_NO_2         0x4000UL        /*!< For PLL output divider is 2    \hideinitializer */
-#define CLK_PLLCTL_NO_4         0xC000UL        /*!< For PLL output divider is 4    \hideinitializer */
+#define CLK_PLLCTL_NO_1         (0x0UL << CLK_PLLCTL_OUTDIV_Pos)    /*!< For PLL output divider is 1    \hideinitializer */
+#define CLK_PLLCTL_NO_2         (0x1UL << CLK_PLLCTL_OUTDIV_Pos)    /*!< For PLL output divider is 2    \hideinitializer */
+#define CLK_PLLCTL_NO_4         (0x3UL << CLK_PLLCTL_OUTDIV_Pos)    /*!< For PLL output divider is 4    \hideinitializer */
 
-#define CLK_PLLCTL_64MHz_HXT        (CLK_PLLCTL_PLLSRC_HXT  | CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(64)     | CLK_PLLCTL_NO_4)          /*!< Predefined PLLCTL setting for 64MHz PLL output with HXT(12MHz X'tal)       \hideinitializer */
-#define CLK_PLLCTL_72MHz_HXT        (CLK_PLLCTL_PLLSRC_HXT  | CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(72)     | CLK_PLLCTL_NO_4)          /*!< Predefined PLLCTL setting for 72MHz PLL output with HXT(12MHz X'tal)       \hideinitializer */
-#define CLK_PLLCTL_96MHz_HXT        (CLK_PLLCTL_PLLSRC_HXT  | CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(96)     | CLK_PLLCTL_NO_4)          /*!< Predefined PLLCTL setting for 96MHz PLL output with HXT(12MHz X'tal)       \hideinitializer */
+#define CLK_PLLCTL_64MHz_HXT        (CLK_PLLCTL_PLLSRC_HXT  | CLK_PLLCTL_NR(8)  | CLK_PLLCTL_NF(64)     | CLK_PLLCTL_NO_4)          /*!< Predefined PLLCTL setting for 64MHz PLL output with HXT(12MHz X'tal)       \hideinitializer */
+#define CLK_PLLCTL_68MHz_HXT        (CLK_PLLCTL_PLLSRC_HXT  | CLK_PLLCTL_NR(8)  | CLK_PLLCTL_NF(68)     | CLK_PLLCTL_NO_4)          /*!< Predefined PLLCTL setting for 68MHz PLL output with HXT(12MHz X'tal)       \hideinitializer */
+#define CLK_PLLCTL_72MHz_HXT        (CLK_PLLCTL_PLLSRC_HXT  | CLK_PLLCTL_NR(8)  | CLK_PLLCTL_NF(72)     | CLK_PLLCTL_NO_4)          /*!< Predefined PLLCTL setting for 72MHz PLL output with HXT(12MHz X'tal)       \hideinitializer */
+#define CLK_PLLCTL_96MHz_HXT        (CLK_PLLCTL_PLLSRC_HXT  | CLK_PLLCTL_NR(8)  | CLK_PLLCTL_NF(96)     | CLK_PLLCTL_NO_4)          /*!< Predefined PLLCTL setting for 96MHz PLL output with HXT(12MHz X'tal)       \hideinitializer */
+#define CLK_PLLCTL_144MHz_HXT       (CLK_PLLCTL_PLLSRC_HXT  | CLK_PLLCTL_NR(8)  | CLK_PLLCTL_NF(72)     | CLK_PLLCTL_NO_2)          /*!< Predefined PLLCTL setting for 144MHz PLL output with HXT(12MHz X'tal)      \hideinitializer */
 #define CLK_PLLCTL_64MHz_HIRC_DIV4  (CLK_PLLCTL_PLLSRC_HIRC_DIV4  | CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(64)     | CLK_PLLCTL_NO_4)    /*!< Predefined PLLCTL setting for 64MHz PLL output with HIRC_DIV4(12MHz IRC)   \hideinitializer */
+#define CLK_PLLCTL_68MHz_HIRC_DIV4  (CLK_PLLCTL_PLLSRC_HIRC_DIV4  | CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(68)     | CLK_PLLCTL_NO_4)    /*!< Predefined PLLCTL setting for 68MHz PLL output with HIRC_DIV4(12MHz IRC)   \hideinitializer */
 #define CLK_PLLCTL_72MHz_HIRC_DIV4  (CLK_PLLCTL_PLLSRC_HIRC_DIV4  | CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(72)     | CLK_PLLCTL_NO_4)    /*!< Predefined PLLCTL setting for 72MHz PLL output with HIRC_DIV4(12MHz IRC)   \hideinitializer */
 #define CLK_PLLCTL_96MHz_HIRC_DIV4  (CLK_PLLCTL_PLLSRC_HIRC_DIV4  | CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(96)     | CLK_PLLCTL_NO_4)    /*!< Predefined PLLCTL setting for 96MHz PLL output with HIRC_DIV4(12MHz IRC)   \hideinitializer */
+#define CLK_PLLCTL_144MHz_HIRC_DIV4 (CLK_PLLCTL_PLLSRC_HIRC_DIV4  | CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(72)     | CLK_PLLCTL_NO_2)    /*!< Predefined PLLCTL setting for 144MHz PLL output with HIRC_DIV4(12MHz IRC)  \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  MODULE constant definitions.                                                                           */
@@ -269,6 +327,10 @@ extern "C"
                         MODULE_CLKSEL_ENC( 1)|MODULE_CLKSEL_Msk_ENC( 3)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL1_WWDTSEL_Pos)|\
                         MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< WWDT Module    \hideinitializer */
 
+#define RTC_MODULE     (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_RTCCKEN_Pos)|\
+                        MODULE_CLKSEL_ENC(NA)|MODULE_CLKSEL_Msk_ENC(NA)|MODULE_CLKSEL_Pos_ENC(NA)|\
+                        MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< RTC Module     \hideinitializer */
+
 #define TMR0_MODULE    (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_TMR0CKEN_Pos)|\
                         MODULE_CLKSEL_ENC( 1)|MODULE_CLKSEL_Msk_ENC( 7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL1_TMR0SEL_Pos)|\
                         MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< TMR0 Module    \hideinitializer */
@@ -301,6 +363,26 @@ extern "C"
                         MODULE_CLKSEL_ENC( 3)|MODULE_CLKSEL_Msk_ENC(  7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL3_UART2SEL_Pos)|\
                         MODULE_CLKDIV_ENC( 3)|MODULE_CLKDIV_Msk_ENC(0xF)|MODULE_CLKDIV_Pos_ENC(CLK_CLKDIV4_UART2DIV_Pos))   /*!< UART2 Module   \hideinitializer */
 
+#define UART3_MODULE   (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_UART3CKEN_Pos)|\
+                        MODULE_CLKSEL_ENC( 3)|MODULE_CLKSEL_Msk_ENC(  7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL3_UART3SEL_Pos)|\
+                        MODULE_CLKDIV_ENC( 3)|MODULE_CLKDIV_Msk_ENC(0xF)|MODULE_CLKDIV_Pos_ENC(CLK_CLKDIV4_UART3DIV_Pos))   /*!< UART3 Module   \hideinitializer */
+
+#define UART4_MODULE   (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_UART4CKEN_Pos)|\
+                        MODULE_CLKSEL_ENC( 3)|MODULE_CLKSEL_Msk_ENC(  7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL3_UART4SEL_Pos)|\
+                        MODULE_CLKDIV_ENC( 3)|MODULE_CLKDIV_Msk_ENC(0xF)|MODULE_CLKDIV_Pos_ENC(CLK_CLKDIV4_UART4DIV_Pos))   /*!< UART4 Module   \hideinitializer */
+
+#define UART5_MODULE   (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_UART5CKEN_Pos)|\
+                        MODULE_CLKSEL_ENC( 3)|MODULE_CLKSEL_Msk_ENC(  7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL3_UART5SEL_Pos)|\
+                        MODULE_CLKDIV_ENC( 3)|MODULE_CLKDIV_Msk_ENC(0xF)|MODULE_CLKDIV_Pos_ENC(CLK_CLKDIV4_UART5DIV_Pos))   /*!< UART5 Module   \hideinitializer */
+
+#define UART6_MODULE   (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_UART6CKEN_Pos)|\
+                        MODULE_CLKSEL_ENC( 3)|MODULE_CLKSEL_Msk_ENC(  7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL3_UART6SEL_Pos)|\
+                        MODULE_CLKDIV_ENC( 3)|MODULE_CLKDIV_Msk_ENC(0xF)|MODULE_CLKDIV_Pos_ENC(CLK_CLKDIV4_UART6DIV_Pos))   /*!< UART6 Module   \hideinitializer */
+
+#define UART7_MODULE   (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_UART7CKEN_Pos)|\
+                        MODULE_CLKSEL_ENC( 3)|MODULE_CLKSEL_Msk_ENC(  7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL3_UART7SEL_Pos)|\
+                        MODULE_CLKDIV_ENC( 3)|MODULE_CLKDIV_Msk_ENC(0xF)|MODULE_CLKDIV_Pos_ENC(CLK_CLKDIV4_UART7DIV_Pos))   /*!< UART7 Module   \hideinitializer */
+
 #define I2C0_MODULE    (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_I2C0CKEN_Pos) |\
                         MODULE_CLKSEL_ENC(NA)|MODULE_CLKSEL_Msk_ENC(NA)|MODULE_CLKSEL_Pos_ENC(NA)|\
                         MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< I2C0 Module    \hideinitializer */
@@ -308,6 +390,10 @@ extern "C"
 #define I2C1_MODULE    (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_I2C1CKEN_Pos) |\
                         MODULE_CLKSEL_ENC(NA)|MODULE_CLKSEL_Msk_ENC(NA)|MODULE_CLKSEL_Pos_ENC(NA)|\
                         MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< I2C1 Module    \hideinitializer */
+
+#define QSPI0_MODULE   (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_QSPI0CKEN_Pos) |\
+                        MODULE_CLKSEL_ENC( 2)|MODULE_CLKSEL_Msk_ENC( 3)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL2_QSPI0SEL_Pos)|\
+                        MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< QSPI0 Module   \hideinitializer */
 
 #define SPI0_MODULE    (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_SPI0CKEN_Pos) |\
                         MODULE_CLKSEL_ENC( 2)|MODULE_CLKSEL_Msk_ENC( 3)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL2_SPI0SEL_Pos)|\
@@ -334,9 +420,21 @@ extern "C"
                         MODULE_CLKSEL_ENC( 2)|MODULE_CLKSEL_Msk_ENC( 1)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL2_PWM1SEL_Pos)|\
                         MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< PWM1 Module    \hideinitializer */
 
+#define BPWM0_MODULE   (MODULE_APBCLK_ENC( 2)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK1_BPWM0CKEN_Pos)|\
+                        MODULE_CLKSEL_ENC( 2)|MODULE_CLKSEL_Msk_ENC( 1)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL2_BPWM0SEL_Pos)|\
+                        MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< BPWM0 Module    \hideinitializer */
+
+#define BPWM1_MODULE   (MODULE_APBCLK_ENC( 2)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK1_BPWM1CKEN_Pos)|\
+                        MODULE_CLKSEL_ENC( 2)|MODULE_CLKSEL_Msk_ENC( 1)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL2_BPWM1SEL_Pos)|\
+                        MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< BPWM1 Module    \hideinitializer */
+
 #define USCI0_MODULE   (MODULE_APBCLK_ENC( 2)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK1_USCI0CKEN_Pos)|\
                         MODULE_CLKSEL_ENC(NA)|MODULE_CLKSEL_Msk_ENC(NA)|MODULE_CLKSEL_Pos_ENC(NA)|\
                         MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< USCI0 Module   \hideinitializer */
+
+#define USCI1_MODULE   (MODULE_APBCLK_ENC( 2)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK1_USCI1CKEN_Pos)|\
+                        MODULE_CLKSEL_ENC(NA)|MODULE_CLKSEL_Msk_ENC(NA)|MODULE_CLKSEL_Pos_ENC(NA)|\
+                        MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< USCI1 Module   \hideinitializer */
 
 /*@}*/ /* end of group CLK_EXPORTED_CONSTANTS */
 
