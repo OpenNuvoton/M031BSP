@@ -82,7 +82,7 @@ void USCI_SPI_Init(void)
     USPI_EnableAutoSS(USPI0, 0, USPI_SS_ACTIVE_LOW);
 }
 
-void USCI_IRQHandler(void)
+void USCI01_IRQHandler(void)
 {
     uint32_t u32RxData;
 

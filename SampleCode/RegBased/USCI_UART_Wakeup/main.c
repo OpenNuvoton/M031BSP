@@ -142,7 +142,7 @@ int main()
 /*---------------------------------------------------------------------------------------------------------*/
 /* ISR to handle USCI interrupt event                                                                      */
 /*---------------------------------------------------------------------------------------------------------*/
-void USCI_IRQHandler(void)
+void USCI01_IRQHandler(void)
 {
     uint32_t u32IntSts = UUART0->PROTSTS;
     uint32_t u32WkSts = UUART0->WKSTS;

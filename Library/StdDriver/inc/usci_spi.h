@@ -346,7 +346,7 @@ extern "C"
   * @param[in]  uspi The pointer of the specified USCI_SPI module.
   * @return     None.
   * @details    Set RXPDMAEN bit of USPI_PDMACTL register to enable RX PDMA transfer function.
-  * \hideinitializer  
+  * \hideinitializer
   */
 #define USPI_TRIGGER_RX_PDMA(uspi)   ( (uspi)->PDMACTL |= USPI_PDMACTL_RXPDMAEN_Msk | USPI_PDMACTL_PDMAEN_Msk )
 
@@ -355,7 +355,7 @@ extern "C"
   * @param[in]  uspi The pointer of the specified USCI_SPI module.
   * @return     None.
   * @details    Set TXPDMAEN bit of USPI_PDMACTL register to enable TX PDMA transfer function.
-  * \hideinitializer  
+  * \hideinitializer
   */
 #define USPI_TRIGGER_TX_PDMA(uspi)   ( (uspi)->PDMACTL |= USPI_PDMACTL_TXPDMAEN_Msk | USPI_PDMACTL_PDMAEN_Msk )
 
@@ -364,7 +364,7 @@ extern "C"
   * @param[in]  uspi The pointer of the specified USCI_SPI module.
   * @return     None.
   * @details    Clear RXPDMAEN bit of USPI_PDMACTL register to disable RX PDMA transfer function.
-  * \hideinitializer  
+  * \hideinitializer
   */
 #define USPI_DISABLE_RX_PDMA(uspi) ( (uspi)->PDMACTL &= ~USPI_PDMACTL_RXPDMAEN_Msk )
 
@@ -373,7 +373,7 @@ extern "C"
   * @param[in]  uspi The pointer of the specified USCI_SPI module.
   * @return     None.
   * @details    Clear TXPDMAEN bit of USPI_PDMACTL register to disable TX PDMA transfer function.
-  * \hideinitializer  
+  * \hideinitializer
   */
 #define USPI_DISABLE_TX_PDMA(uspi) ( (uspi)->PDMACTL &= ~USPI_PDMACTL_TXPDMAEN_Msk )
 

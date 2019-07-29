@@ -131,7 +131,7 @@ int main()
 /*---------------------------------------------------------------------------------------------------------*/
 /* ISR to handle USCI interrupt event                                                                      */
 /*---------------------------------------------------------------------------------------------------------*/
-void USCI_IRQHandler(void)
+void USCI01_IRQHandler(void)
 {
     uint32_t u32Temp;
     volatile uint32_t u32ProtSts = UUART_GET_PROT_STATUS(UUART0);
