@@ -148,7 +148,7 @@ extern "C"
 
 #define CLK_CLKSEL2_QSPI0SEL_HXT         (0x0UL<<CLK_CLKSEL2_QSPI0SEL_Pos)      /*!< Setting QSPI clock source as HXT   \hideinitializer */
 #define CLK_CLKSEL2_QSPI0SEL_PLL         (0x1UL<<CLK_CLKSEL2_QSPI0SEL_Pos)      /*!< Setting QSPI clock source as PLL   \hideinitializer */
-#define CLK_CLKSEL2_QSPI0SEL_PCLK1       (0x2UL<<CLK_CLKSEL2_QSPI0SEL_Pos)      /*!< Setting QSPI clock source as PCLK1 \hideinitializer */
+#define CLK_CLKSEL2_QSPI0SEL_PCLK0       (0x2UL<<CLK_CLKSEL2_QSPI0SEL_Pos)      /*!< Setting QSPI clock source as PCLK0 \hideinitializer */
 #define CLK_CLKSEL2_QSPI0SEL_HIRC        (0x3UL<<CLK_CLKSEL2_QSPI0SEL_Pos)      /*!< Setting QSPI clock source as HIRC  \hideinitializer */
 
 #define CLK_CLKSEL2_SPI0SEL_HXT          (0x0UL<<CLK_CLKSEL2_SPI0SEL_Pos)       /*!< Setting SPI clock source as HXT    \hideinitializer */
