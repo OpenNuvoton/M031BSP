@@ -40,15 +40,15 @@ void PowerDownFunction(void)
 }
 
 /**
- * @brief       GPIO PA/PB IRQ
+ * @brief       GPIO PA/PB/PG/PH IRQ
  *
  * @param       None
  *
  * @return      None
  *
- * @details     The PA/PB default IRQ, declared in startup_M031Series.s.
+ * @details     The PA/PB/PG/PH default IRQ, declared in startup_M031Series.s.
  */
-void GPAB_IRQHandler(void)
+void GPABGH_IRQHandler(void)
 {
     volatile uint32_t temp;
 
@@ -168,7 +168,7 @@ int main(void)
     /* Enable interrupt by falling edge trigger */
     PB->INTEN = (PB->INTEN&~GPIO_INTEN_RHIEN3_Msk) | GPIO_INTEN_FLIEN3_Msk;
 
-    NVIC_EnableIRQ(GPIO_PAPB_IRQn);
+    NVIC_EnableIRQ(GPIO_PAPBPGPH_IRQn);
 
     /* Enable interrupt de-bounce function and select de-bounce sampling cycle time is 1024 clocks of LIRC clock */
     GPIO->DBCTL = GPIO_DBCTL_ICLKON_Msk | GPIO_DBCTL_DBCLKSRC_LIRC | GPIO_DBCTL_DBCLKSEL_1024;
