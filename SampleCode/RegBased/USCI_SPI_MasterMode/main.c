@@ -29,7 +29,7 @@ uint32_t g_au32DestinationData[TEST_COUNT];
 volatile uint32_t g_u32TxDataCount;
 volatile uint32_t g_u32RxDataCount;
 
-void USCI_IRQHandler(void)
+void USCI01_IRQHandler(void)
 {
     uint32_t u32RxData;
 

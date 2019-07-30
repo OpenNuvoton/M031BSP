@@ -113,7 +113,7 @@ int main()
 /*---------------------------------------------------------------------------------------------------------*/
 /* ISR to handle USCI interrupt event                                                                      */
 /*---------------------------------------------------------------------------------------------------------*/
-void USCI_IRQHandler(void)
+void USCI01_IRQHandler(void)
 {
     uint32_t u32IntSts = UUART_GET_PROT_STATUS(UUART0);
     uint32_t u32WkSts = UUART_GET_WAKEUP_FLAG(UUART0);
