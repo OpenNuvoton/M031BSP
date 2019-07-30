@@ -125,6 +125,10 @@ void PDMA_SetTransferAddr(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32SrcAddr, uin
  *                - \ref PDMA_UART2_RX
  *                - \ref PDMA_USCI0_TX
  *                - \ref PDMA_USCI0_RX
+ *                - \ref PDMA_USCI1_TX
+ *                - \ref PDMA_USCI1_RX
+ *                - \ref PDMA_QSPI0_TX
+ *                - \ref PDMA_QSPI0_RX
  *                - \ref PDMA_SPI0_TX
  *                - \ref PDMA_SPI0_RX
  *                - \ref PDMA_ADC_RX
@@ -142,6 +146,16 @@ void PDMA_SetTransferAddr(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32SrcAddr, uin
  *                - \ref PDMA_TMR1
  *                - \ref PDMA_TMR2
  *                - \ref PDMA_TMR3
+ *                - \ref PDMA_UART3_TX
+ *                - \ref PDMA_UART3_RX
+ *                - \ref PDMA_UART4_TX
+ *                - \ref PDMA_UART4_RX
+ *                - \ref PDMA_UART5_TX
+ *                - \ref PDMA_UART5_RX
+ *                - \ref PDMA_UART6_TX
+ *                - \ref PDMA_UART6_RX
+ *                - \ref PDMA_UART7_TX
+ *                - \ref PDMA_UART7_RX
  * @param[in]   u32ScatterEn    Scatter-gather mode enable
  * @param[in]   u32DescAddr     Scatter-gather descriptor address
  *
@@ -172,7 +186,23 @@ void PDMA_SetTransferMode(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Peripheral, 
         break;
 
     case 4ul:
-        pdma->REQSEL4 = (pdma->REQSEL4 & ~PDMA_REQSEL4_REQSRC4_Msk) | u32Peripheral;
+        pdma->REQSEL4_7 = (pdma->REQSEL4_7 & ~PDMA_REQSEL4_7_REQSRC4_Msk) | u32Peripheral;
+        break;
+
+    case 5ul:
+        pdma->REQSEL4_7 = (pdma->REQSEL4_7 & ~PDMA_REQSEL4_7_REQSRC5_Msk) | (u32Peripheral << PDMA_REQSEL4_7_REQSRC5_Pos);
+        break;
+
+    case 6ul:
+        pdma->REQSEL4_7 = (pdma->REQSEL4_7 & ~PDMA_REQSEL4_7_REQSRC6_Msk) | (u32Peripheral << PDMA_REQSEL4_7_REQSRC6_Pos);
+        break;
+
+    case 7ul:
+        pdma->REQSEL4_7 = (pdma->REQSEL4_7 & ~PDMA_REQSEL4_7_REQSRC7_Msk) | (u32Peripheral << PDMA_REQSEL4_7_REQSRC7_Pos);
+        break;
+
+    case 8ul:
+        pdma->REQSEL8 = (pdma->REQSEL8 & ~PDMA_REQSEL8_REQSRC8_Msk) | u32Peripheral;
         break;
 
     default:

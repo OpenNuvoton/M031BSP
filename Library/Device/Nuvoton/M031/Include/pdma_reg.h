@@ -409,10 +409,10 @@ typedef struct
      * |        |          |Note: The channel configuration is the same as REQSRC0 field.
      * |        |          |Please refer to the explanation of REQSRC0.
      */
-    DSCT_T        DSCT[5];               /*!< [0x0000 ~ 0x004C] Control Register of PDMA Channel 0 ~ 4                  */
-    __I  uint32_t RESERVE0[44];
-    __I  uint32_t CURSCAT[5];            /*!< [0x0100 ~ 0x110] Current Scatter-gather Descriptor Table Address of PDMA Channel n */
-    __I  uint32_t RESERVE1[187];
+    DSCT_T        DSCT[9];               /*!< [0x0000 ~ 0x004C] Control Register of PDMA Channel 0 ~ 4                  */
+    __I  uint32_t RESERVE0[28];
+    __I  uint32_t CURSCAT[9];            /*!< [0x0100 ~ 0x110] Current Scatter-gather Descriptor Table Address of PDMA Channel n */
+    __I  uint32_t RESERVE1[183];
     __IO uint32_t CHCTL;                 /*!< [0x0400] PDMA Channel Control Register                                    */
     __O  uint32_t PAUSE;                 /*!< [0x0404] PDMA Transfer Pause Control Register                             */
     __O  uint32_t SWREQ;                 /*!< [0x0408] PDMA Software Request Register                                   */
@@ -434,7 +434,8 @@ typedef struct
     __IO uint32_t CHRST;                 /*!< [0x0460] PDMA Channel Reset Register                                      */
     __I  uint32_t RESERVE3[7];
     __IO uint32_t REQSEL0_3;             /*!< [0x0480] PDMA Request Source Select Register 0                            */
-    __IO uint32_t REQSEL4;               /*!< [0x0484] PDMA Request Source Select Register 1                            */
+    __IO uint32_t REQSEL4_7;             /*!< [0x0484] PDMA Request Source Select Register 1                            */
+    __IO uint32_t REQSEL8;               /*!< [0x0488] PDMA Request Source Select Register 2                            */
 } PDMA_T;
 
 /**
@@ -482,25 +483,25 @@ typedef struct
 #define PDMA_CURSCAT_CURADDR_Msk        (0xfffffffful << PDMA_CURSCAT_CURADDR_Pos)       /*!< PDMA_T::CURSCAT: CURADDR Mask         */
 
 #define PDMA_CHCTL_CHENn_Pos            (0)                                              /*!< PDMA_T::CHCTL: CHENn Position         */
-#define PDMA_CHCTL_CHENn_Msk            (0x1ful << PDMA_CHCTL_CHENn_Pos)                 /*!< PDMA_T::CHCTL: CHENn Mask             */
+#define PDMA_CHCTL_CHENn_Msk            (0x1fful << PDMA_CHCTL_CHENn_Pos)                 /*!< PDMA_T::CHCTL: CHENn Mask             */
 
 #define PDMA_PAUSE_PAUSEn_Pos           (0)                                              /*!< PDMA_T::PAUSE: PAUSEn Position        */
-#define PDMA_PAUSE_PAUSEn_Msk           (0x1ful << PDMA_PAUSE_PAUSEn_Pos)                /*!< PDMA_T::PAUSE: PAUSEn Mask            */
+#define PDMA_PAUSE_PAUSEn_Msk           (0x1fful << PDMA_PAUSE_PAUSEn_Pos)                /*!< PDMA_T::PAUSE: PAUSEn Mask            */
 
 #define PDMA_SWREQ_SWREQn_Pos           (0)                                              /*!< PDMA_T::SWREQ: SWREQn Position        */
-#define PDMA_SWREQ_SWREQn_Msk           (0x1ful << PDMA_SWREQ_SWREQn_Pos)                /*!< PDMA_T::SWREQ: SWREQn Mask            */
+#define PDMA_SWREQ_SWREQn_Msk           (0x1fful << PDMA_SWREQ_SWREQn_Pos)                /*!< PDMA_T::SWREQ: SWREQn Mask            */
 
 #define PDMA_TRGSTS_REQSTSn_Pos         (0)                                              /*!< PDMA_T::TRGSTS: REQSTSn Position      */
-#define PDMA_TRGSTS_REQSTSn_Msk         (0x1ful << PDMA_TRGSTS_REQSTSn_Pos)              /*!< PDMA_T::TRGSTS: REQSTSn Mask          */
+#define PDMA_TRGSTS_REQSTSn_Msk         (0x1fful << PDMA_TRGSTS_REQSTSn_Pos)              /*!< PDMA_T::TRGSTS: REQSTSn Mask          */
 
 #define PDMA_PRISET_FPRISETn_Pos        (0)                                              /*!< PDMA_T::PRISET: FPRISETn Position     */
-#define PDMA_PRISET_FPRISETn_Msk        (0x1ful << PDMA_PRISET_FPRISETn_Pos)             /*!< PDMA_T::PRISET: FPRISETn Mask         */
+#define PDMA_PRISET_FPRISETn_Msk        (0x1fful << PDMA_PRISET_FPRISETn_Pos)             /*!< PDMA_T::PRISET: FPRISETn Mask         */
 
 #define PDMA_PRICLR_FPRICLRn_Pos        (0)                                              /*!< PDMA_T::PRICLR: FPRICLRn Position     */
-#define PDMA_PRICLR_FPRICLRn_Msk        (0x1ful << PDMA_PRICLR_FPRICLRn_Pos)             /*!< PDMA_T::PRICLR: FPRICLRn Mask         */
+#define PDMA_PRICLR_FPRICLRn_Msk        (0x1fful << PDMA_PRICLR_FPRICLRn_Pos)             /*!< PDMA_T::PRICLR: FPRICLRn Mask         */
 
 #define PDMA_INTEN_INTENn_Pos           (0)                                              /*!< PDMA_T::INTEN: INTENn Position        */
-#define PDMA_INTEN_INTENn_Msk           (0x1ful << PDMA_INTEN_INTENn_Pos)                /*!< PDMA_T::INTEN: INTENn Mask            */
+#define PDMA_INTEN_INTENn_Msk           (0x1fful << PDMA_INTEN_INTENn_Pos)                /*!< PDMA_T::INTEN: INTENn Mask            */
 
 #define PDMA_INTSTS_ABTIF_Pos           (0)                                              /*!< PDMA_T::INTSTS: ABTIF Position        */
 #define PDMA_INTSTS_ABTIF_Msk           (0x1ul << PDMA_INTSTS_ABTIF_Pos)                 /*!< PDMA_T::INTSTS: ABTIF Mask            */
@@ -532,6 +533,18 @@ typedef struct
 #define PDMA_ABTSTS_ABTIF4_Pos          (4)                                              /*!< PDMA_T::ABTSTS: ABTIF4 Position       */
 #define PDMA_ABTSTS_ABTIF4_Msk          (0x1ul << PDMA_ABTSTS_ABTIF4_Pos)                /*!< PDMA_T::ABTSTS: ABTIF4 Mask           */
 
+#define PDMA_ABTSTS_ABTIF5_Pos          (5)                                               /*!< PDMA_T::ABTSTS: ABTIF5 Position        */
+#define PDMA_ABTSTS_ABTIF5_Msk          (0x1ul << PDMA_ABTSTS_ABTIF5_Pos)                 /*!< PDMA_T::ABTSTS: ABTIF5 Mask            */
+
+#define PDMA_ABTSTS_ABTIF6_Pos          (6)                                               /*!< PDMA_T::ABTSTS: ABTIF6 Position        */
+#define PDMA_ABTSTS_ABTIF6_Msk          (0x1ul << PDMA_ABTSTS_ABTIF6_Pos)                 /*!< PDMA_T::ABTSTS: ABTIF6 Mask            */
+
+#define PDMA_ABTSTS_ABTIF7_Pos          (7)                                               /*!< PDMA_T::ABTSTS: ABTIF7 Position        */
+#define PDMA_ABTSTS_ABTIF7_Msk          (0x1ul << PDMA_ABTSTS_ABTIF7_Pos)                 /*!< PDMA_T::ABTSTS: ABTIF7 Mask            */
+
+#define PDMA_ABTSTS_ABTIF8_Pos          (8)                                               /*!< PDMA_T::ABTSTS: ABTIF8 Position        */
+#define PDMA_ABTSTS_ABTIF8_Msk          (0x1ul << PDMA_ABTSTS_ABTIF8_Pos)                 /*!< PDMA_T::ABTSTS: ABTIF8 Mask            */
+
 #define PDMA_TDSTS_TDIF0_Pos            (0)                                              /*!< PDMA_T::TDSTS: TDIF0 Position         */
 #define PDMA_TDSTS_TDIF0_Msk            (0x1ul << PDMA_TDSTS_TDIF0_Pos)                  /*!< PDMA_T::TDSTS: TDIF0 Mask             */
 
@@ -547,11 +560,23 @@ typedef struct
 #define PDMA_TDSTS_TDIF4_Pos            (4)                                              /*!< PDMA_T::TDSTS: TDIF4 Position         */
 #define PDMA_TDSTS_TDIF4_Msk            (0x1ul << PDMA_TDSTS_TDIF4_Pos)                  /*!< PDMA_T::TDSTS: TDIF4 Mask             */
 
+#define PDMA_TDSTS_TDIF5_Pos            (5)                                               /*!< PDMA_T::TDSTS: TDIF5 Position          */
+#define PDMA_TDSTS_TDIF5_Msk            (0x1ul << PDMA_TDSTS_TDIF5_Pos)                   /*!< PDMA_T::TDSTS: TDIF5 Mask              */
+
+#define PDMA_TDSTS_TDIF6_Pos            (6)                                               /*!< PDMA_T::TDSTS: TDIF6 Position          */
+#define PDMA_TDSTS_TDIF6_Msk            (0x1ul << PDMA_TDSTS_TDIF6_Pos)                   /*!< PDMA_T::TDSTS: TDIF6 Mask              */
+
+#define PDMA_TDSTS_TDIF7_Pos            (7)                                               /*!< PDMA_T::TDSTS: TDIF7 Position          */
+#define PDMA_TDSTS_TDIF7_Msk            (0x1ul << PDMA_TDSTS_TDIF7_Pos)                   /*!< PDMA_T::TDSTS: TDIF7 Mask              */
+
+#define PDMA_TDSTS_TDIF8_Pos            (8)                                               /*!< PDMA_T::TDSTS: TDIF8 Position          */
+#define PDMA_TDSTS_TDIF8_Msk            (0x1ul << PDMA_TDSTS_TDIF8_Pos)                   /*!< PDMA_T::TDSTS: TDIF8 Mask              */
+
 #define PDMA_ALIGN_ALIGNn_Pos           (0)                                              /*!< PDMA_T::ALIGN: ALIGNn Position        */
-#define PDMA_ALIGN_ALIGNn_Msk           (0x1ful << PDMA_ALIGN_ALIGNn_Pos)                /*!< PDMA_T::ALIGN: ALIGNn Mask            */
+#define PDMA_ALIGN_ALIGNn_Msk           (0x1fful << PDMA_ALIGN_ALIGNn_Pos)                /*!< PDMA_T::ALIGN: ALIGNn Mask            */
 
 #define PDMA_TACTSTS_TXACTFn_Pos        (0)                                              /*!< PDMA_T::TACTSTS: TXACTFn Position     */
-#define PDMA_TACTSTS_TXACTFn_Msk        (0x1ful << PDMA_TACTSTS_TXACTFn_Pos)             /*!< PDMA_T::TACTSTS: TXACTFn Mask         */
+#define PDMA_TACTSTS_TXACTFn_Msk        (0x1fful << PDMA_TACTSTS_TXACTFn_Pos)             /*!< PDMA_T::TACTSTS: TXACTFn Mask         */
 
 #define PDMA_TOUTPSC_TOUTPSC0_Pos       (0)                                              /*!< PDMA_T::TOUTPSC: TOUTPSC0 Position    */
 #define PDMA_TOUTPSC_TOUTPSC0_Msk       (0x7ul << PDMA_TOUTPSC_TOUTPSC0_Pos)             /*!< PDMA_T::TOUTPSC: TOUTPSC0 Mask        */
@@ -575,7 +600,7 @@ typedef struct
 #define PDMA_TOC0_1_TOC1_Msk            (0xfffful << PDMA_TOC0_1_TOC1_Pos)               /*!< PDMA_T::TOC0_1: TOC1 Mask             */
 
 #define PDMA_CHRST_CHnRST_Pos           (0)                                              /*!< PDMA_T::CHRST: CHnRST Position        */
-#define PDMA_CHRST_CHnRST_Msk           (0x1ful << PDMA_CHRST_CHnRST_Pos)                /*!< PDMA_T::CHRST: CHnRST Mask            */
+#define PDMA_CHRST_CHnRST_Msk           (0x1fful << PDMA_CHRST_CHnRST_Pos)                /*!< PDMA_T::CHRST: CHnRST Mask            */
 
 #define PDMA_REQSEL0_3_REQSRC0_Pos      (0)                                              /*!< PDMA_T::REQSEL0_3: REQSRC0 Position   */
 #define PDMA_REQSEL0_3_REQSRC0_Msk      (0x3ful << PDMA_REQSEL0_3_REQSRC0_Pos)           /*!< PDMA_T::REQSEL0_3: REQSRC0 Mask       */
@@ -589,9 +614,20 @@ typedef struct
 #define PDMA_REQSEL0_3_REQSRC3_Pos      (24)                                             /*!< PDMA_T::REQSEL0_3: REQSRC3 Position   */
 #define PDMA_REQSEL0_3_REQSRC3_Msk      (0x3ful << PDMA_REQSEL0_3_REQSRC3_Pos)           /*!< PDMA_T::REQSEL0_3: REQSRC3 Mask       */
 
-#define PDMA_REQSEL4_REQSRC4_Pos        (0)                                              /*!< PDMA_T::REQSEL4: REQSRC4 Position     */
-#define PDMA_REQSEL4_REQSRC4_Msk        (0x3ful << PDMA_REQSEL4_REQSRC4_Pos)             /*!< PDMA_T::REQSEL4: REQSRC4 Mask         */
+#define PDMA_REQSEL4_7_REQSRC4_Pos      (0)                                               /*!< PDMA_T::REQSEL4_7: REQSRC4 Position    */
+#define PDMA_REQSEL4_7_REQSRC4_Msk      (0x3ful << PDMA_REQSEL4_7_REQSRC4_Pos)            /*!< PDMA_T::REQSEL4_7: REQSRC4 Mask        */
 
+#define PDMA_REQSEL4_7_REQSRC5_Pos      (8)                                               /*!< PDMA_T::REQSEL4_7: REQSRC5 Position    */
+#define PDMA_REQSEL4_7_REQSRC5_Msk      (0x3ful << PDMA_REQSEL4_7_REQSRC5_Pos)            /*!< PDMA_T::REQSEL4_7: REQSRC5 Mask        */
+
+#define PDMA_REQSEL4_7_REQSRC6_Pos      (16)                                              /*!< PDMA_T::REQSEL4_7: REQSRC6 Position    */
+#define PDMA_REQSEL4_7_REQSRC6_Msk      (0x3ful << PDMA_REQSEL4_7_REQSRC6_Pos)            /*!< PDMA_T::REQSEL4_7: REQSRC6 Mask        */
+
+#define PDMA_REQSEL4_7_REQSRC7_Pos      (24)                                              /*!< PDMA_T::REQSEL4_7: REQSRC7 Position    */
+#define PDMA_REQSEL4_7_REQSRC7_Msk      (0x3ful << PDMA_REQSEL4_7_REQSRC7_Pos)            /*!< PDMA_T::REQSEL4_7: REQSRC7 Mask        */
+
+#define PDMA_REQSEL8_REQSRC8_Pos        (0)                                               /*!< PDMA_T::REQSEL8: REQSRC8 Position    */
+#define PDMA_REQSEL8_REQSRC8_Msk        (0x3ful << PDMA_REQSEL8_REQSRC8_Pos)            /*!< PDMA_T::REQSEL8: REQSRC8 Mask        */
 /**@}*/ /* PDMA_CONST */
 /**@}*/ /* end of PDMA register group */
 /**@}*/ /* end of REGISTER group */

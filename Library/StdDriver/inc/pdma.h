@@ -25,7 +25,7 @@ extern "C"
 /** @addtogroup PDMA_EXPORTED_CONSTANTS PDMA Exported Constants
   @{
 */
-#define PDMA_CH_MAX    5UL   /*!< Specify Maximum Channels of PDMA  \hideinitializer */
+#define PDMA_CH_MAX    9UL   /*!< Specify Maximum Channels of PDMA  \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Operation Mode Constant Definitions                                                                    */
@@ -82,9 +82,13 @@ extern "C"
 #define PDMA_UART2_RX     9UL /*!<DMA Connect to UART2_RX \hideinitializer */
 #define PDMA_USCI0_TX    10UL /*!<DMA Connect to USCI0_TX \hideinitializer */
 #define PDMA_USCI0_RX    11UL /*!<DMA Connect to USCI0_RX \hideinitializer */
+#define PDMA_USCI1_TX    12UL /*!<DMA Connect to USCI1_TX \hideinitializer */
+#define PDMA_USCI1_RX    13UL /*!<DMA Connect to USCI1_RX \hideinitializer */
+#define PDMA_QSPI0_TX    16UL /*!<DMA Connect to QSPI0_TX \hideinitializer */
+#define PDMA_QSPI0_RX    17UL /*!<DMA Connect to QSPI0_RX \hideinitializer */
 #define PDMA_SPI0_TX     18UL /*!<DMA Connect to SPI0_TX \hideinitializer */
 #define PDMA_SPI0_RX     19UL /*!<DMA Connect to SPI0_RX \hideinitializer */
-#define PDMA_ADC_RX     20UL /*!<DMA Connect to ADC_RX \hideinitializer */
+#define PDMA_ADC_RX      20UL /*!<DMA Connect to ADC_RX \hideinitializer */
 #define PDMA_PWM0_P1_RX  21UL /*!<DMA Connect to PWM0_P1 \hideinitializer */
 #define PDMA_PWM0_P2_RX  22UL /*!<DMA Connect to PWM0_P2 \hideinitializer */
 #define PDMA_PWM0_P3_RX  23UL /*!<DMA Connect to PWM0_P3 \hideinitializer */
@@ -99,6 +103,16 @@ extern "C"
 #define PDMA_TMR1        33UL /*!<DMA Connect to TMR1 \hideinitializer */
 #define PDMA_TMR2        34UL /*!<DMA Connect to TMR2 \hideinitializer */
 #define PDMA_TMR3        35UL /*!<DMA Connect to TMR3 \hideinitializer */
+#define PDMA_UART3_TX    36UL /*!<DMA Connect to UART3_TX \hideinitializer */
+#define PDMA_UART3_RX    37UL /*!<DMA Connect to UART3_RX \hideinitializer */
+#define PDMA_UART4_TX    38UL /*!<DMA Connect to UART4_TX \hideinitializer */
+#define PDMA_UART4_RX    39UL /*!<DMA Connect to UART4_RX \hideinitializer */
+#define PDMA_UART5_TX    40UL /*!<DMA Connect to UART5_TX \hideinitializer */
+#define PDMA_UART5_RX    41UL /*!<DMA Connect to UART5_RX \hideinitializer */
+#define PDMA_UART6_TX    42UL /*!<DMA Connect to UART6_TX \hideinitializer */
+#define PDMA_UART6_RX    43UL /*!<DMA Connect to UART6_RX \hideinitializer */
+#define PDMA_UART7_TX    44UL /*!<DMA Connect to UART7_TX \hideinitializer */
+#define PDMA_UART7_RX    45UL /*!<DMA Connect to UART7_RX \hideinitializer */
 
 
 /*---------------------------------------------------------------------------------------------------------*/
