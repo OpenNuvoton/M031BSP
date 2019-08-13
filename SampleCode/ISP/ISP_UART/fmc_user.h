@@ -10,7 +10,7 @@
 
 #include "targetdev.h"
 
-extern int FMC_Proc(unsigned int u32Cmd, unsigned int addr_start, unsigned int addr_end, unsigned int *data);
+extern int FMC_Proc(uint32_t u32Cmd, uint32_t addr_start, uint32_t addr_end, uint32_t *data);
 
 
 #define Config0         FMC_CONFIG_BASE
@@ -54,7 +54,7 @@ extern int FMC_Proc(unsigned int u32Cmd, unsigned int addr_start, unsigned int a
 #define WriteData(addr_start, addr_end, data) (FMC_Proc(FMC_ISPCMD_PROGRAM, addr_start, addr_end, data))
 #define EraseAP(addr_start, size) (FMC_Proc(FMC_ISPCMD_PAGE_ERASE, addr_start, (addr_start) + (size), NULL))
 
-extern void UpdateConfig(unsigned int *data, unsigned int *res);
+extern void UpdateConfig(uint32_t *data, uint32_t *res);
 
 #endif
 

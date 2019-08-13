@@ -13,7 +13,12 @@
 #include "NuMicro.h"
 #include "uart_transfer.h"
 
+#ifdef __ICCARM__
+#pragma data_alignment=4
+uint8_t uart_rcvbuf[MAX_PKT_SIZE] = {0};
+#else
 __attribute__((aligned(4))) uint8_t uart_rcvbuf[MAX_PKT_SIZE] = {0};
+#endif
 
 uint8_t volatile bUartDataReady = 0;
 uint8_t volatile bufhead = 0;
@@ -47,8 +52,12 @@ void UART13_IRQHandler(void)
         bufhead = 0;
     }
 }
-
+#ifdef __ICCARM__
+#pragma data_alignment=4
+extern uint8_t response_buff[64];
+#else
 extern __attribute__((aligned(4))) uint8_t response_buff[64];
+#endif 
 void PutString(void)
 {
     uint32_t i;

@@ -13,7 +13,12 @@
 #include "NuMicro.h"
 #include "uart_transfer.h"
 
+#ifdef __ICCARM__
+#pragma data_alignment=4
+uint8_t uart_rcvbuf[MAX_PKT_SIZE] = {0};
+#else
 __attribute__((aligned(4))) uint8_t uart_rcvbuf[MAX_PKT_SIZE] = {0};
+#endif
 
 uint8_t volatile bUartDataReady = 0;
 uint8_t volatile bufhead = 0;
@@ -29,9 +34,9 @@ void UART02_IRQHandler(void)
     /*----- Determine interrupt source -----*/
     uint32_t u32IntSrc = UART0->INTSTS;
 
-    if (u32IntSrc & 0x11)   //RDA FIFO interrupt & RDA timeout interrupt
+    if (u32IntSrc & 0x11)   /*RDA FIFO interrupt & RDA timeout interrupt*/
     {
-        while (((UART0->FIFOSTS & UART_FIFOSTS_RXEMPTY_Msk) == 0) && (bufhead < MAX_PKT_SIZE))      //RX fifo not empty
+        while (((UART0->FIFOSTS & UART_FIFOSTS_RXEMPTY_Msk) == 0) && (bufhead < MAX_PKT_SIZE))      /*RX fifo not empty*/
         {
             uart_rcvbuf[bufhead++] = UART0->DAT;
         }
@@ -47,8 +52,13 @@ void UART02_IRQHandler(void)
         bufhead = 0;
     }
 }
-
+#ifdef __ICCARM__
+#pragma data_alignment=4
+extern uint8_t response_buff[64];
+#else
 extern __attribute__((aligned(4))) uint8_t response_buff[64];
+#endif 
+
 void PutString(void)
 {
     uint32_t i;
