@@ -1,7 +1,9 @@
 /**************************************************************************//**
  * @file     bpwm.c
- * @version  V0.10
- * @brief    M251 series BPWM driver source file
+ * @version  V1.00
+ * $Revision: 4 $
+ * $Date: 18/04/24 3:49p $
+ * @brief    M031 series BPWM driver source file
  *
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
