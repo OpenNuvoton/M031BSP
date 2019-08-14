@@ -125,13 +125,6 @@ void UART_DisableInt(UART_T  *uart, uint32_t u32InterruptFlag)
     /* Disable UART specified interrupt */
     UART_DISABLE_INT(uart, u32InterruptFlag);
 
-    /* Disable NVIC UART IRQ */
-    if(uart == UART0)
-        NVIC_DisableIRQ(UART02_IRQn);
-    else if(uart == UART1)
-        NVIC_DisableIRQ(UART1_IRQn);
-    else
-        NVIC_DisableIRQ(UART02_IRQn);
 }
 
 
@@ -180,13 +173,6 @@ void UART_EnableInt(UART_T  *uart, uint32_t u32InterruptFlag)
     /* Enable UART specified interrupt */
     UART_ENABLE_INT(uart, u32InterruptFlag);
 
-    /* Enable NVIC UART IRQ */
-    if(uart == UART0)
-        NVIC_EnableIRQ(UART02_IRQn);
-    else if(uart == UART1)
-        NVIC_EnableIRQ(UART1_IRQn);
-    else
-        NVIC_EnableIRQ(UART02_IRQn);
 }
 
 
@@ -577,7 +563,7 @@ uint32_t UART_Write(UART_T *uart, uint8_t pu8TxBuf[], uint32_t u32WriteBytes)
     {
         u32delayno = 0ul;
 
-        while ((uart->FIFOSTS & UART_FIFOSTS_TXEMPTYF_Msk) == 0ul)   /* Wait Tx empty and Time-out manner */
+        while (uart->FIFOSTS & UART_FIFOSTS_TXFULL_Msk)   /* Check Tx Full */
         {
             u32delayno++;
 

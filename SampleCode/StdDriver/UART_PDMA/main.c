@@ -299,6 +299,7 @@ void PDMA_UART(int32_t i32option)
     /* Enable UART0 RDA interrupt */
     if(g_u32TwoChannelPdmaTest == 0)
     {
+        NVIC_EnableIRQ(UART02_IRQn);
         UART_EnableInt(UART0, UART_INTEN_RDAIEN_Msk);
     }
 

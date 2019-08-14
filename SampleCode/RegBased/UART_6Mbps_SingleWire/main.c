@@ -312,7 +312,7 @@ void UART_FunctionTest()
     */
 
     /* Enable UART1 RDA/Time-out/Single-wire Bit Error Detection interrupt */
-    NVIC_EnableIRQ(UART1_IRQn);
+    NVIC_EnableIRQ(UART13_IRQn);
     UART1->INTEN |= (UART_INTEN_RDAIEN_Msk | UART_INTEN_RXTOIEN_Msk | UART_INTEN_SWBEIEN_Msk);
     /* Enable UART2 RDA/Time-out/Single-wire Bit Error Detection interrupt */
     NVIC_EnableIRQ(UART02_IRQn);

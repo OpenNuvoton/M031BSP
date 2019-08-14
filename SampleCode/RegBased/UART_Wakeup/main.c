@@ -304,7 +304,7 @@ void UART_PowerDownWakeUpTest(void)
 
     /* Enable UART wake-up and receive data available interrupt */
     UART1->INTEN |= (UART_INTEN_WKIEN_Msk | UART_INTEN_RDAIEN_Msk | UART_INTEN_RXTOIEN_Msk);
-    NVIC_EnableIRQ(UART1_IRQn);
+    NVIC_EnableIRQ(UART13_IRQn);
 
     UART_PowerDown_TestItem();
     u32Item = getchar();
@@ -346,6 +346,6 @@ void UART_PowerDownWakeUpTest(void)
 
     /* Disable UART Interrupt */
     UART1->INTEN = 0;
-    NVIC_DisableIRQ(UART1_IRQn);
+    NVIC_DisableIRQ(UART13_IRQn);
 
 }

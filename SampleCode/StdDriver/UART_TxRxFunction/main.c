@@ -203,6 +203,7 @@ void UART_FunctionTest()
     */
 
     /* Enable UART RDA and THRE interrupt */
+    NVIC_EnableIRQ(UART02_IRQn);
     UART_EnableInt(UART0, (UART_INTEN_RDAIEN_Msk | UART_INTEN_THREIEN_Msk));
     while(g_bWait);
 

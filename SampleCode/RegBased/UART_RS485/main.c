@@ -341,7 +341,7 @@ void RS485_9bitModeSlave()
     UART1->INTEN |= UART_INTEN_RDAIEN_Msk | UART_INTEN_RLSIEN_Msk | UART_INTEN_RXTOIEN_Msk;
 
     /* Enable UART1 IRQ */
-    NVIC_EnableIRQ(UART1_IRQn);
+    NVIC_EnableIRQ(UART13_IRQn);
 
     printf("Ready to receive data...(Press any key to stop test)\n");
     getchar();
