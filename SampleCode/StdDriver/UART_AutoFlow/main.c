@@ -218,6 +218,7 @@ void AutoFlow_FunctionRxTest(void)
     UART_SetTimeoutCnt(UART1, 0x3E);
 
     /* Enable RDA and RTO Interrupt */
+    NVIC_EnableIRQ(UART13_IRQn);
     UART_EnableInt(UART1, (UART_INTEN_RDAIEN_Msk | UART_INTEN_RLSIEN_Msk | UART_INTEN_RXTOIEN_Msk));
 
     printf("\n Starting to receive data...\n");

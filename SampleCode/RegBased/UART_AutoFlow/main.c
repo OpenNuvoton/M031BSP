@@ -236,7 +236,7 @@ void AutoFlow_FunctionRxTest(void)
     UART1->INTEN |= UART_INTEN_TOCNTEN_Msk;
 
     /* Enable UART1 interrupt */
-    NVIC_EnableIRQ(UART1_IRQn);
+    NVIC_EnableIRQ(UART13_IRQn);
 
     printf("\n Starting to receive data...\n");
 
@@ -255,7 +255,7 @@ void AutoFlow_FunctionRxTest(void)
     printf("\n Receive OK & Check OK\n");
 
     /* Disable UART1 interrupt */
-    NVIC_DisableIRQ(UART1_IRQn);
+    NVIC_DisableIRQ(UART13_IRQn);
 
     /* Disable RDA and RTO Interrupt */
     UART1->INTEN &= ~(UART_INTEN_RDAIEN_Msk | UART_INTEN_RXTOIEN_Msk);
