@@ -56,7 +56,7 @@
 /*                Processor and Core Peripherals                              */
 /******************************************************************************/
 /** @addtogroup CMSIS_Device CMSIS Definitions
-  Configuration of the Cortex-M23 Processor and Core Peripherals
+  Configuration of the Cortex-M0 Processor and Core Peripherals
   @{
 */
 
