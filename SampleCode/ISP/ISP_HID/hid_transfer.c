@@ -14,8 +14,14 @@
 #include "NuMicro.h"
 #include "hid_transfer.h"
 
-extern __align(4) uint8_t response_buff[64];
-__align(4) uint8_t usb_rcvbuf[64];
+#ifdef __ICCARM__
+#pragma data_alignment=4
+extern uint8_t response_buff[64];
+uint8_t usb_rcvbuf[64];
+#else
+extern uint8_t response_buff[64] __attribute__((aligned(4)));
+uint8_t usb_rcvbuf[64] __attribute__((aligned(4)));
+#endif
 uint8_t bUsbDataReady;
 
 void USBD_IRQHandler(void)

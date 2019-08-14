@@ -18,9 +18,14 @@
 
 
 volatile uint8_t bISPDataReady;
-
-__align(4) uint8_t response_buff[64];
-__align(4) static uint8_t aprom_buf[FMC_FLASH_PAGE_SIZE];
+#ifdef __ICCARM__
+#pragma data_alignment=4
+uint8_t response_buff[64];
+static uint8_t aprom_buf[FMC_FLASH_PAGE_SIZE];
+#else
+uint8_t response_buff[64] __attribute__((aligned(4)));
+static uint8_t aprom_buf[FMC_FLASH_PAGE_SIZE] __attribute__((aligned(4)));
+#endif
 uint32_t bUpdateApromCmd;
 uint32_t g_apromSize, g_dataFlashAddr, g_dataFlashSize;
 
@@ -52,7 +57,7 @@ int ParseCmd(unsigned char *buffer, uint8_t len)
     outpw(response + 4, 0);
     pSrc += 8;
     srclen -= 8;
-    ReadData(Config0, Config0 + 16, (uint32_t *)(response + 8)); //read config
+    ReadData(Config0, Config0 + 16, (unsigned int *)(response + 8));
     regcnf0 = *(uint32_t *)(response + 8);
     security = regcnf0 & 0x2;
 
@@ -113,7 +118,7 @@ int ParseCmd(unsigned char *buffer, uint8_t len)
         {
             EraseAP(g_dataFlashAddr, g_dataFlashSize);
             *(uint32_t *)(response + 8) = regcnf0 | 0x02;
-            UpdateConfig((uint32_t *)(response + 8), NULL);
+            UpdateConfig((unsigned int *)(response + 8), (unsigned int *)NULL);
         }
 
         bUpdateApromCmd = TRUE;
@@ -151,7 +156,7 @@ int ParseCmd(unsigned char *buffer, uint8_t len)
             goto out;
         }
 
-        UpdateConfig((uint32_t *)(pSrc), (uint32_t *)(response + 8));
+        UpdateConfig((unsigned int *)(pSrc), (unsigned int *)(response + 8));
         GetDataFlashInfo(&g_dataFlashAddr, &g_dataFlashSize);
         goto out;
     }
@@ -167,9 +172,9 @@ int ParseCmd(unsigned char *buffer, uint8_t len)
             goto out;
         }
 
-        ReadData(PageAddress, StartAddress, (uint32_t *)aprom_buf);
+        ReadData(PageAddress, StartAddress, (unsigned int *)aprom_buf);
         FMC_Erase_User(PageAddress);
-        WriteData(PageAddress, StartAddress, (uint32_t *)aprom_buf);
+        WriteData(PageAddress, StartAddress, (unsigned int *)aprom_buf);
 
         if ((StartAddress % FMC_FLASH_PAGE_SIZE) >= (FMC_FLASH_PAGE_SIZE - LastDataLen))
         {
@@ -187,9 +192,9 @@ int ParseCmd(unsigned char *buffer, uint8_t len)
         }
 
         TotalLen -= srclen;
-        WriteData(StartAddress, StartAddress + srclen, (uint32_t *)pSrc);
+        WriteData(StartAddress, StartAddress + srclen, (unsigned int *)pSrc);
         memset(pSrc, 0, srclen);
-        ReadData(StartAddress, StartAddress + srclen, (uint32_t *)pSrc);
+        ReadData(StartAddress, StartAddress + srclen, (unsigned int *)pSrc);
         StartAddress += srclen;
         LastDataLen =  srclen;
     }

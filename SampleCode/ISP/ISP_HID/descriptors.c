@@ -13,7 +13,12 @@
 #include "hid_transfer.h"
 
 /*!<USB HID Report Descriptor */
+#ifdef __ICCARM__
+#pragma data_alignment=4
 uint8_t HID_DeviceReportDescriptor[] =
+#else
+uint8_t HID_DeviceReportDescriptor[] __attribute__((aligned(4))) =
+#endif
 {
     0x06, 0x00, 0xFF,   // Usage Page = 0xFF00 (Vendor Defined Page 1)
     0x09, 0x01,         // Usage (Vendor Usage 1)
@@ -38,7 +43,12 @@ uint8_t HID_DeviceReportDescriptor[] =
 
 /*----------------------------------------------------------------------------*/
 /*!<USB Device Descriptor */
+#ifdef __ICCARM__
+#pragma data_alignment=4
 uint8_t gu8DeviceDescriptor[] =
+#else
+uint8_t gu8DeviceDescriptor[] __attribute__((aligned(4))) =
+#endif
 {
     LEN_DEVICE,     /* bLength */
     DESC_DEVICE,    /* bDescriptorType */
@@ -61,7 +71,12 @@ uint8_t gu8DeviceDescriptor[] =
 };
 
 /*!<USB Configure Descriptor */
+#ifdef __ICCARM__
+#pragma data_alignment=4
 uint8_t gu8ConfigDescriptor[] =
+#else
+uint8_t gu8ConfigDescriptor[] __attribute__((aligned(4))) =
+#endif
 {
     LEN_CONFIG,     /* bLength */
     DESC_CONFIG,    /* bDescriptorType */
@@ -118,7 +133,12 @@ uint8_t gu8ConfigDescriptor[] =
 };
 
 /*!<USB Language String Descriptor */
+#ifdef __ICCARM__
+#pragma data_alignment=4
 uint8_t gu8StringLang[4] =
+#else
+uint8_t gu8StringLang[4] __attribute__((aligned(4))) =
+#endif
 {
     4,              /* bLength */
     DESC_STRING,    /* bDescriptorType */
@@ -126,7 +146,12 @@ uint8_t gu8StringLang[4] =
 };
 
 /*!<USB Vendor String Descriptor */
+#ifdef __ICCARM__
+#pragma data_alignment=4
 uint8_t gu8VendorStringDesc[] =
+#else
+uint8_t gu8VendorStringDesc[] __attribute__((aligned(4))) =
+#endif
 {
     16,
     DESC_STRING,
@@ -134,7 +159,12 @@ uint8_t gu8VendorStringDesc[] =
 };
 
 /*!<USB Product String Descriptor */
+#ifdef __ICCARM__
+#pragma data_alignment=4
 uint8_t gu8ProductStringDesc[] =
+#else
+uint8_t gu8ProductStringDesc[] __attribute__((aligned(4))) =
+#endif
 {
     16,             /* bLength          */
     DESC_STRING,    /* bDescriptorType  */
@@ -142,7 +172,12 @@ uint8_t gu8ProductStringDesc[] =
 };
 
 /*!<USB BOS Descriptor */
+#ifdef __ICCARM__
+#pragma data_alignment=4
 uint8_t gu8BOSDescriptor[] =
+#else
+uint8_t gu8BOSDescriptor[] __attribute__((aligned(4))) =
+#endif
 {
     LEN_BOS,        /* bLength */
     DESC_BOS,       /* bDescriptorType */
