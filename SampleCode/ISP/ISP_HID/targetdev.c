@@ -17,7 +17,7 @@ uint32_t GetApromSize()
 
     do
     {
-        result = FMC_Read_User(size, &data);
+        result = FMC_Read_User(size, (unsigned int *)&data);
 
         if (result < 0)
         {
@@ -35,11 +35,11 @@ void GetDataFlashInfo(uint32_t *addr, uint32_t *size)
 {
     uint32_t uData;
     *size = 0;
-    FMC_Read_User(Config0, &uData);
+    FMC_Read_User(Config0, (unsigned int *)&uData);
 
     if ((uData & 0x01) == 0)   //DFEN enable
     {
-        FMC_Read_User(Config1, &uData);
+        FMC_Read_User(Config1, (unsigned int *)&uData);
         // filter the reserved bits in CONFIG1
         uData &= 0x000FFFFF;
 
