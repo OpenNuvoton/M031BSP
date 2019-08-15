@@ -46,13 +46,13 @@ void USCI01_IRQHandler(void)
     //USCI1 Interrupt status
     u32Status1 = UI2C_GET_PROT_STATUS(UI2C1);
 
-    if (u32Status0 != NULL)
+    if (u32Status0 != (uint32_t)NULL)
     {
         if (s_UI2C0HandlerFn != NULL)
             s_UI2C0HandlerFn(u32Status0);
     }
 
-    if (u32Status1 != NULL)
+    if (u32Status1 != (uint32_t)NULL)
     {
         if (s_UI2C1HandlerFn != NULL)
             s_UI2C1HandlerFn(u32Status1);
