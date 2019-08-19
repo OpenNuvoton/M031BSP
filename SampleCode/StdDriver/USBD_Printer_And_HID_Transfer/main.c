@@ -16,7 +16,7 @@
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 #include <stdio.h>
-#include "M031Series.h"
+#include "NuMicro.h"
 #include "micro_printer_and_hid_transfer.h"
 
 #define CRYSTAL_LESS        1    /* CRYSTAL_LESS must be 1 if USB clock source is HIRC */
