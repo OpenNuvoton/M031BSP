@@ -303,15 +303,15 @@ void I2C_SetSlaveAddr(I2C_T *i2c, uint8_t u8SlaveNo, uint8_t u8SlaveAddr, uint8_
     switch (u8SlaveNo)
     {
     case 1:
-        i2c->ADDR1  = ((uint32_t)u8SlaveAddr << 1U) | u8GCMode;
+        i2c->ADDR1  = ((uint32_t)u8SlaveAddr << 1U);
         break;
 
     case 2:
-        i2c->ADDR2  = ((uint32_t)u8SlaveAddr << 1U) | u8GCMode;
+        i2c->ADDR2  = ((uint32_t)u8SlaveAddr << 1U);
         break;
 
     case 3:
-        i2c->ADDR3  = ((uint32_t)u8SlaveAddr << 1U) | u8GCMode;
+        i2c->ADDR3  = ((uint32_t)u8SlaveAddr << 1U);
         break;
 
     case 0:
@@ -425,6 +425,239 @@ void I2C_EnableWakeup(I2C_T *i2c)
 void I2C_DisableWakeup(I2C_T *i2c)
 {
     i2c->WKCTL &= ~I2C_WKCTL_WKEN_Msk;
+}
+
+/**
+ * @brief      To get SMBus Status
+ *
+ * @param[in]  i2c          Specify I2C port
+ *
+ * @return     SMBus status
+ *
+ * @details    To get the Bus Management status of I2C_BUSSTS register
+ *
+ */
+uint32_t I2C_SMBusGetStatus(I2C_T *i2c)
+{
+    return (i2c->BUSSTS);
+}
+
+/**
+ * @brief      Clear SMBus Interrupt Flag
+ *
+ * @param[in]  i2c              Specify I2C port
+ * @param[in]  u8SMBusIntFlag   Specify SMBus interrupt flag
+ *
+ * @return     None
+ *
+ * @details    To clear flags of I2C_BUSSTS status register if interrupt set.
+ *
+ */
+void I2C_SMBusClearInterruptFlag(I2C_T *i2c, uint8_t u8SMBusIntFlag)
+{
+    i2c->BUSSTS = u8SMBusIntFlag;
+}
+
+/**
+ * @brief      Set SMBus Bytes Counts of Transmission or Reception
+ *
+ * @param[in]  i2c              Specify I2C port
+ * @param[in]  u32PktSize       Transmit / Receive bytes
+ *
+ * @return     None
+ *
+ * @details    The transmission or receive byte number in one transaction when PECEN is set. The maximum is 255 bytes.
+ *
+ */
+void I2C_SMBusSetPacketByteCount(I2C_T *i2c, uint32_t u32PktSize)
+{
+    i2c->PKTSIZE = u32PktSize;
+}
+
+/**
+ * @brief      Init SMBus Host/Device Mode
+ *
+ * @param[in]  i2c              Specify I2C port
+ * @param[in]  u8HostDevice     Init SMBus port mode(I2C_SMBH_ENABLE/I2C_SMBD_ENABLE)
+ *
+ * @return     None
+ *
+ * @details    Using SMBus communication must specify the port is a Host or a Device.
+ *
+ */
+void I2C_SMBusOpen(I2C_T *i2c, uint8_t u8HostDevice)
+{
+    /* Clear  BMHEN, BMDEN of BUSCTL Register */
+    i2c->BUSCTL &=  ~(I2C_BUSCTL_BMHEN_Msk | I2C_BUSCTL_BMDEN_Msk);
+
+    /* Set SMBus Host/Device Mode, and enable Bus Management*/
+    if(u8HostDevice == (uint8_t)I2C_SMBH_ENABLE)
+    {
+        i2c->BUSCTL |= (I2C_BUSCTL_BMHEN_Msk | I2C_BUSCTL_BUSEN_Msk);
+    }
+    else
+    {
+        i2c->BUSCTL |= (I2C_BUSCTL_BMDEN_Msk | I2C_BUSCTL_BUSEN_Msk);
+    }
+}
+
+/**
+ * @brief      Disable SMBus function
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    Disable all SMBus function include Bus disable, CRC check, Acknowledge by manual, Host/Device Mode.
+ *
+ */
+void I2C_SMBusClose(I2C_T *i2c)
+{
+
+    i2c->BUSCTL = 0x00U;
+}
+
+/**
+ * @brief      Enable SMBus PEC Transmit Function
+ *
+ * @param[in]  i2c              Specify I2C port
+ * @param[in]  u8PECTxEn        CRC transmit enable(PECTX_ENABLE) or disable(PECTX_DISABLE)
+ *
+ * @return     None
+ *
+ * @details    When enable CRC check function, the Host or Device needs to transmit CRC byte.
+ *
+ */
+void I2C_SMBusPECTxEnable(I2C_T *i2c, uint8_t u8PECTxEn)
+{
+    i2c->BUSCTL &= ~I2C_BUSCTL_PECTXEN_Msk;
+
+    if(u8PECTxEn)
+    {
+        i2c->BUSCTL |= (I2C_BUSCTL_PECEN_Msk | I2C_BUSCTL_PECTXEN_Msk);
+    }
+    else
+    {
+        i2c->BUSCTL |= I2C_BUSCTL_PECEN_Msk;
+    }
+}
+
+/**
+ * @brief      Get SMBus CRC value
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     A byte is packet error check value
+ *
+ * @details    The CRC check value after a transmission or a reception by count by using CRC8
+ *
+ */
+uint8_t I2C_SMBusGetPECValue(I2C_T *i2c)
+{
+    return (uint8_t)i2c->PKTCRC;
+}
+
+/**
+ * @brief      Calculate Time-out of SMBus idle period
+ *
+ * @param[in]  i2c              Specify I2C port
+ * @param[in]  us               Time-out length(us)
+ * @param[in]  u32Hclk          I2C peripheral clock frequency
+ *
+ * @return     None
+ *
+ * @details    This function is used to set SMBus Time-out length when bus is in Idle state.
+ *
+ */
+
+void I2C_SMBusIdleTimeout(I2C_T *i2c, uint32_t us, uint32_t u32Hclk)
+{
+    uint32_t  u32Div, u32Hclk_kHz;
+
+    i2c->BUSCTL |= I2C_BUSCTL_TIDLE_Msk;
+    u32Hclk_kHz = u32Hclk / 1000U;
+    u32Div = (((us * u32Hclk_kHz) / 1000U) >> 2U) - 1U;
+    if(u32Div > 255U)
+    {
+        i2c->BUSTOUT = 0xFFU;
+    }
+    else
+    {
+        i2c->BUSTOUT = u32Div;
+    }
+
+}
+
+/**
+ * @brief      Calculate Time-out of SMBus active period
+ *
+ * @param[in]  i2c              Specify I2C port
+ * @param[in]  ms               Time-out length(ms)
+ * @param[in]  u32Pclk          peripheral clock frequency
+ *
+ * @return     None
+ *
+ * @details    This function is used to set SMBus Time-out length when bus is in active state.
+ *             Time-out length is calculate the SCL line "one clock" pull low timing.
+ *
+ */
+
+void I2C_SMBusTimeout(I2C_T *i2c, uint32_t ms, uint32_t u32Pclk)
+{
+    uint32_t u32Div, u32Pclk_kHz;
+
+    i2c->BUSCTL &= ~I2C_BUSCTL_TIDLE_Msk;
+
+    /* DIV4 disabled */
+    i2c->TOCTL &= ~I2C_TOCTL_TOCEN_Msk;
+    u32Pclk_kHz = u32Pclk / 1000U;
+    u32Div = ((ms * u32Pclk_kHz) / (16U * 1024U)) - 1U;
+    if(u32Div <= 0xFFU)
+    {
+        i2c->BUSTOUT = u32Div;
+    }
+    else
+    {
+        /* DIV4 enabled */
+        i2c->TOCTL |= I2C_TOCTL_TOCEN_Msk;
+        i2c->BUSTOUT = (((ms * u32Pclk_kHz) / (16U * 1024U * 4U)) - 1U) & 0xFFU; /* The max value is 255 */
+    }
+}
+
+/**
+ * @brief      Calculate Cumulative Clock low Time-out of SMBus active period
+ *
+ * @param[in]  i2c              Specify I2C port
+ * @param[in]  ms               Time-out length(ms)
+ * @param[in]  u32Pclk          peripheral clock frequency
+ *
+ * @return     None
+ *
+ * @details    This function is used to set SMBus Time-out length when bus is in Active state.
+ *             Time-out length is calculate the SCL line "clocks" low cumulative timing.
+ *
+ */
+
+void I2C_SMBusClockLoTimeout(I2C_T *i2c, uint32_t ms, uint32_t u32Pclk)
+{
+    uint32_t u32Div, u32Pclk_kHz;
+
+    i2c->BUSCTL &= ~I2C_BUSCTL_TIDLE_Msk;
+
+    /* DIV4 disabled */
+    i2c->TOCTL &= ~I2C_TOCTL_TOCEN_Msk;
+    u32Pclk_kHz = u32Pclk / 1000U;
+    u32Div = ((ms * u32Pclk_kHz) / (16U * 1024U)) - 1U;
+    if(u32Div <= 0xFFU)
+    {
+        i2c->CLKTOUT = u32Div;
+    }
+    else
+    {
+        /* DIV4 enabled */
+        i2c->TOCTL |= I2C_TOCTL_TOCEN_Msk;
+        i2c->CLKTOUT = (((ms * u32Pclk_kHz) / (16U * 1024U * 4U)) - 1U) & 0xFFU; /* The max value is 255 */
+    }
 }
 
 /**
