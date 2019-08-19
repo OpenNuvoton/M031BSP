@@ -61,7 +61,7 @@ uint32_t QSPI_Open(QSPI_T *qspi,
         qspi->SSCTL = QSPI_SS_ACTIVE_LOW;
 
         /* Default setting: MSB first, disable unit transfer interrupt, SP_CYCLE = 0. */
-        qspi->CTL = u32MasterSlave | (u32DataWidth << QSPI_CTL_DWIDTH_Pos) | (u32QSPIMode) | QSPI_CTL_QSPIEN_Msk;
+        qspi->CTL = u32MasterSlave | (u32DataWidth << QSPI_CTL_DWIDTH_Pos) | (u32QSPIMode) | QSPI_CTL_SPIEN_Msk;
 
         if (u32BusClock >= u32HCLKFreq)
         {
@@ -134,7 +134,7 @@ uint32_t QSPI_Open(QSPI_T *qspi,
         qspi->SSCTL = QSPI_SS_ACTIVE_LOW;
 
         /* Default setting: MSB first, disable unit transfer interrupt, SP_CYCLE = 0. */
-        qspi->CTL = u32MasterSlave | (u32DataWidth << QSPI_CTL_DWIDTH_Pos) | (u32QSPIMode) | QSPI_CTL_QSPIEN_Msk;
+        qspi->CTL = u32MasterSlave | (u32DataWidth << QSPI_CTL_DWIDTH_Pos) | (u32QSPIMode) | QSPI_CTL_SPIEN_Msk;
 
         /* Set DIVIDER = 0 */
         qspi->CLKDIV = 0UL;
@@ -235,7 +235,7 @@ uint32_t QSPI_SetBusClock(QSPI_T *qspi, uint32_t u32BusClock)
         CLK->CLKSEL2 = (CLK->CLKSEL2 & (~CLK_CLKSEL2_QSPI0SEL_Msk)) | CLK_CLKSEL2_QSPI0SEL_PCLK0;
     }
 
-    /* Check clock source of SPI */
+    /* Check clock source of QSPI */
     if ((CLK->CLKSEL2 & CLK_CLKSEL2_QSPI0SEL_Msk) == CLK_CLKSEL2_QSPI0SEL_HXT)
     {
         u32ClkSrc = __HXT; /* Clock source is HXT */
@@ -300,8 +300,8 @@ uint32_t QSPI_SetBusClock(QSPI_T *qspi, uint32_t u32BusClock)
 /**
   * @brief  Configure FIFO threshold setting.
   * @param[in]  qspi The pointer of the specified QSPI module.
-  * @param[in]  u32TxThreshold Decides the TX FIFO threshold. It could be 0 ~ 3.
-  * @param[in]  u32RxThreshold Decides the RX FIFO threshold. It could be 0 ~ 3.
+  * @param[in]  u32TxThreshold Decides the TX FIFO threshold. It could be 0 ~ 7.
+  * @param[in]  u32RxThreshold Decides the RX FIFO threshold. It could be 0 ~ 7.
   * @return None
   * @details Set TX FIFO threshold and RX FIFO threshold configurations.
   */
@@ -724,7 +724,7 @@ void QSPI_ClearIntFlag(QSPI_T *qspi, uint32_t u32Mask)
   *                       - \ref QSPI_TX_EMPTY_MASK
   *                       - \ref QSPI_TX_FULL_MASK
   *                       - \ref QSPI_TXRX_RESET_MASK
-  *                       - \ref QSPI_QSPIEN_STS_MASK
+  *                       - \ref QSPI_SPIEN_STS_MASK
   *                       - \ref QSPI_SSLINE_STS_MASK
   *
   * @return Flags of selected sources.
@@ -782,12 +782,12 @@ uint32_t QSPI_GetStatus(QSPI_T *qspi, uint32_t u32Mask)
         u32Flag |= QSPI_TXRX_RESET_MASK;
     }
 
-    u32TmpValue = qspi->STATUS & QSPI_STATUS_QSPIENSTS_Msk;
+    u32TmpValue = qspi->STATUS & QSPI_STATUS_SPIENSTS_Msk;
 
-    /* Check QSPIEN flag */
-    if ((u32Mask & QSPI_QSPIEN_STS_MASK) && (u32TmpValue))
+    /* Check SPIEN flag */
+    if ((u32Mask & QSPI_SPIEN_STS_MASK) && (u32TmpValue))
     {
-        u32Flag |= QSPI_QSPIEN_STS_MASK;
+        u32Flag |= QSPI_SPIEN_STS_MASK;
     }
 
     u32TmpValue = qspi->STATUS & QSPI_STATUS_SSLINE_Msk;

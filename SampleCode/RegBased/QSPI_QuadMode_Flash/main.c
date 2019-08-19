@@ -399,7 +399,7 @@ void QSPI_Init(void)
     SPI_FLASH_PORT->SSCTL = QSPI_SSCTL_AUTOSS_Msk | QSPI_SSCTL_SS_Msk;
 
     /* Configure SPI_FLASH_PORT as a master, MSB first, 8-bit transaction, SPI Mode-0 timing */
-    SPI_FLASH_PORT->CTL = QSPI_MASTER | (8 << QSPI_CTL_DWIDTH_Pos) | QSPI_CTL_TXNEG_Msk | QSPI_CTL_QSPIEN_Msk;
+    SPI_FLASH_PORT->CTL = QSPI_MASTER | (8 << QSPI_CTL_DWIDTH_Pos) | QSPI_CTL_TXNEG_Msk | QSPI_CTL_SPIEN_Msk;
 
     /* Set IP clock divider. SPI clock rate = f_PCLK0 / (1+1) */
     SPI_FLASH_PORT->CLKDIV = (SPI_FLASH_PORT->CLKDIV & (~QSPI_CLKDIV_DIVIDER_Msk)) | 1;
