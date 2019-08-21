@@ -45,6 +45,14 @@ extern "C"
 #define I2C_GCMODE_ENABLE           1    /*!< Enable  I2C GC Mode                                                         \hideinitializer */
 #define I2C_GCMODE_DISABLE          0    /*!< Disable I2C GC Mode                                                         \hideinitializer */
 
+/*---------------------------------------------------------------------------------------------------------*/
+/*  I2C SMBUS constant definitions.                                                                        */
+/*---------------------------------------------------------------------------------------------------------*/
+#define I2C_SMBH_ENABLE             1    /*!< Enable  SMBus Host Mode enable                                              \hideinitializer */
+#define I2C_SMBD_ENABLE             0    /*!< Enable  SMBus Device Mode enable                                            \hideinitializer */
+#define I2C_PECTX_ENABLE            1    /*!< Enable  SMBus Packet Error Check Transmit function                          \hideinitializer */
+#define I2C_PECTX_DISABLE           0    /*!< Disable SMBus Packet Error Check Transmit function                          \hideinitializer */
+
 /*@}*/ /* end of group I2C_EXPORTED_CONSTANTS */
 
 /** @addtogroup I2C_EXPORTED_FUNCTIONS I2C Exported Functions
@@ -201,6 +209,193 @@ extern "C"
 #define I2C_GET_WAKEUP_WR_STATUS(i2c) ( ((i2c)->WKSTS & I2C_WKSTS_WRSTSWK_Msk) == I2C_WKSTS_WRSTSWK_Msk ? 1 : 0)
 
 /**
+ * @brief      To get SMBus Status
+ *
+ * @param[in]  i2c          Specify I2C port
+ *
+ * @return     SMBus status
+ *
+ * @details    To get the Bus Management status of I2C_BUSSTS register
+ * \hideinitializer
+ *
+ */
+#define I2C_SMBUS_GET_STATUS(i2c) ((i2c)->BUSSTS)
+
+/**
+ * @brief      Get SMBus CRC value
+ *
+ * @param[in]  i2c          Specify I2C port
+ *
+ * @return     Packet error check byte value
+ *
+ * @details    The CRC check value after a transmission or a reception by count by using CRC8
+ * \hideinitializer
+ */
+#define I2C_SMBUS_GET_PEC_VALUE(i2c) ((i2c)->PKTCRC)
+
+/**
+ * @brief      Set SMBus Bytes number of Transmission or reception
+ *
+ * @param[in]  i2c              Specify I2C port
+ * @param[in]  u32PktSize       Transmit / Receive bytes
+ *
+ * @return     None
+ *
+ * @details    The transmission or receive byte number in one transaction when PECEN is set. The maximum is 255 bytes.
+ * \hideinitializer
+ */
+#define I2C_SMBUS_SET_PACKET_BYTE_COUNT(i2c, u32PktSize) ((i2c)->PKTSIZE = (u32PktSize))
+
+/**
+ * @brief      Enable SMBus Alert function
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    Device Mode(BMHEN=0): If ALERTEN(I2C_BUSCTL[4]) is set, the Alert pin will pull lo, and reply ACK when get ARP from host
+ *             Host   Mode(BMHEN=1): If ALERTEN(I2C_BUSCTL[4]) is set, the Alert pin is supported to receive alert state(Lo trigger)
+ * \hideinitializer
+ */
+#define I2C_SMBUS_ENABLE_ALERT(i2c) ((i2c)->BUSCTL |= I2C_BUSCTL_ALERTEN_Msk)
+
+/**
+ * @brief      Disable SMBus Alert pin function
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    Device Mode(BMHEN=0): If ALERTEN(I2C_BUSCTL[4]) is clear, the Alert pin will pull hi, and reply NACK when get ARP from host
+ *             Host   Mode(BMHEN=1): If ALERTEN(I2C_BUSCTL[4]) is clear, the Alert pin is not supported to receive alert state(Lo trigger)
+ * \hideinitializer
+ */
+#define I2C_SMBUS_DISABLE_ALERT(i2c) ((i2c)->BUSCTL &= ~I2C_BUSCTL_ALERTEN_Msk)
+
+/**
+ * @brief      Set SMBus SUSCON pin is output mode
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    This function to set SUSCON(I2C_BUSCTL[6]) pin is output mode.
+ *
+ * \hideinitializer
+ */
+#define I2C_SMBUS_SET_SUSCON_OUT(i2c)   ((i2c)->BUSCTL |= I2C_BUSCTL_SCTLOEN_Msk)
+
+/**
+ * @brief      Set SMBus SUSCON pin is input mode
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    This function to set SUSCON(I2C_BUSCTL[6]) pin is input mode.
+ *
+ * \hideinitializer
+ */
+#define I2C_SMBUS_SET_SUSCON_IN(i2c)   ((i2c)->BUSCTL &= ~I2C_BUSCTL_SCTLOEN_Msk)
+
+/**
+ * @brief      Set SMBus SUSCON pin output high state
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    This function to set SUSCON(I2C_BUSCTL[6]) pin is output hi state.
+ * \hideinitializer
+ */
+#define I2C_SMBUS_SET_SUSCON_HIGH(i2c)   ((i2c)->BUSCTL |= I2C_BUSCTL_SCTLOSTS_Msk)
+
+
+/**
+ * @brief      Set SMBus SUSCON pin output low state
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    This function to set SUSCON(I2C_BUSCTL[6]) pin is output lo state.
+ * \hideinitializer
+ */
+#define I2C_SMBUS_SET_SUSCON_LOW(i2c)   ((i2c)->BUSCTL &= ~I2C_BUSCTL_SCTLOSTS_Msk)
+
+/**
+ * @brief      Enable SMBus Acknowledge control by manual
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    The 9th bit can response the ACK or NACK according the received data by user. When the byte is received, SCLK line stretching to low between the 8th and 9th SCLK pulse.
+ * \hideinitializer
+ */
+#define I2C_SMBUS_ACK_MANUAL(i2c)   ((i2c)->BUSCTL |= I2C_BUSCTL_ACKMEN_Msk)
+
+/**
+ * @brief      Disable SMBus Acknowledge control by manual
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    Disable acknowledge response control by user.
+ * \hideinitializer
+ */
+#define I2C_SMBUS_ACK_AUTO(i2c)   ((i2c)->BUSCTL &= ~I2C_BUSCTL_ACKMEN_Msk)
+
+/**
+ * @brief      Enable SMBus Acknowledge manual interrupt
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    This function is used to enable SMBUS acknowledge manual interrupt on the 9th clock cycle when SMBUS=1 and ACKMEN=1
+ * \hideinitializer
+ */
+#define I2C_SMBUS_9THBIT_INT_ENABLE(i2c)   ((i2c)->BUSCTL |= I2C_BUSCTL_ACKM9SI_Msk)
+
+/**
+ * @brief      Disable SMBus Acknowledge manual interrupt
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    This function is used to disable SMBUS acknowledge manual interrupt on the 9th clock cycle when SMBUS=1 and ACKMEN=1
+ * \hideinitializer
+ */
+#define I2C_SMBUS_9THBIT_INT_DISABLE(i2c)   ((i2c)->BUSCTL &= ~I2C_BUSCTL_ACKM9SI_Msk)
+
+/**
+ * @brief      Enable SMBus PEC clear at REPEAT START
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    This function is used to enable the condition of REAEAT START can clear the PEC calculation.
+ * \hideinitializer
+ */
+#define I2C_SMBUS_RST_PEC_AT_START_ENABLE(i2c)   ((i2c)->BUSCTL |= I2C_BUSCTL_PECCLR_Msk)
+
+/**
+ * @brief      Disable SMBus PEC clear at Repeat START
+ *
+ * @param[in]  i2c              Specify I2C port
+ *
+ * @return     None
+ *
+ * @details    This function is used to disable the condition of Repeat START can clear the PEC calculation.
+ * \hideinitializer
+ */
+#define I2C_SMBUS_RST_PEC_AT_START_DISABLE(i2c)   ((i2c)->BUSCTL &= ~I2C_BUSCTL_PECCLR_Msk)
+
+/**
   * @brief      Enable RX PDMA function.
   * @param[in]  i2c The pointer of the specified I2C module.
   * @return     None.
@@ -283,7 +478,8 @@ __STATIC_INLINE void I2C_STOP(I2C_T *i2c)
 {
 
     (i2c)->CTL0 |= (I2C_CTL0_SI_Msk | I2C_CTL0_STO_Msk);
-    while(i2c->CTL0 & I2C_CTL0_STO_Msk) {
+    while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+    {
     }
 }
 
@@ -317,6 +513,16 @@ uint8_t I2C_ReadByteOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8DataAddr);
 uint32_t I2C_ReadMultiBytesOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8DataAddr, uint8_t rdata[], uint32_t u32rLen);
 uint8_t I2C_ReadByteTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16DataAddr);
 uint32_t I2C_ReadMultiBytesTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16DataAddr, uint8_t rdata[], uint32_t u32rLen);
+uint32_t I2C_SMBusGetStatus(I2C_T *i2c);
+void I2C_SMBusClearInterruptFlag(I2C_T *i2c, uint8_t u8SMBusIntFlag);
+void I2C_SMBusSetPacketByteCount(I2C_T *i2c, uint32_t u32PktSize);
+void I2C_SMBusOpen(I2C_T *i2c, uint8_t u8HostDevice);
+void I2C_SMBusClose(I2C_T *i2c);
+void I2C_SMBusPECTxEnable(I2C_T *i2c, uint8_t u8PECTxEn);
+uint8_t I2C_SMBusGetPECValue(I2C_T *i2c);
+void I2C_SMBusIdleTimeout(I2C_T *i2c, uint32_t us, uint32_t u32Hclk);
+void I2C_SMBusTimeout(I2C_T *i2c, uint32_t ms, uint32_t u32Pclk);
+void I2C_SMBusClockLoTimeout(I2C_T *i2c, uint32_t ms, uint32_t u32Pclk);
 
 /*@}*/ /* end of group I2C_EXPORTED_FUNCTIONS */
 
