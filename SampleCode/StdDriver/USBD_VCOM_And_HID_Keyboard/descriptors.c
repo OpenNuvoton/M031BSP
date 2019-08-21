@@ -10,7 +10,7 @@
  *****************************************************************************/
 /*!<Includes */
 #include "NuMicro.h"
-#include "VCOM_And_hid_keyboard.h"
+#include "VCOM_and_HID_keyboard.h"
 
 /*!<USB HID Report Descriptor */
 uint8_t HID_KeyboardReportDescriptor[] =

@@ -10,7 +10,7 @@
 *****************************************************************************/
 /*!<Includes */
 #include "NuMicro.h"
-#include "hid_transfer_and_MSC.h"
+#include "HID_Transfer_and_MSC.h"
 
 /*!<USB HID Report Descriptor */
 uint8_t HID_DeviceReportDescriptor[] =

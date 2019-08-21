@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "NuMicro.h"
-#include "VCOM_And_hid_keyboard.h"
+#include "VCOM_and_HID_keyboard.h"
 
 uint8_t volatile g_u8EP5Ready = 0;
 

@@ -10,7 +10,7 @@
  *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"
-#include "VCOM_And_hid_keyboard.h"
+#include "VCOM_and_HID_keyboard.h"
 
 #define CRYSTAL_LESS        1    /* CRYSTAL_LESS must be 1 if USB clock source is HIRC */
 #define TRIM_INIT           (SYS_BASE+0x118)
