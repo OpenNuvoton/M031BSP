@@ -54,7 +54,7 @@ typedef struct
      * |        |          |Note: This field is only useful in burst transfer type.
      * |[7]     |TBINTDIS  |Table Interrupt Disable Bit
      * |        |          |This field can be used to decide whether to enable table interrupt or not.
-     * |        |          |If the TBINTDIS bit is enabled it will not generates TDIFn(PDMA_TDSTS[4:0]) when PDMA controller finishes transfer task.
+     * |        |          |If the TBINTDIS bit is enabled it will not generates TDIFn(PDMA_TDSTS[8:0]) when PDMA controller finishes transfer task.
      * |        |          |0 = Table interrupt Enabled.
      * |        |          |1 = Table interrupt Disabled.
      * |        |          |Note: This function only for scatter-gather mode.
@@ -135,7 +135,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |CHENn     |PDMA Channel Enable Bits
+     * |[8:0]     |CHENn     |PDMA Channel Enable Bits
      * |        |          |Set this bit to 1 to enable PDMAn operation. Channel cannot be active if it is not set as enabled.
      * |        |          |0 = PDMA channel [n] Disabled.
      * |        |          |1 = PDMA channel [n] Enabled.
@@ -145,9 +145,9 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |PAUSEn    |PDMA Channel N Transfer Pause Control (Write Only)
+     * |[8:0]     |PAUSEn    |PDMA Channel N Transfer Pause Control (Write Only)
      * |        |          |User can set PAUSEn bit field to pause the PDMA transfer.
-     * |        |          |When user sets PAUSEn bit, the PDMA controller will pause the on-going transfer, then clear the channel enable bit CHEN(PDMA_CHCTL [n], n=0,1..4) and clear request active flag(PDMA_TRGSTS[n:0], n=0,1..4).
+     * |        |          |When user sets PAUSEn bit, the PDMA controller will pause the on-going transfer, then clear the channel enable bit CHEN(PDMA_CHCTL [n], n=0,1..8) and clear request active flag(PDMA_TRGSTS[n:0], n=0,1..8).
      * |        |          |If the paused channel is re-enabled again, the remaining transfers will be processed.
      * |        |          |0 = No effect.
      * |        |          |1 = Pause PDMA channel n transfer.
@@ -156,7 +156,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |SWREQn    |PDMA Software Request (Write Only)
+     * |[8:0]     |SWREQn    |PDMA Software Request (Write Only)
      * |        |          |Set this bit to 1 to generate a software request to PDMA [n].
      * |        |          |0 = No effect.
      * |        |          |1 = Generate a software request.
@@ -168,7 +168,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |REQSTSn   |PDMA Channel Request Status (Read Only)
+     * |[8:0]     |REQSTSn   |PDMA Channel Request Status (Read Only)
      * |        |          |This flag indicates whether channel[n] have a request or not, no matter request from software or peripheral.
      * |        |          |When PDMA controller finishes channel transfer, this bit will be cleared automatically.
      * |        |          |0 = PDMA Channel n has no request.
@@ -179,7 +179,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |FPRISETn  |PDMA Fixed Priority Setting
+     * |[8:0]     |FPRISETn  |PDMA Fixed Priority Setting
      * |        |          |Set this bit to 1 to enable fixed priority level.
      * |        |          |Write Operation:
      * |        |          |0 = No effect.
@@ -193,7 +193,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |FPRICLRn  |PDMA Fixed Priority Clear Bits (Write Only)
+     * |[8:0]     |FPRICLRn  |PDMA Fixed Priority Clear Bits (Write Only)
      * |        |          |Set this bit to 1 to clear fixed priority level.
      * |        |          |0 = No effect.
      * |        |          |1 = Clear PDMA channel [n] fixed priority setting.
@@ -203,7 +203,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |INTENn    |PDMA Interrupt Enable Bits
+     * |[8:0]     |INTENn    |PDMA Interrupt Enable Bits
      * |        |          |This field is used to enable PDMA channel[n] interrupt.
      * |        |          |0 = PDMA channel n interrupt Disabled.
      * |        |          |1 = PDMA channel n interrupt Enabled.
@@ -236,7 +236,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |ABTIFn    |PDMA Read/Write Target Abort Interrupt Status Flag
+     * |[8:0]     |ABTIFn    |PDMA Read/Write Target Abort Interrupt Status Flag
      * |        |          |This bit indicates which PDMA controller has target abort error; User can write 1 to clear these bits.
      * |        |          |0 = No AHB bus ERROR response received when channel n transfer.
      * |        |          |1 = AHB bus ERROR response received when channel n transfer.
@@ -245,7 +245,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |TDIFn     |Transfer Done Flag
+     * |[8:0]     |TDIFn     |Transfer Done Flag
      * |        |          |This bit indicates whether PDMA controller channel transfer has been finished or not, user can write 1 to clear these bits.
      * |        |          |0 = PDMA channel transfer has not finished.
      * |        |          |1 = PDMA channel has finished transmission.
@@ -254,7 +254,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |ALIGNn    |Transfer Alignment Flag
+     * |[8:0]     |ALIGNn    |Transfer Alignment Flag
      * |        |          |0 = PDMA channel source address and destination address both follow transfer width setting.
      * |        |          |1 = PDMA channel source address or destination address is not follow transfer width setting.
      * @var PDMA_T::TACTSTS
@@ -262,7 +262,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]     |TXACTFn   |Transfer on Active Flag (Read Only)
+     * |[8:0]     |TXACTFn   |Transfer on Active Flag (Read Only)
      * |        |          |This bit indicates which PDMA channel is in active.
      * |        |          |0 = PDMA channel is not finished.
      * |        |          |1 = PDMA channel is active.
@@ -333,7 +333,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[4:0]   |CHnRST    |Channel N Reset
+     * |[8:0]   |CHnRST    |Channel N Reset
      * |        |          |0 = corresponding channel n is not reset.
      * |        |          |1 = corresponding channel n is reset.
      * @var PDMA_T::REQSEL0_3
@@ -356,12 +356,12 @@ typedef struct
      * |        |          |9 = Channel connects to UART2_RX.
      * |        |          |10 = Channel connects to USCI0_TX.
      * |        |          |11 = Channel connects to USCI0_RX.
-     * |        |          |12 = Reserved.
-     * |        |          |13 = Reserved.
+     * |        |          |12 = Channel connects to USCI1_TX.
+     * |        |          |13 = Channel connects to USCI1_RX.
      * |        |          |14 = Reserved.
      * |        |          |15 = Reserved.
-     * |        |          |16 = Reserved.
-     * |        |          |17 = Reserved.
+     * |        |          |16 = Channel connects to QSPI0_TX.
+     * |        |          |17 = Channel connects to QSPI0_RX.
      * |        |          |18 = Channel connects to SPI0_TX.
      * |        |          |19 = Channel connects to SPI0_RX.
      * |        |          |20 = Channel connects to ADC_RX.
@@ -380,6 +380,16 @@ typedef struct
      * |        |          |33 = Channel connects to TMR1.
      * |        |          |34 = Channel connects to TMR2.
      * |        |          |35 = Channel connects to TMR3.
+     * |        |          |36 = Channel connects to UART3_TX.
+     * |        |          |37 = Channel connects to UART3_RX.
+     * |        |          |38 = Channel connects to UART4_TX.
+     * |        |          |39 = Channel connects to UART4_RX.
+     * |        |          |40 = Channel connects to UART5_TX.
+     * |        |          |41 = Channel connects to UART5_RX.
+     * |        |          |42 = Channel connects to UART6_TX.
+     * |        |          |43 = Channel connects to UART6_RX.
+     * |        |          |44 = Channel connects to UART7_TX.
+     * |        |          |45 = Channel connects to UART7_RX.
      * |        |          |Others = Reserved.
      * |        |          |Note 1: A peripheral cannot be assigned to two channels at the same time.
      * |        |          |Note 2: This field is useless when transfer between memory and memory.
@@ -398,7 +408,7 @@ typedef struct
      * |        |          |User can configure the peripheral setting by REQSRC3.
      * |        |          |Note: The channel configuration is the same as REQSRC0 field.
      * |        |          |Please refer to the explanation of REQSRC0.
-     * @var PDMA_T::REQSEL4
+     * @var PDMA_T::REQSEL4_7
      * Offset: 0x484  PDMA Request Source Select Register 1
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
@@ -408,8 +418,33 @@ typedef struct
      * |        |          |User can configure the peripheral setting by REQSRC4.
      * |        |          |Note: The channel configuration is the same as REQSRC0 field.
      * |        |          |Please refer to the explanation of REQSRC0.
+     * |[13:8]  |REQSRC5   |Channel 5 Request Source Selection
+     * |        |          |This filed defines which peripheral is connected to PDMA channel 5.
+     * |        |          |User can configure the peripheral setting by REQSRC5.
+     * |        |          |Note: The channel configuration is the same as REQSRC0 field.
+     * |        |          |Please refer to the explanation of REQSRC0.
+     * |[21:16] |REQSRC6   |Channel 6 Request Source Selection
+     * |        |          |This filed defines which peripheral is connected to PDMA channel 6.
+     * |        |          |User can configure the peripheral setting by REQSRC6.
+     * |        |          |Note: The channel configuration is the same as REQSRC0 field.
+     * |        |          |Please refer to the explanation of REQSRC0.
+     * |[29:24] |REQSRC7   |Channel 7 Request Source Selection
+     * |        |          |This filed defines which peripheral is connected to PDMA channel 7.
+     * |        |          |User can configure the peripheral setting by REQSRC7.
+     * |        |          |Note: The channel configuration is the same as REQSRC0 field.
+     * |        |          |Please refer to the explanation of REQSRC0.
+     * @var PDMA_T::REQSEL8
+     * Offset: 0x488  PDMA Request Source Select Register 2
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[5:0]   |REQSRC8   |Channel 8 Request Source Selection
+     * |        |          |This filed defines which peripheral is connected to PDMA channel 8.
+     * |        |          |User can configure the peripheral setting by REQSRC8.
+     * |        |          |Note: The channel configuration is the same as REQSRC0 field.
+     * |        |          |Please refer to the explanation of REQSRC0.
      */
-    DSCT_T        DSCT[9];               /*!< [0x0000 ~ 0x004C] Control Register of PDMA Channel 0 ~ 4                  */
+    DSCT_T        DSCT[9];               /*!< [0x0000 ~ 0x008C] Control Register of PDMA Channel 0 ~ 8                  */
     __I  uint32_t RESERVE0[28];
     __I  uint32_t CURSCAT[9];            /*!< [0x0100 ~ 0x110] Current Scatter-gather Descriptor Table Address of PDMA Channel n */
     __I  uint32_t RESERVE1[183];
