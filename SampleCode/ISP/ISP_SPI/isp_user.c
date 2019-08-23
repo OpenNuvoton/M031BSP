@@ -13,8 +13,14 @@
 
 volatile uint8_t bISPDataReady;
 
-__align(4) uint8_t response_buff[64];
-__align(4) static uint8_t aprom_buf[FMC_FLASH_PAGE_SIZE];
+#ifdef __ICCARM__
+#pragma data_alignment=4
+uint8_t response_buff[64];
+static uint8_t aprom_buf[FMC_FLASH_PAGE_SIZE];
+#else
+uint8_t response_buff[64] __attribute__((aligned(4)));
+static uint8_t aprom_buf[FMC_FLASH_PAGE_SIZE] __attribute__((aligned(4)));
+#endif
 uint32_t bUpdateApromCmd;
 uint32_t g_apromSize, g_dataFlashAddr, g_dataFlashSize;
 volatile uint8_t bISPDataReady;
