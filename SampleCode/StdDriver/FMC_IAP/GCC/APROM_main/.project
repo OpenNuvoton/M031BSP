@@ -47,7 +47,7 @@
 		<link>
 			<name>Library/Library</name>
 			<type>2</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/Src</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src</locationURI>
 		</link>
 		<link>
 			<name>User/ap_image.S</name>

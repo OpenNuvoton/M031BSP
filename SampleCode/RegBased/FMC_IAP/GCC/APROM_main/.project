@@ -47,7 +47,7 @@
 		<link>
 			<name>Library/Library</name>
 			<type>2</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/Src</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src</locationURI>
 		</link>
 		<link>
 			<name>User/ap_image.S</name>
@@ -55,9 +55,9 @@
 			<locationURI>PARENT-1-PROJECT_LOC/ap_image.S</locationURI>
 		</link>
 		<link>
-			<name>User/aprom_main.c</name>
+			<name>User/APROM_main.c</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/aprom_main.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/APROM_main.c</locationURI>
 		</link>
 	</linkedResources>
 	<filteredResources>
@@ -83,10 +83,10 @@
 			<id>1528697527539</id>
 			<name>Library/Library</name>
 			<type>5</type>
-				<matcher>
+			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-retarget.c</arguments>
-			</matcher>	
+			</matcher>
 		</filter>
 	</filteredResources>
 </projectDescription>
