@@ -44,14 +44,21 @@ extern "C"
 #define ACMP01_RST  ((0x4<<24)|SYS_IPRST1_ACMP01RST_Pos)    /*!< ACMP  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define I2C0_RST    ((0x4<<24)|SYS_IPRST1_I2C0RST_Pos)      /*!< I2C0  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define I2C1_RST    ((0x4<<24)|SYS_IPRST1_I2C1RST_Pos)      /*!< I2C1  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define QSPI0_RST   ((0x4<<24)|SYS_IPRST1_QSPI0RST_Pos)     /*!< QSPI0 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define SPI0_RST    ((0x4<<24)|SYS_IPRST1_SPI0RST_Pos)      /*!< SPI0  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define UART0_RST   ((0x4<<24)|SYS_IPRST1_UART0RST_Pos)     /*!< UART0 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define UART1_RST   ((0x4<<24)|SYS_IPRST1_UART1RST_Pos)     /*!< UART1 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define UART2_RST   ((0x4<<24)|SYS_IPRST1_UART2RST_Pos)     /*!< UART2 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define UART3_RST   ((0x4<<24)|SYS_IPRST1_UART3RST_Pos)     /*!< UART3 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define UART4_RST   ((0x4<<24)|SYS_IPRST1_UART4RST_Pos)     /*!< UART4 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define UART5_RST   ((0x4<<24)|SYS_IPRST1_UART5RST_Pos)     /*!< UART5 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define UART6_RST   ((0x4<<24)|SYS_IPRST1_UART6RST_Pos)     /*!< UART6 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define UART7_RST   ((0x4<<24)|SYS_IPRST1_UART7RST_Pos)     /*!< UART7 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define USBD_RST    ((0x4<<24)|SYS_IPRST1_USBDRST_Pos)      /*!< USBD  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define ADC_RST     ((0x4<<24)|SYS_IPRST1_ADCRST_Pos)       /*!< ADC   reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 
 #define USCI0_RST   ((0x8<<24)|SYS_IPRST2_USCI0RST_Pos)     /*!< USCI0 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define USCI1_RST   ((0x8<<24)|SYS_IPRST2_USCI1RST_Pos)     /*!< USCI1 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define PWM0_RST    ((0x8<<24)|SYS_IPRST2_PWM0RST_Pos)      /*!< PWM0  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define PWM1_RST    ((0x8<<24)|SYS_IPRST2_PWM1RST_Pos)      /*!< PWM1  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define BPWM0_RST   ((0x8<<24)|SYS_IPRST2_BPWM0RST_Pos)     /*!< BPWM0  reset is one of the \ref SYS_ResetModule parameter  \hideinitializer */

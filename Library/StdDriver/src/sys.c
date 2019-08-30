@@ -123,18 +123,27 @@ void SYS_ResetCPU(void)
   *             - \ref TMR1_RST
   *             - \ref TMR2_RST
   *             - \ref TMR3_RST
+  *             - \ref ACMP01_RST
   *             - \ref I2C0_RST
   *             - \ref I2C1_RST
+  *             - \ref QSPI0_RST
   *             - \ref SPI0_RST
   *             - \ref UART0_RST
   *             - \ref UART1_RST
   *             - \ref UART2_RST
-  *             - \ref ACMP01_RST
+  *             - \ref UART3_RST
+  *             - \ref UART4_RST
+  *             - \ref UART5_RST
+  *             - \ref UART6_RST
+  *             - \ref UART7_RST
+  *             - \ref USBD_RST
   *             - \ref ADC_RST
+  *             - \ref USCI0_RST
+  *             - \ref USCI1_RST
   *             - \ref PWM0_RST
   *             - \ref PWM1_RST
-  *             - \ref USBD_RST
-  *             - \ref USCI0_RST
+  *             - \ref BPWM0_RST
+  *             - \ref BPWM1_RST
   * @return     None
   * @details    This function reset selected module.
   */
