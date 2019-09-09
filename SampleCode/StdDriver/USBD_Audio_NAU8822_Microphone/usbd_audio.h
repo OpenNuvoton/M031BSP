@@ -16,7 +16,11 @@
 //#define INPUT_IS_LIN
 #define OPT_I2S_SLAVE_MODE
 
-#define NAU8822_ADDR    0x1A                /* NAU8822 Device ID */
+#define NAU8822_ADDR     0x1A                /* NAU8822 Device ID */
+#define CRYSTAL_LESS        1
+
+//#define dgb_printf printf
+#define dgb_printf(...)
 
 void I2C_WriteNAU8822(uint8_t u8addr, uint16_t u16data);
 
@@ -35,35 +39,26 @@ void I2C_WriteNAU8822(uint8_t u8addr, uint16_t u16data);
 
 /* Define the vendor id and product id */
 #define USBD_VID        0x0416
+
 #define USBD_PID        0xB006
 
 #define UAC_MICROPHONE  0
 #define UAC_SPEAKER     1
 
 /*!<Define Audio information */
-#define PLAY_RATE       48000       /* The audo play sampling rate. It could be 8000, 16000, 32000, and 48000 */
-#define PLAY_CHANNELS   2           /* Number of channels. Don't Change */
+#define SAMPLING_RATE  48000            /* The Sampling rate. It could be 8000, 16000, 32000, and 48000 */
 
-#define REC_RATE        PLAY_RATE   /* The record sampling rate. Must be the same with PLAY_RATE */
+#define REC_RATE        SAMPLING_RATE   /* The record sampling rate. Must be the same with PLAY_RATE */
 #define REC_CHANNELS    2           /* Number of channels. Don't Change */
 
-
 #define REC_FEATURE_UNITID      0x05
-#define PLAY_FEATURE_UNITID     0x06
 
-/*
-    BUF_LEN is used to define buffer length, each word buffer is two channels and 16 bits,
-    we use 4 times larger buffer to store the play data
-*/
-#define BUF_LEN   (PLAY_RATE*2*PLAY_CHANNELS/1000/2*4)
-
-/* Define Descriptor information */
-#if(PLAY_CHANNELS == 1)
-    #define PLAY_CH_CFG     1
-#endif
-#if(PLAY_CHANNELS == 2)
-    #define PLAY_CH_CFG     3
-#endif
+#define AUDIO_RATE_8K      8000
+#define AUDIO_RATE_16K    16000
+#define AUDIO_RATE_32K    32000
+#define AUDIO_RATE_441K   44100
+#define AUDIO_RATE_48K    48000
+#define AUDIO_RATE_96K    96000
 
 #if(REC_CHANNELS == 1)
     #define REC_CH_CFG     1
@@ -72,13 +67,6 @@ void I2C_WriteNAU8822(uint8_t u8addr, uint16_t u16data);
     #define REC_CH_CFG     3
 #endif
 
-#define PLAY_RATE_LO    (PLAY_RATE & 0xFF)
-#define PLAY_RATE_MD    ((PLAY_RATE >> 8) & 0xFF)
-#define PLAY_RATE_HI    ((PLAY_RATE >> 16) & 0xFF)
-
-#define REC_RATE_LO     (REC_RATE & 0xFF)
-#define REC_RATE_MD     ((REC_RATE >> 8) & 0xFF)
-#define REC_RATE_HI     ((REC_RATE >> 16) & 0xFF)
 
 /********************************************/
 /* Audio Class Current State                */
@@ -109,14 +97,44 @@ void I2C_WriteNAU8822(uint8_t u8addr, uint16_t u16data);
 #define MUTE_CONTROL                0x01
 #define VOLUME_CONTROL              0x02
 
+
+/*!<Define HID Class Specific Request */
+#define GET_REPORT              0x01
+#define GET_IDLE                0x02
+#define GET_PROTOCOL            0x03
+#define SET_REPORT              0x09
+#define SET_IDLE                0x0A
+#define SET_PROTOCOL            0x0B
+
+#ifdef __HID__
+#ifdef __MEDIAKEY__
+/* Byte 0 */
+#define HID_CTRL_MUTE        0x01
+#define HID_CTRL_VOLUME_INC  0x02
+#define HID_CTRL_VOLUME_DEC  0x04
+/* Byte 1 */
+#define HID_CTRL_PLAY        0x01
+#define HID_CTRL_STOP        0x02
+#define HID_CTRL_PAUSE       0x04
+#define HID_CTRL_NEXT        0x08
+#define HID_CTRL_PREVIOUS    0x10
+#define HID_CTRL_RECORD      0x20
+#define HID_CTRL_REWIND      0x40
+#define HID_CTRL_FF          0x80
+#endif
+#endif
+
 /*-------------------------------------------------------------*/
 /* Define EP maximum packet size */
 #define EP0_MAX_PKT_SIZE    8
 #define EP1_MAX_PKT_SIZE    EP0_MAX_PKT_SIZE
 
-#define EP2_MAX_PKT_SIZE    (REC_RATE*REC_CHANNELS*2/1000)
+/* Maximum Packet Size for Recprd Endpoint */
+#define EP2_MAX_PKT_SIZE    (REC_RATE * REC_CHANNELS * 2 / 1000)
 
-#define EP3_MAX_PKT_SIZE    (PLAY_RATE*PLAY_CHANNELS*2/1000)
+#define EP4_MAX_PKT_SIZE    8
+
+#define EP5_MAX_PKT_SIZE    8
 
 #define SETUP_BUF_BASE      0
 #define SETUP_BUF_LEN       8
@@ -126,12 +144,16 @@ void I2C_WriteNAU8822(uint8_t u8addr, uint16_t u16data);
 #define EP1_BUF_LEN         EP1_MAX_PKT_SIZE
 #define EP2_BUF_BASE        (EP1_BUF_BASE + EP1_BUF_LEN)
 #define EP2_BUF_LEN         EP2_MAX_PKT_SIZE
-#define EP3_BUF_BASE        (EP2_BUF_BASE + EP2_BUF_LEN)
-#define EP3_BUF_LEN         EP3_MAX_PKT_SIZE
+#define EP4_BUF_BASE        (EP2_BUF_BASE + EP2_BUF_LEN)
+#define EP4_BUF_LEN         EP4_MAX_PKT_SIZE
+#define EP5_BUF_BASE        (EP4_BUF_BASE + EP4_BUF_LEN)
+#define EP5_BUF_LEN         EP5_MAX_PKT_SIZE
 
 /* Define the interrupt In EP number */
 #define ISO_IN_EP_NUM    0x01
 #define ISO_OUT_EP_NUM   0x02
+#define HID_IN_EP_NUM    0x03
+#define HID_OUT_EP_NUM   0x04
 
 /*-------------------------------------------------------------*/
 extern volatile uint32_t g_usbd_UsbAudioState;
@@ -144,10 +166,20 @@ void UAC_ClassRequest(void);
 void UAC_SetInterface(void);
 void EP2_Handler(void);
 void EP3_Handler(void);
+void EP4_Handler(void);
+void EP5_Handler(void);
 void NAU8822_Setup(void);
+void SamplingControl(void);
 void AdjFreq(void);
+void AdjFreq1(void);
 void VolumnControl(void);
 void I2C_WriteWAU8822(uint8_t u8addr, uint16_t u16data);
+void HID_UpdateHidData(void);
+void GPIO_Init(void);
+
+extern volatile uint8_t  g_u8EP4Ready;
+extern volatile uint32_t g_usbd_RecSampleRate;
+extern volatile uint32_t g_PreRecSampleRate;
 
 #endif  /* __USBD_UAC_H_ */
 

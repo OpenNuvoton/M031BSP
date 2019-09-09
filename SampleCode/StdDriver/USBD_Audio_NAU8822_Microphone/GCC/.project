@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>USBD_Audio_NAU8822</name>
+	<name>USBD_Audio_NAU8822_Microphone</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -53,6 +53,11 @@
 			<name>User/descriptors.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/descriptors.c</locationURI>
+		</link>
+		<link>
+			<name>User/hid.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/hid.c</locationURI>
 		</link>
 		<link>
 			<name>User/main.c</name>

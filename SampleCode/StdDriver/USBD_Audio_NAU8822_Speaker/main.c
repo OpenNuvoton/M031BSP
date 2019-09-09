@@ -12,7 +12,6 @@
 #include "NuMicro.h"
 #include "usbd_audio.h"
 
-#define CRYSTAL_LESS        1    /* CRYSTAL_LESS must be 1 if USB clock source is HIRC */
 #define TRIM_INIT           (SYS_BASE+0x118)
 
 void SYS_Init(void)
@@ -22,21 +21,38 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
 
     /* Enable HIRC clock */
+    #if CRYSTAL_LESS
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
-
+    #else
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk|CLK_PWRCTL_HXTEN_Msk);
+    #endif
     /* Waiting for HIRC clock ready */
+    #if CRYSTAL_LESS
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
+    #else
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk|CLK_STATUS_HXTSTB_Msk);
+    #endif
 
     /* Switch HCLK clock source to HIRC and HCLK source divide 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
+    #if (CRYSTAL_LESS==0)
+    CLK_SetCoreClock(48000000);
+    #endif
 
     /* Select HIRC as the clock source of UART0 */
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
+    
+    #if CRYSTAL_LESS
+    CLK_EnableModuleClock(TMR0_MODULE);
+    CLK_EnableModuleClock(TMR1_MODULE);
+    CLK_SetModuleClock(TMR0_MODULE, CLK_CLKSEL1_TMR0SEL_PCLK0, 0);
+    CLK_SetModuleClock(TMR1_MODULE, CLK_CLKSEL1_TMR1SEL_PCLK0, 0);    
+    #else
+    CLK_SetModuleClock(USBD_MODULE,CLK_CLKSEL0_USBDSEL_PLL,CLK_CLKDIV0_USB(2));    
+    #endif
 
     /* Select PCLK1 as the clock source of SPI0 */
-    CLK_SetModuleClock(SPI0_MODULE, CLK_CLKSEL2_SPI0SEL_HIRC, MODULE_NoMsk);
-    /* Switch USB clock source to HIRC & USB Clock = HIRC / 1 */
-    CLK_SetModuleClock(USBD_MODULE, CLK_CLKSEL0_USBDSEL_HIRC, CLK_CLKDIV0_USB(1));
+    CLK_SetModuleClock(SPI0_MODULE, CLK_CLKSEL2_SPI0SEL_PCLK1, MODULE_NoMsk);
 
     /* Enable UART peripheral clock */
     CLK_EnableModuleClock(UART0_MODULE);
@@ -74,9 +90,9 @@ void SYS_Init(void)
 
 #ifdef OPT_I2C0
     /* Setup SPI0 multi-function pins */
-    /* PB.0 is SPI0_I2SMCLK, 		PA.3 is SPI0_SS (I2S_LRCLK)
-       PA.2 is SPI0_CLK (I2S_BCLK), PA.1 is SPI0_MISO (I2S_DI)
-       PA.0 is SPI0_MOSI (I2S_DO) 
+    /* PB.0 is SPI0_I2SMCLK, 		PA.3 is SPI0_SS (I2S_LRCLK)FS
+       PA.2 is SPI0_CLK (I2S_BCLK), PA.1 is SPI0_MISO (I2S_DI)ADC
+       PA.0 is SPI0_MOSI (I2S_DO)DAC 
     */
 
     SYS->GPA_MFPL = (SYS->GPA_MFPL & ~(SYS_GPA_MFPL_PA3MFP_Msk |
@@ -88,7 +104,8 @@ void SYS_Init(void)
                      SYS_GPA_MFPL_PA1MFP_SPI0_MISO |
                      SYS_GPA_MFPL_PA0MFP_SPI0_MOSI);
 
-    SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB0MFP_Msk)) | SYS_GPB_MFPL_PB0MFP_SPI0_I2SMCLK;
+    SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB11MFP_Msk)) | SYS_GPB_MFPH_PB11MFP_SPI0_I2SMCLK;
+
 #else
     /* Setup SPI0 multi-function pins */
     /* PA.4 is SPI0_I2SMCLK, 		PA.3 is SPI0_SS (I2S_LRCLK)
@@ -154,6 +171,10 @@ int32_t main(void)
     /* Initial UART0 for debug message */
     UART0_Init();
 
+#ifdef __HID__
+    GPIO_Init();
+#endif
+
     printf("\n");
     printf("+-------------------------------------------------------+\n");
     printf("|          NuMicro USB Audio CODEC Sample Code          |\n");
@@ -162,22 +183,22 @@ int32_t main(void)
     /* Init I2C1 to access NAU8822 */
 #ifdef OPT_I2C0
     I2C0_Init();
-#else	
+#else
     I2C1_Init();
 #endif
 
 #ifdef OPT_I2S_SLAVE_MODE
     /* Set I2S in slave mode and let NAU8822 provide the exact WS/BCLK */
 #ifdef INPUT_IS_LIN
-    SPII2S_Open(SPI0, SPII2S_MODE_SLAVE, PLAY_RATE, SPII2S_DATABIT_16, SPII2S_STEREO, SPII2S_FORMAT_I2S);
+    SPII2S_Open(SPI0, SPII2S_MODE_SLAVE, SAMPLING_RATE, SPII2S_DATABIT_16, SPII2S_STEREO, SPII2S_FORMAT_I2S);
 #else
-    SPII2S_Open(SPI0, SPII2S_MODE_SLAVE, PLAY_RATE, SPII2S_DATABIT_16, SPII2S_STEREO, SPII2S_FORMAT_I2S);
+    SPII2S_Open(SPI0, SPII2S_MODE_SLAVE, SAMPLING_RATE, SPII2S_DATABIT_16, SPII2S_STEREO, SPII2S_FORMAT_I2S);
 #endif
 #else
 #ifdef INPUT_IS_LIN
-    SPII2S_Open(SPI0, SPII2S_MODE_MASTER, PLAY_RATE, SPII2S_DATABIT_16, SPII2S_STEREO, SPII2S_FORMAT_I2S);
+    SPII2S_Open(SPI0, SPII2S_MODE_MASTER, SAMPLING_RATE, SPII2S_DATABIT_16, SPII2S_STEREO, SPII2S_FORMAT_I2S);
 #else
-    SPII2S_Open(SPI0, SPII2S_MODE_MASTER, PLAY_RATE, SPII2S_DATABIT_16, SPII2S_STEREO, SPII2S_FORMAT_I2S);
+    SPII2S_Open(SPI0, SPII2S_MODE_MASTER, SAMPLING_RATE, SPII2S_DATABIT_16, SPII2S_STEREO, SPII2S_FORMAT_I2S);
 #endif
 #endif  /* OPT_I2S_SLAVE_MODE */
 
@@ -194,92 +215,84 @@ int32_t main(void)
 #endif
 
     /* Start I2S play iteration */
-    SPII2S_EnableInt(SPI0, SPII2S_FIFO_TXTH_INT_MASK | SPII2S_FIFO_RXTH_INT_MASK);
-
-    /* Enable I2S Rx function */
-    SPII2S_ENABLE_RX(SPI0);
+    SPII2S_EnableInt(SPI0, SPII2S_FIFO_TXTH_INT_MASK);
 
     /* Enable I2S Tx function */
     SPII2S_ENABLE_TX(SPI0);
 
-    GPIO_SetMode(PA, BIT4, GPIO_MODE_OUTPUT);
-
-    PA4 = 0;
-
-    /* Open USB controller */
     USBD_Open(&gsInfo, UAC_ClassRequest, (SET_INTERFACE_REQ)UAC_SetInterface);
 
     /* Endpoint configuration */
     UAC_Init();
-     
-    /* Start USB device */
+
     USBD_Start();
+    
+#if CRYSTAL_LESS
+    /* Backup init trim */
+    u32TrimInit = M32(TRIM_INIT);
+
+    /* Waiting for USB bus stable */
+    USBD_CLR_INT_FLAG(USBD_INTSTS_SOFIF_Msk);
+
+    while((USBD_GET_INT_FLAG() & USBD_INTSTS_SOFIF_Msk) == 0);
+
+    /* Enable USB crystal-less - Set reference clock from USB SOF packet & Enable HIRC auto trim function */
+    SYS->HIRCTRIMCTL |= (SYS_HIRCTRIMCTL_REFCKSEL_Msk | 0x1);
+#endif
 
     NVIC_EnableIRQ(USBD_IRQn);
-
     NVIC_EnableIRQ(SPI0_IRQn);
 
     /* SPI (I2S) interrupt has higher frequency then USBD interrupt.
        Therefore, we need to set SPI (I2S) with higher priority to avoid
        SPI (I2S) interrupt pending too long time when USBD interrupt happen. */
     NVIC_SetPriority(USBD_IRQn, 3);
-
     NVIC_SetPriority(SPI0_IRQn, 2);
 
 #if CRYSTAL_LESS
-    /* Backup default trim */
-    u32TrimInit = M32(TRIM_INIT);
-#endif
+    /* Give a dummy target frequency here. Will over write prescale and compare value with macro */
+    TIMER_Open(TIMER0, TIMER_ONESHOT_MODE, 100);
 
-    /* Clear SOF */
-    USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
+    /* Update prescale and compare value. Calculate average frequency every 100 events */
+    TIMER_SET_PRESCALE_VALUE(TIMER0, 0);
+
+    TIMER_SET_CMP_VALUE(TIMER0,11);
+
+    TIMER0->EXTCTL|=TIMER_EXTCTL_ECNTSSEL_Msk;
+
+    /* Update Timer 1 prescale value. So Timer 0 clock is 24MHz */
+    TIMER_SET_PRESCALE_VALUE(TIMER1, 0);
+
+    /* We need capture interrupt */
+    NVIC_EnableIRQ(TMR1_IRQn); 
+
+    TIMER_EnableFreqCounter(TIMER0, 0, 0, TRUE);
+#endif
 
     while (SYS->PDID) 
     {
         uint8_t ch;
         uint32_t u32Reg, u32Data;
         extern int32_t kbhit(void);
-
-#if CRYSTAL_LESS
-       /* Start USB trim if it is not enabled. */
-        if((SYS->HIRCTRIMCTL & SYS_HIRCTRIMCTL_FREQSEL_Msk) != 1)
-        {
-            /* Start USB trim only when SOF */
-            if(USBD->INTSTS & USBD_INTSTS_SOFIF_Msk)
-            {
-                /* Clear SOF */
-                USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
-
-                /* Re-enable crystal-less */
-                SYS->HIRCTRIMCTL = 0x01;
-                SYS->HIRCTRIMCTL |= SYS_HIRCTRIMCTL_REFCKSEL_Msk;
-            }
-        }
-
-        /* Disable USB Trim when error */
-        if(SYS->HIRCTRIMSTS & (SYS_HIRCTRIMSTS_CLKERIF_Msk | SYS_HIRCTRIMSTS_TFAILIF_Msk))
-        {
-            /* Init TRIM */
-            M32(TRIM_INIT) = u32TrimInit;
-
-            /* Disable crystal-less */
-            SYS->HIRCTRIMCTL = 0;
-
-            /* Clear error flags */
-            SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_CLKERIF_Msk | SYS_HIRCTRIMSTS_TFAILIF_Msk;
-
-            /* Clear SOF */
-            USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
-        }
-#endif
+#ifndef __FEEDBACK__
+        #if CRYSTAL_LESS
+        AdjFreq1();
+        #else
         /* Adjust codec sampling rate to synch with USB. The adjustment range is +-0.005% */
         AdjFreq();
+        #endif
+#endif
+#ifdef __HID__
+        HID_UpdateHidData();
+#endif
 
         /* Set audio volume according USB volume control settings */
         VolumnControl();
 
+        SamplingControl();
+
         /* User can change audio codec settings by I2C at run-time if necessary */
-        if (!kbhit()) 
+        if (!kbhit())
         {
             printf("\nEnter codec setting:\n");
             /* Get Register number */
@@ -299,6 +312,25 @@ int32_t main(void)
             printf("%03x\n", u32Data);
             I2C_WriteNAU8822(u32Reg,  u32Data);
         }
+
+#if CRYSTAL_LESS
+        /* Re-start crystal-less when any error found */
+        if (SYS->HIRCTRIMSTS & (SYS_HIRCTRIMSTS_TFAILIF_Msk | SYS_HIRCTRIMSTS_CLKERIF_Msk))
+        {
+            SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_TFAILIF_Msk | SYS_HIRCTRIMSTS_CLKERIF_Msk;
+
+            /* Init TRIM */
+            M32(TRIM_INIT) = u32TrimInit;
+
+            /* Waiting for USB bus stable */
+            USBD_CLR_INT_FLAG(USBD_INTSTS_SOFIF_Msk);
+            while((USBD_GET_INT_FLAG() & USBD_INTSTS_SOFIF_Msk) == 0);
+
+            /* Re-enable crystal-less - Set reference clock from USB SOF packet & Enable HIRC auto trim function */
+            SYS->HIRCTRIMCTL |= (SYS_HIRCTRIMCTL_REFCKSEL_Msk | 0x1);
+            //printf("USB trim fail. Just retry. SYS->HIRCTRIMSTS = 0x%x, SYS->HIRCTRIMCTL = 0x%x\n", SYS->HIRCTRIMSTS, SYS->HIRCTRIMCTL);
+        }
+#endif
     }
 }
 
