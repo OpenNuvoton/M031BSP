@@ -201,7 +201,6 @@ void I2C_WriteNAU8822(uint8_t u8addr, uint16_t u16data);
 #define ISO_OUT_EP_NUM      0x02
 #define ISO_IN_FB_EP_NUM    0x03
 #define HID_IN_EP_NUM       0x04
-#define HID_OUT_EP_NUM      0x05
 
 typedef enum
 {

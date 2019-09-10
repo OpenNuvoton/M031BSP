@@ -70,7 +70,6 @@ void I2C_WriteNAU8822(uint8_t u8addr, uint16_t u16data);
 //#define BUF_LEN   (PLAY_RATE*2*PLAY_CHANNELS/1000/2 * 16)
 #define BUF_LEN     32*12*4
 
-
 #define BUF_LEN_7  BUF_LEN*7/8
 #define BUF_LEN_6  BUF_LEN*6/8
 #define BUF_LEN_5  BUF_LEN*5/8
@@ -179,7 +178,6 @@ void I2C_WriteNAU8822(uint8_t u8addr, uint16_t u16data);
 #define EP5_BUF_BASE        (EP4_BUF_BASE + EP4_BUF_LEN)
 #define EP5_BUF_LEN         EP5_MAX_PKT_SIZE
 
-
 /* Define the interrupt In EP number */
 #define ISO_IN_EP_NUM       0x01
 #define ISO_OUT_EP_NUM      0x02
@@ -199,7 +197,7 @@ void UAC_SetInterface(void);
 void EP2_Handler(void);
 void EP3_Handler(void);
 void EP4_Handler(void);
-void EP5_Handler(void);       
+void EP5_Handler(void);
 void NAU8822_Setup(void);void SamplingControl(void);
 void AdjFreq(void);
 void AdjFreq1(void);

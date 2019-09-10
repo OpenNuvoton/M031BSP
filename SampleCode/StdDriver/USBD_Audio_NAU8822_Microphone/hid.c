@@ -36,11 +36,13 @@ void GPIO_Init(void)
     GPIO->DBCTL = 0x16;    /* Debounce time is about 6ms */
 }
 
-
 void HID_UpdateHidData(void)
 {
     uint8_t *buf;
     uint32_t u32RegA, u32RegB, u32RegC;
+#ifndef __JOYSTICK__
+    uint32_t static u32PreRegA, u32PreRegB, u32PreRegC;
+#endif
     int32_t volatile i;
 
     if(g_u8EP4Ready)
@@ -119,18 +121,33 @@ void HID_UpdateHidData(void)
 */
         buf[0] = 0;
         buf[1] = 0;
+
+        if(u32RegB != u32PreRegB)
+        {
     /* Byte 1 */
-        if((u32RegB & (1<<1)) == 0)          /* PB1 - Button 1             */
-            buf[1] |= HID_CTRL_PAUSE;        /* Play/Pause - 0x04          */ 
-        if((u32RegC & (1<<3)) == 0)          /* PC3 - Right                */
-            buf[1] |= HID_CTRL_NEXT;         /* Scan Next Track - 0x08     */
-        if((u32RegA & (1<<7)) == 0)          /* PA7 - Left                 */
-            buf[1] |= HID_CTRL_PREVIOUS;     /* Scan Previous Track - 0x10 */
+            if((u32RegB & (1<<1)) == 0)          /* PB1 - Button 1             */
+                buf[1] |= HID_CTRL_PAUSE;        /* Play/Pause - 0x04          */ 
+            u32PreRegB = u32RegB;
+        }
+        if(u32RegC != u32PreRegC)
+        {
+    /* Byte 1 */
+            if((u32RegC & (1<<3)) == 0)          /* PC3 - Right                */
+                buf[1] |= HID_CTRL_NEXT;         /* Scan Next Track - 0x08     */
     /* Byte 0 */
-        if((u32RegC & (1<<5)) == 0)          /* PC5 - Up                   */
-            buf[0] |= HID_CTRL_VOLUME_INC;   /* Volume Increment - 0x02    */
-        if((u32RegC & (1<<2)) == 0)          /* PC2 - Down                 */
-            buf[0] |= HID_CTRL_VOLUME_DEC;   /* Volume Decrement -0x04     */
+            if((u32RegC & (1<<5)) == 0)          /* PC5 - Up                   */
+                buf[0] |= HID_CTRL_VOLUME_INC;   /* Volume Increment - 0x02    */
+            if((u32RegC & (1<<2)) == 0)          /* PC2 - Down                 */
+                buf[0] |= HID_CTRL_VOLUME_DEC;   /* Volume Decrement -0x04     */
+            u32PreRegC = u32RegC;
+        }
+        if(u32RegA != u32PreRegA)
+        {
+    /* Byte 1 */
+            if((u32RegA & (1<<7)) == 0)          /* PA7 - Left                 */
+                buf[1] |= HID_CTRL_PREVIOUS;     /* Scan Previous Track - 0x10 */
+            u32PreRegA = u32RegA;
+        }
 #endif
         g_u8EP4Ready = 0;
 

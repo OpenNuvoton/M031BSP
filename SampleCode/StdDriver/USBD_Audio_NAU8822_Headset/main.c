@@ -179,6 +179,7 @@ int32_t main(void)
     printf("+-------------------------------------------------------+\n");
     printf("|          NuMicro USB Audio CODEC Sample Code          |\n");
     printf("+-------------------------------------------------------+\n");
+    printf("Please uninstall the UAC device if you use different target or other UAC demo code before\n");
 
     /* Init I2C1 to access NAU8822 */
 #ifdef OPT_I2C0
