@@ -704,7 +704,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>$TOOLKIT_DIR$\config\generic_2kram.icf</state>
+          <state>$PROJ_DIR$\generic_2kram.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
