@@ -73,6 +73,34 @@ int32_t FMC_Erase(uint32_t u32PageAddr)
     return ret;
 }
 
+/**
+ * @brief      Execute Flash Bank erase
+ *
+ * @param[in]  u32BankAddr Base address of the flash bank to be erased.
+ *
+ * @return     ISP bank erase success or not.
+ * @retval     0  Success
+ * @retval     -1  Erase failed
+ *
+ * @details  Execute FMC_ISPCMD_BANK_ERASE command to erase a flash block.
+ */
+int32_t FMC_EraseBank(uint32_t u32BankAddr)
+{
+    int32_t ret = 0;
+
+    FMC->ISPCMD = FMC_ISPCMD_BANK_ERASE;
+    FMC->ISPADDR = u32BankAddr;
+    FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;
+
+    while (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk) { }
+
+    if (FMC->ISPCTL & FMC_ISPCTL_ISPFF_Msk)
+    {
+        FMC->ISPCTL |= FMC_ISPCTL_ISPFF_Msk;
+        ret = -1;
+    }
+    return ret;
+}
 
 /**
   * @brief Execute FMC_ISPCMD_PAGE_ERASE command to erase SPROM. The page size is 4096 bytes.
@@ -87,6 +115,31 @@ int32_t FMC_Erase_SPROM(void)
     FMC->ISPCMD = FMC_ISPCMD_PAGE_ERASE;
     FMC->ISPADDR = FMC_SPROM_BASE;
     FMC->ISPDAT = 0x0055AA03UL;
+    FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;
+
+    while (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk) { }
+
+    if (FMC->ISPCTL & FMC_ISPCTL_ISPFF_Msk)
+    {
+        FMC->ISPCTL |= FMC_ISPCTL_ISPFF_Msk;
+        ret = -1;
+    }
+    return ret;
+}
+
+/**
+ * @brief Execute FMC_ISPCMD_BANK_REMAP command to remap bank.
+ * @return   Bank remap success or not.
+ * @retval   0  Success
+ * @retval   -1  Erase failed
+ */
+int32_t FMC_RemapBank(uint32_t u32BankIdx)
+{
+    int32_t ret = 0;
+
+    FMC->ISPCMD = FMC_ISPCMD_BANK_REMAP;
+    FMC->ISPADDR = u32BankIdx;
+    FMC->ISPDAT = 0x5AA55AA5UL;
     FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;
 
     while (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk) { }
@@ -192,6 +245,34 @@ void FMC_Write(uint32_t u32Addr, uint32_t u32Data)
     while (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk) { }
 }
 
+/**
+  * @brief Execute ISP FMC_ISPCMD_PROGRAM_64 to program a double-word to flash.
+  * @param[in]  u32addr Address of the flash location to be programmed.
+  *             It must be a double-word aligned address.
+  * @param[in]  u32data0   The word data to be programmed to flash address u32addr.
+  * @param[in]  u32data1   The word data to be programmed to flash address u32addr+4.
+  * @return   0   Success
+  * @return   -1  Failed
+  */
+int32_t FMC_Write8Bytes(uint32_t u32addr, uint32_t u32data0, uint32_t u32data1)
+{
+    int32_t  ret = 0;
+
+    FMC->ISPCMD  = FMC_ISPCMD_PROGRAM_64;
+    FMC->ISPADDR = u32addr;
+    FMC->MPDAT0  = u32data0;
+    FMC->MPDAT1  = u32data1;
+    FMC->ISPTRG  = FMC_ISPTRG_ISPGO_Msk;
+
+    while (FMC->ISPSTS & FMC_ISPSTS_ISPBUSY_Msk) { }
+
+    if (FMC->ISPSTS & FMC_ISPSTS_ISPFF_Msk)
+    {
+        FMC->ISPSTS |= FMC_ISPSTS_ISPFF_Msk;
+        ret = -1;
+    }
+    return ret;
+}
 
 /**
   * @brief Execute FMC_ISPCMD_READ command to read User Configuration.
@@ -226,26 +307,32 @@ int32_t FMC_ReadConfig(uint32_t u32Config[], uint32_t u32Count)
     return ret;
 }
 
-
 /**
-  * @brief Execute ISP commands to erase then write User Configuration.
-  * @param[in] u32Config   A two-word array.
-  *            u32Config[0] holds CONFIG0, while u32Config[1] holds CONFIG1.
-  * @param[in] u32Count  Always be 2 in this BSP.
-  * @return Success or not.
-  * @retval   0  Success.
-  * @retval   -1  Invalid parameter.
-  */
+ * @brief Execute ISP commands to erase then write User Configuration.
+ * @param[in] u32Config   A two-word array.
+ *            u32Config[0] holds CONFIG0, while u32Config[1] holds CONFIG1.
+ * @param[in] u32Count  Always be 2 in this BSP.
+ * @return Success or not.
+ * @retval   0  Success.
+ * @retval   -1  Invalid parameter.
+ */
 int32_t FMC_WriteConfig(uint32_t u32Config[], uint32_t u32Count)
 {
-    FMC_ENABLE_CFG_UPDATE();
-    FMC_Erase(FMC_CONFIG_BASE);
-    FMC_Write(FMC_CONFIG_BASE, u32Config[0]);
-    FMC_Write(FMC_CONFIG_BASE+4UL, u32Config[1]);
-    FMC_DISABLE_CFG_UPDATE();
-    return 0;
-}
+    int32_t ret = 0;
+    uint32_t i;
 
+    for (i = 0u; i < u32Count; i++)
+    {
+        FMC_Write(FMC_CONFIG_BASE + i * 4u, u32Config[i]);
+
+        if (FMC_Read(FMC_CONFIG_BASE + i * 4u) != u32Config[i])
+        {
+            ret = 1;
+        }
+    }
+
+    return ret;
+}
 
 /**
   * @brief Run CRC32 checksum calculation and get result.
@@ -283,6 +370,175 @@ uint32_t  FMC_GetChkSum(uint32_t u32addr, uint32_t u32count)
 
     return ret;
 }
+
+/**
+ * @brief Run flash all one verification and get result.
+ *
+ * @param[in] u32addr   Starting flash address. It must be a page aligned address.
+ * @param[in] u32count  Byte count of flash to be calculated. It must be multiple of 512 bytes.
+ *
+ * @retval   READ_ALLONE_YES      The contents of verified flash area are 0xFFFFFFFF.
+ * @retval   READ_ALLONE_NOT  Some contents of verified flash area are not 0xFFFFFFFF.
+ * @retval   READ_ALLONE_CMD_FAIL  Unexpected error occurred.
+ *
+ * @details  Run ISP check all one command to check specify area is all one or not.
+ */
+uint32_t FMC_CheckAllOne(uint32_t u32addr, uint32_t u32count)
+{
+    uint32_t ret = READ_ALLONE_CMD_FAIL;
+
+    FMC->ISPSTS = 0x80UL; /* clear check all one bit */
+
+    FMC->ISPCMD = FMC_ISPCMD_RUN_ALL1;
+    FMC->ISPADDR = u32addr;
+    FMC->ISPDAT = u32count;
+    FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;
+
+    while (FMC->ISPSTS & FMC_ISPSTS_ISPBUSY_Msk) { }
+
+    do
+    {
+        FMC->ISPCMD = FMC_ISPCMD_READ_ALL1;
+        FMC->ISPADDR = u32addr;
+        FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;
+
+        while (FMC->ISPSTS & FMC_ISPSTS_ISPBUSY_Msk) { }
+    }
+    while (FMC->ISPDAT == 0UL);
+
+    if (FMC->ISPDAT == READ_ALLONE_YES)
+    {
+        ret = FMC->ISPDAT;
+    }
+
+    if (FMC->ISPDAT == READ_ALLONE_NOT)
+    {
+        ret = FMC->ISPDAT;
+    }
+
+    return ret;
+}
+
+/**
+ * @brief      Write Multi-Word bytes to flash
+ *
+ * @param[in]  u32Addr    Start flash address in APROM where the data chunk to be programmed into.
+ *                        This address must be 8-bytes aligned to flash address.
+ * @param[in]  pu32Buf    Buffer that carry the data chunk.
+ * @param[in]  u32Len     Length of the data chunk in bytes.
+ *
+ * @retval     >=0  Number of data bytes were programmed.
+ * @return     -1   Invalid address.
+ *
+ * @detail     Program Multi-Word data into specified address of flash.
+ */
+#if defined ( __CC_ARM )
+#pragma arm section code="fastcode"
+int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
+
+#elif defined ( __ICCARM__ )
+int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len) @ "fastcode"
+
+#elif defined ( __GNUC__ )
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
+__attribute__ ((used, long_call, section(".fastcode"))) int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
+
+#else
+int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
+#endif
+{
+
+    uint32_t i, idx, u32OnProg, retval = 0;
+    int32_t err;
+
+    if ((u32Addr % 8) != 0)
+    {
+        return -1;
+    }
+
+    idx = 0u;
+    FMC->ISPCMD = FMC_ISPCMD_MULTI_PROG;
+    FMC->ISPADDR = u32Addr;
+    retval += 16;
+    do
+    {
+        err = 0;
+        u32OnProg = 1u;
+        FMC->MPDAT0 = pu32Buf[idx + 0u];
+        FMC->MPDAT1 = pu32Buf[idx + 1u];
+        FMC->MPDAT2 = pu32Buf[idx + 2u];
+        FMC->MPDAT3 = pu32Buf[idx + 3u];
+        FMC->ISPTRG = 0x1u;
+        idx += 4u;
+
+        for (i = idx; i < (FMC_MULTI_WORD_PROG_LEN / 4u); i += 4u) /* Max data length is 256 bytes (512/4 words)*/
+        {
+            __set_PRIMASK(1u); /* Mask interrupt to avoid status check coherence error*/
+            do
+            {
+                if ((FMC->MPSTS & FMC_MPSTS_MPBUSY_Msk) == 0u)
+                {
+                    __set_PRIMASK(0u);
+
+                    FMC->ISPADDR = FMC->MPADDR & (~0xful);
+                    idx = (FMC->ISPADDR - u32Addr) / 4u;
+                    err = -1;
+                }
+            }
+            while ((FMC->MPSTS & (3u << FMC_MPSTS_D0_Pos)) && (err == 0));
+
+            if (err == 0)
+            {
+                retval += 8;
+
+                /* Update new data for D0 */
+                FMC->MPDAT0 = pu32Buf[i];
+                FMC->MPDAT1 = pu32Buf[i + 1u];
+                do
+                {
+                    if ((FMC->MPSTS & FMC_MPSTS_MPBUSY_Msk) == 0u)
+                    {
+                        __set_PRIMASK(0u);
+                        FMC->ISPADDR = FMC->MPADDR & (~0xful);
+                        idx = (FMC->ISPADDR - u32Addr) / 4u;
+                        err = -1;
+                    }
+                }
+                while ((FMC->MPSTS & (3u << FMC_MPSTS_D2_Pos)) && (err == 0));
+
+                if (err == 0)
+                {
+                    retval += 8;
+
+                    /* Update new data for D2*/
+                    FMC->MPDAT2 = pu32Buf[i + 2u];
+                    FMC->MPDAT3 = pu32Buf[i + 3u];
+                    __set_PRIMASK(0u);
+                }
+            }
+
+            if (err < 0)
+            {
+                break;
+            }
+        }
+        if (err == 0)
+        {
+            u32OnProg = 0u;
+            while (FMC->ISPSTS & FMC_ISPSTS_ISPBUSY_Msk) { }
+        }
+    }
+    while (u32OnProg);
+    return retval;
+}
+#if defined ( __CC_ARM )
+#pragma arm section
+
+#elif defined ( __GNUC__ )
+#pragma GCC pop_options
+
+#endif
 
 /*@}*/ /* end of group FMC_EXPORTED_FUNCTIONS */
 

@@ -200,6 +200,14 @@ int main()
     /* Init UART0 to 115200-8n1 for print message */
     UART_Open(UART0, 115200);
 
+    /* Checking if flash page size matches with target chip's */
+    if( (SYS_ReadPDID() & 0xFFF) < 0x700 )
+	    if(FMC_FLASH_PAGE_SIZE != 2048)
+        {
+            printf("Please enable the compiler option - PAGE_SIZE_2048 in fmc.h\n");
+            while(SYS->PDID);
+        }
+
     printf("\n\n");
     printf("+----------------------------------------+\n");
     printf("|           M031 FMC Sample Code         |\n");

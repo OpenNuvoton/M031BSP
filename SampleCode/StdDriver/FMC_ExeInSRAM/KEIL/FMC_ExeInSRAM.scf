@@ -1,0 +1,23 @@
+FLASH 0x00000000
+{
+    ER_STARTUP +0
+    {
+        startup_M031Series.o(RESET, +First)
+    }
+    ER_RO +0
+    {
+        *(+RO)
+    }
+    
+    ;on SRAM region
+    ER_FASTCODE_UNINIT 0x20000000 
+    {
+        *(fastcode)
+    }
+	
+    ER_RW +0
+    {
+       *(+RW, +ZI)
+    }
+}
+

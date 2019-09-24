@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\FMC_Base.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\FMC_Boot0.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\FMC_Boot1.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\FMC_Boot2.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\FMC_Boot3.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\FMC_BootLD.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>BuildAll</name>
+      <member>
+        <project>FMC_Base</project>
+        <configuration>Release</configuration>
+      </member>
+      <member>
+        <project>FMC_Boot0</project>
+        <configuration>Release</configuration>
+      </member>
+      <member>
+        <project>FMC_Boot1</project>
+        <configuration>Release</configuration>
+      </member>
+      <member>
+        <project>FMC_Boot2</project>
+        <configuration>Release</configuration>
+      </member>
+      <member>
+        <project>FMC_Boot3</project>
+        <configuration>Release</configuration>
+      </member>
+      <member>
+        <project>FMC_BootLD</project>
+        <configuration>Release</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+

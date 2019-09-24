@@ -82,7 +82,7 @@ __Vectors:
 	.long	UART13_IRQHandler     /* 13: UART13                     */
 	.long	SPI0_IRQHandler       /* 14: SPI0                       */
 	.long	QSPI0_IRQHandler      /* 15: QSPI0                      */
-	.long	Default_Handler       /* 16: Reserved                   */
+	.long	ISP_IRQHandler        /* 16: Reserved                   */
 	.long	UART57_IRQHandler     /* 17: UART57                     */
 	.long	I2C0_IRQHandler       /* 18: I2C0                       */
 	.long	I2C1_IRQHandler       /* 19: I2C1                       */
@@ -314,6 +314,7 @@ Default_Handler:
     def_irq_handler	UART13_IRQHandler
     def_irq_handler	SPI0_IRQHandler
     def_irq_handler	QSPI0_IRQHandler
+    def_irq_handler	ISP_IRQHandler
     def_irq_handler	UART57_IRQHandler
     def_irq_handler	I2C0_IRQHandler
     def_irq_handler	I2C1_IRQHandler

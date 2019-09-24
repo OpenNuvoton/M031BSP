@@ -98,6 +98,7 @@ typedef enum IRQn
     UART13_IRQn               = 13,       /*!< UART1 and UART3 Interrupt                            */
     SPI0_IRQn                 = 14,       /*!< SPI0 Interrupt                                       */
     QSPI0_IRQn                = 15,       /*!< QSPI0 Interrupt                                      */
+    ISP_IRQn                  = 16,       /*!< ISP Interrupt	                                    */
     UART57_IRQn               = 17,       /*!< UART5 and UART7 Interrupt                            */
     I2C0_IRQn                 = 18,       /*!< I2C0 Interrupt                                       */
     I2C1_IRQn                 = 19,       /*!< I2C1 Interrupt                                       */

@@ -61,6 +61,7 @@ __vector_table
     DCD     UART13_IRQHandler
     DCD     SPI0_IRQHandler
     DCD     QSPI0_IRQHandler
+    DCD     ISP_IRQHandler
     DCD     Default_Handler
     DCD     UART57_IRQHandler
     DCD     I2C0_IRQHandler
@@ -140,6 +141,7 @@ Reset_Handler
     PUBWEAK UART13_IRQHandler
     PUBWEAK SPI0_IRQHandler
     PUBWEAK QSPI0_IRQHandler
+    PUBWEAK ISP_IRQHandler
     PUBWEAK UART57_IRQHandler
     PUBWEAK I2C0_IRQHandler
     PUBWEAK I2C1_IRQHandler
@@ -177,6 +179,7 @@ UART02_IRQHandler
 UART13_IRQHandler
 SPI0_IRQHandler
 QSPI0_IRQHandler
+ISP_IRQHandler
 UART57_IRQHandler
 I2C0_IRQHandler
 I2C1_IRQHandler
