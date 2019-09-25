@@ -2565,16 +2565,6 @@
         </option>
       </data>
     </settings>
-    <settings>
-      <name>CADI_ID</name>
-      <archiveVersion>2</archiveVersion>
-      <data/>
-    </settings>
-    <settings>
-      <name>TIFET_ID</name>
-      <archiveVersion>2</archiveVersion>
-      <data/>
-    </settings>
     <debuggerPlugins>
       <plugin>
         <file>$TOOLKIT_DIR$\plugins\middleware\HCCWare\HCCWare.ewplugin</file>
