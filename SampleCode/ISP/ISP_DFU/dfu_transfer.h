@@ -1,6 +1,6 @@
 /******************************************************************************
  * @file     dfu_transfer.h
- * @brief    M251 series USB DFU transfer header file
+ * @brief    M031 series USB DFU transfer header file
  *
  * @note
  * Copyright (C) 2019 Nuvoton Technology Corp. All rights reserved.
