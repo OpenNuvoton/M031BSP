@@ -174,13 +174,26 @@ int main()
     SYS_Init();
     UART_Init();
 
-    /* Checking if flash page size matches with target chip's */
-    if( (SYS_ReadPDID() & 0xFFF) < 0x700 )
-	    if(FMC_FLASH_PAGE_SIZE != 2048)
+    /* Checking if target device supports the feature */
+    if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )
+    {
+        /* Checking if flash size matches with target device */
+        if(FMC_FLASH_PAGE_SIZE != 2048)
         {
+            /* FMC_FLASH_PAGE_SIZE is different from target device's */
             printf("Please enable the compiler option - PAGE_SIZE_2048 in fmc.h\n");
             while(SYS->PDID);
         }
+    }
+    else
+    {
+        if(FMC_FLASH_PAGE_SIZE != 512)
+        {
+            /* FMC_FLASH_PAGE_SIZE is different from target device's */
+            printf("Please disable the compiler option - PAGE_SIZE_2048 in fmc.h\n");
+            while(SYS->PDID);
+        }
+    }
 
     printf("\r\n\n\n");
     printf("+----------------------------------------+\n");
