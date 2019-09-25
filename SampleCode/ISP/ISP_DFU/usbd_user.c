@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file     usbd.c
  * @version  V1.00
- * @brief    M251 series USBD driver source file
+ * @brief    M031 series USBD driver source file
  *
  * @copyright (C) 2019 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/

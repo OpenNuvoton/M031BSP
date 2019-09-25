@@ -1,7 +1,7 @@
 /******************************************************************************//**
  * @file     descriptors.c
  * @version  V3.00
- * @brief    M251 series USBD descriptor
+ * @brief    M031 series USBD descriptor
  *
  * @copyright (C) 2019 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/

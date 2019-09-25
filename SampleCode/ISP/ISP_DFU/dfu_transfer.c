@@ -1,7 +1,7 @@
 /******************************************************************************//**
  * @file     dfu_transfer.c
  * @version  V1.00
- * @brief    M251 series USBD DFU transfer sample file
+ * @brief    M031 series USBD DFU transfer sample file
  *
  * @copyright (C) 2019 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/

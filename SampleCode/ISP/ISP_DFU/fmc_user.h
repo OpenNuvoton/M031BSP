@@ -1,6 +1,6 @@
 /**************************************************************************//**
  * @file     fmc_user.h
- * @brief    M251 series FMC driver header file
+ * @brief    M031 series FMC driver header file
  * @version  2.0.0
  *
  * @copyright (C) 2019 Nuvoton Technology Corp. All rights reserved.
