@@ -82,9 +82,9 @@ int32_t FMC_Erase(uint32_t u32PageAddr)
  * @retval     0  Success
  * @retval     -1  Erase failed
  *
- * @details  Execute FMC_ISPCMD_BANK_ERASE command to erase a flash block.
+ * @details  Execute FMC_ISPCMD_BANK_ERASE command to erase a flash bank.
  */
-int32_t FMC_EraseBank(uint32_t u32BankAddr)
+int32_t FMC_Erase_Bank(uint32_t u32BankAddr)
 {
     int32_t ret = 0;
 
