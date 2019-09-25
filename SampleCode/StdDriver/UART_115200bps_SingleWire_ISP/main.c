@@ -65,6 +65,27 @@ int32_t main(void)
     SYS_Init();
     /* Init UART to 115200 bps, 8bit data length, none parity check, one stop bit */
     UART_Init();
+
+    /* Checking if flash page size matches with target chip's */
+    if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )
+    {
+        if(FMC_FLASH_PAGE_SIZE != 2048)
+        {
+            /* FMC_FLASH_PAGE_SIZE is different from target device */
+            /* Please enable the compiler option PAGE_SIZE_2048 in fmc.h */
+            while(SYS->PDID);
+        }
+    }
+    else
+    {
+        if(FMC_FLASH_PAGE_SIZE != 512)
+        {
+            /* FMC_FLASH_PAGE_SIZE is different from target device */
+            /* Please disable the compiler option PAGE_SIZE_2048 in fmc.h */
+            while(SYS->PDID);
+        }
+    }
+
     //Enable uart single wire funciton
     UART0->FUNCSEL = ((UART0->FUNCSEL & (~UART_FUNCSEL_FUNCSEL_Msk)) | UART_FUNCSEL_SINGLE_WIRE);
     //Enable ISP clock
