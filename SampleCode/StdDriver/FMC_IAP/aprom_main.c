@@ -182,6 +182,30 @@ int main()
 
     SYS_UnlockReg();
 
+    /* Checking if flash page size matches with target chip's */
+    if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )
+    {
+        if(FMC_FLASH_PAGE_SIZE != 2048)
+        {
+            /* FMC_FLASH_PAGE_SIZE is different from target device */
+            /* Please enable the compiler option PAGE_SIZE_2048 in fmc.h */
+            printf("FMC_FLASH_PAGE_SIZE is different from target device\n");
+            printf("Please enable the compiler option PAGE_SIZE_2048 in fmc.h\n");
+            while(SYS->PDID);
+        }
+    }
+    else
+    {
+        if(FMC_FLASH_PAGE_SIZE != 512)
+        {
+            /* FMC_FLASH_PAGE_SIZE is different from target device */
+            /* Please disable the compiler option PAGE_SIZE_2048 in fmc.h */    
+            printf("FMC_FLASH_PAGE_SIZE is different from target device\n");
+            printf("Please disable the compiler option PAGE_SIZE_2048 in fmc.h\n");
+            while(SYS->PDID);
+        }
+    }
+
     FMC_Open();
 
     /*
