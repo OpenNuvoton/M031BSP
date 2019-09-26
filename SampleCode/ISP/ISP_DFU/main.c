@@ -57,6 +57,26 @@ int32_t main(void)
     /* Init system and multi-funcition I/O */
     SYS_Init();
 
+    /* Checking if flash page size matches with target chip's */
+    if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )
+    {
+        if(FMC_FLASH_PAGE_SIZE != 2048)
+        {
+            /* FMC_FLASH_PAGE_SIZE is different from target device */
+            /* Please enable the compiler option PAGE_SIZE_2048 in fmc.h */
+            while(SYS->PDID);
+        }
+    }
+    else
+    {
+        if(FMC_FLASH_PAGE_SIZE != 512)
+        {
+            /* FMC_FLASH_PAGE_SIZE is different from target device */
+            /* Please disable the compiler option PAGE_SIZE_2048 in fmc.h */
+            while(SYS->PDID);
+        }
+    }
+
     /* Enable FMC ISP and APROM update function */
     FMC->ISPCTL |= (FMC_ISPCTL_ISPEN_Msk | FMC_ISPCTL_APUEN_Msk | FMC_ISPCTL_ISPFF_Msk);
 
