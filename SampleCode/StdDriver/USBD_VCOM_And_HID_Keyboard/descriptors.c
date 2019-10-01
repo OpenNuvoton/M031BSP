@@ -57,9 +57,9 @@ uint8_t gu8DeviceDescriptor[] =
     LEN_DEVICE,             /* bLength */
     DESC_DEVICE,            /* bDescriptorType */
     0x10, 0x01,             /* bcdUSB */
-    0xEF,                   /* bDeviceClass: IAD */
-    0x02,                   /* bDeviceSubClass */
-    0x01,                   /* bDeviceProtocol */
+    0x00,                   /* bDeviceClass: IAD */
+    0x00,                   /* bDeviceSubClass */
+    0x00,                   /* bDeviceProtocol */
     EP0_MAX_PKT_SIZE,       /* bMaxPacketSize0 */
     /* idVendor */
     USBD_VID & 0x00FF,
@@ -86,15 +86,15 @@ uint8_t gu8ConfigDescriptor[] =
     0xC0,               /* bmAttributes         */
     0x32,               /* MaxPower             */
 
-    // IAD
-    0x08,               // bLength: Interface Descriptor size
-    0x0B,               // bDescriptorType: IAD
-    0x00,               // bFirstInterface
-    0x02,               // bInterfaceCount
-    0x02,               // bFunctionClass: CDC
-    0x02,               // bFunctionSubClass
-    0x01,               // bFunctionProtocol
-    0x02,               // iFunction
+    /* IAD */
+    0x08,               /* bLength: Interface Descriptor size */
+    0x0B,               /* bDescriptorType: IAD */
+    0x00,               /* bFirstInterface */
+    0x02,               /* bInterfaceCount */
+    0x02,               /* bFunctionClass: CDC */
+    0x02,               /* bFunctionSubClass */
+    0x01,               /* bFunctionProtocol */
+    0x02,               /* iFunction */
 
     /* VCOM */
     /* INTERFACE descriptor */
