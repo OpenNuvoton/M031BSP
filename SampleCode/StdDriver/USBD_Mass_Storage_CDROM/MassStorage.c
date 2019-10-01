@@ -441,6 +441,8 @@ void MSC_ClassRequest(void)
                     USBD_SetStall(EP0);
                     USBD_SetStall(EP1);
                 }
+                USBD_SET_DATA0(EP2);
+
                 break;
             }
             default:
@@ -470,6 +472,7 @@ void MSC_ClassRequest(void)
                     /* Clear ready */
                     USBD->EP[EP2].CFGP |= USBD_CFGP_CLRRDY_Msk;
                     USBD->EP[EP3].CFGP |= USBD_CFGP_CLRRDY_Msk;
+                    USBD_SET_DATA0(EP2);
 
                     /* Prepare to receive the CBW */
                     g_u8EP3Ready = 0;
@@ -1041,6 +1044,7 @@ void MSC_ProcessCmd(void)
                         g_sCSW.dCSWDataResidue = 0;
                         g_u8BulkState = BULK_IN;
                         MSC_AckCmd();
+                        USBD_SET_DATA0(EP2);
                         return;
                     }
                 }
@@ -1120,15 +1124,26 @@ void MSC_ProcessCmd(void)
                 }
                 case UFI_INQUIRY:
                 {
-                    if(Hcount > 36)
-                        Hcount = 36;
-                    /* Bulk IN buffer */
-                    USBD_MemCopy((uint8_t *)((uint32_t)USBD_BUF_BASE + g_u32BulkBuf1), (uint8_t *)g_au8InquiryID, Hcount);
-                    USBD_SET_PAYLOAD_LEN(EP2, Hcount);
+                     if(Hcount > 36 || Hcount == 0)
+                    {
+                        g_u8Prevent = 1;
+                        g_sCSW.dCSWDataResidue = Hcount;
+                        g_sCSW.bCSWStatus = 0x1;
+                        USBD_SET_EP_STALL(EP2);
+                        g_u8BulkState = BULK_IN;
+                        MSC_AckCmd();
+                        USBD_SET_DATA0(EP2);
+                    }
+                    else
+                    {
+                        /* Bulk IN buffer */
+                        USBD_MemCopy((uint8_t *)((uint32_t)USBD_BUF_BASE + g_u32BulkBuf1), (uint8_t *)g_au8InquiryID, Hcount);
+                        USBD_SET_PAYLOAD_LEN(EP2, Hcount);
 
-                    g_u8BulkState = BULK_IN;
-                    g_sCSW.bCSWStatus = 0;
-                    g_sCSW.dCSWDataResidue = 0;
+                        g_u8BulkState = BULK_IN;
+                        g_sCSW.bCSWStatus = 0;
+                        g_sCSW.dCSWDataResidue = 0;
+                    }
                     return;
                 }
                 case UFI_READ_12:
@@ -1275,6 +1290,7 @@ void MSC_ProcessCmd(void)
                             USBD_SET_EP_STALL(EP2);
                             g_u8BulkState = BULK_IN;
                             MSC_AckCmd();
+                            USBD_SET_DATA0(EP2);
                             return;
                         }
                     }
@@ -1296,6 +1312,7 @@ void MSC_ProcessCmd(void)
                     g_sCSW.dCSWDataResidue = 0;
                     g_u8BulkState = BULK_IN;
                     MSC_AckCmd();
+                    USBD_SET_DATA0(EP2);
                     return;
                 }
                 case UFI_READ_TOC:
@@ -1345,6 +1362,19 @@ void MSC_ProcessCmd(void)
                 case UFI_GET_EVENT_STATUS_NOTIFICATION:
                 {
                     MSC_GetEventStatusNotification();
+                    return;
+                }
+                case UFI_MODE_SENSE_6:
+                {
+                    *(uint8_t *)((uint32_t)USBD_BUF_BASE + g_u32BulkBuf1+0) = 0x3;
+                    *(uint8_t *)((uint32_t)USBD_BUF_BASE + g_u32BulkBuf1+1) = 0x0;
+                    *(uint8_t *)((uint32_t)USBD_BUF_BASE + g_u32BulkBuf1+2) = 0x0;
+                    *(uint8_t *)((uint32_t)USBD_BUF_BASE + g_u32BulkBuf1+3) = 0x0;
+
+                    USBD_SET_PAYLOAD_LEN(EP2, 4);
+                    g_u8BulkState = BULK_IN;
+                    g_sCSW.bCSWStatus = 0;
+                    g_sCSW.dCSWDataResidue = Hcount - 4;;
                     return;
                 }
                 default:

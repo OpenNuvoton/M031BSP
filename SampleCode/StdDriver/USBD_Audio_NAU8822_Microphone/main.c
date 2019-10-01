@@ -158,6 +158,7 @@ void I2C1_Init(void)
 /*  Main Function                                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/
 int32_t main(void)
+
 {
 #if CRYSTAL_LESS
     uint32_t u32TrimInit;

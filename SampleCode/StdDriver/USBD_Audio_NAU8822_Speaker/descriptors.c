@@ -82,12 +82,7 @@
 
 /*----------------------------------------------------------------------------*/
 /*!<USB Device Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8DeviceDescriptor[] =
-#else
-uint8_t gu8DeviceDescriptor[] __attribute__((aligned(4))) =
-#endif
 {
     LEN_DEVICE,         /* bLength */
     DESC_DEVICE,        /* bDescriptorType */
@@ -115,12 +110,7 @@ uint8_t gu8DeviceDescriptor[] __attribute__((aligned(4))) =
 
 #ifdef __HID__
 #ifdef __JOYSTICK__
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t HID_DeviceReportDescriptor[] =
-#else
-uint8_t HID_DeviceReportDescriptor[] __attribute__((aligned(4))) =
-#endif
 {
     0x05, 0x01,        /* Usage Page(Generic Desktop Controls) */
     0x09, 0x04,        /* Usage(Joystick) */
@@ -166,12 +156,7 @@ uint8_t HID_DeviceReportDescriptor[] __attribute__((aligned(4))) =
 };
 
 #elif defined __MEDIAKEY__
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t HID_DeviceReportDescriptor[] =
-#else
-uint8_t HID_DeviceReportDescriptor[] __attribute__((aligned(4))) =
-#endif
 {
     0x05, 0x0C,        /* Usage Page (Consumer) */
     0x09, 0x01,        /* Usage(Consumer Control) */
@@ -216,12 +201,7 @@ uint8_t HID_DeviceReportDescriptor[] __attribute__((aligned(4))) =
 #endif
 
 /*!<USB Configure Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8ConfigDescriptor[] =
-#else
-uint8_t gu8ConfigDescriptor[] __attribute__((aligned(4))) =
-#endif
 {
     /* Configuration Descriptor */
     LEN_CONFIG,         /* bLength */
@@ -504,7 +484,7 @@ uint8_t gu8ConfigDescriptor[] __attribute__((aligned(4))) =
     /* Interface Descriptor for HID */
     LEN_INTERFACE,      /* bLength */
     DESC_INTERFACE,     /* bDescriptorType */
-    0x03,               /* bInterfaceNumber */
+    0x02,               /* bInterfaceNumber */
     0x00,               /* bAlternateSetting */
     0x01,               /* bNumEndpoints : Interrupt IN Endpoint */
     0x03,               /* bInterfaceClass */
@@ -559,12 +539,7 @@ uint8_t gu8BosDescriptor[] = {
 
 
 /*!<USB Language String Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8StringLang[4] =
-#else
-uint8_t gu8StringLang[4] __attribute__((aligned(4))) =
-#endif
 {
     4,              /* bLength */
     DESC_STRING,    /* bDescriptorType */
@@ -572,12 +547,7 @@ uint8_t gu8StringLang[4] __attribute__((aligned(4))) =
 };
 
 /*!<USB Vendor String Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8VendorStringDesc[] =
-#else
-uint8_t gu8VendorStringDesc[] __attribute__((aligned(4))) =
-#endif
 {
     16,
     DESC_STRING,
@@ -585,12 +555,7 @@ uint8_t gu8VendorStringDesc[] __attribute__((aligned(4))) =
 };
 
 /*!<USB Product String Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8ProductStringDesc[] =
-#else
-uint8_t gu8ProductStringDesc[] __attribute__((aligned(4))) =
-#endif
 {
 #ifdef __HID__
     54,
@@ -613,12 +578,7 @@ uint8_t gu8ProductStringDesc[] __attribute__((aligned(4))) =
 #endif
 };
 /*!<USB Serial String Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8StringSerial[26] =
-#else
-uint8_t gu8StringSerial[26] __attribute__((aligned(4))) =
-#endif
 {
     26,             /* bLength */
     DESC_STRING,    /* bDescriptorType */
@@ -637,32 +597,38 @@ uint8_t *gu8UsbHidReport[4] =
 {
     0,
     0,
-    0,
 #ifdef __HID__
     HID_DeviceReportDescriptor,
 #else
-    0
+    0,
 #endif
+    0
 };
 
 uint32_t gu32UsbHidReportLen[4] =
 {
     0,
     0,
-    0,
 #ifdef __HID__
     sizeof(HID_DeviceReportDescriptor),
 #else
-    0
+    0,
 #endif
+    0
+};
+uint32_t gu32ConfigHidDescIdx[3] =
+{
+    0,
+    0,
+    (sizeof(gu8ConfigDescriptor) - LEN_HID - LEN_ENDPOINT),
 };
 const S_USBD_INFO_T gsInfo = {
     gu8DeviceDescriptor,
     gu8ConfigDescriptor,
     gpu8UsbString,
     gu8UsbHidReport,
-    gu8BosDescriptor,
+    0,
     gu32UsbHidReportLen,
-    NULL
+    gu32ConfigHidDescIdx,
 };
 

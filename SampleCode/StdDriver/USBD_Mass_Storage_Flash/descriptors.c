@@ -14,14 +14,9 @@
 
 /*----------------------------------------------------------------------------*/
 /*!<USB Device Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8DeviceDescriptor[] =
 {
-#else
-uint8_t gu8DeviceDescriptor[] __attribute__((aligned(4))) =
-{
-#endif
+
     LEN_DEVICE,         /* bLength */
     DESC_DEVICE,        /* bDescriptorType */
     0x10, 0x01,         /* bcdUSB */
@@ -43,14 +38,8 @@ uint8_t gu8DeviceDescriptor[] __attribute__((aligned(4))) =
 };
 
 /*!<USB Configure Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8ConfigDescriptor[] =
 {
-#else
-uint8_t gu8ConfigDescriptor[] __attribute__((aligned(4))) =
-{
-#endif
     LEN_CONFIG,                                         // bLength
     DESC_CONFIG,                                        // bDescriptorType
     (LEN_CONFIG+LEN_INTERFACE+LEN_ENDPOINT*2), 0x00,    // wTotalLength
@@ -89,53 +78,31 @@ uint8_t gu8ConfigDescriptor[] __attribute__((aligned(4))) =
 };
 
 /*!<USB Language String Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8StringLang[4] =
 {
-#else
-uint8_t gu8StringLang[4] __attribute__((aligned(4))) =
-{
-#endif
     4,              /* bLength */
     DESC_STRING,    /* bDescriptorType */
     0x09, 0x04
 };
 
 /*!<USB Vendor String Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8VendorStringDesc[] =
 {
-#else
-uint8_t gu8VendorStringDesc[] __attribute__((aligned(4))) =
-{
-#endif
     16,
     DESC_STRING,
     'N', 0, 'u', 0, 'v', 0, 'o', 0, 't', 0, 'o', 0, 'n', 0
 };
 
 /*!<USB Product String Descriptor */
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8ProductStringDesc[] =
 {
-#else
-uint8_t gu8ProductStringDesc[] __attribute__((aligned(4))) =
-{
-#endif
     22,             /* bLength          */
     DESC_STRING,    /* bDescriptorType  */
     'U', 0, 'S', 0, 'B', 0, ' ', 0, 'D', 0, 'e', 0, 'v', 0, 'i', 0, 'c', 0, 'e', 0
 };
 
-#ifdef __ICCARM__
-#pragma data_alignment=4
 uint8_t gu8StringSerial[] =
-#else
-uint8_t gu8StringSerial[] __attribute__((aligned(4))) =
-#endif
+
 {
     26,             // bLength
     DESC_STRING,    // bDescriptorType

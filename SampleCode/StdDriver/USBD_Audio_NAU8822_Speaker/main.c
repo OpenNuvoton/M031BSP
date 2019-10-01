@@ -218,8 +218,6 @@ int32_t main(void)
     /* Start I2S play iteration */
     SPII2S_EnableInt(SPI0, SPII2S_FIFO_TXTH_INT_MASK);
 
-    /* Enable I2S Tx function */
-    SPII2S_ENABLE_TX(SPI0);
 
     USBD_Open(&gsInfo, UAC_ClassRequest, (SET_INTERFACE_REQ)UAC_SetInterface);
 

@@ -119,6 +119,9 @@ void USBD_IRQHandler(void)
             USBD_ENABLE_USB();
             USBD_SwReset();
 
+            /* Disable I2S Tx function */
+            SPII2S_DISABLE_TX(SPI0);
+
             /*Enable HIRC tirm*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING;
         }
@@ -633,9 +636,6 @@ void UAC_ClassRequest(void)
 //                 }
                 case GET_IDLE:
                 {
-//                    /* Setup error, stall the device */
-//                    USBD_SetStall(0);
-//                    break;
                     /* Data stage */
                     M8(USBD_BUF_BASE + USBD_GET_EP_BUF_ADDR(EP0)) = u8Idle;
                     USBD_SET_DATA1(EP0);
@@ -734,12 +734,20 @@ void UAC_ClassRequest(void)
             }
             case SET_IDLE:
             {
+                u8Idle = buf[3]; 
                 /* Status stage */
                 USBD_SET_DATA1(EP0);
                 USBD_SET_PAYLOAD_LEN(EP0, 0);
                 break;
             }
             case SET_PROTOCOL:
+            {
+                u8Protocol = buf[2]; 
+                /* Status stage */
+                USBD_SET_DATA1(EP0);
+                USBD_SET_PAYLOAD_LEN(EP0, 0);
+                break;
+            }
 #endif
 
             default:
@@ -957,6 +965,8 @@ void UAC_DeviceEnable(uint8_t u8Object)
     /* Reset Play buffer */
     if(g_u8PlayEn == 0)
     {
+        /* Enable I2S Tx function */
+        SPII2S_ENABLE_TX(SPI0);
         /* Fill 0x0 to buffer before playing for buffer operation smooth */
         memset(g_au32PcmPlayBuf, 0, sizeof(g_au32PcmPlayBuf));
         g_u32PlayPos_In = BUF_LEN / 2;
@@ -974,6 +984,8 @@ void UAC_DeviceDisable(uint8_t u8Object)
 {
     /* Disable play hardware/stop play */
     g_u8PlayEn = 0;
+    /* Disable I2S Tx function */
+    SPII2S_DISABLE_TX(SPI0);
 }
 
 #if CRYSTAL_LESS

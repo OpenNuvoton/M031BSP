@@ -293,7 +293,7 @@ const S_USBD_INFO_T gsInfo =
     (uint8_t *)gu8ConfigDescriptor,
     (uint8_t **)gpu8UsbString,
     (uint8_t **)gu8UsbHidReport,
-    (uint8_t *)gu8BOSDescriptor,
+    0,
     (uint32_t *)gu32UsbHidReportLen,
     (uint32_t *)gu32ConfigHidDescIdx
 };

@@ -179,6 +179,13 @@ uint8_t gu8VendorStringDesc[] =
     'N', 0, 'u', 0, 'v', 0, 'o', 0, 't', 0, 'o', 0, 'n', 0
 };
 
+uint8_t gu8StringSerial[] =
+{
+    26,             // bLength
+    DESC_STRING,    // bDescriptorType
+    'A', 0, '0', 0, '2', 0, '0', 0, '0', 0, '8', 0, '0', 0, '4', 0, '0', 0, '1', 0, '1', 0, '4', 0
+};
+
 /*!<USB Product String Descriptor */
 uint8_t gu8ProductStringDesc[] =
 {
@@ -209,7 +216,7 @@ uint8_t *gpu8UsbString[4] =
     gu8StringLang,
     gu8VendorStringDesc,
     gu8ProductStringDesc,
-    0,
+    gu8StringSerial,
 };
 
 uint8_t *gu8UsbHidReport[3] =
@@ -239,7 +246,7 @@ const S_USBD_INFO_T gsInfo =
     (uint8_t *)gu8ConfigDescriptor,
     (uint8_t **)gpu8UsbString,
     (uint8_t **)gu8UsbHidReport,
-    (uint8_t *)gu8BOSDescriptor,
+    0,
     (uint32_t *)gu32UsbHidReportLen,
     (uint32_t *)gu32ConfigHidDescIdx
 };

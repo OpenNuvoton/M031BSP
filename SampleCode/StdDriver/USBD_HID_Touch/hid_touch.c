@@ -15,6 +15,7 @@
 
 uint8_t volatile g_u8EP2Ready = 0;
 uint8_t volatile g_u8Suspend = 0;
+uint8_t g_u8Idle = 0, g_u8Protocol = 0;
 
 void USBD_IRQHandler(void)
 {
@@ -201,50 +202,60 @@ void HID_ClassRequest(void)
         /* Device to host */
         switch (buf[1])
         {
-        case GET_REPORT:
-        {
-            if(buf[3] == HID_RPT_TYPE_INPUT)
+            case GET_REPORT:
             {
-                /* Report Type = input */
-                //DBG_PRINTF(" - Input\n");
+                if(buf[3] == HID_RPT_TYPE_INPUT)
+                {
+                    /* Report Type = input */
+                    //DBG_PRINTF(" - Input\n");
+                }
+                else if(buf[3] == HID_RPT_TYPE_FEATURE)
+                {
+                    /* Request Type = Feature */
+                    /* report ID is 2 */
+                    /* contact count maximum is 2 */
+                    M8(USBD_BUF_BASE + USBD_GET_EP_BUF_ADDR(EP0)) = 2;
+                    M8(USBD_BUF_BASE + USBD_GET_EP_BUF_ADDR(EP0) + 1) = 2;
+                    /* Data stage */
+                    USBD_SET_DATA1(EP0);
+                    USBD_SET_PAYLOAD_LEN(EP0, 2);
+                    /* Status stage */
+                    USBD_PrepareCtrlOut(0,0);
+                }
+                else
+                {
+                    // DBG_PRINTF(" - Unknown\n");
+                    /* Setup error, stall the device */
+                    USBD_SetStall(EP0);
+                    USBD_SetStall(EP1);
+                }
+                break;
             }
-            else if(buf[3] == HID_RPT_TYPE_FEATURE)
+            case GET_IDLE:
             {
-                /* Request Type = Feature */
-                /* report ID is 2 */
-                /* contact count maximum is 2 */
-                M8(USBD_BUF_BASE + USBD_GET_EP_BUF_ADDR(EP0)) = 2;
-                M8(USBD_BUF_BASE + USBD_GET_EP_BUF_ADDR(EP0) + 1) = 2;
+                USBD_SET_PAYLOAD_LEN(EP1, buf[6]);
                 /* Data stage */
-                USBD_SET_DATA1(EP0);
-                USBD_SET_PAYLOAD_LEN(EP0, 2);
+                USBD_PrepareCtrlIn(&g_u8Idle, buf[6]);
                 /* Status stage */
-                USBD_PrepareCtrlOut(0,0);
+                USBD_PrepareCtrlOut(0, 0); 
+                break;
             }
-            else
+            case GET_PROTOCOL:
             {
-                // DBG_PRINTF(" - Unknown\n");
+                USBD_SET_PAYLOAD_LEN(EP1, buf[6]);
+                /* Data stage */
+                USBD_PrepareCtrlIn(&g_u8Protocol, buf[6]);
+                /* Status stage */
+                USBD_PrepareCtrlOut(0, 0); 
+                break;
+            }
+            default:
+            {
                 /* Setup error, stall the device */
                 USBD_SetStall(EP0);
                 USBD_SetStall(EP1);
+                break;
             }
-            break;
-        }
-        case GET_IDLE:
-//             {
-//                 break;
-//             }
-        case GET_PROTOCOL:
-//             {
-//                 break;
-//             }
-        default:
-        {
-            /* Setup error, stall the device */
-            USBD_SetStall(EP0);
-            USBD_SetStall(EP1);
-            break;
-        }
         }
     }
     else
@@ -252,41 +263,46 @@ void HID_ClassRequest(void)
         /* Host to device */
         switch (buf[1])
         {
-        case SET_REPORT:
-        {
-            if (buf[3] == 2)
+            case SET_REPORT:
             {
-                /* Request Type = OUTPUT */
-                USBD_SET_DATA1(EP1);
-                USBD_SET_PAYLOAD_LEN(EP1, 0);
+                if (buf[3] == 2)
+                {
+                    /* Request Type = OUTPUT */
+                    USBD_SET_DATA1(EP1);
+                    USBD_SET_PAYLOAD_LEN(EP1, 0);
+                }
+                else if (buf[3] == 3)
+                {
+                    /* Request Type = Feature */
+                    USBD_SET_DATA1(EP1);
+                    USBD_SET_PAYLOAD_LEN(EP1, 0);
+                }
+                break;
             }
-            else if (buf[3] == 3)
+            case SET_IDLE:
             {
-                /* Request Type = Feature */
-                USBD_SET_DATA1(EP1);
-                USBD_SET_PAYLOAD_LEN(EP1, 0);
+                g_u8Idle = buf[3]; 
+                /* Status stage */
+                USBD_SET_DATA1(EP0);
+                USBD_SET_PAYLOAD_LEN(EP0, 0);
+                break;
             }
-            break;
-        }
-        case SET_IDLE:
-        {
-            /* Status stage */
-            USBD_SET_DATA1(EP0);
-            USBD_SET_PAYLOAD_LEN(EP0, 0);
-            break;
-        }
-        case SET_PROTOCOL:
-//             {
-//                  break;
-//             }
-        default:
-        {
-            /* Stall */
-            /* Setup error, stall the device */
-            USBD_SetStall(EP0);
-            USBD_SetStall(EP1);
-            break;
-        }
+            case SET_PROTOCOL:
+            {
+                g_u8Protocol = buf[2]; 
+                /* Status stage */
+                USBD_SET_DATA1(EP0);
+                USBD_SET_PAYLOAD_LEN(EP0, 0);
+                break;
+            }
+            default:
+            {
+                /* Stall */
+                /* Setup error, stall the device */
+                USBD_SetStall(EP0);
+                USBD_SetStall(EP1);
+                break;
+            }
         }
     }
 }

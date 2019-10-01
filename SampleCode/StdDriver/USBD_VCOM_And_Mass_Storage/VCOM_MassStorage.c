@@ -38,6 +38,7 @@ uint32_t g_u32BytesInStorageBuf;
 
 uint32_t g_u32BulkBuf0, g_u32BulkBuf1;
 uint32_t volatile g_u32OutToggle = 0, g_u32OutSkip = 0;
+uint32_t volatile g_u32CbwStall = 1;
 
 /* CBW/CSW variables */
 struct CBW g_sCBW;
@@ -269,7 +270,7 @@ void EP5_Handler(void)
 void EP6_Handler(void)
 {
     /* Bulk OUT */
-    if (g_u32OutToggle == (USBD->EPSTS0 & USBD_EPSTS0_EPSTS6_Msk))
+    if ((g_u32OutToggle == (USBD->EPSTS0 & USBD_EPSTS0_EPSTS6_Msk)) && !g_u32CbwStall)
     {
         g_u32OutSkip = 1;
         USBD_SET_PAYLOAD_LEN(EP6, EP6_MAX_PKT_SIZE);
@@ -277,6 +278,7 @@ void EP6_Handler(void)
     else
     {
         g_u8EP6Ready = 1;
+        g_u32CbwStall = 0;
         g_u32OutToggle = USBD->EPSTS0 & USBD_EPSTS0_EPSTS6_Msk;
         g_u32OutSkip = 0;
     }
@@ -352,11 +354,32 @@ void VCOM_ClassRequest(void)
 
     USBD_GetSetupPacket(buf);
 
-    if (buf[0] & 0x80)   /* request data transfer direction */
+    if (buf[0] & EP_INPUT)  /* request data transfer direction */
     {
         /* Device to host */
         switch (buf[1])
         {
+            case GET_MAX_LUN:
+            {
+                /* Check interface number with cfg descriptor and check wValue = 0, wLength = 1 */
+                if ((buf[2] == 0x00) && (buf[4] == 0x02) && (buf[6] == 1))
+                {
+                    M8(USBD_BUF_BASE + USBD_GET_EP_BUF_ADDR(EP0)) = 0;
+                    /* Data stage */
+                    USBD_SET_DATA1(EP0);
+                    USBD_SET_PAYLOAD_LEN(EP0, 1);
+                    /* Status stage */
+                    USBD_PrepareCtrlOut(0,0);
+                }
+                else     /* Invalid Get MaxLun command */
+                {
+                    USBD_SET_EP_STALL(EP1); /* Stall when wrong parameter */
+                }
+                g_u32OutToggle = 0;
+                    USBD_SET_DATA0(EP5);
+
+                break;
+            }
             case GET_LINE_CODE:
             {
                 if (buf[4] == 0)   /* VCOM-1 */
@@ -368,25 +391,6 @@ void VCOM_ClassRequest(void)
                 USBD_SET_PAYLOAD_LEN(EP0, 7);
                 /* Status stage */
                 USBD_PrepareCtrlOut(0,0);
-                break;
-            }
-            case GET_MAX_LUN:
-            {
-                /* Check interface number with cfg descriptor and check wValue = 0, wLength = 1 */
-                if ((((buf[3]<<8)+buf[2]) == 0) && (((buf[5]<<8)+buf[4]) == 0) && (((buf[7]<<8)+buf[6]) == 1))
-                {
-                    M8(USBD_BUF_BASE + USBD_GET_EP_BUF_ADDR(EP0)) = 0;
-                    /* Data stage */
-                    USBD_SET_DATA1(EP0);
-                    USBD_SET_PAYLOAD_LEN(EP0, 1);
-                    /* Status stage */
-                    USBD_PrepareCtrlOut(0,0);
-                }
-                else     /* Invalid Get MaxLun command */
-                {
-                    USBD_SetStall(EP0);
-                    USBD_SetStall(EP1);
-                }
                 break;
             }
             default:
@@ -402,14 +406,47 @@ void VCOM_ClassRequest(void)
     {
         /* Host to device */
         switch (buf[1])
-        {
+        {      
+            case BULK_ONLY_MASS_STORAGE_RESET:
+            {
+                /* 
+                    Check interface number with cfg descriptor and check wValue = 0, wLength = 0
+                */
+                if(buf[4] == 0x02)
+                {
+                    USBD_SET_DATA1(EP0);
+                    USBD_SET_PAYLOAD_LEN(EP0, 0);
+
+                    USBD_LockEpStall(0);
+
+                    /* Clear ready */
+                    USBD->EP[EP5].CFGP |= USBD_CFGP_CLRRDY_Msk;
+                    USBD->EP[EP6].CFGP |= USBD_CFGP_CLRRDY_Msk;
+                    USBD_SET_DATA0(EP5);
+
+                    /* Prepare to receive the CBW */
+                    g_u8EP6Ready = 0;
+                    g_u8BulkState = BULK_CBW;
+
+                    USBD_SET_DATA1(EP6);
+                    USBD_SET_EP_BUF_ADDR(EP6, g_u32BulkBuf0);
+                    USBD_SET_PAYLOAD_LEN(EP6, EP6_MAX_PKT_SIZE);
+                }
+                else
+                {
+                    /* Setup error, stall the device */
+                    USBD_SetStall(EP0);
+                    USBD_SetStall(EP1);
+                }
+                break;
+            }
             case SET_CONTROL_LINE_STATE:
             {
                 if (buf[4] == 0)   /* VCOM-1 */
                 {
                     gCtrlSignal = buf[3];
                     gCtrlSignal = (gCtrlSignal << 8) | buf[2];
-                    //printf("RTS=%d  DTR=%d\n", (gCtrlSignal0 >> 1) & 1, gCtrlSignal0 & 1);
+//                     printf("RTS=%d  DTR=%d\n", (gCtrlSignal0 >> 1) & 1, gCtrlSignal0 & 1);
                 }
 
                 /* Status stage */
@@ -425,31 +462,6 @@ void VCOM_ClassRequest(void)
                 /* Status stage */
                 USBD_SET_DATA1(EP0);
                 USBD_SET_PAYLOAD_LEN(EP0, 0);
-
-                break;
-            }
-            case BULK_ONLY_MASS_STORAGE_RESET:
-            {
-                /* Check interface number with cfg descriptor and check wValue = 0, wLength = 0
-                   if ((((buf[3]<<8)+buf[2]) == 0) && (((buf[5]<<8)+buf[4]) == 0) && (((buf[7]<<8)+buf[6]) == 0))
-                   CV3.0 Test Failed - BOT MSC Reset : Modify this command always Reset
-                */
-                USBD_SET_DATA1(EP0);
-                USBD_SET_PAYLOAD_LEN(EP0, 0);
-
-                USBD_LockEpStall(0);
-
-                /* Clear ready */
-                USBD->EP[EP5].CFGP |= USBD_CFGP_CLRRDY_Msk;
-                USBD->EP[EP6].CFGP |= USBD_CFGP_CLRRDY_Msk;
-
-                /* Prepare to receive the CBW */
-                g_u8EP6Ready = 0;
-                g_u8BulkState = BULK_CBW;
-
-                USBD_SET_DATA1(EP6);
-                USBD_SET_EP_BUF_ADDR(EP6, g_u32BulkBuf0);
-                USBD_SET_PAYLOAD_LEN(EP6, EP6_MAX_PKT_SIZE);
 
                 break;
             }
@@ -862,6 +874,7 @@ void MSC_ProcessCmd(void)
                 g_u8Prevent = 1;
                 USBD_SET_EP_STALL(EP5);
                 USBD_SET_EP_STALL(EP6);
+                g_u32CbwStall = 1;
                 USBD_LockEpStall((1 << EP5) | (1 << EP6));
                 return;
             }
@@ -899,6 +912,7 @@ void MSC_ProcessCmd(void)
                         if (g_sCBW.bmCBWFlags == 0)     /* Ho > Dn (Case 9) */
                         {
                             g_u8Prevent = 1;
+                            g_u32CbwStall = 1;
                             USBD_SET_EP_STALL(EP6);
                             g_sCSW.bCSWStatus = 0x1;
                             g_sCSW.dCSWDataResidue = Hcount;
@@ -944,7 +958,7 @@ void MSC_ProcessCmd(void)
                 case UFI_REQUEST_SENSE:
                 {
                     /* Special case : Allocation Length is 24 on specific PC, it caused VCOM can't work.*/
-                    if (Hcount > 0)
+                    if ((Hcount > 0) && (Hcount <= 18))
                     {
                         MSC_RequestSense();
                         /* CV Test must consider reserved bits.
@@ -961,7 +975,8 @@ void MSC_ProcessCmd(void)
                         g_u8Prevent = 1;
                         g_sCSW.bCSWStatus = 0x01;
                         g_sCSW.dCSWDataResidue = 0;
-                        g_u8BulkState = BULK_IN;
+                        g_u8BulkState = BULK_IN;  
+                        USBD_SET_DATA0(EP5);
                         MSC_AckCmd();
                         return;
                     }
@@ -1028,6 +1043,11 @@ void MSC_ProcessCmd(void)
                         USBD_SET_PAYLOAD_LEN(EP6, EP6_MAX_PKT_SIZE);
                         g_u8BulkState = BULK_OUT;
                     }
+                    else
+                    {
+                        g_u8BulkState = BULK_IN;
+                        MSC_AckCmd();
+                    }
                     return;
                 }
                 case UFI_MODE_SENSE_6:
@@ -1072,15 +1092,26 @@ void MSC_ProcessCmd(void)
                 }
                 case UFI_INQUIRY:
                 {
-                    if(Hcount > 36)
-                        Hcount = 36;
-                    /* Bulk IN buffer */
-                    USBD_MemCopy((uint8_t *)((uint32_t)USBD_BUF_BASE + g_u32BulkBuf1), (uint8_t *)g_au8InquiryID, Hcount);
-                    USBD_SET_PAYLOAD_LEN(EP5, Hcount);
+                    if(Hcount > 36 || Hcount == 0)
+                    {
+                        g_u8Prevent = 1;
+                        g_sCSW.dCSWDataResidue = Hcount;
+                        g_sCSW.bCSWStatus = 0x1;
+                        USBD_SET_EP_STALL(EP5);
+                        g_u8BulkState = BULK_IN;      
+                        USBD_SET_DATA0(EP5);
+                        MSC_AckCmd();
+                    }
+                    else
+                    {
+                        /* Bulk IN buffer */
+                        USBD_MemCopy((uint8_t *)((uint32_t)USBD_BUF_BASE + g_u32BulkBuf1), (uint8_t *)g_au8InquiryID, Hcount);
+                        USBD_SET_PAYLOAD_LEN(EP5, Hcount);
 
-                    g_u8BulkState = BULK_IN;
-                    g_sCSW.bCSWStatus = 0;
-                    g_sCSW.dCSWDataResidue = 0;
+                        g_u8BulkState = BULK_IN;
+                        g_sCSW.bCSWStatus = 0;
+                        g_sCSW.dCSWDataResidue = 0;
+                    }
                     return;
                 }
                 case UFI_READ_12:
@@ -1123,6 +1154,7 @@ void MSC_ProcessCmd(void)
                         else     /* Ho <> Di (Case 10) */
                         {
                             g_u8Prevent = 1;
+                            g_u32CbwStall = 1;
                             USBD_SET_EP_STALL(EP6);
                             g_sCSW.bCSWStatus = 0x01;
                             g_sCSW.dCSWDataResidue = Hcount;
@@ -1214,6 +1246,7 @@ void MSC_ProcessCmd(void)
                             g_sCSW.bCSWStatus = 0x1;
                             USBD_SET_EP_STALL(EP5);
                             g_u8BulkState = BULK_IN;
+                            USBD_SET_DATA0(EP5);
                             MSC_AckCmd();
                             return;
                         }
@@ -1234,6 +1267,7 @@ void MSC_ProcessCmd(void)
                     g_sCSW.dCSWDataResidue = 0;
                     g_u8BulkState = BULK_IN;
                     MSC_AckCmd();
+                    USBD_SET_DATA0(EP5);
                     return;
                 }
                 default:

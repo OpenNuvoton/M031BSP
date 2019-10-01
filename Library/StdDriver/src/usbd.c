@@ -213,8 +213,18 @@ void USBD_GetDescriptor(void)
     /* Get BOS Descriptor */
     case DESC_BOS:
     {
-        u32Len = USBD_Minimum(u32Len, LEN_BOS+LEN_BOSCAP);
-        USBD_PrepareCtrlIn((uint8_t *)g_usbd_sInfo->gu8BosDesc, u32Len);
+        if(g_usbd_sInfo->gu8BosDesc)
+        {
+            u32Len = USBD_Minimum(u32Len, LEN_BOS+LEN_BOSCAP);
+            USBD_PrepareCtrlIn((uint8_t *)g_usbd_sInfo->gu8BosDesc, u32Len);
+        }
+        else
+        {
+            /* Not support. Reply STALL. */
+            USBD_SET_EP_STALL(EP0);
+            USBD_SET_EP_STALL(EP1);
+        }
+
         break;
     }
     /* Get HID Descriptor */

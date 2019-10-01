@@ -99,6 +99,8 @@ void USBD_IRQHandler(void)
             /* Bus reset */
             USBD_ENABLE_USB();
             USBD_SwReset();
+            /* Disable I2S Rx function */
+            SPII2S_DISABLE_RX(SPI0);
 
             /*Enable HIRC tirm*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING;
@@ -463,9 +465,6 @@ void UAC_ClassRequest(void)
 //                 }
                 case GET_IDLE:
                 {
-//                    /* Setup error, stall the device */
-//                    USBD_SetStall(0);
-//                    break;
                     /* Data stage */
                     M8(USBD_BUF_BASE + USBD_GET_EP_BUF_ADDR(EP0)) = u8Idle;
                     USBD_SET_DATA1(EP0);
@@ -563,12 +562,20 @@ void UAC_ClassRequest(void)
             }
             case SET_IDLE:
             {
+                u8Idle = buf[3]; 
                 /* Status stage */
                 USBD_SET_DATA1(EP0);
                 USBD_SET_PAYLOAD_LEN(EP0, 0);
                 break;
             }
             case SET_PROTOCOL:
+            {
+                u8Protocol = buf[2]; 
+                /* Status stage */
+                USBD_SET_DATA1(EP0);
+                USBD_SET_PAYLOAD_LEN(EP0, 0);
+                break;
+            }
 #endif
 
             default:
