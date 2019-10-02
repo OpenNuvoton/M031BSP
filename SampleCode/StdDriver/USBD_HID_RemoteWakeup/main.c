@@ -18,6 +18,7 @@
 #define TRIM_INIT           (SYS_BASE+0x118)
 
 extern uint8_t volatile g_u8Suspend;
+uint8_t volatile g_u8RemouteWakeup = 0;
 int IsDebugFifoEmpty(void);
 
 void SYS_Init(void)
@@ -76,6 +77,7 @@ void GPIO_Init(void)
 void GPCDEF_IRQHandler(void)
 {
     GPIO_CLR_INT_FLAG(PC, 0x3f);
+    g_u8RemouteWakeup = 1;
 }
 
 
@@ -97,7 +99,7 @@ void PowerDown()
         CLK->PWRCTL ^= CLK_PWRCTL_PDEN_Msk;
 
     /* Note HOST to resume USB tree if it is suspended and remote wakeup enabled */
-    if(g_usbd_RemoteWakeupEn && g_u8Suspend)
+    if(g_usbd_RemoteWakeupEn && g_u8RemouteWakeup)
     {
         /* Enable PHY before sending Resume('K') state */
         USBD->ATTR |= USBD_ATTR_PHYEN_Msk;
@@ -106,6 +108,7 @@ void PowerDown()
         USBD->ATTR |= USBD_ATTR_RWAKEUP_Msk;
         CLK_SysTickDelay(1000); /* Delay 1ms */
         USBD->ATTR ^= USBD_ATTR_RWAKEUP_Msk;
+        g_u8RemouteWakeup = 0;
         printf("Remote Wakeup!!\n");
     }
 
