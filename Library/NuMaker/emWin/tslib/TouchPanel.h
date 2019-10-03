@@ -1,5 +1,5 @@
-#ifndef __NUC126TOUCHPANEL_H__
-#define __NUC126TOUCHPANEL_H__
+#ifndef __M032TOUCHPANEL_H__
+#define __M032TOUCHPANEL_H__
 
 #define __DEMO_TSFILE_ADDR__    0x00030000 /* SPI flash 192KB address */
 
