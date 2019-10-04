@@ -12,7 +12,7 @@
       <name>General</name>
       <archiveVersion>3</archiveVersion>
       <data>
-        <version>22</version>
+        <version>21</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>0</debug>
         <option>
@@ -39,20 +39,20 @@
         <option>
           <name>Input variant</name>
           <version>3</version>
-          <state>6</state>
+          <state>0</state>
         </option>
         <option>
           <name>Input description</name>
-          <state>No specifier n, no float nor long long, no scan set, no assignment suppressing.</state>
+          <state>Automatic choice of formatter.</state>
         </option>
         <option>
           <name>Output variant</name>
           <version>2</version>
-          <state>5</state>
+          <state>6</state>
         </option>
         <option>
           <name>Output description</name>
-          <state>No specifier a, A, no specifier n, no float nor long long.</state>
+          <state>No specifier a, A, no specifier n, no float nor long long, without multibyte support.</state>
         </option>
         <option>
           <name>GOutputBinary</name>
@@ -87,7 +87,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>6.70.2.6303</state>
+          <state>6.50.2.4581</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -153,17 +153,13 @@
           <name>OGUseCmsisDspLib</name>
           <state>0</state>
         </option>
-        <option>
-          <name>GRuntimeLibThreads</name>
-          <state>0</state>
-        </option>
       </data>
     </settings>
     <settings>
       <name>ICCARM</name>
       <archiveVersion>2</archiveVersion>
       <data>
-        <version>29</version>
+        <version>28</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>0</debug>
         <option>
@@ -173,6 +169,7 @@
         <option>
           <name>CCDefines</name>
           <state>__DEMO_320x240__</state>
+          <state>__GUI_NUMBTYES__=12</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
@@ -233,7 +230,7 @@
         <option>
           <name>CCAllowList</name>
           <version>1</version>
-          <state>1111111</state>
+          <state>0000000</state>
         </option>
         <option>
           <name>CCDebugInfo</name>
@@ -301,8 +298,8 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state>$PROJ_DIR$\..\..\..\..\Library\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\Library\Device\Nuvoton\M031\Include</state>
+          <state>$PROJ_DIR$\..\..\..\..\Library\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\Library\StdDriver\inc</state>
           <state>$PROJ_DIR$\..\..\..\..\ThirdParty\emWin\Config</state>
           <state>$PROJ_DIR$\..\..\..\..\ThirdParty\emWin\Include</state>
@@ -327,16 +324,16 @@
         </option>
         <option>
           <name>CCOptLevel</name>
-          <state>3</state>
+          <state>0</state>
         </option>
         <option>
           <name>CCOptStrategy</name>
           <version>0</version>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>CCOptLevelSlave</name>
-          <state>3</state>
+          <state>0</state>
         </option>
         <option>
           <name>CompilerMisraRules98</name>
@@ -400,17 +397,13 @@
           <name>IccFloatSemantics</name>
           <state>0</state>
         </option>
-        <option>
-          <name>CCNoLiteralPool</name>
-          <state>0</state>
-        </option>
       </data>
     </settings>
     <settings>
       <name>AARM</name>
       <archiveVersion>2</archiveVersion>
       <data>
-        <version>9</version>
+        <version>8</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>0</debug>
         <option>
@@ -566,10 +559,6 @@
           <name>AExtraOptionsV2</name>
           <state></state>
         </option>
-        <option>
-          <name>AsmNoLiteralPool</name>
-          <state>0</state>
-        </option>
       </data>
     </settings>
     <settings>
@@ -627,7 +616,7 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>16</version>
+        <version>15</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>0</debug>
         <option>
@@ -859,7 +848,7 @@
         </option>
         <option>
           <name>IlinkOptInline</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>IlinkOptExceptionsAllow</name>
@@ -907,10 +896,6 @@
           <version>0</version>
           <state>0</state>
         </option>
-        <option>
-          <name>IlinkThreadsSlave</name>
-          <state>1</state>
-        </option>
       </data>
     </settings>
     <settings>
@@ -947,7 +932,7 @@
     </file>
   </group>
   <group>
-    <name>CMSIS</name>
+    <name>CMSIS Files</name>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\Device\Nuvoton\M031\Source\IAR\startup_M031Series.s</name>
     </file>
@@ -956,7 +941,7 @@
     </file>
   </group>
   <group>
-    <name>emWin</name>
+    <name>Config</name>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\ThirdParty\emWin\Config\GUI_X.c</name>
     </file>
@@ -989,7 +974,7 @@
     </file>
   </group>
   <group>
-    <name>Library</name>
+    <name>Library Files</name>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\adc.c</name>
     </file>
@@ -1003,10 +988,10 @@
       <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\gpio.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\retarget.c</name>
+      <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\pdma.c</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\spi.c</name>
+      <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\retarget.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\sys.c</name>
@@ -1017,11 +1002,23 @@
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\uart.c</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\Library\StdDriver\src\usci_spi.c</name>
+    </file>
+  </group>
+  <group>
+    <name>Source Files</name>
+    <file>
+      <name>$PROJ_DIR$\..\main.c</name>
+    </file>
   </group>
   <group>
     <name>tslib</name>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\fbutils.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\fbutils.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\nuvoton_logo.c</name>
@@ -1030,16 +1027,25 @@
       <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\testutils.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\testutils.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\TouchPanel.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\TouchPanel.h</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\ts_calibrate.c</name>
     </file>
-  </group>
-  <group>
-    <name>User</name>
     <file>
-      <name>$PROJ_DIR$\..\main.c</name>
+      <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\tslib-filter.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\tslib-private.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\Library\NuMaker\emWin\tslib\tslib.h</name>
     </file>
   </group>
 </project>
