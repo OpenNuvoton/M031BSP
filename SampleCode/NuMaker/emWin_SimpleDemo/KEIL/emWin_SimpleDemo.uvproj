@@ -14,9 +14,9 @@
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>M032KIAAE</Device>
+          <Device>M032SG8AE</Device>
           <Vendor>Nuvoton</Vendor>
-          <Cpu>IRAM(0x20000000-0x20017FFF) IROM(0-0x7FFFF) CLOCK(72000000) CPUTYPE("Cortex-M0")</Cpu>
+          <Cpu>IRAM(0x20000000-0x2000FFFF) IROM(0-0x3FFFF) CLOCK(72000000) CPUTYPE("Cortex-M0")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile>undefined</StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -283,12 +283,12 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x18000</Size>
+                <Size>0x10000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x80000</Size>
+                <Size>0x40000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -313,7 +313,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x80000</Size>
+                <Size>0x40000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -338,7 +338,7 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x18000</Size>
+                <Size>0x10000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -596,9 +596,9 @@
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>M032KIAAE</Device>
+          <Device>M032SG8AE</Device>
           <Vendor>Nuvoton</Vendor>
-          <Cpu>IRAM(0x20000000-0x20017FFF) IROM(0-0x7FFFF) CLOCK(72000000) CPUTYPE("Cortex-M0")</Cpu>
+          <Cpu>IRAM(0x20000000-0x2000FFFF) IROM(0-0x3FFFF) CLOCK(72000000) CPUTYPE("Cortex-M0")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile>undefined</StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -755,7 +755,7 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4106</DriverSelection>
+            <DriverSelection>4105</DriverSelection>
           </Flash1>
           <bUseTDR>0</bUseTDR>
           <Flash2>Bin\Nu_Link.dll</Flash2>
@@ -865,12 +865,12 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x18000</Size>
+                <Size>0x10000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x80000</Size>
+                <Size>0x40000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -895,7 +895,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x80000</Size>
+                <Size>0x40000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -920,7 +920,7 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x18000</Size>
+                <Size>0x10000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
