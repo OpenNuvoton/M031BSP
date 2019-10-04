@@ -810,20 +810,7 @@
           <name>OCXDS100AttachSlave</name>
           <state>1</state>
         </option>
-        
-        
-        
       </data>
-    </settings>
-    <settings>
-      <name>CADI_ID</name>
-      <archiveVersion>2</archiveVersion>
-      <data/>
-    </settings>
-    <settings>
-      <name>TIFET_ID</name>
-      <archiveVersion>2</archiveVersion>
-      <data/>
     </settings>
     <debuggerPlugins>
       <plugin>
