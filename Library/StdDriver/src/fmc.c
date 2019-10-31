@@ -327,7 +327,7 @@ int32_t FMC_WriteConfig(uint32_t u32Config[], uint32_t u32Count)
 
         if (FMC_Read(FMC_CONFIG_BASE + i * 4u) != u32Config[i])
         {
-            ret = 1;
+            ret = -1;
         }
     }
 
