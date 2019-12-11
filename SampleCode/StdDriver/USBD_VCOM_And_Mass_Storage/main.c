@@ -32,7 +32,7 @@ extern uint8_t volatile g_u8Suspend;
 /*--------------------------------------------------------------------------*/
 #define RX_BUFSIZE           512 /* RX buffer size */
 #define TX_BUFSIZE           512 /* RX buffer size */
-#define TX_FIFO_SIZE         64  /* TX Hardware FIFO size */
+#define TX_FIFO_SIZE         16  /* TX Hardware FIFO size */
 
 #define CONFIG_BASE      0x00300000
 
@@ -89,6 +89,8 @@ void SYS_Init(void)
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))
                     |(SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+
+    UART_ENABLE_INT(UART0, (UART_INTEN_RDAIEN_Msk | UART_INTEN_THREIEN_Msk | UART_INTEN_RXTOIEN_Msk));
 
     /* Lock protected registers */
     SYS_LockReg();
