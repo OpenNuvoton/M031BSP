@@ -118,7 +118,6 @@ int32_t main(void)
     /* Write one word on LD */
     FMC_Write(0x100000, 0x55AABBCC);
 
-    printf("\nSPROM (0x100000 ~ 0x%x) CRC32 checksum =>  ", (FMC_LDROM_BASE+FMC_MIN_LDROM_SIZE));
     /*
      *  Request FMC hardware to run CRC32 calculation on LDROM.
      */
