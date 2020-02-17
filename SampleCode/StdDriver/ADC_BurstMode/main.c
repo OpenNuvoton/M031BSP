@@ -114,8 +114,15 @@ void ADC_FunctionTest()
                 while (ADC_GET_INT_FLAG(ADC, ADC_ADF_INT)==0);
                 ADC_CLR_INT_FLAG(ADC, ADC_ADF_INT); /* clear ADF interrupt flag */
 
-                /* Get the conversion result from ADC channel 0 always */
-                i32ConversionData[u32ConvCount++] = ADC_GET_CONVERSION_DATA(ADC, 0);
+                /* Get the conversion result until VALIDF turns to 0 */
+                while(ADC->ADSR0 & ADC_ADSR0_VALIDF_Msk)
+                {
+                    /* Get the conversion result from ADC channel 0 always */
+                    i32ConversionData[u32ConvCount++] = ADC_GET_CONVERSION_DATA(ADC, 0);
+                    if(u32ConvCount == CONV_TOTAL_COUNT)
+                        break;
+                }
+
                 if(u32ConvCount == CONV_TOTAL_COUNT)
                     break;
             }
@@ -153,8 +160,15 @@ void ADC_FunctionTest()
                 while (ADC_GET_INT_FLAG(ADC, ADC_ADF_INT)==0);
                 ADC_CLR_INT_FLAG(ADC, ADC_ADF_INT); /* clear ADF interrupt flag */
 
-                /* Get the conversion result from ADC channel 0 always */
-                i32ConversionData[u32ConvCount++] = ADC_GET_CONVERSION_DATA(ADC, 0);
+                /* Get the conversion result until VALIDF turns to 0 */
+                while(ADC->ADSR0 & ADC_ADSR0_VALIDF_Msk)
+                {
+                    /* Get the conversion result from ADC channel 0 always */
+                    i32ConversionData[u32ConvCount++] = ADC_GET_CONVERSION_DATA(ADC, 0);
+                    if(u32ConvCount == CONV_TOTAL_COUNT)
+                        break;
+                }
+
                 if(u32ConvCount == CONV_TOTAL_COUNT)
                     break;
             }
