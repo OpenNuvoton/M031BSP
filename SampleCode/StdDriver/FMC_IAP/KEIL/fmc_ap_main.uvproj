@@ -7,10 +7,11 @@
 
   <Targets>
     <Target>
-      <TargetName>fmc_ld_iap</TargetName>
+      <TargetName>fmc_ap_main</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
@@ -46,7 +47,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\obj\</OutputDirectory>
-          <OutputName>fmc_ld_iap</OutputName>
+          <OutputName>fmc_ap_main</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -403,7 +404,7 @@
             <noStLib>0</noStLib>
             <RepFail>1</RepFail>
             <useFile>0</useFile>
-            <TextAddressRange>0x00100000</TextAddressRange>
+            <TextAddressRange>0x00000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
             <ScatterFile></ScatterFile>
@@ -435,15 +436,30 @@
           <GroupName>User</GroupName>
           <Files>
             <File>
-              <FileName>LDROM_main.c</FileName>
+              <FileName>APROM_main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\LDROM_main.c</FilePath>
+              <FilePath>..\APROM_main.c</FilePath>
+            </File>
+            <File>
+              <FileName>ap_image.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\ap_image.s</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Library</GroupName>
           <Files>
+            <File>
+              <FileName>retarget.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Library\StdDriver\src\retarget.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Library\StdDriver\src\uart.c</FilePath>
+            </File>
             <File>
               <FileName>sys.c</FileName>
               <FileType>1</FileType>
@@ -453,6 +469,11 @@
               <FileName>fmc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Library\StdDriver\src\fmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>clk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Library\StdDriver\src\clk.c</FilePath>
             </File>
           </Files>
         </Group>
