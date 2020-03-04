@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\App0.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\App1.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\Loader1.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\Loader0.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>BuildAll</name>
+      <member>
+        <project>App0</project>
+        <configuration>Release</configuration>
+      </member>
+      <member>
+        <project>App1</project>
+        <configuration>Release</configuration>
+      </member>
+      <member>
+        <project>Loader1</project>
+        <configuration>Release</configuration>
+      </member>
+      <member>
+        <project>Loader0</project>
+        <configuration>Release</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+
