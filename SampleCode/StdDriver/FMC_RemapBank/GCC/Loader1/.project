@@ -52,7 +52,42 @@
 		<link>
 			<name>User/main.c</name>
 			<type>1</type>
-			<locationURI>copy_PARENT1/Loader1/main.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/Loader1/main.c</locationURI>
+		</link>
+		<link>
+			<name>CMSIS/CMSIS/GCC</name>
+			<type>2</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/Device/Nuvoton/M031/Source/GCC</locationURI>
+		</link>
+		<link>
+			<name>CMSIS/CMSIS/system_M031Series.c</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/Device/Nuvoton/M031/Source/system_M031Series.c</locationURI>
+		</link>
+		<link>
+			<name>Library/Library/clk.c</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src/clk.c</locationURI>
+		</link>
+		<link>
+			<name>Library/Library/fmc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src/fmc.c</locationURI>
+		</link>
+		<link>
+			<name>Library/Library/retarget.c</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src/retarget.c</locationURI>
+		</link>
+		<link>
+			<name>Library/Library/sys.c</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src/sys.c</locationURI>
+		</link>
+		<link>
+			<name>Library/Library/uart.c</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src/uart.c</locationURI>
 		</link>
 	</linkedResources>
 	<filteredResources>
