@@ -45,7 +45,14 @@ uint32_t USPI_Open(USPI_T *uspi, uint32_t u32MasterSlave, uint32_t u32SPIMode,  
     uint32_t u32Pclk;
     uint32_t u32RetValue = 0UL;
 
-    u32Pclk = CLK_GetPCLK0Freq();
+    if (uspi == USPI0)
+    {
+        u32Pclk = CLK_GetPCLK0Freq();
+    }
+    else
+    {
+        u32Pclk = CLK_GetPCLK1Freq();
+    }
 
     if(u32BusClock != 0UL)
     {
@@ -164,7 +171,14 @@ uint32_t USPI_SetBusClock(USPI_T *uspi, uint32_t u32BusClock)
     uint32_t u32ClkDiv;
     uint32_t u32Pclk;
 
-    u32Pclk = CLK_GetPCLK0Freq();
+    if (uspi == USPI0)
+    {
+        u32Pclk = CLK_GetPCLK0Freq();
+    }
+    else
+    {
+        u32Pclk = CLK_GetPCLK1Freq();
+    }
 
     u32ClkDiv = (uint32_t)((((((u32Pclk / 2UL) * 10UL) / (u32BusClock)) + 5UL) / 10UL) - 1UL); /* Compute proper divider for USCI_SPI clock */
 
@@ -186,7 +200,14 @@ uint32_t USPI_GetBusClock(USPI_T *uspi)
 
     u32ClkDiv = (uspi->BRGEN & USPI_BRGEN_CLKDIV_Msk) >> USPI_BRGEN_CLKDIV_Pos;
 
-    u32BusClk = (CLK_GetPCLK0Freq() / ((u32ClkDiv + 1UL) << 1UL));
+    if (uspi == USPI0)
+    {
+        u32BusClk = (CLK_GetPCLK0Freq() / ((u32ClkDiv + 1UL) << 1UL));
+    }
+    else
+    {
+        u32BusClk = (CLK_GetPCLK1Freq() / ((u32ClkDiv + 1UL) << 1UL));
+    }
 
     return u32BusClk;
 }

@@ -265,7 +265,7 @@ void UUART_DisableInt(UUART_T* uuart, uint32_t u32Mask)
  *
  *    @return       None
  *
- *    @details      The function is used to enable USCI_UART related interrupts specified by u32Mask parameter..
+ *    @details      The function is used to enable USCI_UART related interrupts specified by u32Mask parameter.
  */
 void UUART_EnableInt(UUART_T*  uuart, uint32_t u32Mask)
 {
@@ -330,7 +330,14 @@ uint32_t UUART_Open(UUART_T* uuart, uint32_t u32baudrate)
     uint32_t u32Div;
 
     /* Get PCLK frequency */
-    u32PCLKFreq = CLK_GetPCLK0Freq();
+    if(uuart == UUART0)
+    {
+        u32PCLKFreq = CLK_GetPCLK0Freq();
+    }
+    else
+    {
+        u32PCLKFreq = CLK_GetPCLK1Freq();
+    }
 
     /* Calculate baud rate divider */
     u32Div = u32PCLKFreq / u32baudrate;
@@ -496,7 +503,14 @@ uint32_t UUART_SetLine_Config(UUART_T* uuart, uint32_t u32baudrate, uint32_t u32
     uint32_t u32Div;
 
     /* Get PCLK frequency */
-    u32PCLKFreq = CLK_GetPCLK0Freq();
+    if(uuart == UUART0)
+    {
+        u32PCLKFreq = CLK_GetPCLK0Freq();
+    }
+    else
+    {
+        u32PCLKFreq = CLK_GetPCLK1Freq();
+    }
 
     if(u32baudrate != 0ul)
     {
