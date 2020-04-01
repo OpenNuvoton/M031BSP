@@ -39,9 +39,14 @@ void I2C0_IRQHandler(void)
     /* Check I2C Wake-up interrupt flag set or not */
     if ((I2C0->WKSTS & I2C_WKSTS_WKIF_Msk) == I2C_WKSTS_WKIF_Msk)
     {
+        /* Make sure that the ACK bit is done */
+        while (!(I2C0->WKSTS & I2C_WKSTS_WKAKDONE_Msk)) {};
+
         /* Clear I2C Wake-up interrupt flag */
         I2C0->WKSTS = I2C_WKSTS_WKIF_Msk;
 
+        /* Clear Wakeup done flag, I2C will release bus */
+        I2C0->WKSTS = I2C_WKSTS_WKAKDONE_Msk;
         g_u8SlvI2CWK = 1;
 
         return;
@@ -323,11 +328,8 @@ int main()
     __NOP();
     __NOP();
 
+    /* Waiting for syteem wake-up and I2C wake-up finish*/
     while ((g_u8SlvPWRDNWK & g_u8SlvI2CWK) == 0);
-
-    while ((I2C0->WKSTS & I2C_WKSTS_WKAKDONE_Msk) == 0);
-
-    I2C0->WKSTS = I2C_WKSTS_WKAKDONE_Msk;
 
     /* Wake-up Interrupt Message */
     printf("Power-down Wake-up INT 0x%x\n", (uint32_t)(CLK->PWRCTL & CLK_PWRCTL_PDWKIF_Msk));
