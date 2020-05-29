@@ -14,7 +14,7 @@
 
 /* Define the vendor id and product id */
 #define USBD_VID        0x0416
-#define USBD_PID        0x5011
+#define USBD_PID        0xB002
 
 /*!<Define CDC Class Specific Request */
 #define SET_LINE_CODE           0x20
