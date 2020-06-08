@@ -6,6 +6,7 @@
  * @brief    Demonstrate how to reload the WWDT counter value without resetting the MCU.
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 

@@ -3,6 +3,7 @@
  * @version  V0.10
  * @brief    NuMicro series USBD descriptor file
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 /*!<Includes */

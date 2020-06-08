@@ -6,6 +6,7 @@
  * @brief    Demonstrate how to implement a composite device.(Virtual com port and Mass storage device)
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 #include <stdio.h>

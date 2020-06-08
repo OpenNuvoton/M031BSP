@@ -6,8 +6,8 @@
  * @brief    M031 Series Flash Memory Controller Driver Header File
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  ******************************************************************************/
 #ifndef __FMC_H__
 #define __FMC_H__

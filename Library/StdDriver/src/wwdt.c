@@ -6,6 +6,7 @@
  * @brief    M031 series Window Watchdog Timer(WWDT) driver source file
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 #include "NuMicro.h"

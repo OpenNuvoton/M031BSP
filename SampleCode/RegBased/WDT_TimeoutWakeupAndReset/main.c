@@ -7,6 +7,7 @@
  *           Demonstrate how to cause WDT time-out reset system event while WDT time-out reset delay period expired.
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 #include <stdio.h>

@@ -28,6 +28,7 @@
  *                  Modify MSC_ImageSize value to hold the file size.
  *
  *
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>

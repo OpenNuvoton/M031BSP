@@ -5,6 +5,7 @@
  * @date     22, December, 2013
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2013 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #ifndef __USBD_UAC_H__
@@ -231,7 +232,8 @@ void EP2_Handler(void);
 void EP3_Handler(void);
 void EP4_Handler(void);
 void EP5_Handler(void);
-void NAU8822_Setup(void);void SamplingControl(void);
+void NAU8822_Setup(void);
+void SamplingControl(void);
 void AdjFreq(void);
 void AdjFreq1(void);
 void VolumnControl(void);
