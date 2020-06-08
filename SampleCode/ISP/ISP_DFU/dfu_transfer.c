@@ -3,6 +3,7 @@
  * @version  V1.00
  * @brief    M031 series USBD DFU transfer sample file
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2019 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 

@@ -6,6 +6,7 @@
  * @brief    Implement CRC in CRC-CCITT mode and get the CRC checksum result.
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>

@@ -4,9 +4,8 @@
  * @brief    Demonstrate the RTC function and displays current time to the
  *           UART console
  *
- *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
- *
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

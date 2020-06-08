@@ -7,6 +7,7 @@
  *           Demonstrate how to implement a USB keyboard device.
  *           It supports to use GPIO to simulate key input.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 #include <stdio.h>

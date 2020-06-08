@@ -8,6 +8,7 @@
  *           The mouse cursor will move automatically when this mouse device connecting to PC by USB.
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 #include <stdio.h>
