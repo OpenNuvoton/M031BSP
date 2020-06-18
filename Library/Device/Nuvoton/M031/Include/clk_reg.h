@@ -3,6 +3,7 @@
  * @version  V1.00
  * @brief    CLK register definition header file
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 #ifndef __CLK_REG_H__

@@ -3,8 +3,8 @@
  * @version  V3.00
  * @brief    Use ADINT interrupt to do the ADC Single-cycle scan conversion.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

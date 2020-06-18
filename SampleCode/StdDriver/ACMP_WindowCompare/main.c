@@ -1,10 +1,10 @@
-/******************************************************************************
+/**************************************************************************//**
  * @file     main.c
  * @version  V1.00
  * @brief    Show how to monitor ACMP input with window compare function.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

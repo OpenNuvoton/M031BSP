@@ -6,11 +6,9 @@
  * @brief    M031 Series Debug Port and Semihost Setting Source File
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2017 Nuvoton Technology Corp. All rights reserved.
- *
  ******************************************************************************/
-
-
 #include <stdio.h>
 #include "NuMicro.h"
 
@@ -330,7 +328,7 @@ SH_End
 
 /* Make sure won't goes here only because --gnu is defined , so
    add !__CC_ARM and !__ICCARM__ checking */
-# if defined ( __GNUC__ ) && !(__CC_ARM) && !(__ICCARM__) 
+# if defined ( __GNUC__ ) && !(__CC_ARM) && !(__ICCARM__)
 
 /**
  * @brief    This HardFault handler is implemented to show r0, r1, r2, r3, r12, lr, pc, psr
@@ -353,7 +351,7 @@ void HardFault_Handler(void)
         "B       Hard_Fault_Handler            \n"
         "1:                                    \n"
         "MRS     R0, MSP                       \n" /*; LR current value */
-        "B       Hard_Fault_Handler            \n"    
+        "B       Hard_Fault_Handler            \n"
         ::[Hard_Fault_Handler] "r" (Hard_Fault_Handler) // input
     );
     while(1);
@@ -544,7 +542,7 @@ static void SendChar(int ch)
             for(i = 0; i < g_buf_len; i++)
                 SendChar_ToUART(g_buf[i]);
   #endif
-            g_buf_len = 0;            
+            g_buf_len = 0;
         }
     }
 #else

@@ -3,8 +3,9 @@
  * @version  V1.00
  * @brief    This sample code performs how to use software to simulate RTC.
  *           In power down mode, using the Timer to wake-up the MCU and add RTC value per second.
- * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

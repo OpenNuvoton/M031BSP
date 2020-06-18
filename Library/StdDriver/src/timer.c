@@ -6,8 +6,9 @@
  * @brief    M031 Series Timer Controller (TIMER) Driver Source File
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
-*****************************************************************************/
+ *****************************************************************************/
 #include "M031Series.h"
 
 /** @addtogroup Standard_Driver Standard Driver

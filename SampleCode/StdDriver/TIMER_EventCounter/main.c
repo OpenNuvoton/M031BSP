@@ -3,8 +3,8 @@
  * @version  V1.00
  * @brief    Use TM0 pin to demonstrates timer event counter function.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  ****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

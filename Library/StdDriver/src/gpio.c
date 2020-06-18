@@ -3,11 +3,12 @@
  * @version  V3.00
  * $Revision: 2 $
  * $Date: 18/03/28 5:52p $
- * @brief    M031 Series General Purpose I/O (GPIO) Driver SSource File
+ * @brief    M031 Series General Purpose I/O (GPIO) Driver Source File
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
-*****************************************************************************/
+ *****************************************************************************/
 #include "M031Series.h"
 
 /** @addtogroup Standard_Driver Standard Driver

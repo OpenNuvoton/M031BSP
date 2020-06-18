@@ -3,8 +3,8 @@
  * @version  V3.00
  * @brief    Monitor the conversion result of channel 2 by the digital compare function.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

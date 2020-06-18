@@ -3,8 +3,8 @@
  * @version  V3.00
  * @brief    Convert Band-gap (channel 29) and print conversion result.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

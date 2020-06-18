@@ -1,11 +1,11 @@
-/******************************************************************************
+/**************************************************************************//**
  * @file     main.c
  * @version  V1.00
  * @brief    Demonstrate analog comparator (ACMP) comparison by comparing
  *           ACMP1_P1 input and VBG voltage and shows the result on UART console.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

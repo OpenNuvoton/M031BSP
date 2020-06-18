@@ -3,8 +3,8 @@
  * @version  V3.00
  * @brief    Demonstrate how to use PLL as ADC clock source to achieve 2 Msps ADC conversion rate.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

@@ -3,8 +3,8 @@
  * @version  V1.00
  * @brief    Show how to use the Timer capture function to capture Timer counter value.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

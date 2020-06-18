@@ -1,11 +1,11 @@
-/******************************************************************************
+/**************************************************************************//**
  * @file     main.c
  * @version  V1.00
  * @brief    Use ACMP to wake up system from Power-down mode while comparator
  *           output changes.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

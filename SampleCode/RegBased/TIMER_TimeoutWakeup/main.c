@@ -3,8 +3,8 @@
  * @version  V1.00
  * @brief    Use timer to wake up system from Power-down mode periodically.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  ****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

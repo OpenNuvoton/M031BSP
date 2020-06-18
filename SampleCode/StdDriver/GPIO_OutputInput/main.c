@@ -3,8 +3,8 @@
  * @version  V3.00
  * @brief    Show how to set GPIO pin mode and use pin data input/output control.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  ******************************************************************************/
 #include "stdio.h"
 #include "NuMicro.h"

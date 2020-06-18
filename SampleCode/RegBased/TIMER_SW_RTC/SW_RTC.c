@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file     SW_RTC.c
  * @version  V1.00
- * @brief    Use timer to wake up system from Power-down mode periodically.
+ * @brief    Use software to simulate RTC.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
  ****************************************************************************/
 #include "SW_RTC.h"
 

@@ -6,6 +6,7 @@
  * @brief    M031 Series ADC Driver Source File
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 #include "M031Series.h"
@@ -103,17 +104,17 @@ void ADC_EnableHWTrigger(ADC_T *adc,
     if(u32Source == ADC_ADCR_TRGS_STADC)
     {
         adc->ADCR = (adc->ADCR & ~(ADC_ADCR_TRGS_Msk | ADC_ADCR_TRGCOND_Msk | ADC_ADCR_TRGEN_Msk)) |
-                    ((adc->ADCR) | (u32Source) | (u32Param) | ADC_ADCR_TRGEN_Msk);
+                    ((u32Source) | (u32Param) | ADC_ADCR_TRGEN_Msk);
     }
     else if(u32Source == ADC_ADCR_TRGS_TIMER)
     {
         adc->ADCR = (adc->ADCR & ~(ADC_ADCR_TRGS_Msk | ADC_ADCR_TRGCOND_Msk | ADC_ADCR_TRGEN_Msk)) |
-                    ((adc->ADCR) | (u32Source) | ADC_ADCR_TRGEN_Msk);
+                    ((u32Source) | ADC_ADCR_TRGEN_Msk);
     }
     else
     {
         adc->ADCR = (adc->ADCR & ~(ADC_ADCR_TRGS_Msk | ADC_ADCR_TRGCOND_Msk | ADC_ADCR_TRGEN_Msk)) |
-                    ((adc->ADCR) | (u32Source) | ADC_ADCR_TRGEN_Msk);
+                    ((u32Source) | ADC_ADCR_TRGEN_Msk);
     }
     return;
 }

@@ -6,8 +6,8 @@
  * @brief    M031 Series System Setting Header File
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2017 Nuvoton Technology Corp. All rights reserved.
- *
  ******************************************************************************/
 #ifndef __SYSTEM_M031_H__
 #define __SYSTEM_M031_H__
