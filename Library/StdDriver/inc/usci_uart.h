@@ -3,6 +3,7 @@
  * @version  V1.00
  * @brief    M031 series USCI UART (UUART) driver header file
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #ifndef __USCI_UART_H__
@@ -406,6 +407,38 @@ extern "C"
  *    \hideinitializer
  */
 #define UUART_CLR_WAKEUP_FLAG(uuart)    ((uuart)->WKSTS = UUART_WKSTS_WKF_Msk)
+
+
+/**
+ *    @brief        Enable specified USCI_UART PDMA function
+ *
+ *    @param[in]    uuart      The pointer of the specified USCI_UART module
+ *    @param[in]    u32FuncSel Combination of following functions
+ *                             - \ref UUART_PDMACTL_TXPDMAEN_Msk
+ *                             - \ref UUART_PDMACTL_RXPDMAEN_Msk
+ *                             - \ref UUART_PDMACTL_PDMAEN_Msk
+ *
+ *    @return       None
+ *
+ *    \hideinitializer
+ */
+#define UUART_PDMA_ENABLE(uuart, u32FuncSel)   ((uuart)->PDMACTL |= (u32FuncSel))
+
+
+/**
+ *    @brief        Disable specified USCI_UART PDMA function
+ *
+ *    @param[in]    uuart      The pointer of the specified USCI_UART module
+ *    @param[in]    u32FuncSel Combination of following functions
+ *                             - \ref UUART_PDMACTL_TXPDMAEN_Msk
+ *                             - \ref UUART_PDMACTL_RXPDMAEN_Msk
+ *                             - \ref UUART_PDMACTL_PDMAEN_Msk
+ *
+ *    @return       None
+ *
+ *    \hideinitializer
+ */
+#define UUART_PDMA_DISABLE(uuart, u32FuncSel)   ((uuart)->PDMACTL &= ~(u32FuncSel))
 
 
 /**
