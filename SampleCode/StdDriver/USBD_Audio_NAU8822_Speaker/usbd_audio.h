@@ -38,7 +38,7 @@ void I2C_WriteNAU8822(uint8_t u8addr, uint16_t u16data);
                                       (0x0ul<<SYS_HIRCTRIMCTL_CESTOPEN_Pos)| \
                                       (0x3ul<<SYS_HIRCTRIMCTL_RETRYCNT_Pos)| \
                                       (0x0ul<<SYS_HIRCTRIMCTL_LOOPSEL_Pos) | \
-                                      (0x2ul<<SYS_HIRCTRIMCTL_FREQSEL_Pos))
+                                      (0x1ul<<SYS_HIRCTRIMCTL_FREQSEL_Pos))
 
 /* Define the vendor id and product id */
 #define USBD_VID        0x0416
