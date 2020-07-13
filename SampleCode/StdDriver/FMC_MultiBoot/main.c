@@ -137,7 +137,8 @@ int32_t main(void)
 
     /* Init System, IP clock and multi-function I/O. */
     SYS_Init();
-    /* Unlock protected registers */
+    
+    /* Unlock protected registers to operate FMC ISP function */
     SYS_UnlockReg();
 
     /* Configure UART0: 115200, 8-bit word, no parity bit, 1 stop bit. */

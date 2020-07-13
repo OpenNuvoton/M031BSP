@@ -202,6 +202,7 @@ int main()
     printf("|              [APROM code]              |\n");
     printf("+----------------------------------------+\n");
 
+    /* Unlock protected registers to operate FMC ISP function */
     SYS_UnlockReg();
 
     /* Checking if flash page size matches with target chip's */

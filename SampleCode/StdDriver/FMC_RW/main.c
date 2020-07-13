@@ -192,7 +192,7 @@ int main()
 {
     uint32_t    i, u32Data;
 
-    /* Unlock protected registers */
+    /* Unlock protected registers to operate FMC ISP function */
     SYS_UnlockReg();
 
     /* Init System, peripheral clock and multi-function I/O */

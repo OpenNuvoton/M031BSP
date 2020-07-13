@@ -141,7 +141,8 @@ int main()
     PutString("|            [LDROM code]            |\n");
     PutString("+------------------------------------+\n");
 
-    SYS_UnlockReg();                   /* Unlock protected registers */
+    /* Unlock protected registers to operate FMC ISP function */
+    SYS_UnlockReg();
 
     FMC_Open();                        /* Enable FMC ISP function */
 
