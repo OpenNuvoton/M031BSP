@@ -6,6 +6,7 @@
  *           USCI_SPI0 will be configured as Master mode and USCI_SPI1 will be configured as Slave mode.
  *           Both TX PDMA function and RX PDMA function will be enabled.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
@@ -252,10 +253,10 @@ void UsciSpiLoopTest_WithPDMA(void)
     PDMA->DSCT[USPI_SLAVE_TX_DMA_CH].CTL |= PDMA_DSCT_CTL_TBINTDIS_Msk;
 
     /* Enable USCI_SPI slave DMA function */
-    (UspiSlave)->PDMACTL |= USPI_PDMACTL_RXPDMAEN_Msk | USPI_PDMACTL_TXPDMAEN_Msk | USPI_PDMACTL_PDMAEN_Msk;
+    USPI_TRIGGER_TX_RX_PDMA(UspiSlave);
 
     /* Enable USCI_SPI master DMA function */
-    (UspiMaster)->PDMACTL |= USPI_PDMACTL_RXPDMAEN_Msk | USPI_PDMACTL_TXPDMAEN_Msk | USPI_PDMACTL_PDMAEN_Msk;
+    USPI_TRIGGER_TX_RX_PDMA(UspiMaster);
 
     i32Err = 0;
 
@@ -279,8 +280,7 @@ void UsciSpiLoopTest_WithPDMA(void)
                     /* Clear the PDMA transfer done flags */
                     PDMA_CLR_TD_FLAG(PDMA, (1 << USPI_MASTER_TX_DMA_CH) | (1 << USPI_MASTER_RX_DMA_CH) | (1 << USPI_SLAVE_TX_DMA_CH) | (1 << USPI_SLAVE_RX_DMA_CH));
                     /* Disable USCI_SPI master's PDMA transfer function */
-                    USPI_DISABLE_TX_PDMA(UspiMaster);
-                    USPI_DISABLE_RX_PDMA(UspiMaster);
+                    USPI_DISABLE_TX_RX_PDMA(UspiMaster);
 
                     /* Check the transfer data */
                     for (u32DataCount = 0; u32DataCount < TEST_COUNT; u32DataCount++)
@@ -334,8 +334,7 @@ void UsciSpiLoopTest_WithPDMA(void)
                     PDMA_SetTransferMode(PDMA, USPI_MASTER_RX_DMA_CH, PDMA_USCI0_RX, FALSE, 0);
 
                     /* Enable master's DMA transfer function */
-                    USPI_TRIGGER_TX_PDMA(UspiMaster);
-                    USPI_TRIGGER_RX_PDMA(UspiMaster);
+                    USPI_TRIGGER_TX_RX_PDMA(UspiMaster);
                     break;
                 }
             }
@@ -352,10 +351,10 @@ void UsciSpiLoopTest_WithPDMA(void)
             }
 
             /* Check the DMA time-out interrupt flag */
-            if (u32RegValue & 0x00000300)
+            if (u32RegValue & (PDMA_INTSTS_REQTOF0_Msk|PDMA_INTSTS_REQTOF1_Msk))
             {
                 /* Clear the time-out flag */
-                PDMA->INTSTS = u32RegValue & 0x00000300;
+                PDMA->INTSTS = u32RegValue & (PDMA_INTSTS_REQTOF0_Msk|PDMA_INTSTS_REQTOF1_Msk);
                 i32Err = 1;
                 break;
             }
