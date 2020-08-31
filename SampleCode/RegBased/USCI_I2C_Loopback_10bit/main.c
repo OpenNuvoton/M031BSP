@@ -3,6 +3,7 @@
  * @version  V1.00
  * @brief    Show a Master how to access 10-bit address Slave (loopback).
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>

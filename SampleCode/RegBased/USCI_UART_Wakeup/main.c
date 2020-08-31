@@ -7,6 +7,7 @@
  *           Show how to wake up system from Power-down mode by USCI interrupt in UART mode.
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

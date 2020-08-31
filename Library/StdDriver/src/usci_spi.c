@@ -3,6 +3,7 @@
  * @version  V1.00
  * @brief    M031 series USCI_SPI driver source file
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include "M031Series.h"

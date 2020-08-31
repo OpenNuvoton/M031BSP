@@ -6,6 +6,7 @@
  * @brief    Show how a master accesses a 10-bit address slave.
  *           This sample code need works with USCI_I2C_Slave_10bit.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

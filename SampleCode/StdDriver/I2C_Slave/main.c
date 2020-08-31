@@ -7,6 +7,7 @@
  *           Demonstrate how to set I2C in Slave mode to receive 256 bytes data from a master.
  *           This sample code needs to work with I2C_Master.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

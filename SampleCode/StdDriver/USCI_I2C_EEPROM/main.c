@@ -5,6 +5,7 @@
  * $Date: 18/07/12 9:34a $
  * @brief    Show how to use USCI_I2C interface to access EEPROM.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

@@ -7,6 +7,7 @@
  *           Show how a master uses I2C address 0x0 to write data to a slave.
  *           This sample code needs to work with I2C_GCMode_Slave.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

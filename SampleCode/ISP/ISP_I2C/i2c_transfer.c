@@ -5,6 +5,7 @@
  * @brief    I2C ISP slave sample file
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2017 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>

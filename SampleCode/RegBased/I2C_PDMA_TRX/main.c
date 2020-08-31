@@ -4,6 +4,7 @@
  * @brief
  *           Demonstrate I2C PDMA mode and need to connect I2C0 (master) and I2C1 (slave).
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>

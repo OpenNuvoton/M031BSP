@@ -4,6 +4,7 @@
  * @version  1.0.0
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2017 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #ifndef __SPI_TRANS_H__

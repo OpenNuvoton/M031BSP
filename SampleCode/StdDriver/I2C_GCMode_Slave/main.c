@@ -7,6 +7,7 @@
  *           Show how a slave receives data from a master in GC (General Call) mode.
  *           This sample code needs to work with I2C_GCMode_Master.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

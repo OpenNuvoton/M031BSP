@@ -3,6 +3,7 @@
  * @brief    M031 series FMC driver source file
  * @version  2.0.0
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>

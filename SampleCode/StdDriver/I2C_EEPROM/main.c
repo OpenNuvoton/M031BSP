@@ -5,6 +5,7 @@
  * $Date: 18/07/09 7:01p $
  * @brief    Show how to use I2C interface to access EEPROM.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

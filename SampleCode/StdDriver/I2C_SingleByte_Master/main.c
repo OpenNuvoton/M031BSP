@@ -7,6 +7,7 @@
  *           Show how to use I2C Single byte API Read and Write data to Slave.
  *           This sample code needs to work with I2C_Slave.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

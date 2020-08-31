@@ -5,6 +5,7 @@
  * $Date: 18/07/16 3:05p $
  * @brief    Demonstrate USCI_I2C Monitor mode.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

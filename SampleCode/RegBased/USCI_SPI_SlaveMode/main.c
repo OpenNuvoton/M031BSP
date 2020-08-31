@@ -7,6 +7,7 @@
  *           Configure USCI_SPI0 as Slave mode and demonstrate how to communicate with an off-chip SPI master device.
  *           This sample code needs to work with USCI_SPI_MasterMode.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
