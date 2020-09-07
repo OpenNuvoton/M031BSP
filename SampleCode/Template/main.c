@@ -3,6 +3,7 @@
  * @version  V1.00
  * @brief    A project template for M031 MCU.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2017 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

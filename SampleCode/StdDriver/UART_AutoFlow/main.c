@@ -3,6 +3,7 @@
  * @version  V1.00
  * @brief    Transmit and receive data using auto flow control.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2017 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/

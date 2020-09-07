@@ -7,6 +7,7 @@
  *           Transmit and receive data with auto flow control.
  *           This sample code needs to work with UART_Autoflow_Slave.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/

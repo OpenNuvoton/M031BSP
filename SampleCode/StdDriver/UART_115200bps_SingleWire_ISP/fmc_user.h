@@ -1,3 +1,11 @@
+/***************************************************************************//**
+ * @file     fmc_user.h
+ * @brief    M031 series FMC driver header file
+ * @version  2.0.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2020 Nuvoton Technology Corp. All rights reserved.
+ ******************************************************************************/
 #ifndef FMC_USER_H
 #define FMC_USER_H
 

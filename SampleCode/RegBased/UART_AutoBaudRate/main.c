@@ -7,6 +7,7 @@
  *           Show how to use auto baud rate detection function.
  *           This sample code needs to work with UART_AutoBaudRate_Slave.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/

@@ -4,6 +4,7 @@
  * @brief    Show how to print and get character with IDE console window.
  *
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

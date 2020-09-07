@@ -6,6 +6,7 @@
  *           UART setting : Baudrate 115200 bps and 8-N-1.
  *           Config boot option must be set to "boot in LDROM".
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2017 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/

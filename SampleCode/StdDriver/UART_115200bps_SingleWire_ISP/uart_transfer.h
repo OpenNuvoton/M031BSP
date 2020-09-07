@@ -5,6 +5,7 @@
  * @date     22, Sep, 2014
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2015 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #ifndef __UART_TRANS_H__

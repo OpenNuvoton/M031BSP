@@ -7,6 +7,7 @@
  *           Transmit and receive UART data with PDMA.
  *
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/

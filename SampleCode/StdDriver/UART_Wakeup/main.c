@@ -5,6 +5,7 @@
  * $Date: 18/07/16 10:31a $
  * @brief    Show how to wake up system form Power-down mode by UART interrupt.
  * @note
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/

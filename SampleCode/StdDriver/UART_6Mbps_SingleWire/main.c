@@ -3,6 +3,7 @@
  * @version  V1.00
  * @brief    Demonstrate how to transfer 6 Mbps UART data through Single-Wire
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/
