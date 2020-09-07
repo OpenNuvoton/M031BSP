@@ -1,4 +1,11 @@
-
+/**************************************************************************//**
+ * @file     TouchPanel.c
+ * @version  V1.00
+ * @brief    Perform A/D Conversion with ADC single mode.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2020 Nuvoton Technology Corp. All rights reserved.
+ *****************************************************************************/
 #include "NuMicro.h"
 
 #include "TouchPanel.h"
