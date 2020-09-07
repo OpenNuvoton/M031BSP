@@ -60,15 +60,6 @@ void UART_Init()
 
 }
 
-
-#ifdef __ARMCC_VERSION
-__asm __set_SP(uint32_t _sp)
-{
-    MSR MSP, r0
-    BX lr
-}
-#endif
-
 /*
  * @returns     Send value from UART debug port
  * @details     Send a target char to UART debug port .
@@ -129,7 +120,6 @@ int main()
 #ifdef __GNUC__                        /* for GNU C compiler */
     uint32_t    u32Data;
 #endif
-    FUNC_PTR    *func;                 /* function pointer */
 
     SYS_Init();                        /* Init System, IP clock and multi-function I/O */
 
@@ -158,26 +148,8 @@ int main()
     FMC_SetVectorPageAddr(FMC_APROM_BASE);        /* Vector remap APROM page 0 to address 0. */
     SYS_LockReg();                                /* Lock protected registers */
 
-    /*
-     *  The reset handler address of an executable image is located at offset 0x4.
-     *  Thus, this sample get reset handler address of APROM code from FMC_APROM_BASE + 0x4.
-     */
-    func = (FUNC_PTR *)*(uint32_t *)(FMC_APROM_BASE + 4);
-
-    /*
-     *  The stack base address of an executable image is located at offset 0x0.
-     *  Thus, this sample get stack base address of APROM code from FMC_APROM_BASE + 0x0.
-     */
-#ifdef __GNUC__                        /* for GNU C compiler */
-    u32Data = *(uint32_t *)FMC_LDROM_BASE;
-    asm("msr msp, %0" : : "r" (u32Data));
-#else
-    __set_SP(*(uint32_t *)FMC_APROM_BASE);
-#endif
-    /*
-     *  Branch to the LDROM code's reset handler in way of function call.
-     */
-    func();
+    /* Software reset to boot to LDROM */
+    NVIC_SystemReset();
 
     while (1);
 }

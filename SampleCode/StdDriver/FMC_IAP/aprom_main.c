@@ -100,19 +100,6 @@ static int  set_IAP_boot_mode(void)
     return 0;
 }
 
-
-/*
- *  Set stack base address to SP register.
- */
-#ifdef __ARMCC_VERSION
-__asm __set_SP(uint32_t _sp)
-{
-    MSR MSP, r0
-    BX lr
-}
-#endif
-
-
 /**
   * @brief    Load an image to specified flash address. The flash area must have been enabled by
   *           caller. For example, if caller want to program an image to LDROM, FMC_ENABLE_LD_UPDATE()
@@ -170,7 +157,6 @@ int main()
 {
     uint8_t     u8Item;
     uint32_t    u32Data;
-    FUNC_PTR    *func;
 
     SYS_Init();
     UART_Init();
@@ -295,7 +281,6 @@ int main()
 
         case '1':
             printf("\n\nChange VECMAP and branch to LDROM...\n");
-            printf("LDROM code SP = 0x%x\n", *(uint32_t *)(FMC_LDROM_BASE));
             printf("LDROM code ResetHandler = 0x%x\n", *(uint32_t *)(FMC_LDROM_BASE+4));
             /* To check if all the debug messages are finished */
             while(IsDebugFifoEmpty() == 0);
@@ -306,25 +291,8 @@ int main()
 
             FMC_SetVectorPageAddr(FMC_LDROM_BASE);
 
-            /*
-             *  The reset handler address of an executable image is located at offset 0x4.
-             *  Thus, this sample get reset handler address of LDROM code from FMC_LDROM_BASE + 0x4.
-             */
-            func = (FUNC_PTR *)*(uint32_t *)(FMC_LDROM_BASE + 4);
-            /*
-             *  The stack base address of an executable image is located at offset 0x0.
-             *  Thus, this sample get stack base address of LDROM code from FMC_LDROM_BASE + 0x0.
-             */
-#ifdef __GNUC__                        /* for GNU C compiler */
-            u32Data = *(uint32_t *)FMC_LDROM_BASE;
-            asm("msr msp, %0" : : "r" (u32Data));
-#else
-            __set_SP(*(uint32_t *)FMC_LDROM_BASE);
-#endif
-            /*
-             *  Branch to the LDROM code's reset handler in way of function call.
-             */
-            func();
+            /* Software reset to boot to LDROM */
+            NVIC_SystemReset();
             break;
 
         default :
