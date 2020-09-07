@@ -4,6 +4,7 @@
  * @brief    This sample run on SRAM to show FMC multi word program function.
  *
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>

@@ -6,7 +6,8 @@
  * @brief    Show how to multiple word program embedded flash by ISP function.
  * @note     Multiple word program flash function code need to locate on SRAM.
  *
- * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>

@@ -4,6 +4,7 @@
  * @brief    Implement a multi-boot system to boot from different applications in APROM.
  *           A LDROM code and 4 APROM code are implemented in this sample code.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
