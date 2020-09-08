@@ -3,6 +3,7 @@
  * @version  V1.00
  * @brief    WWDT register definition header file
  *
+ * SPDX-License-Identifier: Apache-2.0 
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 #ifndef __WWDT_REG_H__
