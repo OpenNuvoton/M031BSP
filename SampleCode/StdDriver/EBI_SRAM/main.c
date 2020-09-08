@@ -3,6 +3,7 @@
  * @version  V1.0
  * @brief    Configure EBI interface to access BS616LV4017 (SRAM) on EBI interface.
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>

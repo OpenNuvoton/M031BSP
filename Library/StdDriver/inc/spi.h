@@ -5,8 +5,8 @@
  * $Date: 18/06/07 2:32p $
  * @brief    M031 series SPI driver header file
  *
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #ifndef __SPI_H__
 #define __SPI_H__

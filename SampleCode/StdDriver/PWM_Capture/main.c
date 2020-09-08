@@ -4,9 +4,9 @@
  * $Revision: 9 $
  * $Date: 18/07/19 2:15p $
  * @brief    Capture the PWM0 Channel 0 waveform by PWM0 Channel 2.
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

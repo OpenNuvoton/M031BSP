@@ -5,6 +5,7 @@
  * $Date: 18/04/24 3:49p $
  * @brief    M031 series BPWM driver source file
  *
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include "NuMicro.h"

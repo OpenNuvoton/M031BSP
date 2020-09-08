@@ -4,8 +4,9 @@
  * $Revision: 9 $
  * $Date: 19/07/29 2:15p $
  * @brief    Use BPWM0 Channel 0(PA.0) to capture the BPWM1 Channel 0(PB.11) Waveform.
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

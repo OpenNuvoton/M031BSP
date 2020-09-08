@@ -5,8 +5,8 @@
  * $Date: 18/04/25 11:51a $
  * @brief    EBI SRAM Test source file
  *
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

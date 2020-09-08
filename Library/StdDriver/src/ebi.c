@@ -5,8 +5,8 @@
  * $Date: 18/08/20 11:48a $
  * @brief    M031 series External Bus Interface(EBI) driver source file
  *
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include "NuMicro.h"
 
