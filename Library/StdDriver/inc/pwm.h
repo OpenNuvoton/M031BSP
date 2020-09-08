@@ -5,8 +5,8 @@
  * $Date: 18/06/07 3:47p $
  * @brief    M031 series PWM driver header file
  *
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *****************************************************************************/
 #ifndef __PWM_H__
 #define __PWM_H__

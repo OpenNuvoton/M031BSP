@@ -7,8 +7,8 @@
  *           connect MISO_0 pin and MOSI_0 pin together. It will compare the
  *           received data with transmitted data.
  *
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

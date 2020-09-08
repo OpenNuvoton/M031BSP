@@ -7,9 +7,8 @@
  *           with an off-chip SPI Master device with FIFO mode. This sample
  *           code needs to work with SPI_MasterFifoMode sample code.
  *
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

@@ -4,8 +4,9 @@
  * $Revision: 8 $
  * $Date: 18/07/20 3:57p $
  * @brief    Configure EBI interface to access MX29LV320T (NOR Flash) on EBI interface.
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

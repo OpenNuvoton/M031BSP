@@ -6,9 +6,8 @@
  * @brief    M031 SPI Driver Sample Code
  *           This is a I2S demo for playing and recording data with PDMA function.
  *
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
- *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
 #include <string.h>

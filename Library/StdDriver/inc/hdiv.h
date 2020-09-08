@@ -5,8 +5,8 @@
  * $Date: 18/07/25 3:42p $
  * @brief    M031 series Hardware Divider(HDIV) driver header file
  *
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #ifndef __HDIV_H__
 #define __HDIV_H__

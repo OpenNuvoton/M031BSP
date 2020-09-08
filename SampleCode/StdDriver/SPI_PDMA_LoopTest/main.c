@@ -8,9 +8,9 @@
  *           SPI0 will be configured as Master mode and connect MISO_0 pin and
  *           MOSI_0 pin together. Both TX PDMA function and RX PDMA function
  *           will be enabled.
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

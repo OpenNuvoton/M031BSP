@@ -4,9 +4,9 @@
  * $Revision: 8 $
  * $Date: 18/07/19 2:22p $
  * @brief    Demonstrate how to use PWM output waveform.
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
 #include "NuMicro.h"

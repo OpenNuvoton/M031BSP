@@ -6,9 +6,9 @@
  * @brief
  *           Configure SPI0 as I2S Master mode and demonstrate how I2S works in Master mode.
  *           This sample code needs to work with I2S_Slave.
- * @note
- * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  *
+ * SPDX-License-Identifier: Apache-2.0
+ * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  ******************************************************************************/
 #include <stdio.h>
 #include <string.h>
