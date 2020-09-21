@@ -75,11 +75,6 @@ static int  set_data_flash_base(uint32_t u32DFBA)
     if ((!(au32Config[0] & 0x1)) && (au32Config[1] == u32DFBA))
         return 0;
 
-    FMC->ISPCTL |=  FMC_ISPCTL_CFGUEN_Msk;
-
-    au32Config[0] &= ~0x1;         /* CONFIG0[0] = 0 (Enabled) / 1 (Disabled) */
-    au32Config[1] = u32DFBA;
-
     /* Update User Configuration settings. */
     FMC->ISPCTL |=  FMC_ISPCTL_CFGUEN_Msk;
 
@@ -89,6 +84,9 @@ static int  set_data_flash_base(uint32_t u32DFBA)
     while (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk) { }
     if (FMC->ISPCTL & FMC_ISPCTL_ISPFF_Msk)
         FMC->ISPCTL |= FMC_ISPCTL_ISPFF_Msk;
+
+    au32Config[0] &= ~0x1;         /* CONFIG0[0] = 0 (Enabled) / 1 (Disabled) */
+    au32Config[1] = u32DFBA;
 
     FMC->ISPCMD = FMC_ISPCMD_PROGRAM;
     FMC->ISPADDR = FMC_CONFIG_BASE;

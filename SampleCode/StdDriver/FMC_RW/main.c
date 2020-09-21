@@ -72,6 +72,9 @@ static int  set_data_flash_base(uint32_t u32DFBA)
 
     FMC_ENABLE_CFG_UPDATE();
 
+    /* Erase User Configuration */
+    FMC_Erase(FMC_CONFIG_BASE);
+
     au32Config[0] &= ~0x1;         /* CONFIG0[0] = 0 (Enabled) / 1 (Disabled) */
     au32Config[1] = u32DFBA;
 
