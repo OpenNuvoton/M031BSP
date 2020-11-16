@@ -56,8 +56,7 @@ int32_t FMC_Erase(uint32_t u32PageAddr)
     {
         ret = FMC_Erase_SPROM();
     }
-
-    if (ret == 0)
+    else
     {
         FMC->ISPCMD = FMC_ISPCMD_PAGE_ERASE;
         FMC->ISPADDR = u32PageAddr;
