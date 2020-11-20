@@ -383,9 +383,27 @@ uint32_t  FMC_GetChkSum(uint32_t u32addr, uint32_t u32count)
  *
  * @details  Run ISP check all one command to check specify area is all one or not.
  */
+#define FMC_APROM_BANK1_BASE    (0x40000)
+#define FMC_CHECKALLONE_UNIT    (512)
 uint32_t FMC_CheckAllOne(uint32_t u32addr, uint32_t u32count)
 {
     uint32_t ret = READ_ALLONE_CMD_FAIL;
+
+    if(u32addr == FMC_APROM_BANK1_BASE)
+    {
+        uint32_t i;
+        u32count = u32count - FMC_CHECKALLONE_UNIT;
+        for(i = FMC_APROM_BANK1_BASE; i < (FMC_APROM_BANK1_BASE + FMC_CHECKALLONE_UNIT); i = i+4)
+        {
+            if( FMC_Read(i) != 0xFFFFFFFF)
+                return READ_ALLONE_NOT;
+        }
+
+        if(u32count == 0)
+            return READ_ALLONE_YES;
+        else
+            u32addr = u32addr + FMC_CHECKALLONE_UNIT;
+    }
 
     FMC->ISPSTS = 0x80UL; /* clear check all one bit */
 
