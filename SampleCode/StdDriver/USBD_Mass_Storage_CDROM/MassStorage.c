@@ -790,13 +790,15 @@ void MSC_ReadTrig(void)
         else
         {
             u32Len = g_u32Length;
-            if (u32Len > STORAGE_BUFFER_SIZE)
-                u32Len = STORAGE_BUFFER_SIZE;
-
+            if(g_u32LbaAddress <= (16 * CDROM_BLOCK_SIZE))   /* Logical Block Address > 32KB */
+            {
+                if (u32Len > STORAGE_BUFFER_SIZE)
+                    u32Len = STORAGE_BUFFER_SIZE;
+                g_u32Address = STORAGE_DATA_BUF;
+            }
             MSC_ReadMedia(g_u32LbaAddress, u32Len, (uint8_t *)STORAGE_DATA_BUF);
             g_u32BytesInStorageBuf = u32Len;
             g_u32LbaAddress += u32Len;
-            g_u32Address = STORAGE_DATA_BUF;
 
             /* Prepare next data packet */
             g_u8Size = EP2_MAX_PKT_SIZE;
