@@ -150,6 +150,10 @@ void _WriteM1(U8 * pData, int NumItems)
 
     /* Wait TX finish */
     while(USPI_IS_BUSY(SPI_LCD_PORT));
+	//
+	// Finish PDMA gracefully
+	//
+    USPI_DISABLE_TX_PDMA(SPI_LCD_PORT);
 
     SPI_CS_SET;
 }
