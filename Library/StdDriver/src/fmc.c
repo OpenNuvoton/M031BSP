@@ -388,7 +388,10 @@ uint32_t  FMC_GetChkSum(uint32_t u32addr, uint32_t u32count)
 uint32_t FMC_CheckAllOne(uint32_t u32addr, uint32_t u32count)
 {
     uint32_t ret = READ_ALLONE_CMD_FAIL;
-
+    
+    /** Workaround solution for M031 with 512KB Flash uses FMC Read command instead of FMC All-One-Verification command to 
+      * check the Flash content from 0x40000 to 0x401FF.
+      */    
     if(u32addr == FMC_APROM_BANK1_BASE)
     {
         uint32_t i;
