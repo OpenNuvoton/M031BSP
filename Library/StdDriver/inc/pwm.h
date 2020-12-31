@@ -290,7 +290,7 @@ extern "C"
  *       The clock of PWM counter is divided by (u32Prescaler + 1).
  * \hideinitializer
  */
-#define PWM_GET_PRESCALER(pwm, u32ChannelNum) (*(__IO uint32_t *) (&((pwm)->CLKPSC0_1) + ((u32ChannelNum) >> 1)))
+#define PWM_GET_PRESCALER(pwm, u32ChannelNum) (*(__IO uint32_t *) (&((pwm)->CLKPSC[0]) + ((u32ChannelNum) >> 1)))
 
 /**
  * @brief This macro set the comparator of the selected channel
