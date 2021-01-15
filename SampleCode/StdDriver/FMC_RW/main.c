@@ -75,20 +75,32 @@ static int  set_data_flash_base(uint32_t u32DFBA)
     /* Erase User Configuration */
     FMC_Erase(FMC_CONFIG_BASE);
 
-    au32Config[0] &= ~0x1;         /* CONFIG0[0] = 0 (Enabled) / 1 (Disabled) */
+    if(u32DFBA == 0xFFFFFFFF)
+        au32Config[0] |=  0x1;         /* CONFIG0[0] = 1 (Disabled) */
+    else
+        au32Config[0] &= ~0x1;         /* CONFIG0[0] = 0 (Enabled) */
+
     au32Config[1] = u32DFBA;
 
     /* Update User Configuration settings. */
     if (FMC_WriteConfig(au32Config, 2) < 0)
         return -1;
 
-    printf("\nSet Data Flash base as 0x%x.\n", DATA_FLASH_TEST_BASE);
+    FMC_DISABLE_CFG_UPDATE();
+
+    if(u32DFBA == 0xFFFFFFFF)
+        printf("\nDisable Data Flash\n");
+    else
+        printf("\nSet Data Flash base as 0x%x.\n", u32DFBA);
 
     /* To check if all the debug messages are finished */
     while(!IsDebugFifoEmpty());
 
-    /* Perform chip reset to make new User Config take effect */
-    SYS->IPRST0 = SYS_IPRST0_CHIPRST_Msk;
+    if(u32DFBA != 0xFFFFFFFF)
+    {
+        /* Perform chip reset to make new User Config take effect */
+        SYS->IPRST0 = SYS_IPRST0_CHIPRST_Msk;
+    }
     return 0;
 }
 
@@ -342,6 +354,8 @@ int main()
     run_crc32_checksum();
 
 lexit:
+    /* Disable Data flash */
+    set_data_flash_base(0xFFFFFFFF);
 
     /* Disable FMC ISP function */
     FMC_Close();
