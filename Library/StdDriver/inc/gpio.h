@@ -379,6 +379,24 @@ extern "C"
 #define GPIO_SET_DEBOUNCE_TIME(u32ClkSrc, u32ClkSel)    (GPIO->DBCTL = (GPIO_DBCTL_ICLKON_Msk | (u32ClkSrc) | (u32ClkSel)))
 
 /**
+  * @brief       Set GPIO Interrupt Clock on bit
+  * @param[in]   port        Not used in M031.
+  * @return      None
+  * @details     Set the I/O pins edge detection circuit always active after reset for specified port.
+  * \hideinitializer
+  */
+#define GPIO_SET_DEBOUNCE_ICLKON(port)  (GPIO->DBCTL |= GPIO_DBCTL_ICLKON_Msk)
+
+/**
+  * @brief       Clear GPIO Interrupt Clock on bit
+  * @param[in]   port        Not used in M031.
+  * @return      None
+  * @details     Set edge detection circuit active only if I/O pin edge interrupt enabled for specified port
+  * \hideinitializer
+  */
+#define GPIO_CLR_DEBOUNCE_ICLKON(port)  (GPIO->DBCTL &= ~(GPIO_DBCTL_ICLKON_Msk))
+
+/**
   * @brief       Get GPIO Port IN Data
   * @param[in]   port        GPIO port. It could be PA, PB, PC, PD, PE, PF, PG, or PH.
   * @return      The specified port data

@@ -78,6 +78,8 @@ void CLK_EnableCKO(uint32_t u32ClkSrc, uint32_t u32ClkDiv, uint32_t u32ClkDivBy1
   */
 void CLK_PowerDown(void)
 {
+    volatile uint32_t u32SysTickTICKINT = 0;    /* Backup Systick interrupt enable bit */
+
     /* Check HIRC/MIRC auto trim function disable */
     if(SYS->HIRCTRIMCTL & SYS_HIRCTRIMCTL_FREQSEL_Msk)
     {
@@ -87,11 +89,20 @@ void CLK_PowerDown(void)
     /* Set the processor uses deep sleep as its low power mode */
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
 
-    /* Set system Power-down enabled*/
+    /* Set system Power-down enabled */
     CLK->PWRCTL |= CLK_PWRCTL_PDEN_Msk;
+
+    /* Backup systick interrupt setting */
+    u32SysTickTICKINT = SysTick->CTRL & SysTick_CTRL_TICKINT_Msk;
+
+    /* Disable systick interrupt */
+    SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
 
     /* Chip enter Power-down mode after CPU run WFI instruction */
     __WFI();
+
+    /* Restore systick interrupt setting */
+    if(u32SysTickTICKINT) SysTick->CTRL |= SysTick_CTRL_TICKINT_Msk;
 }
 
 /**
