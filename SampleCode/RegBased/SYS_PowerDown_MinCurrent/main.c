@@ -13,7 +13,7 @@
 #define GPIO_P0_TO_P15_QUASI    0xffffffff
 
 /*---------------------------------------------------------------------------------------------------------*/
-/*  Function for diasble internal analog POR circuit                                                       */
+/*  Function for disable internal analog POR circuit                                                       */
 /*---------------------------------------------------------------------------------------------------------*/
 void SYS_Disable_AnalogPORCircuit(void)
 {
