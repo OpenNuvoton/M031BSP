@@ -236,6 +236,20 @@ void UART_Open(UART_T *uart, uint32_t u32baudrate)
         /* Get UART clock divider number */
         u32UartClkDivNum = (CLK->CLKDIV4 & CLK_CLKDIV4_UART5DIV_Msk) >> CLK_CLKDIV4_UART5DIV_Pos;
     }
+    else if(uart==(UART_T*)UART6)
+    {
+        /* Get UART clock source selection */
+        u32UartClkSrcSel = (CLK->CLKSEL3 & CLK_CLKSEL3_UART6SEL_Msk) >> CLK_CLKSEL3_UART6SEL_Pos;
+        /* Get UART clock divider number */
+        u32UartClkDivNum = (CLK->CLKDIV4 & CLK_CLKDIV4_UART6DIV_Msk) >> CLK_CLKDIV4_UART6DIV_Pos;
+    }
+    else if(uart==(UART_T*)UART7)
+    {
+        /* Get UART clock source selection */
+        u32UartClkSrcSel = (CLK->CLKSEL3 & CLK_CLKSEL3_UART7SEL_Msk) >> CLK_CLKSEL3_UART7SEL_Pos;
+        /* Get UART clock divider number */
+        u32UartClkDivNum = (CLK->CLKDIV4 & CLK_CLKDIV4_UART7DIV_Msk) >> CLK_CLKDIV4_UART7DIV_Pos;
+    }    
 
     /* Select UART function */
     uart->FUNCSEL = UART_FUNCSEL_UART;
