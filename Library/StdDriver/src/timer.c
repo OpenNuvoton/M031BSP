@@ -311,16 +311,17 @@ void TIMER_SetTriggerSource(TIMER_T *timer, uint32_t u32Src)
   * @brief      Set Modules Trigger by Timer Interrupt Event
   *
   * @param[in]  timer       The pointer of the specified Timer module.
-  * @param[in]  u32Mask     The mask of modules (PWM, ADC and PDMA) trigger by timer. Is the combination of
+  * @param[in]  u32Mask     The mask of modules (PWM, ADC, BPWM and PDMA) trigger by timer. Is the combination of
   *                         - \ref TIMER_TRG_TO_PWM
   *                         - \ref TIMER_TRG_TO_ADC
   *                         - \ref TIMER_TRG_TO_PDMA
+  *                         - \ref TIMER_TRG_TO_BPWM
   *
   * @return     None
   */
 void TIMER_SetTriggerTarget(TIMER_T *timer, uint32_t u32Mask)
 {
-    timer->CTL = (timer->CTL & ~(TIMER_CTL_TRGPWM_Msk | TIMER_CTL_TRGADC_Msk | TIMER_CTL_TRGPDMA_Msk)) | (u32Mask);
+    timer->CTL = (timer->CTL & ~(TIMER_CTL_TRGPWM_Msk | TIMER_CTL_TRGADC_Msk | TIMER_CTL_TRGPDMA_Msk | TIMER_CTL_TRGBPWM_Msk)) | (u32Mask);
 }
 
 /*@}*/ /* end of group TIMER_EXPORTED_FUNCTIONS */

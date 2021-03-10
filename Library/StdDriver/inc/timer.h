@@ -64,6 +64,7 @@ extern "C"
 #define TIMER_TRG_TO_PWM                        (TIMER_CTL_TRGPWM_Msk)             /*!< Timer trigger PWM   \hideinitializer */
 #define TIMER_TRG_TO_ADC                        (TIMER_CTL_TRGADC_Msk)             /*!< Timer trigger ADC   \hideinitializer */
 #define TIMER_TRG_TO_PDMA                       (TIMER_CTL_TRGPDMA_Msk)            /*!< Timer trigger PDMA  \hideinitializer */
+#define TIMER_TRG_TO_BPWM                       (TIMER_CTL_TRGBPWM_Msk)            /*!< Timer trigger BPWM  \hideinitializer */
 
 #define TIMER_CMP_MAX_VALUE                     (0xFFFFFFUL)                       /*!< Max Timer compare value \hideinitializer */
 

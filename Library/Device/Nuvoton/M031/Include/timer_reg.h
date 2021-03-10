@@ -41,6 +41,11 @@ typedef struct
      * |        |          |0 = Timer interrupt trigger PDMA Disabled.
      * |        |          |1 = Timer interrupt trigger PDMA Enabled.
      * |        |          |Note: If TRGSSEL (TIMERx_CTL[18]) = 0, time-out interrupt signal will trigger PDMA. If TRGSSEL (TIMERx_CTL[18]) = 1, capture interrupt signal will trigger PDMA.
+     * |[9]     |TRGBPWM   |Trigger BPWM Enable Bit
+     * |        |          |If this bit is set to 1, timer time-out interrupt or capture interrupt can trigger BPWM.
+     * |        |          |0 = Timer interrupt trigger BPWM Disabled.
+     * |        |          |1 = Timer interrupt trigger BPWM Enabled.
+     * |        |          |Note: If TRGSSEL (TIMERx_CTL[18]) = 0, time-out interrupt signal will trigger BPWM. If TRGSSEL (TIMERx_CTL[18]) = 1, capture interrupt signal will trigger BPWM.
      * |[10]    |INTRGEN   |Inter-timer Trigger Mode Enable Bit
      * |        |          |Setting this bit will enable the inter-timer trigger capture function.
      * |        |          |The Timer0/2 will be in event counter mode and counting with external clock source or event. Also, Timer1/3 will be in trigger-counting mode of capture function.
@@ -229,6 +234,9 @@ typedef struct
 
 #define TIMER_CTL_TRGPDMA_Pos            (8)                                               /*!< TIMER_T::CTL: TRGPDMA Position         */
 #define TIMER_CTL_TRGPDMA_Msk            (0x1ul << TIMER_CTL_TRGPDMA_Pos)                  /*!< TIMER_T::CTL: TRGPDMA Mask             */
+
+#define TIMER_CTL_TRGBPWM_Pos            (9)                                               /*!< TIMER_T::CTL: TRGBPWM Position         */
+#define TIMER_CTL_TRGBPWM_Msk            (0x1ul << TIMER_CTL_TRGBPWM_Pos)                  /*!< TIMER_T::CTL: TRGBPWM Mask             */
 
 #define TIMER_CTL_INTRGEN_Pos            (10)                                              /*!< TIMER_T::CTL: INTRGEN Position         */
 #define TIMER_CTL_INTRGEN_Msk            (0x1ul << TIMER_CTL_INTRGEN_Pos)                  /*!< TIMER_T::CTL: INTRGEN Mask             */
