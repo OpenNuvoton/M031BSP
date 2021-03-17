@@ -35,10 +35,16 @@ extern "C" {
 /*----------------------------------------------------------------------------
   Define SYSCLK
  *----------------------------------------------------------------------------*/
+#ifndef  __HXT
 #define __HXT       (32000000UL)    /*!< External Crystal Clock Frequency     */
+#endif  /*!defined(__HXT) */
+
+#ifndef  __LXT
+#define __LXT       (32768UL)       /*!< External Crystal Clock Frequency 32.768KHz */
+#endif  /*!defined(__LXT) */
+
 #define __LIRC      (38400UL)       /*!< Internal 38.4KHz RC Oscillator Frequency */
 #define __HIRC      (48000000UL)    /*!< Internal 48M RC Oscillator Frequency */
-#define __LXT       (32768UL)       /*!< External Crystal Clock Frequency 32.768KHz */
 #define __HSI       (96000000UL)    /*!< PLL default output is 96MHz from HIRC */
 
 extern uint32_t SystemCoreClock;    /*!< System Clock Frequency (Core Clock)  */
