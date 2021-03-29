@@ -704,7 +704,7 @@
         </option>
         <option>
           <name>IlinkIcfFile</name>
-          <state>fmc_ld_iap.icf</state>
+          <state>$PROJ_DIR$\fmc_ld_iap.icf</state>
         </option>
         <option>
           <name>IlinkIcfFileSlave</name>
