@@ -1285,13 +1285,13 @@ typedef struct
 #define PWM_CTL1_CNTTYPE4_Msk            (0x3ul << PWM_CTL1_CNTTYPE4_Pos)                  /*!< PWM_T::CTL1: CNTTYPE4 Mask             */
 
 #define PWM_CTL1_OUTMODE0_Pos            (24)                                              /*!< PWM_T::CTL1: PWMMODE0 Position         */
-#define PWM_CTL1_OUTMODE0_Msk            (0x1ul << PWM_CTL1_PWMMODE0_Pos)                  /*!< PWM_T::CTL1: PWMMODE0 Mask             */
+#define PWM_CTL1_OUTMODE0_Msk            (0x1ul << PWM_CTL1_OUTMODE0_Pos)                  /*!< PWM_T::CTL1: PWMMODE0 Mask             */
 
 #define PWM_CTL1_OUTMODE2_Pos            (25)                                              /*!< PWM_T::CTL1: PWMMODE2 Position         */
-#define PWM_CTL1_OUTMODE2_Msk            (0x1ul << PWM_CTL1_PWMMODE2_Pos)                  /*!< PWM_T::CTL1: PWMMODE2 Mask             */
+#define PWM_CTL1_OUTMODE2_Msk            (0x1ul << PWM_CTL1_OUTMODE2_Pos)                  /*!< PWM_T::CTL1: PWMMODE2 Mask             */
 
 #define PWM_CTL1_OUTMODE4_Pos            (26)                                              /*!< PWM_T::CTL1: PWMMODE4 Position         */
-#define PWM_CTL1_OUTMODE4_Msk            (0x1ul << PWM_CTL1_PWMMODE4_Pos)                  /*!< PWM_T::CTL1: PWMMODE4 Mask             */
+#define PWM_CTL1_OUTMODE4_Msk            (0x1ul << PWM_CTL1_OUTMODE4_Pos)                  /*!< PWM_T::CTL1: PWMMODE4 Mask             */
 
 #define PWM_CLKSRC_ECLKSRC0_Pos          (0)                                               /*!< PWM_T::CLKSRC: ECLKSRC0 Position       */
 #define PWM_CLKSRC_ECLKSRC0_Msk          (0x7ul << PWM_CLKSRC_ECLKSRC0_Pos)                /*!< PWM_T::CLKSRC: ECLKSRC0 Mask           */

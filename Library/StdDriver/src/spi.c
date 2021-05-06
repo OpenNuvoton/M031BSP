@@ -882,9 +882,9 @@ uint32_t SPII2S_EnableMCLK(SPI_T *i2s, uint32_t u32BusClock)
     else
     {
         u32Divider = (u32SrcClk / u32BusClock) >> 1;
-        /* MCLKDIV is a 6-bit width configuration. The maximum value is 0x3F. */
-        if(u32Divider > 0x3F)
-            u32Divider = 0x3F;
+        /* MCLKDIV is a 7-bit width configuration. The maximum value is 0x3F. */
+        if(u32Divider > 0xFF)
+            u32Divider = 0xFF;
     }
 
     /* Write u32Divider to MCLKDIV (SPI_I2SCLK[5:0]) */
