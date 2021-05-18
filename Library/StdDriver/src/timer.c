@@ -324,6 +324,37 @@ void TIMER_SetTriggerTarget(TIMER_T *timer, uint32_t u32Mask)
     timer->CTL = (timer->CTL & ~(TIMER_CTL_TRGPWM_Msk | TIMER_CTL_TRGADC_Msk | TIMER_CTL_TRGPDMA_Msk | TIMER_CTL_TRGBPWM_Msk)) | (u32Mask);
 }
 
+/**
+  * @brief      Select Timer Capture Source
+  *
+  * @param[in]  timer       The pointer of the specified Timer module.
+  * @param[in]  u32Src      Timer capture source. Possible values are
+  *                         - \ref TIMER_CAPTURE_FROM_EXTERNAL
+  *                         - \ref TIMER_CAPTURE_FROM_INTERNAL
+  *                         - \ref TIMER_CAPTURE_FROM_ACMP0
+  *                         - \ref TIMER_CAPTURE_FROM_ACMP1
+  *                         - \ref TIMER_CAPTURE_FROM_LIRC
+  *
+  * @return     None
+  *
+  * @details    This API is used to select timer capture source from Tx_EXT or internal signal.
+  */
+void TIMER_CaptureSelect(TIMER_T *timer, uint32_t u32Src)
+{
+    if (u32Src == TIMER_CAPTURE_FROM_EXTERNAL)
+    {
+        timer->CTL = (timer->CTL & ~(TIMER_CTL_CAPSRC_Msk)) |
+                     (TIMER_CAPSRC_TX_EXT);
+    }
+    else
+    {
+        timer->CTL = (timer->CTL & ~(TIMER_CTL_CAPSRC_Msk)) |
+                     (TIMER_CAPSRC_INTERNAL);
+        timer->EXTCTL = (timer->EXTCTL & ~(TIMER_EXTCTL_INTERCAPSEL_Msk)) |
+                        (u32Src);
+    }
+}
+
 /*@}*/ /* end of group TIMER_EXPORTED_FUNCTIONS */
 
 /*@}*/ /* end of group TIMER_Driver */

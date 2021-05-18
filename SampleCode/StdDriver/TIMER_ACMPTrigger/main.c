@@ -111,10 +111,8 @@ int main(void)
 
     /* Configure Timer 0 free counting mode */
     TIMER_EnableCapture(TIMER0, TIMER_CAPTURE_COUNTER_RESET_MODE, TIMER_CAPTURE_RISING_EDGE);
-    /* Set capture source from Internal event */
-    TIMER0->CTL = (TIMER0->CTL & ~(TIMER_CTL_CAPSRC_Msk)) | TIMER_CAPSRC_INTERNAL;
     /* Set capture source from Internal event ACMP1 */
-    TIMER0->EXTCTL = (TIMER0->EXTCTL & ~(TIMER_EXTCTL_INTERCAPSEL_Msk)) | TIMER_INTERCAPSEL_ACMP1;
+    TIMER_CaptureSelect(TIMER0, TIMER_CAPTURE_FROM_ACMP1);
 
     /* Start Timer 0 */
     TIMER_Start(TIMER0);

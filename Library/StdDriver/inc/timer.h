@@ -61,6 +61,12 @@ extern "C"
 #define TIMER_INTERCAPSEL_ACMP1                 (1UL << TIMER_EXTCTL_INTERCAPSEL_Pos)   /*!< Capture source from Internal event ACMP1   \hideinitializer */
 #define TIMER_INTERCAPSEL_LIRC                  (5UL << TIMER_EXTCTL_INTERCAPSEL_Pos)   /*!< Capture source from Internal event LIRC    \hideinitializer */
 
+#define TIMER_CAPTURE_FROM_ACMP0                (TIMER_INTERCAPSEL_ACMP0)          /*!< Capture source from Internal event ACMP0   \hideinitializer */
+#define TIMER_CAPTURE_FROM_ACMP1                (TIMER_INTERCAPSEL_ACMP1)          /*!< Capture source from Internal event ACMP1   \hideinitializer */
+#define TIMER_CAPTURE_FROM_LIRC                 (TIMER_INTERCAPSEL_LIRC)           /*!< Capture source from Internal event LIRC    \hideinitializer */
+#define TIMER_CAPTURE_FROM_INTERNAL             (TIMER_CAPTURE_FROM_ACMP0)         /*!< Capture source from Internal event ACMP0   \hideinitializer */
+#define TIMER_CAPTURE_FROM_EXTERNAL             (0xFFUL)                           /*!< Capture source from Tx_EXT pin             \hideinitializer */
+
 #define TIMER_TRG_TO_PWM                        (TIMER_CTL_TRGPWM_Msk)             /*!< Timer trigger PWM   \hideinitializer */
 #define TIMER_TRG_TO_ADC                        (TIMER_CTL_TRGADC_Msk)             /*!< Timer trigger ADC   \hideinitializer */
 #define TIMER_TRG_TO_PDMA                       (TIMER_CTL_TRGPDMA_Msk)            /*!< Timer trigger PDMA  \hideinitializer */
@@ -138,6 +144,22 @@ extern "C"
 #define TIMER_SELECT_TOUT_PIN(timer, u32ToutSel)    ((timer)->CTL = ((timer)->CTL & ~TIMER_CTL_TGLPINSEL_Msk) | (u32ToutSel))
 
 /**
+  * @brief      Select Timer operating mode
+  *
+  * @param[in]  timer       The pointer of the specified Timer module.
+  * @param[in]  u32OpMode   Operation mode. Possible options are
+  *                         - \ref TIMER_ONESHOT_MODE
+  *                         - \ref TIMER_PERIODIC_MODE
+  *                         - \ref TIMER_TOGGLE_MODE
+  *                         - \ref TIMER_CONTINUOUS_MODE
+  *
+  * @return     None
+  *
+  * \hideinitializer
+  */
+#define TIMER_SET_OPMODE(timer, u32OpMode)   ((timer)->CTL = ((timer)->CTL & ~TIMER_CTL_OPMODE_Msk) | (u32OpMode))
+
+/**
   * @brief      Start Timer Counting
   *
   * @param[in]  timer       The pointer of the specified Timer module.
@@ -201,6 +223,38 @@ static __INLINE void TIMER_EnableWakeup(TIMER_T *timer)
 static __INLINE void TIMER_DisableWakeup(TIMER_T *timer)
 {
     timer->CTL &= ~TIMER_CTL_WKEN_Msk;
+}
+
+/**
+  * @brief      Start Timer Capture Function
+  *
+  * @param[in]  timer       The pointer of the specified Timer module.
+  *
+  * @return     None
+  *
+  * @details    This function is used to start Timer capture function.
+  *
+  * \hideinitializer
+  */
+__STATIC_INLINE void TIMER_StartCapture(TIMER_T *timer)
+{
+    timer->EXTCTL |= TIMER_EXTCTL_CAPEN_Msk;
+}
+
+/**
+  * @brief      Stop Timer Capture Function
+  *
+  * @param[in]  timer       The pointer of the specified Timer module.
+  *
+  * @return     None
+  *
+  * @details    This function is used to stop Timer capture function.
+  *
+  * \hideinitializer
+  */
+__STATIC_INLINE void TIMER_StopCapture(TIMER_T *timer)
+{
+    timer->EXTCTL &= ~TIMER_EXTCTL_CAPEN_Msk;
 }
 
 /**
@@ -462,6 +516,24 @@ static __INLINE uint32_t TIMER_GetCounter(TIMER_T *timer)
     return timer->CNT;
 }
 
+/**
+  * @brief      Reset Counter
+  *
+  * @param[in]  timer       The pointer of the specified Timer module.
+  *
+  * @return     None
+  *
+  * @details    This function is used to reset current counter value and internal prescale counter value.
+  *
+  * \hideinitializer
+  */
+__STATIC_INLINE void TIMER_ResetCounter(TIMER_T *timer)
+{
+    timer->CTL |= TIMER_CTL_RSTCNT_Msk;
+    while((timer->CTL & TIMER_CTL_RSTCNT_Msk) == TIMER_CTL_RSTCNT_Msk);
+}
+
+
 uint32_t TIMER_Open(TIMER_T *timer, uint32_t u32Mode, uint32_t u32Freq);
 void TIMER_Close(TIMER_T *timer);
 void TIMER_Delay(TIMER_T *timer, uint32_t u32Usec);
@@ -477,6 +549,7 @@ void TIMER_EnableFreqCounter(TIMER_T *timer,
 void TIMER_DisableFreqCounter(TIMER_T *timer);
 void TIMER_SetTriggerSource(TIMER_T *timer, uint32_t u32Src);
 void TIMER_SetTriggerTarget(TIMER_T *timer, uint32_t u32Mask);
+void TIMER_CaptureSelect(TIMER_T *timer, uint32_t u32Src);
 
 /*@}*/ /* end of group TIMER_EXPORTED_FUNCTIONS */
 
