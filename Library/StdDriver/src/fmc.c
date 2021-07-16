@@ -243,6 +243,10 @@ void FMC_Write(uint32_t u32Addr, uint32_t u32Data)
     FMC->ISPDAT = u32Data;
     FMC->ISPTRG = FMC_ISPTRG_ISPGO_Msk;
     while (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk) { }
+
+    /* Invalidation Cache */
+    FMC->FTCTL |= FMC_FTCTL_CACHEINV_Msk;
+    while (FMC->FTCTL & FMC_FTCTL_CACHEINV_Msk) { }
 }
 
 /**
@@ -271,6 +275,11 @@ int32_t FMC_Write8Bytes(uint32_t u32addr, uint32_t u32data0, uint32_t u32data1)
         FMC->ISPSTS |= FMC_ISPSTS_ISPFF_Msk;
         ret = -1;
     }
+
+    /* Invalidation Cache */
+    FMC->FTCTL |= FMC_FTCTL_CACHEINV_Msk;
+    while (FMC->FTCTL & FMC_FTCTL_CACHEINV_Msk) { }
+
     return ret;
 }
 
@@ -551,6 +560,11 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
         }
     }
     while (u32OnProg);
+
+    /* Invalidation Cache */
+    FMC->FTCTL |= FMC_FTCTL_CACHEINV_Msk;
+    while (FMC->FTCTL & FMC_FTCTL_CACHEINV_Msk) { }
+
     return retval;
 }
 #if defined ( __CC_ARM )
