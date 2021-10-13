@@ -157,7 +157,7 @@ void MSC_ReadFormatCapacity(void);
 void MSC_Read(void);
 void MSC_ReadCapacity(void);
 void MSC_Write(void);
-void MSC_ModeSense10(void);
+uint32_t MSC_ModeSense10(void);
 void MSC_ReadTrig(void);
 void MSC_ClassRequest(void);
 
