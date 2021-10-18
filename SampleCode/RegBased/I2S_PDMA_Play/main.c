@@ -60,6 +60,7 @@ void PDMA_ResetTxSGTable(uint8_t id)
 int32_t main(void)
 {
     uint32_t u32InitValue, u32DataCount;
+    uint32_t u32TimeOutCount;
 
     /* Unlock protected registers */
     SYS_UnlockReg();
@@ -147,9 +148,29 @@ int32_t main(void)
 
     /* Clear TX and RX FIFO */
     SPII2S_CLR_TX_FIFO(SPI0);
-    while(!SPI_GET_TX_FIFO_EMPTY_FLAG(SPI0));
+
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
+    while(!SPI_GET_TX_FIFO_EMPTY_FLAG(SPI0))
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("SPI encounters some errors, please check it. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    };
     SPII2S_CLR_RX_FIFO(SPI0);
-    while(!SPI_GET_RX_FIFO_EMPTY_FLAG(SPI0));
+    while(!SPI_GET_RX_FIFO_EMPTY_FLAG(SPI0))
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("SPI encounters some errors, please check it. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    };
 
     /* Enable RX and PDMA*/
     SPI0->I2SCTL |= SPI_I2SCTL_RXEN_Msk;
@@ -159,8 +180,21 @@ int32_t main(void)
     SPI0->I2SCTL |= SPI_I2SCTL_TXEN_Msk;
     SPI0->PDMACTL |= SPI_PDMACTL_TXPDMAEN_Msk;
 
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
+    /* Wait test finished */
+    while(!u32PlayReady)
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("Please check if PDMA setting is correct.\n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
+
     /* Print the received data */
-    while(!u32PlayReady);
     for(u32DataCount = 0; u32DataCount < CHECK_BUFF_LEN; u32DataCount++)
     {
         printf("%d:\t0x%X\n", u32DataCount, PcmRxDataBuff[0][u32DataCount]);

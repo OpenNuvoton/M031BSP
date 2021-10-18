@@ -61,6 +61,7 @@ void PDMA_ResetRxSGTable(uint8_t id)
 int32_t main(void)
 {
     uint32_t u32InitValue, u32DataCount;
+    uint32_t u32TimeOutCount;
 
     /* Unlock protected registers */
     SYS_UnlockReg();
@@ -129,11 +130,37 @@ int32_t main(void)
     PDMA_EnableInt(PDMA, I2S_RX_DMA_CH, PDMA_INT_TRANS_DONE);
     NVIC_EnableIRQ(PDMA_IRQn);
 
-    /* Clear TX and RX FIFO */
+    /* Clear TX FIFO */
     SPII2S_CLR_TX_FIFO(SPI0);
-    while(!SPI_GET_TX_FIFO_EMPTY_FLAG(SPI0));
+
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
+    while(!SPI_GET_TX_FIFO_EMPTY_FLAG(SPI0))
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("SPI encounters some errors, please check it. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    };
+
+    /* Clear RX FIFO */
     SPII2S_CLR_RX_FIFO(SPI0);
-    while(!SPI_GET_RX_FIFO_EMPTY_FLAG(SPI0));
+
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
+    while(!SPI_GET_RX_FIFO_EMPTY_FLAG(SPI0))
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("SPI encounters some errors, please check it. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    };
 
     /* Enable RX function and TX function */
     SPII2S_ENABLE_TX(SPI0);
@@ -143,15 +170,36 @@ int32_t main(void)
     SPII2S_ENABLE_TXDMA(SPI0);
     SPII2S_ENABLE_RXDMA(SPI0);
 
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
     /* wait RX Buffer 1 and RX Buffer 2 get first buffer */
-    while(g_count<2);
+    while(g_count<2)
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("Please check if PDMA setting is correct.\n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
 
     /* Once I2S is enabled, CLK would be sent immediately, we still have chance to get zero data at beginning,
        in this case we only need to make sure the on-going data is correct */
     printf("RX Buffer 1\tRX Buffer 2\n");
 
+    /* Wait test finished */
+    while(!u32RecReady)
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("Please check if PDMA setting is correct.\n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
+
     /* Print the received data */
-    while(!u32RecReady);
     for (u32DataCount = 0; u32DataCount < BUFF_LEN; u32DataCount++)
     {
         printf("0x%X\t\t0x%X\n", g_PcmRxBuff[0][u32DataCount], g_PcmRxBuff[1][u32DataCount]);

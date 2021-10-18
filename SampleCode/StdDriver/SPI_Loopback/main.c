@@ -31,6 +31,7 @@ void SPI_Init(void);
 int main(void)
 {
     uint32_t u32DataCount, u32TestCycle, u32Err;
+    uint32_t u32TimeOutCount;
 
     /* Unlock protected registers */
     SYS_UnlockReg();
@@ -77,10 +78,23 @@ int main(void)
 
         while(1)
         {
+            /* setup timeout */
+            u32TimeOutCount = SystemCoreClock;
+
             /* Write to TX register */
             SPI_WRITE_TX(SPI0, g_au32SourceData[u32DataCount]);
+
             /* Check SPI0 busy status */
-            while(SPI_IS_BUSY(SPI0));
+            while(SPI_IS_BUSY(SPI0))
+            {
+                if(u32TimeOutCount == 0)
+                {
+                    printf("\nSomething is wrong, please check if pin connection is correct. \n");
+                    while(1);
+                }
+                u32TimeOutCount--;
+            }
+
             /* Read received data */
             g_au32DestinationData[u32DataCount] = SPI_READ_RX(SPI0);
             u32DataCount++;

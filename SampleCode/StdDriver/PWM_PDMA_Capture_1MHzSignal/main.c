@@ -71,9 +71,21 @@ void PDMA_IRQHandler(void)
 void CalPeriodTime(PWM_T *PWM, uint32_t u32Ch)
 {
     uint16_t u16HighPeriod, u16LowPeriod, u16TotalPeriod;
+    uint32_t u32TimeOutCount;
+
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
 
     /* Wait PDMA interrupt (g_u32IsTestOver will be set at IRQ_Handler function) */
-    while(g_u32IsTestOver == 0);
+    while(g_u32IsTestOver == 0)
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("\nSomething is wrong, please check if pin connection is correct. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
 
     u16HighPeriod = g_au16Count[1] - g_au16Count[2] + 1;
 

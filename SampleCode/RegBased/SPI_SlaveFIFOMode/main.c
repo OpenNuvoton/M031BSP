@@ -34,6 +34,7 @@ void SPI_Init(void);
 int main(void)
 {
     volatile uint32_t u32TxDataCount, u32RxDataCount;
+    uint32_t u32TimeOutCount;
 
     /* Unlock protected registers */
     SYS_UnlockReg();
@@ -76,6 +77,9 @@ int main(void)
     getchar();
     printf("\n");
 
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
     /* Access TX and RX FIFO */
     while(u32RxDataCount < DATA_COUNT)
     {
@@ -85,6 +89,13 @@ int main(void)
         /* Check RX EMPTY flag */
         if((SPI0->STATUS & SPI_STATUS_RXEMPTY_Msk) == 0)
             g_au32DestinationData[u32RxDataCount++] = SPI0->RX; /* Read RX FIFO */
+
+        if(u32TimeOutCount == 0)
+        {
+            printf("\nSomething is wrong, please check if pin connection is correct. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
     }
 
     /* Print the received data */

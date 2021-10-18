@@ -69,6 +69,7 @@ void PDMA_ResetRxSGTable(uint8_t id)
 int32_t main(void)
 {
     uint32_t u32InitValue, u32DataCount;
+    uint32_t u32TimeOutCount;
 
     /* Unlock protected registers */
     SYS_UnlockReg();
@@ -161,11 +162,37 @@ int32_t main(void)
 
     NVIC_EnableIRQ(PDMA_IRQn);
 
-    /* Clear TX and RX FIFO */
+    /* Clear TX FIFO */
     SPII2S_CLR_TX_FIFO(SPI0);
-    while(!SPI_GET_TX_FIFO_EMPTY_FLAG(SPI0));
+
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
+    while(!SPI_GET_TX_FIFO_EMPTY_FLAG(SPI0))
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("SPI encounters some errors, please check it. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    };
+
+    /* Clear RX FIFO */
     SPII2S_CLR_RX_FIFO(SPI0);
-    while(!SPI_GET_RX_FIFO_EMPTY_FLAG(SPI0));
+
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
+    while(!SPI_GET_RX_FIFO_EMPTY_FLAG(SPI0))
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("SPI encounters some errors, please check it. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    };
 
     /* Enable RX PDMA and TX PDMA function */
     SPI0->PDMACTL = (SPI_PDMACTL_RXPDMAEN_Msk | SPI_PDMACTL_TXPDMAEN_Msk);
@@ -173,27 +200,44 @@ int32_t main(void)
     /* Enable RX function and TX function */
     SPI0->I2SCTL |= (SPI_I2SCTL_RXEN_Msk | SPI_I2SCTL_TXEN_Msk);
 
-    /* Print the transmitted data */
-    printf("\nTX Buffer 1\tTX Buffer 2\n");
-    while(!u32PlayReady);
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
+    while(!u32PlayReady)
     {
-        for(u32DataCount = 0; u32DataCount < BUFF_LEN; u32DataCount++)
+        if(u32TimeOutCount == 0)
         {
-            printf("0x%X\t\t0x%X\n", PcmTxBuff[0][u32DataCount], PcmTxBuff[1][u32DataCount]);
+            printf("Please check if PDMA setting is correct.\n");
+            while(1);
         }
-        u32PlayReady = 0;
+        u32TimeOutCount--;
+    }
+    u32PlayReady = 0;
+
+    /* Print the transmitted data */
+    printf("\nTX Buffer 1\t\tTX Buffer 2\n");
+    for(u32DataCount = 0; u32DataCount < BUFF_LEN; u32DataCount++)
+    {
+        printf("0x%X\t\t0x%X\n", PcmTxBuff[0][u32DataCount], PcmTxBuff[1][u32DataCount]);
+    }
+
+    while(!u32RecReady)
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("Please check if PDMA setting is correct.\n");
+            while(1);
+        }
+        u32TimeOutCount--;
     }
 
     /* Print the received data */
     printf("\nRX Buffer 1\tRX Buffer 2\n");
-    while(!u32RecReady);
+    for (u32DataCount = 0; u32DataCount < BUFF_LEN; u32DataCount++)
     {
-        for(u32DataCount = 0; u32DataCount < BUFF_LEN; u32DataCount++)
-        {
-            printf("0x%X\t\t0x%X\n", g_PcmRxBuff[0][u32DataCount], g_PcmRxBuff[1][u32DataCount]);
-        }
-        u32RecReady = 0;
+        printf("0x%X\t\t0x%X\n", g_PcmRxBuff[0][u32DataCount], g_PcmRxBuff[1][u32DataCount]);
     }
+    u32RecReady = 0;
 
     printf("\n\nExit I2S sample code.\n");
 

@@ -144,6 +144,7 @@ void SpiLoopTest_WithPDMA(void)
     uint32_t u32DataCount, u32TestCycle;
     uint32_t u32RegValue, u32Abort;
     int32_t i32Err;
+    uint32_t u32TimeOutCount;
 
     printf("\nSPI0 Loopback test with PDMA \n");
 
@@ -212,6 +213,9 @@ void SpiLoopTest_WithPDMA(void)
     {
         if((u32TestCycle & 0x1FF) == 0)
             putchar('.');
+
+        /* setup timeout */
+        u32TimeOutCount = SystemCoreClock;
 
         while(1)
         {
@@ -284,6 +288,13 @@ void SpiLoopTest_WithPDMA(void)
                 i32Err = 1;
                 break;
             }
+
+            if(u32TimeOutCount == 0)
+            {
+                printf("\nSomething is wrong, please check if pin connection is correct. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
         }
 
         if(i32Err)

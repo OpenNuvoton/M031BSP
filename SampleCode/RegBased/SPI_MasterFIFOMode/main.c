@@ -34,6 +34,7 @@ void SPI_Init(void);
 int main(void)
 {
     uint32_t u32DataCount;
+    uint32_t u32TimeOutCount;
 
     /* Unlock protected registers */
     SYS_UnlockReg();
@@ -81,8 +82,19 @@ int main(void)
     g_u32RxDataCount = 0;
     NVIC_EnableIRQ(SPI0_IRQn);
 
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
     /* Wait for transfer done */
-    while(g_u32RxDataCount < DATA_COUNT);
+    while(g_u32RxDataCount < DATA_COUNT)
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("\nSomething is wrong, please check if pin connection is correct. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
 
     /* Print the received data */
     printf("Received data:\n");

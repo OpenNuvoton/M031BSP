@@ -54,12 +54,24 @@ void CalPeriodTime()
     uint16_t u32Count[4];
     uint32_t u32i;
     uint16_t u16RisingTime, u16FallingTime, u16HighPeroid, u16LowPeroid, u16TotalPeroid;
+    uint32_t u32TimeOutCount;
 
     /* Clear Capture Falling Indicator (Time A) */
     BPWM0->CAPIF = BPWM_CAPIF_CAPFIF0_Msk;
 
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
     /* Wait for Capture Falling Indicator  */
-    while((BPWM0->CAPIF & BPWM_CAPIF_CAPFIF0_Msk) == 0);
+    while((BPWM0->CAPIF & BPWM_CAPIF_CAPFIF0_Msk) == 0)
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("\nSomething is wrong, please check if pin connection is correct. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
 
     /* Clear Capture Falling Indicator (Time B)*/
     BPWM0->CAPIF = BPWM_CAPIF_CAPFIF0_Msk;
@@ -134,16 +146,16 @@ void SYS_Init(void)
     CLK->APBCLK1 |= (CLK_APBCLK1_BPWM0CKEN_Msk | CLK_APBCLK1_BPWM1CKEN_Msk);
 
     /*---------------------------------------------------------------------------------------------------------*/
-	/* BPWM clock frequency configuration                                                                       */
+    /* BPWM clock frequency configuration                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
     /* BPWM clock frequency can be set equal or double to HCLK by choosing case 1 or case 2 */
     /* case 1.BPWM clock frequency is set equal to HCLK: select BPWM module clock source as PCLK */
     CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_BPWM0SEL_Msk) | CLK_CLKSEL2_BPWM0SEL_PCLK0;
-    CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_BPWM1SEL_Msk) | CLK_CLKSEL2_BPWM1SEL_PCLK1;	
+    CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_BPWM1SEL_Msk) | CLK_CLKSEL2_BPWM1SEL_PCLK1;
 
     /* case 2.BPWM clock frequency is set double to HCLK: select BPWM module clock source as PLL */
     //CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_BPWM0SEL_Msk) | CLK_CLKSEL2_BPWM0SEL_PLL;
-    //CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_BPWM1SEL_Msk) | CLK_CLKSEL2_BPWM1SEL_PLL;	
+    //CLK->CLKSEL2 = (CLK->CLKSEL2 & ~CLK_CLKSEL2_BPWM1SEL_Msk) | CLK_CLKSEL2_BPWM1SEL_PLL;
     /*---------------------------------------------------------------------------------------------------------*/
 
     /* Enable UART clock */
@@ -164,8 +176,8 @@ void SYS_Init(void)
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Set PA multi-function pin for BPWM0 Channel 0 */
-    SYS->GPA_MFPL = (SYS->GPA_MFPL & ~SYS_GPA_MFPL_PA0MFP_Msk) | SYS_GPA_MFPL_PA0MFP_BPWM0_CH0;	
-	
+    SYS->GPA_MFPL = (SYS->GPA_MFPL & ~SYS_GPA_MFPL_PA0MFP_Msk) | SYS_GPA_MFPL_PA0MFP_BPWM0_CH0;
+
     /* Set PB.11 multi-function pin for BPWM1 Channel 0 */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~SYS_GPB_MFPH_PB11MFP_Msk) | SYS_GPB_MFPH_PB11MFP_BPWM1_CH0;
 }
@@ -189,6 +201,8 @@ void UART0_Init()
 /*---------------------------------------------------------------------------------------------------------*/
 int main(void)
 {
+    uint32_t u32TimeOutCount;
+
     /* Unlock protected registers */
     SYS_UnlockReg();
 
@@ -288,11 +302,22 @@ int main(void)
 
         //NVIC_EnableIRQ(BPWM0_IRQn);
 
+        /* setup timeout */
+        u32TimeOutCount = SystemCoreClock;
+
         // Start
         BPWM0->CNTEN |= BPWM_CNTEN_CNTEN0_Msk;
 
         /* Wait until BPWM0 channel 0 Timer start to count */
-        while((BPWM0->CNT) == 0);
+        while((BPWM0->CNT) == 0)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("BPWM encounters some errors, please check it. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Enable capture input path for BPWM0 channel 0 */
         BPWM0->CAPINEN |= BPWM_CAPINEN_CAPINEN0_Msk;
@@ -308,7 +333,15 @@ int main(void)
         BPWM1->PERIOD = 0;
 
         /* Wait until BPWM1 channel 0 Timer Stop */
-        while((BPWM1->CNT & BPWM_CNT_CNT_Msk) != 0);
+        while((BPWM1->CNT & BPWM_CNT_CNT_Msk) != 0)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("BPWM encounters some errors, please check it. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Disable Timer for BPWM1 channel 0 */
         BPWM1->CNTEN &= ~BPWM_CNTEN_CNTEN0_Msk;
@@ -328,7 +361,15 @@ int main(void)
         BPWM0->PERIOD = 0;
 
         /* Wait until BPWM0 channel 0 current counter reach to 0 */
-        while((BPWM0->CNT & BPWM_CNT_CNT_Msk) != 0);
+        while((BPWM0->CNT & BPWM_CNT_CNT_Msk) != 0)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("BPWM encounters some errors, please check it. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Disable Timer for BPWM0 channel 0 */
         BPWM0->CNTEN &= ~BPWM_CNTEN_CNTEN0_Msk;

@@ -50,12 +50,24 @@ void CalPeriodTime(BPWM_T *BPWM, uint32_t u32Ch)
     uint16_t u16Count[4];
     uint32_t u32i;
     uint16_t u16RisingTime, u16FallingTime, u16HighPeriod, u16LowPeriod, u16TotalPeriod;
+    uint32_t u32TimeOutCount;
 
     /* Clear Capture Falling Indicator (Time A) */
     BPWM_ClearCaptureIntFlag(BPWM, u32Ch, BPWM_CAPTURE_INT_FALLING_LATCH | BPWM_CAPTURE_INT_RISING_LATCH);
 
+    /* setup timeout */
+    u32TimeOutCount = SystemCoreClock;
+
     /* Wait for Capture Falling Indicator  */
-    while (BPWM_GetCaptureIntFlag(BPWM, u32Ch) < 2);
+    while (BPWM_GetCaptureIntFlag(BPWM, u32Ch) < 2)
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("\nSomething is wrong, please check if pin connection is correct. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
 
     /* Clear Capture Falling Indicator (Time B)*/
     BPWM_ClearCaptureIntFlag(BPWM, u32Ch, BPWM_CAPTURE_INT_FALLING_LATCH);
@@ -170,6 +182,8 @@ void UART0_Init()
 /*---------------------------------------------------------------------------------------------------------*/
 int32_t main(void)
 {
+    uint32_t u32TimeOutCount;
+
     /* Unlock protected registers */
     SYS_UnlockReg();
 
@@ -251,8 +265,19 @@ int32_t main(void)
         /* Enable falling capture reload */
         BPWM0->CAPCTL |= BPWM_CAPCTL_FCRLDEN0_Msk;
 
+        /* setup timeout */
+        u32TimeOutCount = SystemCoreClock;
+
         /* Wait until BPWM0 channel 0 Timer start to count */
-        while ((BPWM0->CNT) == 0);
+        while ((BPWM0->CNT) == 0)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("BPWM encounters some errors, please check it. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Capture the Input Waveform Data */
         CalPeriodTime(BPWM0, 0);
@@ -265,7 +290,15 @@ int32_t main(void)
         BPWM_Stop(BPWM1, BPWM_CH_0_MASK);
 
         /* Wait until BPWM1 channel 0 Timer Stop */
-        while ((BPWM1->CNT & BPWM_CNT_CNT_Msk) != 0);
+        while ((BPWM1->CNT & BPWM_CNT_CNT_Msk) != 0)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("BPWM encounters some errors, please check it. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Disable Timer for BPWM1 channel 0 */
         BPWM_ForceStop(BPWM1, BPWM_CH_0_MASK);
@@ -284,8 +317,19 @@ int32_t main(void)
         /* Set loaded value as 0 for BPWM0 channel 0 */
         BPWM_Stop(BPWM0, BPWM_CH_0_MASK);
 
+        /* setup timeout */
+        u32TimeOutCount = SystemCoreClock;
+
         /* Wait until BPWM0 channel 0 current counter reach to 0 */
-        while ((BPWM0->CNT & BPWM_CNT_CNT_Msk) != 0);
+        while ((BPWM0->CNT & BPWM_CNT_CNT_Msk) != 0)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("BPWM encounters some errors, please check it. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Disable Timer for BPWM0 channel 0 */
         BPWM_ForceStop(BPWM0, BPWM_CH_0_MASK);
