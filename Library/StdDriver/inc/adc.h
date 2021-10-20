@@ -99,9 +99,14 @@ extern "C"
 #define ADC_LESS_THAN          0   /*!< ADC compare condition is "less than the compare value"                  \hideinitializer */
 #define ADC_GREATER_OR_EQUAL   1   /*!< ADC compare condition is "greater than or equal to the compare value"   \hideinitializer */
 
-
+/*--------------------------------------------------------------------------------------------------*/
+/* Define Error Code                                                                                */
+/*--------------------------------------------------------------------------------------------------*/
+#define ADC_TIMEOUT_ERR     (-1)    /*!< ADC operation abort due to timeout error \hideinitializer */
 
 /*@}*/ /* end of group ADC_EXPORTED_CONSTANTS */
+
+extern int32_t g_ADC_i32ErrCode;
 
 /** @addtogroup ADC_EXPORTED_FUNCTIONS ADC Exported Functions
   @{

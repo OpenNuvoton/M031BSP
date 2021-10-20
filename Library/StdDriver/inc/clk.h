@@ -437,7 +437,11 @@ extern "C"
                         MODULE_CLKSEL_ENC(NA)|MODULE_CLKSEL_Msk_ENC(NA)|MODULE_CLKSEL_Pos_ENC(NA)|\
                         MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< USCI1 Module   \hideinitializer */
 
+#define CLK_TIMEOUT_ERR             (-1)    /*!< Clock timeout error value \hideinitializer */
+
 /*@}*/ /* end of group CLK_EXPORTED_CONSTANTS */
+
+extern int32_t g_CLK_i32ErrCode;
 
 /** @addtogroup CLK_EXPORTED_FUNCTIONS CLK Exported Functions
   @{
@@ -496,23 +500,39 @@ static __INLINE uint32_t CLK_GetPLLClockFreq(void)
   * @brief      This function execute delay function.
   * @param[in]  us  Delay time. The Max value is 2^24 / CPU Clock(MHz). Ex:
   *                             50MHz => 335544us, 48MHz => 349525us, 28MHz => 699050us ...
-  * @return     None
+  * @return     Delay success or not
+  * @retval     0 Success, target delay time reached
+  * @retval     CLK_TIMEOUT_ERR Delay function execute failed due to SysTick stop working
   * @details    Use the SysTick to generate the delay time and the UNIT is in us.
   *             The SysTick clock source is from HCLK, i.e. the same as system core clock.
   *             User can use SystemCoreClockUpdate() to calculate CyclesPerUs automatically before using this function.
   * \hideinitializer
   */
-__STATIC_INLINE void CLK_SysTickDelay(uint32_t us)
+__STATIC_INLINE int32_t CLK_SysTickDelay(uint32_t us)
 {
+    /* The u32TimeOutCnt value must be greater than the max delay time of 1398ms if HCLK=12MHz */
+    uint32_t u32TimeOutCnt = SystemCoreClock * 2;
+
     SysTick->LOAD = us * CyclesPerUs;
     SysTick->VAL  = (0x00);
     SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;
 
     /* Waiting for down-count to zero */
-    while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0);
+    while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0)
+    {
+        if(--u32TimeOutCnt == 0)
+        {
+            break;
+        }
+    }
 
     /* Disable SysTick counter */
     SysTick->CTRL = 0;
+
+    if(u32TimeOutCnt == 0)
+        return CLK_TIMEOUT_ERR;
+    else
+        return 0;
 }
 
 

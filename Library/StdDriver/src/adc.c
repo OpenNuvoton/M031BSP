@@ -19,6 +19,8 @@
   @{
 */
 
+int32_t g_ADC_i32ErrCode = 0;   /*!< ADC global error code */
+
 /** @addtogroup ADC_EXPORTED_FUNCTIONS ADC Exported Functions
   @{
 */
@@ -40,23 +42,44 @@
   *       with smallest number will be convert.
   * @note This API does not turn on ADC power nor does trigger ADC conversion.
   * @note This API will reset and calibrate ADC if ADC never be calibrated after chip power on.
+  * @note This function sets g_ADC_i32ErrCode to ADC_TIMEOUT_ERR if CALIF(ADC_ADCALSTSR[0]) is not set to 1
   */
 void ADC_Open(ADC_T *adc,
               uint32_t u32InputMode,
               uint32_t u32OpMode,
               uint32_t u32ChMask)
 {
+    uint32_t u32Delay = SystemCoreClock;    /* 1 second */
+
+    g_ADC_i32ErrCode = 0;
+
     /* Do calibration for ADC to decrease the effect of electrical random noise. */
     if ((adc->ADCALSTSR & ADC_ADCALSTSR_CALIF_Msk) == 0)
     {
         /* Must reset ADC before ADC calibration */
         adc->ADCR |= ADC_ADCR_RESET_Msk;
-        while((adc->ADCR & ADC_ADCR_RESET_Msk) == ADC_ADCR_RESET_Msk);
+        while((adc->ADCR & ADC_ADCR_RESET_Msk) == ADC_ADCR_RESET_Msk)
+        {
+            if (--u32Delay == 0)
+            {
+                g_ADC_i32ErrCode = ADC_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         adc->ADCALSTSR |= ADC_ADCALSTSR_CALIF_Msk;  /* Clear Calibration Finish Interrupt Flag */
         adc->ADCALR |= ADC_ADCALR_CALEN_Msk;        /* Enable Calibration function */
         ADC_START_CONV(adc);                        /* Start to calibration */
-        while((adc->ADCALSTSR & ADC_ADCALSTSR_CALIF_Msk) != ADC_ADCALSTSR_CALIF_Msk);   /* Wait calibration finish */
+        u32Delay = SystemCoreClock;
+        while((adc->ADCALSTSR & ADC_ADCALSTSR_CALIF_Msk) != ADC_ADCALSTSR_CALIF_Msk)    /* Wait calibration finish */
+        {
+            if (--u32Delay == 0)
+            {
+                g_ADC_i32ErrCode = ADC_TIMEOUT_ERR;
+                break;
+            }
+        }
+
     }
 
     adc->ADCR = (adc->ADCR & (~(ADC_ADCR_DIFFEN_Msk | ADC_ADCR_ADMD_Msk))) | \
