@@ -52,6 +52,12 @@ int32_t  VerifyData(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u32Patt
     {
         u32Data = FMC_Read(u32Addr);
 
+        if (g_FMC_i32ErrCode != 0)
+        {
+            printf("FMC_Read address 0x%x failed!\n", u32Addr);
+            return -1;
+        }
+
         if (u32Data != u32Pattern)
         {
             printf("\nFMC_Read data verify failed at address 0x%x, read=0x%x, expect=0x%x\n", u32Addr, u32Data, u32Pattern);
@@ -70,6 +76,12 @@ int32_t FillAddrPattern(uint32_t u32StartAddr, uint32_t u32EndAddr)
     for (u32Addr = u32StartAddr; u32Addr < u32EndAddr; u32Addr += 4)
     {
         FMC_Write(u32Addr, u32Addr);
+
+        if (g_FMC_i32ErrCode != 0)
+        {
+            printf("FMC_Write address 0x%x failed!\n", u32Addr);
+            return -1;
+        }
     }
     return 0;
 }
@@ -82,6 +94,12 @@ int32_t  VerifyAddrPattern(uint32_t u32StartAddr, uint32_t u32EndAddr)
     for (u32Addr = u32StartAddr; u32Addr < u32EndAddr; u32Addr += 4)
     {
         u32Data = FMC_Read(u32Addr);
+
+        if (g_FMC_i32ErrCode != 0)
+        {
+            printf("FMC_Read address 0x%x failed!\n", u32Addr);
+            return -1;
+        }
 
         if (u32Data != u32Addr)
         {
@@ -105,6 +123,11 @@ int32_t  ProgramFlash(uint32_t u32StartAddr, uint32_t u32EndAddr)
         // Erase page
         FMC_Erase(u32Addr);
 
+        if (g_FMC_i32ErrCode != 0)
+        {
+            printf("FMC_Erase address 0x%x failed!\n", u32Addr);
+            return -1;
+        }
         // Verify if page contents are all 0xFFFFFFFF
         if (VerifyData(u32Addr, u32Addr + FMC_FLASH_PAGE_SIZE, 0xFFFFFFFF) < 0)
         {
@@ -204,6 +227,11 @@ int32_t main(void)
             NVIC_DisableIRQ(ISP_IRQn);
 
             FMC_SetVectorPageAddr(0x0);     /* Switch To bank0 Loader */
+            if (g_FMC_i32ErrCode != 0)
+            {
+                printf("FMC_SetVectorPageAddr failed!\n");
+                return -1;
+            }
             NVIC_SystemReset();
             break;
         }

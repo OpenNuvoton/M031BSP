@@ -165,10 +165,10 @@ int32_t main(void)
             while(SYS->PDID);
         }
     }
-	
+
     /* Enable FMC ISP function */
     FMC_Open();
-	
+
     /*
         This sample code shows how to boot with different firmware images in APROM.
         In the code, VECMAP is used to implement multi-boot function. Software set VECMAP
@@ -263,6 +263,11 @@ int32_t main(void)
     default:
         FMC_SetVectorPageAddr(0x0);
         break;
+    }
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_SetVectorPageAddr failed!\n");
+        while (1);
     }
 
     /* Reset CPU only to reset to new vector page */

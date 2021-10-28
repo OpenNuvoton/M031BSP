@@ -56,15 +56,27 @@ static int SetIAPBoot(void)
     {
         /* Modify User Configuration when it is not in IAP mode */
 
-        FMC_ReadConfig(au32Config, 2);
-
+        if (FMC_ReadConfig(au32Config, 2) < 0)
+        {
+            printf("\nRead User Config failed!\n");
+            return -1;
+        }
         if (au32Config[0] & 0x40)
         {
             FMC_ENABLE_CFG_UPDATE();
             au32Config[0] &= ~0x40;
-            FMC_Erase(FMC_CONFIG_BASE);
-            FMC_WriteConfig(au32Config, 2);
 
+            FMC_Erase(FMC_CONFIG_BASE);
+            if (g_FMC_i32ErrCode != 0)
+            {
+                printf("FMC_Erase failed!\n");
+                return -1;
+            }
+            if (FMC_WriteConfig(au32Config, 2) != 0) /* Update User Configuration CONFIG0 and CONFIG1. */
+            {
+                printf("FMC_WriteConfig failed!\n");
+                return -1;
+            }
             // Perform chip reset to make new User Config take effect
             SYS_ResetChip();
         }
@@ -98,7 +110,11 @@ int32_t main(void)
     /* Enable FMC ISP function */
     FMC_Open();
     SetIAPBoot();
-    FMC_ReadConfig(u32Config, 3);
+    if (FMC_ReadConfig(u32Config, 3) < 0)
+    {
+        printf("\nRead User Config failed!\n");
+        while (1);
+    }
     printf("Config0 = 0x%x\n", u32Config[0]);
     printf("Boot from Loader0\n");
 
@@ -120,10 +136,18 @@ int32_t main(void)
 
             /* All ISP commands are relative to physical address except FMC_ISPCMD_VECMAP */
             FMC_SetVectorPageAddr(0x4000);
-
+            if (g_FMC_i32ErrCode != 0)
+            {
+                printf("FMC_SetVectorPageAddr failed!\n");
+                return -1;
+            }
             /* After bank swap command, Bank0 virtual address 0x4000 will remap to 0 */
             FMC_RemapBank(0);
-
+            if (g_FMC_i32ErrCode != 0)
+            {
+                printf("FMC_RemapBank failed!\n");
+                return -1;
+            }
             NVIC_SystemReset();
         }
         else if(ch=='1')
@@ -133,10 +157,18 @@ int32_t main(void)
 
             /* All ISP commands are relative to physical address except FMC_ISPCMD_VECMAP */
             FMC_SetVectorPageAddr(0x4000);
-
+            if (g_FMC_i32ErrCode != 0)
+            {
+                printf("FMC_SetVectorPageAddr failed!\n");
+                return -1;
+            }
             /* After bank swap command, Bank1 virtual address 0x4000 will remap to 0 */
             FMC_RemapBank(1);
-
+            if (g_FMC_i32ErrCode != 0)
+            {
+                printf("FMC_RemapBank failed!\n");
+                return -1;
+            }
             NVIC_SystemReset();
         }
         else
