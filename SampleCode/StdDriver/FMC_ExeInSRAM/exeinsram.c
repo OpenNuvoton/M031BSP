@@ -50,18 +50,33 @@ int32_t FlashAccess_OnSRAM(void)
     {
         /* Erase Demo */
         if( ((u32Addr+u32Cnt)%FMC_FLASH_PAGE_SIZE) == 0)
+        {
             FMC_Erase(u32Addr+u32Cnt);
-
+            if (g_FMC_i32ErrCode != 0)
+            {
+                printf("FMC_Erase failed!\n");
+                return -1;
+            }
+        }
         /* Write Demo */
         u32Data = u32Cnt + 0x12345678;
         FMC_Write(u32Addr + u32Cnt, u32Data);
-
+        if (g_FMC_i32ErrCode != 0)
+        {
+            printf("FMC_Write failed!\n");
+            return -1;
+        }
         if ((u32Cnt & 0xf) == 0)
             printf(".");
 
         /* Read Demo */
         u32RData = FMC_Read(u32Addr + u32Cnt);
 
+        if (g_FMC_i32ErrCode != 0)
+        {
+            printf("FMC_Read failed!\n");
+            return -1;
+        }
         if (u32Data != u32RData)
         {
             printf("[Read/Write FAIL]\n");

@@ -62,15 +62,15 @@ static int  set_data_flash_base(uint32_t u32DFBA)
     /* Read User Configuration 0 & 1 */
     if (FMC_ReadConfig(au32Config, 2) < 0)
     {
-        printf("\nRead User Config failed!\n");
-        return -1;
+        printf("\nRead User Config failed!\n");       /* Error message */
+        return -1;                     /* failed to read User Configuration */
     }
 
     /* Check if Data Flash is enabled (CONFIG0[0]) and is expected address (CONFIG1) */
     if ((!(au32Config[0] & 0x1)) && (au32Config[1] == u32DFBA))
-        return 0;
+        return 0;                      /* no need to modify User Configuration */
 
-    FMC_ENABLE_CFG_UPDATE();
+    FMC_ENABLE_CFG_UPDATE();           /* Enable User Configuration update. */
 
     /* Erase User Configuration */
     FMC_Erase(FMC_CONFIG_BASE);
@@ -129,11 +129,16 @@ void run_crc32_checksum()
 
 int32_t fill_data_pattern(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u32Pattern)
 {
-    uint32_t u32Addr;
+    uint32_t u32Addr;                  /* flash address */
 
+    /* Fill flash range from u32StartAddr to u32EndAddr with data word u32Pattern. */
     for (u32Addr = u32StartAddr; u32Addr < u32EndAddr; u32Addr += 4)
     {
-        FMC_Write(u32Addr, u32Pattern);
+        if (FMC_Write(u32Addr, u32Pattern) != 0)          /* Program flash */
+        {
+            printf("FMC_Write address 0x%x failed!\n", u32Addr);
+            return -1;
+        }
     }
     return 0;
 }
@@ -141,19 +146,27 @@ int32_t fill_data_pattern(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u
 
 int32_t  verify_data(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u32Pattern)
 {
-    uint32_t    u32Addr;
-    uint32_t    u32data;
+    uint32_t    u32Addr;               /* flash address */
+    uint32_t    u32data;               /* flash data    */
 
+    /* Verify if each data word from flash u32StartAddr to u32EndAddr be u32Pattern.  */
     for (u32Addr = u32StartAddr; u32Addr < u32EndAddr; u32Addr += 4)
     {
-        u32data = FMC_Read(u32Addr);
-        if (u32data != u32Pattern)
+        u32data = FMC_Read(u32Addr);   /* Read a flash word from address u32Addr. */
+
+        if (g_FMC_i32ErrCode != 0)
         {
-            printf("\nFMC_Read data verify failed at address 0x%x, read=0x%x, expect=0x%x\n", u32Addr, u32data, u32Pattern);
+            printf("FMC_Read address 0x%x failed!\n", u32Addr);
             return -1;
         }
+
+        if (u32data != u32Pattern)     /* Verify if data matched. */
+        {
+            printf("\nFMC_Read data verify failed at address 0x%x, read=0x%x, expect=0x%x\n", u32Addr, u32data, u32Pattern);
+            return -1;                 /* data verify failed */
+        }
     }
-    return 0;
+    return 0;                          /* data verify OK */
 }
 
 
@@ -166,13 +179,17 @@ int32_t  flash_test(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u32Patt
         printf("    Flash test address: 0x%x    \r", u32Addr);
 
         /* Erase page */
-        FMC_Erase(u32Addr);
+        if (FMC_Erase(u32Addr) != 0)
+        {
+            printf("FMC_Erase address 0x%x failed!\n", u32Addr);
+            return -1;
+        }
 
         /* Verify if page contents are all 0xFFFFFFFF */
         if (verify_data(u32Addr, u32Addr + FMC_FLASH_PAGE_SIZE, 0xFFFFFFFF) < 0)
         {
-            printf("\nPage 0x%x erase verify failed!\n", u32Addr);
-            return -1;
+            printf("\nPage 0x%x erase verify failed!\n", u32Addr);   /* error message */
+            return -1;                 /* Erase verify failed */
         }
 
         /* Write test pattern to fill the whole page */
@@ -185,21 +202,26 @@ int32_t  flash_test(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u32Patt
         /* Verify if page contents are all equal to test pattern */
         if (verify_data(u32Addr, u32Addr + FMC_FLASH_PAGE_SIZE, u32Pattern) < 0)
         {
-            printf("\nData verify failed!\n ");
+            printf("\nData verify failed!\n ");                      /* error message */
+            return -1;                 /* Program verify failed */
+        }
+
+        /* Erase page */
+        if (FMC_Erase(u32Addr) != 0)
+        {
+            printf("FMC_Erase address 0x%x failed!\n", u32Addr);
             return -1;
         }
 
-        FMC_Erase(u32Addr);
-
-        /* Verify if page contents are all 0xFFFFFFFF */
+        /* Verify if page contents are all 0xFFFFFFFF after erased. */
         if (verify_data(u32Addr, u32Addr + FMC_FLASH_PAGE_SIZE, 0xFFFFFFFF) < 0)
         {
-            printf("\nPage 0x%x erase verify failed!\n", u32Addr);
-            return -1;
+            printf("\nPage 0x%x erase verify failed!\n", u32Addr);   /* error message */
+            return -1;                 /* Erase verify failed */
         }
     }
-    printf("\r    Flash Test Passed.          \n");
-    return 0;
+    printf("\r    Flash Test Passed.          \n");                  /* information message */
+    return 0;      /* flash test passed */
 }
 
 
@@ -289,27 +311,58 @@ int main()
         goto lexit;
     }
 
-    u32Data = FMC_ReadCID();
-    printf("  Company ID ............................ [0x%08x]\n", u32Data);
+    u32Data = FMC_ReadCID();           /* Get company ID, should be 0xDA. */
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_ReadCID failed!\n");
+        goto lexit;
+    }
+    printf("  Company ID ............................ [0x%08x]\n", u32Data);   /* information message */
 
-    u32Data = FMC_ReadPID();
-    printf("  Product ID ............................ [0x%08x]\n", u32Data);
+    u32Data = FMC_ReadPID();           /* Get product ID. */
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_ReadPID failed!\n");
+        goto lexit;
+    }
+    printf("  Product ID ............................ [0x%08x]\n", u32Data);   /* information message */
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)            /* Get 96-bits UID. */
     {
         u32Data = FMC_ReadUID(i);
-        printf("  Unique ID %d ........................... [0x%08x]\n", i, u32Data);
+        if (g_FMC_i32ErrCode != 0)
+        {
+            printf("FMC_ReadUID %d failed!\n", i);
+            goto lexit;
+        }
+        printf("  Unique ID %d ........................... [0x%08x]\n", i, u32Data);  /* information message */
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++)            /* Get 4 words UCID. */
     {
         u32Data = FMC_ReadUCID(i);
-        printf("  Unique Customer ID %d .................. [0x%08x]\n", i, u32Data);
+        if (g_FMC_i32ErrCode != 0)
+        {
+            printf("FMC_ReadUCID %d failed!\n", i);
+            goto lexit;
+        }
+        printf("  Unique Customer ID %d .................. [0x%08x]\n", i, u32Data);  /* information message */
     }
 
     /* Read User Configuration */
     printf("  User Config 0 ......................... [0x%08x]\n", FMC_Read(FMC_CONFIG_BASE));
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Read(FMC_CONFIG_BASE) failed!\n");
+        goto lexit;
+    }
+    /* Read User Configuration CONFIG1 */
     printf("  User Config 1 ......................... [0x%08x]\n", FMC_Read(FMC_CONFIG_BASE+4));
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Read(FMC_CONFIG_BASE+4) failed!\n");
+        goto lexit;
+    }
 
     /* Read Data Flash base address */
     u32Data = FMC_ReadDataFlashBaseAddr();
@@ -335,20 +388,26 @@ int main()
     }
     FMC_DISABLE_SP_UPDATE();
 
-    printf("\n\nAPROM test =>\n");
-    FMC_ENABLE_AP_UPDATE();
+    printf("\n\nAPROM test =>\n");     /* information message */
+
+    FMC_ENABLE_AP_UPDATE();            /* Enable APROM update. */
+
+    /* Execute flash program/verify test on APROM. */
     if (flash_test(APROM_TEST_BASE, DATA_FLASH_TEST_BASE, TEST_PATTERN) < 0)
     {
-        printf("\n\nAPROM test failed!\n");
-        goto lexit;
+        printf("\n\nAPROM test failed!\n");        /* debug message */
+        goto lexit;                                /* LDROM test failed. Program aborted. */
     }
-    FMC_DISABLE_AP_UPDATE();
 
-    printf("\n\nData Flash test =>\n");
+    FMC_DISABLE_AP_UPDATE();           /* Disable APROM update. */
+
+    printf("\n\nData Flash test =>\n");            /* information message */
+
+    /* Execute flash program/verify test on Data Flash. */
     if (flash_test(DATA_FLASH_TEST_BASE, DATA_FLASH_TEST_END, TEST_PATTERN) < 0)
     {
         printf("\n\nData flash read/write test failed!\n");
-        goto lexit;
+        goto lexit;                    /* flash test failed */
     }
 
     run_crc32_checksum();

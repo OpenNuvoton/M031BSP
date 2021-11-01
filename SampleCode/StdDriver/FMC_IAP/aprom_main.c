@@ -88,13 +88,16 @@ static int  set_IAP_boot_mode(void)
         10 = Boot from APROM with IAP mode.
         11 = Boot from APROM without IAP mode.
     */
-    if (au32Config[0] & 0x40)      /* Boot from APROM with IAP mode */
+    if (au32Config[0] & 0x40)          /* Check if it's boot from APROM/LDROM with IAP. */
     {
-        FMC_ENABLE_CFG_UPDATE();
-        au32Config[0] &= ~0x40;
-        FMC_WriteConfig(au32Config, 2);
+        FMC_ENABLE_CFG_UPDATE();       /* Enable User Configuration update. */
+        au32Config[0] &= ~0x40;        /* Select IAP boot mode. */
 
-        // Perform chip reset to make new User Config take effect
+        if (FMC_WriteConfig(au32Config, 2) != 0) /* Update User Configuration CONFIG0 and CONFIG1. */
+        {
+            printf("FMC_WriteConfig failed!\n");
+            return -1;
+        }
         SYS->IPRST0 = SYS_IPRST0_CHIPRST_Msk;
     }
     return 0;
@@ -112,9 +115,9 @@ static int  load_image_to_flash(uint32_t image_base, uint32_t image_limit, uint3
 {
     uint32_t   i, j, u32Data, u32ImageSize, *pu32Loader;
 
-    u32ImageSize = max_size;
+    u32ImageSize = max_size;           /* Give the maximum size of programmable flash area. */
 
-    printf("Program image to flash address 0x%x...", flash_addr);
+    printf("Program image to flash address 0x%x...", flash_addr);    /* information message */
 
     /*
      * program the whole image to specified flash area
@@ -122,11 +125,18 @@ static int  load_image_to_flash(uint32_t image_base, uint32_t image_limit, uint3
     pu32Loader = (uint32_t *)image_base;
     for (i = 0; i < u32ImageSize; i += FMC_FLASH_PAGE_SIZE)
     {
-
-        FMC_Erase(flash_addr + i);
-        for (j = 0; j < FMC_FLASH_PAGE_SIZE; j += 4)
+        if (FMC_Erase(flash_addr + i) != 0)    /* erase a flash page */
         {
-            FMC_Write(flash_addr + i + j, pu32Loader[(i + j) / 4]);
+            printf("FMC_Erase address 0x%x failed!\n", flash_addr + i);
+            return -1;
+        }
+        for (j = 0; j < FMC_FLASH_PAGE_SIZE; j += 4)                 /* program image to this flash page */
+        {
+            if (FMC_Write(flash_addr + i + j, pu32Loader[(i + j) / 4]) != 0)
+            {
+                printf("FMC_Write address 0x%x failed!\n", flash_addr + i + j);
+                return -1;
+            }
         }
     }
     printf("OK.\nVerify ...");
@@ -136,20 +146,25 @@ static int  load_image_to_flash(uint32_t image_base, uint32_t image_limit, uint3
     {
         for (j = 0; j < FMC_FLASH_PAGE_SIZE; j += 4)
         {
-            u32Data = FMC_Read(flash_addr + i + j);
-
-            if (u32Data != pu32Loader[(i+j)/4])
+            u32Data = FMC_Read(flash_addr + i + j);        /* read a word from flash memory */
+            if (g_FMC_i32ErrCode != 0)
             {
-                printf("data mismatch on 0x%x, [0x%x], [0x%x]\n", flash_addr + i + j, u32Data, pu32Loader[(i+j)/4]);
+                printf("FMC_Read address 0x%x failed!\n", flash_addr + i + j);
                 return -1;
             }
 
-            if (i + j >= u32ImageSize)
+            if (u32Data != pu32Loader[(i+j)/4])            /* check if the word read from flash be matched with original image */
+            {
+                printf("data mismatch on 0x%x, [0x%x], [0x%x]\n", flash_addr + i + j, u32Data, pu32Loader[(i+j)/4]);
+                return -1;             /* image program failed */
+            }
+
+            if (i + j >= u32ImageSize) /* check if it reach the end of image */
                 break;
         }
     }
     printf("OK.\n");
-    return 0;
+    return 0;                          /* success */
 }
 
 
@@ -215,7 +230,7 @@ int main()
         }
     }
 
-    FMC_Open();
+    FMC_Open();                        /* Enable FMC ISP function */
 
     /*
      *  Check if User Configuration CBS is boot with IAP mode.
@@ -224,30 +239,51 @@ int main()
     if (set_IAP_boot_mode() < 0)
     {
         printf("Failed to set IAP boot mode!\n");
-        goto lexit;
+        goto lexit;                    /* Failed to set IAP boot mode. Program aborted. */
     }
 
     /* Read BS */
     printf("  Boot Mode ............................. ");
-    if (FMC_GetBootSource() == 0)
-        printf("[APROM]\n");
+    if (FMC_GetBootSource() == 0)      /* Get boot source */
+        printf("[APROM]\n");           /* Is booting from APROM */
     else
     {
-        printf("[LDROM]\n");
+        printf("[LDROM]\n");           /* Is booting from LDROM */
         printf("  WARNING: The sample code must execute in APROM!\n");
-        goto lexit;
+        goto lexit;                    /* This sample program must execute in APROM. Program aborted. */
     }
 
-    u32Data = FMC_ReadCID();
+    u32Data = FMC_ReadCID();           /* get company ID */
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_ReadCID failed!\n");
+        goto lexit;
+    }
     printf("  Company ID ............................ [0x%08x]\n", u32Data);
 
-    u32Data = FMC_ReadPID();
+    u32Data = FMC_ReadPID();           /* get product ID */
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_ReadPID failed!\n");
+        goto lexit;
+    }
     printf("  Product ID ............................ [0x%08x]\n", u32Data);
 
     /* Read User Configuration */
     printf("  User Config 0 ......................... [0x%08x]\n", FMC_Read(FMC_CONFIG_BASE));
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Read(FMC_CONFIG_BASE) failed!\n");
+        goto lexit;
+    }
+
     /* Read User Configuration CONFIG1 */
     printf("  User Config 1 ......................... [0x%08x]\n", FMC_Read(FMC_CONFIG_BASE+4));
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Read(FMC_CONFIG_BASE+4) failed!\n");
+        goto lexit;
+    }
 
     do
     {
@@ -259,8 +295,8 @@ int main()
         printf("| [1] Run IAP program (in LDROM)         |\n");
         printf("+----------------------------------------+\n");
         printf("Please select...");
-        u8Item = getchar();
-        printf("%c\n", u8Item);
+        u8Item = getchar();            /* block waiting to receive any one character from UART0 */
+        printf("%c\n", u8Item);        /* print out the selected item */
 
         switch (u8Item)
         {
@@ -291,6 +327,11 @@ int main()
 
             FMC_SetVectorPageAddr(FMC_LDROM_BASE);
 
+            if (g_FMC_i32ErrCode != 0)
+            {
+                printf("FMC_SetVectorPageAddr failed!\n");
+                return -1;
+            }
             /* Software reset to boot to LDROM */
             NVIC_SystemReset();
             break;

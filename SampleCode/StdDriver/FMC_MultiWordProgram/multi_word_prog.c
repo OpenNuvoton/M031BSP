@@ -73,6 +73,11 @@ int32_t multi_word_program(void)
                 printf("\n[FAILED] Data mismatch at address 0x%x, expect: 0x%x, read: 0x%x!\n", addr + i, page_buff[i / 4], FMC_Read(addr + i));
                 goto err_out;
             }
+            if (g_FMC_i32ErrCode != 0)
+            {
+                printf("FMC_Read address 0x%x failed!\n", addr+i);
+                goto err_out;
+            }
         }
         printf("[OK]\n");
     }
