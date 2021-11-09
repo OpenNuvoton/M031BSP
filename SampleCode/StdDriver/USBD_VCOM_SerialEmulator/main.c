@@ -294,6 +294,7 @@ int32_t main(void)
     NVIC_EnableIRQ(USBD_IRQn);
 
     NVIC_EnableIRQ(UART02_IRQn);
+    UART_EnableInt(UART0, UART_INTEN_RDAIEN_Msk);
 
 #if CRYSTAL_LESS
     /* Backup default trim */
