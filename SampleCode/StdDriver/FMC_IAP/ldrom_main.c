@@ -148,7 +148,7 @@ int main()
     FMC_SetVectorPageAddr(FMC_APROM_BASE);        /* Vector remap APROM page 0 to address 0. */
     if (g_FMC_i32ErrCode != 0)
     {
-        printf("FMC_SetVectorPageAddr(FMC_APROM_BASE) failed!\n");
+        PutString("FMC_SetVectorPageAddr(FMC_APROM_BASE) failed!\n");
         while (1);
     }
     SYS_LockReg();                                /* Lock protected registers */
