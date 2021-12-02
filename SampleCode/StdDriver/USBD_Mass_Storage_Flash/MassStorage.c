@@ -310,7 +310,7 @@ void MSC_ClassRequest(void)
             case GET_MAX_LUN:
             {
                 /* Check interface number with cfg descriptor and check wValue = 0, wLength = 1 */
-                if((buf[4] == 0x0) && (buf[2] + buf[3] + buf[6] + buf[7] == 1))
+                if((buf[4] == 0x0) && (buf[2] == 0) && (buf[3] == 0) && (buf[6] == 1) && (buf[7] == 0))
                 {
                     M8(USBD_BUF_BASE + USBD_GET_EP_BUF_ADDR(EP0)) = 0;
                     /* Data stage */
@@ -342,7 +342,7 @@ void MSC_ClassRequest(void)
             case BULK_ONLY_MASS_STORAGE_RESET:
             {
                 /* Check interface number with cfg descriptor and check wValue = 0, wLength = 0 */
-                if(buf[4] == 0x00 && (buf[2] + buf[3] + buf[6] + buf[7] == 0))
+                if((buf[4] == 0x0) && (buf[2] == 0) && (buf[3] == 0) && (buf[6] == 0) && (buf[7] == 0))
                 {
                     USBD_SET_DATA1(EP0);
                     USBD_SET_PAYLOAD_LEN(EP0, 0);
@@ -361,6 +361,10 @@ void MSC_ClassRequest(void)
                     USBD_SET_DATA1(EP3);
                     USBD_SET_EP_BUF_ADDR(EP3, g_u32BulkBuf0);
                     USBD_SET_PAYLOAD_LEN(EP3, EP3_MAX_PKT_SIZE);
+
+                    /* Status stage */
+                    USBD_SET_DATA1(EP0);
+                    USBD_SET_PAYLOAD_LEN(EP0, 0);
                 }
                 else     /* Invalid Reset command */
                 {
@@ -368,10 +372,6 @@ void MSC_ClassRequest(void)
                     USBD_SetStall(EP0);
                     USBD_SetStall(EP1);
                 }
-
-                /* Status stage */
-                USBD_SET_DATA1(EP0);
-                USBD_SET_PAYLOAD_LEN(EP0, 0);
 
                 break;
             }
