@@ -71,8 +71,8 @@ void SYS_Init(void)
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 #elif (_USE_MCU_CLK_==MCU_CLK_SOURCE_PLL)       //PLL
-    CLK_EnableXtalRC(CLK_PWRCTL_HXTEN_Msk);
-    CLK_WaitClockReady(CLK_STATUS_HXTSTB_Msk);
+    CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
     /* Set core clock */
     CLK_SetCoreClock(CPU_CLOCK_RATE);
 #endif
