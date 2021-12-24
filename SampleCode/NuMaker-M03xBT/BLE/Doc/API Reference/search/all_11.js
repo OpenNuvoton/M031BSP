@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['random_5faddr_1225',['RANDOM_ADDR',['../group__ble__cmd__addr_type.html#gab904533fb50a9838b9d163e11d460ccc',1,'ble_cmd.h']]],
+  ['random_5fidentity_5faddr_1226',['RANDOM_IDENTITY_ADDR',['../group__ble__cmd__addr_type.html#ga40a16e221671248cdaa5f5f473743479',1,'ble_cmd.h']]],
+  ['ref_5fsize_5fle_5fhost_5fpara_1227',['REF_SIZE_LE_HOST_PARA',['../group__host.html#ga1f9d6ede83f553827dc58a89ea13578a',1,'ble_host.h']]],
+  ['request_5fopcode_1228',['request_opcode',['../struct_att___error___rsp___data.html#a6730bff3ad40bf84f56c842e9fa88c1f',1,'Att_Error_Rsp_Data']]],
+  ['reset_5frf_1229',['RESET_RF',['../group__mcu_i_o_mapping_def.html#ga78c8682c81b92640aace9bde50797960',1,'porting_misc.h']]],
+  ['result_1230',['result',['../struct_b_l_e___event___att_db_parsed___param.html#a69a4a73da2762c17bea4f73c90b92357',1,'BLE_Event_AttDbParsed_Param']]],
+  ['rf_20phy_1231',['RF PHY',['../group__rf__phy.html',1,'']]],
+  ['rf_20phy_20definition_2e_1232',['RF PHY Definition.',['../group__rf__phy__def.html',1,'']]],
+  ['rf_20phy_20function_1233',['RF PHY Function',['../group__rf__phy__function.html',1,'']]],
+  ['rf_20power_20definition_1234',['RF Power Definition',['../group__rf_power_def.html',1,'']]],
+  ['rfip_5freg_5f254_1235',['RFIP_REG_254',['../group__rf__phy__def___t_rx_write_port.html#gad129756c1ab3f7cf423bb14505243a0b',1,'rf_phy.h']]],
+  ['rfip_5freg_5f255_1236',['RFIP_REG_255',['../group__rf__phy__def___t_rx_write_port.html#gaa200e629dc67eb89055955d5df2cd325',1,'rf_phy.h']]],
+  ['role_1237',['role',['../struct_service___basic___info.html#a10b9db3ce308ac921e8c41639082e32d',1,'Service_Basic_Info::role()'],['../struct_b_l_e_a_t_t___b_a_s___info.html#af790622f33527c98bde019ec85a6adca',1,'BLEATT_BAS_Info::role()'],['../struct_b_l_e_a_t_t___d_i_s___info.html#a9d356dd90fe41ee65188d1d02fb28ebd',1,'BLEATT_DIS_Info::role()'],['../struct_b_l_e_a_t_t___f_o_t_a___info.html#a1b68365600d5ccac2bf5337ee40542f1',1,'BLEATT_FOTA_Info::role()'],['../group__app_g_a_p__event_def.html#ga1757fc5d8d50c428c6c6b24b43896791',1,'BLEATT_GAP_Info::role()'],['../struct_b_l_e_a_t_t___g_a_t_t___info.html#a7c820a01d7de2f714921d136b12c89b7',1,'BLEATT_GATT_Info::role()'],['../struct_b_l_e_a_t_t___h_r_s___info.html#a288384a153dc92f87a6179f583ae3f6f',1,'BLEATT_HRS_Info::role()'],['../struct_b_l_e_a_t_t___u_d_f01_s___info.html#a258d87e34cf466f5352079fdfbfd369f',1,'BLEATT_UDF01S_Info::role()']]],
+  ['rptdata_1238',['rptData',['../struct_b_l_e___event___scan_report_param.html#adcdd3ba1fde0072fee13c03f45d6d528',1,'BLE_Event_ScanReportParam']]],
+  ['rptdatalength_1239',['rptDataLength',['../struct_b_l_e___event___scan_report_param.html#a50b8cc5937ea9d11924a1f2b4be1410a',1,'BLE_Event_ScanReportParam']]],
+  ['rptpeeraddr_1240',['rptPeerAddr',['../struct_b_l_e___event___scan_report_param.html#aa8380658e291a13de469c68935b22f2e',1,'BLE_Event_ScanReportParam']]],
+  ['rptrssi_1241',['rptRssi',['../struct_b_l_e___event___scan_report_param.html#aa1353ab703c4e74d6f378164eb0f8baf',1,'BLE_Event_ScanReportParam']]],
+  ['rpttype_1242',['rptType',['../struct_b_l_e___event___scan_report_param.html#a73d630f8fc51d927964e03fbb087323e',1,'BLE_Event_ScanReportParam']]],
+  ['rssi_1243',['rssi',['../struct_b_l_e___event___rssi_param.html#a73771daa818f97c32334dbd975e878af',1,'BLE_Event_RssiParam']]],
+  ['rx_5fbuffer_5fread_5fport_1244',['RX_BUFFER_READ_PORT',['../group__rf__phy__def___t_rx_write_port.html#ga1d7596c7303b4bfc5741add6451a5f5b',1,'rf_phy.h']]],
+  ['rxmaxoctets_1245',['rxMaxOctets',['../struct_b_l_e___data_length___param.html#a00be528b9309a00f0c6210395ccaf196',1,'BLE_DataLength_Param']]],
+  ['rxphy_1246',['rxPhy',['../struct_b_l_e___phy___param.html#a466ad8e2443816feac8cfdc6efab4619',1,'BLE_Phy_Param']]]
+];

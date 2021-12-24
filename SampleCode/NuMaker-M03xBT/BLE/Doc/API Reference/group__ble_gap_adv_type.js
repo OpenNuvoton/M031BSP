@@ -1,0 +1,28 @@
+var group__ble_gap_adv_type =
+[
+    [ "GAP_AD_TYPE_3D_INFORMATION_DATA", "group__ble_gap_adv_type.html#ga0d578bd1de6f6bf2d4fdc700072acfa5", null ],
+    [ "GAP_AD_TYPE_ADVERTISING_INTERVAL", "group__ble_gap_adv_type.html#ga673ff086f67223ad1d76d30feb963eeb", null ],
+    [ "GAP_AD_TYPE_APPEARANCE", "group__ble_gap_adv_type.html#ga9323d2d1b526503860e4b26d3069b53f", null ],
+    [ "GAP_AD_TYPE_FLAGS", "group__ble_gap_adv_type.html#ga8d2a57a8e114820ed5f7120c9ed40927", null ],
+    [ "GAP_AD_TYPE_LOCAL_NAME_COMPLETE", "group__ble_gap_adv_type.html#gae96588a878afe16fd84917b9e06e2266", null ],
+    [ "GAP_AD_TYPE_LOCAL_NAME_SHORTENED", "group__ble_gap_adv_type.html#ga6de30ab63811d4bf341c38619f88b5da", null ],
+    [ "GAP_AD_TYPE_MANUFACTURER_SPECIFIC_DATA", "group__ble_gap_adv_type.html#ga741343018561f38846b413fd04baeef1", null ],
+    [ "GAP_AD_TYPE_PUBLIC_TARGET_ADDRESS", "group__ble_gap_adv_type.html#gac0e91f9a3652958d9b0340a73c292d52", null ],
+    [ "GAP_AD_TYPE_RANDOM_TARGET_ADDRESS", "group__ble_gap_adv_type.html#ga54430eb4c413f845544170debd6a9d73", null ],
+    [ "GAP_AD_TYPE_SECURITY_MANAGER_OOB_FLAGS", "group__ble_gap_adv_type.html#gaea15dabdd18dd372b286a3ea1517b6ed", null ],
+    [ "GAP_AD_TYPE_SECURITY_MANAGER_TK_VALUE", "group__ble_gap_adv_type.html#gacae79a762f63371612830d831cf8827b", null ],
+    [ "GAP_AD_TYPE_SERVICE_CPLT_128B_UUID", "group__ble_gap_adv_type.html#ga0308ee6089bb34ce43ac4308c7bb7174", null ],
+    [ "GAP_AD_TYPE_SERVICE_CPLT_16B_UUID", "group__ble_gap_adv_type.html#gac86cc149d44feb3e77028e6e7a20a512", null ],
+    [ "GAP_AD_TYPE_SERVICE_CPLT_32B_UUID", "group__ble_gap_adv_type.html#ga75bfbb2f0f06532c775101696bfc0abe", null ],
+    [ "GAP_AD_TYPE_SERVICE_DATA", "group__ble_gap_adv_type.html#gae2ce996dee7a586c15f5faa50bea7265", null ],
+    [ "GAP_AD_TYPE_SERVICE_MORE_128B_UUID", "group__ble_gap_adv_type.html#ga073792f943b0854ad7c63e6a9700c005", null ],
+    [ "GAP_AD_TYPE_SERVICE_MORE_16B_UUID", "group__ble_gap_adv_type.html#gade8df692bb859ea2360dd004a80298b4", null ],
+    [ "GAP_AD_TYPE_SERVICE_MORE_32B_UUID", "group__ble_gap_adv_type.html#ga0260db2c13ba6e99773ac760bf7b9dbc", null ],
+    [ "GAP_AD_TYPE_SERVICE_SOLICITATION_128B_UUID", "group__ble_gap_adv_type.html#ga4f3f45d3b0aa4bad3b0cf3eb0e0b7a87", null ],
+    [ "GAP_AD_TYPE_SERVICE_SOLICITATION_16B_UUID", "group__ble_gap_adv_type.html#gaad658b48eb712b56ceeba9ed8f8559b1", null ],
+    [ "GAP_AD_TYPE_SIMPLE_PAIRING_OPT_OOB_CLASS_OF_DEVICE", "group__ble_gap_adv_type.html#gab062332c2844f1d458bf29db81d8d1f3", null ],
+    [ "GAP_AD_TYPE_SIMPLE_PAIRING_OPT_OOB_HASH_C", "group__ble_gap_adv_type.html#gaba4e33242f66352d31362a33d0bc52b3", null ],
+    [ "GAP_AD_TYPE_SIMPLE_PAIRING_OPT_OOB_RANDOMIZER_R", "group__ble_gap_adv_type.html#ga25d400bca71d2105d0acae87d9d9ff0e", null ],
+    [ "GAP_AD_TYPE_SLAVE_CONNECTION_INTERVAL_RANGE", "group__ble_gap_adv_type.html#ga26117b8c6d7758480c68f538bbf33493", null ],
+    [ "GAP_AD_TYPE_TX_POWER_LEVEL", "group__ble_gap_adv_type.html#ga504adabb3d2f6752108821e39e3473e9", null ]
+];

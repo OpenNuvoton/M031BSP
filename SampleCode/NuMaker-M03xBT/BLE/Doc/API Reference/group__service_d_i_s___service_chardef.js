@@ -1,0 +1,27 @@
+var group__service_d_i_s___service_chardef =
+[
+    [ "ATT_DIS_SERVICE", "group__service_d_i_s___service_chardef.html#ga7158c074ead99ad10db5af0695ad975a", null ],
+    [ "ATT_DIS_CHARACTERISTIC_FIRMWARE_REVISION_STRING", "group__service_d_i_s___service_chardef.html#ga379511dae5e057884e61e6ee091d8424", null ],
+    [ "ATT_DIS_CHARACTERISTIC_HARDWARE_REVISION_STRING", "group__service_d_i_s___service_chardef.html#ga0eb064980b83d53ace39c18d13ac7518", null ],
+    [ "ATT_DIS_CHARACTERISTIC_MANUFACTURER_NAME_STRING", "group__service_d_i_s___service_chardef.html#ga62855abce45eb4d9a836162f88091f65", null ],
+    [ "ATT_DIS_CHARACTERISTIC_MODEL_NUMBER_STRING", "group__service_d_i_s___service_chardef.html#ga16c00d4704fe66a186d527d0242f865d", null ],
+    [ "ATT_DIS_CHARACTERISTIC_PNP_ID", "group__service_d_i_s___service_chardef.html#ga750143d492621d00fab8f90e01c97ee6", null ],
+    [ "ATT_DIS_CHARACTERISTIC_SERIAL_NUMBER_STRING", "group__service_d_i_s___service_chardef.html#ga9d40e45bf00d181a080cf7f06385d831", null ],
+    [ "ATT_DIS_CHARACTERISTIC_SOFTWARE_REVISION_STRING", "group__service_d_i_s___service_chardef.html#ga24cbe442f636bc242c8987433f055add", null ],
+    [ "ATT_DIS_CHARACTERISTIC_SYSTEM_ID", "group__service_d_i_s___service_chardef.html#ga1015c5c98e8a13282d51831d9941fec9", null ],
+    [ "ATT_DIS_FIRMWARE_REVISION_STRING", "group__service_d_i_s___service_chardef.html#gac109bf558b2e9ab95ede1eea2fe23034", null ],
+    [ "ATT_DIS_FIRMWARE_REVISION_STRING_PRESENTATION_FORMAT", "group__service_d_i_s___service_chardef.html#ga3eaadfc5c6bfe3bbd972ce3f83c095fc", null ],
+    [ "ATT_DIS_HARDWARE_REVISION_STRING", "group__service_d_i_s___service_chardef.html#ga4257b68c58bbe056d4aa3158bbe5185e", null ],
+    [ "ATT_DIS_HARDWARE_REVISION_STRING_PRESENTATION_FORMAT", "group__service_d_i_s___service_chardef.html#ga6debca473bc6abb9b1d11bfc6f7bff03", null ],
+    [ "ATT_DIS_MANUFACTURER_NAME_STRING", "group__service_d_i_s___service_chardef.html#gab8d5ea1c92b26abd42d53345de724a1b", null ],
+    [ "ATT_DIS_MANUFACTURER_NAME_STRING_PRESENTATION_FORMAT", "group__service_d_i_s___service_chardef.html#gaf07821c56a5eb5e5f19d3fbd6724dbb2", null ],
+    [ "ATT_DIS_MODEL_NUMBER_STRING", "group__service_d_i_s___service_chardef.html#ga1d47591487a0099d37919e96017dec6f", null ],
+    [ "ATT_DIS_MODEL_NUMBER_STRING_PRESENTATION_FORMAT", "group__service_d_i_s___service_chardef.html#ga86e11b09236a164e11ac2f5fc0c3045e", null ],
+    [ "ATT_DIS_PNP_ID", "group__service_d_i_s___service_chardef.html#gaa0d7d308c8119ed032b3a5d803396c02", null ],
+    [ "ATT_DIS_PRIMARY_SERVICE", "group__service_d_i_s___service_chardef.html#gab918ec1e0eb8b00238f6d1648226c1a0", null ],
+    [ "ATT_DIS_SERIAL_NUMBER_STRING", "group__service_d_i_s___service_chardef.html#gaf372ce68d1145272dfcb0163a36fe21b", null ],
+    [ "ATT_DIS_SERIAL_NUMBER_STRING_PRESENTATION_FORMAT", "group__service_d_i_s___service_chardef.html#gaff6eccde71dfdcdec8b4c9247a3b7d61", null ],
+    [ "ATT_DIS_SOFTWARE_REVISION_STRING", "group__service_d_i_s___service_chardef.html#ga2022699cd6970e0bc15971dfb57a5308", null ],
+    [ "ATT_DIS_SOFTWARE_REVISION_STRING_PRESENTATION_FORMAT", "group__service_d_i_s___service_chardef.html#gadb3c021166477b29b75e3770fc9ac6d7", null ],
+    [ "ATT_DIS_SYSTEM_ID", "group__service_d_i_s___service_chardef.html#gaa1487f219f00191c96a3ddf451951a69", null ]
+];
