@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
           <Vendor>Nuvoton</Vendor>
-          <PackID>Nuvoton.NuMicro_DFP.1.3.4</PackID>
-          <PackURL>http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack</PackURL>
+          <PackID>Nuvoton.NuMicro_DFP.1.3.11</PackID>
+          <PackURL>https://www.nuvoton.com/enu/Documents/KEILSoftwarePack</PackURL>
           <Cpu>IRAM(0x20000000,0x4000) IROM(0x00000000,0x20000) CPUTYPE("Cortex-M0") CLOCK(12000000)</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -440,8 +440,8 @@
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
           <Vendor>Nuvoton</Vendor>
-          <PackID>Nuvoton.NuMicro_DFP.1.3.4</PackID>
-          <PackURL>http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack</PackURL>
+          <PackID>Nuvoton.NuMicro_DFP.1.3.11</PackID>
+          <PackURL>https://www.nuvoton.com/enu/Documents/KEILSoftwarePack</PackURL>
           <Cpu>IRAM(0x20000000,0x4000) IROM(0x00000000,0x20000) CPUTYPE("Cortex-M0") CLOCK(12000000)</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -864,8 +864,8 @@
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
           <Vendor>Nuvoton</Vendor>
-          <PackID>Nuvoton.NuMicro_DFP.1.3.4</PackID>
-          <PackURL>http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack</PackURL>
+          <PackID>Nuvoton.NuMicro_DFP.1.3.11</PackID>
+          <PackURL>https://www.nuvoton.com/enu/Documents/KEILSoftwarePack</PackURL>
           <Cpu>IRAM(0x20000000,0x4000) IROM(0x00000000,0x20000) CPUTYPE("Cortex-M0") CLOCK(12000000)</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -1288,8 +1288,8 @@
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
           <Vendor>Nuvoton</Vendor>
-          <PackID>Nuvoton.NuMicro_DFP.1.3.4</PackID>
-          <PackURL>http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack</PackURL>
+          <PackID>Nuvoton.NuMicro_DFP.1.3.11</PackID>
+          <PackURL>https://www.nuvoton.com/enu/Documents/KEILSoftwarePack</PackURL>
           <Cpu>IRAM(0x20000000,0x4000) IROM(0x00000000,0x20000) CPUTYPE("Cortex-M0") CLOCK(12000000)</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -1712,8 +1712,8 @@
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
           <Vendor>Nuvoton</Vendor>
-          <PackID>Nuvoton.NuMicro_DFP.1.3.4</PackID>
-          <PackURL>http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack</PackURL>
+          <PackID>Nuvoton.NuMicro_DFP.1.3.11</PackID>
+          <PackURL>https://www.nuvoton.com/enu/Documents/KEILSoftwarePack</PackURL>
           <Cpu>IRAM(0x20000000,0x4000) IROM(0x00000000,0x20000) CPUTYPE("Cortex-M0") CLOCK(12000000)</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -2136,8 +2136,8 @@
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
           <Vendor>Nuvoton</Vendor>
-          <PackID>Nuvoton.NuMicro_DFP.1.3.4</PackID>
-          <PackURL>http://www.nuvoton.com/hq/enu/Documents/KEILSoftwarePack</PackURL>
+          <PackID>Nuvoton.NuMicro_DFP.1.3.11</PackID>
+          <PackURL>https://www.nuvoton.com/enu/Documents/KEILSoftwarePack</PackURL>
           <Cpu>IRAM(0x20000000,0x4000) IROM(0x00000000,0x20000) CPUTYPE("Cortex-M0") CLOCK(12000000)</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -2455,7 +2455,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>__BOOTLD__</Define>
+              <Define>__LDROM__</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\Library\CMSIS\Include;..\..\..\..\Library\StdDriver\inc</IncludePath>
             </VariousControls>

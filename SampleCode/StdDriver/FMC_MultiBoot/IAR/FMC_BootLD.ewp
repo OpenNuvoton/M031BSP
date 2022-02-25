@@ -169,6 +169,7 @@
         <option>
           <name>CCDefines</name>
           <state>NDEBUG</state>
+          <state>__LDROM__</state>
         </option>
         <option>
           <name>CCPreprocFile</name>

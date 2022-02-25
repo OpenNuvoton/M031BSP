@@ -169,6 +169,7 @@
         <option>
           <name>CCDefines</name>
           <state>NDEBUG</state>
+          <state>__BOOT0__</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
