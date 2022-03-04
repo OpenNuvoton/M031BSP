@@ -105,11 +105,6 @@ Reset_Handler
         LDR     R1, =0x00000001
         STR     R1, [R2]
 
-        ; Disable NMI (Assign to reserved IRQ)
-        LDR     R2, =0x40000380
-        LDR     R1, =0x0000001F
-        STR     R1, [R2]
-
         ; Lock register
         MOVS    R1, #0
         STR     R1, [R0]
