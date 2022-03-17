@@ -14,10 +14,6 @@
 
 extern uint32_t flash_data_partition_addr;          // The start address of data flash partition
 
-#pragma push
-//#pragma Otime
-#pragma Ospace
-
 /* Set BLE device address from data flash */
 int BleAddr_Form_Flash(BLE_Addr_Param *bleAddrParam)
 {
@@ -154,6 +150,4 @@ BleStackStatus Set_BleAddr(void)
 
     return status;
 }
-
-#pragma pop
 

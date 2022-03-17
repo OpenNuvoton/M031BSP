@@ -57,9 +57,6 @@ static void BleService_FOTALink0Handler(uint8_t hostId, uint8_t cmdAccess, uint8
 /**************************************************************************
  * Function
  **************************************************************************/
-#pragma push
-//#pragma Otime
-#pragma Ospace
 
 void handle_AppLink0_FOTAHRSP(void)
 {
@@ -214,7 +211,7 @@ BleStackStatus BleApp_ProfileInit(void)
     //---------------------------------------------------------------------------------------
     bleProfile_link0_info.hostId = CONN_HRS_LINK_HOSTID;
     bleProfile_link0_info.bleState = STATE_BLE_STANDBY;
-    bleProfile_link0_info.subState = NULL;
+    bleProfile_link0_info.subState = 0x00;
 
     // GAP (Server) Related
     // -------------------------------------
@@ -379,6 +376,7 @@ static void BleService_FOTALink0Handler(uint8_t hostId, uint8_t cmdAccess, uint8
     {
         BleFota_Cmd(length, data);
     }
+    break;
 
     default:
         break;
@@ -402,7 +400,4 @@ void TMR0_IRQHandler(void)
         fota_timer_expired = 1;
     }
 }
-
-
-#pragma pop
 

@@ -55,9 +55,6 @@ static void BleEvent_Callback(BleCmdEvent event, void *param);
 /**************************************************************************
  * Function
  **************************************************************************/
-#pragma push
-//#pragma Otime
-#pragma Ospace
 
 void handle_AppLink0_HRSP(void)
 {
@@ -195,7 +192,7 @@ BleStackStatus BleApp_ProfileInit(void)
     //------------------------------------------------------------------------
     bleProfile_link0_info.hostId = CONN_HRS_LINK_HOSTID;
     bleProfile_link0_info.bleState = STATE_BLE_STANDBY;
-    bleProfile_link0_info.subState = NULL;
+    bleProfile_link0_info.subState = 0x00;
 
     // GAP (Server) Related
     // -------------------------------------
@@ -342,7 +339,4 @@ void TMR0_IRQHandler(void)
     // send heart rate measurement value
     hrs_data_transmit_enable = 1;
 }
-
-
-#pragma pop
 

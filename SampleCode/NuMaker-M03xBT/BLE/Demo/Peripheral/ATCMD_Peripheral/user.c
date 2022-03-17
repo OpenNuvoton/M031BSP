@@ -26,7 +26,7 @@
 #define CONN_TRSP_LINK_HOSTID           0       // host Id start from 0
 
 // Advertising device name
-#define DEVICE_NAME                    'N', 'u', 'v', 'o', 't', 'o', 'n', '_', 'U', 'A', 'R', 'T'
+#define DEVICE_NAME                    'N', 'u', 'v', 'o', 't', 'o', 'n', '_', 'A', 'T', 'C', 'M', 'D'
 
 // Advertising parameters
 #define APP_ADV_INTERVAL_MIN            160U    // 160*0.625ms=100ms
@@ -49,7 +49,8 @@ uint8_t txDataBuffer[DEFAULT_MTU];                                 // transmitte
 
 BLE_Event_ConnUpdateParam ble_conn_update;
 uint16_t ble_adv_interval = ADV_INTERVAL_MIN;
-uint8_t ble_phy = 1;
+uint8_t ble_phy = 1;                                               // bandwidth of the BLE phy
+uint8_t standby_reset = 1;                                         // flag of reset BLE data in standby mode
 
 /**************************************************************************
  * Extern Function
@@ -68,9 +69,6 @@ static void BleService_UDF01SLink0Handler(uint8_t hostId, uint8_t cmdAccess, uin
 /**************************************************************************
  * Function
  **************************************************************************/
-#pragma push
-//#pragma Otime
-#pragma Ospace
 
 //Send out RF data
 void trspx_send(uint8_t *data, uint16_t len)
@@ -99,12 +97,17 @@ void handle_AppLink0_TRSPP(void)
 
     if (bleProfile_link0_info.bleState == STATE_BLE_STANDBY)
     {
-        // reset preferred MTU size
-        setBLEGATT_PreferredMtuSize(CONN_TRSP_LINK_HOSTID, DEFAULT_MTU);
+        if (standby_reset == 1)
+        {
+            standby_reset = 0;
 
-        // reset service data
-        BleService_GATT_DataInit(&(bleProfile_link0_info.serviceGATT_info_s.data));
-        BleService_UDF01S_DataInit(&(bleProfile_link0_info.serviceUDF01S_info_s.data));
+            // reset preferred MTU size
+            setBLEGATT_PreferredMtuSize(CONN_TRSP_LINK_HOSTID, DEFAULT_MTU);
+
+            // reset service data
+            BleService_GATT_DataInit(&(bleProfile_link0_info.serviceGATT_info_s.data));
+            BleService_UDF01S_DataInit(&(bleProfile_link0_info.serviceUDF01S_info_s.data));
+        }
     }
     else if (bleProfile_link0_info.bleState == STATE_BLE_CONNECTION)
     {
@@ -233,7 +236,7 @@ BleStackStatus BleApp_ProfileInit(void)
     //------------------------------------------------------------------------
     bleProfile_link0_info.hostId = CONN_TRSP_LINK_HOSTID;
     bleProfile_link0_info.bleState = STATE_BLE_STANDBY;
-    bleProfile_link0_info.subState = NULL;
+    bleProfile_link0_info.subState = 0x00;
 
     // GAP (Server) Related
     // -------------------------------------
@@ -305,9 +308,14 @@ static void BleEvent_Callback(BleCmdEvent event, void *param)
     case BLECMD_EVENT_ADV_COMPLETE:
     {
         if (bleProfile_link0_info.bleState == STATE_BLE_ADVERTISING)
+        {
+            standby_reset = 1;
             debug_printf("Start advertising...\n");
+        }
         else if (bleProfile_link0_info.bleState == STATE_BLE_STANDBY)
+        {
             debug_printf("Stop advertising...\n");
+        }
         status = BLESTACK_STATUS_SUCCESS;
     }
     break;
@@ -349,8 +357,16 @@ static void BleEvent_Callback(BleCmdEvent event, void *param)
         /* Return to advertising after disconnect */
         if (disconnParam->hostId == CONN_TRSP_LINK_HOSTID)
         {
-            setBLE_AdvEnable(disconnParam->hostId);
-            bleProfile_link0_info.bleState = STATE_BLE_ADVERTISING;
+            status = setBLE_AdvEnable(disconnParam->hostId);
+            debug_printf("setBLE_AdvEnable(%d) = %d\n", disconnParam->hostId, status);
+            if (status == BLESTACK_STATUS_SUCCESS)
+            {
+                bleProfile_link0_info.bleState = STATE_BLE_ADVERTISING;
+            }
+            else
+            {
+                bleProfile_link0_info.bleState = STATE_BLE_STANDBY;
+            }
         }
     }
     break;
@@ -444,7 +460,7 @@ static void BleService_UDF01SLink0Handler(uint8_t hostId, uint8_t cmdAccess, uin
     {
         //send read rsp with const read data to client
         uint8_t readData[] = "UDATRW01 data";
-        setBLEGATT_ReadRsp(hostId, bleProfile_link0_info.serviceUDF01S_info_s.handles.hdl_udatrw01, (uint8_t *)readData, (SIZE_STRING(readData)));
+        setBLEGATT_GeneralReadRsp(hostId, bleProfile_link0_info.serviceUDF01S_info_s.handles.hdl_udatrw01, (uint8_t *)readData, (SIZE_STRING(readData)));
     }
     break;
 
@@ -452,7 +468,4 @@ static void BleService_UDF01SLink0Handler(uint8_t hostId, uint8_t cmdAccess, uin
         break;
     }
 }
-
-
-#pragma pop
 

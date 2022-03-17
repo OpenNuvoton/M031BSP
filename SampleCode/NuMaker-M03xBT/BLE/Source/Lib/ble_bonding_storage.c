@@ -8,7 +8,6 @@
 #include "porting_bonding.h"
 #include "ble_bonding.h"
 
-#pragma push
 /*******************************************************************
  *      Global Variable Defines
  *******************************************************************/
@@ -22,6 +21,8 @@
 const uint8_t INFO_FLASHBOND[NUM_OF_TOTAL_INFO_BLK][SIZE_OF_INFO_BLK] __attribute__((at(BONDING_INFORMATION_ADDRESS)));
 #elif defined (__ICCARM__)
 const uint8_t INFO_FLASHBOND[NUM_OF_TOTAL_INFO_BLK][SIZE_OF_INFO_BLK] @(BONDING_INFORMATION_ADDRESS);
+#elif defined (__GNUC__)
+volatile const uint8_t INFO_FLASHBOND[NUM_OF_TOTAL_INFO_BLK][SIZE_OF_INFO_BLK] __attribute__((section(".bondingInfo_section")));
 #endif
 
 uint8_t flashBackUpRam[SIZE_OF_INFO_BLK];
@@ -31,8 +32,6 @@ uint8_t flashBackUpRam[SIZE_OF_INFO_BLK];
  *      Functions
  *******************************************************************/
 #if (BLE_SUPPORT_BOND == ENABLE_DEF)
-#pragma Otime
-
 /** This function is used to flash program for BLE.
  *
  * @param[in] u32Addr    : Address of the flash location to be programmed.
@@ -76,7 +75,7 @@ static void erase_InfoBond(uint8_t offset)
     setBLE_FlashErase((uint32_t)&INFO_FLASHBOND + ((uint16_t)offset << FLASH_PAGE_SIZE_FOR_POWER_OF_2));
 }
 
-#pragma Ospace
+
 /* Function : Mark PID to BLE Bond information space.
 
 Description:
@@ -928,4 +927,4 @@ uint8_t *setBLE_RestoreDataBondwithExistHOSTID(uint8_t *para_data)
     return para_data;
 }
 #endif  //(#if (BLE_SUPPORT_BOND == 1))
-#pragma pop
+

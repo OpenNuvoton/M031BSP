@@ -10,6 +10,7 @@
 #include "ble_uuid.h"
 #include "ble_host.h"
 #include "ble_cmd.h"
+#include "processors_compiler.h"
 
 /**************************************************************************
 * BLE Profile Based Definitions
@@ -113,7 +114,7 @@ struct Att_Error_Rsp_Data
     uint8_t       request_opcode; /**< The request that generated this error response. @ref bleAttOpCode.*/
     uint16_t      att_handler;    /**< The attribute handle that generated this error response. */
     uint8_t       error_code;     /**< The reason why the request has generated an error response. @ref bleAttErrorCode. */
-} __attribute__((packed));
+} __PACKED;
 
 /** @brief Attribute Error Response Structure Definition. */
 typedef struct Att_Error_Rsp_Data Att_Error_Rsp_Data;

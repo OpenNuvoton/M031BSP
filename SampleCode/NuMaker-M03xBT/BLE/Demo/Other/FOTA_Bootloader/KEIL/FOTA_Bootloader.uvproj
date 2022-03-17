@@ -173,7 +173,7 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4106</DriverSelection>
+            <DriverSelection>4107</DriverSelection>
           </Flash1>
           <bUseTDR>0</bUseTDR>
           <Flash2>Bin\Nu_Link.dll</Flash2>
@@ -375,7 +375,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define></Define>
+              <Define>_BOOT_LOADER_</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\..\..\..\..\..\Library\CMSIS\Include;..\..\..\..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\..\..\..\Library\StdDriver\inc;..\..\..\..\Source\Porting</IncludePath>
             </VariousControls>

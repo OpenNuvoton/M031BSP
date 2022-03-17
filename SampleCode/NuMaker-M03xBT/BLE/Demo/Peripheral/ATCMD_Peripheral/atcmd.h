@@ -12,8 +12,8 @@
 #define debug_printf(...)
 #endif
 
-#define AT_VERSION              "1.1.1"
-#define AT_DATE                 "20210630"
+#define AT_VERSION              "1.1.2"
+#define AT_DATE                 "20220314"
 
 typedef uint8_t AtCmdStatus;
 #define ATCMD_SUCCESS           0x00

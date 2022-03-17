@@ -50,9 +50,6 @@ static void BleService_UDF01SLink0Handler(uint8_t hostId, uint8_t cmdAccess, uin
 /**************************************************************************
  * Function
  **************************************************************************/
-#pragma push
-//#pragma Otime
-#pragma Ospace
 
 void handle_AppLink0_TRSPP(void)
 {
@@ -154,7 +151,7 @@ BleStackStatus BleApp_ProfileInit(void)
     //------------------------------------------------------------------------
     bleProfile_link0_info.hostId = CONN_TRSP_LINK_HOSTID;
     bleProfile_link0_info.bleState = STATE_BLE_STANDBY;
-    bleProfile_link0_info.subState = NULL;
+    bleProfile_link0_info.subState = 0x00;
 
     // GAP (Server) Related
     // -------------------------------------
@@ -316,7 +313,4 @@ static void BleService_UDF01SLink0Handler(uint8_t hostId, uint8_t cmdAccess, uin
         break;
     }
 }
-
-
-#pragma pop
 

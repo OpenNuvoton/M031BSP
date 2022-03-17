@@ -33,10 +33,6 @@ extern void trspx_send(uint8_t *data, uint16_t len);  //send out RF data
  * Function
  **************************************************************************/
 
-#pragma push
-//#pragma Otime
-#pragma Ospace
-
 /*!
    \brief Initial necessary peripheral on MCU.
 */
@@ -312,4 +308,3 @@ void UART02_IRQHandler(void)
     }
 }
 
-#pragma pop

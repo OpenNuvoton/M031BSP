@@ -442,6 +442,11 @@
               <FilePath>..\..\..\..\..\..\..\Library\StdDriver\src\clk.c</FilePath>
             </File>
             <File>
+              <FileName>fmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Library\StdDriver\src\fmc.c</FilePath>
+            </File>
+            <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Library\StdDriver\src\gpio.c</FilePath>
@@ -480,11 +485,6 @@
               <FileName>wdt.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Library\StdDriver\src\wdt.c</FilePath>
-            </File>
-            <File>
-              <FileName>fmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\..\Library\StdDriver\src\fmc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -527,9 +527,9 @@
               <FilePath>..\..\..\..\Source\Lib\ble_LL_ref.c</FilePath>
             </File>
             <File>
-              <FileName>BLELIB_NOCONN.lib</FileName>
+              <FileName>BLELIB_Keil_NOCONN.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\Source\Lib\BLELIB_NOCONN.lib</FilePath>
+              <FilePath>..\..\..\..\Source\Lib\BLELIB_Keil_NOCONN.lib</FilePath>
             </File>
           </Files>
         </Group>

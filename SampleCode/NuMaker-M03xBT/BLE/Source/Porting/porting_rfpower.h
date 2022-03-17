@@ -12,6 +12,9 @@
  * @}
  **************************************************************************/
 
+#include "ble_stack_status.h"
+#include "ble_cmd.h"
+
 /** BLE TX power level table
  * @ingroup rfPowerDef
  * @attention  BLE TX power level table can be modified but please noted that the default TX power setting is set to index 0. \n

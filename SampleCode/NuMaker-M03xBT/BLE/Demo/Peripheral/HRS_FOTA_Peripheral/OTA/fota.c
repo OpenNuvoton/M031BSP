@@ -5,8 +5,6 @@
  *
  *
  *******************************************************************/
-//#pragma push
-//#pragma Otime
 
 #include <stdint.h>
 #include <stdio.h>
@@ -692,29 +690,41 @@ void BleFota_Data(uint8_t length, uint8_t *data)
         while (getRF_Mode() == BLERFMODE_ACTIVE);
 
         /*programming received FOTA data into flash bank1*/
-        for (DataOffset = 0; DataOffset < DataLen; DataOffset += sizeof(uint32_t))
+        for (DataOffset = 0; DataOffset < DataLen; DataOffset += FLASH_PROGRAM_SIZE)
         {
+            uint8_t CopyIdx;
             while (getRF_Mode() == BLERFMODE_ACTIVE);
 
-            OtaData = ((data[3 + OtaDataIdx] << 24) | (data[2 + OtaDataIdx] << 16) | (data[1 + OtaDataIdx] << 8) | data[OtaDataIdx]) ;
+            OtaData = 0;
 
             /*check whether the bin file size align with flash programming size*/
-            if (DataOffset + sizeof(uint32_t) > DataLen)
+            if (DataOffset + FLASH_PROGRAM_SIZE > DataLen)
             {
-                uint8_t i, RemainB = (DataOffset + sizeof(uint32_t) - DataLen);
+                uint8_t i, RemainB = (DataOffset + FLASH_PROGRAM_SIZE - DataLen);
 
-                OtaData = ~0;
-                for (i = 0; i < RemainB; i++)
+                for (i = 0; i < (FLASH_PROGRAM_SIZE- RemainB); i++)
                 {
                     OtaData |= (data[i + OtaDataIdx] << (i * 8));
                 }
+
+                for (i = (FLASH_PROGRAM_SIZE- RemainB); i < FLASH_PROGRAM_SIZE; i++)
+                {
+                    OtaData |= (0xFF << (i * 8));
+                }
+            }
+            else
+            {
+                for (CopyIdx = 0; CopyIdx < FLASH_PROGRAM_SIZE; CopyIdx++)
+                {
+                    OtaData |= (data[CopyIdx + OtaDataIdx] << (CopyIdx * 8));
+                }
             }
             setBLE_FlashProgram((uint32_t)(OtaDataExpectAddr + flash_fota_bank_addr), OtaData);
-            OtaDataExpectAddr += sizeof(uint32_t);
-            OtaDataIdx += sizeof(uint32_t);
+
+            OtaDataExpectAddr += FLASH_PROGRAM_SIZE;
+            OtaDataIdx += FLASH_PROGRAM_SIZE;
 
             bleFota_Step(OTA_STEP_UPDATE, &OtaDataExpectAddr);
-
         }
 
         /*Check if periodic notification interval reached*/

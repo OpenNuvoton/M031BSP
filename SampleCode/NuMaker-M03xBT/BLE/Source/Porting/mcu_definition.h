@@ -71,7 +71,7 @@
 #if (_CHIP_SELECTION_ == _CHIP_M031BT)
 #define _USE_MCU_CLK_                       MCU_CLK_SOURCE_HIRC     /**< Selected the clock source from @ref mcuClockDef "MCU clock source definition list" */
 #elif (_CHIP_SELECTION_ == _CHIP_M032BT)
-#define _USE_MCU_CLK_                       MCU_CLK_SOURCE_PLL      /**< Selected the clock source from @ref mcuClockDef "MCU clock source definition list" */
+#define _USE_MCU_CLK_                       MCU_CLK_SOURCE_HIRC     /**< Selected the clock source from @ref mcuClockDef "MCU clock source definition list" */
 #endif
 
 

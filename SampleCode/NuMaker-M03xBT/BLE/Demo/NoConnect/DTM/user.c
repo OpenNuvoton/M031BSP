@@ -15,11 +15,6 @@
 #include "porting_spi.h"
 #include "porting_misc.h"
 
-#pragma push
-//#pragma Otime
-#pragma Ospace
-
-
 /**************************************************************************
 * Definitions
 **************************************************************************/
@@ -187,7 +182,4 @@ void BleDTM_Main(void)
     // DTM command handling, DTM command is received from equipment through 2-wire UART.
     BleDTM_2wire_cmd_handler(current_time);
 }
-
-#pragma pop
-
 

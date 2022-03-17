@@ -81,9 +81,6 @@ static void BleService_DISLink0Handler(uint8_t hostId, uint8_t cmdAccess, uint8_
 /**************************************************************************
  * Function
  **************************************************************************/
-#pragma push
-//#pragma Otime
-#pragma Ospace
 
 //Send out RF data
 void trspx_send(uint8_t *data, uint16_t len)
@@ -615,7 +612,4 @@ static void BleService_DISLink0Handler(uint8_t hostId, uint8_t cmdAccess, uint8_
         break;
     }
 }
-
-
-#pragma pop
 

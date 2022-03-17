@@ -365,8 +365,11 @@ void setMCU_TinyDelay(uint32_t u32Usec)
 
 
 /* GPIO Interrupt Handler */
+#if defined (__CC_ARM)
 #pragma push
 #pragma Otime
+#endif
+
 #if (_CHIP_SELECTION_ == _CHIP_M031BT)
 void GPCDEF_IRQHandler(void)
 {
@@ -419,6 +422,10 @@ void EINT135_IRQHandler(void)
 }
 #endif
 
+#if defined (__CC_ARM)
+#pragma pop
+#endif
+
 #if (BLE_USE_TIMER == ENABLE_DEF)
 void setBLE_TimerInit(void)
 {
@@ -449,6 +456,4 @@ void TMR3_IRQHandler(void)
     }
 }
 #endif
-
-#pragma pop
 

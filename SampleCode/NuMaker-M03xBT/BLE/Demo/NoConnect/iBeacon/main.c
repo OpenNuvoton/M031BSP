@@ -16,11 +16,6 @@
 #include "porting_rfpower.h"
 #include "ble_stack_status.h"
 
-
-#pragma push
-//#pragma Otime
-#pragma Ospace
-
 /*!
    \brief Initial necessary peripheral on MCU.
 */
@@ -190,4 +185,3 @@ int main(void)
     }
 }
 
-#pragma pop

@@ -377,7 +377,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\..\..\..\Library\CMSIS\Include;..\..\..\..\..\..\..\Library\StdDriver\inc;..\..\..\..\Source;..\..\..\..\Source\Include;..\..\..\..\Source\Lib;..\..\..\..\Source\Porting;..;..\BleAppProfile;..\..\..\..\Source\Service\BleServiceBase;..\..\..\..\Source\Service\GAP;..\..\..\..\Source\Service\GATT;..\..\..\..\Source\Service\DIS;..\..\..\..\Source\Service\HID_KB_MS_CS;..\..\..\..\Source\Service\BAS</IncludePath>
+              <IncludePath>..\..\..\..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\..\..\..\Library\CMSIS\Include;..\..\..\..\..\..\..\Library\StdDriver\inc;..\..\..\..\Source\Include;..\..\..\..\Source\Porting;..;..\BleAppProfile;..\..\..\..\Source\Service\BleServiceBase;..\..\..\..\Source\Service\GAP;..\..\..\..\Source\Service\GATT;..\..\..\..\Source\Service\DIS;..\..\..\..\Source\Service\HID_KB_MS_CS;..\..\..\..\Source\Service\BAS</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -537,9 +537,9 @@
               <FilePath>..\..\..\..\Source\Lib\ble_LL_ref.c</FilePath>
             </File>
             <File>
-              <FileName>BLELIB_P.lib</FileName>
+              <FileName>BLELIB_Keil_P.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\Source\Lib\BLELIB_P.lib</FilePath>
+              <FilePath>..\..\..\..\Source\Lib\BLELIB_Keil_P.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -605,6 +605,11 @@
               <FileName>porting_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\Source\Porting\porting_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>dev_addr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Source\Porting\dev_addr.c</FilePath>
             </File>
           </Files>
         </Group>

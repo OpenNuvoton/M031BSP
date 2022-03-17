@@ -63,9 +63,10 @@ void setBLE_SpiInit(void)
 
 
 
+#if defined (__CC_ARM)
 #pragma push
 #pragma Otime
-//#pragma Ospace
+#endif
 
 
 /** This function is used to read RF 1 byte register.
@@ -627,9 +628,7 @@ void setBLE_SpiWaitAndSSHigh(void)
 #endif  //if (SPI_SS_CONTROL == AUTO_SPI_SS)
 }
 
-
-
-
+#if defined (__CC_ARM)
 #pragma pop
-
+#endif
 

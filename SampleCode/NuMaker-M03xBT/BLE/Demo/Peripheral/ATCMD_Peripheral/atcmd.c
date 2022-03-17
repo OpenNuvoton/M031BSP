@@ -247,8 +247,8 @@ AtCmdStatus atcmd_set_adven(void)
     AtCmdStatus ret = ATCMD_FAIL;
     BleStackStatus status;
 
-    status = setBLE_AdvEnable(ble_conn_update.hostId);
-    debug_printf("setBLE_AdvEnable() = %d\n", status);
+    status = setBLE_AdvEnable(bleProfile_link0_info.hostId);
+    debug_printf("setBLE_AdvEnable(%d) = %d\n", bleProfile_link0_info.hostId, status);
     if (status == BLESTACK_STATUS_SUCCESS)
     {
         bleProfile_link0_info.bleState = STATE_BLE_ADVERTISING;
@@ -346,10 +346,10 @@ AtCmdStatus atcmd_set_conint(int interval)
             connParam.connIntervalMax = interval;
             connParam.connLatency = ble_conn_update.connLatency;
             connParam.connSupervisionTimeout = ble_conn_update.connSupervisionTimeout;
-            debug_printf("Conn_IntervalMin = %d\n", connParam.Conn_IntervalMin);
-            debug_printf("Conn_IntervalMax = %d\n", connParam.Conn_IntervalMax);
-            debug_printf("Conn_Latency = %d\n", connParam.Conn_Latency);
-            debug_printf("Conn_SvisionTimeout = %d\n", connParam.Conn_SvisionTimeout);
+            debug_printf("connIntervalMin = %d\n", connParam.connIntervalMin);
+            debug_printf("connIntervalMin = %d\n", connParam.connIntervalMax);
+            debug_printf("connLatency = %d\n", connParam.connLatency);
+            debug_printf("connSupervisionTimeout = %d\n", connParam.connSupervisionTimeout);
             status = setBLE_ConnUpdate(ble_conn_update.hostId, &connParam);
             debug_printf("setBLE_ConnUpdate() = %d\n", status);
             if (status == BLESTACK_STATUS_SUCCESS)
@@ -777,6 +777,11 @@ AtCmdStatus atcmd_handler(char *data)
     if (pcPtr == data)
     {
         pcCopy = malloc(strlen(data) + 1);
+        if (pcCopy == 0)
+        {
+            printf("malloc() fail !!\n");
+            while (1);
+        }
         strcpy(pcCopy, data);
 
         pcPtr = strtok(data, pcDelim);

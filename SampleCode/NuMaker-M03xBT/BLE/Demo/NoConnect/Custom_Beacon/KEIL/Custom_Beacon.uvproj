@@ -173,7 +173,7 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4106</DriverSelection>
+            <DriverSelection>4107</DriverSelection>
           </Flash1>
           <bUseTDR>0</bUseTDR>
           <Flash2>Bin\Nu_Link.dll</Flash2>
@@ -377,7 +377,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\..\..\..\Library\CMSIS\Include;..\..\..\..\..\..\..\Library\StdDriver\inc;..\..\..\..\Source;..\..\..\..\Source\Include;..\..\..\..\Source\Lib;..\..\..\..\Source\Porting;..\</IncludePath>
+              <IncludePath>..\..\..\..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\..\..\..\Library\CMSIS\Include;..\..\..\..\..\..\..\Library\StdDriver\inc;..\..\..\..\Source\Include;..\..\..\..\Source\Porting;..\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -442,6 +442,11 @@
               <FilePath>..\..\..\..\..\..\..\Library\StdDriver\src\clk.c</FilePath>
             </File>
             <File>
+              <FileName>fmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\..\Library\StdDriver\src\fmc.c</FilePath>
+            </File>
+            <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Library\StdDriver\src\gpio.c</FilePath>
@@ -481,11 +486,6 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\..\Library\StdDriver\src\wdt.c</FilePath>
             </File>
-            <File>
-              <FileName>fmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\..\Library\StdDriver\src\fmc.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -522,14 +522,11 @@
               <FilePath>..\..\..\..\Source\Lib\ble_LL_ref.c</FilePath>
             </File>
             <File>
-              <FileName>BLELIB_NOCONN.lib</FileName>
+              <FileName>BLELIB_Keil_NOCONN.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\Source\Lib\BLELIB_NOCONN.lib</FilePath>
+              <FilePath>..\..\..\..\Source\Lib\BLELIB_Keil_NOCONN.lib</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>Service</GroupName>
         </Group>
         <Group>
           <GroupName>Porting</GroupName>
@@ -537,27 +534,27 @@
             <File>
               <FileName>mcu_definition.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\source\Porting\mcu_definition.h</FilePath>
+              <FilePath>..\..\..\..\Source\Porting\mcu_definition.h</FilePath>
             </File>
             <File>
               <FileName>porting_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\source\Porting\porting_flash.c</FilePath>
+              <FilePath>..\..\..\..\Source\Porting\porting_flash.c</FilePath>
             </File>
             <File>
               <FileName>porting_misc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\source\Porting\porting_misc.c</FilePath>
-            </File>
-            <File>
-              <FileName>porting_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\source\Porting\porting_spi.c</FilePath>
+              <FilePath>..\..\..\..\Source\Porting\porting_misc.c</FilePath>
             </File>
             <File>
               <FileName>porting_rfpower.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\source\Porting\porting_rfpower.c</FilePath>
+              <FilePath>..\..\..\..\Source\Porting\porting_rfpower.c</FilePath>
+            </File>
+            <File>
+              <FileName>porting_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Source\Porting\porting_spi.c</FilePath>
             </File>
             <File>
               <FileName>dev_addr.c</FileName>

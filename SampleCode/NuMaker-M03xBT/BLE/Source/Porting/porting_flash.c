@@ -41,7 +41,9 @@ void setBLE_FlashPartitionsBA(uint8_t u8ShowMsg)
     }
     else
     {
+#if !defined(_BOOT_LOADER_)
         printf("Do not support the chipset for BLE !\n");
+#endif
         while (1);
     }
 
@@ -50,9 +52,11 @@ void setBLE_FlashPartitionsBA(uint8_t u8ShowMsg)
 
     if (u8ShowMsg)
     {
+#if !defined(_BOOT_LOADER_)
         printf("Set the base address of Flash partitions...\n");
         printf("Image Bank      : %08X ~ %08X\n", 0, BONDING_INFORMATION_ADDRESS - 1);
         printf("Bonding Info    : %08X ~ %08X\n", BONDING_INFORMATION_ADDRESS, BONDING_INFORMATION_ADDRESS + SIZE_OF_BONDING_INFORMATION - 1);
+#endif
     }
 
     /* 64KB flash size does not support FOTA feature */
@@ -65,27 +69,35 @@ void setBLE_FlashPartitionsBA(uint8_t u8ShowMsg)
 
         if (u8ShowMsg)
         {
+#if !defined(_BOOT_LOADER_)
             printf("FOTA Bank       : %08X ~ %08X\n", flash_fota_bank_addr, flash_fota_bank_addr + SIZE_OF_FOTA_BANK - 1);
             printf("FOTA Info       : %08X ~ %08X\n", flash_fota_info_addr, flash_fota_info_addr + SIZE_OF_FOTA_INFO - 1);
+#endif
         }
 
         /* Check the partition boundary */
         if (BONDING_INFORMATION_ADDRESS + SIZE_OF_BONDING_INFORMATION > flash_fota_bank_addr)
         {
+#if !defined(_BOOT_LOADER_)
             printf("Bonding partition is conflict with FOTA bank partition !\n");
+#endif
             while (1);
         }
     }
 
     if (u8ShowMsg)
     {
+#if !defined(_BOOT_LOADER_)
         printf("Data Flash      : %08X ~ %08X\n", flash_data_partition_addr, flash_data_partition_addr + SIZE_OF_DATA_FLASH - 1);
+#endif
     }
 
     /* Check the partition boundary */
     if (BONDING_INFORMATION_ADDRESS + SIZE_OF_BONDING_INFORMATION > flash_data_partition_addr)
     {
+#if !defined(_BOOT_LOADER_)
         printf("Bonding partition is conflict with data flash partition !\n");
+#endif
         while (1);
     }
 }

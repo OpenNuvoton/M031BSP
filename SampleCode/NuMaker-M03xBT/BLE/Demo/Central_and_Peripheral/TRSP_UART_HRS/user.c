@@ -102,9 +102,6 @@ static void BleService_DISLink0Handler(uint8_t hostId, uint8_t cmdAccess, uint8_
 /**************************************************************************
  * Function
  **************************************************************************/
-#pragma push
-//#pragma Otime
-#pragma Ospace
 
 //Send out RF data
 void trspx_send(uint8_t *data, uint16_t len)
@@ -511,7 +508,7 @@ BleStackStatus BleApp_ProfileInit(void)
     //------------------------------------------------------------------------
     bleProfile_link1_info.hostId = CONN_HRSP_LINK_HOSTID;
     bleProfile_link1_info.bleState = STATE_BLE_STANDBY;
-    bleProfile_link1_info.subState = NULL;
+    bleProfile_link1_info.subState = 0x00;
 
     // GAP (Server) Related
     // -------------------------------------
@@ -793,7 +790,4 @@ void TMR0_IRQHandler(void)
     // send heart rate measurement value
     hrs_data_transmit_enable = 1;
 }
-
-
-#pragma pop
 

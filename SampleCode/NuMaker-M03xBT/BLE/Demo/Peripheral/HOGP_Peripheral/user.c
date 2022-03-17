@@ -15,7 +15,7 @@
 #include "ble_event.h"
 #include "ble_host.h"
 #include "ble_profile.h"
-
+#include "stdlib.h"
 
 /**************************************************************************
 * Application Definitions
@@ -115,10 +115,6 @@ static void BleService_BAS_Link0Handler(uint8_t hostId, uint8_t cmdAccess, uint8
 /**************************************************************************
  * Function
  **************************************************************************/
-#pragma push
-//#pragma Otime
-#pragma Ospace
-
 void handle_AppLink0_HOGP(void)
 {
     BleStackStatus status;
@@ -152,6 +148,27 @@ void handle_AppLink0_HOGP(void)
 #if (IOCAPABILITY_SETTING == KEYBOARD_ONLY)
         if (ble_passKeyConfirmedState == 1)
         {
+#if defined (__ICCARM__)
+            char passkey[8];
+            uint32_t passkey_a;
+            char ch;
+            uint8_t i = 0;
+
+            ble_passKeyConfirmedState = 0;
+
+            scanf("%c", &ch);
+            passkey[i] = ch;
+            i++;
+            while((ch != 'r') && (ch != '\n') && (i < 6))   //6: Decimal representation of the six digits.
+            {
+                scanf("%c",&ch);
+                passkey[i] = ch;
+                i++;
+            }
+            sscanf(passkey, "%06d", &passkey_a);
+            printf("BLE_PAIRING_KEY = %06d\n", passkey_a);                                // show the passkey
+            setBLE_PairingPassKey(bleProfile_link0_info.hostId, (uint32_t)passkey_a);     // set scanned passkey
+#else
             uint32_t passkey;
 
             ble_passKeyConfirmedState = 0;
@@ -159,6 +176,7 @@ void handle_AppLink0_HOGP(void)
             scanf("%d", &passkey);                                                      // wait for passkey entered
             printf("BLE_PAIRING_KEY = %06d\n", passkey);                                // show the passkey
             setBLE_PairingPassKey(bleProfile_link0_info.hostId, (uint32_t)passkey);     // set scanned passkey
+#endif
         }
 #endif
         if (hogp_data_transmit_enable == 1)
@@ -385,7 +403,7 @@ BleStackStatus BleApp_ProfileInit(void)
     //------------------------------------------------------------------------
     bleProfile_link0_info.hostId = CONN_HOGP_LINK_HOSTID;
     bleProfile_link0_info.bleState = STATE_BLE_STANDBY;
-    bleProfile_link0_info.subState = NULL;
+    bleProfile_link0_info.subState = 0x00;
 
     // GAP (Server) Related
     // -------------------------------------
@@ -720,7 +738,4 @@ void TMR0_IRQHandler(void)
     // transmit HOGP data
     hogp_data_transmit_enable = 1;
 }
-
-
-#pragma pop
 

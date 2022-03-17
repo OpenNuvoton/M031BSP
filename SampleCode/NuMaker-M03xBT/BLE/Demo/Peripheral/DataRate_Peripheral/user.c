@@ -114,9 +114,6 @@ static void BleService_UDF01SLink0Handler(uint8_t hostId, uint8_t cmdAccess, uin
 /**************************************************************************
  * Function
  **************************************************************************/
-#pragma push
-//#pragma Otime
-#pragma Ospace
 
 void BleApp_TimerEnable(uint32_t u32Freq)
 {
@@ -323,6 +320,28 @@ void handle_UDF01S_WriteCommand(uint8_t length, uint8_t *data)
             int state;
 
             /* Get Data Rate Parameters */
+#if defined (__GNUC__)
+            char *p_str;
+            uint16_t data_array[4];
+            uint8_t i;
+
+            i = 0;
+            p_str = strtok(data+10, ",");
+            while(p_str != NULL)
+            {
+                state = sscanf((char *)p_str, "%hhu", &data_array[i]);
+                if (state == -1)
+                {
+                    printf("the params of set_param cmd is wrong!\n");
+                }
+                i++;
+                p_str = strtok(NULL, ",");
+            }
+            dataRateParam.phy = data_array[0];
+            dataRateParam.packageDataLen = data_array[1];
+            dataRateParam.connIntervalMin = data_array[2];
+            dataRateParam.connIntervalMax = data_array[3];
+#else
             data[length] = 0;
             state = sscanf((char *)data, "set_param=%hhu,%hhu,%hu,%hu",
                            &(dataRateParam.phy),
@@ -333,6 +352,7 @@ void handle_UDF01S_WriteCommand(uint8_t length, uint8_t *data)
             {
                 printf("the params of set_param cmd is wrong!\n");
             }
+#endif
             currentMode = DATARATE_MODE_SET_PARAM;
         }
         else if (CHECK_STR(data, GET_PARAM_STR))
@@ -428,7 +448,7 @@ BleStackStatus BleApp_ProfileInit(void)
     //------------------------------------------------------------------------
     bleProfile_link0_info.hostId = CONN_DATARATE_LINK_HOSTID;
     bleProfile_link0_info.bleState = STATE_BLE_STANDBY;
-    bleProfile_link0_info.subState = NULL;
+    bleProfile_link0_info.subState = 0x00;
 
     // GAP (Server) Related
     // -------------------------------------
@@ -719,6 +739,4 @@ void TMR0_IRQHandler(void)
         tmr0cnt++;
     }
 }
-
-#pragma pop
 

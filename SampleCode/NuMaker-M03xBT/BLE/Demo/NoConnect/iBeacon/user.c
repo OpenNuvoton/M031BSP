@@ -38,9 +38,6 @@ static void BleEvent_Callback(BleCmdEvent event, void *param);
 /**************************************************************************
  * Function
  **************************************************************************/
-#pragma push
-//#pragma Otime
-#pragma Ospace
 
 void handle_App_NoConnect(void)
 {
@@ -143,5 +140,4 @@ static void BleEvent_Callback(BleCmdEvent event, void *param)
         break;
     }
 }
-#pragma pop
 

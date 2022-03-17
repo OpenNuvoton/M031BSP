@@ -62,9 +62,6 @@ static void BleService_UDF01SLink0Handler(uint8_t hostId, uint8_t cmdAccess, uin
 /**************************************************************************
  * Function
  **************************************************************************/
-#pragma push
-//#pragma Otime
-#pragma Ospace
 
 //Send out RF data
 void trspx_send(uint8_t *data, uint16_t len)
@@ -409,7 +406,4 @@ static void BleService_UDF01SLink0Handler(uint8_t hostId, uint8_t cmdAccess, uin
         break;
     }
 }
-
-
-#pragma pop
 
