@@ -765,7 +765,7 @@ AtCmdStatus atcmd_handler(char *data)
     AtCmdStatus ret = ATCMD_FAIL;
     char *pcDelim = "+=?,\r\n";
     char *pcPtr;
-    char *pcCopy;
+    char pcCopy[48];
     char cDelim;
     int iNum1, iNum2;
     uint32_t u32Addr, u32Val;
@@ -776,12 +776,6 @@ AtCmdStatus atcmd_handler(char *data)
 
     if (pcPtr == data)
     {
-        pcCopy = malloc(strlen(data) + 1);
-        if (pcCopy == 0)
-        {
-            printf("malloc() fail !!\n");
-            while (1);
-        }
         strcpy(pcCopy, data);
 
         pcPtr = strtok(data, pcDelim);
@@ -996,8 +990,6 @@ AtCmdStatus atcmd_handler(char *data)
         else
         {
         }
-
-        free(pcCopy);
     }
     else if (strcmp(data, "AT\r") == 0)
     {
