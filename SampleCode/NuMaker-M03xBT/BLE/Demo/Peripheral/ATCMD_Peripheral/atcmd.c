@@ -330,6 +330,7 @@ AtCmdStatus atcmd_set_conint(int interval)
     AtCmdStatus ret = ATCMD_FAIL;
     BleStackStatus status;
     BLE_Conn_Param connParam;
+    uint16_t ref_time;
 
     /* interval = value * 1.25ms, and the range is 7.5ms ~ 4s */
     if ((interval < 6) || (interval > 3200))
@@ -346,6 +347,16 @@ AtCmdStatus atcmd_set_conint(int interval)
             connParam.connIntervalMax = interval;
             connParam.connLatency = ble_conn_update.connLatency;
             connParam.connSupervisionTimeout = ble_conn_update.connSupervisionTimeout;
+
+            /* Set appropriate value of connSupervisionTimeout, default is ((1+Latency)*IntervalMax)*4) */
+            ref_time = (((1 + connParam.connLatency) * connParam.connIntervalMax + 7) / 8) * 4;
+            if (ref_time > 3200)
+                connParam.connSupervisionTimeout = 3200;
+            else if (ref_time < 500)
+                connParam.connSupervisionTimeout = 500;
+            else
+                connParam.connSupervisionTimeout = ref_time;
+
             debug_printf("connIntervalMin = %d\n", connParam.connIntervalMin);
             debug_printf("connIntervalMin = %d\n", connParam.connIntervalMax);
             debug_printf("connLatency = %d\n", connParam.connLatency);
