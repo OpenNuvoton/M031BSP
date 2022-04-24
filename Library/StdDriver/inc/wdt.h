@@ -152,23 +152,29 @@ extern "C"
   */
 #define WDT_RESET_COUNTER()             (WDT->RSTCNT = WDT_RESET_COUNTER_KEYWORD)
 
-__STATIC_INLINE void WDT_Close(void);
-__STATIC_INLINE void WDT_EnableInt(void);
+__STATIC_INLINE int32_t WDT_Close(void);
+__STATIC_INLINE int32_t WDT_EnableInt(void);
 __STATIC_INLINE void WDT_DisableInt(void);
 /**
   * @brief      Stop WDT Counting
   *
   * @param      None
   *
-  * @return     None
+  * @retval      0: SUCCESS
+  * @retval     -1: Fail
   *
   * @details    This function will stop WDT counting and disable WDT module.
   */
-__STATIC_INLINE void WDT_Close(void)
+__STATIC_INLINE int32_t WDT_Close(void)
 {
+    uint32_t u32TimeOutCount = SystemCoreClock / 400;
     WDT->CTL = 0UL;
-    while(WDT->CTL & WDT_CTL_SYNC_Msk); // Wait disable WDTEN bit completed, it needs 2 * WDT_CLK.
-    return;
+    while(WDT->CTL & WDT_CTL_SYNC_Msk)  /* Wait disable WDTEN bit completed, it needs 2 * WDT_CLK. */
+		{
+        if(u32TimeOutCount == 0) return -1;
+        u32TimeOutCount--;
+		}
+    return 0;
 }
 
 /**
@@ -176,15 +182,21 @@ __STATIC_INLINE void WDT_Close(void)
   *
   * @param      None
   *
-  * @return     None
+  * @retval      0: SUCCESS
+  * @retval     -1: Fail
   *
   * @details    This function will enable the WDT time-out interrupt function.
   */
-__STATIC_INLINE void WDT_EnableInt(void)
+__STATIC_INLINE int32_t WDT_EnableInt(void)
 {
-    WDT->CTL |= WDT_CTL_INTEN_Msk;
-    while(WDT->CTL & WDT_CTL_SYNC_Msk); // Wait enable WDTEN bit completed, it needs 2 * WDT_CLK.
-    return;
+    uint32_t u32TimeOutCount = SystemCoreClock / 400;
+    WDT->CTL |= WDT_CTL_INTEN_Msk;	
+    while(WDT->CTL & WDT_CTL_SYNC_Msk)  /* Wait disable WDTEN bit completed, it needs 2 * WDT_CLK. */
+		{
+        if(u32TimeOutCount == 0) return -1;
+        u32TimeOutCount--;
+		}
+    return 0;
 }
 
 /**

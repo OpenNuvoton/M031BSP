@@ -267,7 +267,7 @@ typedef struct
   */
 #define RTC_CLKSRCSEL(u32ClkSrc)        (RTC->LXTCTL = (RTC->LXTCTL & (~RTC_LXTCTL_C32KS_Msk)) | (u32ClkSrc << RTC_LXTCTL_C32KS_Pos)); 
 
-void RTC_Open(S_RTC_TIME_DATA_T *psPt);
+int32_t RTC_Open(S_RTC_TIME_DATA_T *psPt);
 void RTC_Close(void);
 void RTC_32KCalibration(int32_t i32FrequencyX10000);
 void RTC_GetDateAndTime(S_RTC_TIME_DATA_T *psPt);
