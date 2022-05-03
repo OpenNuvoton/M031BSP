@@ -221,7 +221,7 @@ BleStackStatus BleApp_ProfileInit(void)
         //------------------------------------------------------------------------
         bleProfile_link0_info[i].hostId = i;
         bleProfile_link0_info[i].bleState = STATE_BLE_STANDBY;
-        bleProfile_link0_info[i].subState = NULL;
+        bleProfile_link0_info[i].subState = 0x00;
 
         // GAP (Server) Related
         // -------------------------------------
