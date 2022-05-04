@@ -518,24 +518,6 @@ static __INLINE uint32_t TIMER_GetCounter(TIMER_T *timer)
     return timer->CNT;
 }
 
-/**
-  * @brief      Reset Counter
-  *
-  * @param[in]  timer       The pointer of the specified Timer module.
-  *
-  * @return     None
-  *
-  * @details    This function is used to reset current counter value and internal prescale counter value.
-  *
-  * \hideinitializer
-  */
-__STATIC_INLINE void TIMER_ResetCounter(TIMER_T *timer)
-{
-    timer->CTL |= TIMER_CTL_RSTCNT_Msk;
-    while((timer->CTL & TIMER_CTL_RSTCNT_Msk) == TIMER_CTL_RSTCNT_Msk);
-}
-
-
 uint32_t TIMER_Open(TIMER_T *timer, uint32_t u32Mode, uint32_t u32Freq);
 void TIMER_Close(TIMER_T *timer);
 int32_t TIMER_Delay(TIMER_T *timer, uint32_t u32Usec);
@@ -552,6 +534,7 @@ void TIMER_DisableFreqCounter(TIMER_T *timer);
 void TIMER_SetTriggerSource(TIMER_T *timer, uint32_t u32Src);
 void TIMER_SetTriggerTarget(TIMER_T *timer, uint32_t u32Mask);
 void TIMER_CaptureSelect(TIMER_T *timer, uint32_t u32Src);
+int32_t TIMER_ResetCounter(TIMER_T *timer);
 
 /*@}*/ /* end of group TIMER_EXPORTED_FUNCTIONS */
 

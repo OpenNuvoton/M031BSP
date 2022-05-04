@@ -380,6 +380,31 @@ void TIMER_CaptureSelect(TIMER_T *timer, uint32_t u32Src)
     }
 }
 
+/**
+  * @brief      Reset Counter
+  *
+  * @param[in]  timer The base address of Timer module
+  *
+  * @return     Reset success or not
+  * @retval     0 Timer reset success
+  * @retval     TIMER_TIMEOUT_ERR Timer reset failed
+  *
+  * @details    This function is used to reset current counter value and internal prescale counter value.
+  */
+int32_t TIMER_ResetCounter(TIMER_T *timer)
+{
+    uint32_t u32Delay;
+
+    timer->CTL |= TIMER_CTL_RSTCNT_Msk;
+    /* Takes 2~3 ECLKs to reset timer counter */
+    u32Delay = (SystemCoreClock / TIMER_GetModuleClock(timer)) * 3;
+    while(((timer->CTL & TIMER_CTL_RSTCNT_Msk) == TIMER_CTL_RSTCNT_Msk) && (--u32Delay))
+    {
+        __NOP();
+    }
+    return u32Delay > 0 ? 0 : TIMER_TIMEOUT_ERR;
+}
+
 /*@}*/ /* end of group TIMER_EXPORTED_FUNCTIONS */
 
 /*@}*/ /* end of group TIMER_Driver */
