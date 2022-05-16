@@ -80,8 +80,6 @@ void PowerDown()
 
     printf("device wakeup!\n");
 
-    /* Lock protected registers */
-    SYS_LockReg();
 }
 
 /*---------------------------------------------------------------------------------------------------------*/

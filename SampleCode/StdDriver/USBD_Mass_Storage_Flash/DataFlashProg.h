@@ -16,6 +16,7 @@
 #define MASS_STORAGE_OFFSET       0x00008000 /* To avoid the code to write APROM */
 #define DATA_FLASH_STORAGE_SIZE   (32*1024)  /* Configure the DATA FLASH storage size. To pass USB-IF MSC Test, it needs > 64KB */
 /* Windows will consume about 20KB for file system formating. */
+#define BUFFER_PAGE_SIZE          512
 
 #define FLASH_PAGE_SIZE           FMC_FLASH_PAGE_SIZE
 

@@ -22,45 +22,46 @@
 /* Macro, type and constant definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
 
+
 uint32_t g_sectorBuf[FLASH_PAGE_SIZE/4];
-
-uint32_t FMC_ReadPage(uint32_t u32StartAddr, uint32_t * u32Buf)
-{
-    uint32_t i;
-
-    for (i = 0; i < FLASH_PAGE_SIZE/4; i++)
-        u32Buf[i] = FMC_Read(u32StartAddr + i*4);
-
-    return 0;
-}
 
 void DataFlashRead(uint32_t addr, uint32_t size, uint32_t buffer)
 {
     /* This is low level read function of USB Mass Storage */
     int32_t len;
+    uint32_t i;
+    uint32_t * pu32Buf = (uint32_t *)buffer;
 
     /* Modify the address to MASS_STORAGE_OFFSET */
     addr += MASS_STORAGE_OFFSET;
 
     len = (int32_t)size;
 
-    SYS_UnlockReg();
-    FMC_Open();
-
-    while(len >= FLASH_PAGE_SIZE)
+    while(len >= BUFFER_PAGE_SIZE)
     {
-        FMC_ReadPage(addr, (uint32_t *)buffer);
-        addr   += FLASH_PAGE_SIZE;
-        buffer += FLASH_PAGE_SIZE;
-        len  -= FLASH_PAGE_SIZE;
+        for(i = 0; i < BUFFER_PAGE_SIZE / 4; i++)
+            pu32Buf[i] = FMC_Read(addr + i * 4);
+        addr   += BUFFER_PAGE_SIZE;
+        buffer += BUFFER_PAGE_SIZE;
+        len  -= BUFFER_PAGE_SIZE;
+        pu32Buf = (uint32_t *)buffer;
     }
+}
 
-    FMC_Close();
-    SYS_LockReg();
+void DataFlashReadPage(uint32_t addr, uint32_t buffer)
+{
+    uint32_t i;
+    uint32_t * pu32Buf = (uint32_t *)buffer;
+
+    /* Modify the address to MASS_STORAGE_OFFSET */
+    addr += MASS_STORAGE_OFFSET;
+
+    for(i = 0; i < FLASH_PAGE_SIZE / 4; i++)
+        pu32Buf[i] = FMC_Read(addr + i * 4);
 }
 
 
-uint32_t FMC_ProgramPage(uint32_t u32StartAddr, uint32_t * u32Buf)
+uint32_t DataFlashProgramPage(uint32_t u32StartAddr, uint32_t * u32Buf)
 {
     uint32_t i;
 
@@ -85,16 +86,13 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
 
     len = (int32_t)size;
 
-    SYS_UnlockReg();
-    FMC_Open();
-
-    if ( len == FLASH_PAGE_SIZE && ((addr & (FLASH_PAGE_SIZE-1)) == 0) )
+    if((len == FLASH_PAGE_SIZE) && ((addr & (FLASH_PAGE_SIZE - 1)) == 0))
     {
-        FMC_Erase(addr);
 
+        FMC_Erase(addr);		
         while (len >= FLASH_PAGE_SIZE)
         {
-            FMC_ProgramPage(addr, (uint32_t *) buffer);
+            DataFlashProgramPage(addr, (uint32_t *) buffer);
             len    -= FLASH_PAGE_SIZE;
             buffer += FLASH_PAGE_SIZE;
             addr   += FLASH_PAGE_SIZE;
@@ -104,36 +102,32 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
     {
         do
         {
-            alignAddr = addr & 0x1FE00;
+            alignAddr = addr & ~(FLASH_PAGE_SIZE-1);
 
             /* Get the sector offset*/
             offset = ( addr & (FLASH_PAGE_SIZE-1) );
 
             if ( offset || (size < FLASH_PAGE_SIZE) )
             {
-                /* Non 4k alignment. Note: It needs to avoid add MASS_STORAGE_OFFSET twice. */
-                DataFlashRead(alignAddr - MASS_STORAGE_OFFSET, FLASH_PAGE_SIZE, (uint32_t)&g_sectorBuf[0]);
+                DataFlashReadPage(alignAddr - MASS_STORAGE_OFFSET, /*FLASH_PAGE_SIZE,*/ (uint32_t)&g_sectorBuf[0]);
 
             }
 
-            /* Update the data */
+            /* Source buffer */
             pu32 = (uint32_t *)buffer;
+            /* Get the update length */
             len = FLASH_PAGE_SIZE - offset;
-            if (size < len)
+            if(size < len)
                 len = size;
 
-            for (i=0; i<len/4; i++)
+            for(i = 0; i < len / 4; i++)
             {
-                g_sectorBuf[offset/4 + i] = pu32[i];
+                g_sectorBuf[offset / 4 + i] = pu32[i];
             }
+            FMC_Erase(alignAddr);							
 
-            FMC_Erase(alignAddr);
-
-            for(i=0; i<16; i++)
-            {
-                FMC_ProgramPage(alignAddr + (i << 8), (uint32_t *) g_sectorBuf + (i << 8));
-            }
-
+				
+            DataFlashProgramPage(alignAddr, (uint32_t *) g_sectorBuf);
             size -= len;
             addr += len;
             buffer += len;
@@ -142,7 +136,5 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
         while (size > 0);
     }
 
-    FMC_Close();
-    SYS_LockReg();
 }
 

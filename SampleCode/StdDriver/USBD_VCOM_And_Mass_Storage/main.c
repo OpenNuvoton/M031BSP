@@ -117,8 +117,6 @@ void PowerDown()
 
     printf("device wakeup!\n");
 
-    /* Lock protected registers */
-    SYS_LockReg();
 }
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -351,7 +349,6 @@ int32_t main(void)
         /* Reset Chip to reload new CONFIG value */
         SYS->IPRST0 = SYS_IPRST0_CHIPRST_Msk;
     }
-    SYS_LockReg();
  
     /* Open USB controller */
     USBD_Open(&gsInfo, VCOM_ClassRequest, NULL);
