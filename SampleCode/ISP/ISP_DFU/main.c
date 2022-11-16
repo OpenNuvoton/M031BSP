@@ -22,6 +22,8 @@
 #define V6M_AIRCR_VECTKEY_DATA    0x05FA0000UL
 #define V6M_AIRCR_SYSRESETREQ     0x00000004UL
 
+#define TRIM_INIT           (SYS_BASE+0x118)
+
 void SYS_Init(void)
 {
     /* Unlock protected registers */
@@ -51,6 +53,7 @@ void SYS_Init(void)
 /*---------------------------------------------------------------------------------------------------------*/
 int32_t main(void)
 {
+    uint32_t u32TrimInit;
 
     /* Unlock write-protected registers */
     SYS_UnlockReg();
@@ -98,8 +101,44 @@ int32_t main(void)
     /* Enable USB device interrupt */
     NVIC_EnableIRQ(USBD_IRQn);
 
-    while(1);
+    u32TrimInit = M32(TRIM_INIT);
+		
+    /* Clear SOF */
+    USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
+		
+    while(1)
+    {
+       /* Start USB trim if it is not enabled. */
+        if((SYS->HIRCTRIMCTL & SYS_HIRCTRIMCTL_FREQSEL_Msk) != 1)
+        {
+            /* Start USB trim only when SOF */
+            if(USBD->INTSTS & USBD_INTSTS_SOFIF_Msk)
+            {
+                /* Clear SOF */
+                USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
 
+                /* Re-enable crystal-less */
+                SYS->HIRCTRIMCTL = 0x01;
+                SYS->HIRCTRIMCTL |= SYS_HIRCTRIMCTL_REFCKSEL_Msk;
+            }
+        }
+
+        /* Disable USB Trim when error */
+        if(SYS->HIRCTRIMSTS & (SYS_HIRCTRIMSTS_CLKERIF_Msk | SYS_HIRCTRIMSTS_TFAILIF_Msk))
+        {
+            /* Init TRIM */
+            M32(TRIM_INIT) = u32TrimInit;
+
+            /* Disable crystal-less */
+            SYS->HIRCTRIMCTL = 0;
+
+            /* Clear error flags */
+            SYS->HIRCTRIMSTS = SYS_HIRCTRIMSTS_CLKERIF_Msk | SYS_HIRCTRIMSTS_TFAILIF_Msk;
+
+            /* Clear SOF */
+            USBD->INTSTS = USBD_INTSTS_SOFIF_Msk;
+        }			
+    }
 _APROM:
     SYS->RSTSTS = (SYS_RSTSTS_PORF_Msk | SYS_RSTSTS_PINRF_Msk);
     FMC->ISPCTL &= ~(FMC_ISPCTL_ISPEN_Msk | FMC_ISPCTL_BS_Msk);
