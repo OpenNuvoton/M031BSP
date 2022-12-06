@@ -2,6 +2,8 @@
  * @file     main.c
  * @version  V3.00
  * @brief    Demonstrate how to wake up system from Power-down mode by brown-out detector interrupt.
+ *           Please refer to the sample code SYS_PowerDown_MinCurrent to set
+ *           the minimum current of the system in Power-down mode.
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.

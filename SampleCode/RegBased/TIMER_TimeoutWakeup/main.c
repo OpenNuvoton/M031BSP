@@ -2,6 +2,8 @@
  * @file     main.c
  * @version  V1.00
  * @brief    Use timer to wake up system from Power-down mode periodically.
+ *           Please refer to the sample code SYS_PowerDown_MinCurrent to set
+ *           the minimum current of the system in Power-down mode.
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.

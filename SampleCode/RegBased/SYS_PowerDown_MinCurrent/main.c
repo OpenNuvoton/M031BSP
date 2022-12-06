@@ -138,7 +138,7 @@ int main(void)
     printf("+-------------------------------------------------------------+\n\n");
 
     printf("+-------------------------------------------------------------------------+\n");
-    printf("+ Operating sequence on NuTiny-SDK-M031                                   |\n");
+    printf("+ Operating sequence                                                      |\n");
     printf("|  1. Remove all continuous load, e.g. LED.                               |\n");
     printf("|  2. Configure all GPIO as Quasi-bidirectional Mode                      |\n");
     printf("|  3. Must enable LVR                                                     |\n");
@@ -192,5 +192,4 @@ int main(void)
     printf("System waken-up done.\n\n");
 
     while(1);
-
 }
