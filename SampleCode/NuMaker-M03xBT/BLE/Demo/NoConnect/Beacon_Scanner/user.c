@@ -24,6 +24,10 @@
 #define SCAN_WINDOW                     18U     // 18*0.625ms=11.25ms
 #define SCAN_INTERVAL                   160U    // 160*0.625ms=100ms
 
+// uint16 convert to uint8 high byte and low byte
+#define U16_HIGHBYTE(x)                 (uint8_t)((x >> 8) & 0xFF)
+#define U16_LOWBYTE(x)                  (uint8_t)(x & 0xFF)
+
 
 /**************************************************************************
  * Variable
@@ -122,19 +126,6 @@ static void BleEvent_Callback(BleCmdEvent event, void *param)
     {
         BLE_Event_ScanReportParam *scanRepParam = (BLE_Event_ScanReportParam *)param;
 
-#if 0
-        printf("Address: %02x:%02x:%02x:%02x:%02x:%02x\n",
-               scanRepParam->rptPeerAddr.addr[5], scanRepParam->rptPeerAddr.addr[4],
-               scanRepParam->rptPeerAddr.addr[3], scanRepParam->rptPeerAddr.addr[2],
-               scanRepParam->rptPeerAddr.addr[1], scanRepParam->rptPeerAddr.addr[0]);
-        printf("rptType = 0x%02x\n", scanRepParam->rptType);
-        printf("rptData = 0x%02x, 0x%02x, 0x%02x\n",
-               scanRepParam->rptData[0],
-               scanRepParam->rptData[7],
-               scanRepParam->rptData[8]);
-        printf("RSSI:%d\n", scanRepParam->rptRssi);
-#endif
-
         /* Find the Non-Connectable undirected advertising */
         if (scanRepParam->rptType == ADV_TYPE_ADV_NONCONN_IND)
         {
@@ -167,6 +158,36 @@ static void BleEvent_Callback(BleCmdEvent event, void *param)
                 printf("\tRSSI: %d\n", scanRepParam->rptRssi);
                 printf("\tVariable 1: %d\n", scanRepParam->rptData[5]);
                 printf("\tVariable 2: %d\n", scanRepParam->rptData[6]);
+            }
+        }
+        /* Find the Connectable and scannable undirected advertising */
+        else if (scanRepParam->rptType == ADV_TYPE_ADV_IND)
+        {
+            if ((scanRepParam->rptData[5] == U16_LOWBYTE(GATT_SERVICES_HEART_RATE)) && \
+                (scanRepParam->rptData[6] == U16_HIGHBYTE(GATT_SERVICES_HEART_RATE)))
+            {
+                printf("Found a HRS device\n");
+
+                // device address
+                printf("\tAddress: %02x:%02x:%02x:%02x:%02x:%02x\n",
+                       scanRepParam->rptPeerAddr.addr[5], scanRepParam->rptPeerAddr.addr[4],
+                       scanRepParam->rptPeerAddr.addr[3], scanRepParam->rptPeerAddr.addr[2],
+                       scanRepParam->rptPeerAddr.addr[1], scanRepParam->rptPeerAddr.addr[0]);
+                // received data
+                printf("\tRSSI: %d\n", scanRepParam->rptRssi);
+            }
+            else if ((scanRepParam->rptData[5] == U16_LOWBYTE(GATT_SERVICES_HUMAN_INTERFACE_DEVICE)) && \
+                (scanRepParam->rptData[6] == U16_HIGHBYTE(GATT_SERVICES_HUMAN_INTERFACE_DEVICE)))
+            {
+                printf("Found a HOGP device\n");
+
+                // device address
+                printf("\tAddress: %02x:%02x:%02x:%02x:%02x:%02x\n",
+                       scanRepParam->rptPeerAddr.addr[5], scanRepParam->rptPeerAddr.addr[4],
+                       scanRepParam->rptPeerAddr.addr[3], scanRepParam->rptPeerAddr.addr[2],
+                       scanRepParam->rptPeerAddr.addr[1], scanRepParam->rptPeerAddr.addr[0]);
+                // received data
+                printf("\tRSSI: %d\n", scanRepParam->rptRssi);
             }
         }
     }
