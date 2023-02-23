@@ -35,7 +35,7 @@ int32_t FlashAccess_OnSRAM(void) @ "fastcode"
 #elif defined ( __GNUC__ )
 #pragma GCC push_options
 #pragma GCC optimize ("O0")
-__attribute__ ((used, long_call, section(".fastcode"))) int32_t FlashAccess_OnSRAM(void)
+__attribute__ ((used, section("fastcode"))) int32_t FlashAccess_OnSRAM(void)
 
 #else
 int32_t FlashAccess_OnSRAM(void)

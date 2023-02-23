@@ -24,7 +24,7 @@ int32_t multi_word_program(void) @ "fastcode"
 #elif defined ( __GNUC__ )
 #pragma GCC push_options
 #pragma GCC optimize ("O0")
-__attribute__ ((used, long_call, section(".fastcode"))) int32_t multi_word_program(void)
+__attribute__ ((used, section("fastcode"))) int32_t multi_word_program(void)
 
 #else
 int32_t multi_word_program(void)

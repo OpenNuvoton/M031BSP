@@ -149,7 +149,7 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>19</TargetSelection>
+          <TargetSelection>20</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -411,7 +411,7 @@
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc>--map --first='startup_M031Series.o(RESET)' --datacompressor=off --info=inline --entry Reset_Handler</Misc>
+            <Misc>--map --first='startup_M031Series_User.o(RESET)' --datacompressor=off --info=inline --entry Reset_Handler</Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -422,14 +422,14 @@
           <GroupName>CMSIS</GroupName>
           <Files>
             <File>
-              <FileName>startup_M031Series.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>..\..\..\..\Library\Device\Nuvoton\M031\Source\ARM\startup_M031Series.s</FilePath>
-            </File>
-            <File>
               <FileName>system_M031Series_User.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\system_M031Series_User.c</FilePath>
+            </File>
+            <File>
+              <FileName>startup_M031Series_User.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\startup_M031Series_User.s</FilePath>
             </File>
           </Files>
         </Group>

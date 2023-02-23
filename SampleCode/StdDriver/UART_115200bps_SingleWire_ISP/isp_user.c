@@ -20,8 +20,8 @@ uint8_t response_buff[64];
 static uint8_t aprom_buf[FMC_FLASH_PAGE_SIZE];
 #endif
 #ifdef __ARMCC_VERSION
-__align(4) uint8_t response_buff[64];
-__align(4) static uint8_t aprom_buf[FMC_FLASH_PAGE_SIZE];
+__attribute__((aligned(4))) uint8_t response_buff[64];
+__attribute__((aligned(4))) static uint8_t aprom_buf[FMC_FLASH_PAGE_SIZE];
 #endif
 #ifdef __GNUC__
 uint8_t response_buff[64] __attribute__((aligned(4)));
