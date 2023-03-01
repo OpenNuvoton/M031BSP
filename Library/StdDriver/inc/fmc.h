@@ -85,6 +85,7 @@ extern "C"
 
 #define FMC_TIMEOUT_READ        ((SystemCoreClock/10)/4) /*!< Read command time-out 100 ms         \hideinitializer */
 #define FMC_TIMEOUT_WRITE       ((SystemCoreClock/10)/4) /*!< Write command time-out 100 ms        \hideinitializer */
+#define FMC_TIMEOUT_MUL_WRITE   (SystemCoreClock/1)      /*!< Write command time-out 100 ms        \hideinitializer */
 #define FMC_TIMEOUT_ERASE       ((SystemCoreClock/10)/2) /*!< Erase command time-out 200 ms        \hideinitializer */
 #define FMC_TIMEOUT_CHKSUM      (SystemCoreClock/2)      /*!< Get checksum command time-out 2 s    \hideinitializer */
 #define FMC_TIMEOUT_CHKALLONE   (SystemCoreClock/2)      /*!< Check-all-one command time-out 2 s   \hideinitializer */

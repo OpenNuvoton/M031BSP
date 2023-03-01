@@ -671,7 +671,7 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
 #elif defined ( __GNUC__ )
 #pragma GCC push_options
 #pragma GCC optimize ("O0")
-__attribute__ ((used, long_call, section(".fastcode"))) int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
+__attribute__ ((used, section("fastcode"))) int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
 
 #else
 int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
@@ -707,7 +707,7 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
         for (i = idx; i < (FMC_MULTI_WORD_PROG_LEN / 4u); i += 4u) /* Max data length is 256 bytes (512/4 words)*/
         {
             __set_PRIMASK(1u); /* Mask interrupt to avoid status check coherence error*/
-            tout = FMC_TIMEOUT_WRITE;
+            tout = FMC_TIMEOUT_MUL_WRITE;
             do
             {
                 if ((FMC->MPSTS & FMC_MPSTS_MPBUSY_Msk) == 0u)
@@ -733,7 +733,7 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
                 /* Update new data for D0 */
                 FMC->MPDAT0 = pu32Buf[i];
                 FMC->MPDAT1 = pu32Buf[i + 1u];
-                tout = FMC_TIMEOUT_WRITE;
+                tout = FMC_TIMEOUT_MUL_WRITE;
                 do
                 {
                     if ((FMC->MPSTS & FMC_MPSTS_MPBUSY_Msk) == 0u)
@@ -772,7 +772,7 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
         {
             u32OnProg = 0u;
             
-            tout = FMC_TIMEOUT_WRITE;
+            tout = FMC_TIMEOUT_MUL_WRITE;
             
             while ((--tout > 0) && (FMC->ISPSTS & FMC_ISPSTS_ISPBUSY_Msk)) { }
 
@@ -788,7 +788,7 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
     /* Invalidation Cache */
     FMC->FTCTL |= FMC_FTCTL_CACHEINV_Msk;
     
-    tout = FMC_TIMEOUT_WRITE;
+    tout = FMC_ISPCMD_MULTI_PROG;
     
     while ((--tout > 0) && (FMC->FTCTL & FMC_FTCTL_CACHEINV_Msk)) {}
     

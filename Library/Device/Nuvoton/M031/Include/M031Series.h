@@ -114,7 +114,7 @@ typedef enum IRQn
     PWRWU_IRQn                = 28,       /*!< Power Down Wake Up Interrupt                         */
     ADC_IRQn                  = 29,       /*!< ADC Interrupt                                        */
     CKFAIL_IRQn               = 30,       /*!< Clock fail detect Interrupt                          */
-    RTC_IRQn                  = 31,       /*!< RTC Interrupt                                        */
+    RTC_IRQn                  = 31       /*!< RTC Interrupt                                        */
 } IRQn_Type;
 
 

@@ -326,10 +326,10 @@ void handle_UDF01S_WriteCommand(uint8_t length, uint8_t *data)
             uint8_t i;
 
             i = 0;
-            p_str = strtok(data+10, ",");
+            p_str = strtok((char *)data+10, ",");
             while(p_str != NULL)
             {
-                state = sscanf((char *)p_str, "%hhu", &data_array[i]);
+                state = sscanf((char *)p_str, "%hhu", (unsigned char *)&data_array[i]);
                 if (state == -1)
                 {
                     printf("the params of set_param cmd is wrong!\n");

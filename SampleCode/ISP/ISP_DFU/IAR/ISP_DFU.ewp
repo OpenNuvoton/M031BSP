@@ -939,7 +939,7 @@
   <group>
     <name>CMSIS</name>
     <file>
-      <name>$PROJ_DIR$\..\..\..\..\Library\Device\Nuvoton\M031\Source\IAR\startup_M031Series.s</name>
+      <name>$PROJ_DIR$\startup_M031Series_user.s</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Library\Device\Nuvoton\M031\Source\system_M031Series.c</name>

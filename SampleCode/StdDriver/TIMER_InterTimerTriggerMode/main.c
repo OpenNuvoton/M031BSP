@@ -19,7 +19,7 @@ void TMR1_IRQHandler(void)
 {
     /* TIMER1 clock source = PCLK0 = HCLK / 2 = HIRC / 2 */
     /* Timer clock is 24 MHz, counter value records the duration for 100 event counts. */
-    printf("Event frequency is %d Hz\n", (__HIRC/2) / TIMER_GetCounter(TIMER1) * 100);
+    printf("Event frequency is %d Hz\n", (int32_t)(__HIRC/2) / TIMER_GetCounter(TIMER1) * 100);
     TIMER_ClearCaptureIntFlag(TIMER1);
     complete = 1;
 }
