@@ -65,7 +65,17 @@ uint8_t txDataBuffer[DEFAULT_MTU];                                 // transmitte
 /**************************************************************************
  * Extern Function
  **************************************************************************/
-extern void UART_TX_Send(uint32_t len, uint8_t *ptr);         //show data on UART
+extern void UART_TX_Send(uint32_t len, uint8_t *ptr);           // show data on UART
+
+#if (BLE_AUTO_CONNECT == ENABLE_DEF)
+/**************************************************************************
+ * Auto Reconnection symbols
+ **************************************************************************/
+#define RECONNECT_SCAN_TIME             5                       // Time to scan connected device
+uint8_t uptime;                                                 // Timer count for scanning
+extern int check_record_in_data_flash(uint8_t input_addr[]);    // check paired device address
+extern int add_record_to_data_flash(uint8_t input_addr[]);      // add paired device address
+#endif
 
 /**************************************************************************
  * Function Prototype Declaration
@@ -214,6 +224,12 @@ void handle_AppLink0_TRSPC(void)
         if (status == BLESTACK_STATUS_SUCCESS)
         {
             bleProfile_link0_info.bleState = STATE_BLE_SCANNING;
+
+#if (BLE_AUTO_CONNECT == ENABLE_DEF)
+            // start Timer0 counting
+            uptime = 0;
+            TIMER_Start(TIMER0);
+#endif
         }
     }
     else if (bleProfile_link0_info.bleState == STATE_BLE_INITIATING)
@@ -422,6 +438,32 @@ static void BleEvent_Callback(BleCmdEvent event, void *param)
 
             if (targetDevice_nameCheck(nameStr, nameLen) == TRUE_DEF)
             {
+#if (BLE_AUTO_CONNECT == ENABLE_DEF)
+                if ((check_record_in_data_flash(scanRepParam->rptPeerAddr.addr) == 0) || (uptime > RECONNECT_SCAN_TIME))
+                {
+                    // targetAddr
+                    targetAddr.addrType = scanRepParam->rptPeerAddr.addrType;
+                    memcpy(targetAddr.addr, scanRepParam->rptPeerAddr.addr, SIZE_BLE_ADDR);
+
+                    // disable scan first then create connection
+                    setBLE_ScanDisable();
+
+                    if (uptime > RECONNECT_SCAN_TIME)
+                    {
+                        printf("Found new device and stop scanning...\n");
+
+                        // add record
+                        add_record_to_data_flash(scanRepParam->rptPeerAddr.addr);
+                    }
+                    else
+                    {
+                        printf("Found connected device and stop scanning...\n");
+                    }
+
+                    // stop Timer0 counting
+                    TIMER_Stop(TIMER0);
+                }
+#else
                 printf("Found device and stop scanning...\n");
 
                 // targetAddr
@@ -430,6 +472,7 @@ static void BleEvent_Callback(BleCmdEvent event, void *param)
 
                 // disable scan first then create connection
                 setBLE_ScanDisable();
+#endif
             }
         }
     }
@@ -579,4 +622,20 @@ static void BleService_DISLink0Handler(uint8_t hostId, uint8_t cmdAccess, uint8_
         break;
     }
 }
+
+
+#if (BLE_AUTO_CONNECT == ENABLE_DEF)
+void TMR0_IRQHandler(void)
+{
+    if (TIMER_GetIntFlag(TIMER0) == 1)
+    {
+        /* Clear Timer0 time-out interrupt flag */
+
+        TIMER_ClearIntFlag(TIMER0);
+    }
+
+    uptime++;
+    printf("Uptime: %d\n", uptime);
+}
+#endif
 

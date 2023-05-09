@@ -165,6 +165,22 @@ BleStackStatus BLE_StackInit()
     return BLESTACK_STATUS_SUCCESS;
 }
 
+#if (BLE_AUTO_CONNECT == ENABLE_DEF)
+void MCU_Timer0Enable(void)
+{
+    /* Enable TIMER module clock */
+    CLK_EnableModuleClock(TMR0_MODULE);
+    CLK_SetModuleClock(TMR0_MODULE, CLK_CLKSEL1_TMR0SEL_LIRC, 0);
+
+    /* Open Timer0 in periodic mode, enable interrupt and 1 interrupt tick per second */
+    TIMER_Open(TIMER0, TIMER_PERIODIC_MODE, 1);
+    TIMER_EnableInt(TIMER0);
+
+    /* Enable Timer0 NVIC */
+    NVIC_EnableIRQ(TMR0_IRQn);
+}
+#endif
+
 /*!
    \brief main loop for initialization and BLE kernel
 */
@@ -172,6 +188,9 @@ int main(void)
 {
     BleStackStatus status;
 
+#if (BLE_AUTO_CONNECT == ENABLE_DEF)
+    extern int set_data_flash(void);
+#endif
     extern void BleApp_Main(void);
     extern BleStackStatus BleApp_Init(void);
     extern BleStackStatus Set_BleAddr(void);
@@ -190,6 +209,14 @@ int main(void)
         printf("BLE_StackInit() returns fail %d\n", status);
         while (1);
     }
+
+#if (BLE_AUTO_CONNECT == ENABLE_DEF)
+    /* Load settings from data flash */
+    set_data_flash();
+
+    /* Enable Timer0 for send heart rate measurement */
+    MCU_Timer0Enable();
+#endif
 
     printf("-----------------------------------------\n");
     printf("  BLE demo: TRSP_UART(Central) start.....\n");

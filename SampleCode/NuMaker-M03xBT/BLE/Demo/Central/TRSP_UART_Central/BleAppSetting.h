@@ -19,6 +19,9 @@
 // BLE stack run in DTM mode.
 #define BLE_DTM_ENABLE              DISABLE_DEF
 
+// BLE demo auto-connect.
+#define BLE_AUTO_CONNECT            DISABLE_DEF
+
 // Set MTU size
 #if (BLE_SUPPORT_MTU_LARGE == ENABLE_DEF)
 #define DEFAULT_MTU                 247

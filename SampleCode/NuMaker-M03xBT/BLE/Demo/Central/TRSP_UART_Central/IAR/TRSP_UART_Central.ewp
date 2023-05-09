@@ -1176,5 +1176,8 @@
         <file>
             <name>$PROJ_DIR$\..\user.c</name>
         </file>
+        <file>
+            <name>$PROJ_DIR$\..\data_flash.c</name>
+        </file>
     </group>
 </project>
