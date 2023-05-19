@@ -104,6 +104,11 @@
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/user.c</locationURI>
 		</link>
+		<link>
+			<name>User/data_flash.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/data_flash.c</locationURI>
+		</link>
 	</linkedResources>
 	<filteredResources>
 		<filter>

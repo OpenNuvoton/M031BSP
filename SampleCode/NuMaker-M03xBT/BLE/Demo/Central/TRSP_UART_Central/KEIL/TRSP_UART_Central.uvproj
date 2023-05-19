@@ -502,6 +502,11 @@
               <FilePath>..\user.c</FilePath>
             </File>
             <File>
+              <FileName>data_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\data_flash.c</FilePath>
+            </File>
+            <File>
               <FileName>ble_profile_def.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BleAppProfile\ble_profile_def.c</FilePath>
