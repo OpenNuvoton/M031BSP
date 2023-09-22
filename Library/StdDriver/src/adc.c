@@ -50,6 +50,7 @@ void ADC_Open(ADC_T *adc,
               uint32_t u32ChMask)
 {
     uint32_t u32Delay = SystemCoreClock;    /* 1 second */
+    volatile uint32_t tmp;
 
     g_ADC_i32ErrCode = 0;
 
@@ -79,7 +80,8 @@ void ADC_Open(ADC_T *adc,
                 break;
             }
         }
-
+        /* Read channel 0 ADDR to clear Valid flag of channel 0 that set by calibration. */
+        tmp = adc->ADDR[0];
     }
 
     adc->ADCR = (adc->ADCR & (~(ADC_ADCR_DIFFEN_Msk | ADC_ADCR_ADMD_Msk))) | \
