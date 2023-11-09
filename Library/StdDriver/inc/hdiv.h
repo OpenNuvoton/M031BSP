@@ -47,6 +47,7 @@ static __INLINE int32_t HDIV_Div(int32_t x, int16_t y)
     p32 = (uint32_t *)HDIV_BASE;
     *p32++ = x;
     *p32++ = y;
+	__NOP();
     return *p32;
 }
 

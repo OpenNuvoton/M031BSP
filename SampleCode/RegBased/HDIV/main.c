@@ -88,6 +88,9 @@ int main(void)
 
     HDIV->DIVIDEND = 12341;
     HDIV->DIVISOR = 123;
+    
+    /* add one NOP delay */
+	__NOP();
     printf("12341 / 123 = %d, remainder = %d\n", HDIV->QUOTIENT, HDIV->REM);
 
     /* Lock protected registers */
