@@ -16,6 +16,7 @@
   @{
 */
 
+int32_t g_UI2C_i32ErrCode = 0;       /*!< UI2C global error code */
 
 /** @addtogroup USCI_I2C_EXPORTED_FUNCTIONS USCI_I2C Exported Functions
   @{
@@ -616,7 +617,7 @@ void UI2C_DisableWakeup(UI2C_T *ui2c)
 /**
   * @brief      Write a byte to Slave
   *
-  * @param[in]  ui2c           The pointer of the specified USCI_I2C module.
+  * @param[in]  ui2c            The pointer of the specified USCI_I2C module.
   * @param[in]  u8SlaveAddr     Access Slave address(7-bit)
   * @param[in]  data            Write a byte data to Slave
   *
@@ -631,12 +632,23 @@ uint8_t UI2C_WriteByte(UI2C_T *ui2c, uint8_t u8SlaveAddr, const uint8_t data)
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Ctrl = 0U;
     enum UI2C_MASTER_EVENT eEvent = MASTER_SEND_START;
+    uint32_t u32TimeOutCount = 0U;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                       /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -690,7 +702,7 @@ uint8_t UI2C_WriteByte(UI2C_T *ui2c, uint8_t u8SlaveAddr, const uint8_t data)
 /**
   * @brief      Write multi bytes to Slave
   *
-  * @param[in]  ui2c           The pointer of the specified USCI_I2C module.
+  * @param[in]  ui2c            The pointer of the specified USCI_I2C module.
   * @param[in]  u8SlaveAddr     Access Slave address(7-bit)
   * @param[in]  *data           Pointer to array to write data to Slave
   * @param[in]  u32wLen         How many bytes need to write to Slave
@@ -704,13 +716,23 @@ uint8_t UI2C_WriteByte(UI2C_T *ui2c, uint8_t u8SlaveAddr, const uint8_t data)
 uint32_t UI2C_WriteMultiBytes(UI2C_T *ui2c, uint8_t u8SlaveAddr, const uint8_t *data, uint32_t u32wLen)
 {
     uint8_t u8Xfering = 1U, u8Ctrl = 0U;
-    uint32_t u32txLen = 0U;
+    uint32_t u32txLen = 0U, u32TimeOutCount = 0U;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                       /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -758,7 +780,7 @@ uint32_t UI2C_WriteMultiBytes(UI2C_T *ui2c, uint8_t u8SlaveAddr, const uint8_t *
 /**
   * @brief      Specify a byte register address and write a byte to Slave
   *
-  * @param[in]  ui2c           The pointer of the specified USCI_I2C module.
+  * @param[in]  ui2c            The pointer of the specified USCI_I2C module.
   * @param[in]  u8SlaveAddr     Access Slave address(7-bit)
   * @param[in]  u8DataAddr      Specify a address (1 byte) of data write to
   * @param[in]  data            A byte data to write it to Slave
@@ -773,13 +795,23 @@ uint32_t UI2C_WriteMultiBytes(UI2C_T *ui2c, uint8_t u8SlaveAddr, const uint8_t *
 uint8_t UI2C_WriteByteOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8DataAddr, const uint8_t data)
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Ctrl = 0U;
-    uint32_t u32txLen = 0U;
+    uint32_t u32txLen = 0U, u32TimeOutCount = 0U;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                       /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -838,7 +870,7 @@ uint8_t UI2C_WriteByteOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8DataAd
 /**
   * @brief      Specify a byte register address and write multi bytes to Slave
   *
-  * @param[in]  ui2c           The pointer of the specified USCI_I2C module.
+  * @param[in]  ui2c            The pointer of the specified USCI_I2C module.
   * @param[in]  u8SlaveAddr     Access Slave address(7-bit)
   * @param[in]  u8DataAddr      Specify a address (1 byte) of data write to
   * @param[in]  *data           Pointer to array to write data to Slave
@@ -853,14 +885,24 @@ uint8_t UI2C_WriteByteOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8DataAd
 uint32_t UI2C_WriteMultiBytesOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8DataAddr, const uint8_t *data, uint32_t u32wLen)
 {
     uint8_t u8Xfering = 1U, u8Ctrl = 0U;
-    uint32_t u32txLen = 0U;
+    uint32_t u32txLen = 0U, u32TimeOutCount = 0U;
     enum UI2C_MASTER_EVENT eEvent = MASTER_SEND_START;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                       /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -932,13 +974,23 @@ uint32_t UI2C_WriteMultiBytesOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u
 uint8_t UI2C_WriteByteTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t u16DataAddr, const uint8_t data)
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Ctrl = 0U;
-    uint32_t u32txLen = 0U;
+    uint32_t u32txLen = 0U, u32TimeOutCount = 0U;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                           /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -1002,7 +1054,7 @@ uint8_t UI2C_WriteByteTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t u16Dat
 /**
   * @brief      Specify two bytes register address and write multi bytes to Slave
   *
-  * @param[in]  ui2c           The pointer of the specified USCI_I2C module.
+  * @param[in]  ui2c            The pointer of the specified USCI_I2C module.
   * @param[in]  u8SlaveAddr     Access Slave address(7-bit)
   * @param[in]  u16DataAddr     Specify a address (2 bytes) of data write to
   * @param[in]  *data           Pointer to array to write data to Slave
@@ -1017,14 +1069,24 @@ uint8_t UI2C_WriteByteTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t u16Dat
 uint32_t UI2C_WriteMultiBytesTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t u16DataAddr, const uint8_t *data, uint32_t u32wLen)
 {
     uint8_t u8Xfering = 1U, u8Addr = 1U, u8Ctrl = 0U;
-    uint32_t u32txLen = 0U;
+    uint32_t u32txLen = 0U, u32TimeOutCount = 0U;
     enum UI2C_MASTER_EVENT eEvent = MASTER_SEND_START;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                           /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -1091,7 +1153,7 @@ uint32_t UI2C_WriteMultiBytesTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t
 /**
   * @brief      Read a byte from Slave
   *
-  * @param[in]  ui2c           The pointer of the specified USCI_I2C module.
+  * @param[in]  ui2c            The pointer of the specified USCI_I2C module.
   * @param[in]  u8SlaveAddr     Access Slave address(7-bit)
   *
   * @return     Read a byte data from Slave
@@ -1103,12 +1165,23 @@ uint8_t UI2C_ReadByte(UI2C_T *ui2c, uint8_t u8SlaveAddr)
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, rdata = 0U, u8Ctrl = 0U;
     enum UI2C_MASTER_EVENT eEvent = MASTER_SEND_START;
+    uint32_t u32TimeOutCount = 0U;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                       /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -1166,7 +1239,7 @@ uint8_t UI2C_ReadByte(UI2C_T *ui2c, uint8_t u8SlaveAddr)
 /**
   * @brief      Read multi bytes from Slave
   *
-  * @param[in]  ui2c           The pointer of the specified USCI_I2C module.
+  * @param[in]  ui2c            The pointer of the specified USCI_I2C module.
   * @param[in]  u8SlaveAddr     Access Slave address(7-bit)
   * @param[out] *rdata          Point to array to store data from Slave
   * @param[in]  u32rLen         How many bytes need to read from Slave
@@ -1180,14 +1253,24 @@ uint8_t UI2C_ReadByte(UI2C_T *ui2c, uint8_t u8SlaveAddr)
 uint32_t UI2C_ReadMultiBytes(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t *rdata, uint32_t u32rLen)
 {
     uint8_t u8Xfering = 1U, u8Ctrl = 0U;
-    uint32_t u32rxLen = 0U;
+    uint32_t u32rxLen = 0U, u32TimeOutCount = 0U;
     enum UI2C_MASTER_EVENT eEvent = MASTER_SEND_START;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                       /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -1264,12 +1347,23 @@ uint8_t UI2C_ReadByteOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8DataAdd
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, rdata = 0U, u8Ctrl = 0U;
     enum UI2C_MASTER_EVENT eEvent = MASTER_SEND_START;
+    uint32_t u32TimeOutCount = 0U;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                       /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -1354,7 +1448,7 @@ uint8_t UI2C_ReadByteOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8DataAdd
 /**
   * @brief      Specify a byte register address and read multi bytes from Slave
   *
-  * @param[in]  ui2c           The pointer of the specified USCI_I2C module.
+  * @param[in]  ui2c            The pointer of the specified USCI_I2C module.
   * @param[in]  u8SlaveAddr     Access Slave address(7-bit)
   * @param[in]  u8DataAddr      Specify a address (1 bytes) of data read from
   * @param[out] *rdata          Point to array to store data from Slave
@@ -1369,14 +1463,24 @@ uint8_t UI2C_ReadByteOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8DataAdd
 uint32_t UI2C_ReadMultiBytesOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8DataAddr, uint8_t *rdata, uint32_t u32rLen)
 {
     uint8_t u8Xfering = 1U, u8Ctrl = 0U;
-    uint32_t u32rxLen = 0U;
+    uint32_t u32rxLen = 0U, u32TimeOutCount = 0U;
     enum UI2C_MASTER_EVENT eEvent = MASTER_SEND_START;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                       /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -1460,7 +1564,7 @@ uint32_t UI2C_ReadMultiBytesOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8
 /**
   * @brief      Specify two bytes register address and read a byte from Slave
   *
-  * @param[in]  ui2c           The pointer of the specified USCI_I2C module.
+  * @param[in]  ui2c            The pointer of the specified USCI_I2C module.
   * @param[in]  u8SlaveAddr     Access Slave address(7-bit)
   * @param[in]  u16DataAddr     Specify a address(2 byte) of data read from
   *
@@ -1474,12 +1578,23 @@ uint8_t UI2C_ReadByteTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t u16Data
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, rdata = 0U, u8Addr = 1U, u8Ctrl = 0U;
     enum UI2C_MASTER_EVENT eEvent = MASTER_SEND_START;
+    uint32_t u32TimeOutCount = 0U;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                       /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
@@ -1586,14 +1701,24 @@ uint8_t UI2C_ReadByteTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t u16Data
 uint32_t UI2C_ReadMultiBytesTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t u16DataAddr, uint8_t *rdata, uint32_t u32rLen)
 {
     uint8_t u8Xfering = 1U, u8Addr = 1U, u8Ctrl = 0U;
-    uint32_t u32rxLen = 0U;
+    uint32_t u32rxLen = 0U, u32TimeOutCount = 0U;
     enum UI2C_MASTER_EVENT eEvent = MASTER_SEND_START;
+
+    g_UI2C_i32ErrCode = 0;
 
     UI2C_START(ui2c);                                                       /* Send START */
 
     while (u8Xfering)
     {
-        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U));                     /* Wait UI2C new status occur */
+        u32TimeOutCount = UI2C_TIMEOUT;
+        while (!(UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U))                     /* Wait UI2C new status occur */
+        {
+            if(--u32TimeOutCount == 0)
+            {
+                g_UI2C_i32ErrCode = UI2C_ERR_TIMEOUT;
+                break;
+            }
+        }
 
         switch (UI2C_GET_PROT_STATUS(ui2c) & 0x3F00U)
         {
