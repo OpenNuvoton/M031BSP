@@ -123,6 +123,10 @@ uint32_t ProcessHardFault(uint32_t _lr, uint32_t msp, uint32_t psp)
         sp = (uint32_t *)psp;
     else
         sp = (uint32_t *)msp;
+    
+#ifdef __VSCode__    
+    sp+=2;
+#endif
 
     /* Get information from stack */
     r0  = sp[0];
