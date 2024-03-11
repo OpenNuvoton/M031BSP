@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMSIS Build",
+            "type": "cmsis-csolution.build",
+            "solution": "${command:cmsis-csolution.getSolutionPath}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Flash Device",
+            "type": "embedded-debug.flash",
+            "program": "${command:embedded-debug.getApplicationFile}",
+            "serialNumber": "${command:device-manager.getSerialNumber}",
+            "cmsisPack": "${command:device-manager.getDevicePack}",
+            "deviceName": "${command:device-manager.getDeviceName}",
+            "problemMatcher": [],
+            "verifyFlash": false,
+            "dependsOn": "CMSIS Build"
+        },
+    ]
+}
