@@ -12,9 +12,9 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
-#define APROM_TEST_BASE             0x3000
-#define DATA_FLASH_TEST_BASE        0x3000
-#define DATA_FLASH_TEST_END         0x4000      /* 16KB */
+#define APROM_TEST_BASE             0x4000
+#define DATA_FLASH_TEST_BASE        0x4000
+#define DATA_FLASH_TEST_END         0x5000      /* 16KB */
 #define TEST_PATTERN                0x5A5A5A5A
 
 uint32_t APROM_TEST_END  = 0x00004000UL;        /* 16KB */
