@@ -1,6 +1,6 @@
 project:
   linker:
-    - script: ../GCC/FMC_MultiBoot_0x0.ld
+    - script: ../GCC/FMC_MultiBoot_0x8000.ld
   setups:
     - setup: Options for project  
       processor:
@@ -55,4 +55,4 @@ project:
       files:
         - file: ../main.c        
       define:
-        - __BASE__
+        - __BOOT1__
