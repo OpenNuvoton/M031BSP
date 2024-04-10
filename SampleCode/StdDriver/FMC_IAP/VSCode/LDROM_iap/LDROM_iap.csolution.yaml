@@ -5,7 +5,7 @@ solution:
   packs:
     - pack: Nuvoton::NuMicro_DFP      
   target-types:
-    - type: Debug
+    - type: GCC
       device: M032SE3AE
       optimize: none
   build-types:

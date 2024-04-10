@@ -9,7 +9,7 @@ project:
         - ../../../../../Library/CMSIS/Include
         - ../../../../../Library/Device/Nuvoton/M031/Include
         - ../../../../../Library/StdDriver/inc 
-        - ../../GCC        
+        - ../LDROM_iap/out/LDROM_iap/GCC/Debug
     - output:
         type: "bin"
       misc:

@@ -19,7 +19,7 @@ loaderImage1Base:
 #ifndef _ARM_VSCODE_
     .incbin  "../../LDROM_iap/LDROM_iap.bin"
 #else
-    .incbin  "./LDROM_iap/LDROM_iap.bin"
+    .incbin  "./LDROM_iap.bin"
 #endif    
 loaderImage1Limit:
     .space   4
