@@ -22,8 +22,9 @@ uint32_t slave_buff_addr;
 uint8_t g_au8SlvData[TEST_LENGTH];
 uint8_t g_au8SlvRxData[3];
 
-volatile uint8_t g_u8DeviceAddr;
 volatile uint8_t g_u8SlvDataLen;
+volatile uint8_t g_u8SlvTRxAbortFlag = 0;
+volatile uint8_t g_u8TimeoutFlag = 0;
 
 typedef void (*I2C_FUNC)(uint32_t u32Status);
 
@@ -42,6 +43,7 @@ void I2C0_IRQHandler(void)
     {
         /* Clear I2C0 Timeout Flag */
         I2C0->TOCTL |= I2C_TOCTL_TOIF_Msk;
+        g_u8TimeoutFlag = 1;
     }
     else
     {
@@ -55,7 +57,7 @@ void I2C0_IRQHandler(void)
 /*---------------------------------------------------------------------------------------------------------*/
 void I2C_SlaveTRx(uint32_t u32Status)
 {
-    uint8_t u8data;
+    uint8_t u8Data;
 
     if (u32Status == 0x60)                      /* Own SLA+W has been receive; ACK has been return */
     {
@@ -65,16 +67,16 @@ void I2C_SlaveTRx(uint32_t u32Status)
     else if (u32Status == 0x80)                 /* Previously address with own SLA address
                                                    Data has been received; ACK has been returned*/
     {
-        u8data = (unsigned char) I2C_GET_DATA(I2C0);
+        u8Data = (unsigned char) I2C_GET_DATA(I2C0);
 
         if (g_u8SlvDataLen < 2)
         {
-            g_au8SlvRxData[g_u8SlvDataLen++] = u8data;
+            g_au8SlvRxData[g_u8SlvDataLen++] = u8Data;
             slave_buff_addr = (g_au8SlvRxData[0] << 8) + g_au8SlvRxData[1];
         }
         else
         {
-            g_au8SlvData[slave_buff_addr++] = u8data;
+            g_au8SlvData[slave_buff_addr++] = u8Data;
 
             if (slave_buff_addr == TEST_LENGTH)
             {
@@ -114,8 +116,21 @@ void I2C_SlaveTRx(uint32_t u32Status)
     }
     else
     {
-        /* TO DO */
-        printf("Status 0x%x is NOT processed\n", u32Status);
+        printf("[SlaveTRx] Status [0x%x] Unexpected abort!!\n", u32Status);
+        if(u32Status == 0x68)               /* Slave receive arbitration lost, clear SI */
+        {
+            I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI_AA);
+        }
+        else if(u32Status == 0xB0)          /* Address transmit arbitration lost, clear SI  */
+        {
+            I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI_AA);
+        }
+        else                                /* Slave bus error, stop I2C and clear SI */
+        {
+            I2C_SET_CONTROL_REG(I2C0, I2C_CTL_STO_SI);
+            I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI);
+        }
+        g_u8SlvTRxAbortFlag = 1;
     }
 }
 
@@ -234,7 +249,7 @@ void I2C0_Close(void)
 
 int main()
 {
-    uint32_t i;
+    uint32_t i, u32TimeOutCnt;
 
     SYS_Init();
 
@@ -274,7 +289,34 @@ int main()
     printf("\n");
     printf("I2C Slave Mode is Running.\n");
 
-    while (1);
+    g_u8TimeoutFlag = 0;
+
+    while(1)
+    {
+        /* Handle Slave timeout condition */
+        if(g_u8TimeoutFlag)
+        {
+            printf(" SlaveTRx time out, press any key to reset IP\n");
+            getchar();
+            SYS->IPRST1 |= SYS_IPRST1_I2C0RST_Msk;
+            SYS->IPRST1 = 0;
+            I2C0_Init();
+            g_u8TimeoutFlag = 0;
+            g_u8SlvTRxAbortFlag = 1;
+        }
+        /* When I2C abort, clear SI to enter non-addressed SLV mode*/
+        if(g_u8SlvTRxAbortFlag)
+        {
+            g_u8SlvTRxAbortFlag = 0;
+
+            u32TimeOutCnt = SystemCoreClock;
+            while(I2C0->CTL0 & I2C_CTL0_SI_Msk)
+                if(--u32TimeOutCnt == 0) break;
+
+            printf("I2C Slave re-start. status[0x%x]\n", I2C0->STATUS0);
+            I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI_AA);
+        }
+    }
 }
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/
