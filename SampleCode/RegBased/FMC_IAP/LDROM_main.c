@@ -49,13 +49,6 @@ void SYS_Init(void)
     SYS_LockReg();
 }
 
-#ifdef __ARMCC_VERSION
-__asm __set_SP(uint32_t _sp)
-{
-    MSR MSP, r0
-    BX lr
-}
-#endif
 
 /*
  * @returns     Send value from UART debug port
@@ -117,7 +110,6 @@ int main()
 #ifdef __GNUC__                        /* for GNU C compiler */
     uint32_t    u32Data;
 #endif
-    FUNC_PTR    *func;                 /* function pointer */
 
     /* Init System, IP clock and multi-function I/O */
     SYS_Init();
@@ -165,26 +157,15 @@ int main()
     SYS_LockReg();
 
     /*
-     *  The reset handler address of an executable image is located at offset 0x4.
-     *  Thus, this sample get reset handler address of APROM code from FMC_APROM_BASE + 0x4.
-     */
-    func = (FUNC_PTR *)*(uint32_t *)(FMC_APROM_BASE + 4);
-
-    /*
      *  The stack base address of an executable image is located at offset 0x0.
      *  Thus, this sample get stack base address of APROM code from FMC_APROM_BASE + 0x0.
      */
-#ifdef __GNUC__                        /* for GNU C compiler */
-    u32Data = *(uint32_t *)FMC_LDROM_BASE;
-    asm("msr msp, %0" : : "r" (u32Data));
-#else
-    __set_SP(*(uint32_t *)FMC_APROM_BASE);
-#endif
+    __DSB();                                                          /* Ensure all outstanding memory accesses included
+                                                                       buffered write are completed before reset */
+    SCB->AIRCR  = ((0x5FAUL << SCB_AIRCR_VECTKEY_Pos) |
+                 SCB_AIRCR_SYSRESETREQ_Msk);
+    __DSB();                                                          /* Ensure completion of memory access */
 
-    /*
-     *  Branch to the LDROM code's reset handler in way of function call.
-     */
-    func();
 
     while (1);
 }
