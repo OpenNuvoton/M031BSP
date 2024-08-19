@@ -19,6 +19,12 @@
 
 #if defined (__CC_ARM)
 const uint8_t INFO_FLASHBOND[NUM_OF_TOTAL_INFO_BLK][SIZE_OF_INFO_BLK] __attribute__((at(BONDING_INFORMATION_ADDRESS)));
+#elif defined (__ARMCC_VERSION)
+#if (_CHIP_SELECTION_ == _CHIP_M031BT)
+volatile const uint8_t INFO_FLASHBOND[NUM_OF_TOTAL_INFO_BLK][SIZE_OF_INFO_BLK] __attribute__((section(".ARM.__at_0x0000F000")));
+#elif (_CHIP_SELECTION_ == _CHIP_M032BT)
+volatile const uint8_t INFO_FLASHBOND[NUM_OF_TOTAL_INFO_BLK][SIZE_OF_INFO_BLK] __attribute__((section(".ARM.__at_0x0001E000")));
+#endif
 #elif defined (__ICCARM__)
 const uint8_t INFO_FLASHBOND[NUM_OF_TOTAL_INFO_BLK][SIZE_OF_INFO_BLK] @(BONDING_INFORMATION_ADDRESS);
 #elif defined (__GNUC__)
