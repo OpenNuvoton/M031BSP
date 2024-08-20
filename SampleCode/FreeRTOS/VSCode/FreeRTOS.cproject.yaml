@@ -10,8 +10,8 @@ project:
         - ../../../Library/Device/Nuvoton/M031/Include
         - ../../../Library/StdDriver/inc
         - ../../../ThirdParty/FreeRTOS/Source/include
-        - ../../../ThirdParty/FreeRTOS/Demo/COMMON/include
-        - ../../../ThirdParty/FreeRTOS/SOURCE/portable/GCC/ARM_CM0
+        - ../../../ThirdParty/FreeRTOS/Demo/Common/include
+        - ../../../ThirdParty/FreeRTOS/Source/portable/GCC/ARM_CM0
         - ../../FreeRTOS         
       define:
         - RVDS_ARMCM4_NUC4xx          
@@ -69,5 +69,5 @@ project:
         - file: ../main.c
         - file: ../../../ThirdParty/FreeRTOS/Demo/Common/Minimal/QueueSet.c
         - file: ../../../ThirdParty/FreeRTOS/Demo/Common/Minimal/PollQ.c
-        - file: ../../../ThirdParty/FreeRTOS/Demo/Common/Minimal/Flash.c          
+        - file: ../../../ThirdParty/FreeRTOS/Demo/Common/Minimal/flash.c          
         - file: ../ParTest.c
