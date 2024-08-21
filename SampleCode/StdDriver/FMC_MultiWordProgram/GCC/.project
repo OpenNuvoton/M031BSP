@@ -140,16 +140,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1554168277210</id>
-			<name>CMSIS/CMSIS/GCC</name>
-			<type>5</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-*.S</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1554168277234</id>
+			<id>1724053298310</id>
 			<name>CMSIS/CMSIS/GCC</name>
 			<type>5</type>
 			<matcher>
@@ -158,7 +149,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1554168277263</id>
+			<id>1724053298322</id>
 			<name>CMSIS/CMSIS/GCC</name>
 			<type>5</type>
 			<matcher>
@@ -167,7 +158,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1554168277295</id>
+			<id>1724053298334</id>
 			<name>CMSIS/CMSIS/GCC</name>
 			<type>5</type>
 			<matcher>

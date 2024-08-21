@@ -11,24 +11,10 @@
 
 #include "NuMicro.h"
 
-#define PAGE_SIZE       0x800
-uint32_t    page_buff[PAGE_SIZE / 4];
 
-#if defined ( __CC_ARM )
-#pragma arm section code="fastcode"
+uint32_t    page_buff[FMC_FLASH_PAGE_SIZE / 4];
+
 int32_t multi_word_program(void)
-
-#elif defined ( __ICCARM__ )
-int32_t multi_word_program(void) @ "fastcode"
-
-#elif defined ( __GNUC__ )
-#pragma GCC push_options
-#pragma GCC optimize ("O0")
-__attribute__ ((used, section("fastcode"))) int32_t multi_word_program(void)
-
-#else
-int32_t multi_word_program(void)
-#endif
 {
     uint32_t i, addr, maddr;
 
@@ -86,10 +72,5 @@ err_out:
     return -1;
 }
 
-#if defined ( __CC_ARM )
-#pragma arm section
-#elif defined ( __GNUC__ )
-#pragma GCC pop_options
-#endif
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/

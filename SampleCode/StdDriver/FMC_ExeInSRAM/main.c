@@ -8,13 +8,8 @@
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
 *****************************************************************************/
 #include <stdio.h>
-#include <string.h>
 #include "NuMicro.h"
 
-#define APROM_TEST_BASE             0x3000
-#define TEST_PATTERN                0x5A5A5A5A
-
-int32_t FlashAccess_OnSRAM(void);
 
 void SYS_Init(void)
 {
@@ -52,11 +47,11 @@ void SYS_Init(void)
 
 int32_t main(void)
 {
+    uint32_t u32Addr;
+    uint32_t u32Cnt;
+
     /* Init System, IP clock and multi-function I/O. */
     SYS_Init();
-
-    /* Unlock protected registers to operate FMC ISP function */
-    SYS_UnlockReg();                   
 
     /* Configure UART0: 115200, 8-bit word, no parity bit, 1 stop bit. */
     UART_Open(UART0, 115200);
@@ -65,46 +60,20 @@ int32_t main(void)
     printf("+-----------------------------------------------------------+\n");
     printf("|      FMC Write/Read code execute in SRAM Sample Code      |\n");
     printf("+-----------------------------------------------------------+\n");
-
-    /* Checking if target device supports the feature */
-    if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )
-    {
-        /* Checking if flash size matches with target device */
-        if(FMC_FLASH_PAGE_SIZE != 2048)
-        {
-            /* FMC_FLASH_PAGE_SIZE is different from target device's */
-            printf("Please enable the compiler option - PAGE_SIZE_2048 in fmc.h\n");
-            while(SYS->PDID);
-        }
-    }
-    else
-    {
-        if(FMC_FLASH_PAGE_SIZE != 512)
-        {
-            /* FMC_FLASH_PAGE_SIZE is different from target device's */
-            printf("Please disable the compiler option - PAGE_SIZE_2048 in fmc.h\n");
-            while(SYS->PDID);
-        }
-    }
-	
-#if defined ( __CC_ARM )
-    /* fastcode section will be copied duration startup  */
-#elif defined (__ICCARM__)
-#pragma section = "fastcode"
-#pragma section = "fastcode_init"
-
-    printf("Fast Code Section Source Addr = 0x%x\n", (uint32_t)__section_begin("fastcode_init"));
-    printf("Fast Code Section Destination Addr = 0x%x\n", (uint32_t)__section_begin("fastcode"));
-    memcpy((void *) __section_begin("fastcode"), __section_begin("fastcode_init"), (unsigned long) __section_size("fastcode"));
-
-#elif defined (__GNUC__)
-    /* fastcode section will be copied duration startup  */
-#endif
+    printf("Check FMC function execution address\n");
+    printf("FMC_Erase: 0x%X, FMC_Write: 0x%X, FMC_Read: 0x%X\n",
+           (uint32_t)FMC_Erase, (uint32_t)FMC_Write, (uint32_t)FMC_Read);
 
     /*
-       This sample code is used to demonstrate how to implement a fuction that executes in SRAM.
-       By setting scatter loading file (.scf/.icf/.ld),
+       This sample code is used to demonstrate how to implement a code to execute in SRAM.
+       By setting KEIL's scatter file: scatter.scf,
+                  IAR's linker configuration file: FMC_ExeInSRAM.icf,
+                  GCC's linker script file: FMC_ExeInSRAM.ld,
+       RO code is placed to 0x20000000 ~ 0x20000fff with RW is placed to 0x20001000 ~ 0x20001fff.
     */
+
+    /* Unlock protected registers to operate FMC ISP function */
+    SYS_UnlockReg();
 
     /* Enable FMC ISP functions */
     FMC_Open();
@@ -112,7 +81,36 @@ int32_t main(void)
     /* Update APROM enabled */
     FMC_ENABLE_AP_UPDATE();
 
-    FlashAccess_OnSRAM();
+    /* The ROM address for erase/write/read demo */
+    u32Addr = 0x4000;
+    FMC_Erase(u32Addr); /* Erase page */
+
+    for (u32Cnt = 0; u32Cnt < 0x100; u32Cnt += 4)
+    {
+        uint32_t u32Data, u32RData;
+
+        /* Write Demo */
+        u32Data = u32Cnt + 0x12345678;
+        FMC_Write(u32Addr + u32Cnt, u32Data);
+
+        if ((u32Cnt & 0xf) == 0)
+            printf(".");
+
+        /* Read Demo */
+        u32RData = FMC_Read(u32Addr + u32Cnt);
+
+        if (u32Data != u32RData)
+        {
+            printf("[Read/Write FAIL]\n");
+
+            while (1);
+        }
+    }
+
+    printf("\nISP function run at SRAM finished\n");
+
+    /* Disable FMC ISP function */
+    FMC->ISPCTL &=  ~FMC_ISPCTL_ISPEN_Msk;
 
     /* Lock protected registers */
     SYS_LockReg();

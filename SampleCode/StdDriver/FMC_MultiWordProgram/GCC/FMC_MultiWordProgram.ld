@@ -1,9 +1,9 @@
 /* Linker script to configure memory regions. */
 MEMORY
 {
-  FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x8000    /*32K */
-  RAM (rwx)  : ORIGIN = 0x20000800, LENGTH = 0x1800    /* 6K */
-  RAM2 (rwx)  : ORIGIN = 0x20001800, LENGTH = 0x800    /* 2K */
+    FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x4000    /* 8k */
+    RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x1000    /* 4k  */
+    RAM2 (rwx) : ORIGIN = 0x20001000, LENGTH = 0x1000    /* 4k */
 }
 
 /* Library configurations */
@@ -53,8 +53,8 @@ SECTIONS
 		__end__ = .;
 
 		/**(.text*)*/
-		*(EXCLUDE_FILE(./User/multi_word_prog.o) .text*)
 
+        
 		KEEP(*(.init))
 		KEEP(*(.fini))
 
@@ -73,6 +73,7 @@ SECTIONS
  		*(.dtors)
 		*(.rodata*)
 
+
 		KEEP(*(.eh_frame*))
 	} > FLASH
 
@@ -88,23 +89,35 @@ SECTIONS
 	} > FLASH
 	__exidx_end = .;
 
+    
+	__ExeSramBase = .;
+	.ExeSramCode :
+	{
+		. = ALIGN(4);
+		./Library/Library/*.o (.text*)
+		./User/main.o (.text*)
+		__ExeSramEnd = .; 
+	} > RAM2 AT > FLASH
+	
+    
+
 	/* To copy multiple ROM to RAM sections,
 	 * uncomment .copy.table section and,
 	 * define __STARTUP_COPY_MULTIPLE in startup_ARMCMx.S */
-	/*
-	.copy.table :
+	 
+    .copy.table :
 	{
 		. = ALIGN(4);
 		__copy_table_start__ = .;
 		LONG (__etext)
 		LONG (__data_start__)
 		LONG (__data_end__ - __data_start__)
-		LONG (__etext2)
-		LONG (__data2_start__)
-		LONG (__data2_end__ - __data2_start__)
+		LONG (__ExeSramBase)
+		LONG (0x20001000)
+		LONG (__ExeSramEnd - 0x20001000)
 		__copy_table_end__ = .;
 	} > FLASH
-	*/
+
 
 	/* To clear multiple BSS sections,
 	 * uncomment .zero.table section and,
@@ -122,16 +135,22 @@ SECTIONS
 	} > FLASH
 	*/
 	
+	/*. = 0x20000000;
 	
-
+	/*.exe_sram : AT (__exidx_end)*/
+	/*.exe_sram : 
+	{
+		./User/main.o(.text*)
+	} > RAM2  AT > FLASH*/
+    
 	__etext = .;
 
 	.data : AT (__etext)
 	{
 		__data_start__ = .;
-		*(.fastcode)
 		*(vtable)
 		*(.data*)
+		
 
 		. = ALIGN(4);
 		/* preinit data */
@@ -158,8 +177,11 @@ SECTIONS
 		. = ALIGN(4);
 		/* All data end */
 		__data_end__ = .;
+		
+		
 
 	} > RAM
+	
 
 	.bss :
 	{

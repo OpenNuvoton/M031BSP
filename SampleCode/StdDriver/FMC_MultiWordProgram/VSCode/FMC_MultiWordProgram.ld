@@ -1,7 +1,7 @@
 /* Linker script to configure memory regions. */
 MEMORY
 {
-    FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x4000    /* 8k */
+    FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x3000    /* 8k */
     RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x1000    /* 4k  */
     RAM2 (rwx) : ORIGIN = 0x20001000, LENGTH = 0x1000    /* 4k */
 }
@@ -94,8 +94,9 @@ SECTIONS
 	.ExeSramCode :
 	{
 		. = ALIGN(4);
-		./Library/Library/*.o (.text*)
-		./User/main.o (.text*)
+
+		*/fmc.c.obj (.text*)
+    	*/fmc.c.obj (.rodata*)
 		__ExeSramEnd = .; 
 	} > RAM2 AT > FLASH
 	

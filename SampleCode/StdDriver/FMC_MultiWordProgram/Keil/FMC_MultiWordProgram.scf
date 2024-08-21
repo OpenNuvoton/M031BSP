@@ -1,27 +1,31 @@
-FLASH 0x00000000
+
+
+FLASH 0x00000000 0x00002000
 {
-    ER_STARTU +0
+    FLASH +0
     {
-        startup_M031Series.o(RESET, +First)
+         startup_M031Series.o(RESET, +First)
+         startup_M031Series.o
+         system_M031Series.o
+         anon$$obj.o
+         init.o
+         entry*.o
+         handlers.o
     }
-	ER_RO +0
-    {
-        *(+RO)
-    }
-	
-	;on SRAM region
-    SRAM1 0x20000000	
+
+    SRAM1 0x20000000 0x00001000
     {  
-        fmc.o(+RO)
+        * (+RO)
     }
-    FASTCODE_INIT +0
+
+    SRAM2 0x20001000 0x00001000
     {
-        *(fastcode)
+        * (+RW)
+    
     }
-	
-    ER_RW +0
+
+    ZI +0
     {
-       *(+RW, +ZI)
+        * (+ZI)
     }
 }
-

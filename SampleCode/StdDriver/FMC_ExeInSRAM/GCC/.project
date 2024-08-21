@@ -50,11 +50,6 @@
 			<locationURI>PARENT-4-PROJECT_LOC/Library/StdDriver/src</locationURI>
 		</link>
 		<link>
-			<name>User/exeinsram.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/exeinsram.c</locationURI>
-		</link>
-		<link>
 			<name>User/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/main.c</locationURI>
@@ -135,16 +130,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1554097899419</id>
-			<name>CMSIS/CMSIS/GCC</name>
-			<type>5</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-*.S</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1554097899430</id>
+			<id>1724050621611</id>
 			<name>CMSIS/CMSIS/GCC</name>
 			<type>5</type>
 			<matcher>
@@ -153,7 +139,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1554097899454</id>
+			<id>1724050621619</id>
 			<name>CMSIS/CMSIS/GCC</name>
 			<type>5</type>
 			<matcher>
@@ -162,7 +148,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1554097899465</id>
+			<id>1724050621631</id>
 			<name>CMSIS/CMSIS/GCC</name>
 			<type>5</type>
 			<matcher>

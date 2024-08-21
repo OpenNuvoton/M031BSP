@@ -1,6 +1,6 @@
 project:
   linker:
-    - script: ../GCC/FMC_MultiWordProgram.ld
+    - script: ./FMC_MultiWordProgram.ld
   setups:
     - setup: Options for project  
       processor:
@@ -41,9 +41,7 @@ project:
     - group: CMSIS
       files:
         - file: ../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/GCC/_syscalls.c
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/GCC/semihosting.h      
+        - file: ./startup_M031Series.S
     - group: Library
       files:
         - file: ../../../../Library/StdDriver/src/retarget.c

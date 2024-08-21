@@ -661,21 +661,8 @@ uint32_t FMC_CheckAllOne(uint32_t u32addr, uint32_t u32count)
  *           -1  Program failed or time-out
  *           -2  Invalid address 
  */
-#if defined ( __CC_ARM )
-#pragma arm section code="fastcode"
+
 int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
-
-#elif defined ( __ICCARM__ )
-int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len) @ "fastcode"
-
-#elif defined ( __GNUC__ )
-#pragma GCC push_options
-#pragma GCC optimize ("O0")
-__attribute__ ((used, section("fastcode"))) int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
-
-#else
-int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
-#endif
 {
 
     uint32_t i, idx, u32OnProg, retval = 0;
@@ -800,13 +787,7 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
 
     return retval;
 }
-#if defined ( __CC_ARM )
-#pragma arm section
 
-#elif defined ( __GNUC__ )
-#pragma GCC pop_options
-
-#endif
 
 /*@}*/ /* end of group FMC_EXPORTED_FUNCTIONS */
 
