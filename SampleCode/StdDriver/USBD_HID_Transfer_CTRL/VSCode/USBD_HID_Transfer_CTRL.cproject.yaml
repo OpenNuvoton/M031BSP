@@ -4,7 +4,7 @@ project:
   setups:
     - setup: Options for project  
       processor:
-        trustzone: non-secure
+        trustzone: off
       add-path:
         - ../../../../Library/CMSIS/Include
         - ../../../../Library/Device/Nuvoton/M031/Include
