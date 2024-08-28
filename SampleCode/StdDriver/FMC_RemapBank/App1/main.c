@@ -72,6 +72,7 @@ int32_t  VerifyData(uint32_t u32StartAddr, uint32_t u32EndAddr, uint32_t u32Patt
             printf("FMC_Read address 0x%x failed!\n", u32Addr);
             return -1;
         }
+
         if (u32Data != u32Pattern)
         {
             printf("\nFMC_Read data verify failed at address 0x%x, read=0x%x, expect=0x%x\n", u32Addr, u32Data, u32Pattern);
@@ -114,6 +115,7 @@ int32_t  VerifyAddrPattern(uint32_t u32StartAddr, uint32_t u32EndAddr)
             printf("FMC_Read address 0x%x failed!\n", u32Addr);
             return -1;
         }
+
         if (u32Data != u32Addr)
         {
             printf("\nFMC_Read data verify failed at address 0x%x, read=0x%x, expect=0x%x\n", u32Addr, u32Data, u32Addr);
@@ -183,7 +185,9 @@ int32_t main(void)
     UART_Open(UART0, 115200);
 
     printf("\n\n\nApplication 1 on bank 1\n");
+
     while(UART_IS_TX_EMPTY(UART0)==0);
+
     /* Enable FMC ISP function */
     FMC_Open();
 
@@ -194,11 +198,11 @@ int32_t main(void)
         printf("+------------------------------------------------+\n");
         printf("| [ 0 ]: Program a page to bank0                 |\n");
         printf("| [ 1 ]: Program a page to bank1                 |\n");
-        printf("| [ 2 ]: CPU dumps the programmed page in bank0  |\n");
-        printf("| [ 3 ]: CPU dumps the programmed page in bank1  |\n");
-        printf("| [ 4 ]: Switch to Loader0                       |\n");
+        printf("| [ 2 ]: CPU dumps the programmed page in bank 0 |\n");
+        printf("| [ 3 ]: CPU dumps the programmed page in bank 1 |\n");
+        printf("| [ 4 ]: Switch to Loader1                       |\n");
         printf("| [ q/Q ]: Quit                                  |\n");
-        printf("| Current Bank %d                                |\n", (FMC->ISPSTS&BIT30)?1:0);
+        printf("| Current Bank %d                                 |\n", (FMC->ISPSTS&BIT30)?1:0);
         printf("+------------------------------------------------+\n");
         ch = getchar();
         switch(ch)
@@ -218,14 +222,17 @@ int32_t main(void)
             cpu_dump(u32Bank1ProgAddr, u32Bank1ProgAddr+FMC_FLASH_PAGE_SIZE);
             break;
         case '4':
-            printf("Switch to Loader 1\n");
+            printf("Switch to Loader1\n");
             UART_WAIT_TX_EMPTY(UART0);
+
             while (FMC->ISPTRG & FMC_ISPTRG_ISPGO_Msk) { }
 
             FMC_DISABLE_ISP_INT();
+
             NVIC_DisableIRQ(ISP_IRQn);
 
-            FMC_SetVectorPageAddr(0x0);     /* Switch To bank0 Loader */
+            FMC_SetVectorPageAddr(0x0);     /* Switch To bank 1 Loader */
+
             if (g_FMC_i32ErrCode != 0)
             {
                 printf("FMC_SetVectorPageAddr failed!\n");

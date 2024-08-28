@@ -1,0 +1,15 @@
+solution:
+  created-by: uv2csolution@1.2.0
+  created-for: CMSIS-Toolbox@2.0.0
+  compiler: GCC  
+  packs:
+    - pack: Nuvoton::NuMicro_DFP      
+  target-types:
+    - type: Debug
+      device: M032SE3AE
+      optimize: none
+  build-types:
+    - type: Debug
+      warnings: on         
+  projects:
+    - project: WriteToBank1.cproject.yaml

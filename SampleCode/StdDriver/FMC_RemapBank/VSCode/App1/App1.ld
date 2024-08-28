@@ -1,8 +1,9 @@
 /* Linker script to configure memory regions. */
 MEMORY
 {
-  FLASH (rx) : ORIGIN = 0x00004000, LENGTH = 0x8000    /*32K */
-  RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x0400    /* 6K */
+    FLASH (rx) : ORIGIN = 0x00004000, LENGTH = 0x8000    /* 8k */
+    RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x1000    /* 4k  */
+    RAM2 (rwx) : ORIGIN = 0x20001000, LENGTH = 0x1000    /* 4k */
 }
 
 /* Library configurations */
@@ -51,8 +52,9 @@ SECTIONS
 		__Vectors_Size = __Vectors_End - __Vectors;
 		__end__ = .;
 
-		*(.text*)
+		/**(.text*)*/
 
+        
 		KEEP(*(.init))
 		KEEP(*(.fini))
 
@@ -69,8 +71,8 @@ SECTIONS
  		*(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
  		*(SORT(.dtors.*))
  		*(.dtors)
-
 		*(.rodata*)
+
 
 		KEEP(*(.eh_frame*))
 	} > FLASH
@@ -87,23 +89,36 @@ SECTIONS
 	} > FLASH
 	__exidx_end = .;
 
+    
+	__ExeSramBase = .;
+	.ExeSramCode :
+	{
+		. = ALIGN(4);
+
+		*/fmc.c.obj (.text*)
+    	*/fmc.c.obj (.rodata*)
+		__ExeSramEnd = .; 
+	} > RAM2 AT > FLASH
+	
+    
+
 	/* To copy multiple ROM to RAM sections,
 	 * uncomment .copy.table section and,
 	 * define __STARTUP_COPY_MULTIPLE in startup_ARMCMx.S */
-	/*
-	.copy.table :
+	 
+    .copy.table :
 	{
 		. = ALIGN(4);
 		__copy_table_start__ = .;
 		LONG (__etext)
 		LONG (__data_start__)
 		LONG (__data_end__ - __data_start__)
-		LONG (__etext2)
-		LONG (__data2_start__)
-		LONG (__data2_end__ - __data2_start__)
+		LONG (__ExeSramBase)
+		LONG (0x20001000)
+		LONG (__ExeSramEnd - 0x20001000)
 		__copy_table_end__ = .;
 	} > FLASH
-	*/
+
 
 	/* To clear multiple BSS sections,
 	 * uncomment .zero.table section and,
@@ -120,30 +135,23 @@ SECTIONS
 		__zero_table_end__ = .;
 	} > FLASH
 	*/
-
-	__etext = .;
-
-	/* .stack_dummy section doesn't contains any symbols. It is only
-	 * used for linker to calculate size of stack sections, and assign
-	 * values to stack symbols later */
-
-	.stack_dummy (COPY):
+	
+	/*. = 0x20000000;
+	
+	/*.exe_sram : AT (__exidx_end)*/
+	/*.exe_sram : 
 	{
-		KEEP(*(.stack*))
-	} > RAM
-
-	/* Set stack top to size of stack_dummy section in RAM, and stack limit move down by
-	* size of stack_dummy section */
-	__StackTop = ORIGIN(RAM) + SIZEOF(.stack_dummy);
-	__StackLimit = ORIGIN(RAM);
-	PROVIDE(__stack = __StackTop);
+		./User/main.o(.text*)
+	} > RAM2  AT > FLASH*/
+    
+	__etext = .;
 
 	.data : AT (__etext)
 	{
 		__data_start__ = .;
-		. = SIZEOF(.stack_dummy);
 		*(vtable)
 		*(.data*)
+		
 
 		. = ALIGN(4);
 		/* preinit data */
@@ -170,8 +178,11 @@ SECTIONS
 		. = ALIGN(4);
 		/* All data end */
 		__data_end__ = .;
+		
+		
 
 	} > RAM
+	
 
 	.bss :
 	{
@@ -192,6 +203,20 @@ SECTIONS
 		__HeapLimit = .;
 	} > RAM
 
+	/* .stack_dummy section doesn't contains any symbols. It is only
+	 * used for linker to calculate size of stack sections, and assign
+	 * values to stack symbols later */
+	.stack_dummy (COPY):
+	{
+		KEEP(*(.stack*))
+	} > RAM
+
+	/* Set stack top to end of RAM, and stack limit move down by
+	 * size of stack_dummy section */
+	__StackTop = ORIGIN(RAM) + LENGTH(RAM);
+	__StackLimit = __StackTop - SIZEOF(.stack_dummy);
+	PROVIDE(__stack = __StackTop);
+
 	/* Check if data + heap + stack exceeds RAM limit */
-	/*ASSERT(__StackLimit >= __HeapLimit, "region RAM overflowed with stack")*/
+	ASSERT(__StackLimit >= __HeapLimit, "region RAM overflowed with stack")
 }
