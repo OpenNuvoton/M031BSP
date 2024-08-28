@@ -1,6 +1,6 @@
 project:
   linker:
-    - script: ./App0.ld
+    - script: ./FMC_WriteToBank1.ld
   setups:
     - setup: Options for project  
       processor:
@@ -8,9 +8,9 @@ project:
       add-path:
         - ../../../../../Library/CMSIS/Include
         - ../../../../../Library/Device/Nuvoton/M031/Include
-        - ../../../../../Library/StdDriver/inc
-      define:
-        - _ARM_VSCODE_        
+        - ../../../../../Library/StdDriver/inc 
+        - ../App1/out/App1/Debug/Debug
+        - ../Loader1/out/Loader1/Debug/Debug
     - output:
         type: "bin"
       misc:
@@ -43,7 +43,7 @@ project:
     - group: CMSIS
       files:
         - file: ../../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
-        - file: ./startup_M031Series.S
+        - file: .//startup_M031Series.S    
     - group: Library
       files:
         - file: ../../../../../Library/StdDriver/src/retarget.c
@@ -53,5 +53,8 @@ project:
         - file: ../../../../../Library/StdDriver/src/fmc.c         
     - group: User
       files:
-        - file: ../../App0/main.c
-  
+        - file: ./main.c
+        - file: ./image.S  
+      define:
+        - _ARM_VSCODE_         
+        - PAGE_SIZE_2048   

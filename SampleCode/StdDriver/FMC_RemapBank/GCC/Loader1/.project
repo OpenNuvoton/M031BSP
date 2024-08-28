@@ -42,52 +42,17 @@
 		<link>
 			<name>CMSIS/CMSIS</name>
 			<type>2</type>
-			<locationURI>copy_PARENT/Library/Device/Nuvoton/M031/Source</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/Device/Nuvoton/M031/Source</locationURI>
 		</link>
 		<link>
 			<name>Library/Library</name>
 			<type>2</type>
-			<locationURI>copy_PARENT/Library/StdDriver/Src</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src</locationURI>
 		</link>
 		<link>
 			<name>User/main.c</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Loader1/main.c</locationURI>
-		</link>
-		<link>
-			<name>CMSIS/CMSIS/GCC</name>
-			<type>2</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Library/Device/Nuvoton/M031/Source/GCC</locationURI>
-		</link>
-		<link>
-			<name>CMSIS/CMSIS/system_M031Series.c</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Library/Device/Nuvoton/M031/Source/system_M031Series.c</locationURI>
-		</link>
-		<link>
-			<name>Library/Library/clk.c</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src/clk.c</locationURI>
-		</link>
-		<link>
-			<name>Library/Library/fmc.c</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src/fmc.c</locationURI>
-		</link>
-		<link>
-			<name>Library/Library/retarget.c</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src/retarget.c</locationURI>
-		</link>
-		<link>
-			<name>Library/Library/sys.c</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src/sys.c</locationURI>
-		</link>
-		<link>
-			<name>Library/Library/uart.c</name>
-			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Library/StdDriver/src/uart.c</locationURI>
+			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/Loader1/main.c</locationURI>
 		</link>
 	</linkedResources>
 	<filteredResources>
@@ -110,7 +75,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1529460670889</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -119,16 +84,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
-			<name>Library/Library</name>
-			<type>5</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-sys.c</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>0</id>
+			<id>1529460670897</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -137,7 +93,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1529460670904</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -146,16 +102,16 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1529460670911</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-timer.c</arguments>
+				<arguments>1.0-name-matches-false-false-sys.c</arguments>
 			</matcher>
 		</filter>
 		<filter>
-			<id>0</id>
+			<id>1529460670918</id>
 			<name>Library/Library</name>
 			<type>5</type>
 			<matcher>
@@ -164,14 +120,4 @@
 			</matcher>
 		</filter>
 	</filteredResources>
-	<variableList>
-		<variable>
-			<name>copy_PARENT</name>
-			<value>file:/F:/ARM_Project/M031/bsp</value>
-		</variable>
-		<variable>
-			<name>copy_PARENT1</name>
-			<value>$%7Bcopy_PARENT%7D/SampleCode/StdDriver/FMC_RemapBank</value>
-		</variable>
-	</variableList>
 </projectDescription>
