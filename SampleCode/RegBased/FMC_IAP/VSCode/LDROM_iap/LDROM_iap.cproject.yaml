@@ -1,0 +1,47 @@
+project:
+  linker:
+    - script: ./LDROM_iap_4K.ld
+  setups:
+    - setup: Options for project  
+      processor:
+        trustzone: off
+      add-path:
+        - ../../../../../Library/CMSIS/Include
+        - ../../../../../Library/Device/Nuvoton/M031/Include
+        - ../../../../../Library/StdDriver/inc      
+    - output:
+        type: "bin"
+      misc:
+        - C-CPP:
+          - -mthumb
+          - -masm-syntax-unified
+          - -fmessage-length=0
+          - -fsigned-char
+          - -ffunction-sections
+          - -fdata-sections
+          - -g
+        - C:
+          - -std=gnu11
+        - ASM:
+          - -mthumb
+          - -fmessage-length=0
+          - -fsigned-char
+          - -ffunction-sections
+          - -fdata-sections
+          - -g
+          - -x assembler-with-cpp
+        - Link:
+          - -mthumb
+          - -fmessage-length=0
+          - -fsigned-char
+          - -g
+          - --specs=nano.specs
+          - -Wl,--gc-sections,-Map=$elf()$.map           
+  groups:
+    - group: CMSIS
+      files:
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
+    - group: User
+      files:
+        - file: ../../ldrom_main.c  
