@@ -166,7 +166,7 @@ __STATIC_INLINE uint32_t FMC_GetVECMAP(void)
   */
 __STATIC_INLINE uint32_t FMC_ReadCID(void)
 {
-    uint32_t  tout = FMC_TIMEOUT_READ;
+    uint32_t volatile tout = FMC_TIMEOUT_READ;
 
     g_FMC_i32ErrCode = 0;
 
@@ -201,7 +201,7 @@ __STATIC_INLINE uint32_t FMC_ReadCID(void)
   */
 __STATIC_INLINE uint32_t FMC_ReadPID(void)
 {
-    uint32_t  tout = FMC_TIMEOUT_READ;
+    uint32_t volatile tout = FMC_TIMEOUT_READ;
 
     g_FMC_i32ErrCode = 0;
 
@@ -231,7 +231,7 @@ __STATIC_INLINE uint32_t FMC_ReadPID(void)
  */
 __STATIC_INLINE uint32_t FMC_ReadUID(uint8_t u8Index)
 {
-    uint32_t  tout = FMC_TIMEOUT_READ;
+    uint32_t volatile tout = FMC_TIMEOUT_READ;
 
     g_FMC_i32ErrCode = 0;
 
@@ -262,7 +262,7 @@ __STATIC_INLINE uint32_t FMC_ReadUID(uint8_t u8Index)
   */
 __STATIC_INLINE uint32_t FMC_ReadUCID(uint32_t u32Index)
 {
-    uint32_t  tout = FMC_TIMEOUT_READ;
+    uint32_t volatile tout = FMC_TIMEOUT_READ;
 
     g_FMC_i32ErrCode = 0;
 
@@ -297,7 +297,7 @@ __STATIC_INLINE uint32_t FMC_ReadUCID(uint32_t u32Index)
  */
 __STATIC_INLINE int32_t FMC_SetVectorPageAddr(uint32_t u32PageAddr)
 {
-    uint32_t  tout = FMC_TIMEOUT_WRITE;
+    uint32_t volatile tout = FMC_TIMEOUT_WRITE;
 
     g_FMC_i32ErrCode = 0;
 
