@@ -44,4 +44,4 @@ project:
         - file: ../../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
     - group: User
       files:
-        - file: ../../ldrom_main.c  
+        - file: ../../LDROM_main.c  

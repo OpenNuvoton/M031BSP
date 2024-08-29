@@ -48,7 +48,7 @@ project:
         - file: ../../../../../Library/StdDriver/src/retarget.c     
     - group: User
       files:
-        - file: ../../aprom_main.c
+        - file: ../../APROM_main.c
         - file: ../../GCC/ap_image.S  
       define:
         - _ARM_VSCODE_         
