@@ -10,8 +10,7 @@
       <TargetName>FMC_MultiBoot</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
@@ -321,7 +320,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>3</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
@@ -435,8 +434,7 @@
       <TargetName>FMC_Boot0</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
@@ -860,8 +858,7 @@
       <TargetName>FMC_Boot1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
@@ -1285,8 +1282,7 @@
       <TargetName>FMC_Boot2</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
@@ -1710,8 +1706,7 @@
       <TargetName>FMC_Boot3</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
@@ -2135,8 +2130,7 @@
       <TargetName>FMC_BootLD</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>M032SE3AE</Device>
