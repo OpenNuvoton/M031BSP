@@ -13,6 +13,9 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
+/* Enable I2C timeout */
+//#define ENABLE_I2C_TIMEOUT
+
 #define TEST_LENGTH    256
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -63,6 +66,10 @@ void I2C_SlaveTRx(uint32_t u32Status)
     {
         g_u8SlvDataLen = 0;
         I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI_AA);
+#ifdef ENABLE_I2C_TIMEOUT
+        /* Enable I2C timeout */
+        I2C_EnableTimeout(I2C0,1);
+#endif
     }
     else if(u32Status == 0x80)                 /* Previously address with own SLA address
                                                    Data has been received; ACK has been returned*/
@@ -89,6 +96,10 @@ void I2C_SlaveTRx(uint32_t u32Status)
         I2C_SET_DATA(I2C0, g_au8SlvData[slave_buff_addr]);
         slave_buff_addr++;
         I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI_AA);
+#ifdef ENABLE_I2C_TIMEOUT
+        /* Enable I2C timeout */
+        I2C_EnableTimeout(I2C0,1);
+#endif
     }
     else if(u32Status == 0xB8)                  /* Data byte in I2CDAT has been transmitted ACK has been received */
     {
@@ -111,9 +122,17 @@ void I2C_SlaveTRx(uint32_t u32Status)
     {
         g_u8SlvDataLen = 0;
         I2C_SET_CONTROL_REG(I2C0, I2C_CTL_SI_AA);
+#ifdef ENABLE_I2C_TIMEOUT
+        /* Disable I2C timeout */
+        I2C_DisableTimeout(I2C0);
+#endif
     }
     else
     {
+#ifdef ENABLE_I2C_TIMEOUT
+        /* Disable I2C timeout */
+        I2C_DisableTimeout(I2C0);
+#endif
         printf("[SlaveTRx] Status [0x%x] Unexpected abort!!\n", u32Status);
         if(u32Status == 0x68)               /* Slave receive arbitration lost, clear SI */
         {
