@@ -329,7 +329,7 @@
             <uC99>0</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>1</v6Lang>
+            <v6Lang>3</v6Lang>
             <v6LangP>0</v6LangP>
             <vShortEn>0</vShortEn>
             <vShortWch>0</vShortWch>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\Library\CMSIS\Include;..\..\..\Library\StdDriver\inc;..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\ThirdParty\FreeRTOS\Source\include;..\..\..\ThirdParty\FreeRTOS\Demo\COMMON\include;..\..\..\ThirdParty\FreeRTOS\SOURCE\portable\GCC\ARM_CM0;..\..\FreeRTOS</IncludePath>
+              <IncludePath>..\..\..\Library\CMSIS\Core\Include;..\..\..\Library\StdDriver\inc;..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\ThirdParty\FreeRTOS\Source\include;..\..\..\ThirdParty\FreeRTOS\Demo\COMMON\include;..\..\..\ThirdParty\FreeRTOS\SOURCE\portable\GCC\ARM_CM0;..\..\FreeRTOS</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

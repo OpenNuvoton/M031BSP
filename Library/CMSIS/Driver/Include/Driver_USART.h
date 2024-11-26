@@ -1,36 +1,37 @@
-/* -----------------------------------------------------------------------------
- * Copyright (c) 2013-2014 ARM Ltd.
+/*
+ * Copyright (c) 2013-2020 ARM Limited. All rights reserved.
  *
- * This software is provided 'as-is', without any express or implied warranty.
- * In no event will the authors be held liable for any damages arising from
- * the use of this software. Permission is granted to anyone to use this
- * software for any purpose, including commercial applications, and to alter
- * it and redistribute it freely, subject to the following restrictions:
+ * SPDX-License-Identifier: Apache-2.0
  *
- * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software. If you use this software in
- *    a product, an acknowledgment in the product documentation would be
- *    appreciated but is not required.
+ * Licensed under the Apache License, Version 2.0 (the License); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ * www.apache.org/licenses/LICENSE-2.0
  *
- * 3. This notice may not be removed or altered from any source distribution.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- *
- * $Date:        24. Nov 2014
- * $Revision:    V2.02
+ * $Date:        31. March 2020
+ * $Revision:    V2.4
  *
  * Project:      USART (Universal Synchronous Asynchronous Receiver Transmitter)
  *               Driver definitions
- * -------------------------------------------------------------------------- */
+ */
 
 /* History:
- *  Version 2.02
- *    Corrected ARM_USART_CPOL_Pos and ARM_USART_CPHA_Pos definitions 
- *  Version 2.01
+ *  Version 2.4
+ *    Removed volatile from ARM_USART_STATUS and ARM_USART_MODEM_STATUS
+ *  Version 2.3
+ *    ARM_USART_STATUS and ARM_USART_MODEM_STATUS made volatile
+ *  Version 2.2
+ *    Corrected ARM_USART_CPOL_Pos and ARM_USART_CPHA_Pos definitions
+ *  Version 2.1
  *    Removed optional argument parameter from Signal Event
- *  Version 2.00
+ *  Version 2.0
  *    New simplified driver:
  *      complexity moved to upper layer (especially data handling)
  *      more unified API for different communication interfaces
@@ -39,7 +40,7 @@
  *      Synchronous
  *      Single-wire
  *      IrDA
- *      Smart Card  
+ *      Smart Card
  *    Changed prefix ARM_DRV -> ARM_DRIVER
  *  Version 1.10
  *    Namespace prefix ARM_ added
@@ -53,12 +54,21 @@
  *    Initial release
  */
 
-#ifndef __DRIVER_USART_H
-#define __DRIVER_USART_H
+#ifndef DRIVER_USART_H_
+#define DRIVER_USART_H_
+
+#ifdef  __cplusplus
+extern "C"
+{
+#endif
 
 #include "Driver_Common.h"
 
-#define ARM_USART_API_VERSION ARM_DRIVER_VERSION_MAJOR_MINOR(2,02)  /* API version */
+#define ARM_USART_API_VERSION ARM_DRIVER_VERSION_MAJOR_MINOR(2,4)  /* API version */
+
+
+#define _ARM_Driver_USART_(n)      Driver_USART##n
+#define  ARM_Driver_USART_(n) _ARM_Driver_USART_(n)
 
 
 /****** USART Control Codes *****/
@@ -121,7 +131,7 @@
 
 /*----- USART Control Codes: Miscellaneous Controls  -----*/
 #define ARM_USART_SET_DEFAULT_TX_VALUE      (0x10UL << ARM_USART_CONTROL_Pos)   ///< Set default Transmit value (Synchronous Receive only); arg = value
-#define ARM_USART_SET_IRDA_PULSE            (0x11UL << ARM_USART_CONTROL_Pos)   ///< Set IrDA Pulse in ns; arg: 0=3/16 of bit period  
+#define ARM_USART_SET_IRDA_PULSE            (0x11UL << ARM_USART_CONTROL_Pos)   ///< Set IrDA Pulse in ns; arg: 0=3/16 of bit period
 #define ARM_USART_SET_SMART_CARD_GUARD_TIME (0x12UL << ARM_USART_CONTROL_Pos)   ///< Set Smart Card Guard Time; arg = number of bit periods
 #define ARM_USART_SET_SMART_CARD_CLOCK      (0x13UL << ARM_USART_CONTROL_Pos)   ///< Set Smart Card Clock in Hz; arg: 0=Clock not generated
 #define ARM_USART_CONTROL_SMART_CARD_NACK   (0x14UL << ARM_USART_CONTROL_Pos)   ///< Smart Card NACK generation; arg: 0=disabled, 1=enabled
@@ -156,6 +166,7 @@ typedef struct _ARM_USART_STATUS {
   uint32_t rx_break         : 1;        ///< Break detected on receive (cleared on start of next receive operation)
   uint32_t rx_framing_error : 1;        ///< Framing error detected on receive (cleared on start of next receive operation)
   uint32_t rx_parity_error  : 1;        ///< Parity error detected on receive (cleared on start of next receive operation)
+  uint32_t reserved         : 25;
 } ARM_USART_STATUS;
 
 /**
@@ -172,10 +183,11 @@ typedef enum _ARM_USART_MODEM_CONTROL {
 \brief USART Modem Status
 */
 typedef struct _ARM_USART_MODEM_STATUS {
-  uint32_t cts : 1;                     ///< CTS state: 1=Active, 0=Inactive
-  uint32_t dsr : 1;                     ///< DSR state: 1=Active, 0=Inactive
-  uint32_t dcd : 1;                     ///< DCD state: 1=Active, 0=Inactive
-  uint32_t ri  : 1;                     ///< RI  state: 1=Active, 0=Inactive
+  uint32_t cts      : 1;                ///< CTS state: 1=Active, 0=Inactive
+  uint32_t dsr      : 1;                ///< DSR state: 1=Active, 0=Inactive
+  uint32_t dcd      : 1;                ///< DCD state: 1=Active, 0=Inactive
+  uint32_t ri       : 1;                ///< RI  state: 1=Active, 0=Inactive
+  uint32_t reserved : 28;
 } ARM_USART_MODEM_STATUS;
 
 
@@ -203,7 +215,7 @@ typedef struct _ARM_USART_MODEM_STATUS {
   \return      \ref ARM_DRIVER_VERSION
 
   \fn          ARM_USART_CAPABILITIES ARM_USART_GetCapabilities (void)
-  \brief       Get driver capabilities
+  \brief       Get driver capabilities.
   \return      \ref ARM_USART_CAPABILITIES
 
   \fn          int32_t ARM_USART_Initialize (ARM_USART_SignalEvent_t cb_event)
@@ -262,7 +274,7 @@ typedef struct _ARM_USART_MODEM_STATUS {
   \fn          int32_t ARM_USART_SetModemControl (ARM_USART_MODEM_CONTROL control)
   \brief       Set USART Modem Control line state.
   \param[in]   control  \ref ARM_USART_MODEM_CONTROL
-  \return      \ref execution_status 
+  \return      \ref execution_status
 
   \fn          ARM_USART_MODEM_STATUS ARM_USART_GetModemStatus (void)
   \brief       Get USART Modem Status lines state.
@@ -271,7 +283,6 @@ typedef struct _ARM_USART_MODEM_STATUS {
   \fn          void ARM_USART_SignalEvent (uint32_t event)
   \brief       Signal USART Events.
   \param[in]   event  \ref USART_events notification mask
-  \return      none
 */
 
 typedef void (*ARM_USART_SignalEvent_t) (uint32_t event);  ///< Pointer to \ref ARM_USART_SignalEvent : Signal USART Event.
@@ -281,7 +292,7 @@ typedef void (*ARM_USART_SignalEvent_t) (uint32_t event);  ///< Pointer to \ref 
 \brief USART Device Driver Capabilities.
 */
 typedef struct _ARM_USART_CAPABILITIES {
-  uint32_t asynchronous       : 1;      ///< supports UART (Asynchronous) mode 
+  uint32_t asynchronous       : 1;      ///< supports UART (Asynchronous) mode
   uint32_t synchronous_master : 1;      ///< supports Synchronous Master mode
   uint32_t synchronous_slave  : 1;      ///< supports Synchronous Slave mode
   uint32_t single_wire        : 1;      ///< supports UART Single-wire mode
@@ -302,6 +313,7 @@ typedef struct _ARM_USART_CAPABILITIES {
   uint32_t event_dsr          : 1;      ///< Signal DSR change event: \ref ARM_USART_EVENT_DSR
   uint32_t event_dcd          : 1;      ///< Signal DCD change event: \ref ARM_USART_EVENT_DCD
   uint32_t event_ri           : 1;      ///< Signal RI change event: \ref ARM_USART_EVENT_RI
+  uint32_t reserved           : 11;     ///< Reserved (must be zero)
 } ARM_USART_CAPABILITIES;
 
 
@@ -327,4 +339,8 @@ typedef struct _ARM_DRIVER_USART {
   ARM_USART_MODEM_STATUS (*GetModemStatus)  (void);                              ///< Pointer to \ref ARM_USART_GetModemStatus : Get USART Modem Status lines state.
 } const ARM_DRIVER_USART;
 
-#endif /* __DRIVER_USART_H */
+#ifdef  __cplusplus
+}
+#endif
+
+#endif /* DRIVER_USART_H_ */

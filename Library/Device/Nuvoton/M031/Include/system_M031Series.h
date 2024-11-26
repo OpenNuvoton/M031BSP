@@ -51,6 +51,11 @@ extern uint32_t SystemCoreClock;    /*!< System Clock Frequency (Core Clock)  */
 extern uint32_t CyclesPerUs;        /*!< Cycles per micro second              */
 extern uint32_t PllClock;           /*!< PLL Output Clock Frequency           */
 
+/**
+  \brief Exception / Interrupt Handler Function Prototype
+*/
+typedef void(*VECTOR_TABLE_Type)(void);
+
 #if USE_ASSERT
 /**
  * @brief      Assert Function

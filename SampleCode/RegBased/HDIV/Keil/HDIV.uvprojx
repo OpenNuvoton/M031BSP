@@ -325,7 +325,7 @@
             <uC99>0</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>1</v6Lang>
+            <v6Lang>3</v6Lang>
             <v6LangP>1</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -335,7 +335,7 @@
             <uC99>0</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>1</v6Lang>
+            <v6Lang>3</v6Lang>
             <v6LangP>1</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -346,7 +346,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\Library\CMSIS\Include;..\..\..\..\Library\StdDriver\inc</IncludePath>
+              <IncludePath>..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\Library\CMSIS\Core\Include;..\..\..\..\Library\StdDriver\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

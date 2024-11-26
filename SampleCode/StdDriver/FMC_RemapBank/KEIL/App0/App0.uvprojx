@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>PAGE_SIZE_2048</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\..\Library\CMSIS\Include;..\..\..\..\..\Library\StdDriver\inc</IncludePath>
+              <IncludePath>..\..\..\..\..\Library\Device\Nuvoton\M031\Include;..\..\..\..\..\Library\CMSIS\Core\Include;..\..\..\..\..\Library\StdDriver\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

@@ -1,6 +1,24 @@
+/*
+ * Copyright (c) 2013-2020 Arm Limited. All rights reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the License); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 
 #include "Driver_ETH_PHY.h"
 
-#define ARM_ETH_PHY_DRV_VERSION    ARM_DRIVER_VERSION_MAJOR_MINOR(2, 0) /* driver version */
+#define ARM_ETH_PHY_DRV_VERSION    ARM_DRIVER_VERSION_MAJOR_MINOR(1, 0) /* driver version */
 
 /* Driver Version */
 static const ARM_DRIVER_VERSION DriverVersion = {
@@ -12,19 +30,20 @@ static const ARM_DRIVER_VERSION DriverVersion = {
 // Functions
 //
 
-ARM_DRIVER_VERSION ARM_ETH_PHY_GetVersion(void)
+static ARM_DRIVER_VERSION ARM_ETH_PHY_GetVersion(void)
+{
+  return DriverVersion;
+}
+
+static int32_t ARM_ETH_PHY_Initialize(ARM_ETH_PHY_Read_t fn_read, ARM_ETH_PHY_Write_t fn_write)
 {
 }
 
-int32_t ARM_ETH_PHY_Initialize(ARM_ETH_PHY_Read_t fn_read, ARM_ETH_PHY_Write_t fn_write)
+static int32_t ARM_ETH_PHY_Uninitialize(void)
 {
 }
 
-int32_t ARM_ETH_PHY_Uninitialize(void)
-{
-}
-
-int32_t ARM_ETH_PHY_PowerControl(ARM_POWER_STATE state)
+static int32_t ARM_ETH_PHY_PowerControl(ARM_POWER_STATE state)
 {
     switch (state)
     {
@@ -36,13 +55,11 @@ int32_t ARM_ETH_PHY_PowerControl(ARM_POWER_STATE state)
 
     case ARM_POWER_FULL:
         break;
-
-    default:
-        return ARM_DRIVER_ERROR_UNSUPPORTED;
     }
+    return ARM_DRIVER_OK;
 }
 
-int32_t ARM_ETH_PHY_SetInterface(uint32_t interface)
+static int32_t ARM_ETH_PHY_SetInterface(uint32_t interface)
 {
     switch (interface)
     {
@@ -55,7 +72,7 @@ int32_t ARM_ETH_PHY_SetInterface(uint32_t interface)
     }
 }
 
-int32_t ARM_ETH_PHY_SetMode(uint32_t mode)
+static int32_t ARM_ETH_PHY_SetMode(uint32_t mode)
 {
     switch (mode & ARM_ETH_PHY_SPEED_Msk)
     {
@@ -88,15 +105,17 @@ int32_t ARM_ETH_PHY_SetMode(uint32_t mode)
     }
 }
 
-ARM_ETH_LINK_STATE ARM_ETH_PHY_GetLinkState(void)
+static ARM_ETH_LINK_STATE ARM_ETH_PHY_GetLinkState(void)
 {
 }
 
-ARM_ETH_LINK_INFO ARM_ETH_PHY_GetLinkInfo(void)
+static ARM_ETH_LINK_INFO ARM_ETH_PHY_GetLinkInfo(void)
 {
 }
 
-ARM_DRIVER_ETH_PHY ARM_Driver_ETH_PHY_(ETH_PHY_NUM) =
+extern \
+ARM_DRIVER_ETH_PHY Driver_ETH_PHY0;
+ARM_DRIVER_ETH_PHY Driver_ETH_PHY0 =
 {
     ARM_ETH_PHY_GetVersion,
     ARM_ETH_PHY_Initialize,

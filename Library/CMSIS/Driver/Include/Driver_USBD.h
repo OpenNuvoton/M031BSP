@@ -1,33 +1,34 @@
-/* -----------------------------------------------------------------------------
- * Copyright (c) 2013-2014 ARM Ltd.
+/*
+ * Copyright (c) 2013-2024 ARM Limited. All rights reserved.
  *
- * This software is provided 'as-is', without any express or implied warranty.
- * In no event will the authors be held liable for any damages arising from
- * the use of this software. Permission is granted to anyone to use this
- * software for any purpose, including commercial applications, and to alter
- * it and redistribute it freely, subject to the following restrictions:
+ * SPDX-License-Identifier: Apache-2.0
  *
- * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software. If you use this software in
- *    a product, an acknowledgment in the product documentation would be
- *    appreciated but is not required.
+ * Licensed under the Apache License, Version 2.0 (the License); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ * www.apache.org/licenses/LICENSE-2.0
  *
- * 3. This notice may not be removed or altered from any source distribution.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- *
- * $Date:        3. Jun 2014
- * $Revision:    V2.01
+ * $Date:        13. May 2024
+ * $Revision:    V2.3
  *
  * Project:      USB Device Driver definitions
- * -------------------------------------------------------------------------- */
+ */
 
 /* History:
- *  Version 2.01
+ *  Version 2.3
+ *    Removed volatile from ARM_USBD_STATE
+ *  Version 2.2
+ *    ARM_USBD_STATE made volatile
+ *  Version 2.1
  *    Added ARM_USBD_ReadSetupPacket function
- *  Version 2.00
+ *  Version 2.0
  *    Removed ARM_USBD_DeviceConfigure function
  *    Removed ARM_USBD_SET_ADDRESS_STAGE parameter from ARM_USBD_DeviceSetAddress function
  *    Removed ARM_USBD_EndpointReadStart function
@@ -42,21 +43,31 @@
  *    Initial release
  */
 
-#ifndef __DRIVER_USBD_H
-#define __DRIVER_USBD_H
+#ifndef DRIVER_USBD_H_
+#define DRIVER_USBD_H_
+
+#ifdef  __cplusplus
+extern "C"
+{
+#endif
 
 #include "Driver_USB.h"
 
-#define ARM_USBD_API_VERSION ARM_DRIVER_VERSION_MAJOR_MINOR(2,01)  /* API version */
+#define ARM_USBD_API_VERSION ARM_DRIVER_VERSION_MAJOR_MINOR(2,3)  /* API version */
+
+
+#define _ARM_Driver_USBD_(n)      Driver_USBD##n
+#define  ARM_Driver_USBD_(n) _ARM_Driver_USBD_(n)
 
 
 /**
 \brief USB Device State
 */
 typedef struct _ARM_USBD_STATE {
-  uint32_t vbus   : 1;                  ///< USB Device VBUS flag
-  uint32_t speed  : 2;                  ///< USB Device speed setting (ARM_USB_SPEED_xxx)
-  uint32_t active : 1;                  ///< USB Device active flag
+  uint32_t vbus     : 1;                ///< USB Device VBUS flag
+  uint32_t speed    : 2;                ///< USB Device speed setting (ARM_USB_SPEED_xxx)
+  uint32_t active   : 1;                ///< USB Device active flag
+  uint32_t reserved : 28;
 } ARM_USBD_STATE;
 
 
@@ -73,8 +84,6 @@ typedef struct _ARM_USBD_STATE {
 #define ARM_USBD_EVENT_OUT              (1UL << 1)      ///< OUT Packet(s)
 #define ARM_USBD_EVENT_IN               (1UL << 2)      ///< IN Packet(s)
 
-
-#ifndef __DOXYGEN_MW__                  // exclude from middleware documentation
 
 // Function documentation
 /**
@@ -205,7 +214,6 @@ typedef struct _ARM_USBD_STATE {
   \fn          void ARM_USBD_SignalDeviceEvent (uint32_t event)
   \brief       Signal USB Device Event.
   \param[in]   event \ref USBD_dev_events
-  \return      none
 */
 /**
   \fn          void ARM_USBD_SignalEndpointEvent (uint8_t ep_addr, uint32_t event)
@@ -214,7 +222,6 @@ typedef struct _ARM_USBD_STATE {
                 - ep_addr.0..3: Address
                 - ep_addr.7:    Direction
   \param[in]   event \ref USBD_ep_events
-  \return      none
 */
 
 typedef void (*ARM_USBD_SignalDeviceEvent_t)   (uint32_t event);                    ///< Pointer to \ref ARM_USBD_SignalDeviceEvent : Signal USB Device Event.
@@ -228,6 +235,7 @@ typedef struct _ARM_USBD_CAPABILITIES {
   uint32_t vbus_detection  : 1;         ///< VBUS detection
   uint32_t event_vbus_on   : 1;         ///< Signal VBUS On event
   uint32_t event_vbus_off  : 1;         ///< Signal VBUS Off event
+  uint32_t reserved        : 29;        ///< Reserved (must be zero)
 } ARM_USBD_CAPABILITIES;
 
 
@@ -258,6 +266,8 @@ typedef struct _ARM_DRIVER_USBD {
   uint16_t              (*GetFrameNumber)            (void);                                              ///< Pointer to \ref ARM_USBD_GetFrameNumber : Get current USB Frame Number.
 } const ARM_DRIVER_USBD;
 
-#endif /* __DOXYGEN_MW__ */
+#ifdef  __cplusplus
+}
+#endif
 
-#endif /* __DRIVER_USBD_H */
+#endif /* DRIVER_USBD_H_ */

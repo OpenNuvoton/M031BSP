@@ -1,35 +1,38 @@
-/* -----------------------------------------------------------------------------
- * Copyright (c) 2013-2014 ARM Ltd.
+/*
+ * Copyright (c) 2013-2024 ARM Limited. All rights reserved.
  *
- * This software is provided 'as-is', without any express or implied warranty.
- * In no event will the authors be held liable for any damages arising from
- * the use of this software. Permission is granted to anyone to use this
- * software for any purpose, including commercial applications, and to alter
- * it and redistribute it freely, subject to the following restrictions:
+ * SPDX-License-Identifier: Apache-2.0
  *
- * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software. If you use this software in
- *    a product, an acknowledgment in the product documentation would be
- *    appreciated but is not required.
+ * Licensed under the Apache License, Version 2.0 (the License); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ * www.apache.org/licenses/LICENSE-2.0
  *
- * 3. This notice may not be removed or altered from any source distribution.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- *
- * $Date:        3. September 2014
- * $Revision:    V2.01
+ * $Date:        13. May 2024
+ * $Revision:    V2.4
  *
  * Project:      USB Host Driver definitions
- * -------------------------------------------------------------------------- */
+ */
 
 /* History:
- *  Version 2.01
+ *  Version 2.4
+ *    Deprecated API for OHCI/EHCI Host Controller Interface (HCI)
+ *  Version 2.3
+ *    Removed volatile from ARM_USBH_PORT_STATE
+ *  Version 2.2
+ *    ARM_USBH_PORT_STATE made volatile
+ *  Version 2.1
  *    Renamed structure ARM_USBH_EP_HANDLE to ARM_USBH_PIPE_HANDLE
  *    Renamed functions ARM_USBH_Endpoint... to ARM_USBH_Pipe...
  *    Renamed function ARM_USBH_SignalEndpointEvent to ARM_USBH_SignalPipeEvent
- *  Version 2.00
+ *  Version 2.0
  *    Replaced function ARM_USBH_PortPowerOnOff with ARM_USBH_PortVbusOnOff
  *    Changed function ARM_USBH_EndpointCreate parameters
  *    Replaced function ARM_USBH_EndpointConfigure with ARM_USBH_EndpointModify
@@ -47,12 +50,21 @@
  *    Initial release
  */
 
-#ifndef __DRIVER_USBH_H
-#define __DRIVER_USBH_H
+#ifndef DRIVER_USBH_H_
+#define DRIVER_USBH_H_
+
+#ifdef  __cplusplus
+extern "C"
+{
+#endif
 
 #include "Driver_USB.h"
 
-#define ARM_USBH_API_VERSION ARM_DRIVER_VERSION_MAJOR_MINOR(2,01)  /* API version */
+#define ARM_USBH_API_VERSION ARM_DRIVER_VERSION_MAJOR_MINOR(2,4)  /* API version */
+
+
+#define _ARM_Driver_USBH_(n)      Driver_USBH##n
+#define  ARM_Driver_USBH_(n) _ARM_Driver_USBH_(n)
 
 
 /**
@@ -62,6 +74,7 @@ typedef struct _ARM_USBH_PORT_STATE {
   uint32_t connected   : 1;             ///< USB Host Port connected flag
   uint32_t overcurrent : 1;             ///< USB Host Port overcurrent flag
   uint32_t speed       : 2;             ///< USB Host Port speed setting (ARM_USB_SPEED_xxx)
+  uint32_t reserved    : 28;
 } ARM_USBH_PORT_STATE;
 
 /**
@@ -113,8 +126,6 @@ typedef uint32_t ARM_USBH_PIPE_HANDLE;
 #define ARM_USBH_EVENT_HANDSHAKE_ERR     (1UL << 5)     ///< ERR Handshake received
 #define ARM_USBH_EVENT_BUS_ERROR         (1UL << 6)     ///< Bus Error detected
 
-
-#ifndef __DOXYGEN_MW__                  // exclude from middleware documentation
 
 // Function documentation
 /**
@@ -264,14 +275,12 @@ typedef uint32_t ARM_USBH_PIPE_HANDLE;
   \brief       Signal Root HUB Port Event.
   \param[in]   port  Root HUB Port Number
   \param[in]   event \ref USBH_port_events
-  \return      none
 */
 /**
   \fn          void ARM_USBH_SignalPipeEvent (ARM_USBH_PIPE_HANDLE pipe_hndl, uint32_t event)
   \brief       Signal Pipe Event.
   \param[in]   pipe_hndl  Pipe Handle
   \param[in]   event  \ref USBH_pipe_events
-  \return      none
 */
 
 typedef void (*ARM_USBH_SignalPortEvent_t) (uint8_t port, uint32_t event);                    ///< Pointer to \ref ARM_USBH_SignalPortEvent : Signal Root HUB Port Event.
@@ -288,6 +297,7 @@ typedef struct _ARM_USBH_CAPABILITIES {
   uint32_t event_connect      :  1;     ///< Signal Connect event
   uint32_t event_disconnect   :  1;     ///< Signal Disconnect event
   uint32_t event_overcurrent  :  1;     ///< Signal Overcurrent event
+  uint32_t reserved           : 13;     ///< Reserved (must be zero)
 } ARM_USBH_CAPABILITIES;
 
 
@@ -332,6 +342,8 @@ typedef struct _ARM_DRIVER_USBH {
 } const ARM_DRIVER_USBH;
 
 
+#ifndef CMSIS_DISABLE_DEPRECATED
+
 // HCI (OHCI/EHCI)
 
 // Function documentation
@@ -375,7 +387,6 @@ typedef struct _ARM_DRIVER_USBH {
 /**
   \fn          void ARM_USBH_HCI_Interrupt (void)
   \brief       USB Host HCI Interrupt Handler.
-  \return      none
 */
 
 typedef void (*ARM_USBH_HCI_Interrupt_t) (void);  ///< Pointer to Interrupt Handler Routine.
@@ -386,11 +397,12 @@ typedef void (*ARM_USBH_HCI_Interrupt_t) (void);  ///< Pointer to Interrupt Hand
 */
 typedef struct _ARM_USBH_HCI_CAPABILITIES {
   uint32_t port_mask : 15;              ///< Root HUB available Ports Mask
+  uint32_t reserved  : 17;              ///< Reserved (must be zero)
 } ARM_USBH_HCI_CAPABILITIES;
 
 
 /**
-  \brief Access structure of USB Host HCI (OHCI/EHCI) Driver.
+  \brief Access structure of USB Host HCI (OHCI/EHCI) Driver. @deprecated HCI driver has been deprecated
 */
 typedef struct _ARM_DRIVER_USBH_HCI {
   ARM_DRIVER_VERSION        (*GetVersion)      (void);                                  ///< Pointer to \ref ARM_USBH_HCI_GetVersion : Get USB Host HCI (OHCI/EHCI) driver version.
@@ -401,6 +413,10 @@ typedef struct _ARM_DRIVER_USBH_HCI {
   int32_t                   (*PortVbusOnOff)   (uint8_t port, bool vbus);               ///< Pointer to \ref ARM_USBH_HCI_PortVbusOnOff : USB Host HCI (OHCI/EHCI) Root HUB Port VBUS on/off.
 } const ARM_DRIVER_USBH_HCI;
 
-#endif /* __DOXYGEN_MW__ */
+#endif // CMSIS_DISABLE_DEPRECATED
 
-#endif /* __DRIVER_USBH_H */
+#ifdef  __cplusplus
+}
+#endif
+
+#endif /* DRIVER_USBH_H_ */

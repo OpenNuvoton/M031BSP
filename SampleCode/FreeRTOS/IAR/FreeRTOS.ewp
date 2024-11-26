@@ -301,7 +301,7 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state>$PROJ_DIR$..\..\..\..\Library\CMSIS\Include</state>
+          <state>$PROJ_DIR$..\..\..\..\Library\CMSIS\Core\Include</state>
           <state>$PROJ_DIR$..\..\..\..\Library\Device\Nuvoton\M031\Include</state>
           <state>$PROJ_DIR$..\..\..\..\Library\StdDriver\inc</state>
           <state>$PROJ_DIR$..\..\..\..\ThirdParty\FreeRTOS\SOURCE\include</state>
@@ -556,7 +556,7 @@
         </option>
         <option>
           <name>AUserIncludes</name>
-          <state>$PROJ_DIR$..\..\..\..\Library\CMSIS\Include</state>
+          <state>$PROJ_DIR$..\..\..\..\Library\CMSIS\Core\Include</state>
           <state>$PROJ_DIR$..\..\..\..\Library\Device\Nuvoton\M031\Include</state>
           <state>$PROJ_DIR$..\..\..\..\Library\StdDriver\inc</state>
           <state>$PROJ_DIR$..\..\..\..\ThirdParty\FreeRTOS\SOURCE\include</state>
