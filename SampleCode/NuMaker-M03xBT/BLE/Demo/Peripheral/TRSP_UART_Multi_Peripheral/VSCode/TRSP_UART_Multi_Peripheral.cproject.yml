@@ -1,0 +1,111 @@
+project:
+  packs:
+    - pack: Nuvoton::NuMicro_DFP
+  setups:
+    - output:
+        # bin, elf, hex, lib
+        type: bin
+    - setup: Options for TRSPUARTMultiPeripheral
+      add-path:
+        - ../../../../../../../Library/Device/Nuvoton/M031/Include
+        - ../../../../../../../Library/CMSIS/Core/Include
+        - ../../../../../../../Library/StdDriver/inc
+        - ../../../../Source/Include
+        - ../../../../Source/Porting
+        - ..
+        - ../BleAppProfile
+        - ../../../../Source/Service/BleServiceBase
+        - ../../../../Source/Service/GAP
+        - ../../../../Source/Service/GATT
+        - ../../../../Source/Service/DIS
+        - ../../../../Source/Service/UDF01S
+      misc:
+        - for-compiler: AC6
+          C:
+            - -D__MICROLIB
+            - -std=c99
+          C-CPP:
+            - -fno-rtti
+            - -funsigned-char
+            - -fshort-enums
+            - -fshort-wchar
+            - -ffunction-sections
+          CPP:
+            - -xc++
+            - -std=c++98
+          ASM:
+            - -masm=auto
+            - -D__MICROLIB
+          Link:
+            - --library_type=microlib
+            - --map
+            - --load_addr_map_info
+            - --symbols
+            - --info sizes
+            - --info totals
+            - --map --datacompressor=off --info=inline --entry Reset_Handler
+            - --strict
+            - --summary_stderr
+            - --info summarysizes
+        - for-compiler: GCC
+          C:
+            - -std=gnu11 -mthumb -masm-syntax-unified -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
+          Link:
+            - -mthumb -fmessage-length=0 -fsigned-char --specs=nano.specs --specs=nosys.specs
+            - -Wl,--gc-sections,-Map="$elf()$.map"
+  linker:
+    - script: ../../../../../../../Library/Device/Nuvoton/M031/Source/ARM/APROM.sct
+      for-compiler: AC6
+    - script: ../../../../../../../Library/Device/Nuvoton/M031/Source/GCC/gcc_arm_128k.ld
+      for-compiler: GCC
+  groups:
+    - group: CMSIS
+      files:
+        - file: ../../../../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
+        - file: ../../../../../../../Library/Device/Nuvoton/M031/Source/ARM/startup_M031Series.c
+          for-compiler: AC6
+        - file: ../../../../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
+          for-compiler: GCC
+    - group: Library
+      files:
+        - file: ../../../../../../../Library/StdDriver/src/clk.c
+        - file: ../../../../../../../Library/StdDriver/src/fmc.c
+        - file: ../../../../../../../Library/StdDriver/src/gpio.c
+        - file: ../../../../../../../Library/StdDriver/src/pdma.c
+        - file: ../../../../../../../Library/StdDriver/src/retarget.c
+        - file: ../../../../../../../Library/StdDriver/src/spi.c
+        - file: ../../../../../../../Library/StdDriver/src/sys.c
+        - file: ../../../../../../../Library/StdDriver/src/timer.c
+        - file: ../../../../../../../Library/StdDriver/src/uart.c
+        - file: ../../../../../../../Library/StdDriver/src/wdt.c
+    - group: User
+      files:
+        - file: ../main.c
+        - file: ../user.c
+        - file: ../BleAppProfile/ble_profile_def.c
+        - file: ../BleAppProfile/ble_profile_app.c
+        - file: ../BleAppSetting.h
+    - group: BLE Lib
+      files:
+        - file: ../../../../Source/Lib/ble_msgblock.c
+        - file: ../../../../Source/Lib/ble_bonding_storage.c
+        - file: ../../../../Source/Lib/ble_LL_ref.c
+        - file: ../../../../Source/Lib/BLELIB_Keil_P.lib
+          for-compiler: AC6
+        - file: ../../../../Source/Lib/libBLELIB_GCC_P.a
+          for-compiler: GCC
+    - group: Service
+      files:
+        - file: ../../../../Source/Service/BleServiceBase/ble_service_base.c
+        - file: ../../../../Source/Service/GAP/ble_service_gap.c
+        - file: ../../../../Source/Service/GATT/ble_service_gatt.c
+        - file: ../../../../Source/Service/DIS/ble_service_dis.c
+        - file: ../../../../Source/Service/UDF01S/ble_service_udf01s.c
+    - group: Porting
+      files:
+        - file: ../../../../Source/Porting/mcu_definition.h
+        - file: ../../../../Source/Porting/porting_flash.c
+        - file: ../../../../Source/Porting/porting_misc.c
+        - file: ../../../../Source/Porting/porting_rfpower.c
+        - file: ../../../../Source/Porting/porting_spi.c
+        - file: ../../../../Source/Porting/dev_addr.c

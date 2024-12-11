@@ -1,0 +1,76 @@
+project:
+  packs:
+    - pack: Nuvoton::NuMicro_DFP
+  setups:
+    - output:
+        # bin, elf, hex, lib
+        type: bin
+    - setup: Options for fmcldiap
+      add-path:
+        - ../../../../Library/Device/Nuvoton/M031/Include
+        - ../../../../Library/CMSIS/Core/Include
+        - ../../../../Library/StdDriver/inc
+      misc:
+        - for-compiler: AC6
+          C:
+            - -D__MICROLIB
+            - -std=c99
+          C-CPP:
+            - -fno-rtti
+            - -funsigned-char
+            - -fshort-enums
+            - -fshort-wchar
+            - -ffunction-sections
+          CPP:
+            - -xc++
+            - -std=c++98
+          ASM:
+            - -masm=auto
+            - -D__MICROLIB
+          Link:
+            - --library_type=microlib
+            - --map
+            - --load_addr_map_info
+            - --symbols
+            - --info sizes
+            - --info totals
+            - --map --datacompressor=off --info=inline --entry Reset_Handler
+            - --strict
+            - --summary_stderr
+            - --info summarysizes
+        - for-compiler: GCC
+          C:
+            - -std=gnu11 -mthumb -masm-syntax-unified -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
+          Link:
+            - -mthumb -fmessage-length=0 -fsigned-char --specs=nano.specs --specs=nosys.specs
+            - -Wl,--gc-sections,-Map="$elf()$.map"
+  linker:
+    - script: ../../../../Library/Device/Nuvoton/M031/Source/ARM/LDROM.sct
+      for-compiler: AC6
+    - script: ./LDROM_iap_4K.ld
+      for-compiler: GCC
+  groups:
+    - group: CMSIS
+      files:
+        - file: ../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
+        - file: ./startup_M031Series_user.c
+          for-compiler: AC6
+        - file: ../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
+          for-compiler: GCC        
+    - group: User
+      files:
+        - file: ../ldrom_main.c
+    - group: Library
+      files:
+        - file: ../../../../Library/StdDriver/src/sys.c
+        - file: ../../../../Library/StdDriver/src/fmc.c
+
+  # The execute: node is processed only for an application build when no --context option is specified.
+  executes:
+    - execute: Copy bin file
+      run: ${CMAKE_COMMAND} -E copy $input$ $output$
+      always:
+      input:
+        - $bin()$
+      output:
+        - $SolutionDir()$/bin/fmc_ld_iap.bin

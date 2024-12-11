@@ -1,0 +1,12 @@
+{
+    "cmsis-csolution.actions": [
+        {
+            "path": "ISP_RS485.csolution.yml",
+            "target": "ARMCLANG",
+            "config": {
+                "run": "Flash Device LDROM",
+                "debug": "Embedded Debug"
+            }
+        }
+    ]
+}

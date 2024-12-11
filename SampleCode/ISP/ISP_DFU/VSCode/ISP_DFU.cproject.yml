@@ -1,0 +1,55 @@
+project:
+  packs:
+    - pack: Nuvoton::NuMicro_DFP
+  setups:
+    - output:
+        # bin, elf, hex, lib
+        type: bin
+    - setup: Options for ISPDFU
+      add-path:
+        - ../../../../Library/CMSIS/Core/Include
+        - ../../../../Library/Device/Nuvoton/M031/Include
+        - ../../../../Library/StdDriver/inc
+      misc:
+        - for-compiler: AC6
+          C:
+            - -D__MICROLIB
+            - -std=c99
+          C-CPP:
+            - -fno-rtti
+            - -funsigned-char
+            - -fshort-enums
+            - -fshort-wchar
+            - -ffunction-sections
+          CPP:
+            - -xc++
+            - -std=c++98
+          ASM:
+            - -masm=auto
+            - -D__MICROLIB
+          Link:
+            - --library_type=microlib
+            - --map
+            - --load_addr_map_info
+            - --symbols
+            - --info sizes
+            - --info totals
+            - --map --datacompressor=off --info=inline --entry Reset_Handler
+            - --strict
+            - --summary_stderr
+            - --info summarysizes
+  linker:
+    - script: ../../../../Library/Device/Nuvoton/M031/Source/ARM/LDROM.sct
+      for-compiler: AC6
+  groups:
+    - group: CMSIS
+      files:
+        - file: ../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
+        - file: ./startup_M031Series_user.c
+    - group: User
+      files:
+        - file: ../fmc_user.c
+        - file: ../descriptors.c
+        - file: ../main.c
+        - file: ../dfu_transfer.c
+        - file: ../usbd_user.c

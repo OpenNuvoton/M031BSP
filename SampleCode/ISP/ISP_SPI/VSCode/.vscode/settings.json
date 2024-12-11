@@ -1,0 +1,12 @@
+{
+    "cmsis-csolution.actions": [
+        {
+            "path": "ISP_SPI.csolution.yml",
+            "target": "ARMCLANG",
+            "config": {
+                "run": "Flash Device LDROM",
+                "debug": "Embedded Debug"
+            }
+        }
+    ]
+}

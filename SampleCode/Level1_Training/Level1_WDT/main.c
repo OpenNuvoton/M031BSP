@@ -70,7 +70,7 @@ void SYS_Init(void)
 
     /* Set module clock */
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
-    CLK_SetModuleClock(WDT_MODULE, CLK_CLKSEL1_WDTSEL_LIRC, NULL);
+    CLK_SetModuleClock(WDT_MODULE, CLK_CLKSEL1_WDTSEL_LIRC, (uint32_t)NULL);
 }
 
 void UART0_Init()

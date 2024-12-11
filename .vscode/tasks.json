@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMSIS Build",
+            "type": "cmsis-csolution.build",
+            "solution": "${command:cmsis-csolution.getSolutionPath}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Flash Device",
+            "type": "embedded-debug.flash",
+            "program": "${command:embedded-debug.getApplicationFile}",
+            "serialNumber": "${command:device-manager.getSerialNumber}",
+            "cmsisPack": "${command:device-manager.getDevicePack}",
+            "deviceName": "${command:device-manager.getDeviceName}",
+            "problemMatcher": [],
+            "verifyFlash": false,
+            "resetRun": true
+        },
+        {
+            "label": "Flash Device LDROM",
+            "type": "embedded-debug.flash",
+            "program": "${command:embedded-debug.getApplicationFile}",
+            "serialNumber": "${command:device-manager.getSerialNumber}",
+            "cmsisPack": "${command:device-manager.getDevicePack}",
+            "deviceName": "${command:device-manager.getDeviceName}",
+            "problemMatcher": [],
+            "verifyFlash": false,
+            "resetRun": true,
+            "flm": "${userHome}/AppData/Local/Arm/Packs/Nuvoton/NuMicro_DFP/1.3.24/Flash/M031_LD_8.FLM"
+	}
+    ]
+}

@@ -60,7 +60,7 @@ void SYS_Init(void)
 //    CLK_SetModuleClock(PWM1_MODULE, CLK_CLKSEL2_PWM1SEL_PCLK0, 0);
 
     /* case 2.PWM clock frequency is set double to HCLK: select PWM module clock source as PLL */
-    CLK_SetModuleClock(PWM1_MODULE, CLK_CLKSEL2_PWM1SEL_PLL, NULL);
+    CLK_SetModuleClock(PWM1_MODULE, CLK_CLKSEL2_PWM1SEL_PLL, (uint32_t)NULL);
     /*---------------------------------------------------------------------------------------------------------*/
 
     /* Reset PWM1 module */
