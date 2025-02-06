@@ -34,7 +34,6 @@ void SYS_Init(void)
     CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
     /* Waiting for Internal High speed RC clock ready */
     while ((CLK->STATUS & CLK_STATUS_HIRCSTB_Msk) != CLK_STATUS_HIRCSTB_Msk);
-
     /* Switch HCLK clock source to HIRC */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk) | CLK_CLKSEL0_HCLKSEL_HIRC ;
     /* Switch USB clock source to HIRC */
@@ -45,6 +44,8 @@ void SYS_Init(void)
     CLK->APBCLK0 |= CLK_APBCLK0_USBDCKEN_Msk ;
     CLK->AHBCLK |= CLK_AHBCLK_ISPCKEN_Msk;
     SystemCoreClockUpdate();
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 
 
@@ -54,9 +55,6 @@ void SYS_Init(void)
 int32_t main(void)
 {
     uint32_t u32TrimInit;
-
-    /* Unlock write-protected registers */
-    SYS_UnlockReg();
 
     /* Init system and multi-funcition I/O */
     SYS_Init();
@@ -80,8 +78,10 @@ int32_t main(void)
             while(SYS->PDID);
         }
     }
+    /* Unlock protected registers */
+    SYS_UnlockReg();
 
-    /* Enable FMC ISP and APROM update function */
+    /* Enable FMC ISP and APROM update function. Before using FMC function, it should unlock system register first. */
     FMC->ISPCTL |= (FMC_ISPCTL_ISPEN_Msk | FMC_ISPCTL_APUEN_Msk | FMC_ISPCTL_ISPFF_Msk);
 
     if (DetectPin != 0)

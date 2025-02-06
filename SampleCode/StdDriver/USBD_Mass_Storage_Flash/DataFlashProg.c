@@ -36,6 +36,9 @@ void DataFlashRead(uint32_t addr, uint32_t size, uint32_t buffer)
 
     len = (int32_t)size;
 
+    /* Before using FMC function, it should unlock system register first. */
+    SYS_UnlockReg();
+
     while(len >= BUFFER_PAGE_SIZE)
     {
         for(i = 0; i < BUFFER_PAGE_SIZE / 4; i++)
@@ -45,6 +48,8 @@ void DataFlashRead(uint32_t addr, uint32_t size, uint32_t buffer)
         len  -= BUFFER_PAGE_SIZE;
         pu32Buf = (uint32_t *)buffer;
     }
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 
 void DataFlashReadPage(uint32_t addr, uint32_t buffer)
@@ -72,13 +77,15 @@ uint32_t DataFlashProgramPage(uint32_t u32StartAddr, uint32_t * u32Buf)
     return 0;
 }
 
-
 void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
 {
     /* This is low level write function of USB Mass Storage */
     int32_t len, i, offset;
     uint32_t *pu32;
     uint32_t alignAddr;
+
+    /* Before using FMC function, it should unlock system register first. */
+    SYS_UnlockReg();
 
     /* Modify the address to MASS_STORAGE_OFFSET */
     addr += MASS_STORAGE_OFFSET;
@@ -87,8 +94,7 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
 
     if((len == FLASH_PAGE_SIZE) && ((addr & (FLASH_PAGE_SIZE - 1)) == 0))
     {
-
-        FMC_Erase(addr);		
+        FMC_Erase(addr);
         while (len >= FLASH_PAGE_SIZE)
         {
             DataFlashProgramPage(addr, (uint32_t *) buffer);
@@ -109,7 +115,6 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
             if ( offset || (size < FLASH_PAGE_SIZE) )
             {
                 DataFlashReadPage(alignAddr - MASS_STORAGE_OFFSET, /*FLASH_PAGE_SIZE,*/ (uint32_t)&g_sectorBuf[0]);
-
             }
 
             /* Source buffer */
@@ -123,9 +128,8 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
             {
                 g_sectorBuf[offset / 4 + i] = pu32[i];
             }
-            FMC_Erase(alignAddr);							
+            FMC_Erase(alignAddr);
 
-				
             DataFlashProgramPage(alignAddr, (uint32_t *) g_sectorBuf);
             size -= len;
             addr += len;
@@ -135,5 +139,7 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
         while (size > 0);
     }
 
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 

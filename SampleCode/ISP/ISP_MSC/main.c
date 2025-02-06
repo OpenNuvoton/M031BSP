@@ -17,6 +17,8 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
+    /* Unlock protected registers */
+    SYS_UnlockReg();
 
     /* Enable Internal RC 48MHz clock */
     CLK->PWRCTL = (CLK_PWRCTL_HIRCEN_Msk);
@@ -35,6 +37,8 @@ void SYS_Init(void)
     /* Enable module clock */
     CLK->APBCLK0 |= CLK_APBCLK0_USBDCKEN_Msk;
 
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 
 void gotoAPROM(void)
@@ -62,7 +66,10 @@ int32_t main(void)
         gotoAPROM();
     }
 
+    /* Unlock protected registers */
     SYS_UnlockReg();
+
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC->ISPCTL = FMC_ISPCTL_ISPEN_Msk|FMC_ISPCTL_APUEN_Msk;
     
     SYS_Init();

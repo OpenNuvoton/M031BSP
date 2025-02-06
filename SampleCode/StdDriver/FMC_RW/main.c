@@ -50,7 +50,6 @@ void SYS_Init(void)
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))
                     |(SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-
     /* Lock protected registers */
     SYS_LockReg();
 }
@@ -229,9 +228,6 @@ int main()
 {
     uint32_t    i, u32Data;
 
-    /* Unlock protected registers to operate FMC ISP function */
-    SYS_UnlockReg();
-
     /* Init System, peripheral clock and multi-function I/O */
     SYS_Init();
 
@@ -264,8 +260,6 @@ int main()
     printf("|           M031 FMC Sample Code         |\n");
     printf("+----------------------------------------+\n");
 
-    SYS_UnlockReg();
-
     /* Checking if flash page size matches with target chip's */
     if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )
     {
@@ -290,7 +284,10 @@ int main()
         }
     }
 
-    /* Enable FMC ISP function */
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC_Open();
 
     /* Enable Data Flash and set base address. */

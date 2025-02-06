@@ -60,7 +60,6 @@ void SYS_Init(void)
     SYS_LockReg();
 }
 
-
 void PowerDown()
 {
     /* Unlock protected registers */
@@ -80,6 +79,8 @@ void PowerDown()
 
     printf("device wakeup!\n");
 
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -93,9 +94,6 @@ int32_t main(void)
 
     uint32_t au32Config[2];
 
-    /* Unlock protected registers */
-    SYS_UnlockReg();
-
     /* Init System, peripheral clock and multi-function I/O */
     SYS_Init();
 
@@ -106,7 +104,6 @@ int32_t main(void)
     printf("+--------------------------------------------------------------+\n");
     printf("|     NuMicro USB HID Transfer and MassStorage Sample Code     |\n");
     printf("+--------------------------------------------------------------+\n");
-    SYS_UnlockReg();
 
     /* Checking if flash page size matches with target chip's */
     if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )
@@ -132,7 +129,10 @@ int32_t main(void)
         }
     }
 
-    /* Enable FMC ISP function */
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC_Open();
 
     /* Check if Data Flash Size is 64K. If not, to re-define Data Flash size and to enable Data Flash function */

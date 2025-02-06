@@ -36,6 +36,8 @@ void SYS_Init(void)
     CLK->APBCLK0 |= CLK_APBCLK0_USBDCKEN_Msk ;
     /* Update System Core Clock */
     SystemCoreClockUpdate();
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -44,8 +46,7 @@ void SYS_Init(void)
 int32_t main(void)
 {
     uint32_t u32TrimInit;
-    /* Unlock protected registers */
-    SYS_UnlockReg();
+
     /* Init System, peripheral clock and multi-function I/O */
     SYS_Init();
 
@@ -71,6 +72,10 @@ int32_t main(void)
 
     CLK->AHBCLK |= CLK_AHBCLK_ISPCKEN_Msk;
 
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC->ISPCTL |= (FMC_ISPCTL_ISPEN_Msk | FMC_ISPCTL_APUEN_Msk);
 
     g_apromSize = GetApromSize();

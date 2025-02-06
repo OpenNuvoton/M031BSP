@@ -16,6 +16,8 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init System Clock                                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
+    /* Unlock protected registers */
+    SYS_UnlockReg();
 
     /* Enable HIRC clock */
     CLK_EnableXtalRC(CLK_PWRCTL_HIRCEN_Msk);
@@ -41,22 +43,17 @@ void SYS_Init(void)
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))
                     |(SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
+
+    /* Lock protected registers */
+    SYS_LockReg();
 }
-
-
 
 int32_t main(void)
 {
     uint32_t    u32Data, u32ChkSum;    /* temporary data */
 
-    /* Unlock protected registers */
-    SYS_UnlockReg();
-
     /* Init System, IP clock and multi-function I/O. */
     SYS_Init();
-
-    /* Lock protected registers */
-    SYS_LockReg();
 
     /* Configure UART0: 115200, 8-bit word, no parity bit, 1 stop bit. */
     UART_Open(UART0, 115200);
@@ -90,10 +87,10 @@ int32_t main(void)
     printf("|   M031 FMC CRC32 Sample Demo       |\n");
     printf("+------------------------------------+\n");
 
-    /* Unlock protected registers to operate FMC ISP function */
+    /* Unlock protected registers  */
     SYS_UnlockReg();                   
 
-    /* Enable FMC ISP Function */
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC_Open();
 
     /* FMC_ReadCID */

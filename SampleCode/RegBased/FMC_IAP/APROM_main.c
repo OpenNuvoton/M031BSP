@@ -184,26 +184,18 @@ int main()
     uint8_t     u8Item;
     uint32_t    u32Data;
 
-    /* Unlock protected registers */
-    SYS_UnlockReg();
-
     /* Init System, peripheral clock and multi-function I/O */
     SYS_Init();
-
-    /* Init UART0 to 115200-8n1 for print message */
 
     /* Configure UART0 and set UART0 baud rate */
     UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
-
 
     printf("\r\n\n\n");
     printf("+----------------------------------------+\n");
     printf("|        M031 FMC IAP Sample Code        |\n");
     printf("|              [APROM code]              |\n");
     printf("+----------------------------------------+\n");
-
-    SYS_UnlockReg();
 
     /* Checking if flash page size matches with target chip's */
     if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )
@@ -229,6 +221,10 @@ int main()
         }
     }
 
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC->ISPCTL |=  FMC_ISPCTL_ISPEN_Msk;
 
     /*

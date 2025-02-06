@@ -31,6 +31,9 @@ void DataFlashRead(uint32_t addr, uint32_t size, uint32_t buffer)
     uint32_t i;
     uint32_t * pu32Buf = (uint32_t *)buffer;
 
+    /* Before using FMC function, it should unlock system register first. */
+    SYS_UnlockReg();
+
     /* Modify the address to MASS_STORAGE_OFFSET */
     addr += MASS_STORAGE_OFFSET;
 
@@ -45,6 +48,8 @@ void DataFlashRead(uint32_t addr, uint32_t size, uint32_t buffer)
         len  -= BUFFER_PAGE_SIZE;
         pu32Buf = (uint32_t *)buffer;
     }
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 
 void DataFlashReadPage(uint32_t addr, uint32_t buffer)
@@ -80,6 +85,9 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
     uint32_t *pu32;
     uint32_t alignAddr;
 
+    /* Before using FMC function, it should unlock system register first. */
+    SYS_UnlockReg();
+
     /* Modify the address to MASS_STORAGE_OFFSET */
     addr += MASS_STORAGE_OFFSET;
 
@@ -88,7 +96,7 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
     if((len == FLASH_PAGE_SIZE) && ((addr & (FLASH_PAGE_SIZE - 1)) == 0))
     {
 
-        FMC_Erase(addr);		
+        FMC_Erase(addr);
         while (len >= FLASH_PAGE_SIZE)
         {
             DataFlashProgramPage(addr, (uint32_t *) buffer);
@@ -123,9 +131,8 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
             {
                 g_sectorBuf[offset / 4 + i] = pu32[i];
             }
-            FMC_Erase(alignAddr);							
+            FMC_Erase(alignAddr);
 
-				
             DataFlashProgramPage(alignAddr, (uint32_t *) g_sectorBuf);
             size -= len;
             addr += len;
@@ -134,6 +141,7 @@ void DataFlashWrite(uint32_t addr, uint32_t size, uint32_t buffer)
         }
         while (size > 0);
     }
-
+    /* Lock protected registers */
+    SYS_LockReg();
 }
 

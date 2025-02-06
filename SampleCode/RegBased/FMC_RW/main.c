@@ -22,6 +22,7 @@ uint32_t LDROM_TEST_SIZE = 0x00000800UL;        /*  2KB */
 uint32_t LDROM_TEST_END  = 0x00100800UL;
 
 int IsDebugFifoEmpty(void);
+
 void SYS_Init(void)
 {
     /* Unlock protected registers */
@@ -332,13 +333,9 @@ int main()
 {
     uint32_t    i, u32Data;
 
-    /* Unlock protected registers */
-    SYS_UnlockReg();
-
     /* Init System, peripheral clock and multi-function I/O */
     SYS_Init();
 
-    /* Init UART0 to 115200-8n1 for print message */
     /* Reset UART0 */
     SYS->IPRST1 |=  SYS_IPRST1_UART0RST_Msk;
     SYS->IPRST1 &= ~SYS_IPRST1_UART0RST_Msk;
@@ -351,8 +348,6 @@ int main()
     printf("+----------------------------------------+\n");
     printf("|           M031 FMC Sample Code         |\n");
     printf("+----------------------------------------+\n");
-
-    SYS_UnlockReg();
 
     /* Checking if flash page size matches with target chip's */
     if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )
@@ -378,7 +373,10 @@ int main()
         }
     }
 
-    /* Enable FMC ISP function */
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC->ISPCTL |=  FMC_ISPCTL_ISPEN_Msk;
 
     /* Enable Data Flash and set base address. */

@@ -118,7 +118,6 @@ int main()
     UART0->BAUD = UART_BAUD_MODE2 | UART_BAUD_MODE2_DIVIDER(__HIRC, 115200);
     UART0->LINE = UART_WORD_LEN_8 | UART_PARITY_NONE | UART_STOP_BIT_1;
 
-
     PutString("\n\n+------------------------------------+\n");
     PutString("|      M031 FMC IAP Sample Code      |\n");
     PutString("|            [LDROM code]            |\n");
@@ -127,7 +126,7 @@ int main()
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Enable FMC ISP function */
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     FMC->ISPCTL |=  FMC_ISPCTL_ISPEN_Msk;
 
     /* block on waiting for any one character input from UART0 */

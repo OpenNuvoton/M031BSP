@@ -174,6 +174,7 @@ int main()
     uint32_t    u32Data;
 
     SYS_Init();
+
     UART_Init();
 
     /* Checking if target device supports the feature */
@@ -203,9 +204,6 @@ int main()
     printf("|              [APROM code]              |\n");
     printf("+----------------------------------------+\n");
 
-    /* Unlock protected registers to operate FMC ISP function */
-    SYS_UnlockReg();
-
     /* Checking if flash page size matches with target chip's */
     if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )
     {
@@ -230,7 +228,11 @@ int main()
         }
     }
 
-    FMC_Open();                        /* Enable FMC ISP function */
+    /* Unlock protected registers */
+    SYS_UnlockReg();
+
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
+    FMC_Open();
 
     /*
      *  Check if User Configuration CBS is boot with IAP mode.
