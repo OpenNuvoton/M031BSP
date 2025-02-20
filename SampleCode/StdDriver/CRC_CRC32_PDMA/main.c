@@ -155,6 +155,7 @@ int main(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
+    /* Enable FMC ISP function. Before using FMC function, it should unlock system register first. */
     /*  Case a. */
     u32FMCChecksum = GetFMCChecksum(0x0, size);
 
