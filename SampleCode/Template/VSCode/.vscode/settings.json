@@ -16,5 +16,8 @@
                 "debug": "Embedded Debug"
             }
         }
+    ],
+    "clangd.arguments": [
+        "--compile-commands-dir=e:\\Working_zone\\M0\\M031\\BSP\\1_bsp_20250324\\SampleCode\\Template\\VSCode\\out\\Template\\ARMCLANG\\Release"
     ]
 }
