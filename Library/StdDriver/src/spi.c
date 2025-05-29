@@ -85,7 +85,27 @@ uint32_t SPI_Open(SPI_T *spi,
             else if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PLL)
                 u32ClkSrc = CLK_GetPLLClockFreq(); /* Clock source is PLL */
             else if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PCLK1)
-                u32ClkSrc = u32HCLKFreq / ((CLK->PCLKDIV & CLK_PCLKDIV_APB0DIV_Msk)+1);
+            {
+                switch ((CLK->PCLKDIV & CLK_PCLKDIV_APB1DIV_Msk)>>4)
+                {
+                    case 0:
+                    default:
+                        u32ClkSrc = u32HCLKFreq;
+                        break;
+                    case 1:
+                        u32ClkSrc = u32HCLKFreq/2;
+                        break;
+                    case 2:
+                        u32ClkSrc = u32HCLKFreq/4;
+                        break;
+                    case 3:
+                        u32ClkSrc = u32HCLKFreq/8;
+                        break;
+                    case 4:
+                        u32ClkSrc = u32HCLKFreq/16;
+                        break;
+                }
+            }
             else
                 u32ClkSrc = 48000000; /* Clock source is HIRC48 */
         }
