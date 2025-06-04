@@ -165,10 +165,10 @@ int main(void)
     printf("|   In power down mode, using the Timer to wake-up the MCU             |\n");
     printf("|      and add RTC value per second.                                   |\n");
     printf("|   (1) Modify the macro WakeUpFreq to adjust the wake-up frequency.   |\n");
-    printf("|   (2) This sample code is usung LXT for counting in power-down mode. |\n");
+    printf("|   (2) This sample code is using LXT for counting in power-down mode. |\n");
     printf("+----------------------------------------------------------------------+\n\n");
 
-    /* Wait uart transfer message */
+    /* Wait UART transfer message */
     while(!UART_IS_TX_EMPTY(UART0));
 
     while(1)
@@ -195,7 +195,7 @@ int main(void)
             printf("%d:%d:%d AM   Day of week : %d \n",rtc.time.hour, rtc.time.minutes, rtc.time.seconds, rtc.date.dayofweek);
 #endif
 
-        /* Wait uart transfer message */
+        /* Wait UART transfer message */
         while(!UART_IS_TX_EMPTY(UART0));
     }
 }

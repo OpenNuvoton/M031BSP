@@ -201,7 +201,7 @@ void ADC_FunctionTest()
     printf("   ADC conversion data will be moved to GPIO pins PA11 ~ PA0 by PDMA.\n");
     printf("   Please connect PB2 to 0V and PB3 to 3.3V\n");
     printf("   and monitor PA11 (MSB of 12-bit ADC conversion data) on scope.\n");
-    printf("   The real ADC SPS shoule be (PA11 frequency * 2).\n");
+    printf("   The real ADC SPS should be (PA11 frequency * 2).\n");
 
     /* Enable ADC converter */
     ADC->ADCR |= ADC_ADCR_ADEN_Msk;
