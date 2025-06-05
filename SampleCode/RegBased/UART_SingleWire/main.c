@@ -259,7 +259,7 @@ void UART02_TEST_HANDLE()
     }
 }
 /*---------------------------------------------------------------------------------------------------------*/
-/*                              Bulid Source Pattern function                                              */
+/*                              Build Source Pattern function                                              */
 /*---------------------------------------------------------------------------------------------------------*/
 void Build_Src_Pattern(uint32_t u32Addr, uint8_t type, uint32_t u32Length)
 {
@@ -294,7 +294,7 @@ uint8_t Check_Pattern(uint32_t u32Addr0, uint32_t u32Addr1, uint32_t u32Length)
     {
         if (pAddr0[i] != pAddr1[i])
         {
-            printf("Data Error Idex=%d,tx =%d,rx=%d\n", i, pAddr0[i], pAddr1[i]) ;
+            printf("Data Error Index=%d,tx =%d,rx=%d\n", i, pAddr0[i], pAddr1[i]) ;
             result = 0;
         }
     }
@@ -326,7 +326,7 @@ void UART_FunctionTest()
     /*
         Using a RS232 cable to connect UART0 and PC.UART0 is set to debug port.
           UART1 and UART2 is enable RDA and RLS interrupt.
-          The user can use URT0 to control the transmission or reception of UART1(Single Wire mode)
+          The user can use UART0 to control the transmission or reception of UART1(Single Wire mode)
         When UART1(Single Wire 1)transfers data to UART2(Single Wire 2), if data is valid,
           it will enter the interrupt and receive the data.And then check the received data.
         When UART2(Single Wire 2)transfers data to UART1(Single Wire 1), if data is valid,
@@ -360,7 +360,7 @@ void UART_FunctionTest()
             g_i32RecOK  = FALSE;
             Build_Src_Pattern((uint32_t)g_u8TxData, UART_WORD_LEN_8, BUFSIZE);
 
-            /* Check the Rx status is Idel */
+            /* Check the Rx status is Idle */
             while (!UART_RX_IDLE(UART1)) {};
 
             /* Send data */
@@ -388,7 +388,7 @@ void UART_FunctionTest()
             g_i32RecOK  = FALSE;
             Build_Src_Pattern((uint32_t)g_u8TxData, UART_WORD_LEN_8, BUFSIZE);
 
-            /* Check the Rx status is Idel */
+            /* Check the Rx status is Idle */
             while (!UART_RX_IDLE(UART2)) {};
 
             /* Send data */

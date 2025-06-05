@@ -411,7 +411,7 @@ int main()
     else
     {
         /* Default Mode*/
-        printf("(A)ddress math\n");
+        printf("(A)ddress match\n");
 
         /* Enable UI2C0 address match mode wake-up */
         UI2C0->WKCTL |= UI2C_WKCTL_WKADDREN_Msk;

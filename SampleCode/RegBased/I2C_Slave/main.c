@@ -265,7 +265,7 @@ int main()
     printf("| I2C Driver Sample Code(Slave) for access Slave         |\n");
     printf("|  Needs to work with I2C_Master sample code.            |\n");
     printf("| I2C Master (I2C0) <---> I2C Slave(I2C0)                |\n");
-    printf("| !! This sample code requires two borads to test !!     |\n");
+    printf("| !! This sample code requires two boards to test !!     |\n");
     printf("+--------------------------------------------------------+\n");
 
     printf("Configure I2C0 as a slave.\n");

@@ -373,7 +373,7 @@ int main()
     else
     {
         /* Default Mode*/
-        printf("(A)ddress math\n");
+        printf("(A)ddress match\n");
 
         /* Enable UI2C0 address match mode wake-up */
         UI2C_EnableWakeup(UI2C0, UI2C_ADDR_MATCH_WK);

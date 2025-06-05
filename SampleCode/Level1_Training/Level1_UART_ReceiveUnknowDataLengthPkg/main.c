@@ -135,12 +135,12 @@ void UART0_Init(void)
 void DescriptionMessage(void)
 {
     printf("+----------------------------------------------------------------------+\n");
-    printf("|  This sample code performs how to receive unknow data length package.|\n");
+    printf("|  This sample code performs how to receive unknown data length package.|\n");
     printf("|                                                                      |\n");
     printf("|   (1) Please send data to UART0 Rx(PB.12)                            |\n");
     printf("|   (2) UART will receive data by UART Rx RDA and RXTO interrupt.      |\n");
     printf("|   (3) User can modify the Rx Timeout counter RX_TIMEOUT_CNT for      |\n");
-    printf("|       diffirent timeout period.                                      |\n");
+    printf("|       different timeout period.                                      |\n");
     printf("|                                                                      |\n");
     printf("|   Description for RX_TIMEOUT_CNT :                                   |\n");
     printf("|   -UART data = 8 bits                                                |\n");
@@ -149,7 +149,7 @@ void DescriptionMessage(void)
     printf("|     If there is no data comes in 60 baudrate clock,                  |\n");
     printf("|     the UART Rx timeout interrupt flag will be set to 1.             |\n");
     printf("|     RX_TIMEOUT_CNT = 60 = 6 * ( 1 start + 8 data bits + 1 stop bit ) |\n");
-    printf("|                         = 6 bytes data transmittion times            |\n");
+    printf("|                         = 6 bytes data transmission times            |\n");
     printf("+----------------------------------------------------------------------+\n\n");
 
     UART_WAIT_TX_EMPTY(UART0);

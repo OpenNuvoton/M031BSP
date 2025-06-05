@@ -211,7 +211,7 @@ void I2C0_Init(void)
     /* Enable I2C0 Controller */
     I2C0->CTL0 |= I2C_CTL0_I2CEN_Msk;
 
-    /* I2C0 clock divider, I2C Bus Clock = PCLK(48Mhz) / (4*120) = 100kHz */
+    /* I2C0 clock divider, I2C Bus Clock = PCLK(48MHz) / (4*120) = 100kHz */
     I2C0->CLKDIV = 120 - 1;
 
     /* Get I2C0 Bus Clock */

@@ -242,9 +242,9 @@ int main(void)
 
     /* Check transfer result */
     if (g_u32IsTestOver == 1)
-        printf("PDMA trasnfer done...\n");
+        printf("PDMA transfer done...\n");
     else if (g_u32IsTestOver == 2)
-        printf("PDMA trasnfer abort...\n");
+        printf("PDMA transfer abort...\n");
 
     printf("# Period between two falling edge captured event is showed as following.\n");
     printf("    [%2d]: %4d. (1st captured value)\n", 0, g_au32CAPValue[0]);

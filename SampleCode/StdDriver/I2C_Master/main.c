@@ -394,7 +394,7 @@ int32_t I2C0_Read_Write_SLAVE(uint8_t slvaddr)
             }
         }
     }
-    while(g_u8MstReStartFlag);   /*If unexpected abort happens, re-start the transmition*/
+    while(g_u8MstReStartFlag);   /*If unexpected abort happens, re-start the transmission */
 
     /* Disable I2C timeout */
     I2C_DisableTimeout(I2C0);

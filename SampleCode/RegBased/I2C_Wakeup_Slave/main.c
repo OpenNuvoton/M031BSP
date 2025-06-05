@@ -329,7 +329,7 @@ int main()
     __NOP();
     __NOP();
 
-    /* Waiting for syteem wake-up and I2C wake-up finish*/
+    /* Waiting for system wake-up and I2C wake-up finish*/
     while ((g_u8SlvPWRDNWK & g_u8SlvI2CWK) == 0);
 
     /* Wake-up Interrupt Message */

@@ -548,7 +548,7 @@ int main()
             /* Set I2C0 Payload bytes */
             I2C_SMBusSetPacketByteCount(I2C0, 2);            // I2C0: 1byte address + 1byte data
 
-            /* Alert pin support if BMHEN(I2C0->BUSCTL[4]) = 0 */
+            /* Alert pin supports if BMHEN(I2C0->BUSCTL[4]) = 0 */
             I2C_SMBUS_ENABLE_ALERT(I2C0);
 
             /* Enable Host SUSCON pin function and output Hi */

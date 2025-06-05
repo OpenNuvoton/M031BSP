@@ -8,7 +8,7 @@
  *           This sample code needs to work with UART_RS485_Slave.
  * @note
  * SPDX-License-Identifier: Apache-2.0
- * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
+ * @copyright (C) 2017 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/
 #include <stdio.h>
@@ -159,7 +159,7 @@ void RS485_HANDLE()
 {
     volatile uint32_t addr = 0;
     volatile uint32_t regRX = 0xFF;
-    volatile uint32_t u32IntSts = UART1->INTSTS;;
+    volatile uint32_t u32IntSts = UART1->INTSTS;
 
     if((u32IntSts & UART_INTSTS_RLSINT_Msk) && (u32IntSts & UART_INTSTS_RDAINT_Msk))           /* RLS INT & RDA INT */ //For RS485 Detect Address
     {
@@ -415,5 +415,5 @@ void RS485_FunctionTest()
 
 }
 
-
+/*** (C) COPYRIGHT 2017 Nuvoton Technology Corp. ***/
 

@@ -181,7 +181,7 @@ void UsciSpiLoopTest_WithPDMA(void)
     PDMA_SetTransferAddr(PDMA, USPI_MASTER_TX_DMA_CH, (uint32_t)g_au16MasterToSlaveTestPattern, PDMA_SAR_INC, (uint32_t)&UspiMaster->TXDAT, PDMA_DAR_FIX);
     /* Set request source; set basic mode. */
     PDMA_SetTransferMode(PDMA, USPI_MASTER_TX_DMA_CH, PDMA_USCI0_TX, FALSE, 0);
-    /* Single request type. USCI_SPI only support PDMA single request type. */
+    /* Single request type. USCI_SPI only supports PDMA single request type. */
     PDMA_SetBurstType(PDMA, USPI_MASTER_TX_DMA_CH, PDMA_REQ_SINGLE, 0);
     /* Disable table interrupt */
     PDMA->DSCT[USPI_MASTER_TX_DMA_CH].CTL |= PDMA_DSCT_CTL_TBINTDIS_Msk;
@@ -203,7 +203,7 @@ void UsciSpiLoopTest_WithPDMA(void)
     PDMA_SetTransferAddr(PDMA, USPI_MASTER_RX_DMA_CH, (uint32_t)&UspiMaster->RXDAT, PDMA_SAR_FIX, (uint32_t)g_au16MasterRxBuffer, PDMA_DAR_INC);
     /* Set request source; set basic mode. */
     PDMA_SetTransferMode(PDMA, USPI_MASTER_RX_DMA_CH, PDMA_USCI0_RX, FALSE, 0);
-    /* Single request type. USCI_SPI only support PDMA single request type. */
+    /* Single request type. SPI only supports PDMA single request type. */
     PDMA_SetBurstType(PDMA, USPI_MASTER_RX_DMA_CH, PDMA_REQ_SINGLE, 0);
     /* Disable table interrupt */
     PDMA->DSCT[USPI_MASTER_RX_DMA_CH].CTL |= PDMA_DSCT_CTL_TBINTDIS_Msk;
@@ -225,7 +225,7 @@ void UsciSpiLoopTest_WithPDMA(void)
     PDMA_SetTransferAddr(PDMA, USPI_SLAVE_RX_DMA_CH, (uint32_t)&UspiSlave->RXDAT, PDMA_SAR_FIX, (uint32_t)g_au16SlaveRxBuffer, PDMA_DAR_INC);
     /* Set request source; set basic mode. */
     PDMA_SetTransferMode(PDMA, USPI_SLAVE_RX_DMA_CH, PDMA_USCI1_RX, FALSE, 0);
-    /* Single request type. USCI_SPI only support PDMA single request type. */
+    /* Single request type. USCI_SPI only supports PDMA single request type. */
     PDMA_SetBurstType(PDMA, USPI_SLAVE_RX_DMA_CH, PDMA_REQ_SINGLE, 0);
     /* Disable table interrupt */
     PDMA->DSCT[USPI_SLAVE_RX_DMA_CH].CTL |= PDMA_DSCT_CTL_TBINTDIS_Msk;
@@ -247,7 +247,7 @@ void UsciSpiLoopTest_WithPDMA(void)
     PDMA_SetTransferAddr(PDMA, USPI_SLAVE_TX_DMA_CH, (uint32_t)g_au16SlaveToMasterTestPattern, PDMA_SAR_INC, (uint32_t)&UspiSlave->TXDAT, PDMA_DAR_FIX);
     /* Set request source; set basic mode. */
     PDMA_SetTransferMode(PDMA, USPI_SLAVE_TX_DMA_CH, PDMA_USCI1_TX, FALSE, 0);
-    /* Single request type. USCI_SPI only support PDMA single request type. */
+    /* Single request type. USCI_SPI only supports PDMA single request type. */
     PDMA_SetBurstType(PDMA, USPI_SLAVE_TX_DMA_CH, PDMA_REQ_SINGLE, 0);
     /* Disable table interrupt */
     PDMA->DSCT[USPI_SLAVE_TX_DMA_CH].CTL |= PDMA_DSCT_CTL_TBINTDIS_Msk;
