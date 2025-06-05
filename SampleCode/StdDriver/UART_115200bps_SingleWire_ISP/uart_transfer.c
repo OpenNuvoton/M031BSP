@@ -26,7 +26,7 @@ uint8_t volatile bUartDataReady = 0;
 uint8_t volatile bufhead = 0;
 
 
-/* please check "targetdev.h" for chip specifc define option */
+/* please check "targetdev.h" for chip specific define option */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* INTSTS to handle UART Channel 0 interrupt event                                                            */

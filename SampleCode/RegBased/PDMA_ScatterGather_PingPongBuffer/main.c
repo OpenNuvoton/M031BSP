@@ -267,7 +267,7 @@ int main()
     NVIC_EnableIRQ(PDMA_IRQn);
     g_u32IsTestOver = 0;
 
-    /* Start PDMA operatin */
+    /* Start PDMA operation */
     PDMA->SWREQ = (1 << PDMA_CH);
 
     while(1)

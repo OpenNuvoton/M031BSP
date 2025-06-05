@@ -226,7 +226,7 @@ void UI2C0_Init(uint32_t u32ClkSpeed)
     UI2C0->CTL &= ~UI2C_CTL_FUNMODE_Msk;
     UI2C0->CTL = 4 << UI2C_CTL_FUNMODE_Pos;
 
-    /* 8-bit legnt data format configuration */
+    /* 8-bit length data format configuration */
     UI2C0->LINECTL &= ~UI2C_LINECTL_DWIDTH_Msk;
     UI2C0->LINECTL |= 8 << UI2C_LINECTL_DWIDTH_Pos;
 

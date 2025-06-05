@@ -114,7 +114,7 @@ int main()
     printf("|    TIMER trigger : 1 kHz                                                   | \n");
     printf("|    PA.0 outputs 500 Hz signal based SRAM data and TIMER trigger setting    | \n");
     printf("|    PA.1 outputs 250 Hz signal based SRAM data and TIMER trigger setting    | \n");
-    printf("|    PA.2 ~ 7 also ouput corresponding signal                                | \n");
+    printf("|    PA.2 ~ 7 also output corresponding signal                               | \n");
     printf("+----------------------------------------------------------------------------+ \n");
 
     /* Create source pattern for PDMA transfer */

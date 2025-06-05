@@ -3,7 +3,7 @@
  * @version  V3.00
  * $Revision: 6 $
  * $Date: 18/07/16 10:31a $
- * @brief    Show how to wake up system form Power-down mode by UART interrupt.
+ * @brief    Show how to wake up system from Power-down mode by UART interrupt.
  * @note
  * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
@@ -194,7 +194,7 @@ void UART_CTSWakeUp(void)
 /*---------------------------------------------------------------------------------------------------------*/
 void UART_DataWakeUp(void)
 {
-    /* Enable UART data wake-up frunction */
+    /* Enable UART data wake-up function */
     UART1->WKCTL |= UART_WKCTL_WKDATEN_Msk;
 
     /* Set UART data wake-up start bit compensation value.
@@ -222,7 +222,7 @@ void UART_RxThresholdWakeUp(void)
     UART_Open(UART1, 9600);
     UART1->BRCOMP = 0x80000001;
 
-    /* Enable UART Rx Threshold and Rx time-out wake-up frunction */
+    /* Enable UART Rx Threshold and Rx time-out wake-up function */
     UART1->WKCTL |= UART_WKCTL_WKRFRTEN_Msk | UART_WKCTL_WKTOUTEN_Msk;
 
     /* Set Rx FIFO interrupt trigger level */

@@ -56,7 +56,7 @@ typedef struct
      * |        |          |This bit enables the interrupt generation in case of a transmit finish event.
      * |        |          |0 = The transmit finish interrupt Disabled.
      * |        |          |1 = The transmit finish interrupt Enabled.
-     * |[3]     |RXSTIEN   |Receive Start Interrupt Enable BIt
+     * |[3]     |RXSTIEN   |Receive Start Interrupt Enable Bit
      * |        |          |This bit enables the interrupt generation in case of a receive start event.
      * |        |          |0 = The receive start interrupt Disabled.
      * |        |          |1 = The receive start interrupt Enabled.

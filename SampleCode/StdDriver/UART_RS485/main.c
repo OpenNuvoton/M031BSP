@@ -212,14 +212,14 @@ void RS485_9bitModeMaster()
     uint8_t g_u8SendDataGroup4[10] = {0};
 
     printf("\n\n");
-    printf("+-----------------------------------------------------------+\n");
-    printf("|               RS485 9-bit Master Test                     |\n");
-    printf("+-----------------------------------------------------------+\n");
+    printf("+------------------------------------------------------------+\n");
+    printf("|               RS485 9-bit Master Test                      |\n");
+    printf("+------------------------------------------------------------+\n");
     printf("| The function will send different address with 10 data bytes|\n");
-    printf("| to test RS485 9-bit mode. Please connect TX/RX to another |\n");
-    printf("| board and wait its ready to receive.                      |\n");
-    printf("| Press any key to start...                                 |\n");
-    printf("+-----------------------------------------------------------+\n\n");
+    printf("| to test RS485 9-bit mode. Please connect TX/RX to another  |\n");
+    printf("| board and wait its ready to receive.                       |\n");
+    printf("| Press any key to start...                                  |\n");
+    printf("+------------------------------------------------------------+\n\n");
     getchar();
 
     /* Set RS485-Master as AUD mode*/

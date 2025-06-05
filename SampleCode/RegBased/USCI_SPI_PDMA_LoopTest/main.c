@@ -262,7 +262,7 @@ void UsciSpiLoopTest_WithPDMA(void)
     PDMA->DSCT[USPI_MASTER_TX_DMA_CH].CTL &= ~(PDMA_DSCT_CTL_OPMODE_Msk);
     PDMA->DSCT[USPI_MASTER_TX_DMA_CH].CTL |= (PDMA_OP_BASIC);
 
-    /* Single request type. USCI_SPI only support PDMA single request type. */
+    /* Single request type. USCI_SPI only supports PDMA single request type. */
     PDMA->DSCT[USPI_MASTER_TX_DMA_CH].CTL &= ~(PDMA_DSCT_CTL_TXTYPE_Msk | PDMA_DSCT_CTL_BURSIZE_Msk);
     PDMA->DSCT[USPI_MASTER_TX_DMA_CH].CTL |= (PDMA_REQ_SINGLE | 0);
 
@@ -295,7 +295,7 @@ void UsciSpiLoopTest_WithPDMA(void)
     PDMA->DSCT[USPI_MASTER_RX_DMA_CH].CTL &= ~(PDMA_DSCT_CTL_OPMODE_Msk);
     PDMA->DSCT[USPI_MASTER_RX_DMA_CH].CTL |= (PDMA_OP_BASIC);
 
-    /* Single request type. SPI only support PDMA single request type. */
+    /* Single request type. SPI only supports PDMA single request type. */
     PDMA->DSCT[USPI_MASTER_RX_DMA_CH].CTL &= ~(PDMA_DSCT_CTL_TXTYPE_Msk | PDMA_DSCT_CTL_BURSIZE_Msk);
     PDMA->DSCT[USPI_MASTER_RX_DMA_CH].CTL |= (PDMA_REQ_SINGLE | 0);
 
@@ -325,7 +325,7 @@ void UsciSpiLoopTest_WithPDMA(void)
     PDMA->REQSEL0_3 = (PDMA->REQSEL0_3 & ~PDMA_REQSEL0_3_REQSRC3_Msk) | (PDMA_USCI1_RX << PDMA_REQSEL0_3_REQSRC3_Pos);
     PDMA->DSCT[USPI_SLAVE_RX_DMA_CH].CTL &= ~(PDMA_DSCT_CTL_OPMODE_Msk);
     PDMA->DSCT[USPI_SLAVE_RX_DMA_CH].CTL |= (PDMA_OP_BASIC);
-    /* Single request type. USCI_SPI only support PDMA single request type. */
+    /* Single request type. USCI_SPI only supports PDMA single request type. */
     PDMA->DSCT[USPI_SLAVE_RX_DMA_CH].CTL &= ~(PDMA_DSCT_CTL_TXTYPE_Msk | PDMA_DSCT_CTL_BURSIZE_Msk);
     PDMA->DSCT[USPI_SLAVE_RX_DMA_CH].CTL |= (PDMA_REQ_SINGLE | 0);
     /* Disable table interrupt */
@@ -354,7 +354,7 @@ void UsciSpiLoopTest_WithPDMA(void)
     PDMA->REQSEL0_3 = (PDMA->REQSEL0_3 & ~PDMA_REQSEL0_3_REQSRC2_Msk) | (PDMA_USCI1_TX << PDMA_REQSEL0_3_REQSRC2_Pos);
     PDMA->DSCT[USPI_SLAVE_TX_DMA_CH].CTL &= ~(PDMA_DSCT_CTL_OPMODE_Msk);
     PDMA->DSCT[USPI_SLAVE_TX_DMA_CH].CTL |= (PDMA_OP_BASIC);
-    /* Single request type. USCI_SPI only support PDMA single request type. */
+    /* Single request type. USCI_SPI only supports PDMA single request type. */
     PDMA->DSCT[USPI_SLAVE_TX_DMA_CH].CTL &= ~(PDMA_DSCT_CTL_TXTYPE_Msk | PDMA_DSCT_CTL_BURSIZE_Msk);
     PDMA->DSCT[USPI_SLAVE_TX_DMA_CH].CTL |= (PDMA_REQ_SINGLE | 0);
     /* Disable table interrupt */
