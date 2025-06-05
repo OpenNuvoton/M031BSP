@@ -283,7 +283,7 @@ void PDMA_IRQHandler(void)
     {
         if(PDMA_GET_TD_STS(PDMA) & PDMA_TDSTS_TDIF0_Msk)             /* channel 0 done */
         {
-            /* Reset PDMA Scater-Gatter table */
+            /* Reset PDMA Scatter-Gather table */
             PDMA_ResetTxSGTable(u8TxIdx);
             u8TxIdx ^= 1;
             u32PlayReady = 1;

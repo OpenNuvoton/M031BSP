@@ -47,13 +47,13 @@ typedef struct
      * |        |          |If counter halt is enabled, PWM all counters will keep current value until exit ICE debug mode.
      * |        |          |0 = ICE debug mode counter halt disable.
      * |        |          |1 = ICE debug mode counter halt enable.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[31]    |DBGTRIOFF |ICE Debug Mode Acknowledge Disable (Write Protect)
      * |        |          |0 = ICE debug mode acknowledgement affects PWM output.
      * |        |          |PWM pin will be forced as tri-state while ICE debug mode acknowledged.
      * |        |          |1 = ICE debug mode acknowledgement disabled.
      * |        |          |PWM pin will keep output no matter ICE debug mode acknowledged or not.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * @var PWM_T::CTL1
      * Offset: 0x04  PWM Control Register 1
      * ---------------------------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ typedef struct
      * |[24]    |DTCKSEL   |Dead-time Clock Select (Write Protect)
      * |        |          |0 = Dead-time clock source from PWM_CLK.
      * |        |          |1 = Dead-time clock source from prescaler output.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * @var PWM_T::CNT
      * Offset: 0x90~0xA4  PWM Counter Register 0/2/4
      * ---------------------------------------------------------------------------------------------------
@@ -573,11 +573,11 @@ typedef struct
      * |[2:0]   |BRKETRGn  |PWM Edge Brake Software Trigger (Write Only) (Write Protect)
      * |        |          |Each bit n controls the corresponding PWM pair n.
      * |        |          |Write 1 to this bit will trigger Edge brake, and set BRKEIFn to 1 in PWM_INTSTS1 register.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[10:8]  |BRKLTRGn  |PWM Level Brake Software Trigger (Write Only) (Write Protect)
      * |        |          |Each bit n controls the corresponding PWM pair n.
      * |        |          |Write 1 to this bit will trigger level brake, and set BRKLIFn to 1 in PWM_INTSTS1 register.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * @var PWM_T::INTEN0
      * Offset: 0xE0  PWM Interrupt Enable Register 0
      * ---------------------------------------------------------------------------------------------------
@@ -625,27 +625,27 @@ typedef struct
      * |[0]     |BRKEIEN0_1|PWM Edge-detect Brake Interrupt Enable for Channel0/1 (Write Protect)
      * |        |          |0 = Edge-detect Brake interrupt for channel0/1 Disabled.
      * |        |          |1 = Edge-detect Brake interrupt for channel0/1 Enabled.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[1]     |BRKEIEN2_3|PWM Edge-detect Brake Interrupt Enable for Channel2/3 (Write Protect)
      * |        |          |0 = Edge-detect Brake interrupt for channel2/3 Disabled.
      * |        |          |1 = Edge-detect Brake interrupt for channel2/3 Enabled.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[2]     |BRKEIEN4_5|PWM Edge-detect Brake Interrupt Enable for Channel4/5 (Write Protect)
      * |        |          |0 = Edge-detect Brake interrupt for channel4/5 Disabled.
      * |        |          |1 = Edge-detect Brake interrupt for channel4/5 Enabled.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[8]     |BRKLIEN0_1|PWM Level-detect Brake Interrupt Enable for Channel0/1 (Write Protect)
      * |        |          |0 = Level-detect Brake interrupt for channel0/1 Disabled.
      * |        |          |1 = Level-detect Brake interrupt for channel0/1 Enabled.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[9]     |BRKLIEN2_3|PWM Level-detect Brake Interrupt Enable for Channel2/3 (Write Protect)
      * |        |          |0 = Level-detect Brake interrupt for channel2/3 Disabled.
      * |        |          |1 = Level-detect Brake interrupt for channel2/3 Enabled.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[10]    |BRKLIEN4_5|PWM Level-detect Brake Interrupt Enable for Channel4/5 (Write Protect)
      * |        |          |0 = Level-detect Brake interrupt for channel4/5 Disabled.
      * |        |          |1 = Level-detect Brake interrupt for channel4/5 Enabled.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * @var PWM_T::INTSTS0
      * Offset: 0xE8  PWM Interrupt Flag Register 0
      * ---------------------------------------------------------------------------------------------------
@@ -681,51 +681,51 @@ typedef struct
      * |[0]     |BRKEIF0   |PWM Channel 0 Edge-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 0 edge-detect brake event do not happened.
      * |        |          |1 = When PWM channel 0 edge-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[1]     |BRKEIF1   |PWM Channel 1 Edge-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 1 edge-detect brake event do not happened.
      * |        |          |1 = When PWM channel 1 edge-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[2]     |BRKEIF2   |PWM Channel 2 Edge-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 2 edge-detect brake event do not happened.
      * |        |          |1 = When PWM channel 2 edge-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[3]     |BRKEIF3   |PWM Channel 3 Edge-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 3 edge-detect brake event do not happened.
      * |        |          |1 = When PWM channel 3 edge-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[4]     |BRKEIF4   |PWM Channel 4 Edge-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 4 edge-detect brake event do not happened.
      * |        |          |1 = When PWM channel 4 edge-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[5]     |BRKEIF5   |PWM Channel 5 Edge-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 5 edge-detect brake event do not happened.
      * |        |          |1 = When PWM channel 5 edge-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[8]     |BRKLIF0   |PWM Channel 0 Level-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 0 level-detect brake event do not happened.
      * |        |          |1 = When PWM channel 0 level-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[9]     |BRKLIF1   |PWM Channel 1 Level-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 1 level-detect brake event do not happened.
      * |        |          |1 = When PWM channel 1 level-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[10]    |BRKLIF2   |PWM Channel 2 Level-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 2 level-detect brake event do not happened.
      * |        |          |1 = When PWM channel 2 level-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[11]    |BRKLIF3   |PWM Channel 3 Level-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 3 level-detect brake event do not happened.
      * |        |          |1 = When PWM channel 3 level-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[12]    |BRKLIF4   |PWM Channel 4 Level-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 4 level-detect brake event do not happened.
      * |        |          |1 = When PWM channel 4 level-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[13]    |BRKLIF5   |PWM Channel 5 Level-detect Brake Interrupt Flag (Write Protect)
      * |        |          |0 = PWM channel 5 level-detect brake event do not happened.
      * |        |          |1 = When PWM channel 5 level-detect brake event happened, this bit is set to 1, writing 1 to clear.
-     * |        |          |Note: This register is write protected. Refer toREGWRPROT register.
+     * |        |          |Note: This register is write protected. Refer to REGWRPROT register.
      * |[16]    |BRKESTS0  |PWM Channel 0 Edge-detect Brake Status
      * |        |          |0 = PWM channel 0 edge-detect brake state is released.
      * |        |          |1 = When PWM channel 0 edge-detect brake detects a falling edge of any enabled brake source; this flag will be set to indicate the PWM channel0 at brake state, writing 1 to clear.

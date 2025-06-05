@@ -93,7 +93,7 @@ void UART0_Init()
  *
  * @param       u32CycleResolution   Target generator duty cycle resolution. The value in general is 100.
  *
- * @return      The compatator value by new duty cycle
+ * @return      The comparator value by new duty cycle
  */
 uint32_t CalNewDutyCMR(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32DutyCycle, uint32_t u32CycleResolution)
 {

@@ -295,7 +295,7 @@ void PDMA_IRQHandler(void)
             if (g_count==2)
                 u32RecReady = 1;
 
-            /* Reset PDMA Scater-Gatter table */
+            /* Reset PDMA Scatter-Gather table */
             PDMA_ResetRxSGTable(u8RxIdx);
             u8RxIdx ^= 1;
             PDMA_CLR_TD_FLAG(PDMA, PDMA_TDSTS_TDIF1_Msk);

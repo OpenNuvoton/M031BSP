@@ -55,11 +55,11 @@ typedef struct
      * |        |          |The period of the suspend interval is obtained according to the following equation.
      * |        |          |(SUSPITV[3:0] + 0.5) * period of SPICLK clock cycle
      * |        |          |Example:
-     * |        |          |SUSPITV = 0x0 u2026. 0.5 SPICLK clock cycle.
-     * |        |          |SUSPITV = 0x1 u2026. 1.5 SPICLK clock cycle.
+     * |        |          |SUSPITV = 0x0 ¡K 0.5 SPICLK clock cycle.
+     * |        |          |SUSPITV = 0x1 ¡K 1.5 SPICLK clock cycle.
      * |        |          |......
-     * |        |          |SUSPITV = 0xE u2026. 14.5 SPICLK clock cycle.
-     * |        |          |SUSPITV = 0xF u2026. 15.5 SPICLK clock cycle.
+     * |        |          |SUSPITV = 0xE ¡K 14.5 SPICLK clock cycle.
+     * |        |          |SUSPITV = 0xF ¡K 15.5 SPICLK clock cycle.
      * |[12:8]  |DWIDTH    |Data Width
      * |        |          |This field specifies how many bits can be transmitted / received in one transaction
      * |        |          |The minimum bit length is 8 bits and can up to 32 bits.
@@ -268,7 +268,7 @@ typedef struct
      * |        |          |0 = Receive FIFO buffer is not full.
      * |        |          |1 = Receive FIFO buffer is full.
      * |[10]    |RXTHIF    |Receive FIFO Threshold Interrupt Flag (Read Only)
-     * |        |          |0 = The valid data count within the RXreceive FIFO buffer is smaller than or equal to the setting value of RXTH.
+     * |        |          |0 = The valid data count within the RX receive FIFO buffer is smaller than or equal to the setting value of RXTH.
      * |        |          |1 = The valid data count within the receive FIFO buffer is larger than the setting value of RXTH.
      * |[11]    |RXOVIF    |Receive FIFO Overrun Interrupt Flag
      * |        |          |When the receive FIFO buffer is full, the follow-up data will be dropped and this bit will be set to 1.
@@ -299,7 +299,7 @@ typedef struct
      * |        |          |0 = No effect.
      * |        |          |1 = No data in Transmit FIFO and TX shift register when the slave selection signal is active.
      * |        |          |Note 1: This bit will be cleared by writing 1 to it.
-     * |        |          |Note 2: If reset slaveu2019s transmission circuit when slave selection signal is active, this flag will be set to 1 after 2 peripheral clock cycles + 3 system clock cycles since the reset operation is done.
+     * |        |          |Note 2: If reset slave's transmission circuit when slave selection signal is active, this flag will be set to 1 after 2 peripheral clock cycles + 3 system clock cycles since the reset operation is done.
      * |[23]    |TXRXRST   |TX or RX Reset Status (Read Only)
      * |        |          |0 = The reset function of TXRST or RXRST is done.
      * |        |          |1 = Doing the reset function of TXRST or RXRST.
@@ -317,7 +317,7 @@ typedef struct
      * |[31:0]  |TX        |Data Transmit Register
      * |        |          |The data transmit registers pass through the transmitted data into the 4-level transmit FIFO buffers.
      * |        |          |The number of valid bits depends on the setting of DWIDTH (SPIx_CTL[12:8]) in SPI mode or WDWIDTH (SPIx_I2SCTL[5:4]) in I2S mode.
-     * |        |          |For exampleIn SPI mode, if DWIDTH is set to 0x08, the bits TX[7:0] will be transmitted.
+     * |        |          |For example In SPI mode, if DWIDTH is set to 0x08, the bits TX[7:0] will be transmitted.
      * |        |          |If DWIDTH is set to 0x00 , the SPI controller will perform a 32-bit transfer.
      * |        |          |In I2S mode, if WDWIDTH (SPIx_I2SCTL[5:4]) is set to 0x2, the data width of audio channel is 24-bit and corresponding to TX[243:0].
      * |        |          |If WDWIDTH is set as 0x0, 0x1, or 0x3, all bits of this field are valid and referred to the data arrangement in I2S mode FIFO operation section.
@@ -387,11 +387,11 @@ typedef struct
      * |        |          |When monaural format is selected (MONO = 1), I2S controller will receive right channel data if RXLCH is set to 0, and receive left channel data if RXLCH is set to 1.
      * |        |          |0 = Receive right channel data in Mono mode.
      * |        |          |1 = Receive left channel data in Mono mode.
-     * |[24]    |RZCIEN    |Right Channel Zero- CCross Interrupt Enable Bit
+     * |[24]    |RZCIEN    |Right Channel Zero Cross Interrupt Enable Bit
      * |        |          |Interrupt occurs if this bit is set to 1 and right channel zero- cross event occurs.
      * |        |          |0 = Interrupt Disabled.
      * |        |          |1 = Interrupt Enabled.
-     * |[25]    |LZCIEN    |Left Channel Zero- CCross Interrupt Enable Bit
+     * |[25]    |LZCIEN    |Left Channel Zero Cross Interrupt Enable Bit
      * |        |          |Interrupt occurs if this bit is set to 1 and left channel zero- cross event occurs.
      * |        |          |0 = Interrupt Disabled.
      * |        |          |1 = Interrupt Enabled.
@@ -432,7 +432,7 @@ typedef struct
      * |        |          |0 = Receive FIFO buffer is not full.
      * |        |          |1 = Receive FIFO buffer is full.
      * |[10]    |RXTHIF    |Receive FIFO Threshold Interrupt Flag (Read Only)
-     * |        |          |0 = The valid data count within the Rxreceive FIFO buffer is smaller than or equal to the setting value of RXTH.
+     * |        |          |0 = The valid data count within the Rx receive FIFO buffer is smaller than or equal to the setting value of RXTH.
      * |        |          |1 = The valid data count within the receive FIFO buffer is larger than the setting value of RXTH.
      * |        |          |Note: If RXTHIEN = 1 and RXTHIF = 1, the SPI/I2S controller will generate a SPI interrupt request.
      * |[11]    |RXOVIF    |Receive FIFO Overrun Interrupt Flag

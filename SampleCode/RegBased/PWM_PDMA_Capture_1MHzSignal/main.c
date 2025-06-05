@@ -280,7 +280,7 @@ int32_t main(void)
     /* Configure destination address */
     PDMA->DSCT[PDMAchannel].DA = (uint32_t)&g_au16Count[0];
 
-    /* Configure PDMA channel 0 as request source as PDWM channel 2 */
+    /* Configure PDMA channel 0 as request source as PWM channel 2 */
     PDMA->REQSEL0_3 = (PDMA->REQSEL0_3 & ~PDMA_REQSEL0_3_REQSRC0_Pos) | (PDMA_PWM0_P2_RX << PDMA_REQSEL0_3_REQSRC0_Pos);
 
     /* Set source address as PWM capture channel PDMA register(no increment) and destination address as g_au16Count array(increment) */

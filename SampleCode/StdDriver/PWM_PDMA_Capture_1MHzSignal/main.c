@@ -211,7 +211,7 @@ int32_t main(void)
     printf("\n\nCPU @ %dHz(PLL@ %dHz)\n", SystemCoreClock, PllClock);
     printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "CPU" : "PLL");
     printf("+------------------------------------------------------------------------+\n");
-    printf("|                          PWM Capture Sample Code                        |\n");
+    printf("|                          PWM Capture Sample Code                       |\n");
     printf("|                                                                        |\n");
     printf("+------------------------------------------------------------------------+\n");
     printf("  This sample code will use PWM0 channel 2 to capture the signal from PWM0 channel 0.\n");
@@ -227,7 +227,7 @@ int32_t main(void)
     /*--------------------------------------------------------------------------------------*/
 
     /* Assume PWM output frequency is 1 MHz and duty ratio is 50%, user can calculate PWM settings by follows.
-         duty ratio = CMR+/(CNR+1)
+         duty ratio = CMR /(CNR+1)
          cycle time = CNR+1
          High level = CMR
          PWM clock source frequency from HIRC is 48,000,000
