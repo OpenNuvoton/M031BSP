@@ -455,7 +455,7 @@ extern int32_t g_CLK_i32ErrCode;
   * @brief    Get PLL Clock Output Frequency
   * @param    None
   * @return   PLL clock output frequency
-  * @details  To get actual PLL clock output frequency. The clock uint is in Hz.
+  * @details  To get actual PLL clock output frequency. The clock unit is in Hz.
   * \hideinitializer
   */
 static __INLINE uint32_t CLK_GetPLLClockFreq(void)
@@ -537,9 +537,9 @@ __STATIC_INLINE int32_t CLK_SysTickDelay(uint32_t us)
 
 
 /**
-  * @brief  Get current UART0 clock frquency.
+  * @brief  Get current UART0 clock frequency.
   * @param  None.
-  * @return UART0 clock frquency. The clock UNIT is in Hz.
+  * @return UART0 clock frequency. The clock UNIT is in Hz.
   * \hideinitializer
   */
 static __INLINE uint32_t CLK_GetUARTFreq(void)
