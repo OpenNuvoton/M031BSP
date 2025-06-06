@@ -349,26 +349,26 @@ void RS485_FunctionTest()
         The sample code is used to test RS485 9-bit mode and needs
         two Module test board to complete the test.
         Master:
-            1.Set AUD mode and HW will control RTS pin. LEV_RTS is set to '0'.
+            1.Set AUD mode and HW will control RTS pin. RTSACTLV is set to '0'.
             2.Master will send four different address with 10 bytes data to test Slave.
-            3.Address bytes : the parity bit should be '1'. (Set UA_LCR = 0x2B)
-            4.Data bytes : the parity bit should be '0'. (Set UA_LCR = 0x3B)
+            3.Address bytes : the parity bit should be '1'. (Set UART_LINE = 0x2B)
+            4.Data bytes : the parity bit should be '0'. (Set UART_LINE = 0x3B)
             5.RTS pin is low in idle state. When master is sending,
               RTS pin will be pull high.
 
         Slave:
-            1.Set AAD and AUD mode firstly. LEV_RTS is set to '0'.
+            1.Set AAD and AUD mode firstly. RTSACTLV is set to '0'.
             2.The received byte, parity bit is '1' , is considered "ADDRESS".
             3.The received byte, parity bit is '0' , is considered "DATA".  (Default)
-            4.AAD: The slave will ignore any data until ADDRESS match ADDR_MATCH value.
+            4.AAD: The slave will ignore any data until ADDRESS match address match value.
               When RLS and RDA interrupt is happened,it means the ADDRESS is received.
-              Check if RS485_ADD_DETF is set and read UA_RBR to clear ADDRESS stored in rx_fifo.
+              Check if RS485 address byte detect flag is set and read RX FIFO data to clear ADDRESS stored in RX FIFO.
 
-              NMM: The slave will ignore data byte until disable RX_DIS.
+              NMM: The slave will ignore data byte until RXOFF is disabled.
               When RLS and RDA interrupt is happened,it means the ADDRESS is received.
               Check the ADDRESS is match or not by user in UART_IRQHandler.
-              If the ADDRESS is match,clear RX_DIS bit to receive data byte.
-              If the ADDRESS is not match,set RX_DIS bit to avoid data byte stored in FIFO.
+              If the ADDRESS is match, clear RXOFF bit to receive data byte.
+              If the ADDRESS is not match, set RXOFF bit to avoid data byte stored in FIFO.
     */
 
     if (u32Item == '0')
