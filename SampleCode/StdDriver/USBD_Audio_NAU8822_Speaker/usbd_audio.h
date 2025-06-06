@@ -148,7 +148,7 @@ void I2C_WriteNAU8822(uint8_t u8addr, uint16_t u16data);
 #define EP0_MAX_PKT_SIZE    8
 #define EP1_MAX_PKT_SIZE    EP0_MAX_PKT_SIZE
 
-/* Maximum Packet Size for Recprd Endpoint */
+/* Maximum Packet Size for Record Endpoint */
 #define EP2_MAX_PKT_SIZE    (PLAY_RATE * PLAY_CHANNELS * 2 / 1000)
 
 #ifdef __FEEDBACK__

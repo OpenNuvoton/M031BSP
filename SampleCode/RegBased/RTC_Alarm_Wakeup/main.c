@@ -22,7 +22,7 @@ volatile uint8_t g_u8IsRTCAlarmINT = 0;
  *
  * @return      None
  *
- * @details     The RTC_IRQHandler is default IRQ of RTC, declared in startup_M2351.s.
+ * @details     The RTC_IRQHandler is default IRQ of RTC, declared in startup_M031Series.s.
  */
 void RTC_IRQHandler(void)
 {

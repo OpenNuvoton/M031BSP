@@ -77,7 +77,7 @@ uint8_t gu8ConfigDescriptor[] =
     /* Communication Class Specified INTERFACE descriptor */
     0x04,           /* Size of the descriptor, in bytes */
     0x24,           /* CS_INTERFACE descriptor type */
-    0x02,           /* Abstract control management funcational descriptor subtype */
+    0x02,           /* Abstract control management functional descriptor subtype */
     0x00,           /* bmCapabilities       */
 
     /* Communication Class Specified INTERFACE descriptor */

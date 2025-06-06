@@ -300,7 +300,7 @@ typedef uint8_t BleAdvIntervalRange;
 typedef uint8_t BleAdvType;
 #define ADV_TYPE_ADV_IND              0x00  /**< Connectable and scannable undirected advertising. */
 #define ADV_TYPE_ADV_DIRECT_IND       0x01  /**< Connectable directed advertising. */
-#define ADV_TYPE_SCAN_IND             0x02  /**< Scanable undirected advertising. */
+#define ADV_TYPE_SCAN_IND             0x02  /**< Scannable undirected advertising. */
 #define ADV_TYPE_ADV_NONCONN_IND      0x03  /**< Non-Connectable undirected advertising. */
 #define ADV_TYPE_SCAN_RSP             0x04  /**< Scan Response. */
 /** @} */
@@ -1452,7 +1452,7 @@ BleStackStatus setBLE_ConnCreate(uint8_t hostId, BLE_Addr_Param *peerAddrParam, 
  * Wait for @ref BLECMD_EVENT_CONN_COMPLETE event which indicates the connection establishing process has been started. \n
  * @attention The connection process will be stopped until the connection is established or @ref setBLE_ConnCancel is called.
  *
- * @note it calls @ref setBLE_ConnCreate with the setting of scan parameters by @ref setBLE_ScanParam otherwise the deafult scan parameters are:
+ * @note it calls @ref setBLE_ConnCreate with the setting of scan parameters by @ref setBLE_ScanParam otherwise the default scan parameters are:
  *       - scan type    : @ref SCAN_TYPE_ACTIVE
  *       - scan interval: 10 (10*0.625ms=6.25ms)
  *       - scan window  : 10 10*0.625ms=6.25ms

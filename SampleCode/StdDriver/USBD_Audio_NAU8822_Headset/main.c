@@ -163,7 +163,7 @@ int32_t main(void)
 #if CRYSTAL_LESS
     uint32_t u32TrimInit;
 #endif
-    /* Unlock Protected Regsiter */
+    /* Unlock Protected Register */
     SYS_UnlockReg();
 
     /* Initial system & multi-function */
@@ -277,7 +277,7 @@ int32_t main(void)
         #if CRYSTAL_LESS
         AdjFreq1();
         #else
-        /* Adjust codec sampling rate to synch with USB. The adjustment range is +-0.005% */
+        /* Adjust codec sampling rate to sync with USB. The adjustment range is +-0.005% */
         AdjFreq();
         #endif
 #endif

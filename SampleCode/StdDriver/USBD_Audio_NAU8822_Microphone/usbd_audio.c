@@ -77,7 +77,7 @@ void USBD_IRQHandler(void)
             /* USB Plug In */
             USBD_ENABLE_USB();
 
-            /*Enable HIRC tirm*/
+            /*Enable HIRC trim*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING;
         }
         else
@@ -85,7 +85,7 @@ void USBD_IRQHandler(void)
             /* USB Un-plug */
             USBD_DISABLE_USB();
 
-            /*Disable HIRC tirm*/
+            /*Disable HIRC trim*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING & (~SYS_HIRCTRIMCTL_FREQSEL_Msk);
         }
     }
@@ -103,7 +103,7 @@ void USBD_IRQHandler(void)
             /* Disable I2S Rx function */
             SPII2S_DISABLE_RX(SPI0);
 
-            /*Enable HIRC tirm*/
+            /*Enable HIRC trim*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING;
         }
 
@@ -112,7 +112,7 @@ void USBD_IRQHandler(void)
             /* Enable USB but disable PHY */
             USBD_DISABLE_PHY();
 
-            /*Disable HIRC tirm*/
+            /*Disable HIRC trim*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING & (~SYS_HIRCTRIMCTL_FREQSEL_Msk);
         }
 
@@ -121,7 +121,7 @@ void USBD_IRQHandler(void)
             /* Enable USB and enable PHY */
             USBD_ENABLE_USB();
 
-            /*Enable HIRC tirm*/
+            /*Enable HIRC trim*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING;
         }
 

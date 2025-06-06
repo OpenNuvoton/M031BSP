@@ -73,13 +73,13 @@ extern const ATTRIBUTE_BLE ATT_HID_CHARACTERISTIC_KEYBOARD_OUTPUT_REPORT;       
 extern const ATTRIBUTE_BLE ATT_HID_KEYBOARD_OUTPUT_REPORT;                                       /**< HID characteristic keyboard output report value. */
 extern const ATTRIBUTE_BLE ATT_HID_KEYBOARD_OUTPUT_REPORT_REFERENCE;                             /**< HID characteristic keyboard output report reference value. */
 
-extern const ATTRIBUTE_BLE ATT_HID_CHARACTERISTIC_BOOT_MOUSE_INPUT_REPORT;                       /**< HID characteristic BOOT mouse intput report. */
-extern const ATTRIBUTE_BLE ATT_HID_BOOT_MOUSE_INPUT_REPORT;                                      /**< HID characteristic BOOT mouse intput report value. */
-extern const ATTRIBUTE_BLE ATT_HID_BOOT_MOUSE_INPUT_NOTIFY_CLIENT_CHARC_CONFIGURATION;           /**< HID characteristic BOOT mouse intput client characteristic configuration descriptor. */
-extern const ATTRIBUTE_BLE ATT_HID_CHARACTERISTIC_MOUSE_INPUT_REPORT;                            /**< HID characteristic mouse intput report. */
-extern const ATTRIBUTE_BLE ATT_HID_MOUSE_INPUT_REPORT;                                           /**< HID characteristic mouse intput report value. */
-extern const ATTRIBUTE_BLE ATT_HID_MOUSE_INPUT_NOTIFY_CLIENT_CHARC_CONFIGURATION;                /**< HID characteristic mouse intput reference client characteristic configuration descriptor. */
-extern const ATTRIBUTE_BLE ATT_HID_MOUSE_INPUT_REPORT_REFERENCE;                                 /**< HID characteristic mouse intput report reference value. */
+extern const ATTRIBUTE_BLE ATT_HID_CHARACTERISTIC_BOOT_MOUSE_INPUT_REPORT;                       /**< HID characteristic BOOT mouse input report. */
+extern const ATTRIBUTE_BLE ATT_HID_BOOT_MOUSE_INPUT_REPORT;                                      /**< HID characteristic BOOT mouse input report value. */
+extern const ATTRIBUTE_BLE ATT_HID_BOOT_MOUSE_INPUT_NOTIFY_CLIENT_CHARC_CONFIGURATION;           /**< HID characteristic BOOT mouse input client characteristic configuration descriptor. */
+extern const ATTRIBUTE_BLE ATT_HID_CHARACTERISTIC_MOUSE_INPUT_REPORT;                            /**< HID characteristic mouse input report. */
+extern const ATTRIBUTE_BLE ATT_HID_MOUSE_INPUT_REPORT;                                           /**< HID characteristic mouse input report value. */
+extern const ATTRIBUTE_BLE ATT_HID_MOUSE_INPUT_NOTIFY_CLIENT_CHARC_CONFIGURATION;                /**< HID characteristic mouse input reference client characteristic configuration descriptor. */
+extern const ATTRIBUTE_BLE ATT_HID_MOUSE_INPUT_REPORT_REFERENCE;                                 /**< HID characteristic mouse input report reference value. */
 /** @} */
 
 

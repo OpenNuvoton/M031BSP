@@ -32,7 +32,7 @@
 #define GATT_DECLARATIONS_PROPERTIES_NOTIFY                             0x10  /**< Notification of the value permitted. */
 #define GATT_DECLARATIONS_PROPERTIES_INDICATE                           0x20  /**< Indications of the value permitted. */
 #define GATT_DECLARATIONS_PROPERTIES_AUTHENTICATED_SIGNED_WRITES        0x40  /**< Writing the value with signed write command permitted. */
-#define GATT_DECLARATIONS_PROPERTIES_EXTENDED_PROPERTIES                0x80  /**< Addional characteristic properties are defined in the characteristic extended properties descriptor. */
+#define GATT_DECLARATIONS_PROPERTIES_EXTENDED_PROPERTIES                0x80  /**< Additional characteristic properties are defined in the characteristic extended properties descriptor. */
 /** @} */
 
 

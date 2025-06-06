@@ -555,7 +555,7 @@ static void BleEvent_Callback(BleCmdEvent event, void *param)
 
     case BLECMD_EVENT_PASSKEY_CONFIRM:
     {
-        //enter a scanned Passkey or use a randomly generaated passkey.
+        //enter a scanned Passkey or use a randomly generated passkey.
 #if (IOCAPABILITY_SETTING == DISPLAY_ONLY)
         BLE_Event_PassKeyConfirmParam *event_param = (BLE_Event_PassKeyConfirmParam *)param;
         setBLE_PairingPassKey(event_param->hostId, (uint32_t)BLE_PAIRING_KEY);

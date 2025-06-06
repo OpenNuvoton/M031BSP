@@ -195,7 +195,7 @@ BleStackStatus setBLE_TxPower_Wrap(uint8_t power_index, BleMode bleMode)
 {
     BleStackStatus status;
 
-    /* Comfirm the TX Power remapping table is set */
+    /* Confirm the TX Power remapping table is set */
     if (TXPOWER_REMAP == 0)
     {
         printf("Warning! Does not initial the TX Power remap table.\n");

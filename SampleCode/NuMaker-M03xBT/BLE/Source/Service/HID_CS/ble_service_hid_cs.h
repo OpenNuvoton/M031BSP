@@ -57,10 +57,10 @@ extern const ATTRIBUTE_BLE ATT_HID_PROTOCOL_MODE;                               
 extern const ATTRIBUTE_BLE ATT_HID_CHARACTERISTIC_REPORT_MAP;                                    /**< HID characteristic report map. */
 extern const ATTRIBUTE_BLE ATT_HID_REPORT_MAP;                                                   /**< HID characteristic report map value. */
 
-extern const ATTRIBUTE_BLE ATT_HID_CHARACTERISTIC_CONSUMER_INPUT_REPORT;                         /**< HID characteristic consumer intput report. */
-extern const ATTRIBUTE_BLE ATT_HID_CONSUMER_INPUT_REPORT;                                        /**< HID characteristic consumer intput report value. */
-extern const ATTRIBUTE_BLE ATT_HID_CONSUMER_INPUT_NOTIFY_CLIENT_CHARC_CONFIGURATION;             /**< HID characteristic consumer intput report client characteristic configuration descriptor. */
-extern const ATTRIBUTE_BLE ATT_HID_CONSUMER_INPUT_REPORT_REFERENCE;                              /**< HID characteristic consumer intput report reference value. */
+extern const ATTRIBUTE_BLE ATT_HID_CHARACTERISTIC_CONSUMER_INPUT_REPORT;                         /**< HID characteristic consumer input report. */
+extern const ATTRIBUTE_BLE ATT_HID_CONSUMER_INPUT_REPORT;                                        /**< HID characteristic consumer input report value. */
+extern const ATTRIBUTE_BLE ATT_HID_CONSUMER_INPUT_NOTIFY_CLIENT_CHARC_CONFIGURATION;             /**< HID characteristic consumer input report client characteristic configuration descriptor. */
+extern const ATTRIBUTE_BLE ATT_HID_CONSUMER_INPUT_REPORT_REFERENCE;                              /**< HID characteristic consumer input report reference value. */
 /** @} */
 
 

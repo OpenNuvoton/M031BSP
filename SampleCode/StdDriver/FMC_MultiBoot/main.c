@@ -174,7 +174,7 @@ int32_t main(void)
         to remap page of VECMAP to 0x0~0x1ff.
         NOTE: VECMAP only valid when CBS = 00'b or 10'b.
 
-        The sample code didn't use stanard C library for UART message due to the size of LDROM.
+        The sample code didn't use standard C library for UART message due to the size of LDROM.
 
         To use this sample code, please:
         1. Build all targets and download to device individually. The targets are:

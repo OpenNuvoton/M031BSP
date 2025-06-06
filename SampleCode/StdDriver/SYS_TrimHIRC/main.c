@@ -124,7 +124,7 @@ int32_t main(void)
     /* Trim HIRC to 12MHz */
     TrimHIRC();
 
-    /* Disable IRC Trim */
+    /* Disable HIRC Trim */
     SYS->HIRCTRIMCTL = 0;
     printf("Disable HIRC Trim\n");
 

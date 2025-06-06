@@ -85,7 +85,7 @@
          D8: Bass Boost
          D9: Loudness
          D10..(n*8-1): Reserved
-  3.If you want to change the polling interal of HID Endpoint, please modify the bInterval field of Endpoint Descriptor for HID.
+  3.If you want to change the polling interval of HID Endpoint, please modify the bInterval field of Endpoint Descriptor for HID.
 */
 
 /*----------------------------------------------------------------------------*/
@@ -689,7 +689,7 @@ uint8_t gu8BosDescriptor[] = {
     0x06, 0x04, 0x00, 0x00  /* bmAttributs, 32 bits     */
     /* bit 0 : Reserved. Must 0.                                         */
     /* bit 1 : 1 to support LPM.                                         */
-    /* bit 2 : 1 to support BSL & Alternat HIRD                          */
+    /* bit 2 : 1 to support BSL & Alternate HIRD                         */
     /* bit 3 : 1 to recommend Baseline BESL                              */
     /* bit 4 : 1 to recommand Deep BESL                                  */
     /* bit 11:8 : Recommend Baseline BESL value. Ignore by bit3 is zero. */

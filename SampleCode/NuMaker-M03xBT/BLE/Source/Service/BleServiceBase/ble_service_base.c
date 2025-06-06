@@ -414,7 +414,7 @@ BleStackStatus setBLEGATT_HandleCCCDGeneralReadRequest(uint8_t hostId, uint8_t o
  * @param[out] readData : a pointer to "read" data.
  * @param[out] reaDataLength : the length of "read" data.
  *
- * @retval BLESTACK_STATUS_ERR_INVALID_HOSTID : Rrror host id.
+ * @retval BLESTACK_STATUS_ERR_INVALID_HOSTID : Error host id.
  * @retval BLESTACK_STATUS_ERR_INVALID_STATE  : Invalid BLE state, usually happens in there is no connection established with the host id.
  * @retval BLESTACK_STATUS_ERR_INVALID_HANDLE : Invalid handle.
  * @retval BLESTACK_STATUS_ERR_BUSY           : Message queue buffer full.

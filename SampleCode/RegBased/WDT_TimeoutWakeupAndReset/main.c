@@ -27,7 +27,7 @@ volatile uint8_t g_u8IsWDTWakeupINT;
  *
  * @return      None
  *
- * @details     The WDT_IRQHandler is default IRQ of WDT and WWDT, declared in startup_NUC123.s.
+ * @details     The WDT_IRQHandler is default IRQ of WDT and WWDT, declared in startup_M031Series.s.
  */
 void WDT_IRQHandler(void)
 {

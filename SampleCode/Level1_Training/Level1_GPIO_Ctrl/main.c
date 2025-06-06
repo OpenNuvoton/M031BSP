@@ -80,7 +80,7 @@ void BTN_Init(void)
     /**************  SW1 ***************/
     /* Set PB.4 to GPIO */
     SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB4MFP_Msk)) | (SYS_GPB_MFPL_PB4MFP_GPIO);
-    /* Set PB.4 to GPIO intput */
+    /* Set PB.4 to GPIO input */
     GPIO_SetMode(PB, BIT4, GPIO_MODE_INPUT);
     GPIO_EnableInt(PB, 4, GPIO_INT_FALLING);
     NVIC_EnableIRQ(GPIO_PAPB_IRQn);
@@ -88,7 +88,7 @@ void BTN_Init(void)
     /**************  SW2 ***************/
     /* Set PB.0 to GPIO */
     SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB0MFP_Msk)) | (SYS_GPB_MFPL_PB0MFP_GPIO);
-    /* Set PB.0 to GPIO intput */
+    /* Set PB.0 to GPIO input */
     GPIO_SetMode(PB, BIT0, GPIO_MODE_INPUT);
     GPIO_EnableInt(PB, 0, GPIO_INT_FALLING);
 

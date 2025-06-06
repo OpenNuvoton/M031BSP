@@ -164,7 +164,7 @@ int32_t main(void)
 #if CRYSTAL_LESS
     uint32_t u32TrimInit;
 #endif
-    /* Unlock Protected Regsiter */
+    /* Unlock Protected Register */
     SYS_UnlockReg();
 
     /* Initial system & multi-function */

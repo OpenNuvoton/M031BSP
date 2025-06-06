@@ -194,7 +194,7 @@ uint32_t ProcessHardFault(uint32_t lr, uint32_t msp, uint32_t psp)
     uint32_t *sp;
     uint32_t inst;
 
-    /* It is casued by hardfault. Just process the hard fault */
+    /* It is caused by hardfault. Just process the hard fault */
     /* TODO: Implement your hardfault handle code here */
 
     /* Check the used stack */
