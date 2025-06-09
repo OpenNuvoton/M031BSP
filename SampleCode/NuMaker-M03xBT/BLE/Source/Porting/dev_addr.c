@@ -45,7 +45,7 @@ int BleAddr_Form_Flash(BLE_Addr_Param *bleAddrParam)
         u32Data1 = FMC_Read(u32Addr);
         u32Data2 = FMC_Read(u32Addr + 4);
 
-        /* Check the device address is vaild or not (46-bits are not all zero or one) */
+        /* Check the device address is valid or not (46-bits are not all zero or one) */
         if ((u32Data1 == 0x00000000) && ((u32Data2 & 0xFF3F) == 0x0000))
             ;
         else if ((u32Data1 == 0xFFFFFFFF) && ((u32Data2 & 0xFF3F) == 0xFF3F))

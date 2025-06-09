@@ -32,7 +32,7 @@
 
 
 
-/** Marcro retrun if input callback function is  equal to NULL.
+/** Marcro return if input callback function is  equal to NULL.
  *
  * @ingroup service_basedDef
  * @param[in] callback BLE service callback function.

@@ -352,13 +352,13 @@ void PDMA_IRQHandler(void)
         {
             /* Copy RX data to TX buffer */
             memcpy(&PcmTxBuff[u8TxIdx ^ 1], &PcmRxBuff[u8RxIdx], BUFF_LEN * 4);
-            /* Reset PDMA Scater-Gatter table */
+            /* Reset PDMA Scatter-Gather table */
             PDMA_ResetRxSGTable(u8RxIdx);
             u8RxIdx ^= 1;
         }
         if((PDMA->TDSTS) & PDMA_TDSTS_TDIF0_Msk)             /* channel 0 done */
         {
-            /* Reset PDMA Scater-Gatter table */
+            /* Reset PDMA Scatter-Gather table */
             PDMA_ResetTxSGTable(u8TxIdx);
             u8TxIdx ^= 1;
         }

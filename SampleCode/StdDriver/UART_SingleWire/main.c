@@ -82,10 +82,10 @@ void SYS_Init(void)
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk)) | \
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
-    /* Set PA multi-function pins for UART1 TXD, RXD */
+    /* Set PA multi-function pins for UART1 RXD */
     SYS->GPA_MFPL = (SYS->GPA_MFPL & ~(SYS_GPA_MFPL_PA2MFP_Msk)) | SYS_GPA_MFPL_PA2MFP_UART1_RXD;
 
-    /* Set PB multi-function pins for UART2 TXD and RXD */
+    /* Set PB multi-function pins for UART2 RXD */
     SYS->GPB_MFPL = (SYS->GPB_MFPL & ~(SYS_GPB_MFPL_PB0MFP_Msk)) | SYS_GPB_MFPL_PB0MFP_UART2_RXD;
 
     /* The RX pin needs to pull-high for single-wire */
@@ -215,7 +215,7 @@ void UART1_TEST_HANDLE()
 
 
 /*---------------------------------------------------------------------------------------------------------*/
-/* ISR to handle UART Channel 2 interrupt event                                                            */
+/* ISR to handle UART Channel 0/2 interrupt event                                                            */
 /*---------------------------------------------------------------------------------------------------------*/
 void UART02_IRQHandler(void)
 {
@@ -223,7 +223,7 @@ void UART02_IRQHandler(void)
 }
 
 /*---------------------------------------------------------------------------------------------------------*/
-/* UART1 Callback function                                                                                  */
+/* UART0/2 Callback function                                                                                  */
 /*---------------------------------------------------------------------------------------------------------*/
 void UART02_TEST_HANDLE()
 {
@@ -256,7 +256,7 @@ void UART02_TEST_HANDLE()
     }
 }
 /*---------------------------------------------------------------------------------------------------------*/
-/*                              Bulid Source Pattern function                                              */
+/*                              Build Source Pattern function                                              */
 /*---------------------------------------------------------------------------------------------------------*/
 void Build_Src_Pattern(uint32_t u32Addr, uint8_t type, uint32_t u32Length)
 {
@@ -291,7 +291,7 @@ uint8_t Check_Pattern(uint32_t u32Addr0, uint32_t u32Addr1, uint32_t u32Length)
     {
         if (pAddr0[i] != pAddr1[i])
         {
-            printf("Data Error Idex=%d,tx =%d,rx=%d\n", i, pAddr0[i], pAddr1[i]) ;
+            printf("Data Error Index=%d,tx =%d,rx=%d\n", i, pAddr0[i], pAddr1[i]) ;
             result = 0;
         }
     }
@@ -322,7 +322,7 @@ void UART_FunctionTest()
     /*
         Using a RS232 cable to connect UART0 and PC.UART0 is set to debug port.
           UART1 and UART2 is enable RDA and RLS interrupt.
-          The user can use URT0 to control the transmission or reception of UART1(Single Wire mode)
+          The user can use UART0 to control the transmission or reception of UART1(Single Wire mode)
         When UART1(Single Wire 1)transfers data to UART2(Single Wire 2), if data is valid,
           it will enter the interrupt and receive the data.And then check the received data.
         When UART2(Single Wire 2)transfers data to UART1(Single Wire 1), if data is valid,
@@ -356,7 +356,7 @@ void UART_FunctionTest()
             g_i32RecOK  = FALSE;
             Build_Src_Pattern((uint32_t)g_u8TxData, UART_WORD_LEN_8, BUFSIZE);
 
-            /* Check the Rx status is Idel */
+            /* Check the Rx status is Idle */
             while (!UART_RX_IDLE(UART1)) {};
 
             UART_Write(UART1, g_u8TxData, BUFSIZE);
@@ -376,7 +376,7 @@ void UART_FunctionTest()
             g_i32RecOK  = FALSE;
             Build_Src_Pattern((uint32_t)g_u8TxData, UART_WORD_LEN_8, BUFSIZE);
 
-            /* Check the Rx status is Idel */
+            /* Check the Rx status is Idle */
             while (!UART_RX_IDLE(UART2)) {};
 
             UART_Write(UART2, g_u8TxData, BUFSIZE);

@@ -380,7 +380,7 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[0]     |BUSTOEN   |Bus Time Out Enable Bit
      * |        |          |0 = Bus clock low time-out detection Disabled.
-     * |        |          |1 = Bus clock low time-out detection Enabled (bus clock is low for more than TTime-out (in BIDLE=0) or high more than TTime-out(in BIDLE =1)
+     * |        |          |1 = Bus clock low time-out detection Enabled (bus clock is low for more than Time-out (in BIDLE=0) or high more than Time-out(in BIDLE =1)
      * |[1]     |CLKTOEN   |Cumulative Clock Low Time Out Enable Bit
      * |        |          |0 = Cumulative clock low time-out detection Disabled.
      * |        |          |1 = Cumulative clock low time-out detection Enabled.

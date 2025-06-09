@@ -134,7 +134,7 @@ void PWM0_Init()
 
 void PDMA_Init()
 {
-    /* Configure PDMA peripheral mode form EADC to memory */
+    /* Configure PDMA peripheral mode form ADC to memory */
     /* Open Channel 1 */
     PDMA->CHCTL |= BIT1;
 

@@ -137,7 +137,7 @@ int32_t main(void)
     printf("Press any key to stop.\n");
     getchar();
 
-    /* Start BPWM0 counter */
+    /* Stop BPWM0 counter */
     BPWM_ForceStop(BPWM0, 0x3F);
 
     printf("Done.");

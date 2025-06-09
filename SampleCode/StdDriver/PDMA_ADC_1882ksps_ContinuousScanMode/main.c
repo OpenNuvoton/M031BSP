@@ -180,9 +180,9 @@ void ADC_FunctionTest()
 
         /* Check transfer result */
         if (g_u32IsTestOver == 1)
-            printf("PDMA trasnfer done...\n");
+            printf("PDMA transfer done...\n");
         else if (g_u32IsTestOver == 2)
-            printf("PDMA trasnfer abort...\n");
+            printf("PDMA transfer abort...\n");
 
         /* Clear g_u32IsTestOver software flag */
         g_u32IsTestOver = 0;
@@ -193,7 +193,7 @@ void ADC_FunctionTest()
         /* Disable PDMA function of ADC */
         ADC_DISABLE_PDMA(ADC);
 
-        /* Calculate average and print ADC result except first sampling data result that belongs to preivous channel*/
+        /* Calculate average and print ADC result except first sampling data result that belongs to previous channel*/
         g_u32ResultSum = 0;
         printf("\nConversion result of channel %d:\n",g_u32ADChannel);
         for(g_u32ADCounter = 1; (g_u32ADCounter) < (ADCDatalenght+1); g_u32ADCounter++)

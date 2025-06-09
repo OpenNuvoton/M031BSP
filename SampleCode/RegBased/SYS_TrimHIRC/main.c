@@ -19,7 +19,7 @@
  *
  * @return      None
  *
- * @details     The CLKDIRC_IRQHandler default IRQ
+ * @details     The CKFAIL_IRQHandler default IRQ
  */
 void CKFAIL_IRQHandler()
 {
@@ -85,7 +85,7 @@ void SYS_Init(void)
 
 void TrimHIRC()
 {
-    /*  Enable IRC Trim, set HIRC clock and enable interrupt */
+    /*  Enable HIRC Trim, set HIRC clock and enable interrupt */
     SYS->HIRCTRIMIEN |= (SYS_HIRCTRIMIEN_CLKEIEN_Msk | SYS_HIRCTRIMIEN_TFALIEN_Msk);
     SYS->HIRCTRIMCTL = (SYS->HIRCTRIMCTL & ~SYS_HIRCTRIMCTL_FREQSEL_Msk) | 0x1;
 
@@ -139,7 +139,7 @@ int32_t main(void)
     /* Trim HIRC to 12MHz */
     TrimHIRC();
 
-    /* Disable IRC Trim */
+    /* Disable HIRC Trim */
     SYS->HIRCTRIMCTL = 0;
     printf("Disable HIRC Trim\n");
 

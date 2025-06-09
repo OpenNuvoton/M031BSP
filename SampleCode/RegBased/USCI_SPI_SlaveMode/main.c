@@ -95,7 +95,7 @@ void UART0_Init(void)
 void USCI_SPI_Init(void)
 {
     /*---------------------------------------------------------------------------------------------------------*/
-    /* Initiate USCI_SPI0                                                                                      */
+    /* Init USCI_SPI0                                                                                          */
     /*---------------------------------------------------------------------------------------------------------*/
     /* Configure USCI_SPI0 as a slave, USCI_SPI0 clock rate = f_PCLK1,
        clock idle low, 16-bit transaction, drive output on falling clock edge and latch input on rising edge. */

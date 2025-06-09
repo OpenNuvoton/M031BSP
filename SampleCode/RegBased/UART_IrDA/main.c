@@ -8,7 +8,7 @@
  *           This sample code needs to work with UART_IrDA_Slave.
  * @note
  * SPDX-License-Identifier: Apache-2.0
- * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
+ * @copyright (C) 2017 Nuvoton Technology Corp. All rights reserved.
  *
  ******************************************************************************/
 #include <stdio.h>
@@ -274,4 +274,6 @@ void IrDA_FunctionRxTest()
     while(u8InChar != '0');
 
 }
+
+/*** (C) COPYRIGHT 2017 Nuvoton Technology Corp. ***/
 

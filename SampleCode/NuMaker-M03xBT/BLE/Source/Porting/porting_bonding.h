@@ -19,7 +19,7 @@
 #define SIZE_OF_INFO_BLK                               (SIZE_OF_KEY_BLK+SIZE_OF_DATA_BLK)               /**< Size of BLE bonding information block.*/
 #define SIZE_OF_INFO_BLK_FOR_POWER_OF_2                8                                                /**< SIZE_OF_INFO_BLK 256 = 2^8. */
 
-#define NUM_OF_TOTAL_INFO_BLK                          (SIZE_OF_BONDING_INFORMATION/SIZE_OF_INFO_BLK)   /**< Total number of inforamtion size of bound information block.*/
+#define NUM_OF_TOTAL_INFO_BLK                          (SIZE_OF_BONDING_INFORMATION/SIZE_OF_INFO_BLK)   /**< Total number of information size of bound information block.*/
 #define NUM_OF_FLASH_PAGE_FOR_BONDING_INFO_BLK         (SIZE_OF_BONDING_INFORMATION/FLASH_PAGE_SIZE)    /**< Total number of flash size of bound information block.*/
 #define NUM_OF_INFO_BLK_ONE_PAGE                       (FLASH_PAGE_SIZE/SIZE_OF_INFO_BLK)               /**< Amount of information bound using flash page.*/
 

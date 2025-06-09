@@ -135,10 +135,10 @@ int main(void)
     UART0_Init();
 
     printf("\nPB.5 is PWM0 channel 0.\n");
-    printf("\nConnet PB.1 (PWM0 brake pin 0) to PD.3.\n");
+    printf("\nConnect PB.1 (PWM0 brake pin 0) to PD.3.\n");
     printf("It will generate brake interrupt and PWM0 channel 0 output stop toggling.\n");
 
-    /* Set PD.3 as output mode and 0 as initail state */
+    /* Set PD.3 as output mode and 0 as initial state */
     GPIO_SetMode(PD, BIT3, GPIO_MODE_OUTPUT);
     PD3 = 0;
 

@@ -651,7 +651,7 @@ void BleFota_Data(uint8_t length, uint8_t *data)
         LastNotifyDataAddr = OtaDataExpectAddr;
         printf("Add unexp %d %d\n", DataAddr, OtaDataExpectAddr);
     }
-    else if ((DataLen == 0) || (DataLen > length)) /*Check if FOTA data length vaild*/
+    else if ((DataLen == 0) || (DataLen > length)) /*Check if FOTA data length valid*/
     {
         Notify = OTA_DATA_NOTIFY_LEN_ERROR;
 

@@ -48,7 +48,7 @@ static uint16_t Checksum(unsigned char *buf, int len)
     return (c);
 }
 /*---------------------------------------------------------------------------------------------------------*/
-/*  Parser Nuvoton ISP command packge                                                                      */
+/*  Parser Nuvoton ISP command package                                                                      */
 /*---------------------------------------------------------------------------------------------------------*/
 int ParseCmd(unsigned char *buffer, uint8_t len)
 {

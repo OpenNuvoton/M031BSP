@@ -39,7 +39,7 @@ typedef struct
      * |        |          |01 = Basic mode: The descriptor table only has one task. When this task is finished, the PDMA_INTSTS[1] will be asserted.
      * |        |          |10 = Scatter-Gather mode: When operating in this mode, user must give the next descriptor table address in PDMA_DSCT_NEXT register; PDMA controller will ignore this task, then load the next task to execute.
      * |        |          |11 = Reserved.
-     * |        |          |Note: Before filling new transfer task in the Descriptor Table, user must check the PDMA_INTSTS[1] to make sure the curren task is complete.
+     * |        |          |Note: Before filling new transfer task in the Descriptor Table, user must check the PDMA_INTSTS[1] to make sure the current task is complete.
      * |[2]     |TXTYPE    |Transfer Type
      * |        |          |0 = Burst transfer type.
      * |        |          |1 = Single transfer type.

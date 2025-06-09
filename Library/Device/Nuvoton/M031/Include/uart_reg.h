@@ -98,8 +98,8 @@ typedef struct
      * |        |          |Clear Break Error Flag BIF or Frame Error Flag FEF or Parity Error Flag PEF by writing "1" to corresponding BIF, FEF and PEF to make UART PDMA receive request operation continue.
      * |[16]    |SWBEIEN   |Single-wire Bit Error Detection Interrupt Enable Bit
      * |        |          |Set this bit, the Single-wire Half Duplex Bit Error Detection Interrupt SWBEINT(UART_INTSTS[24]) is generated when Single-wire Bit Error Detection SWBEIF(UART_INTSTS[16]) is set.
-     * |        |          |0 = Single-wire Bit Error Detect Inerrupt Disabled.
-     * |        |          |1 = Single-wire Bit Error Detect Inerrupt Enabled.
+     * |        |          |0 = Single-wire Bit Error Detect Interrupt Disabled.
+     * |        |          |1 = Single-wire Bit Error Detect Interrupt Enabled.
      * |        |          |Note: This bit is valid when FUNCSEL (UART_FUNCSEL[2:0]) is select UART Single-wire mode.
      * |[18]    |ABRIEN    |Auto-baud Rate Interrupt Enable Bit
      * |        |          |0 = Auto-baud rate interrupt Disabled.
@@ -609,7 +609,7 @@ typedef struct
      * |        |          |0 = TX and RX Enabled.
      * |        |          |1 = TX and RX Disabled.
      * |        |          |Note: The TX and RX will not disable immediately when this bit is set.
-     * |        |          |The TX and RX compelet current task before disable TX and RX.
+     * |        |          |The TX and RX complete current task before disable TX and RX.
      * |        |          |When TX and RX disable, the TXRXACT (UART_FIFOSTS[31]) is cleared.
      * @var UART_T::BRCOMP
      * Offset: 0x3C  UART Baud Rate Compensation Register

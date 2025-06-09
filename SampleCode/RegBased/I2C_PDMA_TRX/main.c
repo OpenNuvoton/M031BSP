@@ -400,7 +400,7 @@ void I2C0_Init(void)
     /* Enable I2C0 Controller */
     I2C0->CTL0 |= I2C_CTL0_I2CEN_Msk;
 
-    /* I2C0 clock divider, I2C Bus Clock = PCLK(48Mhz) / (4*120) = 100kHz */
+    /* I2C0 clock divider, I2C Bus Clock = PCLK(48MHz) / (4*120) = 100kHz */
     I2C0->CLKDIV = 120 - 1;
 
     /* Get I2C0 Bus Clock */
@@ -426,7 +426,7 @@ void I2C1_Init(void)
     /* Enable I2C1 Controller */
     I2C1->CTL0 |= I2C_CTL0_I2CEN_Msk;
 
-    /* I2C1 clock divider, I2C Bus Clock = PCLK(48Mhz) / (4*120) = 100kHz */
+    /* I2C1 clock divider, I2C Bus Clock = PCLK(48MHz) / (4*120) = 100kHz */
     I2C1->CLKDIV = 120 - 1;
 
     /* Get I2C1 Bus Clock */
@@ -496,13 +496,13 @@ void PDMA_Init(void)
     PDMA->DSCT[I2C1_PDMA_TX_CH].SA = (uint32_t)(&g_u8SlaveTx_Buffer[0]);
     PDMA->DSCT[I2C1_PDMA_TX_CH].DA = (uint32_t)(&(I2C1->DAT));
 
-    /* Enalbe PDMA I2C0 TX mode */
+    /* Enable PDMA I2C0 TX mode */
     PDMA->REQSEL0_3 = (PDMA->REQSEL0_3 & ~PDMA_REQSEL0_3_REQSRC0_Msk) | (PDMA_I2C0_TX << PDMA_REQSEL0_3_REQSRC0_Pos);
-    /* Enalbe PDMA I2C1 RX mode */
+    /* Enable PDMA I2C1 RX mode */
     PDMA->REQSEL0_3 = (PDMA->REQSEL0_3 & ~PDMA_REQSEL0_3_REQSRC1_Msk) | (PDMA_I2C1_RX << PDMA_REQSEL0_3_REQSRC1_Pos);
-    /* Enalbe PDMA I2C0 RX mode */
+    /* Enable PDMA I2C0 RX mode */
     PDMA->REQSEL0_3 = (PDMA->REQSEL0_3 & ~PDMA_REQSEL0_3_REQSRC2_Msk) | (PDMA_I2C0_RX << PDMA_REQSEL0_3_REQSRC2_Pos);
-    /* Enalbe PDMA I2C1 TX mode */
+    /* Enable PDMA I2C1 TX mode */
     PDMA->REQSEL0_3 = (PDMA->REQSEL0_3 & ~PDMA_REQSEL0_3_REQSRC3_Msk) | (PDMA_I2C1_TX << PDMA_REQSEL0_3_REQSRC3_Pos);
 
     /* Enable PDMA Channel 0 INT */

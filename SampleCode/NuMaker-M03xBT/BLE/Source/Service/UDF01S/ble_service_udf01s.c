@@ -528,7 +528,7 @@ BleStackStatus setUDF01S_ServerDataSend(uint8_t hostId, uint16_t cccd, uint16_t 
 /** Get data from server by reading request (Client ONLY)
  *
  * @param[in] hostId : the link's host id
- * @param[in] hdlNum : handle numnber of the data you want to read.
+ * @param[in] hdlNum : handle number of the data you want to read.
  *
  * @retval BLESTACK_STATUS_ERR_INVALID_HOSTID : Error host id.
  * @retval BLESTACK_STATUS_ERR_INVALID_PARAM : Invalid parameter.

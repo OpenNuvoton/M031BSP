@@ -68,7 +68,7 @@ void SYS_Init(void)
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
 
-    /* Set PA multi-function pins for BPWM0 Channel0 */
+    /* Set PA multi-function pin for BPWM0 Channel0 */
     SYS->GPA_MFPL = (SYS->GPA_MFPL & (~SYS_GPA_MFPL_PA0MFP_Msk)) | SYS_GPA_MFPL_PA0MFP_BPWM0_CH0;
 
 }
@@ -97,7 +97,7 @@ void UART0_Init()
  *
  * @param       u32CycleResolution   Target generator duty cycle resolution. The value in general is 100.
  *
- * @return      The compatator value by new duty cycle
+ * @return      The comparator value by new duty cycle
  */
 uint32_t CalNewDutyCMR(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32DutyCycle, uint32_t u32CycleResolution)
 {

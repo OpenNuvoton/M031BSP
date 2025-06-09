@@ -161,7 +161,7 @@ int32_t main(void)
     printf("Press any key to stop.\n");
     getchar();
 
-    /* Start PWM0 counter */
+    /* Stop PWM0 counter */
     PWM_ForceStop(PWM0, 0x3F);
 
     printf("Done.\n");

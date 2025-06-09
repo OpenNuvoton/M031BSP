@@ -88,7 +88,7 @@ void setBLE_SpiSSLow(void);
  *
  * @ingroup mcuSPIFunc
  *
- * @note If @ref SPI_SS_CONTROL is set to @ref AUTO_SPI_SS then user do not have to wait and manual set SS pin to hight state.
+ * @note If @ref SPI_SS_CONTROL is set to @ref AUTO_SPI_SS then user do not have to wait and manual set SS pin to high state.
  *
  * @return none
  */

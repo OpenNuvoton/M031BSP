@@ -34,14 +34,14 @@ typedef struct
     } date;
 } DATETIME;
 
-// Enumrate for month
+// Enumerate for month
 enum
 {
     January = 1,
     February,
 };
 
-// Enumrate for day of week
+// Enumerate for day of week
 enum
 {
     Monday = 1,

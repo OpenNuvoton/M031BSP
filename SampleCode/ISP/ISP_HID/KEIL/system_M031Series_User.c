@@ -79,7 +79,7 @@ void SystemInit(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Set HXTGain Level dependend on HXT Frequency */
+    /* Set HXTGain Level depended on HXT Frequency */
     CLK->PWRCTL = CLK->PWRCTL & ~CLK_PWRCTL_HXTGAIN_Msk;
     if ((__HXT >= FREQ_4MHZ) && (__HXT < FREQ_8MHZ))
     {

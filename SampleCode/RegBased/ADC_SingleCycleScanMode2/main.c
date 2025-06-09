@@ -116,7 +116,7 @@ void ADC_Init(uint32_t u32AdcTotalCh, uint32_t u32InputMode)
                 (u32InputMode) | (ADC_ADCR_ADMD_SINGLE);
     ADC->ADCHER = (ADC->ADCHER & ~ADC_ADCHER_CHEN_Msk) | (g_u32ADCHER[0]);
 
-    /* Read out valid conversion data to avoid trigger PDMA in unexpect timing */
+    /* Read out valid conversion data to avoid trigger PDMA in unexpected timing */
     if(ADC->ADSR1)
     {
         for(i = 0; i < 32; i++)

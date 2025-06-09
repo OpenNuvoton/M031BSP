@@ -94,7 +94,7 @@ typedef struct
      * |        |          |0 = Chip normal operation.
      * |        |          |1 = Chip one-shot reset.
      * |        |          |Note1: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |        |          |Note2: Reset by powr on reset.
+     * |        |          |Note2: Reset by power on reset.
      * |[1]     |CPURST    |Processor Core One-shot Reset (Write Protect)
      * |        |          |Setting this bit will only reset the processor core and Flash Memory Controller(FMC), and this bit will automatically return to 0 after the 2 clock cycles.
      * |        |          |0 = Processor core normal operation.
@@ -195,7 +195,7 @@ typedef struct
      * |        |          |0 = Brown-out Detector function Disabled.
      * |        |          |1 = Brown-out Detector function Enabled.
      * |        |          |Note1: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |        |          |Note2: Reset by powr on reset.
+     * |        |          |Note2: Reset by power on reset.
      * |[3]     |BODRSTEN  |Brown-out Reset Enable Bit (Write Protect)
      * |        |          |The default value is set by flash controller user configuration register CBORST(CONFIG0[20]) bit .
      * |        |          |0 = Brown-out "INTERRUPT" function Enabled.
@@ -204,7 +204,7 @@ typedef struct
      * |        |          |While the Brown-out Detector function is enabled (BODEN high) and BOD reset function is enabled (BODRSTEN high), BOD will assert a signal to reset chip when the detected voltage is lower than the threshold (BODOUT high).
      * |        |          |While the BOD function is enabled (BODEN high) and BOD interrupt function is enabled (BODRSTEN low), BOD will assert an interrupt if BODOUT is high. BOD interrupt will keep till to the BODEN set to 0. BOD interrupt can be blocked by disabling the NVIC BOD interrupt or disabling BOD function (set BODEN low).
      * |        |          |Note2: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |        |          |Note3: Reset by powr on reset.
+     * |        |          |Note3: Reset by power on reset.
      * |[4]     |BODIF     |Brown-out Detector Interrupt Flag
      * |        |          |0 = Brown-out Detector does not detect any voltage draft at VDD down through or up through the voltage of BODVL setting.
      * |        |          |1 = When Brown-out Detector detects the VDD is dropped down through the voltage of BODVL setting or the VDD is raised up through the voltage of BODVL setting, this bit is set to 1 and the brown-out interrupt is requested if brown-out interrupt is enabled.
@@ -250,7 +250,7 @@ typedef struct
      * |        |          |0 = Brown-Out Detector threshold voltage is 2.0V.
      * |        |          |1 = Brown-Out Detector threshold voltage is 2.5V.
      * |        |          |Note1: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |        |          |Note2: Reset by powr on reset.
+     * |        |          |Note2: Reset by power on reset.
      * @var SYS_T::PORCTL
      * Offset: 0x24  Power-On-reset Controller Register
      * ---------------------------------------------------------------------------------------------------
@@ -396,7 +396,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[0]     |LPLDO_EN  |Low Power LDO Enalbe Bit
+     * |[0]     |LPLDO_EN  |Low Power LDO Enable Bit
      * |        |          |This bit enables uLDO voltage output.
      * |        |          |0 = uLDO Voltage Output Disabled.
      * |        |          |1 = uLDO Voltage Output Enabled.
@@ -406,7 +406,7 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[0]     |MODEN     |Modulation Function Enable Bit
-     * |        |          |This bit enables modulation funcion by modulating with PWM0 channel output and USCI0(USCI0_DAT0) or UART0(UART0_TXD) output.
+     * |        |          |This bit enables modulation function by modulating with PWM0 channel output and USCI0(USCI0_DAT0) or UART0(UART0_TXD) output.
      * |        |          |0 = Modulation Function Disabled.
      * |        |          |1 = Modulation Function Enabled.
      * |[1]     |MODH      |Modulation at Data High
@@ -418,17 +418,17 @@ typedef struct
      * |        |          |0000: PWM0 Channel 0 modulate with UART0_TXD.
      * |        |          |0001: PWM0 Channel 1 modulate with UART0_TXD.
      * |        |          |0010: PWM0 Channel 2 modulate with UART0_TXD.
-     * |        |          |0011: PWM0 Channel 3 modulete with UART0_TXD.
-     * |        |          |0100: PWM0 Channel 4 modulete with UART0_TXD.
-     * |        |          |0101: PWM0 Channel 5 modulete with UART0_TXD.
+     * |        |          |0011: PWM0 Channel 3 modulate with UART0_TXD.
+     * |        |          |0100: PWM0 Channel 4 modulate with UART0_TXD.
+     * |        |          |0101: PWM0 Channel 5 modulate with UART0_TXD.
      * |        |          |0110: Reserved.
      * |        |          |0111: Reserved.
      * |        |          |1000: PWM0 Channel 0 modulate with USCI0_DAT0.
      * |        |          |1001: PWM0 Channel 1 modulate with USCI0_DAT0.
      * |        |          |1010: PWM0 Channel 2 modulate with USCI0_DAT0.
-     * |        |          |1011: PWM0 Channel 3 modulete with USCI0_DAT0.
-     * |        |          |1100: PWM0 Channel 4 modulete with USCI0_DAT0.
-     * |        |          |1101: PWM0 Channel 5 modulete with USCI0_DAT0.
+     * |        |          |1011: PWM0 Channel 3 modulate with USCI0_DAT0.
+     * |        |          |1100: PWM0 Channel 4 modulate with USCI0_DAT0.
+     * |        |          |1101: PWM0 Channel 5 modulate with USCI0_DAT0.
      * |        |          |1110: Reserved.
      * |        |          |1111: Reserved.
      * |        |          |Note: This bis is valid while MODEN (SYS_MODCTL[0]) is set to 1.
@@ -531,27 +531,27 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[0]     |FREQLOCK  |HIRC Frequency Lock Status
      * |        |          |This bit indicates the HIRC frequency is locked.
-     * |        |          |This is a status bit and doesn't trigger any interrupt. Write 1 to clear this to 0. This bit will be set automatically, if the frequecy is lock and the RC_TRIM is enabled.
+     * |        |          |This is a status bit and doesn't trigger any interrupt. Write 1 to clear this to 0. This bit will be set automatically, if the frequency is lock and the RC_TRIM is enabled.
      * |        |          |0 = The internal high-speed oscillator frequency doesn't lock at 48 MHz yet.
      * |        |          |1 = The internal high-speed oscillator frequency locked at 48 MHz.
-     * |        |          |Note: Reset by powr on reset.
+     * |        |          |Note: Reset by power on reset.
      * |[1]     |TFAILIF   |Trim Failure Interrupt Status
      * |        |          |This bit indicates that HIRC trim value update limitation count reached and the HIRC clock frequency still doesn't be locked
      * |        |          |Once this bit is set, the auto trim operation stopped and FREQSEL(SYS_HIRCTRIMCTL[1:0]) will be cleared to 00 by hardware automatically.
      * |        |          |If this bit is set and TFAILIEN(SYS_HIRCIEN[1]) is high, an interrupt will be triggered to notify that HIRC trim value update limitation count was reached. Write 1 to clear this to 0.
      * |        |          |0 = Trim value update limitation count does not reach.
      * |        |          |1 = Trim value update limitation count reached and HIRC frequency still not locked.
-     * |        |          |Note: Reset by powr on reset.
+     * |        |          |Note: Reset by power on reset.
      * |[2]     |CLKERIF   |Clock Error Interrupt Status
      * |        |          |When the frequency of 38.4 kHz external low speed crystal oscillator (LXT) or 48MHz internal high speed RC oscillator (HIRC) is shift larger to unreasonable value, this bit will be set and to be an indicate that clock frequency is inaccuracy. Once this bit is set to 1, the auto trim operation stopped and FREQSEL(SYS_HIRCTRIMCTL[1:0]) will be cleared to 00 by hardware automatically if CESTOPEN(SYS_HIRCTRIMCTL[8]) is set to 1.
      * |        |          |If this bit is set and CLKEIEN(SYS_HIRCTIEN[2]) is high, an interrupt will be triggered to notify the clock frequency is inaccuracy. Write 1 to clear this to 0.
      * |        |          |0 = Clock frequency is accuracy.
      * |        |          |1 = Clock frequency is inaccuracy.
-     * |        |          |Note: Reset by powr on reset.
+     * |        |          |Note: Reset by power on reset.
      * |[3]     |OVBDIF    |Over Boundary Status
      * |        |          |When the over boundary function is set, if there occurs the over boundary condition, this flag will be set.
-     * |        |          |0 = Over boundary coundition did not occur.
-     * |        |          |1 = Over boundary coundition occurred.
+     * |        |          |0 = Over boundary condition did not occur.
+     * |        |          |1 = Over boundary condition occurred.
      * |        |          |Note: Write 1 to clear this flag.
      * @var SYS_T::REGLCTL
      * Offset: 0x100  Register Lock Control Register

@@ -61,13 +61,13 @@ uint32_t GetFMCChecksum(uint32_t u32Address, uint32_t u32Size)
     return u32CHKS;
 }
 /**
- * @brief       DMA IRQ
+ * @brief       PDMA IRQ
  *
  * @param       None
  *
  * @return      None
  *
- * @details     The DMA default IRQ, declared in startup_M031Series.s.
+ * @details     The PDMA default IRQ, declared in startup_M031Series.s.
  */
 void PDMA_IRQHandler(void)
 {

@@ -16,7 +16,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief       PWM0 IRQ Handler
+ * @brief       BPWM0 IRQ Handler
  *
  * @param       None
  *
@@ -216,8 +216,7 @@ int main(void)
     UART0_Init();
 
     printf("+------------------------------------------------------------------------+\n");
-    printf("|                          BPWM Driver Sample Code                        |\n");
-    printf("|                                                                        |\n");
+    printf("|                          BPWM Driver Sample Code                       |\n");
     printf("+------------------------------------------------------------------------+\n");
     printf("  This sample code will use BPWM0 channel 0 to capture\n  the signal from BPWM1 channel 0.\n");
     printf("  I/O configuration:\n");

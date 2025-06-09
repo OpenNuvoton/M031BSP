@@ -48,7 +48,7 @@ void RTC_Process(void)
                         /* Check whether it is a leap year or not */
                         if ( RTC_CheckLeapYear(rtc.date.year) == LeapYear )
                         {
-                            /* In leap year Faburary, there is 29 days(DaysInMonth[rtc.date.month - 1] + 1) */
+                            /* In leap year February, there is 29 days(DaysInMonth[rtc.date.month - 1] + 1) */
                             if ( rtc.date.day > DaysInMonth[rtc.date.month - 1] + 1)
                             {
                                 /* If day >= days of month, it will carry on month. */
@@ -101,7 +101,7 @@ void UpdateDayOfWeek (void)
     /* (1) Per 4 years is leap year */
     /* (2) Per 100 years is not leap year */
     /* (3) Per 400 years is leap year */
-    /* (4) Piority (3) > (2) > (1) */
+    /* (4) Priority (3) > (2) > (1) */
 
     temp += ((rtc.date.year-2000)>>2);
     temp -= ((rtc.date.year-2000)/100);

@@ -217,13 +217,13 @@ uint32_t DestArray[64];
 uint32_t volatile u32IsTestOver = 0;
 
 /**
- * @brief       DMA IRQ
+ * @brief       PDMA IRQ
  *
  * @param       None
  *
  * @return      None
  *
- * @details     The DMA default IRQ, declared in startup_M031Series.s.
+ * @details     The PDMA default IRQ, declared in startup_M031Series.s.
  */
 void PDMA_IRQHandler(void)
 {

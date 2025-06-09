@@ -89,10 +89,10 @@ extern const ATTRIBUTE_BLE ATT_GATT_CLIENT_CHARC_CONFIGURATION_SERVICE_CHANGED; 
  * @{
  * @details Here shows the event definitions of the GATT service.
 */
-#define BLESERVICE_GATT_SERVICE_CHANGED_INDICATE_EVENT               0x01   /**< GATT characteristic service cahnged indicate event. */
-#define BLESERVICE_GATT_SERVICE_CHANGED_CCCD_WRITE_EVENT             0x02   /**< GATT characteristic service cahnged cccd write event. */
-#define BLESERVICE_GATT_SERVICE_CHANGED_CCCD_READ_EVENT              0x03   /**< GATT characteristic service cahnged cccd read event. */
-#define BLESERVICE_GATT_SERVICE_CHANGED_CCCD_WRITE_RSP_EVENT         0x04   /**< GATT characteristic service cahnged cccd write response event. */
+#define BLESERVICE_GATT_SERVICE_CHANGED_INDICATE_EVENT               0x01   /**< GATT characteristic service changed indicate event. */
+#define BLESERVICE_GATT_SERVICE_CHANGED_CCCD_WRITE_EVENT             0x02   /**< GATT characteristic service changed cccd write event. */
+#define BLESERVICE_GATT_SERVICE_CHANGED_CCCD_READ_EVENT              0x03   /**< GATT characteristic service changed cccd read event. */
+#define BLESERVICE_GATT_SERVICE_CHANGED_CCCD_WRITE_RSP_EVENT         0x04   /**< GATT characteristic service changed cccd write response event. */
 /** @} */
 
 

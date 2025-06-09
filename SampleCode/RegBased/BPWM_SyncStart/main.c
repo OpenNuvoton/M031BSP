@@ -3,7 +3,7 @@
  * @version  V3.00
  * $Revision: 7 $
  * $Date: 18/07/19 2:23p $
- * @brief    Demonstrate how to use PWM counter synchronous start function.
+ * @brief    Demonstrate how to use BPWM counter synchronous start function.
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
@@ -16,7 +16,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 
 /**
- * @brief       PWM0 IRQ Handler
+ * @brief       BPWM0 IRQ Handler
  *
  * @param       None
  *
@@ -24,7 +24,7 @@
  *
  * @details     ISR to handle PWM0 interrupt event
  */
-void PWM0_IRQHandler(void)
+void BPWM0_IRQHandler(void)
 {
 
 }

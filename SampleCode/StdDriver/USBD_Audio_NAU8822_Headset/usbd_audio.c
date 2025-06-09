@@ -116,7 +116,7 @@ void USBD_IRQHandler(void)
             /* USB Plug In */
             USBD_ENABLE_USB();
 
-            /*Enable HIRC tirm*/
+            /*Enable HIRC trim*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING;
         }
         else
@@ -124,7 +124,7 @@ void USBD_IRQHandler(void)
             /* USB Un-plug */
             USBD_DISABLE_USB();
 
-            /*Disable HIRC tirm*/
+            /*Disable HIRC trim*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING & (~SYS_HIRCTRIMCTL_FREQSEL_Msk);
         }
     }
@@ -145,7 +145,7 @@ void USBD_IRQHandler(void)
             /* Disable I2S Rx function */
             SPII2S_DISABLE_RX(SPI0);
 
-            /*Enable HIRC tirm*/
+            /*Enable HIRC trim*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING;
         }
 
@@ -154,7 +154,7 @@ void USBD_IRQHandler(void)
             /* Enable USB but disable PHY */
             USBD_DISABLE_PHY();
 
-            /*Disable HIRC tirm*/
+            /*Disable HIRC trim*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING & (~SYS_HIRCTRIMCTL_FREQSEL_Msk);
         }
 
@@ -163,7 +163,7 @@ void USBD_IRQHandler(void)
             /* Enable USB and enable PHY */
             USBD_ENABLE_USB();
 
-            /*Enable HIRC tirm*/
+            /*Enable HIRC trim*/
             SYS->HIRCTRIMCTL = DEFAULT_HIRC_TRIM_SETTING;
         }
 
@@ -379,10 +379,10 @@ void EP3_Handler(void)
     }
 
 #ifdef __FEEDBACK__
-    /* Prepare for nex OUT packet */
+    /* Prepare for next OUT packet */
     USBD_SET_PAYLOAD_LEN(EP3, g_play_max_packet_size + 64);
 #else
-    /* Prepare for nex OUT packet */
+    /* Prepare for next OUT packet */
     USBD_SET_PAYLOAD_LEN(EP3, g_play_max_packet_size);
 #endif
 
@@ -1101,7 +1101,7 @@ void SPI0_IRQHandler(void)
             /* Check buffer empty */
             if ((g_u32PlayPos_Out != g_u32PlayPos_In) && g_u8PlayEn)
             {
-                /* Check ring buffer trun around */
+                /* Check ring buffer turn around */
                 u32Idx = g_u32PlayPos_Out + 1;
 
                 if (u32Idx >= BUF_LEN)
@@ -1213,7 +1213,7 @@ void UAC_DeviceEnable(uint8_t u8Object)
     }
     else
     {
-        /* Eanble play hardware */
+        /* Enable play hardware */
         /* Reset Play buffer */
         if(g_u8PlayEn == 0)
         {

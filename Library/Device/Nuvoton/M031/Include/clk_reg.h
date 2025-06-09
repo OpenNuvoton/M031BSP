@@ -357,7 +357,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[2:0]   |APB0DIV   |APB0 Clock DIvider
+     * |[2:0]   |APB0DIV   |APB0 Clock Divider
      * |        |          |APB0 clock can be divided from HCLK.
      * |        |          |000 = PCLK0 = HCLK.
      * |        |          |001 = PCLK0 = 1/2 HCLK.
@@ -365,7 +365,7 @@ typedef struct
      * |        |          |011 = PCLK0 = 1/8 HCLK.
      * |        |          |100 = PCLK0 = 1/16 HCLK.
      * |        |          |Others = Reserved.
-     * |[6:4]   |APB1DIV   |APB1 Clock DIvider
+     * |[6:4]   |APB1DIV   |APB1 Clock Divider
      * |        |          |APB1 clock can be divided from HCLK.
      * |        |          |000 = PCLK1 = HCLK.
      * |        |          |001 = PCLK1 = 1/2 HCLK.
