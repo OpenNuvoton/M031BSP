@@ -132,10 +132,13 @@ _ISP:
     {
         if (bSpiDataReady == 1)
         {
+            /* Disable SPI IRQ until ParseCmd() is finished to prevent returning incomplete data prematurely */
+            NVIC_DisableIRQ(SPI0_IRQn);        	
             memcpy(cmd_buff, spi_rcvbuf, 64);
             bSpiDataReady = 0;
             ParseCmd((unsigned char *)cmd_buff, 64);
             bISPDataReady = 1;
+            NVIC_EnableIRQ(SPI0_IRQn);            
 #ifdef ReadyPin
             ReadyPin = 0;
 #endif
