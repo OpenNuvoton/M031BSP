@@ -89,7 +89,7 @@ int fputc(int ch, FILE *stream);
 char GetChar(void);
 void SendChar_ToUART(int ch);
 void SendChar(int ch);
-static volatile int32_t g_ICE_Conneced = 1;
+static volatile int32_t g_ICE_Connected = 1;
 enum { r0, r1, r2, r3, r12, lr, pc, psr};
 
 
@@ -132,7 +132,7 @@ static char g_buf_len = 0;
  */
 int32_t SH_Return(int32_t n32In_R0, int32_t n32In_R1, int32_t *pn32Out_R0)
 {
-    if (g_ICE_Conneced)
+    if (g_ICE_Connected)
     {
         if (pn32Out_R0)
             *pn32Out_R0 = n32In_R0;
@@ -236,7 +236,7 @@ uint32_t ProcessHardFault(uint32_t lr, uint32_t msp, uint32_t psp)
             If the instruction is 0xBEAB, it means it is caused by BKPT without ICE connected.
             We still return for output/input message to UART.
         */
-        g_ICE_Conneced = 0; // Set a flag for ICE offline
+        g_ICE_Connected = 0; // Set a flag for ICE offline
         sp[6] += 2;         // Return to next instruction
         return lr;          // Keep lr in R0
     }
@@ -361,7 +361,7 @@ __WEAK void SendChar(int ch)
     if (g_buf_len + 1 >= sizeof(g_buf) || ch == '\n' || ch == '\0')
     {
         /* Send the char */
-        if (g_ICE_Conneced)
+        if (g_ICE_Connected)
         {
 
             if (SH_DoCommand(0x04, (int)g_buf, NULL) != 0)
@@ -403,7 +403,7 @@ char GetChar(void)
 {
 #ifdef DEBUG_ENABLE_SEMIHOST
 
-    if (g_ICE_Conneced)
+    if (g_ICE_Connected)
     {
 #if defined (__ICCARM__)
         int nRet;
@@ -435,7 +435,7 @@ char GetChar(void)
 #if (DEBUG_ENABLE_SEMIHOST == 1) // Re-direct to UART Debug Port only when DEBUG_ENABLE_SEMIHOST=1
 
         /* Use debug port when ICE is not connected at semihost mode */
-        while (!g_ICE_Conneced)
+        while (!g_ICE_Connected)
         {
             if ((DEBUG_PORT->FIFOSTS & UART_FIFOSTS_RXEMPTY_Msk) == 0U)
             {
@@ -540,6 +540,8 @@ int fputc(int ch, FILE *stream)
 
 #else
 
+#include <sys/stat.h>
+
 int _write(int fd, char *ptr, int len)
 {
     int i = len;
@@ -567,6 +569,38 @@ int _read(int fd, char *ptr, int len)
     while ((DEBUG_PORT->FIFOSTS & UART_FIFOSTS_RXEMPTY_Msk) != 0);
 
     *ptr = DEBUG_PORT->DAT;
+    return 1;
+}
+
+/* Add implementations to fix linker warnings from the newlib-nano C library in VSCode-GCC14.3.1 */
+int _close(int file) 
+{
+    return -1;
+}
+
+int _lseek(int file, int ptr, int dir) 
+{
+    return 0;
+}
+
+int _fstat(int file, struct stat *st) 
+{
+    st->st_mode = S_IFCHR;
+    return 0;
+}
+
+int _isatty(int file) 
+{
+    return 1;
+}
+
+int _kill(int pid, int sig) 
+{
+    return -1;
+}
+
+int _getpid(void) 
+{
     return 1;
 }
 #endif

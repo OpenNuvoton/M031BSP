@@ -67,7 +67,7 @@ project:
 
   # The execute: node is processed only for an application build when no --context option is specified.
   executes:
-    - execute: Copy bin file
+    - execute: Copybinfile
       run: ${CMAKE_COMMAND} -E copy $input$ $output$
       always:
       input:

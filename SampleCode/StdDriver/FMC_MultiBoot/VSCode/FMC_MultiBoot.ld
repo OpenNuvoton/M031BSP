@@ -3,6 +3,7 @@ MEMORY
 {
   FLASH (rx) : ORIGIN = FLASH_BASE, LENGTH = 0x20000    /* 128K */
   RAM (rwx)  : ORIGIN = 0x20000000, LENGTH = 0x4000     /*  16K */
+
 }
 
 /* Library configurations */
@@ -69,7 +70,7 @@ SECTIONS
  		*(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors)
  		*(SORT(.dtors.*))
  		*(.dtors)
-
+        
 		*(.rodata*)
 
 		KEEP(*(.eh_frame*))
@@ -120,8 +121,6 @@ SECTIONS
 		__zero_table_end__ = .;
 	} > FLASH
 	*/
-	
-	
 
 	__etext = .;
 
@@ -158,6 +157,7 @@ SECTIONS
 		__data_end__ = .;
 
 	} > RAM
+    
 
 	.bss :
 	{

@@ -88,9 +88,10 @@ LR_ROM __RO_BASE __RO_SIZE  {                         ; load region size_region
 
     ARM_LIB_STACK __STACK_TOP EMPTY - __STACK_SIZE {  ; Reserve empty region for stack
     }
-    
+
 #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
     STACKSEAL +0 EMPTY __STACKSEAL_SIZE {             ; Reserve empty region for stack seal immediately after stack
     }
 #endif
 }
+

@@ -47,7 +47,7 @@ project:
   linker:
     - script: ../../../../Library/Device/Nuvoton/M031/Source/ARM/APROM.sct
       for-compiler: AC6
-    - script: ../../../../Library/Device/Nuvoton/M031/Source/GCC/gcc_arm.ld
+    - script: ../../../../Library/Device/Nuvoton/M031/Source/GCC/gcc_arm_32K.ld
       for-compiler: GCC
   groups:
     - group: CMSIS

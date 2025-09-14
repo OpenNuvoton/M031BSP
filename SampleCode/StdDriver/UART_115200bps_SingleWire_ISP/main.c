@@ -15,6 +15,12 @@
 #include "uart_transfer.h"
 #include "ISP_USER.h"
 
+/* Add implementations to fix linker warnings from the newlib-nano C library in VSCode-GCC14.3.1 */
+void _close(void) {}
+void _lseek(void) {}
+void _read_r(void) {}
+void _write_r(void) {}
+
 /*---------------------------------------------------------------------------------------------------------*/
 /* Init system clock and UART single wire function                                                              */
 /*---------------------------------------------------------------------------------------------------------*/
