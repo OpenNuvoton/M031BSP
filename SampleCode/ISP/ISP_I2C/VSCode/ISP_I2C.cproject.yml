@@ -39,6 +39,7 @@ project:
             - --strict
             - --summary_stderr
             - --info summarysizes
+            - --diag_suppress=6314
   linker:
     - script: ../../../../Library/Device/Nuvoton/M031/Source/ARM/LDROM.sct
       for-compiler: AC6

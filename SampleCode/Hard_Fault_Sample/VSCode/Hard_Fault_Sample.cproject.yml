@@ -64,7 +64,9 @@ project:
     - -fsigned-char
     - -g
     - --specs=nano.specs
+    - --specs=nosys.specs
     - -Wl,--gc-sections,-Map="$elf()$.map"
+    - -Wl,--no-warn-rwx-segments
   setups:
   - output:
       type:

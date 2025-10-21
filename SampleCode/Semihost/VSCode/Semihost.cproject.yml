@@ -63,18 +63,14 @@ project:
     - -fmessage-length=0
     - -fsigned-char
     - -g
-    - --specs=nano.specs
+    - --specs=nano.specs --specs=nosys.specs
     - -Wl,--gc-sections,-Map="$elf()$.map"
+    - -Wl,--no-warn-rwx-segments    
   setups:
   - output:
       type:
       - elf
       - bin
-  linker:
-  - for-compiler: GCC
-    script: ../../../Library/Device/Nuvoton/M031/Source/GCC/gcc_arm.ld
-  - for-compiler: AC6
-    script: ../../../Library/Device/Nuvoton/M031/Source/ARM/APROM.sct
   add-path:
   - ../../../Library/CMSIS/Core/Include
   - ../../../Library/Device/Nuvoton/M031/Include

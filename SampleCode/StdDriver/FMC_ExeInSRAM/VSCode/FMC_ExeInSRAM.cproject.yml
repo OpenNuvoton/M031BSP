@@ -38,6 +38,7 @@ project:
             - --strict
             - --summary_stderr
             - --info summarysizes
+            - --diag_suppress=6314
         - for-compiler: GCC
           C:
             - -std=gnu11 -mthumb -masm-syntax-unified -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
@@ -45,7 +46,8 @@ project:
             - -D__STARTUP_COPY_MULTIPLE
           Link:
             - -mthumb -fmessage-length=0 -fsigned-char --specs=nano.specs --specs=nosys.specs
-            - -Wl,--gc-sections,-Map="$elf()$.map"
+            - -Wl,--gc-sections,-Map="$elf()$.map" 
+            - -Wl,--no-warn-rwx-segments   
   linker:
     - script: FMC_ExeInSRAM.sct
       for-compiler: AC6
