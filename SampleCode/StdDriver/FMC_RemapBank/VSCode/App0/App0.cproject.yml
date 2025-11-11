@@ -5,11 +5,11 @@ project:
     - output:
         # bin, elf, hex, lib
         type: bin
-    - setup: Options for Loader1
+    - setup: Options for AppBank0
       add-path:
-        - ../../../../Library/Device/Nuvoton/M031/Include
-        - ../../../../Library/CMSIS/Core/Include
-        - ../../../../Library/StdDriver/inc
+        - ../../../../../Library/Device/Nuvoton/M031/Include
+        - ../../../../../Library/CMSIS/Core/Include
+        - ../../../../../Library/StdDriver/inc
       define:
         - PAGE_SIZE_2048
       misc:
@@ -49,25 +49,25 @@ project:
             - -Wl,--gc-sections,-Map="$elf()$.map" 
             - -Wl,--no-warn-rwx-segments   
   linker:
-    - script: ./Loader1.sct
+    - script: ./App0.sct
       for-compiler: AC6
-    - script: ./Loader1.ld
+    - script: ./App0.ld
       for-compiler: GCC
   groups:
     - group: CMSIS
       files:
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/ARM/startup_M031Series.c
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/ARM/startup_M031Series.c
           for-compiler: AC6
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
           for-compiler: GCC        
     - group: User
       files:
-        - file: ../Loader1/main.c
+        - file: ../../App0/main.c
     - group: Library
       files:
-        - file: ../../../../Library/StdDriver/src/retarget.c
-        - file: ../../../../Library/StdDriver/src/clk.c
-        - file: ../../../../Library/StdDriver/src/uart.c
-        - file: ../../../../Library/StdDriver/src/sys.c
-        - file: ../../../../Library/StdDriver/src/fmc.c
+        - file: ../../../../../Library/StdDriver/src/retarget.c
+        - file: ../../../../../Library/StdDriver/src/clk.c
+        - file: ../../../../../Library/StdDriver/src/uart.c
+        - file: ../../../../../Library/StdDriver/src/sys.c
+        - file: ../../../../../Library/StdDriver/src/fmc.c

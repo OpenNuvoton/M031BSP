@@ -5,13 +5,11 @@ project:
     - output:
         # bin, elf, hex, lib
         type: bin
-    - setup: Options for AppBank0
+    - setup: Options for fmcapmain
       add-path:
-        - ../../../../Library/Device/Nuvoton/M031/Include
-        - ../../../../Library/CMSIS/Core/Include
-        - ../../../../Library/StdDriver/inc
-      define:
-        - PAGE_SIZE_2048
+        - ../../../../../Library/Device/Nuvoton/M031/Include
+        - ../../../../../Library/CMSIS/Core/Include
+        - ../../../../../Library/StdDriver/inc
       misc:
         - for-compiler: AC6
           C:
@@ -28,7 +26,6 @@ project:
             - -std=c++98
           ASM:
             - -masm=auto
-            - -D__MICROLIB
           Link:
             - --library_type=microlib
             - --map
@@ -46,28 +43,27 @@ project:
             - -std=gnu11 -mthumb -masm-syntax-unified -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
           Link:
             - -mthumb -fmessage-length=0 -fsigned-char --specs=nano.specs --specs=nosys.specs
-            - -Wl,--gc-sections,-Map="$elf()$.map" 
-            - -Wl,--no-warn-rwx-segments   
-  linker:
-    - script: ./App0.sct
-      for-compiler: AC6
-    - script: ./App0.ld
-      for-compiler: GCC
+            - -Wl,--gc-sections,-Map="$elf()$.map"
+            - -Wl,--no-warn-rwx-segments
   groups:
     - group: CMSIS
       files:
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/ARM/startup_M031Series.c
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/ARM/startup_M031Series.c
           for-compiler: AC6
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
-          for-compiler: GCC        
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
+          for-compiler: GCC
     - group: User
       files:
-        - file: ../App0/main.c
+        - file: ../../aprom_main.c
+        - file: ./ap_image.s
+          for-compiler: AC6
+        - file: ./ap_image_gcc.S
+          for-compiler: GCC
     - group: Library
       files:
-        - file: ../../../../Library/StdDriver/src/retarget.c
-        - file: ../../../../Library/StdDriver/src/clk.c
-        - file: ../../../../Library/StdDriver/src/uart.c
-        - file: ../../../../Library/StdDriver/src/sys.c
-        - file: ../../../../Library/StdDriver/src/fmc.c
+        - file: ../../../../../Library/StdDriver/src/retarget.c
+        - file: ../../../../../Library/StdDriver/src/uart.c
+        - file: ../../../../../Library/StdDriver/src/sys.c
+        - file: ../../../../../Library/StdDriver/src/fmc.c
+        - file: ../../../../../Library/StdDriver/src/clk.c

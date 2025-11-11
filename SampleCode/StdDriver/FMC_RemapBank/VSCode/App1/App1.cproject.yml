@@ -7,9 +7,9 @@ project:
         type: bin
     - setup: Options for AppBank1
       add-path:
-        - ../../../../Library/Device/Nuvoton/M031/Include
-        - ../../../../Library/CMSIS/Core/Include
-        - ../../../../Library/StdDriver/inc
+        - ../../../../../Library/Device/Nuvoton/M031/Include
+        - ../../../../../Library/CMSIS/Core/Include
+        - ../../../../../Library/StdDriver/inc
       define:
         - PAGE_SIZE_2048
       misc:
@@ -56,18 +56,18 @@ project:
   groups:
     - group: CMSIS
       files:
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/ARM/startup_M031Series.c
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/ARM/startup_M031Series.c
           for-compiler: AC6
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
           for-compiler: GCC        
     - group: User
       files:
-        - file: ../App1/main.c
+        - file: ../../App1/main.c
     - group: Library
       files:
-        - file: ../../../../Library/StdDriver/src/retarget.c
-        - file: ../../../../Library/StdDriver/src/clk.c
-        - file: ../../../../Library/StdDriver/src/uart.c
-        - file: ../../../../Library/StdDriver/src/sys.c
-        - file: ../../../../Library/StdDriver/src/fmc.c
+        - file: ../../../../../Library/StdDriver/src/retarget.c
+        - file: ../../../../../Library/StdDriver/src/clk.c
+        - file: ../../../../../Library/StdDriver/src/uart.c
+        - file: ../../../../../Library/StdDriver/src/sys.c
+        - file: ../../../../../Library/StdDriver/src/fmc.c

@@ -16,4 +16,7 @@ solution:
       compiler: GCC
       device: Nuvoton::M032SE3AE
   projects:
-    - project: App1.cproject.yml
+    - project: ./Loader0/Loader0.cproject.yml
+    - project: ./Loader1/Loader1.cproject.yml
+    - project: ./App0/App0.cproject.yml
+    - project: ./App1/App1.cproject.yml
