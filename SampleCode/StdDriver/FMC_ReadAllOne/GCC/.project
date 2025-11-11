@@ -60,7 +60,7 @@
 			<locationURI>PARENT-4-PROJECT_LOC/Library/Device/Nuvoton/M031/Source/GCC</locationURI>
 		</link>
 		<link>
-			<name>CMSIS/CMSIS/System_M031Series.c</name>
+			<name>CMSIS/CMSIS/system_M031Series.c</name>
 			<type>1</type>
 			<locationURI>PARENT-4-PROJECT_LOC/Library/Device/Nuvoton/M031/Source/System_M031Series.c</locationURI>
 		</link>

@@ -5,11 +5,11 @@ project:
     - output:
         # bin, elf, hex, lib
         type: bin
-    - setup: Options for fmcldiap
+    - setup: Options for fmcapmain
       add-path:
-        - ../../../../Library/Device/Nuvoton/M031/Include
-        - ../../../../Library/CMSIS/Core/Include
-        - ../../../../Library/StdDriver/inc
+        - ../../../../../Library/Device/Nuvoton/M031/Include
+        - ../../../../../Library/CMSIS/Core/Include
+        - ../../../../../Library/StdDriver/inc
       misc:
         - for-compiler: AC6
           C:
@@ -26,7 +26,6 @@ project:
             - -std=c++98
           ASM:
             - -masm=auto
-            - -D__MICROLIB
           Link:
             - --library_type=microlib
             - --map
@@ -44,31 +43,23 @@ project:
             - -std=gnu11 -mthumb -masm-syntax-unified -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
           Link:
             - -mthumb -fmessage-length=0 -fsigned-char --specs=nano.specs --specs=nosys.specs
-            - -Wl,--gc-sections,-Map="$elf()$.map" 
-            - -Wl,--no-warn-rwx-segments   
-  linker:
-    - script: ../../../../Library/Device/Nuvoton/M031/Source/ARM/LDROM.sct
-      for-compiler: AC6
-    - script: ./LDROM_iap_4K.ld
-      for-compiler: GCC
+            - -Wl,--gc-sections,-Map="$elf()$.map"
+            - -Wl,--no-warn-rwx-segments
   groups:
     - group: CMSIS
       files:
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
-        - file: ./startup_M031Series_user.c
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/system_M031Series.c
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/ARM/startup_M031Series.c
           for-compiler: AC6
-        - file: ../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
-          for-compiler: GCC        
+        - file: ../../../../../Library/Device/Nuvoton/M031/Source/GCC/startup_M031Series.S
+          for-compiler: GCC
     - group: User
       files:
-        - file: ../LDROM_main.c
-
-  # The execute: node is processed only for an application build when no --context option is specified.
-  executes:
-    - execute: Copybinfile
-      run: ${CMAKE_COMMAND} -E copy $input$ $output$
-      always:
-      input:
-        - $bin()$
-      output:
-        - $SolutionDir()$/bin/fmc_ld_iap.bin
+        - file: ../../APROM_main.c
+        - file: ./ap_image.s
+          for-compiler: AC6
+        - file: ./ap_image_gcc.S
+          for-compiler: GCC
+    - group: Library
+      files:
+        - file: ../../../../../Library/StdDriver/src/retarget.c

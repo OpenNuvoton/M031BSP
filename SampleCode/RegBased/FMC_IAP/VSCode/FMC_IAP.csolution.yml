@@ -16,4 +16,5 @@ solution:
       compiler: GCC
       device: Nuvoton::M032SE3AE
   projects:
-    - project: fmc_ld_iap.cproject.yml
+    - project: ./FMC_IAP_APROM/FMC_IAP_APROM.cproject.yml
+    - project: ./FMC_IAP_LDROM/FMC_IAP_LDROM.cproject.yml
