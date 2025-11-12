@@ -42,7 +42,7 @@
 		<link>
 			<name>CMSIS/CMSIS</name>
 			<type>2</type>
-			<locationURI>PARENT-4-PROJECT_LOC/Library/Device/Nuvoton/M251/Source</locationURI>
+			<locationURI>PARENT-4-PROJECT_LOC/Library/Device/Nuvoton/M031/Source</locationURI>
 		</link>
 		<link>
 			<name>Library/Library</name>
