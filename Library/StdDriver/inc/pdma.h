@@ -119,9 +119,10 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Interrupt Type Constant Definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
-#define PDMA_INT_TRANS_DONE 0x00000000UL            /*!<Transfer Done Interrupt  \hideinitializer */
-#define PDMA_INT_TEMPTY     0x00000001UL            /*!<Table Empty Interrupt  \hideinitializer */
-#define PDMA_INT_TIMEOUT    0x00000002UL            /*!<Timeout Interrupt \hideinitializer */
+#define PDMA_INT_TRANS_DONE 0x00000001UL            /*!<Transfer Done Interrupt  \hideinitializer */
+#define PDMA_INT_TEMPTY     0x00000002UL            /*!<Table Empty Interrupt  \hideinitializer */
+#define PDMA_INT_TIMEOUT    0x00000004UL            /*!<Timeout Interrupt \hideinitializer */
+#define PDMA_INT_ALIGN      0x00000008UL            /*!<Transfer Alignment Interrupt  \hideinitializer */
 
 
 /*@}*/ /* end of group PDMA_EXPORTED_CONSTANTS */
@@ -325,6 +326,19 @@ extern "C"
  * \hideinitializer
  */
 #define PDMA_PAUSE(pdma, u32Ch) ((uint32_t)((pdma)->PAUSE = (1UL << (u32Ch))))
+
+/**
+ * @brief       Reset the channel
+ *
+ * @param[in]   pdma      The pointer of the specified PDMA module
+ * @param[in]   u32Ch     The selected channel
+ *
+ * @return      None
+ *
+ * @details     This macro reset the selected channel.
+ * \hideinitializer 
+ */
+#define PDMA_RESET(pdma, u32Ch) ((uint32_t)((pdma)->CHRST = (1UL << (u32Ch))))
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Define PDMA functions prototype                                                                          */

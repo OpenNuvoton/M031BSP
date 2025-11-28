@@ -349,22 +349,19 @@ void PDMA_Trigger(PDMA_T *pdma, uint32_t u32Ch)
  */
 void PDMA_EnableInt(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Mask)
 {
-    switch (u32Mask)
+    if (u32Mask & PDMA_INT_TRANS_DONE)
     {
-    case PDMA_INT_TRANS_DONE:
-        pdma->INTEN |= (1ul << u32Ch);
-        break;
+        pdma->INTEN |= (1UL << u32Ch);
+    }
 
-    case PDMA_INT_TEMPTY:
+    if (u32Mask & PDMA_INT_TEMPTY)
+    {
         pdma->DSCT[u32Ch].CTL &= ~PDMA_DSCT_CTL_TBINTDIS_Msk;
-        break;
+    }
 
-    case PDMA_INT_TIMEOUT:
-        pdma->TOUTIEN |= (1ul << u32Ch);
-        break;
-
-    default:
-        break;
+    if (u32Mask & PDMA_INT_TIMEOUT)
+    {
+        pdma->TOUTIEN |= (1UL << u32Ch);
     }
 }
 
@@ -384,22 +381,19 @@ void PDMA_EnableInt(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Mask)
  */
 void PDMA_DisableInt(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Mask)
 {
-    switch (u32Mask)
+    if (u32Mask & PDMA_INT_TRANS_DONE)
     {
-    case PDMA_INT_TRANS_DONE:
-        pdma->INTEN &= ~(1ul << u32Ch);
-        break;
+        pdma->INTEN &= ~(1UL << u32Ch);
+    }
 
-    case PDMA_INT_TEMPTY:
+    if (u32Mask & PDMA_INT_TEMPTY)
+    {
         pdma->DSCT[u32Ch].CTL |= PDMA_DSCT_CTL_TBINTDIS_Msk;
-        break;
+    }
 
-    case PDMA_INT_TIMEOUT:
-        pdma->TOUTIEN &= ~(1ul << u32Ch);
-        break;
-
-    default:
-        break;
+    if (u32Mask & PDMA_INT_TIMEOUT)
+    {
+        pdma->TOUTIEN &= ~(1UL << u32Ch);
     }
 }
 
