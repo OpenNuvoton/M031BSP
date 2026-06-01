@@ -686,11 +686,10 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
         err = 0;
         if(idx < (u32Len / 4u))
         {
-        u32OnProg = 1u;
+            u32OnProg = 1u;
         }
         else
         {
-            u32OnProg = 0u;
             break;
         }
         FMC->MPDAT0 = pu32Buf[idx + 0u];
@@ -769,13 +768,14 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
                             retval = FMC->ISPADDR - u32Addr;
                             err = -1;
                         }
-                        if( tout-- <= 0)
-                        {
-                            g_FMC_i32ErrCode = -1;
-                            err = -1;
-                        }
                     }
-                    while((u32MPStatus & (0xF << FMC_MPSTS_D0_Pos)) && (err == 0));
+                    while ((--tout > 0) && (u32MPStatus & (0xF << FMC_MPSTS_D0_Pos)) && (err == 0));
+
+                    if (tout == 0)
+                    {
+                        g_FMC_i32ErrCode = -1;
+                        return -1;
+                    }
                 }
             }
 
