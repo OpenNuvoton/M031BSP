@@ -1,0 +1,996 @@
+{
+    "bomFormat":  "CycloneDX",
+    "specVersion":  "1.6",
+    "serialNumber":  "urn:uuid:63efd1b7-ba68-426d-96b5-fa466ac41f23",
+    "version":  1,
+    "metadata":  {
+                     "timestamp":  "2026-08-12T01:46:47Z",
+                     "tools":  {
+                                   "components":  [
+                                                      {
+                                                          "type":  "application",
+                                                          "name":  "syft",
+                                                          "version":  "1.50.0",
+                                                          "author":  "anchore"
+                                                      }
+                                                  ]
+                               },
+                     "component":  {
+                                       "type":  "application",
+                                       "bom-ref":  "m031bsp:test-sample:root",
+                                       "name":  "M031 Test Sample",
+                                       "version":  "V3.07.000-36-g676f919",
+                                       "supplier":  {
+                                                        "name":  "Nuvoton Technology Corp."
+                                                    },
+                                       "author":  "Nuvoton Technology Corp.",
+                                       "properties":  [
+                                                          {
+                                                              "name":  "bsp:sbom-type",
+                                                              "value":  "Test Sample SBOM"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:git-commit",
+                                                              "value":  "676f9193a5726efa60c914f28c7c8a25d6398ff9"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:git-describe",
+                                                              "value":  "V3.07.000-36-g676f919"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:repository",
+                                                              "value":  "https://github.com/OpenNuvoton/M031BSP"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:runtime-profile",
+                                                              "value":  "Cortex-M0"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:scope",
+                                                              "value":  "SampleCode, ThirdParty, distributed test tools and drivers"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:syft-raw-component-count",
+                                                              "value":  "25"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:unique-binary-count",
+                                                              "value":  "18"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:preserved-location-count",
+                                                              "value":  "25"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:purl-disposition",
+                                                              "value":  "1 removed"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:cpe-disposition",
+                                                              "value":  "18 removed; 0 accepted; 0 pending review"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:repository-account-status",
+                                                              "value":  "resolved; public repository URL used"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:placeholder-metadata-status",
+                                                              "value":  "resolved; 2 components corrected by documented disposition"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:unknown-version-status",
+                                                              "value":  "resolved; 1 location version corrected and 5 locations accepted as unavailable with documented limitation"
+                                                          },
+                                                          {
+                                                              "name":  "bsp:cpe-review-status",
+                                                              "value":  "resolved; 18 unverified Syft-generated CPE values removed"
+                                                          }
+                                                      ]
+                                   }
+                 },
+    "components":  [
+                       {
+                           "type":  "library",
+                           "bom-ref":  "pkg:generic/freertos-kernel@10.4.3?source=vendored\u0026path=ThirdParty/FreeRTOS",
+                           "name":  "FreeRTOS-Kernel",
+                           "version":  "10.4.3",
+                           "supplier":  {
+                                            "name":  "Amazon.com, Inc."
+                                        },
+                           "author":  "Amazon.com, Inc.",
+                           "scope":  "optional",
+                           "licenses":  [
+                                            {
+                                                "license":  {
+                                                                "id":  "MIT"
+                                                            }
+                                            }
+                                        ],
+                           "purl":  "pkg:generic/freertos-kernel@10.4.3",
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:path",
+                                                  "value":  "ThirdParty/FreeRTOS"
+                                              },
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "vendored_source"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "freertos:target-architecture",
+                                                  "value":  "Cortex-M0"
+                                              },
+                                              {
+                                                  "name":  "freertos:available-port",
+                                                  "value":  "GCC/ARM_CM0"
+                                              },
+                                              {
+                                                  "name":  "freertos:available-port",
+                                                  "value":  "IAR/ARM_CM0"
+                                              },
+                                              {
+                                                  "name":  "freertos:available-port",
+                                                  "value":  "RVDS/ARM_CM0"
+                                              },
+                                              {
+                                                  "name":  "freertos:available-memory-managers",
+                                                  "value":  "heap_1, heap_2, heap_3, heap_4, heap_5"
+                                              },
+                                              {
+                                                  "name":  "freertos:package-license-evidence",
+                                                  "value":  "MIT license text in reviewed Kernel source headers"
+                                              },
+                                              {
+                                                  "name":  "freertos:heap2-disposition",
+                                                  "value":  "Empty non-functional placeholder; excluded from available memory manager list"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44",
+                           "name":  "BLE Application",
+                           "version":  "1, 0, 0, 1",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "D00AD71A871C4E0838761F0BA4B976A7BBA1FF7F7D006E513A62E74F17DADD44"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/NuMaker-M03xBT/BLE/Tool/BLE_DTM_Lab_Test_Tool_v1.6B.exe"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca",
+                           "name":  "ISP Programming Tool",
+                           "version":  "2.04",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "7A1F198B1D9799E16CD28A6954624520227C057485708B9638AC6BC43BF41ECA"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/StdDriver/UART_115200bps_SingleWire_ISP/Software/NuvoISP_UART_Single_Wire.exe"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db",
+                           "name":  "NUVPOS58",
+                           "version":  "1.01",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "CE0ED66A5DB0A0C061FD92975939F48E93AFFAD15F3F6E806D44B3E82078B3DB"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X64.exe"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92",
+                           "name":  "NUVPOS58",
+                           "version":  "1.01",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "76E4D01DBF17CA7525E3A9156BD7E6274C5DB0FFF88A25943C25C8D2BDD38D92"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X86.exe"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183",
+                           "name":  "NuvPos58 Driver",
+                           "version":  "1.0",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "911E4C166FE9B06C8E2E31AB46B56EF662C43CBA208D2088CA1D41C6D584E183"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/StdDriver/USBD_Micro_Printer/Windows driver/NuvPos58_Driver.exe"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f",
+                           "name":  "HIDCtrlTransferTest",
+                           "version":  "1.0.0.1",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "9099BE6E12479E50B0706E3DFE1828FA4FD62DCBCC0C2A462DB1783B35ECAC5F"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/StdDriver/USBD_HID_Transfer_CTRL/WindowsTool/HIDCtrlTransferTest.exe"
+                                              },
+                                              {
+                                                  "name":  "bsp:original-pe-product-name",
+                                                  "value":  "TODO: \u003cProduct name\u003e"
+                                              },
+                                              {
+                                                  "name":  "bsp:original-pe-file-description",
+                                                  "value":  "TODO: \u003cFile description\u003e"
+                                              },
+                                              {
+                                                  "name":  "bsp:metadata-resolution",
+                                                  "value":  "Resolved by PE filename and version evidence plus internal owner confirmation"
+                                              },
+                                              {
+                                                  "name":  "bsp:supplier-evidence",
+                                                  "value":  "Internal owner confirmation"
+                                              }
+                                          ],
+                           "supplier":  {
+                                            "name":  "Nuvoton Technology Corp."
+                                        },
+                           "description":  "HID Control Transfer Test Tool"
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+                           "name":  "WDF Coinstaller",
+                           "version":  "1.11.9200.16384",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "C7649879A10C9332FC0F9744C7E3224647AEE9E7E62C7E21CF9E987462E3DD06"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "2"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/WdfCoInstaller01011.dll"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/WdfCoInstaller01011.dll"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c",
+                           "name":  "Windows Driver Foundation - User-mode Platform Device Update Co-Installer",
+                           "version":  "6.1.7600.16385",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "EBE3B7708DD974EE87EFED3113028D266AF87CA8DBAE77C47C6F7612824D3D6C"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/winusbcoinstaller2.dll"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4",
+                           "name":  "BLE FOTA Update Tool",
+                           "version":  "0.0.3",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "51A18E92A4E8CC77624FD917BDDCA59BDEBB8B6AA369E73482D6376B4935B0C4"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/NuMaker-M03xBT/BLE/Tool/FOTA_Tool_v0.0.3_210423.exe"
+                                              },
+                                              {
+                                                  "name":  "bsp:original-pe-product-name",
+                                                  "value":  "WindowsApplication1"
+                                              },
+                                              {
+                                                  "name":  "bsp:embedded-pe-version",
+                                                  "value":  "1.0.0.0"
+                                              },
+                                              {
+                                                  "name":  "bsp:filename-observed-version",
+                                                  "value":  "0.0.3"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-disposition",
+                                                  "value":  "Version 0.0.3 approved by internal owner confirmation; embedded PE version 1.0.0.0 treated as generic metadata"
+                                              },
+                                              {
+                                                  "name":  "bsp:metadata-resolution",
+                                                  "value":  "Resolved by PE FileDescription, filename version, and internal owner confirmation"
+                                              },
+                                              {
+                                                  "name":  "bsp:supplier-evidence",
+                                                  "value":  "Internal owner confirmation"
+                                              }
+                                          ],
+                           "supplier":  {
+                                            "name":  "Rafael Microelectronics"
+                                        },
+                           "description":  "BLE fota update tool"
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:9b876875be22caf1a690608b36e2eb43670f5b53a345bc6a612f2e74b8dfa654",
+                           "name":  "dfu-util",
+                           "version":  "0.8",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "9B876875BE22CAF1A690608B36E2EB43670F5B53A345BC6A612F2E74B8DFA654"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsTool/dfu-util.exe"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-status",
+                                                  "value":  "resolved"
+                                              },
+                                              {
+                                                  "name":  "bsp:original-detected-name",
+                                                  "value":  "\\SampleCode\\ISP\\ISP_DFU\\WindowsTool\\dfu-util"
+                                              },
+                                              {
+                                                  "name":  "bsp:original-version",
+                                                  "value":  "UNKNOWN"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-evidence",
+                                                  "value":  "Embedded strings: dfu-util 0.8 and /tmp/mingw/dfu-util-0.8/src"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-disposition",
+                                                  "value":  "Version 0.8 confirmed from tool-specific embedded strings"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:2e91a330663524e5192d7bbdca68c607d1785607336fcab1aa63863cdfdd00f7",
+                           "name":  "HIDTransferTest",
+                           "version":  "UNKNOWN",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "2E91A330663524E5192D7BBDCA68C607D1785607336FCAB1AA63863CDFDD00F7"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "3"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/StdDriver/USBD_HID_Transfer/WindowsTool/HIDTransferTest.exe"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/StdDriver/USBD_HID_Transfer_And_Keyboard/WindowsTool/HIDTransferTest.exe"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/StdDriver/USBD_HID_Transfer_And_MSC/WindowsTool/HIDTransferTest.exe"
+                                              },
+                                              {
+                                                  "name":  "bsp:observed-names",
+                                                  "value":  "\\SampleCode\\StdDriver\\USBD_HID_Transfer\\WindowsTool\\HIDTransferTest | \\SampleCode\\StdDriver\\USBD_HID_Transfer_And_Keyboard\\WindowsTool\\HIDTransferTest | \\SampleCode\\StdDriver\\USBD_HID_Transfer_And_MSC\\WindowsTool\\HIDTransferTest"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-status",
+                                                  "value":  "unavailable"
+                                              },
+                                              {
+                                                  "name":  "bsp:original-detected-name",
+                                                  "value":  "\\SampleCode\\StdDriver\\USBD_HID_Transfer\\WindowsTool\\HIDTransferTest"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-disposition",
+                                                  "value":  "No product version found in PE resources, embedded product strings, or available repository evidence"
+                                              },
+                                              {
+                                                  "name":  "bsp:review-status",
+                                                  "value":  "Resolved with documented limitation"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-evidence-location-count",
+                                                  "value":  "3"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747",
+                           "name":  "HIDTransferTest",
+                           "version":  "UNKNOWN",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "24BDD0BAADD8EE6632B40757D2F599F391F9B87B87E23F8FB30324C8C873E747"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "2"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/WindowsTool/HIDTransferTest.exe"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/StdDriver/USBD_VCOM_And_HID_Transfer/WindowsTool/HIDTransferTest.exe"
+                                              },
+                                              {
+                                                  "name":  "bsp:observed-names",
+                                                  "value":  "\\SampleCode\\StdDriver\\USBD_Printer_And_HID_Transfer\\WindowsTool\\HIDTransferTest | \\SampleCode\\StdDriver\\USBD_VCOM_And_HID_Transfer\\WindowsTool\\HIDTransferTest"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-status",
+                                                  "value":  "unavailable"
+                                              },
+                                              {
+                                                  "name":  "bsp:original-detected-name",
+                                                  "value":  "\\SampleCode\\StdDriver\\USBD_Printer_And_HID_Transfer\\WindowsTool\\HIDTransferTest"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-disposition",
+                                                  "value":  "No product version found in PE resources, embedded product strings, or available repository evidence"
+                                              },
+                                              {
+                                                  "name":  "bsp:review-status",
+                                                  "value":  "Resolved with documented limitation"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-evidence-location-count",
+                                                  "value":  "2"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:18172f1da95230ee7e99c78a01771476e3bae6b194d33bcba613719a5c9d198c",
+                           "name":  "libusb-1.0",
+                           "version":  "1.0.19.10903",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "18172F1DA95230EE7E99C78A01771476E3BAE6B194D33BCBA613719A5C9D198C"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsTool/libusb-1.0.dll"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14",
+                           "name":  "libusb-win32 - DLL",
+                           "version":  "1.2.6.0",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "4F18B5D2C28AA66B648C8683C6D09B52B92CBBEE85984BBEFAD5F38A64BC2A14"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0.dll"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666",
+                           "name":  "libusb-win32 - DLL",
+                           "version":  "1.2.6.0",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "00CACA07869B19D10B370552AC7CC2F6F2EE246FC15DB11650F6CD3F4EF9B666"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0_x86.dll"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+                           "name":  "libusb-win32 - Install-Filter",
+                           "version":  "1.2.6.0",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "5E84D13636FBCE7869CDDC8B20C7D83FA0063E98C319E8E5AB751EDC9EE1DA76"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "3"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0_x86.dll"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/install-filter.exe"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0.dll"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188",
+                           "name":  "libusbK.dll",
+                           "version":  "3.0.7.0",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "592CD24BAE321F1CB6CBE2F6E1BC5C05E279328E1C86814EB64EA1E89FDEA188"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "1"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK.dll"
+                                              }
+                                          ]
+                       },
+                       {
+                           "type":  "application",
+                           "bom-ref":  "m031bsp:test-binary:sha256:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4",
+                           "name":  "libusbK.dll",
+                           "version":  "3.0.7.0",
+                           "scope":  "optional",
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "22803C719494F193D22519BFAFF9484FECDCF1FADD6F082EFD024FCEE0B97BA4"
+                                          }
+                                      ],
+                           "properties":  [
+                                              {
+                                                  "name":  "bsp:integration-method",
+                                                  "value":  "distributed-binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-scope",
+                                                  "value":  "test-sample"
+                                              },
+                                              {
+                                                  "name":  "bsp:copy-count",
+                                                  "value":  "2"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK_x86.dll"
+                                              },
+                                              {
+                                                  "name":  "bsp:source-location",
+                                                  "value":  "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusbK.dll"
+                                              }
+                                          ]
+                       }
+                   ],
+    "dependencies":  [
+                         {
+                             "ref":  "m031bsp:test-sample:root",
+                             "dependsOn":  [
+                                               "pkg:generic/freertos-kernel@10.4.3?source=vendored\u0026path=ThirdParty/FreeRTOS",
+                                               "m031bsp:test-binary:sha256:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44",
+                                               "m031bsp:test-binary:sha256:7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca",
+                                               "m031bsp:test-binary:sha256:ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db",
+                                               "m031bsp:test-binary:sha256:76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92",
+                                               "m031bsp:test-binary:sha256:911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183",
+                                               "m031bsp:test-binary:sha256:9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f",
+                                               "m031bsp:test-binary:sha256:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+                                               "m031bsp:test-binary:sha256:ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c",
+                                               "m031bsp:test-binary:sha256:51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4",
+                                               "m031bsp:test-binary:sha256:9b876875be22caf1a690608b36e2eb43670f5b53a345bc6a612f2e74b8dfa654",
+                                               "m031bsp:test-binary:sha256:2e91a330663524e5192d7bbdca68c607d1785607336fcab1aa63863cdfdd00f7",
+                                               "m031bsp:test-binary:sha256:24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747",
+                                               "m031bsp:test-binary:sha256:18172f1da95230ee7e99c78a01771476e3bae6b194d33bcba613719a5c9d198c",
+                                               "m031bsp:test-binary:sha256:4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14",
+                                               "m031bsp:test-binary:sha256:00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666",
+                                               "m031bsp:test-binary:sha256:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+                                               "m031bsp:test-binary:sha256:592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188",
+                                               "m031bsp:test-binary:sha256:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4"
+                                           ]
+                         },
+                         {
+                             "ref":  "pkg:generic/freertos-kernel@10.4.3?source=vendored\u0026path=ThirdParty/FreeRTOS",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:9b876875be22caf1a690608b36e2eb43670f5b53a345bc6a612f2e74b8dfa654",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:2e91a330663524e5192d7bbdca68c607d1785607336fcab1aa63863cdfdd00f7",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:18172f1da95230ee7e99c78a01771476e3bae6b194d33bcba613719a5c9d198c",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188",
+                             "dependsOn":  [
+
+                                           ]
+                         },
+                         {
+                             "ref":  "m031bsp:test-binary:sha256:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4",
+                             "dependsOn":  [
+
+                                           ]
+                         }
+                     ]
+}
