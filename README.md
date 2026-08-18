@@ -62,6 +62,9 @@ BSP for M031 Series MCU
 
 ## .\Tool\
 
+- BLE<br>
+       Host-side BLE test utilities, including the BLE DTM Lab Test Tool
+       and FOTA Tool used by the NuMaker-M03xBT BLE sample projects.
 - HIDCtrlTransferTest<br>
        Host-side test tool for USB HID control transfer testing.
 - HIDTransferTest<br>
