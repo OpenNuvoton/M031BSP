@@ -109,7 +109,7 @@ int32_t main(void)
     printf("+--------------------------------------------------------+\n");
     printf("|          NuMicro USB HID Transfer Sample Code          |\n");
     printf("+--------------------------------------------------------+\n");
-
+    printf("PID is 0x0520\n");
     /* Open USB controller */
     USBD_Open(&gsInfo, HID_ClassRequest, NULL);
 

@@ -104,6 +104,7 @@ int32_t main(void)
     printf("|      NuMicro USB HID Transfer via Control Transfer     |\n");
     printf("+--------------------------------------------------------+\n");
     printf("Windows tool will Read and Write one pair of reports(periodic exchanges of reports).\n");
+    printf("PID is 0x0520\n");
 
     /* Open USB controller */
     USBD_Open(&gsInfo, HID_ClassRequest, NULL);

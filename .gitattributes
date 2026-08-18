@@ -1,32 +1,89 @@
-#
-# Set the default behavior, in case people don't have core.autocrlf set.
-#
+# Normalize text files in the Git repository.
 * text=auto
+.gitattributes text eol=lf
 
-#
-# Explicitly declare text files you want to always be normalized and converted
-# to native line endings on checkout.
-#
-*.c text
-*.h text
-*.s text
-*.uvproj text
-*.ini text
-*.eww text
-*.ewp text
-*.ewd text
-*.html text
-*.js text
-*.css text
-*.txt text
+# Source code and linker files use LF.
+*.c text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.s text eol=lf
+*.S text eol=lf
+*.ld text eol=lf
+*.sct text eol=lf
+*.icf text eol=lf
 
-#
-# Denote all files that are truly binary and should not be modified.
-#
+# Scripts use LF, except Windows command scripts.
+*.py text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# SBOM and governance files use LF for stable SHA-256 values.
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+*.xml text eol=lf
+*.toml text eol=lf
+
+# Web documents use LF.
+*.html text eol=lf
+*.htm text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+
+# IDE project and configuration files use LF.
+*.ini text eol=lf
+*.cfg text eol=lf
+*.conf text eol=lf
+*.project text eol=lf
+*.cproject text eol=lf
+*.uvproj text eol=lf
+*.uvprojx text eol=lf
+*.uvopt text eol=lf
+*.uvoptx text eol=lf
+*.ewp text eol=lf
+*.eww text eol=lf
+*.ewd text eol=lf
+
+# Visual Studio text files use CRLF.
+*.sln text eol=crlf
+*.vcproj text eol=crlf
+*.vcxproj text eol=crlf
+*.props text eol=crlf
+*.filters text eol=crlf
+*.rc text eol=crlf
+*.rc2 text eol=crlf
+
+# Windows driver installation files use CRLF.
+*.inf text eol=crlf
+
+# Binary files must not be modified by text conversion.
 *.a binary
 *.lib binary
+*.dll binary
+*.exe binary
+*.sys binary
+*.cat binary
 *.bin binary
+*.hex binary
+*.axf binary
+*.elf binary
+*.o binary
+*.obj binary
+*.apk binary
+*.zip binary
+*.7z binary
+*.rar binary
 *.pdf binary
 *.chm binary
 *.rtf binary
 *.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

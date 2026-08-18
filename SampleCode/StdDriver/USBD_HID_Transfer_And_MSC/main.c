@@ -104,6 +104,7 @@ int32_t main(void)
     printf("+--------------------------------------------------------------+\n");
     printf("|     NuMicro USB HID Transfer and MassStorage Sample Code     |\n");
     printf("+--------------------------------------------------------------+\n");
+    printf("PID is 0x0520\n");
 
     /* Checking if flash page size matches with target chip's */
     if( (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_I) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_G) )

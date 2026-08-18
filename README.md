@@ -60,7 +60,14 @@ BSP for M031 Series MCU
 - FreeRTOS<br>
 	FreeRTOS porting for M031.
 
-# Licesne
+## .\Tool\
+
+- HIDCtrlTransferTest<br>
+       Host-side test tool for USB HID control transfer testing.
+- HIDTransferTest<br>
+       Host-side test tool for USB HID data transfer testing.
+
+# License
 
 **SPDX-License-Identifier: Apache-2.0**
 

@@ -112,7 +112,7 @@ int32_t main(void)
     printf("|        NuMicro USB Composite device Sample Code        |\n");
     printf("|              HID Transfer and Keyboard                 |\n");
     printf("+--------------------------------------------------------+\n");
-
+    printf("PID is 0x0520\n");
     printf("If PB.15 = 0, just report key 'a'.\n");
 
     /* Set PB.15 as Quasi-bidirectional mode */
