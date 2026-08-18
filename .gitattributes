@@ -87,3 +87,6 @@
 *.jpeg binary
 *.gif binary
 *.ico binary
+
+# Preserve the signed Nu_DFU driver package INF byte-for-byte.
+SampleCode/ISP/ISP_DFU/WindowsDriver/Nu_DFU.inf -text !eol
