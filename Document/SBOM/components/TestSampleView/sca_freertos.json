@@ -1,123 +1,59 @@
 {
-  "schemaVersion": "1.0",
-  "documentType": "component-sca-evidence",
-  "component": {
-    "name": "FreeRTOS-Kernel",
-    "type": "operating-system",
-    "supplier": "Amazon Web Services",
-    "origin": "third-party",
-    "scopeView": "TestSampleView",
-    "integration": "source",
-    "runtime": "embedded-firmware",
-    "includedInProductFirmware": false,
-    "includedInTestSampleFirmware": true,
-    "version": {
-      "value": "10.4.3",
-      "status": "confirmed",
-      "evidence": {
-        "path": "ThirdParty/FreeRTOS/Source/include/task.h",
-        "fields": {
-          "tskKERNEL_VERSION_NUMBER": "V10.4.3",
-          "tskKERNEL_VERSION_MAJOR": "10",
-          "tskKERNEL_VERSION_MINOR": "4",
-          "tskKERNEL_VERSION_BUILD": "3"
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/freertos-kernel@10.4.3?source=vendored&path=ThirdParty/FreeRTOS",
+      "name": "FreeRTOS",
+      "version": "10.4.3",
+      "scope": "required",
+      "author": "FreeRTOS Project / Amazon",
+      "purl": "pkg:generic/freertos-kernel@10.4.3",
+      "description": "FreeRTOS Kernel included in M031 BSP test sample scope.",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
         }
-      }
-    },
-    "license": {
-      "expression": "MIT",
-      "status": "identified",
-      "evidenceType": "source-file-license-headers",
-      "evidencePaths": [
-        "ThirdParty/FreeRTOS/Source/include/FreeRTOS.h",
-        "ThirdParty/FreeRTOS/Source/include/task.h",
-        "ThirdParty/FreeRTOS/Source/tasks.c"
       ],
-      "standaloneLicenseFile": {
-        "status": "not-found",
-        "scope": "ThirdParty/FreeRTOS/"
-      }
-    },
-    "scope": {
-      "componentPaths": [
-        "ThirdParty/FreeRTOS/"
-      ],
-      "integrationPaths": [
-        "SampleCode/FreeRTOS/"
-      ],
-      "componentFileCount": 171,
-      "integrationFileCount": 16,
-      "combinedFileCount": 187,
-      "topLevelDirectories": [
-        "Demo",
-        "Source"
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "ThirdParty/FreeRTOS"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_source"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "FreeRTOS Project"
+        },
+        {
+          "name": "bsp:upstream-repository",
+          "value": "https://github.com/FreeRTOS/FreeRTOS-Kernel"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_freertos.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "ThirdParty/FreeRTOS"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "ThirdParty/FreeRTOS/Source/include/task.h"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "ThirdParty/FreeRTOS/LICENSE"
+        }
       ]
     }
-  },
-  "repository": {
-    "name": "M031/bsp",
-    "branch": "master",
-    "revision": "51ffb9b7e71511e58b705178b2d7acf34de99de4",
-    "originMaster": "51ffb9b7e71511e58b705178b2d7acf34de99de4",
-    "describe": "V3.07.000-46-g51ffb9b",
-    "commitDate": "2026-08-18T17:34:09+08:00",
-    "revisionStatus": "merged",
-    "workingTreeStatus": {
-      "unstagedChanges": false,
-      "stagedSbomFilesAllowed": true
-    }
-  },
-  "evidence": {
-    "fileManifest": {
-      "generatedPath": "/tmp/m031_freertos_file_manifest.txt",
-      "repositoryTracked": false,
-      "recordFormat": "sha256|size|repository-relative-path",
-      "recordCount": 187,
-      "sha256": "6863013835d0083896409f995d400e8d09e052ee832b0c4d1c273265c8ea0a2f",
-      "validationStatus": "passed"
-    },
-    "versionEvidence": [
-      "ThirdParty/FreeRTOS/Source/include/task.h"
-    ],
-    "licenseEvidence": {
-      "standaloneLicenseFileFound": false,
-      "licenseExpression": "MIT",
-      "sourceHeaderEvidenceFound": true
-    },
-    "sampleReferences": [
-      {
-        "path": "SampleCode/FreeRTOS/main.c",
-        "headers": [
-          "FreeRTOS.h",
-          "task.h",
-          "timers.h",
-          "semphr.h"
-        ]
-      },
-      {
-        "path": "SampleCode/FreeRTOS/ParTest.c",
-        "headers": [
-          "FreeRTOS.h",
-          "task.h"
-        ]
-      }
-    ]
-  },
-  "analysis": {
-    "scaStatus": "evidence-collected",
-    "sastStatus": "not-performed",
-    "binaryAnalysisRequired": false,
-    "findings": [],
-    "unresolvedItems": [
-      "Perform vulnerability analysis for FreeRTOS-Kernel 10.4.3.",
-      "Review upstream support status for FreeRTOS-Kernel 10.4.3.",
-      "Confirm the portable layer selected by each FreeRTOS project configuration.",
-      "Confirm the heap implementation selected by each FreeRTOS project configuration."
-    ]
-  },
-  "modelingDecision": {
-    "included": true,
-    "targetSbom": "M031BSP_TestSample_SBOM_cdx.json",
-    "reason": "FreeRTOS is included as source code and used by the M031 FreeRTOS test sample, but is not a mandatory dependency of every M031 BSP firmware application."
-  }
+  ]
 }

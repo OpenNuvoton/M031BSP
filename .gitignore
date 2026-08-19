@@ -4,6 +4,20 @@
 obj/
 lst/
 
+# BSP SBOM Generated Views
+Product_View/
+TestSample_View/
+
+# BSP SBOM Release Package
+V*/
+
+# BSP SBOM Generated Reports
+debug-syft/
+vulnerability-scan/
+
+# Python Cache
+__pycache__/
+*.pyc
 
 #
 # For IAR

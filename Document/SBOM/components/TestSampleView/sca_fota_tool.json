@@ -1,0 +1,67 @@
+{
+  "components": [
+    {
+      "type": "application",
+      "bom-ref": "pkg:generic/fota-tool@1.0.0.0?path=Tool/BLE",
+      "name": "FOTA Tool",
+      "version": "1.0.0.0",
+      "scope": "required",
+      "author": "Nuvoton Technology Corporation",
+      "purl": "pkg:generic/fota-tool@1.0.0.0",
+      "description": "Bluetooth firmware over-the-air update utility.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Tool/BLE"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_binary"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Nuvoton Technology Corporation"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_fota_tool.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "Tool/BLE"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "FOTA_Tool_v0.0.3_210423.exe"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Tool/BLE/LICENSE.md"
+        },
+        {
+          "name": "bsp:sha256",
+          "value": "51A18E92A4E8CC77624FD917BDDCA59BDEBB8B6AA369E73482D6376B4935B0C4"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "false"
+        },
+        {
+          "name": "bsp:runtime-dependency",
+          "value": "false"
+        }
+      ]
+    }
+  ]
+}

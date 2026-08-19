@@ -1,0 +1,67 @@
+{
+  "components": [
+    {
+      "type": "application",
+      "bom-ref": "pkg:generic/ble-dtm-lab-test-tool@1.0.0.1?path=Tool/BLE",
+      "name": "BLE_DTM_Lab_Test_Tool",
+      "version": "1.0.0.1",
+      "scope": "required",
+      "author": "Nuvoton Technology Corporation",
+      "purl": "pkg:generic/ble-dtm-lab-test-tool@1.0.0.1",
+      "description": "BLE DTM laboratory testing utility.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Tool/BLE"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_binary"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Nuvoton Technology Corporation"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_ble_dtm_lab_test_tool.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "Tool/BLE"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "BLE_DTM_Lab_Test_Tool_v1.6B.exe"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Tool/BLE/LICENSE.md"
+        },
+        {
+          "name": "bsp:sha256",
+          "value": "D00AD71A871C4E0838761F0BA4B976A7BBA1FF7F7D006E513A62E74F17DADD44"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "false"
+        },
+        {
+          "name": "bsp:runtime-dependency",
+          "value": "false"
+        }
+      ]
+    }
+  ]
+}

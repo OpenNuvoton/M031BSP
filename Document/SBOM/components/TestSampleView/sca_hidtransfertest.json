@@ -1,169 +1,63 @@
 {
-  "schemaVersion": "1.0",
-  "documentType": "component-sca-evidence",
-  "component": {
-    "name": "HIDTransferTest",
-    "type": "application",
-    "supplier": "Nuvoton Technology Corporation",
-    "origin": "first-party",
-    "scopeView": "TestSampleView",
-    "integration": "source-and-prebuilt-binary",
-    "runtime": "windows-host-side",
-    "includedInProductFirmware": false,
-    "includedInTestSampleScope": true,
-    "version": {
-      "value": "UNKNOWN",
-      "status": "not-present-in-pe-metadata",
-      "evidence": {
-        "path": "Tool/HIDTransferTest/HIDTransferTest.exe",
-        "fileVersion": null,
-        "productVersion": null
-      }
-    },
-    "license": {
-      "expression": "Apache-2.0",
-      "status": "identified-with-third-party-exceptions",
-      "evidencePath": "Tool/HIDTransferTest/LICENSE.md",
-      "evidenceSha256": "ef189a94f4a15d5d88ff94bec498d26ef7935dfbb87efb43b33c7195b863f5d4",
-      "limitations": [
-        "Third-party files and binaries remain subject to their own notices and terms.",
-        "The license of hid.lib is not established by the directory-level Apache-2.0 notice."
-      ]
-    },
-    "scope": {
-      "paths": [
-        "Tool/HIDTransferTest/"
-      ],
-      "fileCount": 16,
-      "integrationPaths": [
-        "SampleCode/StdDriver/USBD_HID_Transfer/",
-        "SampleCode/StdDriver/USBD_HID_Transfer_And_Keyboard/",
-        "SampleCode/StdDriver/USBD_HID_Transfer_And_MSC/"
-      ],
-      "excludedIntegrationPaths": [
-        "SampleCode/StdDriver/USBD_HID_Transfer_CTRL/"
-      ]
-    },
-    "platform": {
-      "operatingSystem": "Windows",
-      "architecture": "x86",
-      "executableFormat": "PE32"
-    }
-  },
-  "repository": {
-    "name": "M031/bsp",
-    "branch": "master",
-    "revision": "51ffb9b7e71511e58b705178b2d7acf34de99de4",
-    "originMaster": "51ffb9b7e71511e58b705178b2d7acf34de99de4",
-    "describe": "V3.07.000-46-g51ffb9b",
-    "commitDate": "2026-08-18T17:34:09+08:00",
-    "revisionStatus": "merged",
-    "workingTreeStatus": {
-      "unstagedChanges": false,
-      "stagedSbomFilesAllowed": true
-    }
-  },
-  "artifacts": [
+  "components": [
     {
-      "path": "Tool/HIDTransferTest/HIDTransferTest.exe",
-      "type": "executable",
-      "size": 5579776,
-      "sha256": "24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747",
-      "architecture": "x86",
+      "type": "application",
+      "bom-ref": "pkg:generic/hidtransfertest@unknown?path=Tool/HIDTransferTest",
+      "name": "HIDTransferTest",
       "version": "UNKNOWN",
-      "authenticode": {
-        "status": "NotSigned",
-        "signerCertificatePresent": false
-      }
-    },
-    {
-      "path": "Tool/HIDTransferTest/HIDTransferTest/hid.lib",
-      "type": "archive-or-import-library",
-      "size": 12384,
-      "sha256": "22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4",
-      "identity": {
-        "value": "UNKNOWN",
-        "status": "unconfirmed"
-      },
-      "license": {
-        "expression": "NOASSERTION",
-        "status": "unresolved"
-      },
-      "inspection": {
-        "archiveMembers": "not-performed",
-        "printableStrings": "not-performed",
-        "reason": "ar and strings tools were unavailable."
-      }
-    }
-  ],
-  "projectMetadata": {
-    "solution": {
-      "path": "Tool/HIDTransferTest/HIDTransferTest.sln",
-      "formatVersion": "12.00",
-      "visualStudioVersion": "Visual Studio 2012",
-      "encoding": "UTF-8 with BOM",
-      "workingTreeLineEnding": "CRLF"
-    },
-    "project": {
-      "projectGuid": "{F7B82D43-D0AF-4433-AC26-16D76DEAC8CE}",
-      "rootNamespace": "HIDTransferTest",
-      "configurationType": "Application",
-      "platformToolset": "v110",
-      "characterSet": "Unicode"
-    }
-  },
-  "evidence": {
-    "fileManifest": {
-      "generatedPath": "/tmp/m031_hidtransfertest_file_manifest.txt",
-      "repositoryTracked": false,
-      "recordFormat": "sha256|size|repository-relative-path",
-      "recordCount": 16,
-      "sha256": "17c776c570ca3615276dd746c1a3ac7327eb5561e5eb6c1ed95350b29eed2253",
-      "validationStatus": "passed"
-    },
-    "sampleIntegration": {
-      "primarySample": "SampleCode/StdDriver/USBD_HID_Transfer/",
-      "features": [
-        "HID report descriptors",
-        "interrupt IN endpoint",
-        "interrupt OUT endpoint",
-        "GET_REPORT request",
-        "SET_REPORT request",
-        "erase command",
-        "read command",
-        "write command",
-        "test command"
+      "scope": "required",
+      "author": "Nuvoton Technology Corporation",
+      "purl": "pkg:generic/hidtransfertest",
+      "description": "Host-side HID transfer testing utility.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Tool/HIDTransferTest"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_binary"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Nuvoton Technology Corporation"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_hidtransfertest.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "Tool/HIDTransferTest"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "HIDTransferTest.exe (no version resource found)"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Tool/HIDTransferTest/LICENSE.md"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "false"
+        },
+        {
+          "name": "bsp:runtime-dependency",
+          "value": "false"
+        }
       ]
     }
-  },
-  "analysis": {
-    "scaStatus": "evidence-collected",
-    "sastStatus": "not-performed",
-    "binaryAnalysisStatus": "partial",
-    "findings": [
-      {
-        "severity": "medium",
-        "title": "The distributed executable is unsigned."
-      },
-      {
-        "severity": "medium",
-        "title": "The application version is not present in PE metadata."
-      },
-      {
-        "severity": "medium",
-        "title": "The identity and license of hid.lib remain unresolved."
-      }
-    ],
-    "unresolvedItems": [
-      "Assign or recover an authoritative HIDTransferTest version.",
-      "Confirm the identity and license of hid.lib.",
-      "Perform SAST on the host-tool source.",
-      "Perform malware and binary security scanning on the distributed executable."
-    ]
-  },
-  "modelingDecision": {
-    "included": true,
-    "targetSbom": "M031BSP_TestSample_SBOM_cdx.json",
-    "reason": "HIDTransferTest is optional Windows host-side software supplied with the M031 HID Transfer samples and is not included in device firmware."
-  }
+  ]
 }

@@ -1,104 +1,59 @@
 {
-  "schemaVersion": "1.0",
-  "documentType": "component-sca-evidence",
-  "component": {
-    "name": "CMSIS",
-    "type": "library",
-    "supplier": "Arm Limited",
-    "origin": "third-party",
-    "scopeView": "ProductView",
-    "integration": "source",
-    "runtime": "embedded-firmware",
-    "includedInProductFirmware": true,
-    "version": {
-      "value": "6.1",
-      "appliesTo": "CMSIS-Core",
-      "status": "confirmed",
-      "evidence": [
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/cmsis@6.1.0?source=vendored&path=Library/CMSIS",
+      "name": "CMSIS",
+      "version": "6.1.0",
+      "scope": "required",
+      "author": "Arm Ltd.",
+      "purl": "pkg:generic/cmsis@6.1.0",
+      "description": "Arm Cortex Microcontroller Software Interface Standard (CMSIS) framework used by M031 BSP.",
+      "licenses": [
         {
-          "path": "Library/CMSIS/Core/Include/cmsis_version.h",
-          "fields": {
-            "__CM_CMSIS_VERSION_MAIN": "6",
-            "__CM_CMSIS_VERSION_SUB": "1",
-            "__CA_CMSIS_VERSION_MAIN": "6",
-            "__CA_CMSIS_VERSION_SUB": "1"
+          "license": {
+            "id": "Apache-2.0"
           }
         }
       ],
-      "limitations": [
-        "The confirmed version is the CMSIS-Core version.",
-        "Independent aggregate versions for CMSIS-Driver and CMSIS-RTOS2 were not identified."
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Library/CMSIS"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_source"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Arm Ltd."
+        },
+        {
+          "name": "bsp:upstream-repository",
+          "value": "https://github.com/ARM-software/CMSIS_6"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/ProductView/sca_cmsis.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "Library/CMSIS"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "Library/CMSIS/Core/Include/cmsis_version.h"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Library/CMSIS/Core/Include/cmsis_version.h"
+        }
       ]
-    },
-    "license": {
-      "expression": "Apache-2.0",
-      "status": "identified",
-      "evidenceType": "source-file-spdx-headers",
-      "evidencePaths": [
-        "Library/CMSIS/Core/Include/cmsis_version.h",
-        "Library/CMSIS/Core/Include/cmsis_compiler.h",
-        "Library/CMSIS/Driver/Include/Driver_Common.h"
-      ],
-      "standaloneLicenseFile": {
-        "status": "not-found",
-        "scope": "Library/CMSIS/"
-      }
-    },
-    "scope": {
-      "paths": [
-        "Library/CMSIS/"
-      ],
-      "topLevelDirectories": [
-        "Core",
-        "Documentation",
-        "Driver",
-        "RTOS2"
-      ],
-      "fileCount": 2188
     }
-  },
-  "repository": {
-    "name": "M031/bsp",
-    "branch": "master",
-    "revision": "51ffb9b7e71511e58b705178b2d7acf34de99de4",
-    "originMaster": "51ffb9b7e71511e58b705178b2d7acf34de99de4",
-    "describe": "V3.07.000-46-g51ffb9b",
-    "commitDate": "2026-08-18T17:34:09+08:00",
-    "revisionStatus": "merged"
-  },
-  "evidence": {
-    "fileManifest": {
-      "generatedPath": "/tmp/m031_cmsis_file_manifest.txt",
-      "repositoryTracked": false,
-      "recordFormat": "sha256|size|repository-relative-path",
-      "recordCount": 2188,
-      "sha256": "2552db62954f51ee0786c2d08aa0efcd7648cedbfb200304b3138632a258f663",
-      "validationStatus": "passed"
-    },
-    "versionEvidence": [
-      "Library/CMSIS/Core/Include/cmsis_version.h"
-    ],
-    "licenseEvidence": {
-      "standaloneLicenseFileFound": false,
-      "spdxIdentifier": "Apache-2.0",
-      "sourceHeaderEvidenceFound": true
-    }
-  },
-  "analysis": {
-    "scaStatus": "evidence-collected",
-    "sastStatus": "not-performed",
-    "binaryAnalysisRequired": false,
-    "findings": [],
-    "unresolvedItems": [
-      "Confirm whether CMSIS-Driver requires a separate component-level SCA record.",
-      "Confirm whether CMSIS-RTOS2 requires a separate component-level SCA record.",
-      "Run vulnerability analysis after final component granularity is approved."
-    ]
-  },
-  "modelingDecision": {
-    "included": true,
-    "targetSbom": "M031BSP_Product_SBOM_cdx.json",
-    "reason": "CMSIS is a product-level source dependency used by the M031 BSP firmware architecture.",
-    "m031DeviceAndStdDriverModeling": "Library/Device/Nuvoton/M031 and Library/StdDriver remain part of the top-level M031 BSP component and are not represented by sca_m031_driver."
-  }
+  ]
 }

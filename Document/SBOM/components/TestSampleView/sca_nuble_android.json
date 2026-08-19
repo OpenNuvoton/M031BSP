@@ -1,0 +1,67 @@
+{
+  "components": [
+    {
+      "type": "application",
+      "bom-ref": "pkg:generic/nuble-android@2.2.13?path=Tool/BLE/Android",
+      "name": "NuBLE Android",
+      "version": "2.2.13",
+      "scope": "required",
+      "author": "Nuvoton Technology Corporation",
+      "purl": "pkg:generic/nuble-android@2.2.13",
+      "description": "Android BLE utility application.",
+      "licenses": [
+        {
+          "license": {
+            "name": "Nuvoton Software License Agreement"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Tool/BLE/Android"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_binary"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Nuvoton Technology Corporation"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_nuble_android.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "Tool/BLE/Android"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "NuBLE_v2.2.13-210728.apk"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement"
+        },
+        {
+          "name": "bsp:sha256",
+          "value": "261A4B82B19E68AE7E2BED31B191CE016AA3219A4FDDA2A3B2C63E220421987A"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "false"
+        },
+        {
+          "name": "bsp:runtime-dependency",
+          "value": "false"
+        }
+      ]
+    }
+  ]
+}
