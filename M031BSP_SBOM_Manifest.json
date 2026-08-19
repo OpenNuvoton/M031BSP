@@ -1,0 +1,248 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "sbom-manifest",
+  "manifestId": "urn:uuid:ed47d42e-5be0-41a1-8302-34d611d7d7bb",
+  "generatedAt": "2026-08-19T00:13:25Z",
+  "product": {
+    "name": "M031 BSP",
+    "supplier": "Nuvoton Technology Corporation",
+    "version": {
+      "value": "V3.07.000-46-g51ffb9b",
+      "status": "repository-derived"
+    }
+  },
+  "repository": {
+    "name": "M031/bsp",
+    "branch": "master",
+    "revision": "51ffb9b7e71511e58b705178b2d7acf34de99de4",
+    "originMaster": "51ffb9b7e71511e58b705178b2d7acf34de99de4",
+    "describe": "V3.07.000-46-g51ffb9b",
+    "commitDate": "2026-08-18T17:34:09+08:00",
+    "commitSubject": "Normalize HIDCtrlTransferTest solution line endings",
+    "revisionStatus": "merged"
+  },
+  "views": {
+    "ProductView": {
+      "cycloneDxSbom": "M031BSP_Product_SBOM_cdx.json",
+      "components": [
+        "CMSIS"
+      ],
+      "componentEvidenceCount": 1
+    },
+    "TestSampleView": {
+      "cycloneDxSbom": "M031BSP_TestSample_SBOM_cdx.json",
+      "components": [
+        "FreeRTOS-Kernel",
+        "HIDTransferTest",
+        "HIDCtrlTransferTest"
+      ],
+      "componentEvidenceCount": 3
+    }
+  },
+  "files": [
+    {
+      "path": "M031BSP_Product_SBOM_cdx.json",
+      "role": "cyclonedx-product-sbom",
+      "view": "ProductView",
+      "format": "CycloneDX JSON",
+      "size": 3988,
+      "hashes": [
+        {
+          "algorithm": "SHA-256",
+          "content": "5e0d25fe759bbdc00fd6623ab57abcfd1844e631b4ecb90042efbd61295ac744"
+        }
+      ],
+      "cycloneDx": {
+        "specVersion": "1.6",
+        "serialNumber": "urn:uuid:a3cff4f6-03bc-4813-a191-168868f628b6",
+        "documentVersion": 1,
+        "componentCount": 1,
+        "dependencyCount": 2,
+        "validation": {
+          "tool": "CycloneDX CLI",
+          "inputVersion": "v1_6",
+          "status": "passed",
+          "failOnErrors": true
+        }
+      }
+    },
+    {
+      "path": "M031BSP_TestSample_SBOM_cdx.json",
+      "role": "cyclonedx-test-sample-sbom",
+      "view": "TestSampleView",
+      "format": "CycloneDX JSON",
+      "size": 7268,
+      "hashes": [
+        {
+          "algorithm": "SHA-256",
+          "content": "1ba77ea05465c6edf9109446017218db41f63be0e77a0810ab76c5c3e93080f0"
+        }
+      ],
+      "cycloneDx": {
+        "specVersion": "1.6",
+        "serialNumber": "urn:uuid:1f13c812-04cc-4491-9f13-58623670b8fc",
+        "documentVersion": 1,
+        "componentCount": 3,
+        "dependencyCount": 4,
+        "validation": {
+          "tool": "CycloneDX CLI",
+          "inputVersion": "v1_6",
+          "status": "passed",
+          "failOnErrors": true
+        }
+      }
+    },
+    {
+      "path": "Document/SBOM/components/ProductView/sca_cmsis.json",
+      "role": "component-sca-evidence",
+      "view": "ProductView",
+      "format": "JSON",
+      "size": 3327,
+      "hashes": [
+        {
+          "algorithm": "SHA-256",
+          "content": "97619411d5c39f5d52f1c8ecef53408f51132ec911ff12f9bdeff242f4092883"
+        }
+      ]
+    },
+    {
+      "path": "Document/SBOM/components/ProductView/sca_cmsis.md",
+      "role": "component-review-evidence",
+      "view": "ProductView",
+      "format": "Markdown",
+      "size": 3012,
+      "hashes": [
+        {
+          "algorithm": "SHA-256",
+          "content": "e5dc5d29a3a13b292879af8fa615c7f64c851da91297b567618fcdeacc5d0ee7"
+        }
+      ]
+    },
+    {
+      "path": "Document/SBOM/components/TestSampleView/sca_freertos.json",
+      "role": "component-sca-evidence",
+      "view": "TestSampleView",
+      "format": "JSON",
+      "size": 3662,
+      "hashes": [
+        {
+          "algorithm": "SHA-256",
+          "content": "0db3ab56c01c73656587e685986375327d6c62cf23e54de28db6ecbf826a414e"
+        }
+      ]
+    },
+    {
+      "path": "Document/SBOM/components/TestSampleView/sca_freertos.md",
+      "role": "component-review-evidence",
+      "view": "TestSampleView",
+      "format": "Markdown",
+      "size": 4153,
+      "hashes": [
+        {
+          "algorithm": "SHA-256",
+          "content": "6ffb2b421f90cdaa7c9e69858273e6e527dbeeb8b4a9dad8e53034873937c44f"
+        }
+      ]
+    },
+    {
+      "path": "Document/SBOM/components/TestSampleView/sca_hidtransfertest.json",
+      "role": "component-sca-evidence",
+      "view": "TestSampleView",
+      "format": "JSON",
+      "size": 5378,
+      "hashes": [
+        {
+          "algorithm": "SHA-256",
+          "content": "99304730a7d5fe1fc8472c9637245678af820e336b41ce04ac9141ddfbfca55d"
+        }
+      ]
+    },
+    {
+      "path": "Document/SBOM/components/TestSampleView/sca_hidtransfertest.md",
+      "role": "component-review-evidence",
+      "view": "TestSampleView",
+      "format": "Markdown",
+      "size": 3192,
+      "hashes": [
+        {
+          "algorithm": "SHA-256",
+          "content": "a4677c86ca7dcc2328071529a9cf945cd859beb14683a133a31fadeeca76917d"
+        }
+      ]
+    },
+    {
+      "path": "Document/SBOM/components/TestSampleView/sca_hidctrltransfertest.json",
+      "role": "component-sca-evidence",
+      "view": "TestSampleView",
+      "format": "JSON",
+      "size": 8872,
+      "hashes": [
+        {
+          "algorithm": "SHA-256",
+          "content": "41e28952ef886ff568a9e6d3d62fd28b7117001588ea38ec9372a78f0418348a"
+        }
+      ]
+    },
+    {
+      "path": "Document/SBOM/components/TestSampleView/sca_hidctrltransfertest.md",
+      "role": "component-review-evidence",
+      "view": "TestSampleView",
+      "format": "Markdown",
+      "size": 7817,
+      "hashes": [
+        {
+          "algorithm": "SHA-256",
+          "content": "e53d2471c1a248731934f60cd54e12dbba3fb689e29953f881f64ecbe65674ec"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "managedFileCount": 10,
+    "cycloneDxDocumentCount": 2,
+    "componentEvidenceJsonCount": 4,
+    "componentReviewMarkdownCount": 4,
+    "productViewComponentCount": 1,
+    "testSampleViewComponentCount": 3
+  },
+  "validation": {
+    "jsonSyntax": "passed",
+    "cycloneDxSchema": {
+      "specVersion": "1.6",
+      "status": "passed",
+      "tool": "CycloneDX CLI",
+      "commandPolicy": "input-format=json; input-version=v1_6; fail-on-errors=true"
+    },
+    "dependencyReferences": "passed",
+    "componentEvidenceConsistency": "passed",
+    "gitWhitespaceCheck": "passed"
+  },
+  "securityAnalysis": {
+    "sast": {
+      "status": "not-performed"
+    },
+    "scaVulnerabilityAnalysis": {
+      "status": "not-performed"
+    },
+    "binaryMalwareScanning": {
+      "status": "not-performed"
+    },
+    "authenticode": {
+      "HIDTransferTest": "NotSigned",
+      "HIDCtrlTransferTest": "NotSigned"
+    },
+    "unresolvedBinaryLibraries": [
+      "Tool/HIDTransferTest/HIDTransferTest/hid.lib",
+      "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hid.lib",
+      "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidclass.lib",
+      "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidparse.lib",
+      "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/setupapi.lib"
+    ]
+  },
+  "scopeLimitations": [
+    "The manifest covers the currently approved component evidence only.",
+    "SAST, vulnerability analysis, and binary malware scanning remain pending.",
+    "Bundled library identities and licenses listed as unresolved remain NOASSERTION.",
+    "HIDTransferTest has no authoritative version in PE metadata."
+  ]
+}

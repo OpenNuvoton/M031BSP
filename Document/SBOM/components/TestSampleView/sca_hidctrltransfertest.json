@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "1.0",
+  "documentType": "component-sca-evidence",
+  "component": {
+    "name": "HIDCtrlTransferTest",
+    "type": "application",
+    "supplier": "Nuvoton Technology Corporation",
+    "origin": "first-party",
+    "scopeView": "TestSampleView",
+    "integration": "source-and-prebuilt-binary",
+    "runtime": "windows-host-side",
+    "includedInProductFirmware": false,
+    "includedInTestSampleScope": true,
+    "version": {
+      "value": "1.0.0.1",
+      "status": "confirmed-from-pe-metadata",
+      "evidence": {
+        "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest.exe",
+        "fileVersion": "1.0.0.1",
+        "productVersion": "1.0.0.1"
+      }
+    },
+    "license": {
+      "expression": "Apache-2.0",
+      "status": "identified-with-third-party-exceptions",
+      "evidencePath": "Tool/HIDCtrlTransferTest/LICENSE.md",
+      "evidenceSha256": "ef189a94f4a15d5d88ff94bec498d26ef7935dfbb87efb43b33c7195b863f5d4",
+      "limitations": [
+        "Third-party headers, libraries, and binaries remain subject to their own applicable notices and terms.",
+        "The directory-level Apache-2.0 notice does not establish the licenses of the four bundled library archives."
+      ]
+    },
+    "scope": {
+      "paths": [
+        "Tool/HIDCtrlTransferTest/"
+      ],
+      "fileCount": 23,
+      "integrationPaths": [
+        "SampleCode/StdDriver/USBD_HID_Transfer_CTRL/"
+      ],
+      "excludedIntegrationPaths": [
+        "SampleCode/StdDriver/USBD_HID_Transfer/",
+        "SampleCode/StdDriver/USBD_HID_Transfer_And_Keyboard/",
+        "SampleCode/StdDriver/USBD_HID_Transfer_And_MSC/"
+      ]
+    },
+    "platform": {
+      "operatingSystem": "Windows",
+      "architecture": "x86",
+      "executableFormat": "PE32",
+      "subsystem": "GUI"
+    }
+  },
+  "repository": {
+    "name": "M031/bsp",
+    "branch": "master",
+    "revision": "51ffb9b7e71511e58b705178b2d7acf34de99de4",
+    "originMaster": "51ffb9b7e71511e58b705178b2d7acf34de99de4",
+    "describe": "V3.07.000-46-g51ffb9b",
+    "commitDate": "2026-08-18T17:34:09+08:00",
+    "revisionStatus": "merged",
+    "workingTreeStatus": {
+      "unstagedChanges": false,
+      "stagedSbomFilesAllowed": true
+    }
+  },
+  "artifacts": {
+    "executable": {
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest.exe",
+      "type": "executable",
+      "size": 1868800,
+      "sha256": "9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f",
+      "architecture": "x86",
+      "format": "PE32",
+      "subsystem": "GUI",
+      "version": "1.0.0.1",
+      "authenticode": {
+        "status": "NotSigned",
+        "signerCertificatePresent": false
+      },
+      "peMetadata": {
+        "fileVersion": "1.0.0.1",
+        "productVersion": "1.0.0.1",
+        "originalFilename": "HIDCtrlTransferTest.exe",
+        "companyName": {
+          "rawValue": "TODO: <Company name>",
+          "status": "placeholder-not-authoritative"
+        },
+        "productName": {
+          "rawValue": "TODO: <Product name>",
+          "status": "placeholder-not-authoritative"
+        },
+        "fileDescription": {
+          "rawValue": "TODO: <File description>",
+          "status": "placeholder-not-authoritative"
+        },
+        "legalCopyright": {
+          "rawValue": "TODO: (c) <Company name>. All rights reserved.",
+          "status": "placeholder-not-authoritative"
+        }
+      }
+    },
+    "libraries": [
+      {
+        "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hid.lib",
+        "name": "hid.lib",
+        "type": "archive-or-import-library",
+        "size": 12384,
+        "sha256": "3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756",
+        "identity": {
+          "value": "UNKNOWN",
+          "status": "unconfirmed"
+        },
+        "license": {
+          "expression": "NOASSERTION",
+          "status": "unresolved"
+        },
+        "inspection": {
+          "archiveMembers": "not-performed",
+          "printableStrings": "not-performed",
+          "reason": "ar and strings tools were unavailable."
+        }
+      },
+      {
+        "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidclass.lib",
+        "name": "hidclass.lib",
+        "type": "archive-or-import-library",
+        "size": 1766,
+        "sha256": "8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4",
+        "identity": {
+          "value": "UNKNOWN",
+          "status": "unconfirmed"
+        },
+        "license": {
+          "expression": "NOASSERTION",
+          "status": "unresolved"
+        },
+        "inspection": {
+          "archiveMembers": "not-performed",
+          "printableStrings": "not-performed",
+          "reason": "ar and strings tools were unavailable."
+        }
+      },
+      {
+        "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidparse.lib",
+        "name": "hidparse.lib",
+        "type": "archive-or-import-library",
+        "size": 9212,
+        "sha256": "00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb",
+        "identity": {
+          "value": "UNKNOWN",
+          "status": "unconfirmed"
+        },
+        "license": {
+          "expression": "NOASSERTION",
+          "status": "unresolved"
+        },
+        "inspection": {
+          "archiveMembers": "not-performed",
+          "printableStrings": "not-performed",
+          "reason": "ar and strings tools were unavailable."
+        }
+      },
+      {
+        "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/setupapi.lib",
+        "name": "setupapi.lib",
+        "type": "archive-or-import-library",
+        "size": 141048,
+        "sha256": "7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a",
+        "identity": {
+          "value": "UNKNOWN",
+          "status": "unconfirmed"
+        },
+        "license": {
+          "expression": "NOASSERTION",
+          "status": "unresolved"
+        },
+        "inspection": {
+          "archiveMembers": "not-performed",
+          "printableStrings": "not-performed",
+          "reason": "ar and strings tools were unavailable."
+        }
+      }
+    ]
+  },
+  "projectMetadata": {
+    "solution": {
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest.sln",
+      "formatVersion": "10.00",
+      "visualStudioVersion": "Visual Studio 2008"
+    },
+    "project": {
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/HIDCtrlTransferTest.vcproj",
+      "projectGuid": "{80836F19-E76E-4EDA-9EA2-591FBC079CE4}",
+      "rootNamespace": "HIDCtrlTransferTest",
+      "configurationType": "Application",
+      "configurationTypeRawValue": "1",
+      "characterSet": "Unicode",
+      "characterSetRawValue": "1"
+    }
+  },
+  "evidence": {
+    "fileManifest": {
+      "generatedPath": "/tmp/m031_hidctrltransfertest_file_manifest.txt",
+      "repositoryTracked": false,
+      "recordFormat": "sha256|size|repository-relative-path",
+      "recordCount": 23,
+      "sha256": "a5d174596c69b9a16ac7362662b9a24bf5787fb94c265e862a2ea6b4bb75b95e",
+      "validationStatus": "passed"
+    },
+    "sampleIntegration": {
+      "path": "SampleCode/StdDriver/USBD_HID_Transfer_CTRL/",
+      "transport": "USB HID control transfer",
+      "scopeStatus": "integration-evidence"
+    }
+  },
+  "analysis": {
+    "scaStatus": "evidence-collected",
+    "sastStatus": "not-performed",
+    "binaryAnalysisStatus": "partial",
+    "findings": [
+      {
+        "severity": "medium",
+        "title": "The distributed executable is unsigned."
+      },
+      {
+        "severity": "low",
+        "title": "PE identity fields contain Visual Studio placeholder values.",
+        "details": [
+          "CompanyName contains a TODO placeholder.",
+          "ProductName contains a TODO placeholder.",
+          "FileDescription contains a TODO placeholder.",
+          "LegalCopyright contains a TODO placeholder."
+        ],
+        "recommendedAction": "Replace the placeholder VERSIONINFO fields with approved Nuvoton metadata."
+      },
+      {
+        "severity": "medium",
+        "title": "The identities and licenses of the bundled library archives are unresolved."
+      }
+    ],
+    "unresolvedItems": [
+      "Confirm the identity and license of hid.lib.",
+      "Confirm the identity and license of hidclass.lib.",
+      "Confirm the identity and license of hidparse.lib.",
+      "Confirm the identity and license of setupapi.lib.",
+      "Perform SAST on the host-tool source.",
+      "Perform malware and binary security scanning on the distributed executable."
+    ]
+  },
+  "modelingDecision": {
+    "included": true,
+    "targetSbom": "M031BSP_TestSample_SBOM_cdx.json",
+    "reason": "HIDCtrlTransferTest is optional Windows host-side software supplied for the M031 USB HID control-transfer sample and is not included in device firmware.",
+    "referenceModel": "The component structure follows the completed HIDTransferTest SCA evidence model."
+  }
+}
