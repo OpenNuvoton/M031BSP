@@ -56,7 +56,11 @@ extern uint32_t PllClock;           /*!< PLL Output Clock Frequency           */
 */
 typedef void(*VECTOR_TABLE_Type)(void);
 
-#if USE_ASSERT
+#ifndef USE_ASSERT
+#define USE_ASSERT (0)
+#endif
+
+#if (USE_ASSERT == 1)
 /**
  * @brief      Assert Function
  *
