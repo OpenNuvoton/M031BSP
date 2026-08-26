@@ -106,7 +106,7 @@ extern "C"
 /*  RTC Miscellaneous Constant Definitions                                                                 */
 /*---------------------------------------------------------------------------------------------------------*/
 #define RTC_YEAR2000            2000UL          /*!< RTC Reference for compute year data \hideinitializer */
-#define RTC_FCR_REFERENCE       32761UL           /*!< RTC Reference for frequency compensation \hideinitializer */
+#define RTC_FCR_REFERENCE       32752UL           /*!< RTC Reference for frequency compensation \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  RTC Clock Source Constant Definitions                                                                  */
