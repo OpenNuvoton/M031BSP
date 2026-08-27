@@ -24,9 +24,8 @@ extern void *__Vectors;                   /* see startup file */
   Clock Variable definitions
  *----------------------------------------------------------------------------*/
 uint32_t SystemCoreClock  = __HSI;              /*!< System Clock Frequency (Core Clock) */
-uint32_t CyclesPerUs      = (__HSI / 1000000);  /*!< Cycles per micro second             */
+uint32_t CyclesPerUs      = (__HSI / 1000000UL);  /*!< Cycles per micro second             */
 uint32_t PllClock         = __HSI;              /*!< PLL Output Clock Frequency          */
-const uint32_t gau32ClkSrcTbl[] = {__HXT, __LXT, __HSI, __LIRC, __HIRC, 0UL, 0UL, __HIRC};
 
 
 /**
@@ -41,7 +40,12 @@ const uint32_t gau32ClkSrcTbl[] = {__HXT, __LXT, __HSI, __LIRC, __HIRC, 0UL, 0UL
  */
 void SystemCoreClockUpdate(void)
 {
-    uint32_t u32Freq, u32ClkSrc;
+    static const uint32_t gau32ClkSrcTbl[] =
+    {
+        __HXT, __LXT, __HSI, __LIRC, __HIRC, 0UL, 0UL, __HIRC
+    };
+    uint32_t u32Freq;
+    uint32_t u32ClkSrc;
     uint32_t u32HclkDiv;
 
     u32ClkSrc = CLK->CLKSEL0 & CLK_CLKSEL0_HCLKSEL_Msk;
@@ -60,12 +64,12 @@ void SystemCoreClockUpdate(void)
         u32Freq = PllClock;
     }
 
-    u32HclkDiv = (CLK->CLKDIV0 & CLK_CLKDIV0_HCLKDIV_Msk) + 1;
+    u32HclkDiv = (CLK->CLKDIV0 & CLK_CLKDIV0_HCLKDIV_Msk) + 1UL;
 
     /* Update System Core Clock */
     SystemCoreClock = u32Freq / u32HclkDiv;
 
-    CyclesPerUs = (SystemCoreClock + 500000) / 1000000;
+    CyclesPerUs = (SystemCoreClock + 500000UL) / 1000000UL;
 }
 
 
@@ -85,25 +89,29 @@ void SystemInit(void)
 
     /* Set HXTGain Level depended on HXT Frequency */
     CLK->PWRCTL = CLK->PWRCTL & ~CLK_PWRCTL_HXTGAIN_Msk;
-    if ((__HXT >= FREQ_4MHZ) && (__HXT < FREQ_8MHZ))
+    if (((uint32_t)__HXT >= (uint32_t)FREQ_4MHZ) &&
+        ((uint32_t)__HXT < (uint32_t)FREQ_8MHZ))
     {
-        CLK->PWRCTL |= (1 << CLK_PWRCTL_HXTGAIN_Pos);
+        CLK->PWRCTL |= (1UL << CLK_PWRCTL_HXTGAIN_Pos);
     }
-    else if ((__HXT >= FREQ_8MHZ) && (__HXT < FREQ_12MHZ))
+    else if (((uint32_t)__HXT >= (uint32_t)FREQ_8MHZ) &&
+             ((uint32_t)__HXT < (uint32_t)FREQ_12MHZ))
     {
-        CLK->PWRCTL |= (2 << CLK_PWRCTL_HXTGAIN_Pos);
+        CLK->PWRCTL |= (2UL << CLK_PWRCTL_HXTGAIN_Pos);
     }
-    else if ((__HXT >= FREQ_12MHZ) && (__HXT < FREQ_16MHZ))
+    else if (((uint32_t)__HXT >= (uint32_t)FREQ_12MHZ) &&
+             ((uint32_t)__HXT < (uint32_t)FREQ_16MHZ))
     {
-        CLK->PWRCTL |= (3 << CLK_PWRCTL_HXTGAIN_Pos);
+        CLK->PWRCTL |= (3UL << CLK_PWRCTL_HXTGAIN_Pos);
     }
-    else if ((__HXT >= FREQ_16MHZ) && (__HXT < FREQ_24MHZ))
+    else if (((uint32_t)__HXT >= (uint32_t)FREQ_16MHZ) &&
+             ((uint32_t)__HXT < (uint32_t)FREQ_24MHZ))
     {
-        CLK->PWRCTL |= (4 << CLK_PWRCTL_HXTGAIN_Pos);
+        CLK->PWRCTL |= (4UL << CLK_PWRCTL_HXTGAIN_Pos);
     }
     else
     {
-        CLK->PWRCTL |= (7 << CLK_PWRCTL_HXTGAIN_Pos);
+        CLK->PWRCTL |= (7UL << CLK_PWRCTL_HXTGAIN_Pos);
     }
 
     /* Lock protected registers */
@@ -129,6 +137,9 @@ void AssertError(uint8_t * file, uint32_t line)
     printf("[%s] line %d : wrong parameters.\r\n", file, line);
 
     /* Infinite loop */
-    while(1) ;
+    while (1U != 0U)
+    {
+        /* Wait forever. */
+    }
 }
 #endif
