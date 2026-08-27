@@ -1,63 +1,73 @@
 {
-  "components": [
-    {
-      "type": "application",
-      "bom-ref": "pkg:generic/hidctrltransfertest@1.0.0.1?path=Tool/HIDCtrlTransferTest",
-      "name": "HIDCtrlTransferTest",
-      "version": "1.0.0.1",
-      "scope": "required",
-      "author": "Nuvoton Technology Corporation",
-      "purl": "pkg:generic/hidctrltransfertest@1.0.0.1",
-      "description": "Host-side HID control transfer testing utility.",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "properties": [
-        {
-          "name": "src_path",
-          "value": "Tool/HIDCtrlTransferTest"
-        },
-        {
-          "name": "integration",
-          "value": "vendored_binary"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party"
-        },
-        {
-          "name": "bsp:component-source",
-          "value": "Nuvoton Technology Corporation"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_hidctrltransfertest.json"
-        },
-        {
-          "name": "bsp:evidence-path",
-          "value": "Tool/HIDCtrlTransferTest"
-        },
-        {
-          "name": "bsp:version-evidence",
-          "value": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/HIDCtrlTransferTest.rc"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Tool/HIDCtrlTransferTest/LICENSE.md"
-        },
-        {
-          "name": "bsp:included-in-product-firmware",
-          "value": "false"
-        },
-        {
-          "name": "bsp:runtime-dependency",
-          "value": "false"
-        }
-      ]
-    }
-  ]
+    "components":  [
+                       {
+                           "type":  "application",
+                           "bom-ref":  "pkg:generic/hidctrltransfertest@1.0.0.1?path=Tool/HIDCtrlTransferTest",
+                           "name":  "HIDCtrlTransferTest",
+                           "version":  "1.0.0.1",
+                           "scope":  "required",
+                           "author":  "Nuvoton Technology Corporation",
+                           "purl":  "pkg:generic/hidctrltransfertest@1.0.0.1",
+                           "description":  "Host-side HID control transfer testing utility.",
+                           "licenses":  [
+                                            {
+                                                "license":  {
+                                                                "id":  "Apache-2.0"
+                                                            }
+                                            }
+                                        ],
+                           "properties":  [
+                                              {
+                                                  "name":  "src_path",
+                                                  "value":  "Tool/HIDCtrlTransferTest"
+                                              },
+                                              {
+                                                  "name":  "integration",
+                                                  "value":  "vendored_binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-origin",
+                                                  "value":  "first-party"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-source",
+                                                  "value":  "Nuvoton Technology Corporation"
+                                              },
+                                              {
+                                                  "name":  "bsp:evidence-file",
+                                                  "value":  "Document/SBOM/components/TestSampleView/sca_hidctrltransfertest.json"
+                                              },
+                                              {
+                                                  "name":  "bsp:evidence-path",
+                                                  "value":  "Tool/HIDCtrlTransferTest"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-evidence",
+                                                  "value":  "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/HIDCtrlTransferTest.rc"
+                                              },
+                                              {
+                                                  "name":  "bsp:license-evidence",
+                                                  "value":  "Tool/HIDCtrlTransferTest/LICENSE.md"
+                                              },
+                                              {
+                                                  "name":  "bsp:included-in-product-firmware",
+                                                  "value":  "false"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-dependency",
+                                                  "value":  "false"
+                                              },
+                                              {
+                                                  "name":  "bsp:sha256",
+                                                  "value":  "9099BE6E12479E50B0706E3DFE1828FA4FD62DCBCC0C2A462DB1783B35ECAC5F"
+                                              }
+                                          ],
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f"
+                                          }
+                                      ]
+                       }
+                   ]
 }

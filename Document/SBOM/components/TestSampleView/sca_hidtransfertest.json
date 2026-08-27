@@ -1,63 +1,73 @@
 {
-  "components": [
-    {
-      "type": "application",
-      "bom-ref": "pkg:generic/hidtransfertest@unknown?path=Tool/HIDTransferTest",
-      "name": "HIDTransferTest",
-      "version": "UNKNOWN",
-      "scope": "required",
-      "author": "Nuvoton Technology Corporation",
-      "purl": "pkg:generic/hidtransfertest",
-      "description": "Host-side HID transfer testing utility.",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "properties": [
-        {
-          "name": "src_path",
-          "value": "Tool/HIDTransferTest"
-        },
-        {
-          "name": "integration",
-          "value": "vendored_binary"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party"
-        },
-        {
-          "name": "bsp:component-source",
-          "value": "Nuvoton Technology Corporation"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_hidtransfertest.json"
-        },
-        {
-          "name": "bsp:evidence-path",
-          "value": "Tool/HIDTransferTest"
-        },
-        {
-          "name": "bsp:version-evidence",
-          "value": "HIDTransferTest.exe (no version resource found)"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Tool/HIDTransferTest/LICENSE.md"
-        },
-        {
-          "name": "bsp:included-in-product-firmware",
-          "value": "false"
-        },
-        {
-          "name": "bsp:runtime-dependency",
-          "value": "false"
-        }
-      ]
-    }
-  ]
+    "components":  [
+                       {
+                           "type":  "application",
+                           "bom-ref":  "pkg:generic/hidtransfertest@1.1.0.0?path=Tool/HIDTransferTest",
+                           "name":  "HIDTransferTest",
+                           "version":  "1.1.0.0",
+                           "scope":  "required",
+                           "author":  "Nuvoton Technology Corporation",
+                           "purl":  "pkg:generic/hidtransfertest@1.1.0.0",
+                           "description":  "Host-side HID transfer testing utility.",
+                           "licenses":  [
+                                            {
+                                                "license":  {
+                                                                "id":  "Apache-2.0"
+                                                            }
+                                            }
+                                        ],
+                           "properties":  [
+                                              {
+                                                  "name":  "src_path",
+                                                  "value":  "Tool/HIDTransferTest"
+                                              },
+                                              {
+                                                  "name":  "integration",
+                                                  "value":  "vendored_binary"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-origin",
+                                                  "value":  "first-party"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-source",
+                                                  "value":  "Nuvoton Technology Corporation"
+                                              },
+                                              {
+                                                  "name":  "bsp:evidence-file",
+                                                  "value":  "Document/SBOM/components/TestSampleView/sca_hidtransfertest.json"
+                                              },
+                                              {
+                                                  "name":  "bsp:evidence-path",
+                                                  "value":  "Tool/HIDTransferTest"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-evidence",
+                                                  "value":  "HIDTransferTest.exe (no version resource found)"
+                                              },
+                                              {
+                                                  "name":  "bsp:license-evidence",
+                                                  "value":  "Tool/HIDTransferTest/LICENSE.md"
+                                              },
+                                              {
+                                                  "name":  "bsp:included-in-product-firmware",
+                                                  "value":  "false"
+                                              },
+                                              {
+                                                  "name":  "bsp:runtime-dependency",
+                                                  "value":  "false"
+                                              },
+                                              {
+                                                  "name":  "bsp:sha256",
+                                                  "value":  "24BDD0BAADD8EE6632B40757D2F599F391F9B87B87E23F8FB30324C8C873E747"
+                                              }
+                                          ],
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747"
+                                          }
+                                      ]
+                       }
+                   ]
 }

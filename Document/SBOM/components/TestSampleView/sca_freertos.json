@@ -1,59 +1,69 @@
 {
-  "components": [
-    {
-      "type": "library",
-      "bom-ref": "pkg:generic/freertos-kernel@10.4.3?source=vendored&path=ThirdParty/FreeRTOS",
-      "name": "FreeRTOS",
-      "version": "10.4.3",
-      "scope": "required",
-      "author": "FreeRTOS Project / Amazon",
-      "purl": "pkg:generic/freertos-kernel@10.4.3",
-      "description": "FreeRTOS Kernel included in M031 BSP test sample scope.",
-      "licenses": [
-        {
-          "license": {
-            "id": "MIT"
-          }
-        }
-      ],
-      "properties": [
-        {
-          "name": "src_path",
-          "value": "ThirdParty/FreeRTOS"
-        },
-        {
-          "name": "integration",
-          "value": "vendored_source"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "third-party"
-        },
-        {
-          "name": "bsp:component-source",
-          "value": "FreeRTOS Project"
-        },
-        {
-          "name": "bsp:upstream-repository",
-          "value": "https://github.com/FreeRTOS/FreeRTOS-Kernel"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/TestSampleView/sca_freertos.json"
-        },
-        {
-          "name": "bsp:evidence-path",
-          "value": "ThirdParty/FreeRTOS"
-        },
-        {
-          "name": "bsp:version-evidence",
-          "value": "ThirdParty/FreeRTOS/Source/include/task.h"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "ThirdParty/FreeRTOS/LICENSE"
-        }
-      ]
-    }
-  ]
+    "components":  [
+                       {
+                           "type":  "library",
+                           "bom-ref":  "pkg:generic/freertos-kernel@10.4.3?source=vendored\u0026path=ThirdParty/FreeRTOS",
+                           "name":  "FreeRTOS",
+                           "version":  "10.4.3",
+                           "scope":  "required",
+                           "author":  "FreeRTOS Project / Amazon",
+                           "purl":  "pkg:generic/freertos-kernel@10.4.3",
+                           "description":  "FreeRTOS Kernel included in M031 BSP test sample scope.",
+                           "licenses":  [
+                                            {
+                                                "license":  {
+                                                                "id":  "MIT"
+                                                            }
+                                            }
+                                        ],
+                           "properties":  [
+                                              {
+                                                  "name":  "src_path",
+                                                  "value":  "ThirdParty/FreeRTOS"
+                                              },
+                                              {
+                                                  "name":  "integration",
+                                                  "value":  "vendored_source"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-origin",
+                                                  "value":  "third-party"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-source",
+                                                  "value":  "FreeRTOS Project"
+                                              },
+                                              {
+                                                  "name":  "bsp:upstream-repository",
+                                                  "value":  "https://github.com/FreeRTOS/FreeRTOS-Kernel"
+                                              },
+                                              {
+                                                  "name":  "bsp:evidence-file",
+                                                  "value":  "Document/SBOM/components/TestSampleView/sca_freertos.json"
+                                              },
+                                              {
+                                                  "name":  "bsp:evidence-path",
+                                                  "value":  "ThirdParty/FreeRTOS"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-evidence",
+                                                  "value":  "ThirdParty/FreeRTOS/Source/include/task.h"
+                                              },
+                                              {
+                                                  "name":  "bsp:license-evidence",
+                                                  "value":  "ThirdParty/FreeRTOS/LICENSE"
+                                              },
+                                              {
+                                                  "name":  "bsp:sha256",
+                                                  "value":  "B734313C3C29ECF83B7DC7D625387E6B442CE6E171D98E1A2B93D18C6980F23D"
+                                              }
+                                          ],
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "b734313c3c29ecf83b7dc7d625387e6b442ce6e171d98e1a2b93d18c6980f23d"
+                                          }
+                                      ]
+                       }
+                   ]
 }
