@@ -90,3 +90,10 @@
 
 # Preserve the signed Nu_DFU driver package INF byte-for-byte.
 SampleCode/ISP/ISP_DFU/WindowsDriver/Nu_DFU.inf -text !eol
+
+#
+# SBOM evidence files must be preserved byte-for-byte.
+# Prevent line-ending conversion from changing release hashes.
+#
+Document/SBOM/** -text
+
