@@ -1,59 +1,65 @@
 {
-  "components": [
-    {
-      "type": "library",
-      "bom-ref": "pkg:generic/cmsis@6.1.0?source=vendored&path=Library/CMSIS",
-      "name": "CMSIS",
-      "version": "6.1.0",
-      "scope": "required",
-      "author": "Arm Ltd.",
-      "purl": "pkg:generic/cmsis@6.1.0",
-      "description": "Arm Cortex Microcontroller Software Interface Standard (CMSIS) framework used by M031 BSP.",
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "properties": [
-        {
-          "name": "src_path",
-          "value": "Library/CMSIS"
-        },
-        {
-          "name": "integration",
-          "value": "vendored_source"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "third-party"
-        },
-        {
-          "name": "bsp:component-source",
-          "value": "Arm Ltd."
-        },
-        {
-          "name": "bsp:upstream-repository",
-          "value": "https://github.com/ARM-software/CMSIS_6"
-        },
-        {
-          "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/ProductView/sca_cmsis.json"
-        },
-        {
-          "name": "bsp:evidence-path",
-          "value": "Library/CMSIS"
-        },
-        {
-          "name": "bsp:version-evidence",
-          "value": "Library/CMSIS/Core/Include/cmsis_version.h"
-        },
-        {
-          "name": "bsp:license-evidence",
-          "value": "Library/CMSIS/Core/Include/cmsis_version.h"
-        }
-      ]
-    }
-  ]
+    "components":  [
+                       {
+                           "type":  "library",
+                           "bom-ref":  "pkg:generic/cmsis@6.1.0?source=vendored\u0026path=Library/CMSIS",
+                           "name":  "CMSIS",
+                           "version":  "6.1.0",
+                           "scope":  "required",
+                           "author":  "Arm Ltd.",
+                           "purl":  "pkg:generic/cmsis@6.1.0",
+                           "description":  "Arm Cortex Microcontroller Software Interface Standard (CMSIS) framework used by M031 BSP.",
+                           "licenses":  [
+                                            {
+                                                "license":  {
+                                                                "id":  "Apache-2.0"
+                                                            }
+                                            }
+                                        ],
+                           "properties":  [
+                                              {
+                                                  "name":  "src_path",
+                                                  "value":  "Library/CMSIS"
+                                              },
+                                              {
+                                                  "name":  "integration",
+                                                  "value":  "vendored_source"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-origin",
+                                                  "value":  "third-party"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-source",
+                                                  "value":  "Arm Ltd."
+                                              },
+                                              {
+                                                  "name":  "bsp:upstream-repository",
+                                                  "value":  "https://github.com/ARM-software/CMSIS_6"
+                                              },
+                                              {
+                                                  "name":  "bsp:evidence-file",
+                                                  "value":  "Document/SBOM/components/ProductView/sca_cmsis.json"
+                                              },
+                                              {
+                                                  "name":  "bsp:evidence-path",
+                                                  "value":  "Library/CMSIS"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-evidence",
+                                                  "value":  "Library/CMSIS/Core/Include/cmsis_version.h"
+                                              },
+                                              {
+                                                  "name":  "bsp:license-evidence",
+                                                  "value":  "Library/CMSIS/Core/Include/cmsis_version.h"
+                                              }
+                                          ],
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "3b9195c5373a2a4dbfd968b083b3d7f5f446f9ec2e126f75928ac1ff4356b91e"
+                                          }
+                                      ]
+                       }
+                   ]
 }
