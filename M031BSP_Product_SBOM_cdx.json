@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:c0be1a40-c8a9-43cc-9a0e-29e9b070fb6a",
+  "serialNumber": "urn:uuid:df9c85f4-b4bb-4de4-9e77-fad0e6b9a23f",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-28T05:22:06+08:00",
+    "timestamp": "2026-08-28T22:35:23+08:00",
     "tools": {
       "components": [
         {
@@ -20,14 +20,14 @@
       "bom-ref": "b3fb85bdb52060f2",
       "type": "library",
       "name": "MCU Driver",
-      "version": "V3.07.000-57-g822260b",
+      "version": "V3.07.000-58-gb52fb33",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-driver@V3.07.000-57-g822260b",
+      "purl": "pkg:generic/nuvoton/mcu-driver@V3.07.000-58-gb52fb33",
       "licenses": [
         {
           "license": {
@@ -107,14 +107,14 @@
       "type": "library",
       "bom-ref": "m031bsp:product-component:library-device",
       "name": "M031 Device",
-      "version": "V3.07.000-57-g822260b",
+      "version": "V3.07.000-58-gb52fb33",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-device@V3.07.000-57-g822260b",
+      "purl": "pkg:generic/nuvoton/library-device@V3.07.000-58-gb52fb33",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -165,14 +165,14 @@
       "type": "library",
       "bom-ref": "m031bsp:product-component:library-stddriver",
       "name": "M031 StdDriver",
-      "version": "V3.07.000-57-g822260b",
+      "version": "V3.07.000-58-gb52fb33",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-stddriver@V3.07.000-57-g822260b",
+      "purl": "pkg:generic/nuvoton/library-stddriver@V3.07.000-58-gb52fb33",
       "hashes": [
         {
           "alg": "SHA-256",
