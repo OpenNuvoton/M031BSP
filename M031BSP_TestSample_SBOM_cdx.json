@@ -1,26 +1,33 @@
 {
-  "$schema": "http://cyclonedx.org/schema/bom-1.7.schema.json",
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
-  "specVersion": "1.7",
-  "serialNumber": "urn:uuid:352c4cb6-c044-4721-9711-ec64fb3001b0",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:33d481c2-be8f-483e-9c20-ecd59304639c",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-19T13:33:01+08:00",
+    "timestamp": "2026-08-28T05:22:26+08:00",
     "tools": {
       "components": [
         {
           "type": "application",
           "author": "anchore",
           "name": "syft",
-          "version": "1.50.0"
+          "version": "1.45.1"
         }
       ]
     },
     "component": {
-      "bom-ref": "0f0c720ad1e1f638",
+      "bom-ref": "1f1142a0088e1cf1",
       "type": "application",
       "name": "MCU Test Sample",
-      "version": "V3.07.000-48-g1f9c6fe",
+      "version": "V3.07.000-57-g822260b",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.07.000-57-g822260b",
       "licenses": [
         {
           "license": {
@@ -70,7 +77,18 @@
           "value": "Library/"
         }
       ]
-    }
+    },
+    "supplier": {
+      "name": "Nuvoton Technology Corp.",
+      "url": [
+        "https://www.nuvoton.com"
+      ]
+    },
+    "authors": [
+      {
+        "name": "Nuvoton Technology Corp."
+      }
+    ]
   },
   "components": [
     {
@@ -208,7 +226,7 @@
       "licenses": [
         {
           "license": {
-            "name": "Nuvoton Software License Agreement"
+            "id": "LicenseRef-Nuvoton-Proprietary"
           }
         }
       ]
@@ -298,7 +316,7 @@
       "licenses": [
         {
           "license": {
-            "name": "Nuvoton Software License Agreement"
+            "id": "LicenseRef-Nuvoton-Proprietary"
           }
         }
       ]
@@ -376,7 +394,7 @@
       "licenses": [
         {
           "license": {
-            "name": "Nuvoton Software License Agreement"
+            "id": "LicenseRef-Nuvoton-Proprietary"
           }
         }
       ]
@@ -479,7 +497,7 @@
       "licenses": [
         {
           "license": {
-            "name": "Microsoft Software License Terms"
+            "id": "LicenseRef-Microsoft-Software-License-Terms"
           }
         }
       ]
@@ -557,7 +575,7 @@
       "licenses": [
         {
           "license": {
-            "name": "Microsoft Software License Terms"
+            "id": "LicenseRef-Microsoft-Software-License-Terms"
           }
         }
       ]
@@ -687,7 +705,7 @@
       "licenses": [
         {
           "license": {
-            "name": "Microsoft Software License Terms"
+            "id": "LicenseRef-Microsoft-Software-License-Terms"
           }
         }
       ]
@@ -1593,9 +1611,22 @@
     },
     {
       "type": "application",
-      "bom-ref": "bsp:test-sample-component:samplecode",
-      "name": " SampleCode",
-      "version": "V3.07.000-48-g1f9c6fe",
+      "bom-ref": "m031bsp:test-sample-component:samplecode",
+      "name": "M031 SampleCode",
+      "version": "V3.07.000-57-g822260b",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/samplecode@V3.07.000-57-g822260b",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e94dc03afc14972048e988873fe0bcf9edf62eba850014ef32651af790e1f406"
+        }
+      ],
       "licenses": [
         {
           "license": {
@@ -1697,6 +1728,12 @@
           "name": "bsp:runtime-dependency",
           "value": "false"
         }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44"
+        }
       ]
     },
     {
@@ -1760,6 +1797,12 @@
           "name": "bsp:runtime-dependency",
           "value": "false"
         }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4"
+        }
       ]
     },
     {
@@ -1814,6 +1857,16 @@
         {
           "name": "bsp:license-evidence",
           "value": "ThirdParty/FreeRTOS/LICENSE"
+        },
+        {
+          "name": "bsp:sha256",
+          "value": "B734313C3C29ECF83B7DC7D625387E6B442CE6E171D98E1A2B93D18C6980F23D"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b734313c3c29ecf83b7dc7d625387e6b442ce6e171d98e1a2b93d18c6980f23d"
         }
       ]
     },
@@ -1873,17 +1926,27 @@
         {
           "name": "bsp:runtime-dependency",
           "value": "false"
+        },
+        {
+          "name": "bsp:sha256",
+          "value": "9099BE6E12479E50B0706E3DFE1828FA4FD62DCBCC0C2A462DB1783B35ECAC5F"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f"
         }
       ]
     },
     {
       "type": "application",
-      "bom-ref": "pkg:generic/hidtransfertest@unknown?path=Tool/HIDTransferTest",
+      "bom-ref": "pkg:generic/hidtransfertest@1.1.0.0?path=Tool/HIDTransferTest",
       "name": "HIDTransferTest",
-      "version": "UNKNOWN",
+      "version": "1.1.0.0",
       "scope": "required",
       "author": "Nuvoton Technology Corporation",
-      "purl": "pkg:generic/hidtransfertest",
+      "purl": "pkg:generic/hidtransfertest@1.1.0.0",
       "description": "Host-side HID transfer testing utility.",
       "licenses": [
         {
@@ -1932,6 +1995,16 @@
         {
           "name": "bsp:runtime-dependency",
           "value": "false"
+        },
+        {
+          "name": "bsp:sha256",
+          "value": "24BDD0BAADD8EE6632B40757D2F599F391F9B87B87E23F8FB30324C8C873E747"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747"
         }
       ]
     },
@@ -1947,7 +2020,7 @@
       "licenses": [
         {
           "license": {
-            "name": "Nuvoton Software License Agreement"
+            "id": "LicenseRef-Nuvoton-Proprietary"
           }
         }
       ],
@@ -1995,6 +2068,12 @@
         {
           "name": "bsp:runtime-dependency",
           "value": "false"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "261a4b82b19e68ae7e2bed31b191ce016aa3219a4fdda2a3b2c63e220421987a"
         }
       ]
     },
@@ -2192,9 +2271,9 @@
   ],
   "dependencies": [
     {
-      "ref": "0f0c720ad1e1f638",
+      "ref": "1f1142a0088e1cf1",
       "dependsOn": [
-        "bsp:test-sample-component:samplecode"
+        "m031bsp:test-sample-component:samplecode"
       ]
     }
   ]

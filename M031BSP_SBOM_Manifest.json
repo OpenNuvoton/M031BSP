@@ -1,13 +1,13 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:02a8ef8b-9b8e-40e5-81fe-7e230ec08279",
-  "createdAt": "2026-08-19T05:33:20.098988Z",
+  "serialNumber": "urn:uuid:8294fc16-62c1-4d26-9f33-54d3ab06eac7",
+  "createdAt": "2026-08-27T21:22:57.439256Z",
   "bsp": {
-    "name": "bsp",
-    "version": "V3.07.000-48-g1f9c6fe",
+    "name": "M031BSP",
+    "version": "V3.07.000-57-g822260b",
     "releaseIdentifierSource": "SBOM file name",
-    "gitDescribe": "V3.07.000-48-g1f9c6fe"
+    "gitDescribe": "V3.07.000-57-g822260b"
   },
   "sbomPackage": {
     "name": "MCU BSP SBOM Package",
@@ -20,18 +20,18 @@
   },
   "sboms": [
     {
-      "fileName": "bsp_Product_SBOM_cdx.json",
+      "fileName": "M031BSP_Product_SBOM_cdx.json",
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
-      "specVersion": "1.7",
-      "serialNumber": "urn:uuid:76901cc6-8982-41cb-82d7-1c6b894ded72",
+      "specVersion": "1.6",
+      "serialNumber": "urn:uuid:c0be1a40-c8a9-43cc-9a0e-29e9b070fb6a",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-08-19T13:32:36+08:00",
+      "generatedTimestamp": "2026-08-28T05:22:06+08:00",
       "metadataComponent": {
-        "bomRef": "3cec1b4a00fb98d1",
+        "bomRef": "b3fb85bdb52060f2",
         "type": "library",
         "name": "MCU Driver",
-        "version": "V3.07.000-48-g1f9c6fe",
+        "version": "V3.07.000-57-g822260b",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -55,7 +55,7 @@
           },
           {
             "name": "bsp:third-party-components",
-            "value": "none identified in product scope based on the defined Product SBOM scope policy"
+            "value": "Third-party component status is represented by component-level bsp:component-origin properties and manual SCA evidence."
           },
           {
             "name": "bsp:product-scope-include-path",
@@ -100,22 +100,22 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "07eaaa7be08479ba3e6762067ff3aa1c62df559aed9e5854de93df60ff491a35"
+        "value": "8628ad60c8b8eb1808d712f6bd6b4b4f6515f90d607cec96f552a474d21e6bbe"
       }
     },
     {
-      "fileName": "bsp_TestSample_SBOM_cdx.json",
+      "fileName": "M031BSP_TestSample_SBOM_cdx.json",
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
-      "specVersion": "1.7",
-      "serialNumber": "urn:uuid:352c4cb6-c044-4721-9711-ec64fb3001b0",
+      "specVersion": "1.6",
+      "serialNumber": "urn:uuid:33d481c2-be8f-483e-9c20-ecd59304639c",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-08-19T13:33:01+08:00",
+      "generatedTimestamp": "2026-08-28T05:22:26+08:00",
       "metadataComponent": {
-        "bomRef": "0f0c720ad1e1f638",
+        "bomRef": "1f1142a0088e1cf1",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "V3.07.000-48-g1f9c6fe",
+        "version": "V3.07.000-57-g822260b",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -169,7 +169,6 @@
           "library": 10
         },
         "applicationNames": [
-          " SampleCode",
           "/Tool/HIDTransferTest/HIDTransferTest",
           "BLE Application",
           "BLE_DTM_Lab_Test_Tool",
@@ -177,6 +176,7 @@
           "HIDCtrlTransferTest",
           "HIDTransferTest",
           "ISP Programming Tool",
+          "M031 SampleCode",
           "NUVPOS58",
           "NuBLE Android",
           "NuvPos58 Driver",
@@ -189,11 +189,11 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "0600868fa73a2969d7b3de0172918e55b9e9e7e13c85c8bed3111e3cdf482228"
+        "value": "30569549e52bad457f662da94ed5ecdd37e157e3870ccb002a1db08179c0ea59"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,
-        "productSbomFile": "bsp_Product_SBOM_cdx.json",
+        "productSbomFile": "M031BSP_Product_SBOM_cdx.json",
         "description": "Test sample firmware may be built using MCU Driver components described in the Product SBOM. These product components are not duplicated in the Test Sample SBOM."
       }
     }

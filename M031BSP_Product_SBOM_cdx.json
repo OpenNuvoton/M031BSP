@@ -1,26 +1,33 @@
 {
-  "$schema": "http://cyclonedx.org/schema/bom-1.7.schema.json",
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
-  "specVersion": "1.7",
-  "serialNumber": "urn:uuid:76901cc6-8982-41cb-82d7-1c6b894ded72",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:c0be1a40-c8a9-43cc-9a0e-29e9b070fb6a",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-19T13:32:36+08:00",
+    "timestamp": "2026-08-28T05:22:06+08:00",
     "tools": {
       "components": [
         {
           "type": "application",
           "author": "anchore",
           "name": "syft",
-          "version": "1.50.0"
+          "version": "1.45.1"
         }
       ]
     },
     "component": {
-      "bom-ref": "3cec1b4a00fb98d1",
+      "bom-ref": "b3fb85bdb52060f2",
       "type": "library",
       "name": "MCU Driver",
-      "version": "V3.07.000-48-g1f9c6fe",
+      "version": "V3.07.000-57-g822260b",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/mcu-driver@V3.07.000-57-g822260b",
       "licenses": [
         {
           "license": {
@@ -51,7 +58,7 @@
         },
         {
           "name": "bsp:third-party-components",
-          "value": "none identified in product scope based on the defined Product SBOM scope policy"
+          "value": "Third-party component status is represented by component-level bsp:component-origin properties and manual SCA evidence."
         },
         {
           "name": "bsp:product-scope-include-path",
@@ -82,14 +89,38 @@
           "value": "Tool/"
         }
       ]
-    }
+    },
+    "supplier": {
+      "name": "Nuvoton Technology Corp.",
+      "url": [
+        "https://www.nuvoton.com"
+      ]
+    },
+    "authors": [
+      {
+        "name": "Nuvoton Technology Corp."
+      }
+    ]
   },
   "components": [
     {
       "type": "library",
-      "bom-ref": "bsp:product-component:library-device",
-      "name": " Device",
-      "version": "V3.07.000-48-g1f9c6fe",
+      "bom-ref": "m031bsp:product-component:library-device",
+      "name": "M031 Device",
+      "version": "V3.07.000-57-g822260b",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/library-device@V3.07.000-57-g822260b",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c66b1f03f38efd77b4015e60a6ec629d5a47a08c13b4b18a674c419689016c16"
+        }
+      ],
       "licenses": [
         {
           "license": {
@@ -132,9 +163,22 @@
     },
     {
       "type": "library",
-      "bom-ref": "bsp:product-component:library-stddriver",
-      "name": " StdDriver",
-      "version": "V3.07.000-48-g1f9c6fe",
+      "bom-ref": "m031bsp:product-component:library-stddriver",
+      "name": "M031 StdDriver",
+      "version": "V3.07.000-57-g822260b",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/library-stddriver@V3.07.000-57-g822260b",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a0269a3cb94d1fdcd8df0dbc78be4b42792c98e2a62572ecbf387f7b1bd278e0"
+        }
+      ],
       "licenses": [
         {
           "license": {
@@ -228,15 +272,21 @@
           "name": "bsp:license-evidence",
           "value": "Library/CMSIS/Core/Include/cmsis_version.h"
         }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3b9195c5373a2a4dbfd968b083b3d7f5f446f9ec2e126f75928ac1ff4356b91e"
+        }
       ]
     }
   ],
   "dependencies": [
     {
-      "ref": "3cec1b4a00fb98d1",
+      "ref": "b3fb85bdb52060f2",
       "dependsOn": [
-        "bsp:product-component:library-device",
-        "bsp:product-component:library-stddriver"
+        "m031bsp:product-component:library-device",
+        "m031bsp:product-component:library-stddriver"
       ]
     }
   ]
