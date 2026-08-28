@@ -39,8 +39,11 @@ uint32_t BPWM_ConfigCaptureChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_
     uint32_t u32Src;
     uint32_t u32BPWMClockSrc;
     uint32_t u32NearestUnitTimeNsec;
-    uint16_t u16Prescale = 1UL, u16CNR = 0xFFFFUL;
-    uint8_t u8BreakLoop = 0UL;
+    uint16_t u16Prescale = 1U;
+    uint16_t u16CNR = 0xFFFFU;
+    uint8_t u8BreakLoop = 0U;
+    (void)u32ChannelNum;
+    (void)u32CaptureEdge;
 
     if (bpwm == BPWM0)
     {
@@ -73,7 +76,7 @@ uint32_t BPWM_ConfigCaptureChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_
 
     u32BPWMClockSrc /= 1000UL;
 
-    for (u16Prescale = 1UL; u16Prescale <= 0x1000UL; u16Prescale++)
+    for (u16Prescale = 1U; u16Prescale <= 0x1000UL; u16Prescale++)
     {
         u32NearestUnitTimeNsec = (1000000UL * u16Prescale) / u32BPWMClockSrc;
 
@@ -82,17 +85,17 @@ uint32_t BPWM_ConfigCaptureChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_
             if (u16Prescale == 0x1000UL)
             {
                 /* limit to the maximum unit time(nano second) */
-                u8BreakLoop = 1UL;
+                u8BreakLoop = 1U;
             }
 
             if (!((1000000UL * (u16Prescale + 1UL) > (u32NearestUnitTimeNsec * u32BPWMClockSrc))))
             {
-                u8BreakLoop = 1UL;
+                u8BreakLoop = 1U;
             }
         }
         else
         {
-            u8BreakLoop = 1UL;
+            u8BreakLoop = 1U;
         }
 
         if (u8BreakLoop)
@@ -102,7 +105,7 @@ uint32_t BPWM_ConfigCaptureChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_
     }
 
     // convert to real register value
-    u16Prescale = u16Prescale - 1UL;
+    u16Prescale = (uint16_t)(u16Prescale - 1U);
     // all channels share a prescaler
     BPWM_SET_PRESCALER(bpwm, u32ChannelNum, (uint32_t)u16Prescale);
 
@@ -131,7 +134,8 @@ uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t
     uint32_t u32Src;
     uint32_t u32BPWMClockSrc;
     uint32_t i;
-    uint16_t u16Prescale = 1UL, u16CNR = 0xFFFFUL;
+    uint16_t u16Prescale = 1U;
+    uint16_t u16CNR = 0xFFFFU;
 
     if (bpwm == BPWM0)
     {
@@ -162,7 +166,7 @@ uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t
         }
     }
 
-    for (u16Prescale = 1UL; u16Prescale < 0xFFFUL; u16Prescale++)   //prescale could be 0~0xFFF
+    for (u16Prescale = 1U; u16Prescale < 0xFFFUL; u16Prescale++)   //prescale could be 0~0xFFF
     {
         i = (u32BPWMClockSrc / u32Frequency) / u16Prescale;
 
@@ -174,38 +178,45 @@ uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t
         }
     }
 
+    if (u16CNR == 0U)
+    {
+        u16CNR = 1U;
+    }
+
     // Store return value here 'cos we're gonna change u16Prescale & u16CNR to the real value to fill into register
     i = u32BPWMClockSrc / ((uint32_t)u16Prescale * (uint32_t)u16CNR);
 
     // convert to real register value
-    u16Prescale = u16Prescale - 1UL;
+    u16Prescale = (uint16_t)(u16Prescale - 1U);
     // all channels share a prescaler
     BPWM_SET_PRESCALER(bpwm, u32ChannelNum, (uint32_t)u16Prescale);
     // set BPWM to down count type
     (bpwm)->CTL1 = BPWM_DOWN_COUNTER;
 
-    u16CNR = u16CNR - 1UL;
+    u16CNR = (uint16_t)(u16CNR - 1U);
     BPWM_SET_CNR(bpwm, u32ChannelNum, u16CNR);
 
     if (u32DutyCycle)
     {
         if (u32DutyCycle >= 100UL)
+        {
             BPWM_SET_CMR(bpwm, u32ChannelNum, u16CNR);
+        }
         else
+        {
             BPWM_SET_CMR(bpwm, u32ChannelNum, u32DutyCycle * (u16CNR + 1UL) / 100UL);
+        }
 
         (bpwm)->WGCTL0 &= ~((BPWM_WGCTL0_PRDPCTL0_Msk | BPWM_WGCTL0_ZPCTL0_Msk) << (u32ChannelNum << 1UL));
-        (bpwm)->WGCTL0 |= (BPWM_OUTPUT_LOW << ((u32ChannelNum << 1UL) + BPWM_WGCTL0_PRDPCTL0_Pos));
         (bpwm)->WGCTL1 &= ~((BPWM_WGCTL1_CMPDCTL0_Msk | BPWM_WGCTL1_CMPUCTL0_Msk) << (u32ChannelNum << 1UL));
-        (bpwm)->WGCTL1 |= (BPWM_OUTPUT_HIGH << ((u32ChannelNum << 1UL) + BPWM_WGCTL1_CMPDCTL0_Pos));
+        (bpwm)->WGCTL1 |= (BPWM_OUTPUT_HIGH << ((u32ChannelNum << 1UL) + (uint32_t)BPWM_WGCTL1_CMPDCTL0_Pos));
     }
     else
     {
         BPWM_SET_CMR(bpwm, u32ChannelNum, 0UL);
         (bpwm)->WGCTL0 &= ~((BPWM_WGCTL0_PRDPCTL0_Msk | BPWM_WGCTL0_ZPCTL0_Msk) << (u32ChannelNum << 1UL));
-        (bpwm)->WGCTL0 |= (BPWM_OUTPUT_LOW << ((u32ChannelNum << 1UL) + BPWM_WGCTL0_ZPCTL0_Pos));
         (bpwm)->WGCTL1 &= ~((BPWM_WGCTL1_CMPDCTL0_Msk | BPWM_WGCTL1_CMPUCTL0_Msk) << (u32ChannelNum << 1UL));
-        (bpwm)->WGCTL1 |= (BPWM_OUTPUT_HIGH << ((u32ChannelNum << 1UL) + BPWM_WGCTL1_CMPDCTL0_Pos));
+        (bpwm)->WGCTL1 |= (BPWM_OUTPUT_HIGH << ((u32ChannelNum << 1UL) + (uint32_t)BPWM_WGCTL1_CMPDCTL0_Pos));
     }
 
     return (i);
@@ -223,6 +234,7 @@ uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t
  */
 void BPWM_Start(BPWM_T *bpwm, uint32_t u32ChannelMask)
 {
+    (void)u32ChannelMask;
     (bpwm)->CNTEN = BPWM_CNTEN_CNTEN0_Msk;
 }
 
@@ -238,6 +250,7 @@ void BPWM_Start(BPWM_T *bpwm, uint32_t u32ChannelMask)
  */
 void BPWM_Stop(BPWM_T *bpwm, uint32_t u32ChannelMask)
 {
+    (void)u32ChannelMask;
     (bpwm)->PERIOD = 0UL;
 }
 
@@ -253,6 +266,7 @@ void BPWM_Stop(BPWM_T *bpwm, uint32_t u32ChannelMask)
  */
 void BPWM_ForceStop(BPWM_T *bpwm, uint32_t u32ChannelMask)
 {
+    (void)u32ChannelMask;
     (bpwm)->CNTEN &= ~BPWM_CNTEN_CNTEN0_Msk;
 }
 
@@ -320,6 +334,7 @@ void BPWM_DisableADCTrigger(BPWM_T *bpwm, uint32_t u32ChannelNum)
  */
 void BPWM_ClearADCTriggerFlag(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32Condition)
 {
+    (void)u32Condition;
     (bpwm)->STATUS = (BPWM_STATUS_EADCTRG0_Msk << u32ChannelNum);
 }
 
@@ -333,7 +348,7 @@ void BPWM_ClearADCTriggerFlag(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32
  * @retval 1 The specified channel trigger ADC to start of conversion flag is set
  * @details This function is used to get BPWM trigger ADC to start of conversion flag for specified channel
  */
-uint32_t BPWM_GetADCTriggerFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
+uint32_t BPWM_GetADCTriggerFlag(const BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
     return (((bpwm)->STATUS & (BPWM_STATUS_EADCTRG0_Msk << u32ChannelNum)) ? 1UL : 0UL);
 }
@@ -463,7 +478,7 @@ void BPWM_ClearCaptureIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32
  * @retval 3 Rising and falling latch interrupt
  * @details This function is used to get capture interrupt of selected channel.
  */
-uint32_t BPWM_GetCaptureIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
+uint32_t BPWM_GetCaptureIntFlag(const BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
     return (((((bpwm)->CAPIF & (BPWM_CAPIF_CAPFIF0_Msk << u32ChannelNum)) ? 1UL : 0UL) << 1UL) | \
             (((bpwm)->CAPIF & (BPWM_CAPIF_CAPRIF0_Msk << u32ChannelNum)) ? 1UL : 0UL));
@@ -524,7 +539,7 @@ void BPWM_ClearDutyIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
  * @retval 1 Duty interrupt occurred
  * @details This function is used to get duty interrupt flag of selected channel
  */
-uint32_t BPWM_GetDutyIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
+uint32_t BPWM_GetDutyIntFlag(const BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
     return ((((bpwm)->INTSTS & ((BPWM_INTSTS_CMPDIF0_Msk | BPWM_INTSTS_CMPUIF0_Msk) << u32ChannelNum))) ? 1UL : 0UL);
 }
@@ -542,6 +557,8 @@ uint32_t BPWM_GetDutyIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
  */
 void BPWM_EnablePeriodInt(BPWM_T *bpwm, uint32_t u32ChannelNum,  uint32_t u32IntPeriodType)
 {
+    (void)u32ChannelNum;
+    (void)u32IntPeriodType;
     (bpwm)->INTEN |= BPWM_INTEN_PIEN0_Msk;
 }
 
@@ -557,6 +574,7 @@ void BPWM_EnablePeriodInt(BPWM_T *bpwm, uint32_t u32ChannelNum,  uint32_t u32Int
  */
 void BPWM_DisablePeriodInt(BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
+    (void)u32ChannelNum;
     (bpwm)->INTEN &= ~BPWM_INTEN_PIEN0_Msk;
 }
 
@@ -572,6 +590,7 @@ void BPWM_DisablePeriodInt(BPWM_T *bpwm, uint32_t u32ChannelNum)
  */
 void BPWM_ClearPeriodIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
+    (void)u32ChannelNum;
     (bpwm)->INTSTS = BPWM_INTSTS_PIF0_Msk;
 }
 
@@ -587,8 +606,9 @@ void BPWM_ClearPeriodIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
  * @details This function is used to get period interrupt of selected channel
  * @note All channels share channel 0's setting.
  */
-uint32_t BPWM_GetPeriodIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
+uint32_t BPWM_GetPeriodIntFlag(const BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
+    (void)u32ChannelNum;
     return (((bpwm)->INTSTS & BPWM_INTSTS_PIF0_Msk) ? 1UL : 0UL);
 }
 
@@ -604,6 +624,7 @@ uint32_t BPWM_GetPeriodIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
  */
 void BPWM_EnableZeroInt(BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
+    (void)u32ChannelNum;
     (bpwm)->INTEN |= BPWM_INTEN_ZIEN0_Msk;
 }
 
@@ -619,6 +640,7 @@ void BPWM_EnableZeroInt(BPWM_T *bpwm, uint32_t u32ChannelNum)
  */
 void BPWM_DisableZeroInt(BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
+    (void)u32ChannelNum;
     (bpwm)->INTEN &= ~BPWM_INTEN_ZIEN0_Msk;
 }
 
@@ -634,6 +656,7 @@ void BPWM_DisableZeroInt(BPWM_T *bpwm, uint32_t u32ChannelNum)
  */
 void BPWM_ClearZeroIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
+    (void)u32ChannelNum;
     (bpwm)->INTSTS = BPWM_INTSTS_ZIF0_Msk;
 }
 
@@ -649,8 +672,9 @@ void BPWM_ClearZeroIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
  * @details This function is used to get zero interrupt of selected channel.
  * @note All channels share channel 0's setting.
  */
-uint32_t BPWM_GetZeroIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
+uint32_t BPWM_GetZeroIntFlag(const BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
+    (void)u32ChannelNum;
     return (((bpwm)->INTSTS & BPWM_INTSTS_ZIF0_Msk) ? 1UL : 0UL);
 }
 
@@ -706,6 +730,7 @@ void BPWM_DisableLoadMode(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32Load
  */
 void BPWM_SetClockSource(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32ClkSrcSel)
 {
+    (void)u32ChannelNum;
     (bpwm)->CLKSRC = (u32ClkSrcSel);
 }
 
@@ -721,8 +746,9 @@ void BPWM_SetClockSource(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32ClkSr
  * @details This function is used to get the time-base counter reached its maximum value flag of selected channel.
  * @note All channels share channel 0's setting.
  */
-uint32_t BPWM_GetWrapAroundFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
+uint32_t BPWM_GetWrapAroundFlag(const BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
+    (void)u32ChannelNum;
     return (((bpwm)->STATUS & BPWM_STATUS_CNTMAX0_Msk) ? 1UL : 0UL);
 }
 
@@ -738,6 +764,7 @@ uint32_t BPWM_GetWrapAroundFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
  */
 void BPWM_ClearWrapAroundFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
+    (void)u32ChannelNum;
     (bpwm)->STATUS = BPWM_STATUS_CNTMAX0_Msk;
 }
 
