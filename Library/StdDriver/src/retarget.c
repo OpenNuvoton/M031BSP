@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file     retarget.c
  * @version  V0.10
- * @brief    M031 series Debug Port and Semihost Setting Source File
+ * @brief    Debug Port and Semihost Setting Source File
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2020 Nuvoton Technology Corp. All rights reserved.
@@ -10,6 +10,20 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
+/*
+ * Compiler identification used in this file
+ * -----------------------------------------
+ * ARMCC5                 : __CC_ARM, __ARMCC_VERSION
+ * ARMCLANG6 (Keil/VSCode): __ARMCC_VERSION
+ * GCC (VSCode/Eclipse)   : __GNUC__ and no __ARMCC_VERSION
+ * IAR                    : __ICCARM__
+ *
+ * Note:
+ * Keil / VSCode / Eclipse are IDE or build environments.
+ * Conditional compilation in retarget.c is selected by the actual compiler.
+ */
+
+/* GCC only: newlib/newlib-nano support */
 #if defined(__GNUC__) && !defined(__ARMCC_VERSION) && !defined(OS_USE_SEMIHOSTING)
 #include <sys/stat.h>
 #endif
@@ -21,7 +35,8 @@
     #pragma diag_suppress=Pm150
 #endif
 
-#if defined ( __CC_ARM   )
+/* ARM Compiler 5 */
+#if defined(__CC_ARM)
     #if (__ARMCC_VERSION < 400000)
     #else
         /* Insist on keeping widthprec, to avoid X propagation by benign code in C-lib */
@@ -30,7 +45,7 @@
 #endif
 
 #ifndef DEBUG_PORT
-    #define DEBUG_PORT   UART0
+    #define DEBUG_PORT   UART1
 #endif
 
 #define BUF_SIZE     512
@@ -77,15 +92,17 @@ void _ttywrch(int ch);
 /* cppcheck-suppress misra-c2012-21.2 */
 int fputc(int ch, FILE *stream);
 
-#if defined ( __GNUC__ ) && !defined (__ARMCC_VERSION)
-    #if !defined (OS_USE_SEMIHOSTING)
+/* GCC only */
+#if defined(__GNUC__) && !defined(__ARMCC_VERSION)
+    #if !defined(OS_USE_SEMIHOSTING)
         int _read(int fd, char *ptr, int len);
     #endif
 
     int _write(int fd, char *ptr, int len);
 #endif
 
-#if defined (__ARMCC_VERSION) || defined (__ICCARM__)
+/* ARMCC / ARMCLANG / IAR */
+#if defined(__ARMCC_VERSION) || defined(__ICCARM__)
     /* cppcheck-suppress misra-c2012-21.2 */
     int fgetc(FILE *stream);
     /* cppcheck-suppress misra-c2012-21.2 */
@@ -156,31 +173,7 @@ int32_t SH_Return(int32_t n32In_R0, int32_t n32In_R1, int32_t *pn32Out_R0)
 
 #else // defined(DEBUG_ENABLE_SEMIHOST)
 
-#if defined ( __GNUC__ ) && !defined (__ARMCC_VERSION)
-
-/**
- * @brief    This HardFault handler is implemented to show r0, r1, r2, r3, r12, lr, pc, psr
- *
- *
- * @details  This function is implement to print r0, r1, r2, r3, r12, lr, pc, psr.
- *
- */
-#ifdef __VSCode__
-void HardFault_Handler(void)
-#else
-__attribute__((weak)) void HardFault_Handler(void)
-#endif
-{
-    asm("MOV     R0, LR  \n"
-        "MRS     R1, MSP \n"
-        "MRS     R2, PSP \n"
-        "LDR     R3, =ProcessHardFault \n"
-        "BLX     R3 \n"
-        "BX      R0 \n"
-       );
-}
-
-#else
+#if !(defined ( __GNUC__ ) && !defined (__ARMCC_VERSION))
 
 int32_t SH_Return(int32_t n32In_R0, int32_t n32In_R1, int32_t *pn32Out_R0);
 /* [MISRA2.7] Parameters are intentionally unused in semihost return stub. */
@@ -196,10 +189,11 @@ int32_t SH_Return(int32_t n32In_R0, int32_t n32In_R1, int32_t *pn32Out_R0)
 #endif
 
 #endif /* defined(DEBUG_ENABLE_SEMIHOST) */
-#if defined (__ARMCC_VERSION) || defined (__ICCARM__)
+/* ARMCC / ARMCLANG / IAR */
+#if defined(__ARMCC_VERSION) || defined(__ICCARM__)
     extern int32_t SH_DoCommand(int32_t n32In_R0, int32_t n32In_R1, int32_t *pn32Out_R0);
 
-    #if defined( __ICCARM__ )
+    #if defined(__ICCARM__)
         __WEAK
     #else
         __attribute__((weak))
@@ -221,7 +215,7 @@ int32_t SH_Return(int32_t n32In_R0, int32_t n32In_R1, int32_t *pn32Out_R0)
     extern int32_t SH_DoCommand(int32_t n32In_R0, int32_t n32In_R1, int32_t *pn32Out_R0);
 #endif
 
-#if defined( __ICCARM__ )
+#if defined(__ICCARM__)
     __WEAK
 #else
     __attribute__((weak))
@@ -577,6 +571,11 @@ int IsDebugFifoEmpty(void)
  */
 void _ttywrch(int ch)
 {
+#if defined(__ICCARM__) && (__VER__ >= 8000000)
+    (void)__stdout.handle;
+    (void)__stdin.handle;
+#endif
+
     SendChar(ch);
     return;
 }
@@ -645,7 +644,8 @@ int fputc(int ch, FILE *stream)
 }
 #endif
 
-#if defined ( __GNUC__ ) && !defined (__ARMCC_VERSION)
+/* GCC only */
+#if defined(__GNUC__) && !defined(__ARMCC_VERSION)
 
 #if defined (OS_USE_SEMIHOSTING)
 
