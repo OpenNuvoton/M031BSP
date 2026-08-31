@@ -285,6 +285,19 @@ Default_Handler:
 	b	.
 	.size	Default_Handler, . - Default_Handler
 
+	.align	1
+	.thumb_func
+	.weak	HardFault_Handler
+	.type	HardFault_Handler, %function
+HardFault_Handler:
+	mov	r0, lr
+	mrs	r1, msp
+	mrs	r2, psp
+	ldr	r3, =ProcessHardFault
+	blx	r3
+	bx	r0
+	.size	HardFault_Handler, . - HardFault_Handler
+
 /*    Macro to define default handlers. Default handler
  *    will be weak symbol and just dead loops. They can be
  *    overwritten by other handlers */
@@ -294,7 +307,6 @@ Default_Handler:
 	.endm
 
     def_irq_handler	NMI_Handler
-    def_irq_handler	HardFault_Handler
     def_irq_handler	SVC_Handler
     def_irq_handler	PendSV_Handler
     def_irq_handler	SysTick_Handler
