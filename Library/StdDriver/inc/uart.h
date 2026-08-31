@@ -32,76 +32,76 @@ extern "C"
 /* UART FIFO size constants definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
 
-#define UART0_FIFO_SIZE 16ul /*!< UART0 supports separated receive/transmit 16/16 bytes entry FIFO \hideinitializer */
-#define UART1_FIFO_SIZE 16ul /*!< UART1 supports separated receive/transmit 16/16 bytes entry FIFO \hideinitializer */
-#define UART2_FIFO_SIZE 1ul  /*!< UART2 supports separated receive/transmit 1/1 bytes entry FIFO \hideinitializer */
-#define UART3_FIFO_SIZE 1ul  /*!< UART3 supports separated receive/transmit 1/1 bytes entry FIFO \hideinitializer */
-#define UART4_FIFO_SIZE 16ul /*!< UART4 supports separated receive/transmit 16/16 bytes entry FIFO \hideinitializer */
-#define UART5_FIFO_SIZE 16ul /*!< UART5 supports separated receive/transmit 16/16 bytes entry FIFO \hideinitializer */
-#define UART6_FIFO_SIZE 1ul  /*!< UART6 supports separated receive/transmit 1/1 bytes entry FIFO \hideinitializer */
-#define UART7_FIFO_SIZE 1ul  /*!< UART7 supports separated receive/transmit 1/1 bytes entry FIFO \hideinitializer */
+#define UART0_FIFO_SIZE 16UL /*!< UART0 supports separated receive/transmit 16/16 bytes entry FIFO \hideinitializer */
+#define UART1_FIFO_SIZE 16UL /*!< UART1 supports separated receive/transmit 16/16 bytes entry FIFO \hideinitializer */
+#define UART2_FIFO_SIZE 1UL  /*!< UART2 supports separated receive/transmit 1/1 bytes entry FIFO \hideinitializer */
+#define UART3_FIFO_SIZE 1UL  /*!< UART3 supports separated receive/transmit 1/1 bytes entry FIFO \hideinitializer */
+#define UART4_FIFO_SIZE 16UL /*!< UART4 supports separated receive/transmit 16/16 bytes entry FIFO \hideinitializer */
+#define UART5_FIFO_SIZE 16UL /*!< UART5 supports separated receive/transmit 16/16 bytes entry FIFO \hideinitializer */
+#define UART6_FIFO_SIZE 1UL  /*!< UART6 supports separated receive/transmit 1/1 bytes entry FIFO \hideinitializer */
+#define UART7_FIFO_SIZE 1UL  /*!< UART7 supports separated receive/transmit 1/1 bytes entry FIFO \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* UART_FIFO constants definitions                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
 
-#define UART_FIFO_RFITL_1BYTE      (0x0ul << UART_FIFO_RFITL_Pos)   /*!< UART_FIFO setting to set RX FIFO Trigger Level to 1 byte \hideinitializer */
-#define UART_FIFO_RFITL_4BYTES     (0x1ul << UART_FIFO_RFITL_Pos)   /*!< UART_FIFO setting to set RX FIFO Trigger Level to 4 bytes \hideinitializer */
-#define UART_FIFO_RFITL_8BYTES     (0x2ul << UART_FIFO_RFITL_Pos)   /*!< UART_FIFO setting to set RX FIFO Trigger Level to 8 bytes \hideinitializer */
-#define UART_FIFO_RFITL_14BYTES    (0x3ul << UART_FIFO_RFITL_Pos)   /*!< UART_FIFO setting to set RX FIFO Trigger Level to 14 bytes \hideinitializer */
+#define UART_FIFO_RFITL_1BYTE      (0x0UL << UART_FIFO_RFITL_Pos)   /*!< UART_FIFO setting to set RX FIFO Trigger Level to 1 byte \hideinitializer */
+#define UART_FIFO_RFITL_4BYTES     (0x1UL << UART_FIFO_RFITL_Pos)   /*!< UART_FIFO setting to set RX FIFO Trigger Level to 4 bytes \hideinitializer */
+#define UART_FIFO_RFITL_8BYTES     (0x2UL << UART_FIFO_RFITL_Pos)   /*!< UART_FIFO setting to set RX FIFO Trigger Level to 8 bytes \hideinitializer */
+#define UART_FIFO_RFITL_14BYTES    (0x3UL << UART_FIFO_RFITL_Pos)   /*!< UART_FIFO setting to set RX FIFO Trigger Level to 14 bytes \hideinitializer */
 
-#define UART_FIFO_RTSTRGLV_1BYTE      (0x0ul << UART_FIFO_RTSTRGLV_Pos)  /*!< UART_FIFO setting to set RTS Trigger Level to 1 byte \hideinitializer */
-#define UART_FIFO_RTSTRGLV_4BYTES     (0x1ul << UART_FIFO_RTSTRGLV_Pos)  /*!< UART_FIFO setting to set RTS Trigger Level to 4 bytes \hideinitializer */
-#define UART_FIFO_RTSTRGLV_8BYTES     (0x2ul << UART_FIFO_RTSTRGLV_Pos)  /*!< UART_FIFO setting to set RTS Trigger Level to 8 bytes \hideinitializer */
-#define UART_FIFO_RTSTRGLV_14BYTES    (0x3ul << UART_FIFO_RTSTRGLV_Pos)  /*!< UART_FIFO setting to set RTS Trigger Level to 14 bytes \hideinitializer */
+#define UART_FIFO_RTSTRGLV_1BYTE      (0x0UL << UART_FIFO_RTSTRGLV_Pos)  /*!< UART_FIFO setting to set RTS Trigger Level to 1 byte \hideinitializer */
+#define UART_FIFO_RTSTRGLV_4BYTES     (0x1UL << UART_FIFO_RTSTRGLV_Pos)  /*!< UART_FIFO setting to set RTS Trigger Level to 4 bytes \hideinitializer */
+#define UART_FIFO_RTSTRGLV_8BYTES     (0x2UL << UART_FIFO_RTSTRGLV_Pos)  /*!< UART_FIFO setting to set RTS Trigger Level to 8 bytes \hideinitializer */
+#define UART_FIFO_RTSTRGLV_14BYTES    (0x3UL << UART_FIFO_RTSTRGLV_Pos)  /*!< UART_FIFO setting to set RTS Trigger Level to 14 bytes \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* UART_LINE constants definitions                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-#define UART_WORD_LEN_5     (0ul) /*!< UART_LINE setting to set UART word length to 5 bits \hideinitializer */
-#define UART_WORD_LEN_6     (1ul) /*!< UART_LINE setting to set UART word length to 6 bits \hideinitializer */
-#define UART_WORD_LEN_7     (2ul) /*!< UART_LINE setting to set UART word length to 7 bits \hideinitializer */
-#define UART_WORD_LEN_8     (3ul) /*!< UART_LINE setting to set UART word length to 8 bits \hideinitializer */
+#define UART_WORD_LEN_5     (0UL) /*!< UART_LINE setting to set UART word length to 5 bits \hideinitializer */
+#define UART_WORD_LEN_6     (1UL) /*!< UART_LINE setting to set UART word length to 6 bits \hideinitializer */
+#define UART_WORD_LEN_7     (2UL) /*!< UART_LINE setting to set UART word length to 7 bits \hideinitializer */
+#define UART_WORD_LEN_8     (3UL) /*!< UART_LINE setting to set UART word length to 8 bits \hideinitializer */
 
-#define UART_PARITY_NONE    (0x0ul << UART_LINE_PBE_Pos) /*!< UART_LINE setting to set UART as no parity   \hideinitializer */
-#define UART_PARITY_ODD     (0x1ul << UART_LINE_PBE_Pos) /*!< UART_LINE setting to set UART as odd parity  \hideinitializer */
-#define UART_PARITY_EVEN    (0x3ul << UART_LINE_PBE_Pos) /*!< UART_LINE setting to set UART as even parity \hideinitializer */
-#define UART_PARITY_MARK    (0x5ul << UART_LINE_PBE_Pos) /*!< UART_LINE setting to keep parity bit as '1'  \hideinitializer */
-#define UART_PARITY_SPACE   (0x7ul << UART_LINE_PBE_Pos) /*!< UART_LINE setting to keep parity bit as '0'  \hideinitializer */
+#define UART_PARITY_NONE    (0x0UL << UART_LINE_PBE_Pos) /*!< UART_LINE setting to set UART as no parity   \hideinitializer */
+#define UART_PARITY_ODD     (0x1UL << UART_LINE_PBE_Pos) /*!< UART_LINE setting to set UART as odd parity  \hideinitializer */
+#define UART_PARITY_EVEN    (0x3UL << UART_LINE_PBE_Pos) /*!< UART_LINE setting to set UART as even parity \hideinitializer */
+#define UART_PARITY_MARK    (0x5UL << UART_LINE_PBE_Pos) /*!< UART_LINE setting to keep parity bit as '1'  \hideinitializer */
+#define UART_PARITY_SPACE   (0x7UL << UART_LINE_PBE_Pos) /*!< UART_LINE setting to keep parity bit as '0'  \hideinitializer */
 
-#define UART_STOP_BIT_1     (0x0ul << UART_LINE_NSB_Pos) /*!< UART_LINE setting for one stop bit  \hideinitializer */
-#define UART_STOP_BIT_1_5   (0x1ul << UART_LINE_NSB_Pos) /*!< UART_LINE setting for 1.5 stop bit when 5-bit word length  \hideinitializer */
-#define UART_STOP_BIT_2     (0x1ul << UART_LINE_NSB_Pos) /*!< UART_LINE setting for two stop bit when 6, 7, 8-bit word length \hideinitializer */
+#define UART_STOP_BIT_1     (0x0UL << UART_LINE_NSB_Pos) /*!< UART_LINE setting for one stop bit  \hideinitializer */
+#define UART_STOP_BIT_1_5   (0x1UL << UART_LINE_NSB_Pos) /*!< UART_LINE setting for 1.5 stop bit when 5-bit word length  \hideinitializer */
+#define UART_STOP_BIT_2     (0x1UL << UART_LINE_NSB_Pos) /*!< UART_LINE setting for two stop bit when 6, 7, 8-bit word length \hideinitializer */
 
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* UART RTS ACTIVE LEVEL constants definitions                                                             */
 /*---------------------------------------------------------------------------------------------------------*/
-#define UART_RTS_IS_LOW_LEV_ACTIVE   (0x1ul << UART_MODEM_RTSACTLV_Pos) /*!< Set RTS is Low Level Active \hideinitializer */
-#define UART_RTS_IS_HIGH_LEV_ACTIVE  (0x0ul << UART_MODEM_RTSACTLV_Pos) /*!< Set RTS is High Level Active \hideinitializer */
+#define UART_RTS_IS_LOW_LEV_ACTIVE   (0x1UL << UART_MODEM_RTSACTLV_Pos) /*!< Set RTS is Low Level Active \hideinitializer */
+#define UART_RTS_IS_HIGH_LEV_ACTIVE  (0x0UL << UART_MODEM_RTSACTLV_Pos) /*!< Set RTS is High Level Active \hideinitializer */
 
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* UART_IRDA constants definitions                                                                         */
 /*---------------------------------------------------------------------------------------------------------*/
-#define UART_IRDA_TXEN      (0x1ul << UART_IRDA_TXEN_Pos) /*!< Set IrDA function Tx mode \hideinitializer */
-#define UART_IRDA_RXEN      (0x0ul << UART_IRDA_TXEN_Pos) /*!< Set IrDA function Rx mode \hideinitializer */
+#define UART_IRDA_TXEN      (0x1UL << UART_IRDA_TXEN_Pos) /*!< Set IrDA function Tx mode \hideinitializer */
+#define UART_IRDA_RXEN      (0x0UL << UART_IRDA_TXEN_Pos) /*!< Set IrDA function Rx mode \hideinitializer */
 
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* UART_FUNCSEL constants definitions                                                                      */
 /*---------------------------------------------------------------------------------------------------------*/
-#define UART_FUNCSEL_UART  (0x0ul << UART_FUNCSEL_FUNCSEL_Pos) /*!< UART_FUNCSEL setting to set UART Function  (Default) \hideinitializer */
-#define UART_FUNCSEL_LIN   (0x1ul << UART_FUNCSEL_FUNCSEL_Pos) /*!< UART_FUNCSEL setting to set LIN Function             \hideinitializer */
-#define UART_FUNCSEL_IrDA  (0x2ul << UART_FUNCSEL_FUNCSEL_Pos) /*!< UART_FUNCSEL setting to set IrDA Function            \hideinitializer */
-#define UART_FUNCSEL_RS485 (0x3ul << UART_FUNCSEL_FUNCSEL_Pos) /*!< UART_FUNCSEL setting to set RS485 Function           \hideinitializer */
-#define UART_FUNCSEL_SINGLE_WIRE (0x4ul << UART_FUNCSEL_FUNCSEL_Pos) /*!< UART_FUNCSEL setting to set Single Wire Function           \hideinitializer */
+#define UART_FUNCSEL_UART  (0x0UL << UART_FUNCSEL_FUNCSEL_Pos) /*!< UART_FUNCSEL setting to set UART Function  (Default) \hideinitializer */
+#define UART_FUNCSEL_LIN   (0x1UL << UART_FUNCSEL_FUNCSEL_Pos) /*!< UART_FUNCSEL setting to set LIN Function             \hideinitializer */
+#define UART_FUNCSEL_IrDA  (0x2UL << UART_FUNCSEL_FUNCSEL_Pos) /*!< UART_FUNCSEL setting to set IrDA Function            \hideinitializer */
+#define UART_FUNCSEL_RS485 (0x3UL << UART_FUNCSEL_FUNCSEL_Pos) /*!< UART_FUNCSEL setting to set RS485 Function           \hideinitializer */
+#define UART_FUNCSEL_SINGLE_WIRE (0x4UL << UART_FUNCSEL_FUNCSEL_Pos) /*!< UART_FUNCSEL setting to set Single Wire Function           \hideinitializer */
 
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* UART BAUDRATE MODE constants definitions                                                                */
 /*---------------------------------------------------------------------------------------------------------*/
-#define UART_BAUD_MODE0     (0ul) /*!< Set UART Baudrate Mode is Mode0 \hideinitializer */
+#define UART_BAUD_MODE0     (0UL) /*!< Set UART Baudrate Mode is Mode0 \hideinitializer */
 #define UART_BAUD_MODE2     (UART_BAUD_BAUDM1_Msk | UART_BAUD_BAUDM0_Msk) /*!< Set UART Baudrate Mode is Mode2 \hideinitializer */
 
 
@@ -124,7 +124,7 @@ extern "C"
  *    @details      This macro calculate UART baudrate mode0 divider.
  *    \hideinitializer
  */
-#define UART_BAUD_MODE0_DIVIDER(u32SrcFreq, u32BaudRate)    ((((u32SrcFreq) + ((u32BaudRate)*8ul)) / (u32BaudRate) >> 4ul)-2ul)
+#define UART_BAUD_MODE0_DIVIDER(u32SrcFreq, u32BaudRate)    ((((u32SrcFreq) + ((u32BaudRate)*8UL)) / (u32BaudRate) >> 4UL)-2UL)
 
 
 /**
@@ -138,7 +138,7 @@ extern "C"
  *    @details      This macro calculate UART baudrate mode2 divider.
  *    \hideinitializer
  */
-#define UART_BAUD_MODE2_DIVIDER(u32SrcFreq, u32BaudRate)    ((((u32SrcFreq) + ((u32BaudRate)/2ul)) / (u32BaudRate))-2ul)
+#define UART_BAUD_MODE2_DIVIDER(u32SrcFreq, u32BaudRate)    ((((u32SrcFreq) + ((u32BaudRate)/2UL)) / (u32BaudRate))-2UL)
 
 
 /**
@@ -316,7 +316,7 @@ extern "C"
  *                              - \ref UART_INTEN_ABRIEN_Msk     : Auto baud rate interrupt
  *                              - \ref UART_INTEN_SWBEIEN_Msk    : Single-wire bit error detection interrupt
  *                              - \ref UART_INTEN_RXPDMAEN_Msk   : RX PDMA interrupt
- *                              - \ref UART_INTEN_TXPDMAEN_Msk   : TX PDMA interrupt 
+ *                              - \ref UART_INTEN_TXPDMAEN_Msk   : TX PDMA interrupt
  *                              - \ref UART_INTEN_WKIEN_Msk      : Wakeup interrupt
  *                              - \ref UART_INTEN_BUFERRIEN_Msk  : Buffer Error interrupt
  *                              - \ref UART_INTEN_RXTOIEN_Msk    : Rx time-out interrupt
@@ -342,7 +342,7 @@ extern "C"
  *                              - \ref UART_INTEN_ABRIEN_Msk     : Auto baud rate interrupt
  *                              - \ref UART_INTEN_SWBEIEN_Msk    : Single-wire bit error detection interrupt
  *                              - \ref UART_INTEN_RXPDMAEN_Msk   : RX PDMA interrupt
- *                              - \ref UART_INTEN_TXPDMAEN_Msk   : TX PDMA interrupt  
+ *                              - \ref UART_INTEN_TXPDMAEN_Msk   : TX PDMA interrupt
  *                              - \ref UART_INTEN_WKIEN_Msk      : Wakeup interrupt
  *                              - \ref UART_INTEN_BUFERRIEN_Msk  : Buffer Error interrupt
  *                              - \ref UART_INTEN_RXTOIEN_Msk    : Rx time-out interrupt
@@ -353,7 +353,7 @@ extern "C"
  *
  *    @return       None
  *
- *    @details      This macro enable specified UART interrupt.
+ *    @details      This macro disable specified UART interrupt.
  *    \hideinitializer
  */
 #define UART_DISABLE_INT(uart, u32eIntSel)    ((uart)->INTEN &= ~ (u32eIntSel))
@@ -398,7 +398,7 @@ extern "C"
  *    @details      This macro get specified interrupt flag or interrupt indicator status.
  *    \hideinitializer
  */
-#define UART_GET_INT_FLAG(uart,u32eIntTypeFlag)    (((uart)->INTSTS & (u32eIntTypeFlag))?1:0)
+#define UART_GET_INT_FLAG(uart,u32eIntTypeFlag)    (((uart)->INTSTS & (u32eIntTypeFlag))?1UL:0UL)
 
 
 /**
@@ -466,16 +466,16 @@ __STATIC_INLINE void UART_SET_RTS(UART_T *uart)
 void UART_ClearIntFlag(UART_T *uart , uint32_t u32InterruptFlag);
 void UART_Close(UART_T *uart);
 void UART_DisableFlowCtrl(UART_T *uart);
-void UART_DisableInt(UART_T  *uart, uint32_t u32InterruptFlag);
+void UART_DisableInt(UART_T *uart, uint32_t u32InterruptFlag);
 void UART_EnableFlowCtrl(UART_T *uart);
-void UART_EnableInt(UART_T  *uart, uint32_t u32InterruptFlag);
+void UART_EnableInt(UART_T *uart, uint32_t u32InterruptFlag);
 void UART_Open(UART_T *uart, uint32_t u32baudrate);
-uint32_t UART_Read(UART_T *uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes);
+uint32_t UART_Read(const UART_T *uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes);
 void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_width, uint32_t u32parity, uint32_t  u32stop_bits);
 void UART_SetTimeoutCnt(UART_T *uart, uint32_t u32TOC);
 void UART_SelectIrDAMode(UART_T *uart, uint32_t u32Buadrate, uint32_t u32Direction);
 void UART_SelectRS485Mode(UART_T *uart, uint32_t u32Mode, uint32_t u32Addr);
-uint32_t UART_Write(UART_T *uart, uint8_t pu8TxBuf[], uint32_t u32WriteBytes);
+uint32_t UART_Write(UART_T *uart, const uint8_t pu8TxBuf[], uint32_t u32WriteBytes);
 void UART_SelectSingleWireMode(UART_T *uart);
 
 
