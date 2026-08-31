@@ -31,31 +31,31 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /* UUART_LINECTL constants definitions                                                                     */
 /*---------------------------------------------------------------------------------------------------------*/
-#define UUART_WORD_LEN_6     (6ul << UUART_LINECTL_DWIDTH_Pos) /*!< UUART_LINECTL setting to set UART word length to 6 bits \hideinitializer */
-#define UUART_WORD_LEN_7     (7ul << UUART_LINECTL_DWIDTH_Pos) /*!< UUART_LINECTL setting to set UART word length to 7 bits \hideinitializer */
-#define UUART_WORD_LEN_8     (8ul << UUART_LINECTL_DWIDTH_Pos) /*!< UUART_LINECTL setting to set UART word length to 8 bits \hideinitializer */
-#define UUART_WORD_LEN_9     (9ul << UUART_LINECTL_DWIDTH_Pos) /*!< UUART_LINECTL setting to set UART word length to 9 bits \hideinitializer */
+#define UUART_WORD_LEN_6     (6UL << UUART_LINECTL_DWIDTH_Pos) /*!< UUART_LINECTL setting to set UART word length to 6 bits \hideinitializer */
+#define UUART_WORD_LEN_7     (7UL << UUART_LINECTL_DWIDTH_Pos) /*!< UUART_LINECTL setting to set UART word length to 7 bits \hideinitializer */
+#define UUART_WORD_LEN_8     (8UL << UUART_LINECTL_DWIDTH_Pos) /*!< UUART_LINECTL setting to set UART word length to 8 bits \hideinitializer */
+#define UUART_WORD_LEN_9     (9UL << UUART_LINECTL_DWIDTH_Pos) /*!< UUART_LINECTL setting to set UART word length to 9 bits \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* UUART_PROTCTL constants definitions                                                                     */
 /*---------------------------------------------------------------------------------------------------------*/
-#define UUART_PARITY_NONE    (0x0ul << UUART_PROTCTL_PARITYEN_Pos)    /*!< UUART_PROTCTL setting to set UART as no parity \hideinitializer */
-#define UUART_PARITY_ODD     (0x1ul << UUART_PROTCTL_PARITYEN_Pos)    /*!< UUART_PROTCTL setting to set UART as odd parity \hideinitializer */
-#define UUART_PARITY_EVEN    (0x3ul << UUART_PROTCTL_PARITYEN_Pos)    /*!< UUART_PROTCTL setting to set UART as even parity \hideinitializer */
+#define UUART_PARITY_NONE    (0x0UL << UUART_PROTCTL_PARITYEN_Pos)    /*!< UUART_PROTCTL setting to set UART as no parity \hideinitializer */
+#define UUART_PARITY_ODD     (0x1UL << UUART_PROTCTL_PARITYEN_Pos)    /*!< UUART_PROTCTL setting to set UART as odd parity \hideinitializer */
+#define UUART_PARITY_EVEN    (0x3UL << UUART_PROTCTL_PARITYEN_Pos)    /*!< UUART_PROTCTL setting to set UART as even parity \hideinitializer */
 
-#define UUART_STOP_BIT_1     (0x0ul) /*!< UUART_PROTCTL setting for one stop bit \hideinitializer */
-#define UUART_STOP_BIT_2     (0x1ul) /*!< UUART_PROTCTL setting for two stop bit \hideinitializer */
+#define UUART_STOP_BIT_1     (0x0UL) /*!< UUART_PROTCTL setting for one stop bit \hideinitializer */
+#define UUART_STOP_BIT_2     (0x1UL) /*!< UUART_PROTCTL setting for two stop bit \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* USCI UART interrupt mask definitions                                                                    */
 /*---------------------------------------------------------------------------------------------------------*/
-#define UUART_ABR_INT_MASK      (0x002ul) /*!< Auto-baud rate interrupt mask \hideinitializer */
-#define UUART_RLS_INT_MASK      (0x004ul) /*!< Receive line status interrupt mask \hideinitializer */
-#define UUART_BUF_RXOV_INT_MASK (0x008ul) /*!< Buffer RX overrun interrupt mask \hideinitializer */
-#define UUART_TXST_INT_MASK     (0x010ul) /*!< TX start interrupt mask \hideinitializer */
-#define UUART_TXEND_INT_MASK    (0x020ul) /*!< Tx end interrupt mask \hideinitializer */
-#define UUART_RXST_INT_MASK     (0x040ul) /*!< RX start interrupt mask \hideinitializer */
-#define UUART_RXEND_INT_MASK    (0x080ul) /*!< RX end interrupt mask \hideinitializer */
+#define UUART_ABR_INT_MASK      (0x002UL) /*!< Auto-baud rate interrupt mask \hideinitializer */
+#define UUART_RLS_INT_MASK      (0x004UL) /*!< Receive line status interrupt mask \hideinitializer */
+#define UUART_BUF_RXOV_INT_MASK (0x008UL) /*!< Buffer RX overrun interrupt mask \hideinitializer */
+#define UUART_TXST_INT_MASK     (0x010UL) /*!< TX start interrupt mask \hideinitializer */
+#define UUART_TXEND_INT_MASK    (0x020UL) /*!< Tx end interrupt mask \hideinitializer */
+#define UUART_RXST_INT_MASK     (0x040UL) /*!< RX start interrupt mask \hideinitializer */
+#define UUART_RXEND_INT_MASK    (0x080UL) /*!< RX end interrupt mask \hideinitializer */
 
 
 /*@}*/ /* end of group USCI_UART_EXPORTED_CONSTANTS */
@@ -393,7 +393,7 @@ extern "C"
  *    @details      This macro get wakeup flag.
  *    \hideinitializer
  */
-#define UUART_GET_WAKEUP_FLAG(uuart)    ((uuart)->WKSTS & UUART_WKSTS_WKF_Msk ? 1: 0 )
+#define UUART_GET_WAKEUP_FLAG(uuart)    ((uuart)->WKSTS & UUART_WKSTS_WKF_Msk ? 1U: 0U )
 
 
 /**
@@ -493,19 +493,19 @@ extern "C"
 #define UUART_DISABLE_TX_PDMA(uuart) ( (uuart)->PDMACTL &= ~UUART_PDMACTL_TXPDMAEN_Msk )
 
 
-void UUART_ClearIntFlag(UUART_T* uuart, uint32_t u32Mask);
-uint32_t UUART_GetIntFlag(UUART_T* uuart, uint32_t u32Mask);
-void UUART_Close(UUART_T* uuart);
-void UUART_DisableInt(UUART_T*  uuart, uint32_t u32Mask);
-void UUART_EnableInt(UUART_T*  uuart, uint32_t u32Mask);
-uint32_t UUART_Open(UUART_T* uuart, uint32_t u32baudrate);
-uint32_t UUART_Read(UUART_T* uuart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes);
-uint32_t UUART_SetLine_Config(UUART_T* uuart, uint32_t u32baudrate, uint32_t u32data_width, uint32_t u32parity, uint32_t u32stop_bits);
-uint32_t UUART_Write(UUART_T* uuart, uint8_t pu8TxBuf[], uint32_t u32WriteBytes);
-void UUART_EnableWakeup(UUART_T* uuart, uint32_t u32WakeupMode);
-void UUART_DisableWakeup(UUART_T* uuart);
-void UUART_EnableFlowCtrl(UUART_T* uuart);
-void UUART_DisableFlowCtrl(UUART_T* uuart);
+void UUART_ClearIntFlag(UUART_T *uuart, uint32_t u32Mask);
+uint32_t UUART_GetIntFlag(const UUART_T *uuart, uint32_t u32Mask);
+void UUART_Close(UUART_T *uuart);
+void UUART_DisableInt(UUART_T *uuart, uint32_t u32Mask);
+void UUART_EnableInt(UUART_T *uuart, uint32_t u32Mask);
+uint32_t UUART_Open(UUART_T *uuart, uint32_t u32baudrate);
+uint32_t UUART_Read(const UUART_T *uuart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes);
+uint32_t UUART_SetLine_Config(UUART_T *uuart, uint32_t u32baudrate, uint32_t u32data_width, uint32_t u32parity, uint32_t u32stop_bits);
+uint32_t UUART_Write(UUART_T *uuart, const uint8_t pu8TxBuf[], uint32_t u32WriteBytes);
+void UUART_EnableWakeup(UUART_T *uuart, uint32_t u32WakeupMode);
+void UUART_DisableWakeup(UUART_T *uuart);
+void UUART_EnableFlowCtrl(UUART_T *uuart);
+void UUART_DisableFlowCtrl(UUART_T *uuart);
 
 
 /*@}*/ /* end of group USCI_UART_EXPORTED_FUNCTIONS */

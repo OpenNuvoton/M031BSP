@@ -125,7 +125,7 @@ void I2C0_Close(void)
 /*---------------------------------------------------------------------------------------------------------*/
 /* Write Multi Bytes                                                                                       */
 /*---------------------------------------------------------------------------------------------------------*/
-uint32_t I2C_WriteMultiBytesTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16DataAddr, uint8_t data[], uint32_t u32wLen)
+uint32_t I2C_WriteMultiBytesTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16DataAddr, const uint8_t data[], uint32_t u32wLen)
 {
     uint8_t u8Xfering = 1, u8Err = 0, u8Addr = 1, u8Ctrl = 0;
     uint32_t u32txLen = 0;

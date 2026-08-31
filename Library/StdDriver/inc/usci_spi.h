@@ -90,7 +90,7 @@ extern "C"
   * @retval 1: Rx buffer is empty
   * \hideinitializer
   */
-#define USPI_GET_RX_EMPTY_FLAG(uspi) ( ((uspi)->BUFSTS & USPI_BUFSTS_RXEMPTY_Msk) == USPI_BUFSTS_RXEMPTY_Msk ? 1:0 )
+#define USPI_GET_RX_EMPTY_FLAG(uspi) ( ((uspi)->BUFSTS & USPI_BUFSTS_RXEMPTY_Msk) == USPI_BUFSTS_RXEMPTY_Msk ? 1UL:0UL )
 
 /**
   * @brief  Get the Tx buffer empty flag.
@@ -100,7 +100,7 @@ extern "C"
   * @retval 1: Tx buffer is empty
   * \hideinitializer
   */
-#define USPI_GET_TX_EMPTY_FLAG(uspi) ( ((uspi)->BUFSTS & USPI_BUFSTS_TXEMPTY_Msk) == USPI_BUFSTS_TXEMPTY_Msk ? 1:0 )
+#define USPI_GET_TX_EMPTY_FLAG(uspi) ( ((uspi)->BUFSTS & USPI_BUFSTS_TXEMPTY_Msk) == USPI_BUFSTS_TXEMPTY_Msk ? 1UL:0UL )
 
 /**
   * @brief  Get the Tx buffer full flag.
@@ -110,7 +110,7 @@ extern "C"
   * @retval 1: Tx buffer is full
   * \hideinitializer
   */
-#define USPI_GET_TX_FULL_FLAG(uspi) ( ((uspi)->BUFSTS & USPI_BUFSTS_TXFULL_Msk) == USPI_BUFSTS_TXFULL_Msk ? 1:0 )
+#define USPI_GET_TX_FULL_FLAG(uspi) ( ((uspi)->BUFSTS & USPI_BUFSTS_TXFULL_Msk) == USPI_BUFSTS_TXFULL_Msk ? 1UL:0UL )
 
 /**
   * @brief  Get the datum read from RX register.
@@ -204,7 +204,7 @@ extern "C"
   * @retval 1: USCI_SPI module is busy
   * \hideinitializer
   */
-#define USPI_IS_BUSY(uspi) ( ((uspi)->PROTSTS & USPI_PROTSTS_BUSY_Msk) == USPI_PROTSTS_BUSY_Msk ? 1:0 )
+#define USPI_IS_BUSY(uspi) ( ((uspi)->PROTSTS & USPI_PROTSTS_BUSY_Msk) == USPI_PROTSTS_BUSY_Msk ? 1UL:0UL )
 
 /**
   * @brief Get the USCI_SPI wakeup flag.
@@ -214,7 +214,7 @@ extern "C"
   * @retval 1 Flag is set.
   * \hideinitializer
   */
-#define USPI_GET_WAKEUP_FLAG(uspi) ( ((uspi)->WKSTS & USPI_WKSTS_WKF_Msk) == USPI_WKSTS_WKF_Msk ? 1:0 )
+#define USPI_GET_WAKEUP_FLAG(uspi) ( ((uspi)->WKSTS & USPI_WKSTS_WKF_Msk) == USPI_WKSTS_WKF_Msk ? 1UL:0UL )
 
 /**
   * @brief Clear the USCI_SPI wakeup flag.
@@ -403,12 +403,12 @@ void USPI_ClearTxBuf(USPI_T *uspi);
 void USPI_DisableAutoSS(USPI_T *uspi);
 void USPI_EnableAutoSS(USPI_T *uspi, uint32_t u32SSPinMask, uint32_t u32ActiveLevel);
 uint32_t USPI_SetBusClock(USPI_T *uspi, uint32_t u32BusClock);
-uint32_t USPI_GetBusClock(USPI_T *uspi);
+uint32_t USPI_GetBusClock(const USPI_T *uspi);
 void USPI_EnableInt(USPI_T *uspi, uint32_t u32Mask);
 void USPI_DisableInt(USPI_T *uspi, uint32_t u32Mask);
-uint32_t USPI_GetIntFlag(USPI_T *uspi, uint32_t u32Mask);
+uint32_t USPI_GetIntFlag(const USPI_T *uspi, uint32_t u32Mask);
 void USPI_ClearIntFlag(USPI_T *uspi, uint32_t u32Mask);
-uint32_t USPI_GetStatus(USPI_T *uspi, uint32_t u32Mask);
+uint32_t USPI_GetStatus(const USPI_T *uspi, uint32_t u32Mask);
 void USPI_EnableWakeup(USPI_T *uspi);
 void USPI_DisableWakeup(USPI_T *uspi);
 
