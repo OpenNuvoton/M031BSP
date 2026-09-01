@@ -1,14 +1,38 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:e4024ea3-0680-41f7-a5bc-bf4051e4c800",
-  "createdAt": "2026-08-28T14:36:15.660590Z",
+  "serialNumber": "urn:uuid:1b4d1932-b62c-47e7-8d85-1f19d8bd1eb9",
+  "createdAt": "2026-09-01T10:23:18.772819Z",
   "bsp": {
     "name": "M031BSP",
-    "version": "V3.07.000-58-gb52fb33",
-    "releaseIdentifierSource": "SBOM file name",
-    "gitDescribe": "V3.07.000-58-gb52fb33"
+    "version": "V3.07.000-59-gbebb6ece",
+    "releaseIdentifierSource": "git describe --tags --always --long --abbrev=8 --dirty",
+    "gitDescribe": "V3.07.000-59-gbebb6ece",
+    "gitCommit": "bebb6eced395b0c803fd8016aaae9f49c051f101",
+    "sourceTreeState": "clean"
   },
+  "generationTools": [
+    {
+      "name": "SBOM Generator",
+      "version": "0.2.0"
+    },
+    {
+      "name": "Syft",
+      "version": "1.45.1"
+    },
+    {
+      "name": "CycloneDX CLI",
+      "version": "0.32.0+0ed788d25c13cef9e9a3029603f6b708e3279390"
+    },
+    {
+      "name": "grype",
+      "version": "grype 0.117.0"
+    },
+    {
+      "name": "sbom-checker",
+      "version": "1.0.0"
+    }
+  ],
   "sbomPackage": {
     "name": "MCU BSP SBOM Package",
     "format": "CycloneDX",
@@ -24,14 +48,14 @@
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:df9c85f4-b4bb-4de4-9e77-fad0e6b9a23f",
+      "serialNumber": "urn:uuid:9c20b145-4e29-4ebd-bb0c-30c897be1217",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-08-28T22:35:23+08:00",
+      "generatedTimestamp": "2026-09-01T18:19:43+08:00",
       "metadataComponent": {
-        "bomRef": "b3fb85bdb52060f2",
+        "bomRef": "3a3201c88deb78c5",
         "type": "library",
         "name": "MCU Driver",
-        "version": "V3.07.000-58-gb52fb33",
+        "version": "V3.07.000-59-gbebb6ece",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -100,7 +124,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "4e6df160df6110b69c4290f8d4b75393b102f5de79432124acc6c8796afba372"
+        "value": "c3d9673bb948811be1a95e26ac58e185b50c23cf5f1abbac83ba78ab0307e045"
       }
     },
     {
@@ -108,14 +132,14 @@
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:176e5b00-6255-4f9b-89e6-f5c62aa08543",
+      "serialNumber": "urn:uuid:efcbef5c-a5b6-470e-bede-905207654fdb",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-08-28T22:35:43+08:00",
+      "generatedTimestamp": "2026-09-01T18:20:08+08:00",
       "metadataComponent": {
-        "bomRef": "1f1142a0088e1cf1",
+        "bomRef": "c832c9ca5d224f24",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "V3.07.000-58-gb52fb33",
+        "version": "V3.07.000-59-gbebb6ece",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -162,15 +186,14 @@
       "scope": "Components used only for examples, demonstrations, validation, host-side utilities, or testing; not included in product runtime unless explicitly integrated by the user.",
       "isProductRuntimeScope": false,
       "componentSummary": {
-        "componentCount": 29,
+        "componentCount": 69,
         "componentCountByType": {
-          "application": 17,
+          "application": 13,
           "device-driver": 3,
+          "file": 44,
           "library": 9
         },
         "applicationNames": [
-          "/Tool/HIDTransferTest/HIDTransferTest",
-          "BLE Application",
           "BLE_DTM_Lab_Test_Tool",
           "FOTA Tool",
           "HIDCtrlTransferTest",
@@ -180,17 +203,15 @@
           "NUVPOS58",
           "NuBLE Android",
           "NuvPos58 Driver",
-          "TODO: <Product name>",
           "WDF Coinstaller",
-          "Windows Driver Foundation - User-mode Platform Device Update Co-Installer",
-          "WindowsApplication1"
+          "Windows Driver Foundation - User-mode Platform Device Update Co-Installer"
         ],
-        "fileComponentCount": 0,
-        "fileComponentWithHashCount": 0
+        "fileComponentCount": 44,
+        "fileComponentWithHashCount": 44
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "73656358c8f81a7a471ab324611bea8f233cfcc8c13a9221db0716b00511f8f9"
+        "value": "46f9ff434e91ab6446d87cbe5029d3c35d329712c72f27b318571f7680be72ed"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,
