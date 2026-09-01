@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:df9c85f4-b4bb-4de4-9e77-fad0e6b9a23f",
+  "serialNumber": "urn:uuid:9c20b145-4e29-4ebd-bb0c-30c897be1217",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-28T22:35:23+08:00",
+    "timestamp": "2026-09-01T18:19:43+08:00",
     "tools": {
       "components": [
         {
@@ -17,17 +17,17 @@
       ]
     },
     "component": {
-      "bom-ref": "b3fb85bdb52060f2",
+      "bom-ref": "3a3201c88deb78c5",
       "type": "library",
       "name": "MCU Driver",
-      "version": "V3.07.000-58-gb52fb33",
+      "version": "V3.07.000-59-gbebb6ece",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-driver@V3.07.000-58-gb52fb33",
+      "purl": "pkg:generic/nuvoton/mcu-driver@V3.07.000-59-gbebb6ece",
       "licenses": [
         {
           "license": {
@@ -107,14 +107,14 @@
       "type": "library",
       "bom-ref": "m031bsp:product-component:library-device",
       "name": "M031 Device",
-      "version": "V3.07.000-58-gb52fb33",
+      "version": "V3.07.000-59-gbebb6ece",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-device@V3.07.000-58-gb52fb33",
+      "purl": "pkg:generic/nuvoton/library-device@V3.07.000-59-gbebb6ece",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -165,14 +165,14 @@
       "type": "library",
       "bom-ref": "m031bsp:product-component:library-stddriver",
       "name": "M031 StdDriver",
-      "version": "V3.07.000-58-gb52fb33",
+      "version": "V3.07.000-59-gbebb6ece",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-stddriver@V3.07.000-58-gb52fb33",
+      "purl": "pkg:generic/nuvoton/library-stddriver@V3.07.000-59-gbebb6ece",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -278,12 +278,15 @@
           "alg": "SHA-256",
           "content": "3b9195c5373a2a4dbfd968b083b3d7f5f446f9ec2e126f75928ac1ff4356b91e"
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Arm Ltd."
+      }
     }
   ],
   "dependencies": [
     {
-      "ref": "b3fb85bdb52060f2",
+      "ref": "3a3201c88deb78c5",
       "dependsOn": [
         "m031bsp:product-component:library-device",
         "m031bsp:product-component:library-stddriver"

@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:176e5b00-6255-4f9b-89e6-f5c62aa08543",
+  "serialNumber": "urn:uuid:efcbef5c-a5b6-470e-bede-905207654fdb",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-28T22:35:43+08:00",
+    "timestamp": "2026-09-01T18:20:08+08:00",
     "tools": {
       "components": [
         {
@@ -17,17 +17,17 @@
       ]
     },
     "component": {
-      "bom-ref": "1f1142a0088e1cf1",
+      "bom-ref": "c832c9ca5d224f24",
       "type": "application",
       "name": "MCU Test Sample",
-      "version": "V3.07.000-58-gb52fb33",
+      "version": "V3.07.000-59-gbebb6ece",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.07.000-58-gb52fb33",
+      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.07.000-59-gbebb6ece",
       "licenses": [
         {
           "license": {
@@ -92,53 +92,6 @@
   },
   "components": [
     {
-      "bom-ref": "790febdd926e1d32",
-      "type": "application",
-      "name": "BLE Application",
-      "version": "1, 0, 0, 1",
-      "cpe": "cpe:2.3:a:BLE_Application:BLE_Application:1\\,_0\\,_0\\,_1:*:*:*:*:*:*:*",
-      "properties": [
-        {
-          "name": "syft:package:foundBy",
-          "value": "pe-binary-package-cataloger"
-        },
-        {
-          "name": "syft:package:type",
-          "value": "binary"
-        },
-        {
-          "name": "syft:package:metadataType",
-          "value": "pe-binary"
-        },
-        {
-          "name": "syft:location:0:path",
-          "value": "/Tool/BLE/BLE_DTM_Lab_Test_Tool_v1.6B.exe"
-        },
-        {
-          "name": "bsp:file-path",
-          "value": "Tool/BLE/BLE_DTM_Lab_Test_Tool_v1.6B.exe"
-        }
-      ],
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "0b60ed8b37aa778221592ab16c91c5d0df3d68a6"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "purl": "pkg:generic/nuvoton/ble-dtm-lab-test-tool@1.0.0.1"
-    },
-    {
       "bom-ref": "d24a37a425a4093d",
       "type": "application",
       "name": "ISP Programming Tool",
@@ -162,18 +115,30 @@
           "value": "/SampleCode/StdDriver/UART_115200bps_SingleWire_ISP/Software/NuvoISP_UART_Single_Wire.exe"
         },
         {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
           "name": "bsp:file-path",
           "value": "SampleCode/StdDriver/UART_115200bps_SingleWire_ISP/Software/NuvoISP_UART_Single_Wire.exe"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "fa700b97d1d9821ff772deca6819e293ba3e9113"
         }
       ],
       "licenses": [
@@ -183,7 +148,13 @@
           }
         }
       ],
-      "purl": "pkg:generic/nuvoton/nuvoisp-uart-single-wire@2.04"
+      "purl": "pkg:generic/nuvoton/nuvoisp-uart-single-wire@2.04",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      }
     },
     {
       "bom-ref": "4ff6a73283a65c7d",
@@ -255,23 +226,34 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X64.exe"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "806369cd56fe410d0e0ef8d05b1cf5d57a673636"
         }
       ],
       "licenses": [
         {
           "expression": "LicenseRef-Nuvoton-Proprietary"
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FUSBD_Printer_And_HID_Transfer%2FWindows%20driver%2FNUVPOS58_X64.exe"
     },
     {
       "bom-ref": "0751bdc6c9d5e476",
@@ -343,23 +325,34 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X86.exe"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "f0fd2d0946f1d4632a963c9344439c93c5765b97"
         }
       ],
       "licenses": [
         {
           "expression": "LicenseRef-Nuvoton-Proprietary"
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FUSBD_Printer_And_HID_Transfer%2FWindows%20driver%2FNUVPOS58_X86.exe"
     },
     {
       "bom-ref": "3fd87dffff71a8c3",
@@ -419,70 +412,34 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/StdDriver/USBD_Micro_Printer/Windows driver/NuvPos58_Driver.exe"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "ba09b88a8ffa9b06bcd30ad7b45f6acb880b4cb9"
         }
       ],
       "licenses": [
         {
           "expression": "LicenseRef-Nuvoton-Proprietary"
         }
-      ]
-    },
-    {
-      "bom-ref": "75eed61a3c75b99d",
-      "type": "application",
-      "name": "TODO: <Product name>",
-      "version": "1.0.0.1",
-      "cpe": "cpe:2.3:a:TODO\\:_\\<Product_name\\>:TODO\\:_\\<Product_name\\>:1.0.0.1:*:*:*:*:*:*:*",
-      "properties": [
-        {
-          "name": "syft:package:foundBy",
-          "value": "pe-binary-package-cataloger"
-        },
-        {
-          "name": "syft:package:type",
-          "value": "binary"
-        },
-        {
-          "name": "syft:package:metadataType",
-          "value": "pe-binary"
-        },
-        {
-          "name": "syft:location:0:path",
-          "value": "/Tool/HIDCtrlTransferTest/HIDCtrlTransferTest.exe"
-        },
-        {
-          "name": "bsp:file-path",
-          "value": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest.exe"
-        }
       ],
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "1b46ddfb6d4d08921985bf0798e12803252c37cc"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "purl": "pkg:generic/nuvoton/hid-control-transfer-test@1.0.0.1"
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FUSBD_Micro_Printer%2FWindows%20driver%2FNuvPos58_Driver.exe"
     },
     {
       "bom-ref": "5569440e5357172b",
@@ -542,23 +499,34 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/WdfCoInstaller01011.dll"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "dee0ddc820cd0da546dff8bcf2bc490326da90a2"
         }
       ],
       "licenses": [
         {
           "expression": "LicenseRef-Microsoft-Software-License-Terms"
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Famd64%2FWdfCoInstaller01011.dll"
     },
     {
       "bom-ref": "d8995f12c25081c1",
@@ -618,23 +586,34 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/WdfCoInstaller01011.dll"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "dee0ddc820cd0da546dff8bcf2bc490326da90a2"
         }
       ],
       "licenses": [
         {
           "expression": "LicenseRef-Microsoft-Software-License-Terms"
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2FWdfCoInstaller01011.dll"
     },
     {
       "bom-ref": "4bf0dac8cacd6698",
@@ -746,119 +725,34 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/winusbcoinstaller2.dll"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "1633b3715014c90d1c552cd757ef5de33c161dee"
         }
       ],
       "licenses": [
         {
           "expression": "LicenseRef-Microsoft-Software-License-Terms"
         }
-      ]
-    },
-    {
-      "bom-ref": "pkg:nuget/WindowsApplication1@1.0.0.0?package-id=7d83f7dfd765ddee",
-      "type": "application",
-      "name": "WindowsApplication1",
-      "version": "1.0.0.0",
-      "purl": "pkg:generic/nuvoton/ble-fota-tool@1.0.0.0",
-      "properties": [
-        {
-          "name": "syft:package:foundBy",
-          "value": "dotnet-deps-binary-cataloger"
-        },
-        {
-          "name": "syft:package:language",
-          "value": "dotnet"
-        },
-        {
-          "name": "syft:package:type",
-          "value": "dotnet"
-        },
-        {
-          "name": "syft:package:metadataType",
-          "value": "dotnet-portable-executable-entry"
-        },
-        {
-          "name": "syft:location:0:path",
-          "value": "/Tool/BLE/FOTA_Tool_v0.0.3_210423.exe"
-        },
-        {
-          "name": "bsp:file-path",
-          "value": "Tool/BLE/FOTA_Tool_v0.0.3_210423.exe"
-        }
       ],
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "b0fa5fdbe314a2fca8a5e97ad6beed8938fb00b7"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ]
-    },
-    {
-      "bom-ref": "7bfd6f321fa9a08c",
-      "type": "application",
-      "name": "/Tool/HIDTransferTest/HIDTransferTest",
-      "version": "UNKNOWN",
-      "properties": [
-        {
-          "name": "syft:package:foundBy",
-          "value": "pe-binary-package-cataloger"
-        },
-        {
-          "name": "syft:package:type",
-          "value": "binary"
-        },
-        {
-          "name": "syft:package:metadataType",
-          "value": "pe-binary"
-        },
-        {
-          "name": "syft:location:0:path",
-          "value": "/Tool/HIDTransferTest/HIDTransferTest.exe"
-        },
-        {
-          "name": "bsp:file-path",
-          "value": "Tool/HIDTransferTest/HIDTransferTest.exe"
-        }
-      ],
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "eb4e33401eba74e522869b07c7c86373b2d3761b"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "purl": "pkg:generic/nuvoton/hid-transfer-test"
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2Fwinusbcoinstaller2.dll"
     },
     {
       "bom-ref": "a64f0d54e564b312",
@@ -954,16 +848,20 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0.dll"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "bab236f840f1521c43bcbaa2a7b92f14f329bc70"
         }
       ],
       "licenses": [
@@ -972,7 +870,14 @@
             "id": "LGPL-2.1-or-later"
           }
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Famd64%2Flibusb0.dll"
     },
     {
       "bom-ref": "b775bc2a35788071",
@@ -1068,16 +973,20 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0_x86.dll"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "3a238468009a6dea3e4f70821339185e56ea3b69"
         }
       ],
       "licenses": [
@@ -1086,7 +995,14 @@
             "id": "LGPL-2.1-or-later"
           }
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2Flibusb0_x86.dll"
     },
     {
       "bom-ref": "dd54509e3b51ed27",
@@ -1198,16 +1114,20 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0_x86.dll"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "7dd82b6d52a840c4979a7515fc7a9ca3725363c4"
         }
       ],
       "licenses": [
@@ -1216,7 +1136,14 @@
             "id": "LGPL-2.1-or-later"
           }
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Famd64%2Flibusb0_x86.dll"
     },
     {
       "bom-ref": "74cae8393dbbcd4b",
@@ -1328,16 +1255,20 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/install-filter.exe"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "7dd82b6d52a840c4979a7515fc7a9ca3725363c4"
         }
       ],
       "licenses": [
@@ -1346,7 +1277,14 @@
             "id": "LGPL-2.1-or-later"
           }
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2Finstall-filter.exe"
     },
     {
       "bom-ref": "92903767fdf8f934",
@@ -1458,16 +1396,20 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0.dll"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "7dd82b6d52a840c4979a7515fc7a9ca3725363c4"
         }
       ],
       "licenses": [
@@ -1476,7 +1418,14 @@
             "id": "LGPL-2.1-or-later"
           }
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2Flibusb0.dll"
     },
     {
       "bom-ref": "5d9b5d81b237b8ce",
@@ -1536,23 +1485,34 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK.dll"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "fa8489441ac82d22567b5c3d5b494576df54f37d"
         }
       ],
       "licenses": [
         {
           "expression": "BSD-3-Clause OR GPL-3.0-only"
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Famd64%2FlibusbK.dll"
     },
     {
       "bom-ref": "54c0b73d615c0171",
@@ -1612,23 +1572,34 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK_x86.dll"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "fc2350e45b0c7bdac7ac35f42b65f5fdfd622464"
         }
       ],
       "licenses": [
         {
           "expression": "BSD-3-Clause OR GPL-3.0-only"
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Famd64%2FlibusbK_x86.dll"
     },
     {
       "bom-ref": "d842a3083b0024ce",
@@ -1688,36 +1659,47 @@
         {
           "name": "bsp:file-path",
           "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusbK.dll"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:version-basis",
+          "value": "BSP release identity when no PE version is available"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
           "content": "22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4"
-        },
-        {
-          "alg": "SHA-1",
-          "content": "fc2350e45b0c7bdac7ac35f42b65f5fdfd622464"
         }
       ],
       "licenses": [
         {
           "expression": "BSD-3-Clause OR GPL-3.0-only"
         }
-      ]
-    },
-    {
-      "type": "application",
-      "bom-ref": "m031bsp:test-sample-component:samplecode",
-      "name": "M031 SampleCode",
-      "version": "V3.07.000-58-gb52fb33",
+      ],
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/samplecode@V3.07.000-58-gb52fb33",
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2FlibusbK.dll"
+    },
+    {
+      "type": "application",
+      "bom-ref": "m031bsp:test-sample-component:samplecode",
+      "name": "M031 SampleCode",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/samplecode@V3.07.000-59-gbebb6ece",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -1763,6 +1745,150 @@
           "value": "false"
         }
       ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:generic/ble-dtm-lab-test-tool@1.0.0.1?path=Tool/BLE",
+      "name": "BLE_DTM_Lab_Test_Tool",
+      "version": "1.0.0.1",
+      "scope": "required",
+      "author": "Nuvoton Technology Corporation",
+      "purl": "pkg:generic/ble-dtm-lab-test-tool@1.0.0.1",
+      "description": "BLE DTM laboratory testing utility.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Tool/BLE"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_binary"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Nuvoton Technology Corporation"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_ble_dtm_lab_test_tool.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "Tool/BLE"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "BLE_DTM_Lab_Test_Tool_v1.6B.exe"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Tool/BLE/LICENSE.md"
+        },
+        {
+          "name": "bsp:sha256",
+          "value": "D00AD71A871C4E0838761F0BA4B976A7BBA1FF7F7D006E513A62E74F17DADD44"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "false"
+        },
+        {
+          "name": "bsp:runtime-dependency",
+          "value": "false"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44"
+        }
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corporation"
+      }
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:generic/fota-tool@1.0.0.0?path=Tool/BLE",
+      "name": "FOTA Tool",
+      "version": "1.0.0.0",
+      "scope": "required",
+      "author": "Nuvoton Technology Corporation",
+      "purl": "pkg:generic/fota-tool@1.0.0.0",
+      "description": "Bluetooth firmware over-the-air update utility.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Tool/BLE"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_binary"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Nuvoton Technology Corporation"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_fota_tool.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "Tool/BLE"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "FOTA_Tool_v0.0.3_210423.exe"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Tool/BLE/LICENSE.md"
+        },
+        {
+          "name": "bsp:sha256",
+          "value": "51A18E92A4E8CC77624FD917BDDCA59BDEBB8B6AA369E73482D6376B4935B0C4"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "false"
+        },
+        {
+          "name": "bsp:runtime-dependency",
+          "value": "false"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4"
+        }
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corporation"
+      }
     },
     {
       "type": "library",
@@ -1827,7 +1953,154 @@
           "alg": "SHA-256",
           "content": "b734313c3c29ecf83b7dc7d625387e6b442ce6e171d98e1a2b93d18c6980f23d"
         }
-      ]
+      ],
+      "supplier": {
+        "name": "FreeRTOS Project / Amazon"
+      }
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:generic/hidctrltransfertest@1.0.0.1?path=Tool/HIDCtrlTransferTest",
+      "name": "HIDCtrlTransferTest",
+      "version": "1.0.0.1",
+      "scope": "required",
+      "author": "Nuvoton Technology Corporation",
+      "purl": "pkg:generic/hidctrltransfertest@1.0.0.1",
+      "description": "Host-side HID control transfer testing utility.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Tool/HIDCtrlTransferTest"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_binary"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Nuvoton Technology Corporation"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_hidctrltransfertest.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "Tool/HIDCtrlTransferTest"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/HIDCtrlTransferTest.rc"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Tool/HIDCtrlTransferTest/LICENSE.md"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "false"
+        },
+        {
+          "name": "bsp:runtime-dependency",
+          "value": "false"
+        },
+        {
+          "name": "bsp:sha256",
+          "value": "9099BE6E12479E50B0706E3DFE1828FA4FD62DCBCC0C2A462DB1783B35ECAC5F"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f"
+        }
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corporation"
+      }
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:generic/hidtransfertest@1.1.0.0?path=Tool/HIDTransferTest",
+      "name": "HIDTransferTest",
+      "version": "1.1.0.0",
+      "scope": "required",
+      "author": "Nuvoton Technology Corporation",
+      "purl": "pkg:generic/hidtransfertest@1.1.0.0",
+      "description": "Host-side HID transfer testing utility.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Tool/HIDTransferTest"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_binary"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Nuvoton Technology Corporation"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_hidtransfertest.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "Tool/HIDTransferTest"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "HIDTransferTest.exe (no version resource found)"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Tool/HIDTransferTest/LICENSE.md"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "false"
+        },
+        {
+          "name": "bsp:runtime-dependency",
+          "value": "false"
+        },
+        {
+          "name": "bsp:sha256",
+          "value": "24BDD0BAADD8EE6632B40757D2F599F391F9B87B87E23F8FB30324C8C873E747"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747"
+        }
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corporation"
+      }
     },
     {
       "type": "application",
@@ -1894,7 +2167,10 @@
           "alg": "SHA-256",
           "content": "261a4b82b19e68ae7e2bed31b191ce016aa3219a4fdda2a3b2c63e220421987a"
         }
-      ]
+      ],
+      "supplier": {
+        "name": "Nuvoton Technology Corporation"
+      }
     },
     {
       "type": "device-driver",
@@ -1952,10 +2228,6 @@
         {
           "name": "bsp:usage",
           "value": "host-side Windows USB driver/library dependency"
-        },
-        {
-          "name": "bsp:file-path",
-          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK.sys"
         }
       ],
       "purl": "pkg:generic/libusbk@3.0.7.0?arch=amd64"
@@ -2018,10 +2290,6 @@
         {
           "name": "bsp:usage",
           "value": "host-side Windows USB kernel driver dependency"
-        },
-        {
-          "name": "bsp:file-path",
-          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0.sys"
         }
       ],
       "purl": "pkg:generic/libusb-win32-kernel-driver@1.2.6.0?arch=x86"
@@ -2082,19 +2350,2524 @@
         {
           "name": "bsp:usage",
           "value": "host-side Windows USB driver/library dependency"
-        },
-        {
-          "name": "bsp:file-path",
-          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusbK.sys"
         }
       ],
       "purl": "pkg:generic/libusbk@3.0.7.0?arch=x86"
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14:d6895f2a4607765f",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0.dll",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Famd64%2Flibusb0.dll",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0.dll"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:f836201765fe349f",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0_x86.dll",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Famd64%2Flibusb0_x86.dll",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0_x86.dll"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188:6f68e2c1d6f8a91d",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK.dll",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Famd64%2FlibusbK.dll",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK.dll"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b9791c799f7df765",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK_x86.dll",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Famd64%2FlibusbK_x86.dll",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK_x86.dll"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:e05d0c4f3554d3c5",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/WdfCoInstaller01011.dll",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Famd64%2FWdfCoInstaller01011.dll",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/WdfCoInstaller01011.dll"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:3b462e808ada9609",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/install-filter.exe",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2Finstall-filter.exe",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/install-filter.exe"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:83e47bf6f822fccb",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0.dll",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2Flibusb0.dll",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0.dll"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666:8aa3d5ad788cb917",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0_x86.dll",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2Flibusb0_x86.dll",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0_x86.dll"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b08468b7f57a3b2e",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusbK.dll",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2FlibusbK.dll",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusbK.dll"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:bd42d6bd491296ab",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/WdfCoInstaller01011.dll",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2FWdfCoInstaller01011.dll",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/WdfCoInstaller01011.dll"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c:e3b02a89dec958d0",
+      "name": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/winusbcoinstaller2.dll",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FISP%2FISP_DFU%2FWindowsDriver%2Fx86%2Fwinusbcoinstaller2.dll",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/winusbcoinstaller2.dll"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e:68daff7a084996eb",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_C.a",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FBLELIB_IAR_C.a",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_C.a"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be:421520d4561401ee",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_NOCONN.a",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FBLELIB_IAR_NOCONN.a",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_NOCONN.a"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d:e72e28f209ca554a",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_P.a",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FBLELIB_IAR_P.a",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_P.a"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2:8267bdca0012f11f",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_PC.a",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FBLELIB_IAR_PC.a",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_PC.a"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103:4029f756d5aba6ea",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_C.lib",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FBLELIB_Keil_C.lib",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_C.lib"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947:516963b5f6d58de4",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_NOCONN.lib",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FBLELIB_Keil_NOCONN.lib",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_NOCONN.lib"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe:53e4bcc516bd2598",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_P.lib",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FBLELIB_Keil_P.lib",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_P.lib"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe:a2cf5bc16c578adc",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_PC.lib",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FBLELIB_Keil_PC.lib",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_PC.lib"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2:dc36946726e4af10",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_C.a",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FlibBLELIB_GCC_C.a",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_C.a"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47:395c5cd7d9cae89e",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_NOCONN.a",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FlibBLELIB_GCC_NOCONN.a",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_NOCONN.a"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55:0df74fe587430c1c",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_P.a",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FlibBLELIB_GCC_P.a",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_P.a"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace:f2410f8bd466f21b",
+      "name": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_PC.a",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FNuMaker-M03xBT%2FBLE%2FSource%2FLib%2FlibBLELIB_GCC_PC.a",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_PC.a"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a:319f82be2aceb655",
+      "name": "SampleCode/RegBased/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FRegBased%2FFMC_IAP%2FGCC%2FLDROM_iap%2FLDROM_iap.bin",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/RegBased/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party-build-artifact"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921:6dd0d472170e5ddc",
+      "name": "SampleCode/RegBased/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FRegBased%2FFMC_IAP%2FIAR%2FRelease%2FExe%2Ffmc_ld_iap.bin",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/RegBased/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party-build-artifact"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680:cf7b4ae79b3290df",
+      "name": "SampleCode/RegBased/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FRegBased%2FFMC_IAP%2FKEIL%2FObj%2Ffmc_ld_iap.bin",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/RegBased/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party-build-artifact"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5:01998727f43c6508",
+      "name": "SampleCode/RegBased/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FRegBased%2FFMC_IAP%2FVSCode%2Fbin%2Ffmc_ld_iap.bin",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/RegBased/FMC_IAP/VSCode/bin/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party-build-artifact"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff:7ea1a3a7b552965e",
+      "name": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FGCC%2FLDROM_iap%2FLDROM_iap.bin",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party-build-artifact"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143:0e0a1c77a5b88463",
+      "name": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FIAR%2FRelease%2FExe%2Ffmc_ld_iap.bin",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party-build-artifact"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378:225fdbd165d55663",
+      "name": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FKEIL%2FObj%2Ffmc_ld_iap.bin",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party-build-artifact"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209:336273ad62227882",
+      "name": "SampleCode/StdDriver/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FFMC_IAP%2FVSCode%2Fbin%2Ffmc_ld_iap.bin",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/FMC_IAP/VSCode/bin/fmc_ld_iap.bin"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party-build-artifact"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca:15f3b042f35ad381",
+      "name": "SampleCode/StdDriver/UART_115200bps_SingleWire_ISP/Software/NuvoISP_UART_Single_Wire.exe",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FUART_115200bps_SingleWire_ISP%2FSoftware%2FNuvoISP_UART_Single_Wire.exe",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/UART_115200bps_SingleWire_ISP/Software/NuvoISP_UART_Single_Wire.exe"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183:a5f94c445c17f408",
+      "name": "SampleCode/StdDriver/USBD_Micro_Printer/Windows driver/NuvPos58_Driver.exe",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FUSBD_Micro_Printer%2FWindows%20driver%2FNuvPos58_Driver.exe",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/USBD_Micro_Printer/Windows driver/NuvPos58_Driver.exe"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db:0834cff93a752b20",
+      "name": "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X64.exe",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FUSBD_Printer_And_HID_Transfer%2FWindows%20driver%2FNUVPOS58_X64.exe",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X64.exe"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92:79d73c1470b69b8d",
+      "name": "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X86.exe",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=SampleCode%2FStdDriver%2FUSBD_Printer_And_HID_Transfer%2FWindows%20driver%2FNUVPOS58_X86.exe",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X86.exe"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44:df658793e1d20e85",
+      "name": "Tool/BLE/BLE_DTM_Lab_Test_Tool_v1.6B.exe",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=Tool%2FBLE%2FBLE_DTM_Lab_Test_Tool_v1.6B.exe",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Tool/BLE/BLE_DTM_Lab_Test_Tool_v1.6B.exe"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4:8a410d2341ad85c4",
+      "name": "Tool/BLE/FOTA_Tool_v0.0.3_210423.exe",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=Tool%2FBLE%2FFOTA_Tool_v0.0.3_210423.exe",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Tool/BLE/FOTA_Tool_v0.0.3_210423.exe"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756:d82c4a2c407f62ac",
+      "name": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hid.lib",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=Tool%2FHIDCtrlTransferTest%2FHIDCtrlTransferTest%2Fhid.lib",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Microsoft-Windows-SDK"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hid.lib"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "vendor-license"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4:275f308d9b6e7762",
+      "name": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidclass.lib",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=Tool%2FHIDCtrlTransferTest%2FHIDCtrlTransferTest%2Fhidclass.lib",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Microsoft-Windows-SDK"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidclass.lib"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "vendor-license"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb:4c7e6d49554252f4",
+      "name": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidparse.lib",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=Tool%2FHIDCtrlTransferTest%2FHIDCtrlTransferTest%2Fhidparse.lib",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Microsoft-Windows-SDK"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidparse.lib"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "vendor-license"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a:4a677cf779241274",
+      "name": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/setupapi.lib",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=Tool%2FHIDCtrlTransferTest%2FHIDCtrlTransferTest%2Fsetupapi.lib",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Microsoft-Windows-SDK"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/setupapi.lib"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "vendor-license"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f:78228f8aaa1ab4cb",
+      "name": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest.exe",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=Tool%2FHIDCtrlTransferTest%2FHIDCtrlTransferTest.exe",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest.exe"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4:43e8a20b5287d05e",
+      "name": "Tool/HIDTransferTest/HIDTransferTest/hid.lib",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=Tool%2FHIDTransferTest%2FHIDTransferTest%2Fhid.lib",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Microsoft-Windows-SDK"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Tool/HIDTransferTest/HIDTransferTest/hid.lib"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "vendor-license"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/components/TestSampleView/sca_binary-artifacts.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "binary-file:24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747:2c03afe34af981e7",
+      "name": "Tool/HIDTransferTest/HIDTransferTest.exe",
+      "version": "V3.07.000-59-gbebb6ece",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m031bsp-binary@V3.07.000-59-gbebb6ece?file_path=Tool%2FHIDTransferTest%2FHIDTransferTest.exe",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-Nuvoton-Proprietary"
+        }
+      ],
+      "scope": "required",
+      "description": "Binary artifact distributed in the M031BSP test-sample scope.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "test-sample"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Tool/HIDTransferTest/HIDTransferTest.exe"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "proprietary"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Nuvoton Software License Agreement.md"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact distributed file path, SHA-256, and BSP release"
+        }
+      ]
     }
   ],
   "dependencies": [
     {
-      "ref": "1f1142a0088e1cf1",
+      "ref": "c832c9ca5d224f24",
       "dependsOn": [
+        "binary-file:00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb:4c7e6d49554252f4",
+        "binary-file:00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666:8aa3d5ad788cb917",
+        "binary-file:0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d:e72e28f209ca554a",
+        "binary-file:205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe:53e4bcc516bd2598",
+        "binary-file:21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace:f2410f8bd466f21b",
+        "binary-file:22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947:516963b5f6d58de4",
+        "binary-file:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b08468b7f57a3b2e",
+        "binary-file:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b9791c799f7df765",
+        "binary-file:22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4:43e8a20b5287d05e",
+        "binary-file:24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747:2c03afe34af981e7",
+        "binary-file:2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143:0e0a1c77a5b88463",
+        "binary-file:33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e:68daff7a084996eb",
+        "binary-file:3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756:d82c4a2c407f62ac",
+        "binary-file:453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2:dc36946726e4af10",
+        "binary-file:46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680:cf7b4ae79b3290df",
+        "binary-file:49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe:a2cf5bc16c578adc",
+        "binary-file:4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378:225fdbd165d55663",
+        "binary-file:4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14:d6895f2a4607765f",
+        "binary-file:51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4:8a410d2341ad85c4",
+        "binary-file:58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2:8267bdca0012f11f",
+        "binary-file:592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188:6f68e2c1d6f8a91d",
+        "binary-file:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:3b462e808ada9609",
+        "binary-file:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:83e47bf6f822fccb",
+        "binary-file:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:f836201765fe349f",
+        "binary-file:655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55:0df74fe587430c1c",
+        "binary-file:726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5:01998727f43c6508",
+        "binary-file:76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92:79d73c1470b69b8d",
+        "binary-file:7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca:15f3b042f35ad381",
+        "binary-file:7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a:4a677cf779241274",
+        "binary-file:8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4:275f308d9b6e7762",
+        "binary-file:9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f:78228f8aaa1ab4cb",
+        "binary-file:911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183:a5f94c445c17f408",
+        "binary-file:9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47:395c5cd7d9cae89e",
+        "binary-file:97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be:421520d4561401ee",
+        "binary-file:b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103:4029f756d5aba6ea",
+        "binary-file:bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff:7ea1a3a7b552965e",
+        "binary-file:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:bd42d6bd491296ab",
+        "binary-file:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:e05d0c4f3554d3c5",
+        "binary-file:ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db:0834cff93a752b20",
+        "binary-file:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44:df658793e1d20e85",
+        "binary-file:d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209:336273ad62227882",
+        "binary-file:ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c:e3b02a89dec958d0",
+        "binary-file:fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921:6dd0d472170e5ddc",
+        "binary-file:fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a:319f82be2aceb655",
         "m031bsp:test-sample-component:samplecode"
       ]
     }
