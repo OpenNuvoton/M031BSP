@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:9c20b145-4e29-4ebd-bb0c-30c897be1217",
+  "serialNumber": "urn:uuid:6ff802c1-ead5-4874-9628-a5cf596ae3d8",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-01T18:19:43+08:00",
+    "timestamp": "2026-09-01T18:40:58+08:00",
     "tools": {
       "components": [
         {
@@ -20,14 +20,14 @@
       "bom-ref": "3a3201c88deb78c5",
       "type": "library",
       "name": "MCU Driver",
-      "version": "V3.07.000-59-gbebb6ece",
+      "version": "V3.07.000-60-g03e4dea8",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-driver@V3.07.000-59-gbebb6ece",
+      "purl": "pkg:generic/nuvoton/mcu-driver@V3.07.000-60-g03e4dea8",
       "licenses": [
         {
           "license": {
@@ -107,14 +107,14 @@
       "type": "library",
       "bom-ref": "m031bsp:product-component:library-device",
       "name": "M031 Device",
-      "version": "V3.07.000-59-gbebb6ece",
+      "version": "V3.07.000-60-g03e4dea8",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-device@V3.07.000-59-gbebb6ece",
+      "purl": "pkg:generic/nuvoton/library-device@V3.07.000-60-g03e4dea8",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -165,14 +165,14 @@
       "type": "library",
       "bom-ref": "m031bsp:product-component:library-stddriver",
       "name": "M031 StdDriver",
-      "version": "V3.07.000-59-gbebb6ece",
+      "version": "V3.07.000-60-g03e4dea8",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-stddriver@V3.07.000-59-gbebb6ece",
+      "purl": "pkg:generic/nuvoton/library-stddriver@V3.07.000-60-g03e4dea8",
       "hashes": [
         {
           "alg": "SHA-256",
