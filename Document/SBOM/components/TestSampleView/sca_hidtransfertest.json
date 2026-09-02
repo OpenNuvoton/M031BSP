@@ -7,6 +7,9 @@
                            "version":  "1.1.0.0",
                            "scope":  "required",
                            "author":  "Nuvoton Technology Corporation",
+                           "supplier":  {
+                                            "name":  "Nuvoton Technology Corporation"
+                                        },
                            "purl":  "pkg:generic/hidtransfertest@1.1.0.0",
                            "description":  "Host-side HID transfer testing utility.",
                            "licenses":  [

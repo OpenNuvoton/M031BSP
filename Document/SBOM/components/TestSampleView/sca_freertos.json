@@ -7,6 +7,9 @@
                            "version":  "10.4.3",
                            "scope":  "required",
                            "author":  "FreeRTOS Project / Amazon",
+                           "supplier":  {
+                                            "name":  "FreeRTOS Project / Amazon"
+                                        },
                            "purl":  "pkg:generic/freertos-kernel@10.4.3",
                            "description":  "FreeRTOS Kernel included in M031 BSP test sample scope.",
                            "licenses":  [

@@ -7,6 +7,9 @@
                            "version":  "1.0.0.0",
                            "scope":  "required",
                            "author":  "Nuvoton Technology Corporation",
+                           "supplier":  {
+                                            "name":  "Nuvoton Technology Corporation"
+                                        },
                            "purl":  "pkg:generic/fota-tool@1.0.0.0",
                            "description":  "Bluetooth firmware over-the-air update utility.",
                            "licenses":  [

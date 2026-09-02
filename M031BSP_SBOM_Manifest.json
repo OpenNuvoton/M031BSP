@@ -1,14 +1,14 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:4b6cbca9-5aaa-4abf-8f09-946128c9b93e",
-  "createdAt": "2026-09-01T11:22:32.099822Z",
+  "serialNumber": "urn:uuid:72ce3c2d-c425-48ee-b24d-1c09f334e99d",
+  "createdAt": "2026-09-02T01:18:40.665095Z",
   "bsp": {
     "name": "M031BSP",
-    "version": "V3.07.000-60-g03e4dea8",
+    "version": "V3.07.000-70-ga4e2a8c8",
     "releaseIdentifierSource": "git describe --tags --always --long --abbrev=8 --dirty",
-    "gitDescribe": "V3.07.000-60-g03e4dea8",
-    "gitCommit": "03e4dea8e08fab0a90d24af37261ca2a62a1358f",
+    "gitDescribe": "V3.07.000-70-ga4e2a8c8",
+    "gitCommit": "a4e2a8c8f65c6214cf388e8a65b1e1079d7f5cd0",
     "sourceTreeState": "clean"
   },
   "generationTools": [
@@ -48,14 +48,14 @@
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:6ff802c1-ead5-4874-9628-a5cf596ae3d8",
+      "serialNumber": "urn:uuid:995a102a-0edc-46c0-b8f2-59186e5037a0",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-01T18:40:58+08:00",
+      "generatedTimestamp": "2026-09-02T09:17:21+08:00",
       "metadataComponent": {
-        "bomRef": "3a3201c88deb78c5",
+        "bomRef": "6aec29427ee362d1",
         "type": "library",
         "name": "MCU Driver",
-        "version": "V3.07.000-60-g03e4dea8",
+        "version": "V3.07.000-70-ga4e2a8c8",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -124,7 +124,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "2626af12c10529750cab0b4293c1f61e540c8959ee749720e02f37b9f5f756df"
+        "value": "5bf7b81b5fb8b97feef8c9e86793f768e722ce277e3e275dcc79e97dc936332a"
       }
     },
     {
@@ -132,14 +132,14 @@
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:ebc9f43d-3793-4178-89d5-64ae653c332c",
+      "serialNumber": "urn:uuid:af695cce-85e4-4725-8210-9a214fe5aa44",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-01T19:21:12+08:00",
+      "generatedTimestamp": "2026-09-02T09:17:49+08:00",
       "metadataComponent": {
-        "bomRef": "c832c9ca5d224f24",
+        "bomRef": "0c318f422c21e438",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "V3.07.000-60-g03e4dea8",
+        "version": "V3.07.000-70-ga4e2a8c8",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -186,14 +186,16 @@
       "scope": "Components used only for examples, demonstrations, validation, host-side utilities, or testing; not included in product runtime unless explicitly integrated by the user.",
       "isProductRuntimeScope": false,
       "componentSummary": {
-        "componentCount": 69,
+        "componentCount": 73,
         "componentCountByType": {
-          "application": 13,
+          "application": 17,
           "device-driver": 3,
           "file": 44,
           "library": 9
         },
         "applicationNames": [
+          "/Tool/HIDTransferTest/HIDTransferTest",
+          "BLE Application",
           "BLE_DTM_Lab_Test_Tool",
           "FOTA Tool",
           "HIDCtrlTransferTest",
@@ -203,15 +205,17 @@
           "NUVPOS58",
           "NuBLE Android",
           "NuvPos58 Driver",
+          "TODO: <Product name>",
           "WDF Coinstaller",
-          "Windows Driver Foundation - User-mode Platform Device Update Co-Installer"
+          "Windows Driver Foundation - User-mode Platform Device Update Co-Installer",
+          "WindowsApplication1"
         ],
         "fileComponentCount": 44,
         "fileComponentWithHashCount": 44
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "eba3a14f30ecf10b675001599b66b6b57662d0759ca2f53224deafc860ffe334"
+        "value": "c653ecd24951eab69c164683d5b728af00606642df6576a97cf01b19f72607c8"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,

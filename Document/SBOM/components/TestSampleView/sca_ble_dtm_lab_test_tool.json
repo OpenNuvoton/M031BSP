@@ -7,6 +7,9 @@
                            "version":  "1.0.0.1",
                            "scope":  "required",
                            "author":  "Nuvoton Technology Corporation",
+                           "supplier":  {
+                                            "name":  "Nuvoton Technology Corporation"
+                                        },
                            "purl":  "pkg:generic/ble-dtm-lab-test-tool@1.0.0.1",
                            "description":  "BLE DTM laboratory testing utility.",
                            "licenses":  [

@@ -7,6 +7,9 @@
                            "version":  "6.1.0",
                            "scope":  "required",
                            "author":  "Arm Ltd.",
+                           "supplier":  {
+                                            "name":  "Arm Ltd."
+                                        },
                            "purl":  "pkg:generic/cmsis@6.1.0",
                            "description":  "Arm Cortex Microcontroller Software Interface Standard (CMSIS) framework used by M031 BSP.",
                            "licenses":  [

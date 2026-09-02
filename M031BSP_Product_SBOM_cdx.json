@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:6ff802c1-ead5-4874-9628-a5cf596ae3d8",
+  "serialNumber": "urn:uuid:995a102a-0edc-46c0-b8f2-59186e5037a0",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-01T18:40:58+08:00",
+    "timestamp": "2026-09-02T09:17:21+08:00",
     "tools": {
       "components": [
         {
@@ -17,17 +17,17 @@
       ]
     },
     "component": {
-      "bom-ref": "3a3201c88deb78c5",
+      "bom-ref": "6aec29427ee362d1",
       "type": "library",
       "name": "MCU Driver",
-      "version": "V3.07.000-60-g03e4dea8",
+      "version": "V3.07.000-70-ga4e2a8c8",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-driver@V3.07.000-60-g03e4dea8",
+      "purl": "pkg:generic/nuvoton/mcu-driver@V3.07.000-70-ga4e2a8c8",
       "licenses": [
         {
           "license": {
@@ -107,18 +107,18 @@
       "type": "library",
       "bom-ref": "m031bsp:product-component:library-device",
       "name": "M031 Device",
-      "version": "V3.07.000-60-g03e4dea8",
+      "version": "V3.07.000-70-ga4e2a8c8",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-device@V3.07.000-60-g03e4dea8",
+      "purl": "pkg:generic/nuvoton/library-device@V3.07.000-70-ga4e2a8c8",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "c66b1f03f38efd77b4015e60a6ec629d5a47a08c13b4b18a674c419689016c16"
+          "content": "fba49751653567b0344517d0c99df55f665a52057bbaade687721591c08353e6"
         }
       ],
       "licenses": [
@@ -165,18 +165,18 @@
       "type": "library",
       "bom-ref": "m031bsp:product-component:library-stddriver",
       "name": "M031 StdDriver",
-      "version": "V3.07.000-60-g03e4dea8",
+      "version": "V3.07.000-70-ga4e2a8c8",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-stddriver@V3.07.000-60-g03e4dea8",
+      "purl": "pkg:generic/nuvoton/library-stddriver@V3.07.000-70-ga4e2a8c8",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "a0269a3cb94d1fdcd8df0dbc78be4b42792c98e2a62572ecbf387f7b1bd278e0"
+          "content": "d85f4ab5e80e19bae06702d35033e3b005681fa4c54390c154b68d090a728788"
         }
       ],
       "licenses": [
@@ -226,6 +226,9 @@
       "version": "6.1.0",
       "scope": "required",
       "author": "Arm Ltd.",
+      "supplier": {
+        "name": "Arm Ltd."
+      },
       "purl": "pkg:generic/cmsis@6.1.0",
       "description": "Arm Cortex Microcontroller Software Interface Standard (CMSIS) framework used by M031 BSP.",
       "licenses": [
@@ -278,15 +281,12 @@
           "alg": "SHA-256",
           "content": "3b9195c5373a2a4dbfd968b083b3d7f5f446f9ec2e126f75928ac1ff4356b91e"
         }
-      ],
-      "supplier": {
-        "name": "Arm Ltd."
-      }
+      ]
     }
   ],
   "dependencies": [
     {
-      "ref": "3a3201c88deb78c5",
+      "ref": "6aec29427ee362d1",
       "dependsOn": [
         "m031bsp:product-component:library-device",
         "m031bsp:product-component:library-stddriver"

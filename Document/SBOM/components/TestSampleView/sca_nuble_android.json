@@ -7,6 +7,9 @@
                            "version":  "2.2.13",
                            "scope":  "required",
                            "author":  "Nuvoton Technology Corporation",
+                           "supplier":  {
+                                            "name":  "Nuvoton Technology Corporation"
+                                        },
                            "purl":  "pkg:generic/nuble-android@2.2.13",
                            "description":  "Android BLE utility application.",
                            "licenses":  [
