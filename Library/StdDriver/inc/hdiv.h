@@ -40,7 +40,7 @@ extern "C"
  * @details    This is a division function to calculate x/y
  *
  */
-static __INLINE int32_t HDIV_Div(int32_t x, int16_t y)
+__STATIC_INLINE int32_t HDIV_Div(int32_t x, int16_t y)
 {
     uint32_t *p32;
 
@@ -64,7 +64,7 @@ static __INLINE int32_t HDIV_Div(int32_t x, int16_t y)
  *
  * @details    This function is used to calculate the remainder of x/y.
  */
-static __INLINE int16_t HDIV_Mod(int32_t x, int16_t y)
+__STATIC_INLINE int16_t HDIV_Mod(int32_t x, int16_t y)
 {
     uint32_t *p32;
 

@@ -311,7 +311,7 @@ extern "C"
   * @return None
   * @details This function will set RZCEN or LZCEN bit of SPI_I2SCTL register to enable zero cross detection function.
   */
-static __INLINE void SPII2S_ENABLE_TX_ZCD(SPI_T *i2s, uint32_t u32ChMask)
+__STATIC_INLINE void SPII2S_ENABLE_TX_ZCD(SPI_T *i2s, uint32_t u32ChMask)
 {
     if(u32ChMask == SPII2S_RIGHT)
         i2s->I2SCTL |= SPI_I2SCTL_RZCEN_Msk;
@@ -328,7 +328,7 @@ static __INLINE void SPII2S_ENABLE_TX_ZCD(SPI_T *i2s, uint32_t u32ChMask)
   * @return None
   * @details This function will clear RZCEN or LZCEN bit of SPI_I2SCTL register to disable zero cross detection function.
   */
-static __INLINE void SPII2S_DISABLE_TX_ZCD(SPI_T *i2s, uint32_t u32ChMask)
+__STATIC_INLINE void SPII2S_DISABLE_TX_ZCD(SPI_T *i2s, uint32_t u32ChMask)
 {
     if(u32ChMask == SPII2S_RIGHT)
         i2s->I2SCTL &= ~SPI_I2SCTL_RZCEN_Msk;
@@ -441,7 +441,7 @@ static __INLINE void SPII2S_DISABLE_TX_ZCD(SPI_T *i2s, uint32_t u32ChMask)
   * @return None
   * @details This function selects the recording source channel of monaural mode.
   */
-static __INLINE void SPII2S_SET_MONO_RX_CHANNEL(SPI_T *i2s, uint32_t u32Ch)
+__STATIC_INLINE void SPII2S_SET_MONO_RX_CHANNEL(SPI_T *i2s, uint32_t u32Ch)
 {
     u32Ch == SPII2S_MONO_LEFT ?
     (i2s->I2SCTL |= SPI_I2SCTL_RXLCH_Msk) :
