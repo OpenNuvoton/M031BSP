@@ -1,0 +1,3763 @@
+{
+  "schemaVersion": "1.0",
+  "databaseName": "M031 binary/license evidence projection",
+  "sbomSyncBaseCommit": "14039966eeb207be101a34d1de4942fc09864af3",
+  "formalSourceCommit": "4dc3d5af62330f8a4366d2392c3b2f773200b3ab",
+  "formalRelease": "V3.07.000-71-g4dc3d5af",
+  "formalDatabaseSha256": "7c8e65bd1c120a885dd7a34a4067f88607f6fdd0237f484d60f2898832f0d343",
+  "policy": "Records are keyed by exact repository-relative POSIX path and SHA-256. NOASSERTION is used when existing evidence is conflicting, stale, or absent.",
+  "records": [
+    {
+      "id": "artifact:4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14:d6895f2a4607765f",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0.dll",
+      "sha256": "4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14",
+      "binding": "SHA-256: 4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14",
+      "componentRef": "artifact:4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14:d6895f2a4607765f",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "LGPL-2.1-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LGPL-2.1-or-later",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-libusb0-dll-sha256-4f18b5d2"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-libusb0-dll-sha256-4f18b5d2",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-libusb0-dll.md",
+          "sourceEvidenceSha256": "fc3448c9b865f92f8a6af9c43482a77afdb4489b221d56fb0ab7d5d8083242d0",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:f836201765fe349f",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0_x86.dll",
+      "sha256": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "binding": "SHA-256: 5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "componentRef": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:f836201765fe349f",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "LGPL-2.1-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LGPL-2.1-or-later",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-libusb0-x86-dll-sha256-5e84d136"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-libusb0-x86-dll-sha256-5e84d136",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-libusb0-x86-dll.md",
+          "sourceEvidenceSha256": "bf6d8b3eee54117a02fd7046d415546cab18e63d58841f65859faa52714bf92e",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188:6f68e2c1d6f8a91d",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK.dll",
+      "sha256": "592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188",
+      "binding": "SHA-256: 592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188",
+      "componentRef": "artifact:592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188:6f68e2c1d6f8a91d",
+      "supplier": {
+        "name": "libusbK project"
+      },
+      "license": "BSD-3-Clause OR GPL-3.0-only",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "BSD-3-Clause OR GPL-3.0-only",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-libusbk-dll-sha256-592cd24b"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-libusbk-dll-sha256-592cd24b",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-libusbk-dll.md",
+          "sourceEvidenceSha256": "4139d0df4c69e1ce49eaae328920bfab26e45e3c90a77059988870c357ce7eb5",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:1df66ff22e2eaec27180756d90926ca5b07e8bcf6b0e4e3c56471e63a3a05fa6:05716b7f8143959d",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK.sys",
+      "sha256": "1df66ff22e2eaec27180756d90926ca5b07e8bcf6b0e4e3c56471e63a3a05fa6",
+      "binding": "SHA-256: 1df66ff22e2eaec27180756d90926ca5b07e8bcf6b0e4e3c56471e63a3a05fa6",
+      "componentRef": "artifact:1df66ff22e2eaec27180756d90926ca5b07e8bcf6b0e4e3c56471e63a3a05fa6:05716b7f8143959d",
+      "supplier": {
+        "name": "libusbK project"
+      },
+      "license": "BSD-3-Clause OR GPL-3.0-only",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "BSD-3-Clause OR GPL-3.0-only"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-libusbk-sys-sha256-1df66ff2"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-libusbk-sys-sha256-1df66ff2",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-libusbk-sys.md",
+          "sourceEvidenceSha256": "9939bc188b08c3fdd9e571101c36c1a1a1ba177ebc0d4a59007da213c10dcbdb",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b9791c799f7df765",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK_x86.dll",
+      "sha256": "22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4",
+      "binding": "SHA-256: 22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4",
+      "componentRef": "artifact:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b9791c799f7df765",
+      "supplier": {
+        "name": "libusbK project"
+      },
+      "license": "BSD-3-Clause OR GPL-3.0-only",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "BSD-3-Clause OR GPL-3.0-only",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-libusbk-x86-dll-sha256-22803c71"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-libusbk-x86-dll-sha256-22803c71",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-libusbk-x86-dll.md",
+          "sourceEvidenceSha256": "fea6534d6bd539c924263d2ee05dedf40e7f014badec8073086f2dbc0f454a68",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:e05d0c4f3554d3c5",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/WdfCoInstaller01011.dll",
+      "sha256": "c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+      "binding": "SHA-256: c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+      "componentRef": "artifact:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:e05d0c4f3554d3c5",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "license": "Microsoft Software License Terms",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Microsoft-Software-License-Terms",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-wdfcoinstaller01011-dll-sha256-c7649879"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-wdfcoinstaller01011-dll-sha256-c7649879",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-wdfcoinstaller01011-dll.md",
+          "sourceEvidenceSha256": "d080a58155bbcee95196692fe4916a0c03797fab8b36d9ec6df40e99c7e1213b",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:5f9ae7e9ac3d3d0645c701f3be886d9cb4ea2c5090f40c6831879b7fbb2998c1:4b47c74bb69ea84e",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/Nu_DFU.cat",
+      "sha256": "5f9ae7e9ac3d3d0645c701f3be886d9cb4ea2c5090f40c6831879b7fbb2998c1",
+      "binding": "SHA-256: 5f9ae7e9ac3d3d0645c701f3be886d9cb4ea2c5090f40c6831879b7fbb2998c1",
+      "componentRef": "artifact:5f9ae7e9ac3d3d0645c701f3be886d9cb4ea2c5090f40c6831879b7fbb2998c1:4b47c74bb69ea84e",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:b432a5cc7275d15d3fd05050642b6184fff94a8b9140ccc80ca15aa375cdd869:fca43fa26cea158d",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/Nu_DFU.inf",
+      "sha256": "b432a5cc7275d15d3fd05050642b6184fff94a8b9140ccc80ca15aa375cdd869",
+      "binding": "SHA-256: b432a5cc7275d15d3fd05050642b6184fff94a8b9140ccc80ca15aa375cdd869",
+      "componentRef": "artifact:b432a5cc7275d15d3fd05050642b6184fff94a8b9140ccc80ca15aa375cdd869:fca43fa26cea158d",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:3b462e808ada9609",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/install-filter.exe",
+      "sha256": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "binding": "SHA-256: 5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "componentRef": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:3b462e808ada9609",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "LGPL-2.1-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LGPL-2.1-or-later",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-install-filter-exe-sha256-5e84d136"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-install-filter-exe-sha256-5e84d136",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-install-filter-exe.md",
+          "sourceEvidenceSha256": "461bc868e475f7e68433a015013122306b2c9c48844771516ac6447d616c52c7",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:83e47bf6f822fccb",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0.dll",
+      "sha256": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "binding": "SHA-256: 5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "componentRef": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:83e47bf6f822fccb",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "LGPL-2.1-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LGPL-2.1-or-later",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-libusb0-dll-sha256-5e84d136"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-libusb0-dll-sha256-5e84d136",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-libusb0-dll.md",
+          "sourceEvidenceSha256": "b58e95b36bc02292609bab19fa63717f05a8fb38fb582161d471289c2e93fa6c",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:aa7d75a4d01b405aab7c848674bbed392b64c6e374e20fd72adc3c96294e2f00:63317fac0af71aac",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0.sys",
+      "sha256": "aa7d75a4d01b405aab7c848674bbed392b64c6e374e20fd72adc3c96294e2f00",
+      "binding": "SHA-256: aa7d75a4d01b405aab7c848674bbed392b64c6e374e20fd72adc3c96294e2f00",
+      "componentRef": "artifact:aa7d75a4d01b405aab7c848674bbed392b64c6e374e20fd72adc3c96294e2f00:63317fac0af71aac",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "GPL-2.0-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "GPL-2.0-or-later"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-libusb0-sys-sha256-aa7d75a4"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-libusb0-sys-sha256-aa7d75a4",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-libusb0-sys.md",
+          "sourceEvidenceSha256": "4c89d593d4d27a62b3af200b823fb954020a86284673421173bbf6032332e355",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666:8aa3d5ad788cb917",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0_x86.dll",
+      "sha256": "00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666",
+      "binding": "SHA-256: 00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666",
+      "componentRef": "artifact:00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666:8aa3d5ad788cb917",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "LGPL-2.1-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LGPL-2.1-or-later",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-libusb0-x86-dll-sha256-00caca07"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-libusb0-x86-dll-sha256-00caca07",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-libusb0-x86-dll.md",
+          "sourceEvidenceSha256": "389d1248eec5ee111213a9acb023d1b9827a729fa9123d2b1e9fe3c143954bfc",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b08468b7f57a3b2e",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusbK.dll",
+      "sha256": "22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4",
+      "binding": "SHA-256: 22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4",
+      "componentRef": "artifact:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b08468b7f57a3b2e",
+      "supplier": {
+        "name": "libusbK project"
+      },
+      "license": "BSD-3-Clause OR GPL-3.0-only",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "BSD-3-Clause OR GPL-3.0-only",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-libusbk-dll-sha256-22803c71"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-libusbk-dll-sha256-22803c71",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-libusbk-dll.md",
+          "sourceEvidenceSha256": "ed1e70d0d6dbd31b41d9aa95e27121f4c9dd53267c941ee3edd0cfc2ca59580f",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:6265ae9ae5c49f515613f0b749ad8390a1b34ca326203318bffeb6c2c281d2d0:24a26b41086e9a93",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusbK.sys",
+      "sha256": "6265ae9ae5c49f515613f0b749ad8390a1b34ca326203318bffeb6c2c281d2d0",
+      "binding": "SHA-256: 6265ae9ae5c49f515613f0b749ad8390a1b34ca326203318bffeb6c2c281d2d0",
+      "componentRef": "artifact:6265ae9ae5c49f515613f0b749ad8390a1b34ca326203318bffeb6c2c281d2d0:24a26b41086e9a93",
+      "supplier": {
+        "name": "libusbK project"
+      },
+      "license": "BSD-3-Clause OR GPL-3.0-only",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "BSD-3-Clause OR GPL-3.0-only"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-libusbk-sys-sha256-6265ae9a"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-libusbk-sys-sha256-6265ae9a",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-libusbk-sys.md",
+          "sourceEvidenceSha256": "1d0f48b3f33d09875957cc8dde9e2669ced2616948e526588ceb6eaaa04eb8c1",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:bd42d6bd491296ab",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/WdfCoInstaller01011.dll",
+      "sha256": "c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+      "binding": "SHA-256: c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+      "componentRef": "artifact:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:bd42d6bd491296ab",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "license": "Microsoft Software License Terms",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Microsoft-Software-License-Terms",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-WdfCoInstaller01011-sha256-c7649879",
+        "windowsdriver-x86-wdfcoinstaller01011-dll-sha256-c7649879"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-WdfCoInstaller01011-sha256-c7649879",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-wdfcoinstaller01011-dll.md",
+          "sourceEvidenceSha256": "3b9d7d32b21ed617a344095018bd1efce8c8968a28bf69fb6f55902a1e54999a",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-21",
+          "confidence": "medium"
+        },
+        {
+          "formalRecordId": "windowsdriver-x86-wdfcoinstaller01011-dll-sha256-c7649879",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-wdfcoinstaller01011-dll.md",
+          "sourceEvidenceSha256": "3b9d7d32b21ed617a344095018bd1efce8c8968a28bf69fb6f55902a1e54999a",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c:e3b02a89dec958d0",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/winusbcoinstaller2.dll",
+      "sha256": "ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c",
+      "binding": "SHA-256: ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c",
+      "componentRef": "artifact:ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c:e3b02a89dec958d0",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "license": "Microsoft Software License Terms",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Microsoft-Software-License-Terms",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-winusbcoinstaller2-dll-sha256-ebe3b770"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-winusbcoinstaller2-dll-sha256-ebe3b770",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-winusbcoinstaller2-dll.md",
+          "sourceEvidenceSha256": "b0d19ae82d7ce187b97ecde1336006a2eb0cec3f10039884814149bd0a7f5c66",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e:68daff7a084996eb",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_C.a",
+      "sha256": "33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e",
+      "binding": "SHA-256: 33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e",
+      "componentRef": "artifact:33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e:68daff7a084996eb",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be:421520d4561401ee",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_NOCONN.a",
+      "sha256": "97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be",
+      "binding": "SHA-256: 97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be",
+      "componentRef": "artifact:97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be:421520d4561401ee",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d:e72e28f209ca554a",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_P.a",
+      "sha256": "0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d",
+      "binding": "SHA-256: 0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d",
+      "componentRef": "artifact:0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d:e72e28f209ca554a",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2:8267bdca0012f11f",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_PC.a",
+      "sha256": "58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2",
+      "binding": "SHA-256: 58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2",
+      "componentRef": "artifact:58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2:8267bdca0012f11f",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103:4029f756d5aba6ea",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_C.lib",
+      "sha256": "b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103",
+      "binding": "SHA-256: b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103",
+      "componentRef": "artifact:b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103:4029f756d5aba6ea",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947:516963b5f6d58de4",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_NOCONN.lib",
+      "sha256": "22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947",
+      "binding": "SHA-256: 22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947",
+      "componentRef": "artifact:22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947:516963b5f6d58de4",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe:53e4bcc516bd2598",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_P.lib",
+      "sha256": "205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe",
+      "binding": "SHA-256: 205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe",
+      "componentRef": "artifact:205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe:53e4bcc516bd2598",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe:a2cf5bc16c578adc",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_PC.lib",
+      "sha256": "49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe",
+      "binding": "SHA-256: 49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe",
+      "componentRef": "artifact:49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe:a2cf5bc16c578adc",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2:dc36946726e4af10",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_C.a",
+      "sha256": "453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2",
+      "binding": "SHA-256: 453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2",
+      "componentRef": "artifact:453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2:dc36946726e4af10",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47:395c5cd7d9cae89e",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_NOCONN.a",
+      "sha256": "9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47",
+      "binding": "SHA-256: 9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47",
+      "componentRef": "artifact:9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47:395c5cd7d9cae89e",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55:0df74fe587430c1c",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_P.a",
+      "sha256": "655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55",
+      "binding": "SHA-256: 655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55",
+      "componentRef": "artifact:655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55:0df74fe587430c1c",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace:f2410f8bd466f21b",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_PC.a",
+      "sha256": "21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace",
+      "binding": "SHA-256: 21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace",
+      "componentRef": "artifact:21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace:f2410f8bd466f21b",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a:319f82be2aceb655",
+      "path": "SampleCode/RegBased/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin",
+      "sha256": "fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a",
+      "binding": "SHA-256: fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a",
+      "componentRef": "artifact:fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a:319f82be2aceb655",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921:6dd0d472170e5ddc",
+      "path": "SampleCode/RegBased/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
+      "sha256": "fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921",
+      "binding": "SHA-256: fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921",
+      "componentRef": "artifact:fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921:6dd0d472170e5ddc",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680:cf7b4ae79b3290df",
+      "path": "SampleCode/RegBased/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin",
+      "sha256": "46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680",
+      "binding": "SHA-256: 46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680",
+      "componentRef": "artifact:46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680:cf7b4ae79b3290df",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5:01998727f43c6508",
+      "path": "SampleCode/RegBased/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
+      "sha256": "726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5",
+      "binding": "SHA-256: 726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5",
+      "componentRef": "artifact:726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5:01998727f43c6508",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff:7ea1a3a7b552965e",
+      "path": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin",
+      "sha256": "bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff",
+      "binding": "SHA-256: bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff",
+      "componentRef": "artifact:bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff:7ea1a3a7b552965e",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143:0e0a1c77a5b88463",
+      "path": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
+      "sha256": "2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143",
+      "binding": "SHA-256: 2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143",
+      "componentRef": "artifact:2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143:0e0a1c77a5b88463",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378:225fdbd165d55663",
+      "path": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin",
+      "sha256": "4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378",
+      "binding": "SHA-256: 4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378",
+      "componentRef": "artifact:4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378:225fdbd165d55663",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209:336273ad62227882",
+      "path": "SampleCode/StdDriver/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
+      "sha256": "d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209",
+      "binding": "SHA-256: d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209",
+      "componentRef": "artifact:d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209:336273ad62227882",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca:15f3b042f35ad381",
+      "path": "SampleCode/StdDriver/UART_115200bps_SingleWire_ISP/Software/NuvoISP_UART_Single_Wire.exe",
+      "sha256": "7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca",
+      "binding": "SHA-256: 7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca",
+      "componentRef": "artifact:7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca:15f3b042f35ad381",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Apache-2.0",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "Apache-2.0",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "samplecode-uart-single-wire-isp-exe-sha256-7a1f198b"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "samplecode-uart-single-wire-isp-exe-sha256-7a1f198b",
+          "sourceEvidencePath": "license-evidence/samplecode-uart-single-wire-isp-exe.md",
+          "sourceEvidenceSha256": "dda85dab1adf07c9cdc0a80dc3291859e05750908127699e17fafb5996aa603a",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-08-28",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183:a5f94c445c17f408",
+      "path": "SampleCode/StdDriver/USBD_Micro_Printer/Windows driver/NuvPos58_Driver.exe",
+      "sha256": "911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183",
+      "binding": "SHA-256: 911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183",
+      "componentRef": "artifact:911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183:a5f94c445c17f408",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Nuvoton Software License Agreement",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "samplecode-usbd-micro-printer-nuvpos58-driver-exe-sha256-911e4c16"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "samplecode-usbd-micro-printer-nuvpos58-driver-exe-sha256-911e4c16",
+          "sourceEvidencePath": "license-evidence/samplecode-usbd-micro-printer-nuvpos58-driver-exe.md",
+          "sourceEvidenceSha256": "023496b951b5c7043f995e01ca891e6662a71dfcd9cc148f067314ae146e2222",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-25",
+          "confidence": "high"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db:0834cff93a752b20",
+      "path": "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X64.exe",
+      "sha256": "ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db",
+      "binding": "SHA-256: ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db",
+      "componentRef": "artifact:ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db:0834cff93a752b20",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Nuvoton Software License Agreement",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "samplecode-usbd-printer-and-hid-transfer-nuvpos58-x64-exe-sha256-ce0ed66a"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "samplecode-usbd-printer-and-hid-transfer-nuvpos58-x64-exe-sha256-ce0ed66a",
+          "sourceEvidencePath": "license-evidence/samplecode-usbd-printer-and-hid-transfer-nuvpos58-x64-exe.md",
+          "sourceEvidenceSha256": "996a40a474efa07e48d4ba025137e24e21674f87eac2515af16bbef84cb73620",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-25",
+          "confidence": "high"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92:79d73c1470b69b8d",
+      "path": "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X86.exe",
+      "sha256": "76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92",
+      "binding": "SHA-256: 76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92",
+      "componentRef": "artifact:76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92:79d73c1470b69b8d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Nuvoton Software License Agreement",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "samplecode-usbd-printer-and-hid-transfer-nuvpos58-x86-exe-sha256-76e4d01d"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "samplecode-usbd-printer-and-hid-transfer-nuvpos58-x86-exe-sha256-76e4d01d",
+          "sourceEvidencePath": "license-evidence/samplecode-usbd-printer-and-hid-transfer-nuvpos58-x86-exe.md",
+          "sourceEvidenceSha256": "65aa0409908b7d0dcdc203f499118241bae430f92b2108337010cb95a9b516a6",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-25",
+          "confidence": "high"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:c52ff1835d5fe3d7912212ba1fa6910e4a5cf382a9f2f8a9054d0976e33f4fda:0fa884fae9839441",
+      "path": "SampleCode/StdDriver/USBD_VCOM_And_HID_Keyboard/Windows Driver/NuvotonCDC.inf",
+      "sha256": "c52ff1835d5fe3d7912212ba1fa6910e4a5cf382a9f2f8a9054d0976e33f4fda",
+      "binding": "SHA-256: c52ff1835d5fe3d7912212ba1fa6910e4a5cf382a9f2f8a9054d0976e33f4fda",
+      "componentRef": "artifact:c52ff1835d5fe3d7912212ba1fa6910e4a5cf382a9f2f8a9054d0976e33f4fda:0fa884fae9839441",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:9302b17c38a256538eab064a898a6a8dd862f15c8ab7dae022a6426ba1741f88:771e010d269de26b",
+      "path": "SampleCode/StdDriver/USBD_VCOM_And_HID_Transfer/Windows Driver/NuvotonCDC.inf",
+      "sha256": "9302b17c38a256538eab064a898a6a8dd862f15c8ab7dae022a6426ba1741f88",
+      "binding": "SHA-256: 9302b17c38a256538eab064a898a6a8dd862f15c8ab7dae022a6426ba1741f88",
+      "componentRef": "artifact:9302b17c38a256538eab064a898a6a8dd862f15c8ab7dae022a6426ba1741f88:771e010d269de26b",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:86b4607a15ac351ad12fbce4c4e5a0776e747b3c299b7bfaaf2f7e122ca32a9a:f11bd164cd5c1aff",
+      "path": "SampleCode/StdDriver/USBD_VCOM_And_Mass_Storage/Windows Driver/nuvotoncdc.cat",
+      "sha256": "86b4607a15ac351ad12fbce4c4e5a0776e747b3c299b7bfaaf2f7e122ca32a9a",
+      "binding": "SHA-256: 86b4607a15ac351ad12fbce4c4e5a0776e747b3c299b7bfaaf2f7e122ca32a9a",
+      "componentRef": "artifact:86b4607a15ac351ad12fbce4c4e5a0776e747b3c299b7bfaaf2f7e122ca32a9a:f11bd164cd5c1aff",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:e24005a5831b442af34eb82caed6a141707a9a307c7f54317389ff97d24e34fb:6dac6fea35a98ebd",
+      "path": "SampleCode/StdDriver/USBD_VCOM_And_Mass_Storage/Windows Driver/NuvotonCDC.inf",
+      "sha256": "e24005a5831b442af34eb82caed6a141707a9a307c7f54317389ff97d24e34fb",
+      "binding": "SHA-256: e24005a5831b442af34eb82caed6a141707a9a307c7f54317389ff97d24e34fb",
+      "componentRef": "artifact:e24005a5831b442af34eb82caed6a141707a9a307c7f54317389ff97d24e34fb:6dac6fea35a98ebd",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:e95072664412099f5a2e3a9947590a151ad3859ab61d30ad25615e9ea00049ba:fa21ae18bde8ddf5",
+      "path": "SampleCode/StdDriver/USBD_VCOM_DualPort/Windows Driver/nuvoton_daul_cdc0.cat",
+      "sha256": "e95072664412099f5a2e3a9947590a151ad3859ab61d30ad25615e9ea00049ba",
+      "binding": "SHA-256: e95072664412099f5a2e3a9947590a151ad3859ab61d30ad25615e9ea00049ba",
+      "componentRef": "artifact:e95072664412099f5a2e3a9947590a151ad3859ab61d30ad25615e9ea00049ba:fa21ae18bde8ddf5",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:50e4d1c80e74127bd753d45e2ac2c75e2a4cb7661ac3a2fdd98b6fc97ed97915:6bef28defcd839f9",
+      "path": "SampleCode/StdDriver/USBD_VCOM_DualPort/Windows Driver/nuvoton_daul_cdc1.cat",
+      "sha256": "50e4d1c80e74127bd753d45e2ac2c75e2a4cb7661ac3a2fdd98b6fc97ed97915",
+      "binding": "SHA-256: 50e4d1c80e74127bd753d45e2ac2c75e2a4cb7661ac3a2fdd98b6fc97ed97915",
+      "componentRef": "artifact:50e4d1c80e74127bd753d45e2ac2c75e2a4cb7661ac3a2fdd98b6fc97ed97915:6bef28defcd839f9",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:764d66cb75baccfab34a85783cd00d81fb82683a23268c4c62f269dd02db1927:d48f6c8ef0e968f5",
+      "path": "SampleCode/StdDriver/USBD_VCOM_DualPort/Windows Driver/Nuvoton_DUAL_CDC0.inf",
+      "sha256": "764d66cb75baccfab34a85783cd00d81fb82683a23268c4c62f269dd02db1927",
+      "binding": "SHA-256: 764d66cb75baccfab34a85783cd00d81fb82683a23268c4c62f269dd02db1927",
+      "componentRef": "artifact:764d66cb75baccfab34a85783cd00d81fb82683a23268c4c62f269dd02db1927:d48f6c8ef0e968f5",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:7b81c10c81dead4c1e2b1226f6ab378887aea5e58a56f33941008a0ee693371b:ff9e5b938c467588",
+      "path": "SampleCode/StdDriver/USBD_VCOM_DualPort/Windows Driver/Nuvoton_DUAL_CDC1.inf",
+      "sha256": "7b81c10c81dead4c1e2b1226f6ab378887aea5e58a56f33941008a0ee693371b",
+      "binding": "SHA-256: 7b81c10c81dead4c1e2b1226f6ab378887aea5e58a56f33941008a0ee693371b",
+      "componentRef": "artifact:7b81c10c81dead4c1e2b1226f6ab378887aea5e58a56f33941008a0ee693371b:ff9e5b938c467588",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:bac75c972b9aaa66b7b7b54a8894eeadaa32812c6db9c66fbfbcaac160b075ad:0e1f8b1e33a3d7b0",
+      "path": "SampleCode/StdDriver/USBD_VCOM_SerialEmulator/Windows Driver/nuvotoncdc.cat",
+      "sha256": "bac75c972b9aaa66b7b7b54a8894eeadaa32812c6db9c66fbfbcaac160b075ad",
+      "binding": "SHA-256: bac75c972b9aaa66b7b7b54a8894eeadaa32812c6db9c66fbfbcaac160b075ad",
+      "componentRef": "artifact:bac75c972b9aaa66b7b7b54a8894eeadaa32812c6db9c66fbfbcaac160b075ad:0e1f8b1e33a3d7b0",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:9039ff5dc29a10ce09c78a33a994f3fb499ae8890b6d8d930e25905982608628:9e592c992b33fd33",
+      "path": "SampleCode/StdDriver/USBD_VCOM_SerialEmulator/Windows Driver/NuvotonCDC.inf",
+      "sha256": "9039ff5dc29a10ce09c78a33a994f3fb499ae8890b6d8d930e25905982608628",
+      "binding": "SHA-256: 9039ff5dc29a10ce09c78a33a994f3fb499ae8890b6d8d930e25905982608628",
+      "componentRef": "artifact:9039ff5dc29a10ce09c78a33a994f3fb499ae8890b6d8d930e25905982608628:9e592c992b33fd33",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:261a4b82b19e68ae7e2bed31b191ce016aa3219a4fdda2a3b2c63e220421987a:903ea295e7f25a4d",
+      "path": "Tool/BLE/Android/NuBLE_v2.2.13-210728.apk",
+      "sha256": "261a4b82b19e68ae7e2bed31b191ce016aa3219a4fdda2a3b2c63e220421987a",
+      "binding": "SHA-256: 261a4b82b19e68ae7e2bed31b191ce016aa3219a4fdda2a3b2c63e220421987a",
+      "componentRef": "artifact:261a4b82b19e68ae7e2bed31b191ce016aa3219a4fdda2a3b2c63e220421987a:903ea295e7f25a4d",
+      "supplier": {
+        "name": "Nuvoton Technology Corporation"
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "EVID-01"
+      ],
+      "requiredEvidenceOrDecision": "Resolvable hash-bound Nuvoton license evidence for the exact APK.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44:df658793e1d20e85",
+      "path": "Tool/BLE/BLE_DTM_Lab_Test_Tool_v1.6B.exe",
+      "sha256": "d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44",
+      "binding": "SHA-256: d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44",
+      "componentRef": "artifact:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44:df658793e1d20e85",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Apache-2.0",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "Apache-2.0",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "tool-ble-dtm-lab-test-tool-exe-sha256-d00ad71a"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "tool-ble-dtm-lab-test-tool-exe-sha256-d00ad71a",
+          "sourceEvidencePath": "license-evidence/tool-ble-dtm-lab-test-tool-exe.md",
+          "sourceEvidenceSha256": "1549b1d1c219ed88aafa45e848a16c4cf45aa2e8e314eec446ac4bca40245893",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-08-28",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4:8a410d2341ad85c4",
+      "path": "Tool/BLE/FOTA_Tool_v0.0.3_210423.exe",
+      "sha256": "51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4",
+      "binding": "SHA-256: 51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4",
+      "componentRef": "artifact:51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4:8a410d2341ad85c4",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Apache-2.0",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "Apache-2.0",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "tool-ble-fota-tool-exe-sha256-51a18e92"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "tool-ble-fota-tool-exe-sha256-51a18e92",
+          "sourceEvidencePath": "license-evidence/tool-ble-fota-tool-exe.md",
+          "sourceEvidenceSha256": "b7d4bac335770f8266abfe409c0826130ed987a8d18c68768b531de3fd0b693f",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-08-28",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f:78228f8aaa1ab4cb",
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest.exe",
+      "sha256": "9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f",
+      "binding": "SHA-256: 9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f",
+      "componentRef": "artifact:9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f:78228f8aaa1ab4cb",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Apache-2.0",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "Apache-2.0",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "tool-hidctrltransfertest-exe-sha256-9099be6e"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "tool-hidctrltransfertest-exe-sha256-9099be6e",
+          "sourceEvidencePath": "license-evidence/tool-hidctrltransfertest-exe.md",
+          "sourceEvidenceSha256": "2780a5bd5c71a7c6ab9df195c1f055f1c99421b077db14e25644d9a1d0f265ef",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-08-28",
+          "confidence": "high"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756:d82c4a2c407f62ac",
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hid.lib",
+      "sha256": "3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756",
+      "binding": "SHA-256: 3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756",
+      "componentRef": "artifact:3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756:d82c4a2c407f62ac",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-02"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound Microsoft Windows SDK provenance and redistributable license terms for this exact import library.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4:275f308d9b6e7762",
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidclass.lib",
+      "sha256": "8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4",
+      "binding": "SHA-256: 8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4",
+      "componentRef": "artifact:8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4:275f308d9b6e7762",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-02"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound Microsoft Windows SDK provenance and redistributable license terms for this exact import library.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb:4c7e6d49554252f4",
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidparse.lib",
+      "sha256": "00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb",
+      "binding": "SHA-256: 00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb",
+      "componentRef": "artifact:00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb:4c7e6d49554252f4",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-02"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound Microsoft Windows SDK provenance and redistributable license terms for this exact import library.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a:4a677cf779241274",
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/setupapi.lib",
+      "sha256": "7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a",
+      "binding": "SHA-256: 7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a",
+      "componentRef": "artifact:7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a:4a677cf779241274",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-02"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound Microsoft Windows SDK provenance and redistributable license terms for this exact import library.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747:2c03afe34af981e7",
+      "path": "Tool/HIDTransferTest/HIDTransferTest.exe",
+      "sha256": "24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747",
+      "binding": "SHA-256: 24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747",
+      "componentRef": "artifact:24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747:2c03afe34af981e7",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Apache-2.0",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "Apache-2.0",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "tool-hidtransfertest-exe-sha256-24bdd0ba"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "tool-hidtransfertest-exe-sha256-24bdd0ba",
+          "sourceEvidencePath": "license-evidence/tool-hidtransfertest-exe-m031.md",
+          "sourceEvidenceSha256": "db95254022125915b721ff0eacfc800c2e28ae7ab9d6806039ed688d839e80d8",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-08-28",
+          "confidence": "high"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    },
+    {
+      "id": "artifact:22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4:43e8a20b5287d05e",
+      "path": "Tool/HIDTransferTest/HIDTransferTest/hid.lib",
+      "sha256": "22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4",
+      "binding": "SHA-256: 22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4",
+      "componentRef": "artifact:22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4:43e8a20b5287d05e",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-02"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound Microsoft Windows SDK provenance and redistributable license terms for this exact import library.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+    }
+  ],
+  "entries": [
+    {
+      "id": "artifact:4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14:d6895f2a4607765f",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0.dll",
+      "sha256": "4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14",
+      "binding": "SHA-256: 4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14",
+      "componentRef": "artifact:4f18b5d2c28aa66b648c8683c6d09b52b92cbbee85984bbefad5f38a64bc2a14:d6895f2a4607765f",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "LGPL-2.1-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LGPL-2.1-or-later",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-libusb0-dll-sha256-4f18b5d2"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-libusb0-dll-sha256-4f18b5d2",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-libusb0-dll.md",
+          "sourceEvidenceSha256": "fc3448c9b865f92f8a6af9c43482a77afdb4489b221d56fb0ab7d5d8083242d0",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:f836201765fe349f",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusb0_x86.dll",
+      "sha256": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "binding": "SHA-256: 5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "componentRef": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:f836201765fe349f",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "LGPL-2.1-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LGPL-2.1-or-later",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-libusb0-x86-dll-sha256-5e84d136"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-libusb0-x86-dll-sha256-5e84d136",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-libusb0-x86-dll.md",
+          "sourceEvidenceSha256": "bf6d8b3eee54117a02fd7046d415546cab18e63d58841f65859faa52714bf92e",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188:6f68e2c1d6f8a91d",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK.dll",
+      "sha256": "592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188",
+      "binding": "SHA-256: 592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188",
+      "componentRef": "artifact:592cd24bae321f1cb6cbe2f6e1bc5c05e279328e1c86814eb64ea1e89fdea188:6f68e2c1d6f8a91d",
+      "supplier": {
+        "name": "libusbK project"
+      },
+      "license": "BSD-3-Clause OR GPL-3.0-only",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "BSD-3-Clause OR GPL-3.0-only",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-libusbk-dll-sha256-592cd24b"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-libusbk-dll-sha256-592cd24b",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-libusbk-dll.md",
+          "sourceEvidenceSha256": "4139d0df4c69e1ce49eaae328920bfab26e45e3c90a77059988870c357ce7eb5",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:1df66ff22e2eaec27180756d90926ca5b07e8bcf6b0e4e3c56471e63a3a05fa6:05716b7f8143959d",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK.sys",
+      "sha256": "1df66ff22e2eaec27180756d90926ca5b07e8bcf6b0e4e3c56471e63a3a05fa6",
+      "binding": "SHA-256: 1df66ff22e2eaec27180756d90926ca5b07e8bcf6b0e4e3c56471e63a3a05fa6",
+      "componentRef": "artifact:1df66ff22e2eaec27180756d90926ca5b07e8bcf6b0e4e3c56471e63a3a05fa6:05716b7f8143959d",
+      "supplier": {
+        "name": "libusbK project"
+      },
+      "license": "BSD-3-Clause OR GPL-3.0-only",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "BSD-3-Clause OR GPL-3.0-only"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-libusbk-sys-sha256-1df66ff2"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-libusbk-sys-sha256-1df66ff2",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-libusbk-sys.md",
+          "sourceEvidenceSha256": "9939bc188b08c3fdd9e571101c36c1a1a1ba177ebc0d4a59007da213c10dcbdb",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b9791c799f7df765",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/libusbK_x86.dll",
+      "sha256": "22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4",
+      "binding": "SHA-256: 22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4",
+      "componentRef": "artifact:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b9791c799f7df765",
+      "supplier": {
+        "name": "libusbK project"
+      },
+      "license": "BSD-3-Clause OR GPL-3.0-only",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "BSD-3-Clause OR GPL-3.0-only",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-libusbk-x86-dll-sha256-22803c71"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-libusbk-x86-dll-sha256-22803c71",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-libusbk-x86-dll.md",
+          "sourceEvidenceSha256": "fea6534d6bd539c924263d2ee05dedf40e7f014badec8073086f2dbc0f454a68",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:e05d0c4f3554d3c5",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/amd64/WdfCoInstaller01011.dll",
+      "sha256": "c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+      "binding": "SHA-256: c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+      "componentRef": "artifact:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:e05d0c4f3554d3c5",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "license": "Microsoft Software License Terms",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Microsoft-Software-License-Terms",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-wdfcoinstaller01011-dll-sha256-c7649879"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-wdfcoinstaller01011-dll-sha256-c7649879",
+          "sourceEvidencePath": "license-evidence/windowsdriver-amd64-wdfcoinstaller01011-dll.md",
+          "sourceEvidenceSha256": "d080a58155bbcee95196692fe4916a0c03797fab8b36d9ec6df40e99c7e1213b",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:5f9ae7e9ac3d3d0645c701f3be886d9cb4ea2c5090f40c6831879b7fbb2998c1:4b47c74bb69ea84e",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/Nu_DFU.cat",
+      "sha256": "5f9ae7e9ac3d3d0645c701f3be886d9cb4ea2c5090f40c6831879b7fbb2998c1",
+      "binding": "SHA-256: 5f9ae7e9ac3d3d0645c701f3be886d9cb4ea2c5090f40c6831879b7fbb2998c1",
+      "componentRef": "artifact:5f9ae7e9ac3d3d0645c701f3be886d9cb4ea2c5090f40c6831879b7fbb2998c1:4b47c74bb69ea84e",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:b432a5cc7275d15d3fd05050642b6184fff94a8b9140ccc80ca15aa375cdd869:fca43fa26cea158d",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/Nu_DFU.inf",
+      "sha256": "b432a5cc7275d15d3fd05050642b6184fff94a8b9140ccc80ca15aa375cdd869",
+      "binding": "SHA-256: b432a5cc7275d15d3fd05050642b6184fff94a8b9140ccc80ca15aa375cdd869",
+      "componentRef": "artifact:b432a5cc7275d15d3fd05050642b6184fff94a8b9140ccc80ca15aa375cdd869:fca43fa26cea158d",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:3b462e808ada9609",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/install-filter.exe",
+      "sha256": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "binding": "SHA-256: 5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "componentRef": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:3b462e808ada9609",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "LGPL-2.1-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LGPL-2.1-or-later",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-install-filter-exe-sha256-5e84d136"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-install-filter-exe-sha256-5e84d136",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-install-filter-exe.md",
+          "sourceEvidenceSha256": "461bc868e475f7e68433a015013122306b2c9c48844771516ac6447d616c52c7",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:83e47bf6f822fccb",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0.dll",
+      "sha256": "5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "binding": "SHA-256: 5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76",
+      "componentRef": "artifact:5e84d13636fbce7869cddc8b20c7d83fa0063e98c319e8e5ab751edc9ee1da76:83e47bf6f822fccb",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "LGPL-2.1-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LGPL-2.1-or-later",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-libusb0-dll-sha256-5e84d136"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-libusb0-dll-sha256-5e84d136",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-libusb0-dll.md",
+          "sourceEvidenceSha256": "b58e95b36bc02292609bab19fa63717f05a8fb38fb582161d471289c2e93fa6c",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:aa7d75a4d01b405aab7c848674bbed392b64c6e374e20fd72adc3c96294e2f00:63317fac0af71aac",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0.sys",
+      "sha256": "aa7d75a4d01b405aab7c848674bbed392b64c6e374e20fd72adc3c96294e2f00",
+      "binding": "SHA-256: aa7d75a4d01b405aab7c848674bbed392b64c6e374e20fd72adc3c96294e2f00",
+      "componentRef": "artifact:aa7d75a4d01b405aab7c848674bbed392b64c6e374e20fd72adc3c96294e2f00:63317fac0af71aac",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "GPL-2.0-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "GPL-2.0-or-later"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-libusb0-sys-sha256-aa7d75a4"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-libusb0-sys-sha256-aa7d75a4",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-libusb0-sys.md",
+          "sourceEvidenceSha256": "4c89d593d4d27a62b3af200b823fb954020a86284673421173bbf6032332e355",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666:8aa3d5ad788cb917",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusb0_x86.dll",
+      "sha256": "00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666",
+      "binding": "SHA-256: 00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666",
+      "componentRef": "artifact:00caca07869b19d10b370552ac7cc2f6f2ee246fc15db11650f6cd3f4ef9b666:8aa3d5ad788cb917",
+      "supplier": {
+        "name": "libusb-win32 project"
+      },
+      "license": "LGPL-2.1-or-later",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LGPL-2.1-or-later",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-libusb0-x86-dll-sha256-00caca07"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-libusb0-x86-dll-sha256-00caca07",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-libusb0-x86-dll.md",
+          "sourceEvidenceSha256": "389d1248eec5ee111213a9acb023d1b9827a729fa9123d2b1e9fe3c143954bfc",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b08468b7f57a3b2e",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusbK.dll",
+      "sha256": "22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4",
+      "binding": "SHA-256: 22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4",
+      "componentRef": "artifact:22803c719494f193d22519bfaff9484fecdcf1fadd6f082efd024fcee0b97ba4:b08468b7f57a3b2e",
+      "supplier": {
+        "name": "libusbK project"
+      },
+      "license": "BSD-3-Clause OR GPL-3.0-only",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "BSD-3-Clause OR GPL-3.0-only",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-libusbk-dll-sha256-22803c71"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-libusbk-dll-sha256-22803c71",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-libusbk-dll.md",
+          "sourceEvidenceSha256": "ed1e70d0d6dbd31b41d9aa95e27121f4c9dd53267c941ee3edd0cfc2ca59580f",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:6265ae9ae5c49f515613f0b749ad8390a1b34ca326203318bffeb6c2c281d2d0:24a26b41086e9a93",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/libusbK.sys",
+      "sha256": "6265ae9ae5c49f515613f0b749ad8390a1b34ca326203318bffeb6c2c281d2d0",
+      "binding": "SHA-256: 6265ae9ae5c49f515613f0b749ad8390a1b34ca326203318bffeb6c2c281d2d0",
+      "componentRef": "artifact:6265ae9ae5c49f515613f0b749ad8390a1b34ca326203318bffeb6c2c281d2d0:24a26b41086e9a93",
+      "supplier": {
+        "name": "libusbK project"
+      },
+      "license": "BSD-3-Clause OR GPL-3.0-only",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "BSD-3-Clause OR GPL-3.0-only"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-libusbk-sys-sha256-6265ae9a"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-libusbk-sys-sha256-6265ae9a",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-libusbk-sys.md",
+          "sourceEvidenceSha256": "1d0f48b3f33d09875957cc8dde9e2669ced2616948e526588ceb6eaaa04eb8c1",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:bd42d6bd491296ab",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/WdfCoInstaller01011.dll",
+      "sha256": "c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+      "binding": "SHA-256: c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06",
+      "componentRef": "artifact:c7649879a10c9332fc0f9744c7e3224647aee9e7e62c7e21cf9e987462e3dd06:bd42d6bd491296ab",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "license": "Microsoft Software License Terms",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Microsoft-Software-License-Terms",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-amd64-WdfCoInstaller01011-sha256-c7649879",
+        "windowsdriver-x86-wdfcoinstaller01011-dll-sha256-c7649879"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-amd64-WdfCoInstaller01011-sha256-c7649879",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-wdfcoinstaller01011-dll.md",
+          "sourceEvidenceSha256": "3b9d7d32b21ed617a344095018bd1efce8c8968a28bf69fb6f55902a1e54999a",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-21",
+          "confidence": "medium"
+        },
+        {
+          "formalRecordId": "windowsdriver-x86-wdfcoinstaller01011-dll-sha256-c7649879",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-wdfcoinstaller01011-dll.md",
+          "sourceEvidenceSha256": "3b9d7d32b21ed617a344095018bd1efce8c8968a28bf69fb6f55902a1e54999a",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c:e3b02a89dec958d0",
+      "path": "SampleCode/ISP/ISP_DFU/WindowsDriver/x86/winusbcoinstaller2.dll",
+      "sha256": "ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c",
+      "binding": "SHA-256: ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c",
+      "componentRef": "artifact:ebe3b7708dd974ee87efed3113028d266af87ca8dbae77c47c6f7612824d3d6c:e3b02a89dec958d0",
+      "supplier": {
+        "name": "Microsoft Corporation"
+      },
+      "license": "Microsoft Software License Terms",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Microsoft-Software-License-Terms",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "windowsdriver-x86-winusbcoinstaller2-dll-sha256-ebe3b770"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "windowsdriver-x86-winusbcoinstaller2-dll-sha256-ebe3b770",
+          "sourceEvidencePath": "license-evidence/windowsdriver-x86-winusbcoinstaller2-dll.md",
+          "sourceEvidenceSha256": "b0d19ae82d7ce187b97ecde1336006a2eb0cec3f10039884814149bd0a7f5c66",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-22",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e:68daff7a084996eb",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_C.a",
+      "sha256": "33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e",
+      "binding": "SHA-256: 33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e",
+      "componentRef": "artifact:33a3b1f4e86efb81d1a35dcc77cf272ef9bebe8236b09a090cc2e572d9e5d24e:68daff7a084996eb",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be:421520d4561401ee",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_NOCONN.a",
+      "sha256": "97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be",
+      "binding": "SHA-256: 97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be",
+      "componentRef": "artifact:97e4d9fa81a36946e94b9d8fbb5886cb32c1fda2c2b19eb108106ddbb7c3e2be:421520d4561401ee",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d:e72e28f209ca554a",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_P.a",
+      "sha256": "0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d",
+      "binding": "SHA-256: 0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d",
+      "componentRef": "artifact:0d33530ec5017c0bfebe3fe6390a52c45328b595fbf979be6a15abc04abdf05d:e72e28f209ca554a",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2:8267bdca0012f11f",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_IAR_PC.a",
+      "sha256": "58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2",
+      "binding": "SHA-256: 58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2",
+      "componentRef": "artifact:58a70080eec54b63fd3f8a226d24dccf25579cf67fd395ef21c422352b582ff2:8267bdca0012f11f",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103:4029f756d5aba6ea",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_C.lib",
+      "sha256": "b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103",
+      "binding": "SHA-256: b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103",
+      "componentRef": "artifact:b3e1cd55e2f06c320c685c9c8e3a15b03e997f938a61de2659a2c0d94c351103:4029f756d5aba6ea",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947:516963b5f6d58de4",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_NOCONN.lib",
+      "sha256": "22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947",
+      "binding": "SHA-256: 22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947",
+      "componentRef": "artifact:22732d5f78af439ab83c4c2565c54003fa9f31fb7c017d92dff4e5cf5f534947:516963b5f6d58de4",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe:53e4bcc516bd2598",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_P.lib",
+      "sha256": "205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe",
+      "binding": "SHA-256: 205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe",
+      "componentRef": "artifact:205f8f4811e14f61364002363b4dec68a6caa98ab6cb05ec6b33f98d3020e8fe:53e4bcc516bd2598",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe:a2cf5bc16c578adc",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/BLELIB_Keil_PC.lib",
+      "sha256": "49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe",
+      "binding": "SHA-256: 49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe",
+      "componentRef": "artifact:49d5d003705d90871771773f3fedd6105822b214301ee5916234541d890ca4fe:a2cf5bc16c578adc",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2:dc36946726e4af10",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_C.a",
+      "sha256": "453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2",
+      "binding": "SHA-256: 453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2",
+      "componentRef": "artifact:453638963a71ec7ee9fe920b48e5e747cb00a3c616242247df2dc0085dbda7e2:dc36946726e4af10",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47:395c5cd7d9cae89e",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_NOCONN.a",
+      "sha256": "9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47",
+      "binding": "SHA-256: 9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47",
+      "componentRef": "artifact:9614e3743d25acc0baa4fb209f06685fcbc639ba4a344a5159b3c80388d50b47:395c5cd7d9cae89e",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55:0df74fe587430c1c",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_P.a",
+      "sha256": "655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55",
+      "binding": "SHA-256: 655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55",
+      "componentRef": "artifact:655e4f8c1a15742b5e4000d58918933f6a926013b22747334b0b8c43e0ff9f55:0df74fe587430c1c",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace:f2410f8bd466f21b",
+      "path": "SampleCode/NuMaker-M03xBT/BLE/Source/Lib/libBLELIB_GCC_PC.a",
+      "sha256": "21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace",
+      "binding": "SHA-256: 21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace",
+      "componentRef": "artifact:21788eb5a9664184ea9bd9ad268d4b03ffd955bb1c97514ebb93f712c6c6eace:f2410f8bd466f21b",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a:319f82be2aceb655",
+      "path": "SampleCode/RegBased/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin",
+      "sha256": "fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a",
+      "binding": "SHA-256: fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a",
+      "componentRef": "artifact:fff05ae5fc2ca8b59143a8439b68f12913909fb279cc75211b39ec8e8728e51a:319f82be2aceb655",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921:6dd0d472170e5ddc",
+      "path": "SampleCode/RegBased/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
+      "sha256": "fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921",
+      "binding": "SHA-256: fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921",
+      "componentRef": "artifact:fa4361f326707722d8f8053a7d8aedf6063b800864635ed0201ef0160593d921:6dd0d472170e5ddc",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680:cf7b4ae79b3290df",
+      "path": "SampleCode/RegBased/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin",
+      "sha256": "46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680",
+      "binding": "SHA-256: 46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680",
+      "componentRef": "artifact:46c736165ed4d4fd8ed429e4a61434e7d3a87b517746e33c070894a210010680:cf7b4ae79b3290df",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5:01998727f43c6508",
+      "path": "SampleCode/RegBased/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
+      "sha256": "726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5",
+      "binding": "SHA-256: 726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5",
+      "componentRef": "artifact:726eaa199f94191253b45a87cb6f8d40ff2584b7d859e54cdcca9d96f2eaabd5:01998727f43c6508",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff:7ea1a3a7b552965e",
+      "path": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin",
+      "sha256": "bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff",
+      "binding": "SHA-256: bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff",
+      "componentRef": "artifact:bb056b9cee85710524e8ba420b7ad468343404fca0e918f76c7108321d237dff:7ea1a3a7b552965e",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143:0e0a1c77a5b88463",
+      "path": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
+      "sha256": "2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143",
+      "binding": "SHA-256: 2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143",
+      "componentRef": "artifact:2f751d0c83e8df2ae043469adc5846a7019ce04fae2ad62f162a7c1eac1b5143:0e0a1c77a5b88463",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378:225fdbd165d55663",
+      "path": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin",
+      "sha256": "4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378",
+      "binding": "SHA-256: 4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378",
+      "componentRef": "artifact:4a9413d733072411dfb2ba6912b21ae7a915953b5efff0232a4931f8b1f01378:225fdbd165d55663",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209:336273ad62227882",
+      "path": "SampleCode/StdDriver/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
+      "sha256": "d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209",
+      "binding": "SHA-256: d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209",
+      "componentRef": "artifact:d9ff54c942c27dfbb19f5a0e0397dc5071001384c86487dd218d363774df2209:336273ad62227882",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Authoritative legal confirmation and hash-bound license evidence for the existing proprietary claim at this exact path and SHA-256.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca:15f3b042f35ad381",
+      "path": "SampleCode/StdDriver/UART_115200bps_SingleWire_ISP/Software/NuvoISP_UART_Single_Wire.exe",
+      "sha256": "7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca",
+      "binding": "SHA-256: 7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca",
+      "componentRef": "artifact:7a1f198b1d9799e16cd28a6954624520227c057485708b9638ac6bc43bf41eca:15f3b042f35ad381",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Apache-2.0",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "Apache-2.0",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "samplecode-uart-single-wire-isp-exe-sha256-7a1f198b"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "samplecode-uart-single-wire-isp-exe-sha256-7a1f198b",
+          "sourceEvidencePath": "license-evidence/samplecode-uart-single-wire-isp-exe.md",
+          "sourceEvidenceSha256": "dda85dab1adf07c9cdc0a80dc3291859e05750908127699e17fafb5996aa603a",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-08-28",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183:a5f94c445c17f408",
+      "path": "SampleCode/StdDriver/USBD_Micro_Printer/Windows driver/NuvPos58_Driver.exe",
+      "sha256": "911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183",
+      "binding": "SHA-256: 911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183",
+      "componentRef": "artifact:911e4c166fe9b06c8e2e31ab46b56ef662c43cba208d2088ca1d41c6d584e183:a5f94c445c17f408",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Nuvoton Software License Agreement",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "samplecode-usbd-micro-printer-nuvpos58-driver-exe-sha256-911e4c16"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "samplecode-usbd-micro-printer-nuvpos58-driver-exe-sha256-911e4c16",
+          "sourceEvidencePath": "license-evidence/samplecode-usbd-micro-printer-nuvpos58-driver-exe.md",
+          "sourceEvidenceSha256": "023496b951b5c7043f995e01ca891e6662a71dfcd9cc148f067314ae146e2222",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-25",
+          "confidence": "high"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db:0834cff93a752b20",
+      "path": "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X64.exe",
+      "sha256": "ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db",
+      "binding": "SHA-256: ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db",
+      "componentRef": "artifact:ce0ed66a5db0a0c061fd92975939f48e93affad15f3f6e806d44b3e82078b3db:0834cff93a752b20",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Nuvoton Software License Agreement",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "samplecode-usbd-printer-and-hid-transfer-nuvpos58-x64-exe-sha256-ce0ed66a"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "samplecode-usbd-printer-and-hid-transfer-nuvpos58-x64-exe-sha256-ce0ed66a",
+          "sourceEvidencePath": "license-evidence/samplecode-usbd-printer-and-hid-transfer-nuvpos58-x64-exe.md",
+          "sourceEvidenceSha256": "996a40a474efa07e48d4ba025137e24e21674f87eac2515af16bbef84cb73620",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-25",
+          "confidence": "high"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92:79d73c1470b69b8d",
+      "path": "SampleCode/StdDriver/USBD_Printer_And_HID_Transfer/Windows driver/NUVPOS58_X86.exe",
+      "sha256": "76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92",
+      "binding": "SHA-256: 76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92",
+      "componentRef": "artifact:76e4d01dbf17ca7525e3a9156bd7e6274c5db0fff88a25943c25c8d2bdd38d92:79d73c1470b69b8d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Nuvoton Software License Agreement",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "samplecode-usbd-printer-and-hid-transfer-nuvpos58-x86-exe-sha256-76e4d01d"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "samplecode-usbd-printer-and-hid-transfer-nuvpos58-x86-exe-sha256-76e4d01d",
+          "sourceEvidencePath": "license-evidence/samplecode-usbd-printer-and-hid-transfer-nuvpos58-x86-exe.md",
+          "sourceEvidenceSha256": "65aa0409908b7d0dcdc203f499118241bae430f92b2108337010cb95a9b516a6",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-05-25",
+          "confidence": "high"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:c52ff1835d5fe3d7912212ba1fa6910e4a5cf382a9f2f8a9054d0976e33f4fda:0fa884fae9839441",
+      "path": "SampleCode/StdDriver/USBD_VCOM_And_HID_Keyboard/Windows Driver/NuvotonCDC.inf",
+      "sha256": "c52ff1835d5fe3d7912212ba1fa6910e4a5cf382a9f2f8a9054d0976e33f4fda",
+      "binding": "SHA-256: c52ff1835d5fe3d7912212ba1fa6910e4a5cf382a9f2f8a9054d0976e33f4fda",
+      "componentRef": "artifact:c52ff1835d5fe3d7912212ba1fa6910e4a5cf382a9f2f8a9054d0976e33f4fda:0fa884fae9839441",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:9302b17c38a256538eab064a898a6a8dd862f15c8ab7dae022a6426ba1741f88:771e010d269de26b",
+      "path": "SampleCode/StdDriver/USBD_VCOM_And_HID_Transfer/Windows Driver/NuvotonCDC.inf",
+      "sha256": "9302b17c38a256538eab064a898a6a8dd862f15c8ab7dae022a6426ba1741f88",
+      "binding": "SHA-256: 9302b17c38a256538eab064a898a6a8dd862f15c8ab7dae022a6426ba1741f88",
+      "componentRef": "artifact:9302b17c38a256538eab064a898a6a8dd862f15c8ab7dae022a6426ba1741f88:771e010d269de26b",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:86b4607a15ac351ad12fbce4c4e5a0776e747b3c299b7bfaaf2f7e122ca32a9a:f11bd164cd5c1aff",
+      "path": "SampleCode/StdDriver/USBD_VCOM_And_Mass_Storage/Windows Driver/nuvotoncdc.cat",
+      "sha256": "86b4607a15ac351ad12fbce4c4e5a0776e747b3c299b7bfaaf2f7e122ca32a9a",
+      "binding": "SHA-256: 86b4607a15ac351ad12fbce4c4e5a0776e747b3c299b7bfaaf2f7e122ca32a9a",
+      "componentRef": "artifact:86b4607a15ac351ad12fbce4c4e5a0776e747b3c299b7bfaaf2f7e122ca32a9a:f11bd164cd5c1aff",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:e24005a5831b442af34eb82caed6a141707a9a307c7f54317389ff97d24e34fb:6dac6fea35a98ebd",
+      "path": "SampleCode/StdDriver/USBD_VCOM_And_Mass_Storage/Windows Driver/NuvotonCDC.inf",
+      "sha256": "e24005a5831b442af34eb82caed6a141707a9a307c7f54317389ff97d24e34fb",
+      "binding": "SHA-256: e24005a5831b442af34eb82caed6a141707a9a307c7f54317389ff97d24e34fb",
+      "componentRef": "artifact:e24005a5831b442af34eb82caed6a141707a9a307c7f54317389ff97d24e34fb:6dac6fea35a98ebd",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:e95072664412099f5a2e3a9947590a151ad3859ab61d30ad25615e9ea00049ba:fa21ae18bde8ddf5",
+      "path": "SampleCode/StdDriver/USBD_VCOM_DualPort/Windows Driver/nuvoton_daul_cdc0.cat",
+      "sha256": "e95072664412099f5a2e3a9947590a151ad3859ab61d30ad25615e9ea00049ba",
+      "binding": "SHA-256: e95072664412099f5a2e3a9947590a151ad3859ab61d30ad25615e9ea00049ba",
+      "componentRef": "artifact:e95072664412099f5a2e3a9947590a151ad3859ab61d30ad25615e9ea00049ba:fa21ae18bde8ddf5",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:50e4d1c80e74127bd753d45e2ac2c75e2a4cb7661ac3a2fdd98b6fc97ed97915:6bef28defcd839f9",
+      "path": "SampleCode/StdDriver/USBD_VCOM_DualPort/Windows Driver/nuvoton_daul_cdc1.cat",
+      "sha256": "50e4d1c80e74127bd753d45e2ac2c75e2a4cb7661ac3a2fdd98b6fc97ed97915",
+      "binding": "SHA-256: 50e4d1c80e74127bd753d45e2ac2c75e2a4cb7661ac3a2fdd98b6fc97ed97915",
+      "componentRef": "artifact:50e4d1c80e74127bd753d45e2ac2c75e2a4cb7661ac3a2fdd98b6fc97ed97915:6bef28defcd839f9",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:764d66cb75baccfab34a85783cd00d81fb82683a23268c4c62f269dd02db1927:d48f6c8ef0e968f5",
+      "path": "SampleCode/StdDriver/USBD_VCOM_DualPort/Windows Driver/Nuvoton_DUAL_CDC0.inf",
+      "sha256": "764d66cb75baccfab34a85783cd00d81fb82683a23268c4c62f269dd02db1927",
+      "binding": "SHA-256: 764d66cb75baccfab34a85783cd00d81fb82683a23268c4c62f269dd02db1927",
+      "componentRef": "artifact:764d66cb75baccfab34a85783cd00d81fb82683a23268c4c62f269dd02db1927:d48f6c8ef0e968f5",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:7b81c10c81dead4c1e2b1226f6ab378887aea5e58a56f33941008a0ee693371b:ff9e5b938c467588",
+      "path": "SampleCode/StdDriver/USBD_VCOM_DualPort/Windows Driver/Nuvoton_DUAL_CDC1.inf",
+      "sha256": "7b81c10c81dead4c1e2b1226f6ab378887aea5e58a56f33941008a0ee693371b",
+      "binding": "SHA-256: 7b81c10c81dead4c1e2b1226f6ab378887aea5e58a56f33941008a0ee693371b",
+      "componentRef": "artifact:7b81c10c81dead4c1e2b1226f6ab378887aea5e58a56f33941008a0ee693371b:ff9e5b938c467588",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:bac75c972b9aaa66b7b7b54a8894eeadaa32812c6db9c66fbfbcaac160b075ad:0e1f8b1e33a3d7b0",
+      "path": "SampleCode/StdDriver/USBD_VCOM_SerialEmulator/Windows Driver/nuvotoncdc.cat",
+      "sha256": "bac75c972b9aaa66b7b7b54a8894eeadaa32812c6db9c66fbfbcaac160b075ad",
+      "binding": "SHA-256: bac75c972b9aaa66b7b7b54a8894eeadaa32812c6db9c66fbfbcaac160b075ad",
+      "componentRef": "artifact:bac75c972b9aaa66b7b7b54a8894eeadaa32812c6db9c66fbfbcaac160b075ad:0e1f8b1e33a3d7b0",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:9039ff5dc29a10ce09c78a33a994f3fb499ae8890b6d8d930e25905982608628:9e592c992b33fd33",
+      "path": "SampleCode/StdDriver/USBD_VCOM_SerialEmulator/Windows Driver/NuvotonCDC.inf",
+      "sha256": "9039ff5dc29a10ce09c78a33a994f3fb499ae8890b6d8d930e25905982608628",
+      "binding": "SHA-256: 9039ff5dc29a10ce09c78a33a994f3fb499ae8890b6d8d930e25905982608628",
+      "componentRef": "artifact:9039ff5dc29a10ce09c78a33a994f3fb499ae8890b6d8d930e25905982608628:9e592c992b33fd33",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-01"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound license and supplier decision for this driver package artifact; embedded copyright or a generic LGPL notice is not sufficient to select exact terms.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:261a4b82b19e68ae7e2bed31b191ce016aa3219a4fdda2a3b2c63e220421987a:903ea295e7f25a4d",
+      "path": "Tool/BLE/Android/NuBLE_v2.2.13-210728.apk",
+      "sha256": "261a4b82b19e68ae7e2bed31b191ce016aa3219a4fdda2a3b2c63e220421987a",
+      "binding": "SHA-256: 261a4b82b19e68ae7e2bed31b191ce016aa3219a4fdda2a3b2c63e220421987a",
+      "componentRef": "artifact:261a4b82b19e68ae7e2bed31b191ce016aa3219a4fdda2a3b2c63e220421987a:903ea295e7f25a4d",
+      "supplier": {
+        "name": "Nuvoton Technology Corporation"
+      },
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "EVID-01"
+      ],
+      "requiredEvidenceOrDecision": "Resolvable hash-bound Nuvoton license evidence for the exact APK.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44:df658793e1d20e85",
+      "path": "Tool/BLE/BLE_DTM_Lab_Test_Tool_v1.6B.exe",
+      "sha256": "d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44",
+      "binding": "SHA-256: d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44",
+      "componentRef": "artifact:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44:df658793e1d20e85",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Apache-2.0",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "Apache-2.0",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "tool-ble-dtm-lab-test-tool-exe-sha256-d00ad71a"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "tool-ble-dtm-lab-test-tool-exe-sha256-d00ad71a",
+          "sourceEvidencePath": "license-evidence/tool-ble-dtm-lab-test-tool-exe.md",
+          "sourceEvidenceSha256": "1549b1d1c219ed88aafa45e848a16c4cf45aa2e8e314eec446ac4bca40245893",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-08-28",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4:8a410d2341ad85c4",
+      "path": "Tool/BLE/FOTA_Tool_v0.0.3_210423.exe",
+      "sha256": "51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4",
+      "binding": "SHA-256: 51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4",
+      "componentRef": "artifact:51a18e92a4e8cc77624fd917bddca59bdebb8b6aa369e73482d6376b4935b0c4:8a410d2341ad85c4",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Apache-2.0",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "Apache-2.0",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "tool-ble-fota-tool-exe-sha256-51a18e92"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "tool-ble-fota-tool-exe-sha256-51a18e92",
+          "sourceEvidencePath": "license-evidence/tool-ble-fota-tool-exe.md",
+          "sourceEvidenceSha256": "b7d4bac335770f8266abfe409c0826130ed987a8d18c68768b531de3fd0b693f",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-08-28",
+          "confidence": "medium"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f:78228f8aaa1ab4cb",
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest.exe",
+      "sha256": "9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f",
+      "binding": "SHA-256: 9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f",
+      "componentRef": "artifact:9099be6e12479e50b0706e3dfe1828fa4fd62dcbcc0c2a462db1783b35ecac5f:78228f8aaa1ab4cb",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Apache-2.0",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "Apache-2.0",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "tool-hidctrltransfertest-exe-sha256-9099be6e"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "tool-hidctrltransfertest-exe-sha256-9099be6e",
+          "sourceEvidencePath": "license-evidence/tool-hidctrltransfertest-exe.md",
+          "sourceEvidenceSha256": "2780a5bd5c71a7c6ab9df195c1f055f1c99421b077db14e25644d9a1d0f265ef",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-08-28",
+          "confidence": "high"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756:d82c4a2c407f62ac",
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hid.lib",
+      "sha256": "3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756",
+      "binding": "SHA-256: 3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756",
+      "componentRef": "artifact:3f80f3213b65a99268cc19e38b1378cf381e8cb92730290ed4fce9c3e55dc756:d82c4a2c407f62ac",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-02"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound Microsoft Windows SDK provenance and redistributable license terms for this exact import library.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4:275f308d9b6e7762",
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidclass.lib",
+      "sha256": "8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4",
+      "binding": "SHA-256: 8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4",
+      "componentRef": "artifact:8b8721bf4e19b875082e5c0bbcdd191fc00442ca755f66947e5b21a8862ad3d4:275f308d9b6e7762",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-02"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound Microsoft Windows SDK provenance and redistributable license terms for this exact import library.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb:4c7e6d49554252f4",
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/hidparse.lib",
+      "sha256": "00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb",
+      "binding": "SHA-256: 00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb",
+      "componentRef": "artifact:00912ceec31d6c7ae453f0323068ef29919fe2677d9d94bae20e2d6562dc82fb:4c7e6d49554252f4",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-02"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound Microsoft Windows SDK provenance and redistributable license terms for this exact import library.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a:4a677cf779241274",
+      "path": "Tool/HIDCtrlTransferTest/HIDCtrlTransferTest/setupapi.lib",
+      "sha256": "7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a",
+      "binding": "SHA-256: 7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a",
+      "componentRef": "artifact:7bf22e0bc1a833e598e6f9874fd0296e69100467451fe1519a88ab3f358d031a:4a677cf779241274",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-02"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound Microsoft Windows SDK provenance and redistributable license terms for this exact import library.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747:2c03afe34af981e7",
+      "path": "Tool/HIDTransferTest/HIDTransferTest.exe",
+      "sha256": "24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747",
+      "binding": "SHA-256: 24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747",
+      "componentRef": "artifact:24bdd0baadd8ee6632b40757d2f599f391f9b87b87e23f8fb30324c8c873e747:2c03afe34af981e7",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "license": "Apache-2.0",
+      "status": "identified-from-formal-hash-bound-evidence",
+      "observedLicenseClaims": [
+        "Apache-2.0",
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [
+        "tool-hidtransfertest-exe-sha256-24bdd0ba"
+      ],
+      "formalEvidence": [
+        {
+          "formalRecordId": "tool-hidtransfertest-exe-sha256-24bdd0ba",
+          "sourceEvidencePath": "license-evidence/tool-hidtransfertest-exe-m031.md",
+          "sourceEvidenceSha256": "db95254022125915b721ff0eacfc800c2e28ae7ab9d6806039ed688d839e80d8",
+          "reviewedBy": "Product Security",
+          "reviewDate": "2026-08-28",
+          "confidence": "high"
+        }
+      ],
+      "blockerIds": [],
+      "requiredEvidenceOrDecision": null,
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    },
+    {
+      "id": "artifact:22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4:43e8a20b5287d05e",
+      "path": "Tool/HIDTransferTest/HIDTransferTest/hid.lib",
+      "sha256": "22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4",
+      "binding": "SHA-256: 22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4",
+      "componentRef": "artifact:22bcccaed9b092f4ab2aa12e1471959ed1847296f350bb6d7390b0718fdb5ca4:43e8a20b5287d05e",
+      "supplier": null,
+      "license": "NOASSERTION",
+      "status": "unresolved",
+      "observedLicenseClaims": [
+        "LicenseRef-Nuvoton-Proprietary"
+      ],
+      "formalRecordIds": [],
+      "formalEvidence": [],
+      "blockerIds": [
+        "LIC-02"
+      ],
+      "requiredEvidenceOrDecision": "Hash-bound Microsoft Windows SDK provenance and redistributable license terms for this exact import library.",
+      "evidenceFile": "Document/SBOM/evidence/binary-license-database.json",
+      "projection": {
+        "bsps": [
+          "M031BSP"
+        ],
+        "releases": [
+          "V3.07.000-71-g4dc3d5af"
+        ]
+      },
+      "evidence": {
+        "evidenceFile": "Document/SBOM/evidence/binary-license-database.json"
+      }
+    }
+  ]
+}

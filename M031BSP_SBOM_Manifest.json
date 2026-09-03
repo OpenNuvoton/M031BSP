@@ -2,14 +2,22 @@
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
   "serialNumber": "urn:uuid:76e1f39e-9a1d-4b3b-91d8-6e03f4c8e07b",
-  "createdAt": "2026-09-02T01:30:19.336087Z",
+  "createdAt": "2026-09-02T03:58:32.140733Z",
   "bsp": {
     "name": "M031BSP",
     "version": "V3.07.000-71-g4dc3d5af",
     "releaseIdentifierSource": "git describe --tags --always --long --abbrev=8 --dirty",
     "gitDescribe": "V3.07.000-71-g4dc3d5af",
     "gitCommit": "4dc3d5af62330f8a4366d2392c3b2f773200b3ab",
-    "sourceTreeState": "clean"
+    "sourceTreeState": "clean",
+    "formalSourceCommit": "4dc3d5af62330f8a4366d2392c3b2f773200b3ab",
+    "sbomSyncBaseCommit": "14039966eeb207be101a34d1de4942fc09864af3",
+    "generationCommit": null,
+    "releaseCommit": null,
+    "distributionCommit": null,
+    "releaseState": "pending",
+    "distributionState": "pending",
+    "scanStatus": "blocked-pending-identity"
   },
   "generationTools": [
     {
@@ -50,7 +58,7 @@
       "specVersion": "1.6",
       "serialNumber": "urn:uuid:b01099db-9772-44a3-81e2-abf2c5ebc2f3",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-02T09:28:56+08:00",
+      "generatedTimestamp": "2026-09-02T03:58:32.140733Z",
       "metadataComponent": {
         "bomRef": "6aec29427ee362d1",
         "type": "library",
@@ -124,7 +132,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "d0ca06dae5aef5947f77daaf8573f219be38972233da740158d3ffd4c0b16e9e"
+        "value": "c9fd09481193ca6a8741cf5b7a8cab30cb014f1beac25490e84f0012bc0729a2"
       }
     },
     {
@@ -134,7 +142,7 @@
       "specVersion": "1.6",
       "serialNumber": "urn:uuid:3ca96783-218a-4abe-8191-d5f22700122b",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-02T09:29:26+08:00",
+      "generatedTimestamp": "2026-09-02T03:58:32.140733Z",
       "metadataComponent": {
         "bomRef": "0c318f422c21e438",
         "type": "application",
@@ -186,16 +194,14 @@
       "scope": "Components used only for examples, demonstrations, validation, host-side utilities, or testing; not included in product runtime unless explicitly integrated by the user.",
       "isProductRuntimeScope": false,
       "componentSummary": {
-        "componentCount": 73,
+        "componentCount": 62,
         "componentCountByType": {
-          "application": 17,
+          "application": 13,
           "device-driver": 3,
-          "file": 44,
+          "file": 37,
           "library": 9
         },
         "applicationNames": [
-          "/Tool/HIDTransferTest/HIDTransferTest",
-          "BLE Application",
           "BLE_DTM_Lab_Test_Tool",
           "FOTA Tool",
           "HIDCtrlTransferTest",
@@ -205,17 +211,15 @@
           "NUVPOS58",
           "NuBLE Android",
           "NuvPos58 Driver",
-          "TODO: <Product name>",
           "WDF Coinstaller",
-          "Windows Driver Foundation - User-mode Platform Device Update Co-Installer",
-          "WindowsApplication1"
+          "Windows Driver Foundation - User-mode Platform Device Update Co-Installer"
         ],
-        "fileComponentCount": 44,
-        "fileComponentWithHashCount": 44
+        "fileComponentCount": 37,
+        "fileComponentWithHashCount": 37
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "54628b84c13f28e1f5e6548779c9ca403719849bf00e643f08123d835995f292"
+        "value": "c9912ecc269ca57e323df6d7fa6e9c86b455d7eca8a1b8f8d56fb7cbc9ca5055"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,
@@ -236,5 +240,39 @@
   ],
   "notes": [
     "This manifest is an index for the SBOM package; it is not a merged CycloneDX BOM."
-  ]
+  ],
+  "releaseReadiness": {
+    "status": "blocked",
+    "releaseReady": false,
+    "releaseGate": "fail-closed",
+    "blockers": [
+      {
+        "category": "license-evidence",
+        "status": "pending",
+        "evidence": "Document/SBOM/evidence/binary-license-database.json",
+        "reason": "Unresolved exact-artifact license and supplier decisions remain recorded in the durable evidence projection."
+      },
+      {
+        "category": "freertos-cpe",
+        "status": "pending",
+        "evidence": "Document/SBOM/evidence/freertos-inventory.json",
+        "reason": "FreeRTOS Kernel 10.4.3 has no repository-authoritative CPE mapping."
+      },
+      {
+        "category": "vulnerability-coverage",
+        "status": "blocked-pending-identity",
+        "reason": "Coverage cannot be treated as complete until authoritative component identity is available."
+      },
+      {
+        "category": "psirt-vex",
+        "status": "not_assessed",
+        "approval": "pending",
+        "reason": "No approved PSIRT assessment or VEX is asserted."
+      }
+    ],
+    "evidence": [
+      "Document/SBOM/evidence/binary-license-database.json",
+      "Document/SBOM/evidence/freertos-inventory.json"
+    ]
+  }
 }
