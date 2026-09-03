@@ -1,76 +1,99 @@
 {
-    "components":  [
-                       {
-                           "type":  "application",
-                           "bom-ref":  "pkg:generic/ble-dtm-lab-test-tool@1.0.0.1?path=Tool/BLE",
-                           "name":  "BLE_DTM_Lab_Test_Tool",
-                           "version":  "1.0.0.1",
-                           "scope":  "required",
-                           "author":  "Nuvoton Technology Corporation",
-                           "supplier":  {
-                                            "name":  "Nuvoton Technology Corporation"
-                                        },
-                           "purl":  "pkg:generic/ble-dtm-lab-test-tool@1.0.0.1",
-                           "description":  "BLE DTM laboratory testing utility.",
-                           "licenses":  [
-                                            {
-                                                "license":  {
-                                                                "id":  "Apache-2.0"
-                                                            }
-                                            }
-                                        ],
-                           "properties":  [
-                                              {
-                                                  "name":  "src_path",
-                                                  "value":  "Tool/BLE"
-                                              },
-                                              {
-                                                  "name":  "integration",
-                                                  "value":  "vendored_binary"
-                                              },
-                                              {
-                                                  "name":  "bsp:component-origin",
-                                                  "value":  "first-party"
-                                              },
-                                              {
-                                                  "name":  "bsp:component-source",
-                                                  "value":  "Nuvoton Technology Corporation"
-                                              },
-                                              {
-                                                  "name":  "bsp:evidence-file",
-                                                  "value":  "Document/SBOM/components/TestSampleView/sca_ble_dtm_lab_test_tool.json"
-                                              },
-                                              {
-                                                  "name":  "bsp:evidence-path",
-                                                  "value":  "Tool/BLE"
-                                              },
-                                              {
-                                                  "name":  "bsp:version-evidence",
-                                                  "value":  "BLE_DTM_Lab_Test_Tool_v1.6B.exe"
-                                              },
-                                              {
-                                                  "name":  "bsp:license-evidence",
-                                                  "value":  "Tool/BLE/LICENSE.md"
-                                              },
-                                              {
-                                                  "name":  "bsp:sha256",
-                                                  "value":  "D00AD71A871C4E0838761F0BA4B976A7BBA1FF7F7D006E513A62E74F17DADD44"
-                                              },
-                                              {
-                                                  "name":  "bsp:included-in-product-firmware",
-                                                  "value":  "false"
-                                              },
-                                              {
-                                                  "name":  "bsp:runtime-dependency",
-                                                  "value":  "false"
-                                              }
-                                          ],
-                           "hashes":  [
-                                          {
-                                              "alg":  "SHA-256",
-                                              "content":  "d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44"
-                                          }
-                                      ]
-                       }
-                   ]
+  "components": [
+    {
+      "type": "application",
+      "bom-ref": "artifact:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44:df658793e1d20e85",
+      "name": "BLE_DTM_Lab_Test_Tool",
+      "version": "1.0.0.1",
+      "scope": "required",
+      "author": "Nuvoton Technology Corporation",
+      "supplier": {
+        "name": "Nuvoton Technology Corp."
+      },
+      "purl": "pkg:generic/ble-dtm-lab-test-tool@1.0.0.1",
+      "description": "BLE DTM laboratory testing utility.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "integration",
+          "value": "vendored_binary"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Nuvoton Technology Corporation"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/TestSampleView/sca_ble_dtm_lab_test_tool.json"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "Tool/BLE/BLE_DTM_Lab_Test_Tool_v1.6B.exe"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "false"
+        },
+        {
+          "name": "bsp:runtime-dependency",
+          "value": "false"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Tool/BLE/BLE_DTM_Lab_Test_Tool_v1.6B.exe"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified-from-formal-hash-bound-evidence"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/evidence/binary-license-database.json"
+        },
+        {
+          "name": "bsp:license-evidence-record",
+          "value": "artifact:d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44:df658793e1d20e85"
+        },
+        {
+          "name": "bsp:artifact-binding",
+          "value": "SHA-256: d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44"
+        },
+        {
+          "name": "bsp:observed-license-claims",
+          "value": "[\"Apache-2.0\",\"LicenseRef-Nuvoton-Proprietary\"]"
+        },
+        {
+          "name": "bsp:license-evidence-sha256",
+          "value": "10a4f5effcc8a0c2746970db4f2bcaaa2d675a4eed362ebf390939206b021c5e"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d00ad71a871c4e0838761f0ba4b976a7bba1ff7f7d006e513a62e74f17dadd44"
+        }
+      ],
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "Tool/BLE/BLE_DTM_Lab_Test_Tool_v1.6B.exe"
+          }
+        ]
+      }
+    }
+  ]
 }

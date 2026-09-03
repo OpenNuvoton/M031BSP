@@ -5,7 +5,7 @@
   "serialNumber": "urn:uuid:b01099db-9772-44a3-81e2-abf2c5ebc2f3",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-02T09:28:56+08:00",
+    "timestamp": "2026-09-02T03:58:32.140733Z",
     "tools": {
       "components": [
         {
@@ -36,10 +36,6 @@
         }
       ],
       "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "product"
-        },
         {
           "name": "bsp:scope",
           "value": "Components included in, linked with, deployed to, or reasonably expected to be integrated into final product firmware/software."
@@ -87,6 +83,58 @@
         {
           "name": "bsp:product-scope-exclude-path",
           "value": "Tool/"
+        },
+        {
+          "name": "bsp:formal-source-commit",
+          "value": "4dc3d5af62330f8a4366d2392c3b2f773200b3ab"
+        },
+        {
+          "name": "bsp:sbom-sync-base-commit",
+          "value": "14039966eeb207be101a34d1de4942fc09864af3"
+        },
+        {
+          "name": "bsp:release-state",
+          "value": "pending"
+        },
+        {
+          "name": "bsp:distribution-state",
+          "value": "pending"
+        },
+        {
+          "name": "bsp:scan-status",
+          "value": "blocked-pending-identity"
+        },
+        {
+          "name": "bsp:vex-status",
+          "value": "not_assessed"
+        },
+        {
+          "name": "bsp:security-approval",
+          "value": "pending"
+        },
+        {
+          "name": "bsp:release-gate",
+          "value": "blocked"
+        },
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "LICENSE"
+        },
+        {
+          "name": "bsp:license-evidence-sha256",
+          "value": "49bbe9114e49214df2ccc324cb3ac8d1d1aa1c3a0947f94c286765e86647b32e"
+        },
+        {
+          "name": "bsp:notice-evidence",
+          "value": "NOTICE"
+        },
+        {
+          "name": "bsp:notice-evidence-sha256",
+          "value": "2e0ea189389b3d07cdf25707d7e49c3938684a904b40d93fe1dbe2a52bf4d642"
         }
       ]
     },
@@ -118,7 +166,7 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "fba49751653567b0344517d0c99df55f665a52057bbaade687721591c08353e6"
+          "content": "b843d31e3b80e639fd93e8bdeb6e2688baf9757768c7fa6252e7dd214bd4cc4e"
         }
       ],
       "licenses": [
@@ -134,10 +182,6 @@
         {
           "name": "bsp:sbom-category",
           "value": "product"
-        },
-        {
-          "name": "bsp:path",
-          "value": "Library/Device"
         },
         {
           "name": "bsp:component-origin",
@@ -158,6 +202,34 @@
         {
           "name": "bsp:included-in-product-firmware",
           "value": "true"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "LICENSE"
+        },
+        {
+          "name": "bsp:license-evidence-sha256",
+          "value": "49bbe9114e49214df2ccc324cb3ac8d1d1aa1c3a0947f94c286765e86647b32e"
+        },
+        {
+          "name": "bsp:notice-evidence",
+          "value": "NOTICE"
+        },
+        {
+          "name": "bsp:notice-evidence-sha256",
+          "value": "2e0ea189389b3d07cdf25707d7e49c3938684a904b40d93fe1dbe2a52bf4d642"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "44"
         }
       ]
     },
@@ -176,7 +248,7 @@
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "d85f4ab5e80e19bae06702d35033e3b005681fa4c54390c154b68d090a728788"
+          "content": "4963c5edeed2ccc4f12d771c8379037ea62b17dcb7e950bce81bbbe9c4b2371e"
         }
       ],
       "licenses": [
@@ -192,10 +264,6 @@
         {
           "name": "bsp:sbom-category",
           "value": "product"
-        },
-        {
-          "name": "bsp:path",
-          "value": "Library/StdDriver"
         },
         {
           "name": "bsp:component-origin",
@@ -216,6 +284,34 @@
         {
           "name": "bsp:included-in-product-firmware",
           "value": "true"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "LICENSE"
+        },
+        {
+          "name": "bsp:license-evidence-sha256",
+          "value": "49bbe9114e49214df2ccc324cb3ac8d1d1aa1c3a0947f94c286765e86647b32e"
+        },
+        {
+          "name": "bsp:notice-evidence",
+          "value": "NOTICE"
+        },
+        {
+          "name": "bsp:notice-evidence-sha256",
+          "value": "2e0ea189389b3d07cdf25707d7e49c3938684a904b40d93fe1dbe2a52bf4d642"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/StdDriver"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "48"
         }
       ]
     },
@@ -273,7 +369,19 @@
         },
         {
           "name": "bsp:license-evidence",
-          "value": "Library/CMSIS/Core/Include/cmsis_version.h"
+          "value": "LICENSE"
+        },
+        {
+          "name": "bsp:license-evidence-sha256",
+          "value": "49bbe9114e49214df2ccc324cb3ac8d1d1aa1c3a0947f94c286765e86647b32e"
+        },
+        {
+          "name": "bsp:notice-evidence",
+          "value": "NOTICE"
+        },
+        {
+          "name": "bsp:notice-evidence-sha256",
+          "value": "2e0ea189389b3d07cdf25707d7e49c3938684a904b40d93fe1dbe2a52bf4d642"
         }
       ],
       "hashes": [
@@ -289,8 +397,21 @@
       "ref": "6aec29427ee362d1",
       "dependsOn": [
         "m031bsp:product-component:library-device",
-        "m031bsp:product-component:library-stddriver"
+        "m031bsp:product-component:library-stddriver",
+        "pkg:generic/cmsis@6.1.0?source=vendored&path=Library/CMSIS"
       ]
+    },
+    {
+      "ref": "m031bsp:product-component:library-device",
+      "dependsOn": []
+    },
+    {
+      "ref": "m031bsp:product-component:library-stddriver",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:generic/cmsis@6.1.0?source=vendored&path=Library/CMSIS",
+      "dependsOn": []
     }
   ]
 }

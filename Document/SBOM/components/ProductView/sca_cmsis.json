@@ -1,68 +1,80 @@
 {
-    "components":  [
-                       {
-                           "type":  "library",
-                           "bom-ref":  "pkg:generic/cmsis@6.1.0?source=vendored\u0026path=Library/CMSIS",
-                           "name":  "CMSIS",
-                           "version":  "6.1.0",
-                           "scope":  "required",
-                           "author":  "Arm Ltd.",
-                           "supplier":  {
-                                            "name":  "Arm Ltd."
-                                        },
-                           "purl":  "pkg:generic/cmsis@6.1.0",
-                           "description":  "Arm Cortex Microcontroller Software Interface Standard (CMSIS) framework used by M031 BSP.",
-                           "licenses":  [
-                                            {
-                                                "license":  {
-                                                                "id":  "Apache-2.0"
-                                                            }
-                                            }
-                                        ],
-                           "properties":  [
-                                              {
-                                                  "name":  "src_path",
-                                                  "value":  "Library/CMSIS"
-                                              },
-                                              {
-                                                  "name":  "integration",
-                                                  "value":  "vendored_source"
-                                              },
-                                              {
-                                                  "name":  "bsp:component-origin",
-                                                  "value":  "third-party"
-                                              },
-                                              {
-                                                  "name":  "bsp:component-source",
-                                                  "value":  "Arm Ltd."
-                                              },
-                                              {
-                                                  "name":  "bsp:upstream-repository",
-                                                  "value":  "https://github.com/ARM-software/CMSIS_6"
-                                              },
-                                              {
-                                                  "name":  "bsp:evidence-file",
-                                                  "value":  "Document/SBOM/components/ProductView/sca_cmsis.json"
-                                              },
-                                              {
-                                                  "name":  "bsp:evidence-path",
-                                                  "value":  "Library/CMSIS"
-                                              },
-                                              {
-                                                  "name":  "bsp:version-evidence",
-                                                  "value":  "Library/CMSIS/Core/Include/cmsis_version.h"
-                                              },
-                                              {
-                                                  "name":  "bsp:license-evidence",
-                                                  "value":  "Library/CMSIS/Core/Include/cmsis_version.h"
-                                              }
-                                          ],
-                           "hashes":  [
-                                          {
-                                              "alg":  "SHA-256",
-                                              "content":  "3b9195c5373a2a4dbfd968b083b3d7f5f446f9ec2e126f75928ac1ff4356b91e"
-                                          }
-                                      ]
-                       }
-                   ]
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/cmsis@6.1.0?source=vendored&path=Library/CMSIS",
+      "name": "CMSIS",
+      "version": "6.1.0",
+      "scope": "required",
+      "author": "Arm Ltd.",
+      "supplier": {
+        "name": "Arm Ltd."
+      },
+      "purl": "pkg:generic/cmsis@6.1.0",
+      "description": "Arm Cortex Microcontroller Software Interface Standard (CMSIS) framework used by M031 BSP.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "src_path",
+          "value": "Library/CMSIS"
+        },
+        {
+          "name": "integration",
+          "value": "vendored_source"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "third-party"
+        },
+        {
+          "name": "bsp:component-source",
+          "value": "Arm Ltd."
+        },
+        {
+          "name": "bsp:upstream-repository",
+          "value": "https://github.com/ARM-software/CMSIS_6"
+        },
+        {
+          "name": "bsp:evidence-file",
+          "value": "Document/SBOM/components/ProductView/sca_cmsis.json"
+        },
+        {
+          "name": "bsp:evidence-path",
+          "value": "Library/CMSIS"
+        },
+        {
+          "name": "bsp:version-evidence",
+          "value": "Library/CMSIS/Core/Include/cmsis_version.h"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "LICENSE"
+        },
+        {
+          "name": "bsp:license-evidence-sha256",
+          "value": "49bbe9114e49214df2ccc324cb3ac8d1d1aa1c3a0947f94c286765e86647b32e"
+        },
+        {
+          "name": "bsp:notice-evidence",
+          "value": "NOTICE"
+        },
+        {
+          "name": "bsp:notice-evidence-sha256",
+          "value": "2e0ea189389b3d07cdf25707d7e49c3938684a904b40d93fe1dbe2a52bf4d642"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3b9195c5373a2a4dbfd968b083b3d7f5f446f9ec2e126f75928ac1ff4356b91e"
+        }
+      ]
+    }
+  ]
 }
