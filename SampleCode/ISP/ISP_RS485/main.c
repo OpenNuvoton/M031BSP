@@ -16,6 +16,8 @@
 #define RECEIVE_MODE            (0)
 #define TRANSMIT_MODE           (1)
 
+void ProcessHardFault(void) {}
+
 void SYS_Init(void)
 {
     /*---------------------------------------------------------------------------------------------------------*/

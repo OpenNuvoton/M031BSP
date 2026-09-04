@@ -12,6 +12,8 @@
 #include "targetdev.h"
 #include "uart_transfer.h"
 
+void ProcessHardFault(void) {}
+
 void SYS_Init(void)
 {
     /*---------------------------------------------------------------------------------------------------------*/

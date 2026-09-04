@@ -13,6 +13,8 @@
 uint32_t Pclk0;
 uint32_t Pclk1;
 
+void ProcessHardFault(void) {}
+
 void TIMER_Init(void)
 {
     uint32_t u32Prescale = 32;

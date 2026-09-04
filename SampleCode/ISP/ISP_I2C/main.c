@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include "targetdev.h"
 
+void ProcessHardFault(void) {}
 
 void SYS_Init(void)
 {
