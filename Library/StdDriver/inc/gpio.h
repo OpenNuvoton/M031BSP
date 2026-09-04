@@ -31,7 +31,7 @@ extern "C"
   @{
 */
 
-#define GPIO_PIN_MAX    16  /*!< Specify Maximum Pins of Each GPIO Port \hideinitializer */
+#define GPIO_PIN_MAX    16U /*!< Specify Maximum Pins of Each GPIO Port \hideinitializer */
 
 
 /* Define GPIO Pin Data Input/Output. It could be used to control each I/O pin by pin address mapping.
