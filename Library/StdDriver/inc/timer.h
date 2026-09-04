@@ -399,9 +399,9 @@ static __INLINE void TIMER_DisableCaptureInt(TIMER_T *timer)
   *
   * \hideinitializer
   */
-static __INLINE uint32_t TIMER_GetIntFlag(TIMER_T *timer)
+static __INLINE uint32_t TIMER_GetIntFlag(const TIMER_T *timer)
 {
-    return ((timer->INTSTS & TIMER_INTSTS_TIF_Msk) ? 1 : 0);
+  return ((timer->INTSTS & TIMER_INTSTS_TIF_Msk) ? 1UL : 0UL);
 }
 
 /**
@@ -432,7 +432,7 @@ static __INLINE void TIMER_ClearIntFlag(TIMER_T *timer)
   *
   * \hideinitializer
   */
-static __INLINE uint32_t TIMER_GetCaptureIntFlag(TIMER_T *timer)
+static __INLINE uint32_t TIMER_GetCaptureIntFlag(const TIMER_T *timer)
 {
     return timer->EINTSTS;
 }
@@ -465,9 +465,9 @@ static __INLINE void TIMER_ClearCaptureIntFlag(TIMER_T *timer)
   *
   * \hideinitializer
   */
-static __INLINE uint32_t TIMER_GetWakeupFlag(TIMER_T *timer)
+static __INLINE uint32_t TIMER_GetWakeupFlag(const TIMER_T *timer)
 {
-    return (timer->INTSTS & TIMER_INTSTS_TWKF_Msk ? 1 : 0);
+  return (((timer->INTSTS & TIMER_INTSTS_TWKF_Msk) != 0UL) ? 1UL : 0UL);
 }
 
 /**
@@ -497,7 +497,7 @@ static __INLINE void TIMER_ClearWakeupFlag(TIMER_T *timer)
   *
   * \hideinitializer
   */
-static __INLINE uint32_t TIMER_GetCaptureData(TIMER_T *timer)
+static __INLINE uint32_t TIMER_GetCaptureData(const TIMER_T *timer)
 {
     return timer->CAP;
 }
@@ -513,7 +513,7 @@ static __INLINE uint32_t TIMER_GetCaptureData(TIMER_T *timer)
   *
   * \hideinitializer
   */
-static __INLINE uint32_t TIMER_GetCounter(TIMER_T *timer)
+static __INLINE uint32_t TIMER_GetCounter(const TIMER_T *timer)
 {
     return timer->CNT;
 }
@@ -525,7 +525,7 @@ void TIMER_EnableCapture(TIMER_T *timer, uint32_t u32CapMode, uint32_t u32Edge);
 void TIMER_DisableCapture(TIMER_T *timer);
 void TIMER_EnableEventCounter(TIMER_T *timer, uint32_t u32Edge);
 void TIMER_DisableEventCounter(TIMER_T *timer);
-uint32_t TIMER_GetModuleClock(TIMER_T *timer);
+uint32_t TIMER_GetModuleClock(const TIMER_T *timer);
 void TIMER_EnableFreqCounter(TIMER_T *timer,
                              uint32_t u32DropCount,
                              uint32_t u32Timeout,

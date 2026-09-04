@@ -462,7 +462,7 @@ static __INLINE uint32_t CLK_GetPLLClockFreq(void)
 {
     uint32_t u32PllFreq;
     uint32_t u32FIN, u32NF, u32NR, u32NO;
-    uint8_t au8NoTbl[4] = {1, 2, 2, 4}; /* OUTDIV :DEF: {1, 2, 2, 4} */
+    const uint8_t au8NoTbl[4] = {1U, 2U, 2U, 4U}; /* OUTDIV :DEF: {1, 2, 2, 4} */
     uint32_t u32Reg;
 
     u32PllFreq = 0;
