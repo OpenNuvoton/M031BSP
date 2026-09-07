@@ -287,13 +287,21 @@ Default_Handler:
 
 	.align	1
 	.thumb_func
+	.weak	ProcessHardFault
 	.weak	HardFault_Handler
 	.type	HardFault_Handler, %function
 HardFault_Handler:
+	ldr	r3, =ProcessHardFault
+	cmp	r3, #0
+	bne	.L_HardFault_Process
+
+	ldr	r3, =Default_Handler
+	bx	r3
+
+.L_HardFault_Process:
 	mov	r0, lr
 	mrs	r1, msp
 	mrs	r2, psp
-	ldr	r3, =ProcessHardFault
 	blx	r3
 	bx	r0
 	.size	HardFault_Handler, . - HardFault_Handler

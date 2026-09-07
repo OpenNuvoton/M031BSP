@@ -25,6 +25,7 @@ extern __NO_RETURN void __PROGRAM_START(void);
 __NO_RETURN void Reset_Handler(void);
 __NO_RETURN void Default_Handler(void);
 void Reset_Handler_PreInit(void);
+__WEAK uint32_t ProcessHardFault(uint32_t lr, uint32_t msp, uint32_t psp);
 
 /*----------------------------------------------------------------------------
   Exception / Interrupt Handler
@@ -177,10 +178,15 @@ __NO_RETURN void Reset_Handler(void)
 __WEAK void HardFault_Handler(void)
 {
     __ASM(
+        "LDR     R3, =ProcessHardFault \n"
+        "CMP     R3, #0 \n"
+        "BNE     HardFault_Process \n"
+        "LDR     R3, =Default_Handler \n"
+        "BX      R3 \n"
+        "HardFault_Process: \n"
         "MOV     R0, LR  \n"
         "MRS     R1, MSP \n"
         "MRS     R2, PSP \n"
-        "LDR     R3, =ProcessHardFault \n"
         "BLX     R3 \n"
         "BX      R0 \n"
     );

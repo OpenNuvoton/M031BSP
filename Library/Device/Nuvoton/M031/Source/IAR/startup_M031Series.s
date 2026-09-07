@@ -23,7 +23,7 @@
 
     EXTERN  SystemInit
     EXTERN  __iar_program_start
-    EXTERN  ProcessHardFault    
+    EXTWEAK ProcessHardFault    
     PUBLIC  __vector_table
 
     DATA
@@ -119,10 +119,17 @@ Reset_Handler
     PUBWEAK HardFault_Handler
     SECTION .text:CODE:REORDER:NOROOT(2)
 HardFault_Handler
+        LDR     R3, =ProcessHardFault
+        CMP     R3, #0
+        BNE     HardFault_Process
+
+        LDR     R3, =Default_Handler
+        BX      R3
+
+HardFault_Process
         MOV     R0, LR
         MRS     R1, MSP
         MRS     R2, PSP
-        LDR     R3, =ProcessHardFault
         BLX     R3
         BX      R0
         
