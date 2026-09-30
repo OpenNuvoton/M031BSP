@@ -461,7 +461,6 @@ extern int32_t g_CLK_i32ErrCode;
 static __INLINE uint32_t CLK_GetPLLClockFreq(void)
 {
     uint32_t u32PllFreq;
-    uint32_t u32FIN, u32NF, u32NR, u32NO;
     const uint8_t au8NoTbl[4] = {1U, 2U, 2U, 4U}; /* OUTDIV :DEF: {1, 2, 2, 4} */
     uint32_t u32Reg;
 
@@ -470,6 +469,8 @@ static __INLINE uint32_t CLK_GetPLLClockFreq(void)
 
     if ((u32Reg & (CLK_PLLCTL_PD_Msk | CLK_PLLCTL_OE_Msk)) == 0)
     {
+        uint32_t u32FIN;
+
         /* PLL is enabled and output enabled */
         if (u32Reg & CLK_PLLCTL_PLLSRC_Msk)
         {
@@ -484,6 +485,8 @@ static __INLINE uint32_t CLK_GetPLLClockFreq(void)
         }
         else
         {
+            uint32_t u32NF, u32NR, u32NO;
+
             /* PLL is in normal work mode */
             u32NO = au8NoTbl[((u32Reg & CLK_PLLCTL_OUTDIV_Msk) >> CLK_PLLCTL_OUTDIV_Pos)];
             u32NF  = ((u32Reg & CLK_PLLCTL_FBDIV_Msk) >> CLK_PLLCTL_FBDIV_Pos) + 2;
@@ -544,7 +547,7 @@ __STATIC_INLINE int32_t CLK_SysTickDelay(uint32_t us)
   */
 static __INLINE uint32_t CLK_GetUARTFreq(void)
 {
-    uint32_t u32Freqout, u32AHBDivider, u32ClkSel, PCLK0Div;
+    uint32_t u32Freqout, u32AHBDivider, u32ClkSel;
 
     u32Freqout = 0;
     u32ClkSel = CLK->CLKSEL1 & CLK_CLKSEL1_UART0SEL_Msk ;
@@ -567,6 +570,8 @@ static __INLINE uint32_t CLK_GetUARTFreq(void)
     }
     else if(u32ClkSel == CLK_CLKSEL1_UART0SEL_PCLK0)    /* PCLK0 clock */
     {
+        uint32_t PCLK0Div;
+
         PCLK0Div = (CLK->PCLKDIV & CLK_PCLKDIV_APB0DIV_Msk) >> CLK_PCLKDIV_APB0DIV_Pos;
         u32Freqout = (SystemCoreClock >> PCLK0Div);
     }
