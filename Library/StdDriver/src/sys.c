@@ -74,7 +74,7 @@ uint32_t SYS_GetResetSrc(void)
   */
 uint32_t SYS_IsRegLocked(void)
 {
-    return !(SYS->REGLCTL & 0x1);
+    return !(SYS->REGLCTL & 0x1UL);
 }
 
 /**
@@ -151,10 +151,10 @@ void SYS_ResetCPU(void)
 void SYS_ResetModule(uint32_t u32ModuleIndex)
 {
     /* Generate reset signal to the corresponding module */
-    *(volatile uint32_t *)((uint32_t)&SYS->IPRST0 + (u32ModuleIndex >> 24))  |= 1 << (u32ModuleIndex & 0x00ffffff);
+    *(volatile uint32_t *)((uint32_t)&SYS->IPRST0 + (u32ModuleIndex >> 24))  |=  (1UL << (u32ModuleIndex & 0x00ffffffUL));
 
     /* Release corresponding module from reset state */
-    *(volatile uint32_t *)((uint32_t)&SYS->IPRST0 + (u32ModuleIndex >> 24))  &= ~(1 << (u32ModuleIndex & 0x00ffffff));
+    *(volatile uint32_t *)((uint32_t)&SYS->IPRST0 + (u32ModuleIndex >> 24))  &= ~(1UL << (u32ModuleIndex & 0x00ffffffUL));
 }
 
 
@@ -176,7 +176,7 @@ void SYS_EnableBOD(int32_t i32Mode, uint32_t u32BODLevel)
     SYS->BODCTL |= SYS_BODCTL_BODEN_Msk;
 
     /* Enable Brown-out interrupt or reset function */
-    SYS->BODCTL = (SYS->BODCTL & ~SYS_BODCTL_BODRSTEN_Msk) | i32Mode;
+    SYS->BODCTL = (SYS->BODCTL & ~SYS_BODCTL_BODRSTEN_Msk) | (uint32_t)i32Mode;
 
     /* Select Brown-out Detector threshold voltage */
     SYS->BODCTL = (SYS->BODCTL & ~SYS_BODCTL_BODVL_Msk) | u32BODLevel;

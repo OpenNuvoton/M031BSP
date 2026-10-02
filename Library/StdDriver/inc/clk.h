@@ -12,6 +12,8 @@
 #ifndef __CLK_H__
 #define __CLK_H__
 
+#include "M031Series.h"
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -30,22 +32,22 @@ extern "C"
 */
 
 
-#define FREQ_4MHZ           4000000     /*!< Define frequency macro   4MHz  \hideinitializer */
-#define FREQ_8MHZ           8000000     /*!< Define frequency macro   8MHz  \hideinitializer */
-#define FREQ_12MHZ         12000000     /*!< Define frequency macro  12MHz  \hideinitializer */
-#define FREQ_16MHZ         16000000     /*!< Define frequency macro  16MHz  \hideinitializer */
-#define FREQ_24MHZ         24000000     /*!< Define frequency macro  24MHz  \hideinitializer */
-#define FREQ_25MHZ         25000000     /*!< Define frequency macro  25MHz  \hideinitializer */
-#define FREQ_32MHZ         32000000     /*!< Define frequency macro  32MHz  \hideinitializer */
-#define FREQ_48MHZ         48000000     /*!< Define frequency macro  48MHz  \hideinitializer */
-#define FREQ_50MHZ         50000000     /*!< Define frequency macro  50MHz  \hideinitializer */
-#define FREQ_51MHZ         51000000     /*!< Define frequency macro  51MHz  \hideinitializer */
-#define FREQ_64MHZ         64000000     /*!< Define frequency macro  64MHz  \hideinitializer */
-#define FREQ_68MHZ         68000000     /*!< Define frequency macro  68MHz  \hideinitializer */
-#define FREQ_72MHZ         72000000     /*!< Define frequency macro  72MHz  \hideinitializer */
-#define FREQ_96MHZ         96000000     /*!< Define frequency macro  96MHz  \hideinitializer */
-#define FREQ_100MHZ       100000000     /*!< Define frequency macro 100MHz  \hideinitializer */
-#define FREQ_144MHZ       144000000     /*!< Define frequency macro 144MHz  \hideinitializer */
+#define FREQ_4MHZ         (  4000000UL)     /*!< Define frequency macro   4MHz  \hideinitializer */
+#define FREQ_8MHZ         (  8000000UL)     /*!< Define frequency macro   8MHz  \hideinitializer */
+#define FREQ_12MHZ        ( 12000000UL)     /*!< Define frequency macro  12MHz  \hideinitializer */
+#define FREQ_16MHZ        ( 16000000UL)     /*!< Define frequency macro  16MHz  \hideinitializer */
+#define FREQ_24MHZ        ( 24000000UL)     /*!< Define frequency macro  24MHz  \hideinitializer */
+#define FREQ_25MHZ        ( 25000000UL)     /*!< Define frequency macro  25MHz  \hideinitializer */
+#define FREQ_32MHZ        ( 32000000UL)     /*!< Define frequency macro  32MHz  \hideinitializer */
+#define FREQ_48MHZ        ( 48000000UL)     /*!< Define frequency macro  48MHz  \hideinitializer */
+#define FREQ_50MHZ        ( 50000000UL)     /*!< Define frequency macro  50MHz  \hideinitializer */
+#define FREQ_51MHZ        ( 51000000UL)     /*!< Define frequency macro  51MHz  \hideinitializer */
+#define FREQ_64MHZ        ( 64000000UL)     /*!< Define frequency macro  64MHz  \hideinitializer */
+#define FREQ_68MHZ        ( 68000000UL)     /*!< Define frequency macro  68MHz  \hideinitializer */
+#define FREQ_72MHZ        ( 72000000UL)     /*!< Define frequency macro  72MHz  \hideinitializer */
+#define FREQ_96MHZ        ( 96000000UL)     /*!< Define frequency macro  96MHz  \hideinitializer */
+#define FREQ_100MHZ       (100000000UL)     /*!< Define frequency macro 100MHz  \hideinitializer */
+#define FREQ_144MHZ       (144000000UL)     /*!< Define frequency macro 144MHz  \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  PWRCTL constant definitions.  (Write-protection)                                                      */
@@ -217,21 +219,21 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  CLKDIV0 constant definitions.                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/
-#define CLK_CLKDIV0_HCLK(x)  (((x)-1) << CLK_CLKDIV0_HCLKDIV_Pos)   /*!< CLKDIV Setting for HCLK clock divider.  It could be 1~16   \hideinitializer */
-#define CLK_CLKDIV0_USB(x)   (((x)-1) << CLK_CLKDIV0_USBDIV_Pos)    /*!< CLKDIV Setting for USB clock divider.   It could be 1~16   \hideinitializer */
-#define CLK_CLKDIV0_UART0(x) (((x)-1) << CLK_CLKDIV0_UART0DIV_Pos)  /*!< CLKDIV Setting for UART0 clock divider. It could be 1~16   \hideinitializer */
-#define CLK_CLKDIV0_UART1(x) (((x)-1) << CLK_CLKDIV0_UART1DIV_Pos)  /*!< CLKDIV Setting for UART1 clock divider. It could be 1~16   \hideinitializer */
-#define CLK_CLKDIV0_ADC(x)   (((x)-1) << CLK_CLKDIV0_ADCDIV_Pos)    /*!< CLKDIV Setting for ADC clock divider.   It could be 1~256  \hideinitializer */
+#define CLK_CLKDIV0_HCLK(x)  (((x)-1UL) << CLK_CLKDIV0_HCLKDIV_Pos)     /*!< CLKDIV Setting for HCLK clock divider.  It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV0_USB(x)   (((x)-1UL) << CLK_CLKDIV0_USBDIV_Pos)      /*!< CLKDIV Setting for USB clock divider.   It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV0_UART0(x) (((x)-1UL) << CLK_CLKDIV0_UART0DIV_Pos)    /*!< CLKDIV Setting for UART0 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV0_UART1(x) (((x)-1UL) << CLK_CLKDIV0_UART1DIV_Pos)    /*!< CLKDIV Setting for UART1 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV0_ADC(x)   (((x)-1UL) << CLK_CLKDIV0_ADCDIV_Pos)      /*!< CLKDIV Setting for ADC clock divider.   It could be 1~256  \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  CLKDIV4 constant definitions.                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/
-#define CLK_CLKDIV4_UART2(x) (((x)-1) << CLK_CLKDIV4_UART2DIV_Pos)  /*!< CLKDIV Setting for UART2 clock divider. It could be 1~16   \hideinitializer */
-#define CLK_CLKDIV4_UART3(x) (((x)-1) << CLK_CLKDIV4_UART3DIV_Pos)  /*!< CLKDIV Setting for UART3 clock divider. It could be 1~16   \hideinitializer */
-#define CLK_CLKDIV4_UART4(x) (((x)-1) << CLK_CLKDIV4_UART4DIV_Pos)  /*!< CLKDIV Setting for UART4 clock divider. It could be 1~16   \hideinitializer */
-#define CLK_CLKDIV4_UART5(x) (((x)-1) << CLK_CLKDIV4_UART5DIV_Pos)  /*!< CLKDIV Setting for UART5 clock divider. It could be 1~16   \hideinitializer */
-#define CLK_CLKDIV4_UART6(x) (((x)-1) << CLK_CLKDIV4_UART6DIV_Pos)  /*!< CLKDIV Setting for UART6 clock divider. It could be 1~16   \hideinitializer */
-#define CLK_CLKDIV4_UART7(x) (((x)-1) << CLK_CLKDIV4_UART7DIV_Pos)  /*!< CLKDIV Setting for UART7 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART2(x) (((x)-1UL) << CLK_CLKDIV4_UART2DIV_Pos)    /*!< CLKDIV Setting for UART2 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART3(x) (((x)-1UL) << CLK_CLKDIV4_UART3DIV_Pos)    /*!< CLKDIV Setting for UART3 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART4(x) (((x)-1UL) << CLK_CLKDIV4_UART4DIV_Pos)    /*!< CLKDIV Setting for UART4 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART5(x) (((x)-1UL) << CLK_CLKDIV4_UART5DIV_Pos)    /*!< CLKDIV Setting for UART5 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART6(x) (((x)-1UL) << CLK_CLKDIV4_UART6DIV_Pos)    /*!< CLKDIV Setting for UART6 clock divider. It could be 1~16   \hideinitializer */
+#define CLK_CLKDIV4_UART7(x) (((x)-1UL) << CLK_CLKDIV4_UART7DIV_Pos)    /*!< CLKDIV Setting for UART7 clock divider. It could be 1~16   \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  PCLKDIV constant definitions.                                                                          */
@@ -254,8 +256,8 @@ extern "C"
 #define CLK_PLLCTL_PLLSRC_HXT       (0x0UL << CLK_PLLCTL_PLLSRC_Pos)    /*!< For PLL clock source is HXT.  4~12MHz < FIN < 24MHz    \hideinitializer */
 #define CLK_PLLCTL_PLLSRC_HIRC_DIV4 (0x1UL << CLK_PLLCTL_PLLSRC_Pos)    /*!< For PLL clock source is HIRC/4. 12 MHz< FIN < 12MHz    \hideinitializer */
 
-#define CLK_PLLCTL_NR(x)        ((x-2)<<CLK_PLLCTL_INDIV_Pos)   /*!< For PLL input divider. x must be constant and 2 <= x <= 7 since constraint 1.6MHz < FIN/NR < 16MHz and NR = INDIV+2 >= 2   \hideinitializer */
-#define CLK_PLLCTL_NF(x)        ((x-2)<<CLK_PLLCTL_FBDIV_Pos)   /*!< For PLL feedback divider. x must be constant and 17 <= x/NR <= 41 since constraint 200MHz < FIN*NF/NR < 500MHz.            \hideinitializer */
+#define CLK_PLLCTL_NR(x)        (((x)-2)<<CLK_PLLCTL_INDIV_Pos)     /*!< For PLL input divider. x must be constant and 2 <= x <= 7 since constraint 1.6MHz < FIN/NR < 16MHz and NR = INDIV+2 >= 2   \hideinitializer */
+#define CLK_PLLCTL_NF(x)        (((x)-2)<<CLK_PLLCTL_FBDIV_Pos)     /*!< For PLL feedback divider. x must be constant and 17 <= x/NR <= 41 since constraint 200MHz < FIN*NF/NR < 500MHz.            \hideinitializer */
 
 #define CLK_PLLCTL_NO_1         (0x0UL << CLK_PLLCTL_OUTDIV_Pos)    /*!< For PLL output divider is 1    \hideinitializer */
 #define CLK_PLLCTL_NO_2         (0x1UL << CLK_PLLCTL_OUTDIV_Pos)    /*!< For PLL output divider is 2    \hideinitializer */
@@ -285,7 +287,7 @@ extern "C"
 #define MODULE_CLKDIV_Msk(x)    (((x) >>10) & 0xffUL)   /*!< Calculate CLKDIV mask offset on MODULE index       \hideinitializer */
 #define MODULE_CLKDIV_Pos(x)    (((x) >>5 ) & 0x1fUL)   /*!< Calculate CLKDIV position offset on MODULE index   \hideinitializer */
 #define MODULE_IP_EN_Pos(x)     (((x) >>0 ) & 0x1fUL)   /*!< Calculate APBCLK offset on MODULE index            \hideinitializer */
-#define MODULE_NoMsk            0x0                     /*!< Not mask on MODULE index                           \hideinitializer */
+#define MODULE_NoMsk            (0x0UL)                 /*!< Not mask on MODULE index                           \hideinitializer */
 #define NA                      MODULE_NoMsk            /*!< Not Available                                      \hideinitializer */
 
 #define MODULE_APBCLK_ENC(x)        (((x) & 0x03UL) << 30)   /*!< MODULE index, 0x0:AHBCLK, 0x1:APBCLK0, 0x2:APBCLK1    \hideinitializer */
@@ -458,7 +460,7 @@ extern int32_t g_CLK_i32ErrCode;
   * @details  To get actual PLL clock output frequency. The clock unit is in Hz.
   * \hideinitializer
   */
-static __INLINE uint32_t CLK_GetPLLClockFreq(void)
+static inline uint32_t CLK_GetPLLClockFreq(void)
 {
     uint32_t u32PllFreq;
     const uint8_t au8NoTbl[4] = {1U, 2U, 2U, 4U}; /* OUTDIV :DEF: {1, 2, 2, 4} */
@@ -467,7 +469,7 @@ static __INLINE uint32_t CLK_GetPLLClockFreq(void)
     u32PllFreq = 0;
     u32Reg = CLK->PLLCTL;
 
-    if ((u32Reg & (CLK_PLLCTL_PD_Msk | CLK_PLLCTL_OE_Msk)) == 0)
+    if ((u32Reg & (CLK_PLLCTL_PD_Msk | CLK_PLLCTL_OE_Msk)) == 0UL)
     {
         uint32_t u32FIN;
 
@@ -475,8 +477,11 @@ static __INLINE uint32_t CLK_GetPLLClockFreq(void)
         if (u32Reg & CLK_PLLCTL_PLLSRC_Msk)
         {
             u32FIN = (__HIRC >> 2);
-        } else
+        }
+        else
+        {
             u32FIN = __HXT;
+        }
 
         if (u32Reg & CLK_PLLCTL_BP_Msk)
         {
@@ -485,12 +490,14 @@ static __INLINE uint32_t CLK_GetPLLClockFreq(void)
         }
         else
         {
-            uint32_t u32NF, u32NR, u32NO;
+            uint32_t u32NF;
+            uint32_t u32NR;
+            uint32_t u32NO;
 
             /* PLL is in normal work mode */
             u32NO = au8NoTbl[((u32Reg & CLK_PLLCTL_OUTDIV_Msk) >> CLK_PLLCTL_OUTDIV_Pos)];
-            u32NF  = ((u32Reg & CLK_PLLCTL_FBDIV_Msk) >> CLK_PLLCTL_FBDIV_Pos) + 2;
-            u32NR  = ((u32Reg & CLK_PLLCTL_INDIV_Msk) >> CLK_PLLCTL_INDIV_Pos) + 2;
+            u32NF  = ((u32Reg & CLK_PLLCTL_FBDIV_Msk) >> CLK_PLLCTL_FBDIV_Pos) + 2UL;
+            u32NR  = ((u32Reg & CLK_PLLCTL_INDIV_Msk) >> CLK_PLLCTL_INDIV_Pos) + 2UL;
             /* u32FIN is shifted 2 bits to avoid overflow */
             u32PllFreq = (((u32FIN >> 2) * u32NF) / (u32NR * u32NO) << 2);
         }
@@ -514,16 +521,16 @@ static __INLINE uint32_t CLK_GetPLLClockFreq(void)
 __STATIC_INLINE int32_t CLK_SysTickDelay(uint32_t us)
 {
     /* The u32TimeOutCnt value must be greater than the max delay time of 1398ms if HCLK=12MHz */
-    uint32_t u32TimeOutCnt = SystemCoreClock * 2;
+    uint32_t u32TimeOutCnt = SystemCoreClock * 2UL;
 
     SysTick->LOAD = us * CyclesPerUs;
     SysTick->VAL  = (0x00);
     SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;
 
     /* Waiting for down-count to zero */
-    while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0)
+    while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0UL)
     {
-        if(--u32TimeOutCnt == 0)
+        if(--u32TimeOutCnt == 0UL)
         {
             break;
         }
@@ -532,10 +539,14 @@ __STATIC_INLINE int32_t CLK_SysTickDelay(uint32_t us)
     /* Disable SysTick counter */
     SysTick->CTRL = 0;
 
-    if(u32TimeOutCnt == 0)
+    if(u32TimeOutCnt == 0UL)
+    {
         return CLK_TIMEOUT_ERR;
+    }
     else
+    {
         return 0;
+    }
 }
 
 
@@ -545,9 +556,11 @@ __STATIC_INLINE int32_t CLK_SysTickDelay(uint32_t us)
   * @return UART0 clock frequency. The clock UNIT is in Hz.
   * \hideinitializer
   */
-static __INLINE uint32_t CLK_GetUARTFreq(void)
+static inline uint32_t CLK_GetUARTFreq(void)
 {
-    uint32_t u32Freqout, u32AHBDivider, u32ClkSel;
+    uint32_t u32Freqout;
+    uint32_t u32AHBDivider;
+    uint32_t u32ClkSel;
 
     u32Freqout = 0;
     u32ClkSel = CLK->CLKSEL1 & CLK_CLKSEL1_UART0SEL_Msk ;
@@ -579,36 +592,40 @@ static __INLINE uint32_t CLK_GetUARTFreq(void)
     {
         u32Freqout = __LIRC;
     }
+    else
+    {
+        /* no action */
+    }
 
-    u32AHBDivider = (CLK->CLKDIV0 & CLK_CLKDIV0_UART0DIV_Msk) + 1 ;
+    u32AHBDivider = (CLK->CLKDIV0 & CLK_CLKDIV0_UART0DIV_Msk) + 1UL ;
 
     return (u32Freqout/u32AHBDivider);
 }
 
 
-uint32_t CLK_WaitClockReady(uint32_t);
-void CLK_DisableCKO(void);
-void CLK_EnableCKO(uint32_t u32ClkSrc, uint32_t u32ClkDiv, uint32_t u32ClkDivBy1En);
+uint32_t CLK_WaitClockReady(uint32_t u32ClkMask);
+void     CLK_DisableCKO(void);
+void     CLK_EnableCKO(uint32_t u32ClkSrc, uint32_t u32ClkDiv, uint32_t u32ClkDivBy1En);
 uint32_t CLK_GetHCLKFreq(void);
 uint32_t CLK_GetCPUFreq(void);
 uint32_t CLK_GetLXTFreq(void);
 uint32_t CLK_GetHXTFreq(void);
-void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv);
+void     CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv);
 uint32_t CLK_SetCoreClock(uint32_t u32Hclk);
 uint32_t CLK_GetPCLK0Freq(void);
 uint32_t CLK_GetPCLK1Freq(void);
-void CLK_EnableXtalRC(uint32_t u32ClkMask);
-void CLK_DisableXtalRC(uint32_t u32ClkMask);
-void CLK_DisableModuleClock(uint32_t u32ModuleIdx);
-void CLK_EnableModuleClock(uint32_t u32ModuleIdx);
-void CLK_SetModuleClock(uint32_t u32ModuleIdx, uint32_t u32ClkSrc, uint32_t u32ClkDiv);
-void CLK_DisablePLL(void);
+void     CLK_EnableXtalRC(uint32_t u32ClkMask);
+void     CLK_DisableXtalRC(uint32_t u32ClkMask);
+void     CLK_DisableModuleClock(uint32_t u32ModuleIdx);
+void     CLK_EnableModuleClock(uint32_t u32ModuleIdx);
+void     CLK_SetModuleClock(uint32_t u32ModuleIdx, uint32_t u32ClkSrc, uint32_t u32ClkDiv);
+void     CLK_DisablePLL(void);
 uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq);
-void CLK_SetSysTickClockSrc(uint32_t u32ClkSrc);
-void CLK_DisableSysTick(void);
-void CLK_EnableSysTick(uint32_t u32ClkSrc, uint32_t u32Count);
-void CLK_PowerDown(void);
-void CLK_Idle(void);
+void     CLK_SetSysTickClockSrc(uint32_t u32ClkSrc);
+void     CLK_DisableSysTick(void);
+void     CLK_EnableSysTick(uint32_t u32ClkSrc, uint32_t u32Count);
+void     CLK_PowerDown(void);
+void     CLK_Idle(void);
 
 /*@}*/ /* end of group CLK_EXPORTED_FUNCTIONS */
 
