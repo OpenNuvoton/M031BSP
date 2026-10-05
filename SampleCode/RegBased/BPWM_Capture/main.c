@@ -18,9 +18,8 @@
 /**
  * @brief       BPWM0 IRQ Handler
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     ISR to handle BPWM0 interrupt event
  */
@@ -235,14 +234,14 @@ int main(void)
            duty ratio = (CMR+1)/(CNR+1)
            cycle time = CNR+1
            High level = CMR+1
-           BPWM clock source frequency = __HIRC = 48,000,000
+           BPWM clock source frequency = PCLK0 = 48,000,000
            (CNR+1) = BPWM clock source frequency/prescaler/clock source divider/BPWM output frequency
                    = 48,000,000/4/1/250 = 48,000
            (Note: CNR is 16 bits, so if calculated value is larger than 65536, user should increase prescale value.)
            CNR = 47999
            duty ratio = 30% ==> (CMR+1)/(CNR+1) = 30%
            CMR = 14400
-           Prescale value is 1 : prescaler= 2
+           Prescale value is 3 : prescaler = 4
            Clock divider is BPWM_CSR_DIV1 : clock divider =1
         */
 

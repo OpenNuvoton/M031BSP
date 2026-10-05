@@ -83,7 +83,7 @@ void SYS_Init(void)
     CLK_EnableModuleClock(TMR1_MODULE);
 
     /* Select IP clock source */
-    CLK_SetModuleClock(TMR0_MODULE, CLK_CLKSEL1_TMR1SEL_HIRC, 0);
+    CLK_SetModuleClock(TMR1_MODULE, CLK_CLKSEL1_TMR1SEL_HIRC, 0);
 
     /* Set PB multi-function pins for UART0 RXD=PB.12 and TXD=PB.13 */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk | SYS_GPB_MFPH_PB13MFP_Msk))    |       \
@@ -109,8 +109,10 @@ void UART0_Init()
 
 /**
   * @brief      User defined Process HardFault
-  * @param      stack   A pointer to current stack
-  * @return     None
+  * @param      _lr     Exception link register value.
+  * @param      msp     Main stack pointer value.
+  * @param      psp     Process stack pointer value.
+  * @return     This function does not return.
   * @details    This function is an example to show how to implement user's process hard fault handler
   *
   */

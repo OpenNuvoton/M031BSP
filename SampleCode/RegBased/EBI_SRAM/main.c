@@ -126,7 +126,7 @@ void SYS_Init(void)
     CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk;
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*---------------------------------------------------------------------------------------------------------*/
@@ -233,9 +233,8 @@ uint32_t volatile u32IsTestOver = 0;
 /**
  * @brief       PDMA IRQ
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The PDMA default IRQ, declared in startup_M031Series.s.
  */

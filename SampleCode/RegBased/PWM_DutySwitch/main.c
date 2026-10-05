@@ -22,9 +22,8 @@ uint32_t CalNewDutyCMR(PWM_T *pwm, uint32_t u32ChannelNum, uint32_t u32DutyCycle
 /**
  * @brief       PWM0 IRQ Handler
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     ISR to handle PWM0 interrupt event
  */
@@ -166,13 +165,13 @@ int32_t main(void)
     printf("  This sample code will use PWM0 channel 0 to output waveform, and switch duty cycle.\n");
     printf("  I/O configuration:\n");
     printf("    waveform output pin: PWM0 channel 0(PB.5)\n");
-    printf("\nOutput waveform is 1200Hz and it's duty is 50%%.\n");
+    printf("\nOutput waveform is 1.2 MHz and it's duty is 50%%.\n");
 
     /*
       Configure PWM0 channel 0 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
+      Period is PWM clock source frequency / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
-      Period = 48 MHz / (1 * (39 + 1)) = 1,200 KHz
+      Period = 48 MHz / (1 * (39 + 1)) = 1.2 MHz
       Duty ratio = (100) / (39 + 1) = 50%
     */
 

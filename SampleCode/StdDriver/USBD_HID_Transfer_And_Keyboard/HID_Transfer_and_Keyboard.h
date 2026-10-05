@@ -34,7 +34,7 @@
 #define HID_RPT_TYPE_OUTPUT     0x02
 #define HID_RPT_TYPE_FEATURE    0x03
 
-/*!<USB HID HID LED */
+/*!<USB HID LED */
 #define HID_LED_NumLock         0x01
 #define HID_LED_CapsLock        0x02
 #define HID_LED_ScrollLock      0x04

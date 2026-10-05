@@ -1097,7 +1097,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 /* PH.15 MFP */
 
 
-/*@}*/ /* end of group SYS_EXPORTED_CONSTANTS */
+/** @} */ /* end of group SYS_EXPORTED_CONSTANTS */
 
 /** @addtogroup SYS_EXPORTED_FUNCTIONS SYS Exported Functions
   @{
@@ -1106,7 +1106,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Clear Brown-out detector interrupt flag
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro clear Brown-out detector interrupt flag.
   * \hideinitializer
@@ -1115,7 +1115,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Set Brown-out detector function to normal mode
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro set Brown-out detector to normal mode.
   *             The register write-protection function should be disabled before using this macro.
@@ -1125,7 +1125,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Disable Brown-out detector function
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro disable Brown-out detector function.
   *             The register write-protection function should be disabled before using this macro.
@@ -1135,7 +1135,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Enable Brown-out detector function
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro enable Brown-out detector function.
   *             The register write-protection function should be disabled before using this macro.
@@ -1145,7 +1145,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Get Brown-out detector interrupt flag
-  * @param      None
+  * @note       No parameters.
   * @retval     0   Brown-out detect interrupt flag is not set.
   * @retval     >=1 Brown-out detect interrupt flag is set.
   * @details    This macro get Brown-out detector interrupt flag.
@@ -1155,7 +1155,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Get Brown-out detector status
-  * @param      None
+  * @note       No parameters.
   * @retval     0   System voltage is higher than BOD threshold voltage setting or BOD function is disabled.
   * @retval     >=1 System voltage is lower than BOD threshold voltage setting.
   * @details    This macro get Brown-out detector output status.
@@ -1166,7 +1166,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Disable Brown-out detector reset function
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro disable Brown-out detector reset function.
   *             The register write-protection function should be disabled before using this macro.
@@ -1176,7 +1176,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Enable Brown-out detector reset function
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro enable Brown-out detect reset function.
   *             The register write-protection function should be disabled before using this macro.
@@ -1186,7 +1186,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Set Brown-out detector function low power mode
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro set Brown-out detector to low power mode.
   *             The register write-protection function should be disabled before using this macro.
@@ -1208,7 +1208,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Get reset source is from Brown-out detector reset
-  * @param      None
+  * @note       No parameters.
   * @retval     0   Previous reset source is not from Brown-out detector reset
   * @retval     >=1 Previous reset source is from Brown-out detector reset
   * @details    This macro get previous reset source is from Brown-out detect reset or not.
@@ -1218,7 +1218,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Get reset source is from CPU reset
-  * @param      None
+  * @note       No parameters.
   * @retval     0   Previous reset source is not from CPU reset
   * @retval     >=1 Previous reset source is from CPU reset
   * @details    This macro get previous reset source is from CPU reset.
@@ -1228,7 +1228,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Get reset source is from LVR Reset
-  * @param      None
+  * @note       No parameters.
   * @retval     0   Previous reset source is not from Low-Voltage-Reset
   * @retval     >=1 Previous reset source is from Low-Voltage-Reset
   * @details    This macro get previous reset source is from Low-Voltage-Reset.
@@ -1238,7 +1238,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Get reset source is from Power-on Reset
-  * @param      None
+  * @note       No parameters.
   * @retval     0   Previous reset source is not from Power-on Reset
   * @retval     >=1 Previous reset source is from Power-on Reset
   * @details    This macro get previous reset source is from Power-on Reset.
@@ -1248,7 +1248,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Get reset source is from reset pin reset
-  * @param      None
+  * @note       No parameters.
   * @retval     0   Previous reset source is not from reset pin reset
   * @retval     >=1 Previous reset source is from reset pin reset
   * @details    This macro get previous reset source is from reset pin reset.
@@ -1258,7 +1258,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Get reset source is from system reset
-  * @param      None
+  * @note       No parameters.
   * @retval     0   Previous reset source is not from system reset
   * @retval     >=1 Previous reset source is from system reset
   * @details    This macro get previous reset source is from system reset.
@@ -1268,7 +1268,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Get reset source is from watchdog timer or window watchdog timer reset
-  * @param      None
+  * @note       No parameters.
   * @retval     0   Previous reset source is not from watchdog timer or window watchdog timer reset
   * @retval     >=1 Previous reset source is from watchdog timer or window watchdog timer reset
   * @details    This macro get previous reset source is from watchdog timer or window watchdog timer reset.
@@ -1278,7 +1278,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Disable Low-Voltage-Reset function
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro disable Low-Voltage-Reset function.
   *             The register write-protection function should be disabled before using this macro.
@@ -1288,7 +1288,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Enable Low-Voltage-Reset function
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro enable Low-Voltage-Reset function.
   *             The register write-protection function should be disabled before using this macro.
@@ -1298,7 +1298,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Disable Power-on Reset function
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro disable Power-on Reset function.
   *             The register write-protection function should be disabled before using this macro.
@@ -1308,7 +1308,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Enable Power-on Reset function
-  * @param      None
+  * @note       No parameters.
   * @return     None
   * @details    This macro enable Power-on Reset function.
   *             The register write-protection function should be disabled before using this macro.
@@ -1336,8 +1336,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /**
   * @brief      Disable register write-protection function
-  * @param      None
-  * @return     None
+  * @note       No parameters.
   * @details    This function disable register write-protection function.
   *             To unlock the protected register to allow write access.
   * \hideinitializer
@@ -1353,8 +1352,7 @@ __STATIC_INLINE void SYS_UnlockReg(void)
 
 /**
   * @brief      Enable register write-protection function
-  * @param      None
-  * @return     None
+  * @note       No parameters.
   * @details    This function is used to enable register write-protection function.
   *             To lock the protected register to forbid write access.
   * \hideinitializer
@@ -1377,11 +1375,11 @@ void SYS_EnableBOD(int32_t i32Mode, uint32_t u32BODLevel);
 void SYS_DisableBOD(void);
 
 
-/*@}*/ /* end of group SYS_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group SYS_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group SYS_Driver */
+/** @} */ /* end of group SYS_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 
 #ifdef __cplusplus

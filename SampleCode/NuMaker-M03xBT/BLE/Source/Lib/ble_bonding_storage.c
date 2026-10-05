@@ -43,7 +43,6 @@ uint8_t flashBackUpRam[SIZE_OF_INFO_BLK];
  * @param[in] u32Addr    : Address of the flash location to be programmed.
  * @param[in] u8DataPtr  : The data pointer to be programmed.
  * @param[in] u32DataLen : The total length to be programmed.
- * @return none
  */
 static void program_BleFlash(uint32_t u32Addr, uint8_t *u8DataPtr, uint32_t u32DataLen)
 {
@@ -74,7 +73,6 @@ static void program_BleFlash(uint32_t u32Addr, uint8_t *u8DataPtr, uint32_t u32D
 /** This function is used to erase information bond space for BLE.
  *
  * @param[in] offset    : offset value of the information space to be erased.
- * @return none
  */
 static void erase_InfoBond(uint8_t offset)
 {
@@ -801,9 +799,8 @@ uint8_t *setBLE_CmdFlashBond(uint8_t opcode, uint8_t *para_data)
 
 /** This function is used to fill Bonding information in Flash.
  *
- * @param[in] none
+ * @param[in,out] para_data : bonding information data buffer.
  *
- * @return none
  */
 void setBLE_FillInfoBondwithExistPID(uint8_t *para_data)
 {
@@ -828,9 +825,9 @@ void setBLE_FillInfoBondwithExistPID(uint8_t *para_data)
 
 /** This function is used to restore bonding data to service and profile.
  *
- * @param[in] none
+ * @param[in] para_data Bonding information data buffer.
  *
- * @return none
+ * @return The input buffer containing the restored data or an error status.
  */
 uint8_t *setBLE_RestoreDataBondwithExistHOSTID(uint8_t *para_data)
 {
@@ -933,4 +930,3 @@ uint8_t *setBLE_RestoreDataBondwithExistHOSTID(uint8_t *para_data)
     return para_data;
 }
 #endif  //(#if (BLE_SUPPORT_BOND == 1))
-

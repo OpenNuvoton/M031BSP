@@ -18,9 +18,8 @@
 /**
  * @brief       PWM0 IRQ Handler
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     ISR to handle PWM0 interrupt event
  */
@@ -143,7 +142,7 @@ int32_t main(void)
     UART0_Init();
 
     printf("\n\nCPU @ %dHz(PLL@ %dHz)\n", SystemCoreClock, PllClock);
-    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "CPU" : "PLL");
+    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "PCLK" : "PLL");
     printf("+------------------------------------------------------------------------+\n");
     printf("|                          PWM Driver Sample Code                        |\n");
     printf("|                                                                        |\n");
@@ -156,7 +155,7 @@ int32_t main(void)
 
     /*
       Configure PWM0 channel 0 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
+      Period is PWM clock source frequency / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
       Period = 48 MHz / (2 * (199 + 1)) = 120,000 Hz
       Duty ratio = (100) / (199 + 1) = 50%

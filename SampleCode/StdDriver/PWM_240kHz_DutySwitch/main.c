@@ -5,7 +5,7 @@
  * $Date: 18/07/05 4:59p $
  * @brief
  *           Demonstrate how to set PWM0 channel 0 outputs 240 kHz waveform and
-                         swtich duty in each 0.5%.
+                         switch duty in each 0.5%.
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
@@ -87,7 +87,7 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* PWM clock frequency configuration                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
-    /* Select HCLK clock source as PLL and and HCLK clock divider as 2 */
+    /* Select HCLK clock source as PLL and HCLK clock divider as 2 */
 //    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_PLL, CLK_CLKDIV0_HCLK(2));
 
     /* PWM clock frequency can be set equal or double to HCLK by choosing case 1 or case 2 */

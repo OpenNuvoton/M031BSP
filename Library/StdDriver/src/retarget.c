@@ -200,7 +200,7 @@ int32_t SH_Return(int32_t n32In_R0, int32_t n32In_R1, int32_t *pn32Out_R0)
     #endif
 
     /**
-     * @static_deviation
+     * @par Static deviation
      * <b>Rule:</b>          MISRA C:2012 Rule 8.2<br>
      * <b>Justification:</b> Parameters lr, msp, psp are already named in this prototype;
      *                       the preceding conditional __WEAK / __attribute__((weak))
@@ -411,8 +411,6 @@ void SendChar_ToUART(int ch)
  *
  * @param[in] ch : A character data writes to debug port
  *
- * @returns  Send value from UART debug port or semihost
- *
  * @details  Send a target char to UART debug port or semihost.
  */
 
@@ -563,7 +561,7 @@ int IsDebugFifoEmpty(void)
 
 
 /**
- * @brief    C library retargetting
+ * @brief    C library retargeting
  *
  * @param[in]  ch  Write a character data
  *
@@ -596,7 +594,7 @@ void _ttywrch(int ch)
  *
  * @note       The above descriptions are copied from http://www.cplusplus.com/reference/clibrary/cstdio/fputc/.
  *
- * @static_deviation
+ * @par Static deviation
  * <b>Rule:</b>          MISRA C:2012 Rule 21.2<br>
  * <b>Justification:</b> fputc is a standard C library function name that must be
  *                       redeclared/redefined here by design: this is the retarget
@@ -754,7 +752,7 @@ int _getpid(void)
  *
  * @details    For get message from debug port or semihosting.
  *
- * @static_deviation
+ * @par Static deviation
  * <b>Rule:</b>          MISRA C:2012 Rule 21.2<br>
  * <b>Justification:</b> fgetc is a standard C library function name that must be
  *                       redeclared/redefined here by design: this is the retarget
@@ -821,7 +819,7 @@ int fgetc(FILE *stream)
  *
  * @note       The above descriptions are copied from http://www.cplusplus.com/reference/clibrary/cstdio/ferror/.
  *
- * @static_deviation
+ * @par Static deviation
  * <b>Rule:</b>          MISRA C:2012 Rule 21.2<br>
  * <b>Justification:</b> ferror is a standard C library function name that must be
  *                       redeclared/redefined here by design: this is the retarget

@@ -48,15 +48,15 @@ void SYS_Init(void)
     /* Enable UART module clock */
     CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk;
 
-    /* Select UART module clock source as HXT and UART module clock divider as 1 */
+    /* Select UART module clock source as HIRC and UART module clock divider as 1 */
     CLK->CLKSEL1 = (CLK->CLKSEL1 & (~CLK_CLKSEL1_UART0SEL_Msk)) | CLK_CLKSEL1_UART0SEL_HIRC;
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART0DIV_Msk)) | CLK_CLKDIV0_UART0(1);
 
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init I/O Multi-function                                                                                 */
     /*---------------------------------------------------------------------------------------------------------*/
-    /* The RX pin needs to qasi-high for single-wire */
-    PB->MODE = (PB->MODE & ~GPIO_MODE_MODE0_Msk) | (GPIO_MODE_QUASI << GPIO_MODE_MODE12_Pos);
+    /* The RX pin needs to be set to quasi-directional mode for single-wire */
+    PB->MODE = (PB->MODE & ~GPIO_MODE_MODE12_Msk) | (GPIO_MODE_QUASI << GPIO_MODE_MODE12_Pos);
 
     /* Set PB multi-function pins for UART0 RXD=PB.12 */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB12MFP_Msk)) | (SYS_GPB_MFPH_PB12MFP_UART0_RXD);

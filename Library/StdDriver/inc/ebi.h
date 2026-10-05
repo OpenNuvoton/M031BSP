@@ -74,7 +74,7 @@ extern "C"
 #define EBI_OPMODE_NORMAL       0x0UL                 /*!< EBI bus operate in normal mode \hideinitializer */
 #define EBI_OPMODE_CACCESS      (EBI_CTL_CACCESS_Msk) /*!< EBI bus operate in Continuous Data Access mode \hideinitializer */
 
-/*@}*/ /* end of group EBI_EXPORTED_CONSTANTS */
+/** @} */ /* end of group EBI_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup EBI_EXPORTED_FUNCTIONS EBI Exported Functions
@@ -222,7 +222,7 @@ extern "C"
 /**
  * @brief       Enable EBI Write Buffer
  *
- * @param       None
+ * @note        No parameters.
  *
  * @return      None
  *
@@ -233,7 +233,7 @@ extern "C"
 /**
  * @brief       Disable EBI Write Buffer
  *
- * @param       None
+ * @note        No parameters.
  *
  * @return      None
  *
@@ -245,11 +245,11 @@ void EBI_Open(uint32_t u32Bank, uint32_t u32DataWidth, uint32_t u32TimingClass, 
 void EBI_Close(uint32_t u32Bank);
 void EBI_SetBusTiming(uint32_t u32Bank, uint32_t u32TimingConfig, uint32_t u32MclkDiv);
 
-/*@}*/ /* end of group EBI_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group EBI_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group EBI_Driver */
+/** @} */ /* end of group EBI_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

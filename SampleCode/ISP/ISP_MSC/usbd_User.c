@@ -72,10 +72,7 @@ void USBD_MemReset(uint8_t *src, uint32_t size)
   * @brief      This function makes USBD module to be ready to use
   *
   * @param[in]  param           The structure of USBD information.
-  * @param[in]  pfnClassReq     USB Class request callback function.
-  * @param[in]  pfnSetInterface USB Set Interface request callback function.
   *
-  * @return     None
   *
   * @details    This function will enable USB controller, USB PHY transceiver and pull-up resistor of USB_D+ pin. USB PHY will drive SE0 to bus.
   */
@@ -93,9 +90,8 @@ void USBD_Open(const S_USBD_INFO_T *param)
 /**
   * @brief    This function makes USB host to recognize the device
   *
-  * @param    None
+  * @note     No parameters.
   *
-  * @return   None
   *
   * @details  Enable WAKEUP, FLDET, USB and BUS interrupts. Disable software-disconnect function after 100ms delay with SysTick timer.
   */
@@ -116,9 +112,7 @@ void USBD_Open(const S_USBD_INFO_T *param)
   * @brief      Get the received SETUP packet
   *
   * @param[in]  buf A buffer pointer used to store 8-byte SETUP packet.
-  *
-  * @return     None
-  *
+  *  *
   * @details    Store SETUP packet to a user-specified buffer.
   *
   */
@@ -130,9 +124,8 @@ void USBD_GetSetupPacket(uint8_t *buf)
 /**
   * @brief    Process SETUP packet
   *
-  * @param    None
+  * @note     No parameters.
   *
-  * @return   None
   *
   * @details  Parse SETUP packet and perform the corresponding action.
   *
@@ -167,9 +160,8 @@ void USBD_ProcessSetupPacket(void)
 /**
   * @brief    Process GetDescriptor request
   *
-  * @param    None
+  * @note     No parameters.
   *
-  * @return   None
   *
   * @details  Parse GetDescriptor request and perform the corresponding action.
   *
@@ -240,9 +232,8 @@ void USBD_GetDescriptor(void)
 /**
   * @brief    Process standard request
   *
-  * @param    None
+  * @note     No parameters.
   *
-  * @return   None
   *
   * @details  Parse standard request and perform the corresponding action.
   *
@@ -386,7 +377,6 @@ void USBD_StandardRequest(void)
   * @param[in]  pu8Buf  The pointer of data sent to USB host.
   * @param[in]  u32Size The IN transfer size.
   *
-  * @return     None
   *
   * @details    Prepare data for Control IN transfer.
   *
@@ -413,9 +403,8 @@ void USBD_PrepareCtrlIn(uint8_t *pu8Buf, uint32_t u32Size)
 /**
   * @brief    Repeat Control IN pipe
   *
-  * @param    None
+  * @note     No parameters.
   *
-  * @return   None
   *
   * @details  This function processes the remained data of Control IN transfer.
   *
@@ -466,9 +455,8 @@ void USBD_CtrlIn(void)
 /**
   * @brief    Reset software flags
   *
-  * @param    None
+  * @note     No parameters.
   *
-  * @return   None
   *
   * @details  This function resets all variables for protocol and resets USB device address to 0.
   *
@@ -486,11 +474,11 @@ void USBD_SwReset(void)
 }
 
 
-/*@}*/ /* end of group USBD_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group USBD_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group USBD_Driver */
+/** @} */ /* end of group USBD_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

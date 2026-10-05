@@ -105,7 +105,7 @@ extern "C"
 #define UART_BAUD_MODE2     (UART_BAUD_BAUDM1_Msk | UART_BAUD_BAUDM0_Msk) /*!< Set UART Baudrate Mode is Mode2 \hideinitializer */
 
 
-/*@}*/ /* end of group UART_EXPORTED_CONSTANTS */
+/** @} */ /* end of group UART_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup UART_EXPORTED_FUNCTIONS UART Exported Functions
@@ -437,7 +437,6 @@ __STATIC_INLINE void UART_SET_RTS(UART_T *uart);
  *
  *    @param[in]    uart    The pointer of the specified UART module
  *
- *    @return       None
  *
  *    @details      This macro set RTS pin to low.
  */
@@ -453,7 +452,6 @@ __STATIC_INLINE void UART_CLEAR_RTS(UART_T *uart)
  *
  *    @param[in]    uart    The pointer of the specified UART module
  *
- *    @return       None
  *
  *    @details      This macro set RTS pin to high.
  */
@@ -473,18 +471,18 @@ void UART_Open(UART_T *uart, uint32_t u32baudrate);
 uint32_t UART_Read(const UART_T *uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes);
 void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_width, uint32_t u32parity, uint32_t  u32stop_bits);
 void UART_SetTimeoutCnt(UART_T *uart, uint32_t u32TOC);
-void UART_SelectIrDAMode(UART_T *uart, uint32_t u32Buadrate, uint32_t u32Direction);
+void UART_SelectIrDAMode(UART_T *uart, uint32_t u32Baudrate, uint32_t u32Direction);
 void UART_SelectRS485Mode(UART_T *uart, uint32_t u32Mode, uint32_t u32Addr);
 uint32_t UART_Write(UART_T *uart, const uint8_t pu8TxBuf[], uint32_t u32WriteBytes);
 void UART_SelectSingleWireMode(UART_T *uart);
 
 
 
-/*@}*/ /* end of group UART_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group UART_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group UART_Driver */
+/** @} */ /* end of group UART_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

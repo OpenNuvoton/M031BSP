@@ -18,7 +18,7 @@ volatile uint32_t g_u32BandGapConvValue;
 
 /**
   * @brief      Read Built-in Band-Gap conversion value
-  * @param[in]  None
+  * @note       No parameters.
   * @return     Built-in Band-Gap conversion value
   * @details    This function is used to read Band-Gap conversion value.
   */
@@ -55,11 +55,11 @@ void SYS_Init(void)
 
     /* Switch UART0 clock source to HIRC */
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
-    /* Switch ADC clock source to HIRC, set divider to 2, ADC clock is 48/2 MHz */
+    /* Switch ADC clock source to PCLK1, set divider to 2, ADC clock is 48/2 MHz */
     CLK_SetModuleClock(ADC_MODULE, CLK_CLKSEL2_ADCSEL_PCLK1, CLK_CLKDIV0_ADC(2));
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/

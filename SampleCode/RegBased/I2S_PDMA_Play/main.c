@@ -3,7 +3,7 @@
  * @version  V1.00
  * $Revision: 8 $
  * $Date: 18/07/19 2:20p $
- * @brief    M031 SPI Driver Sample Code
+ * @brief    M031 I2S Driver Sample Code
  *           This is a I2S demo for playing data and demonstrate how I2S works with PDMA.
  *
  * SPDX-License-Identifier: Apache-2.0

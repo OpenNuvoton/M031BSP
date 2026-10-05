@@ -15,7 +15,6 @@
 
 /** This function is used to initial MCU SPI.
  *
- * @return none
  */
 void setBLE_SpiInit(void)
 {
@@ -208,7 +207,6 @@ uint8_t setBLE_SpiOneByteRxIsr(uint8_t regAddr)
  *
  * @param[in] regAddr   : register address
  * @param[in] u8SrcData : data which user attempt to transfer through SPI bus
- * @return none
  */
 void setBLE_SpiOneByteTx(uint8_t regAddr, uint8_t u8SrcData)
 {
@@ -262,7 +260,6 @@ void setBLE_SpiOneByteTx(uint8_t regAddr, uint8_t u8SrcData)
  *
  * @param[in] regAddr   : register address
  * @param[in] u8SrcData : data which user attempt to transfer through SPI bus
- * @return none
  */
 void setBLE_SpiOneByteTxIsr(uint8_t regAddr, uint8_t u8SrcData)
 {
@@ -308,8 +305,7 @@ void setBLE_SpiOneByteTxIsr(uint8_t regAddr, uint8_t u8SrcData)
 /** This function is used to write RF 2 byte register in ISR.
  *
  * @param[in] regAddr   : register address
- * @param[in] u8SrcData : data which user attempt to transfer through SPI bus
- * @return none
+ * @param[in] u8SrcAddr : pointer to the two bytes to transmit via SPI
  */
 void setBLE_SpiTwoByteTxIsr(uint8_t regAddr, uint8_t *u8SrcAddr)
 {
@@ -366,7 +362,6 @@ void setBLE_SpiTwoByteTxIsr(uint8_t regAddr, uint8_t *u8SrcAddr)
 
 /** This function is used to initial MCU SPI PDMA.
  *
- * @return none
  */
 void setBLE_SpiPDMAInit(void)
 {
@@ -442,14 +437,14 @@ uint32_t setBLE_SpiPDMAWaitFinish(void)
 }
 
 
-/** This function is used to using SPI PDMA read RF in ISR.
+/** This function uses SPI PDMA to read from RF in ISR.
  *
- * @attention Because of the set-and-forget SPI DMA behavior, user should avoid modification of the source data.
+ * @attention This SPI PDMA read is set-and-forget; do not access the destination
+ *            buffer until the transfer completes.
  *
  * @param[in] regAddr   : register address
- * @param[in] u8SrcData : data which user attempt to transfer through SPI bus
- * @param[in] u32TransCount : transfer count
- * @return none
+ * @param[out] u32DstAddr : destination address for data received from RF.
+ * @param[in] u32TransCount : number of bytes to read
  */
 void setBLE_SpiPDMARxIsr(uint8_t regAddr, uint32_t u32DstAddr, uint32_t u32TransCount)
 {
@@ -529,14 +524,13 @@ void setBLE_SpiPDMARxIsr(uint8_t regAddr, uint32_t u32DstAddr, uint32_t u32Trans
 }
 
 
-/** This function is used to using SPI PDMA write RF in ISR.
+/** This function uses SPI PDMA to write to RF in ISR.
  *
  * @attention Because of the set-and-forget SPI DMA behavior, user should avoid modification of the source data.
  *
  * @param[in] regAddr   : register address
- * @param[in] u8SrcData : data which user attempt to transfer through SPI bus
- * @param[in] u32TransCount : transfer count
- * @return none
+ * @param[in] u32SrcAddr : source address of data to transmit.
+ * @param[in] u32TransCount : number of bytes to transfer
  */
 void setBLE_SpiPDMATx(uint8_t regAddr, uint32_t u32SrcAddr, uint32_t u32TransCount)
 {
@@ -596,7 +590,6 @@ void setBLE_SpiPDMATx(uint8_t regAddr, uint32_t u32SrcAddr, uint32_t u32TransCou
 
 /** This function is used to manual set SPI SS pin to high state immediately.
  *
- * @return none
  */
 void setBLE_SpiSSHigh(void)
 {
@@ -606,7 +599,6 @@ void setBLE_SpiSSHigh(void)
 
 /** This function is used to manual set SPI SS pin to low state immediately.
  *
- * @return none
  */
 void setBLE_SpiSSLow(void)
 {
@@ -616,7 +608,6 @@ void setBLE_SpiSSLow(void)
 
 /** This function is used to manual set SPI SS pin to low state immediately.
  *
- * @return none
  */
 void setBLE_SpiWaitAndSSHigh(void)
 {

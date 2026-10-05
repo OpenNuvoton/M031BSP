@@ -31,8 +31,7 @@ void RTC_TickHandle(void)
 
 /**
   * @brief  RTC ISR to handle interrupt event
-  * @param  None
-  * @retval None
+  * @note   No parameters.
   */
 void RTC_IRQHandler(void)
 {

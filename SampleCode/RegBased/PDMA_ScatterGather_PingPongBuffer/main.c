@@ -45,9 +45,8 @@ DMA_DESC_T DMA_DESC[2]; /* Descriptor table */
 /**
  * @brief       DMA IRQ
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The DMA default IRQ, declared in startup_M031Series.s.
  */

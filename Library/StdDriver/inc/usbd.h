@@ -44,7 +44,7 @@ typedef struct s_usbd_info
 
 extern const S_USBD_INFO_T gsInfo;
 
-/*@}*/ /* end of group USBD_EXPORTED_STRUCTS */
+/** @} */ /* end of group USBD_EXPORTED_STRUCTS */
 
 
 
@@ -184,7 +184,7 @@ extern const S_USBD_INFO_T gsInfo;
 
 
 
-/*@}*/ /* end of group USBD_EXPORTED_CONSTANTS */
+/** @} */ /* end of group USBD_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup USBD_EXPORTED_FUNCTIONS USBD Exported Functions
@@ -222,7 +222,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Enable USB
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @return   None
   *
@@ -234,7 +234,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Disable USB
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @return   None
   *
@@ -246,7 +246,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Enable USB PHY
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @return   None
   *
@@ -258,7 +258,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Disable USB PHY
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @return   None
   *
@@ -270,7 +270,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Enable SE0. Force USB PHY transceiver to drive SE0.
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @return   None
   *
@@ -282,7 +282,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Disable SE0
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @return   None
   *
@@ -306,7 +306,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Get USB device address
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @return   USB device address
   *
@@ -333,7 +333,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Get interrupt status
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @return   The value of USB_INTSTS register
   *
@@ -360,7 +360,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Get endpoint status
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @return   The value of USB_EPSTS register.
   *
@@ -372,7 +372,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Get USB bus state
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @return   The value of USB_ATTR[3:0].
   *           Bit 0 indicates USB bus reset status.
@@ -388,7 +388,7 @@ extern const S_USBD_INFO_T gsInfo;
 /**
   * @brief    Check cable connection state
   *
-  * @param    None
+  * @note     No parameters.
   *
   * @retval   0 USB cable is not attached.
   * @retval   1 USB cable is attached.
@@ -548,7 +548,6 @@ extern const S_USBD_INFO_T gsInfo;
   *
   * @param[in]  size Byte count.
   *
-  * @return     None
   *
   * @details    This function will copy the number of data specified by size and src parameters to the address specified by dest parameter.
   *
@@ -571,7 +570,6 @@ __STATIC_INLINE void USBD_MemCopy(uint8_t dest[], const uint8_t src[], uint32_t 
   *
   * @param[in]   epnum  USB endpoint number
   *
-  * @return      None
   *
   * @details     Set USB endpoint stall state. Endpoint will respond STALL token automatically.
   *
@@ -599,7 +597,6 @@ __STATIC_INLINE void USBD_SetStall(uint8_t epnum)
   *
   * @param[in]   epnum  USB endpoint number
   *
-  * @return      None
   *
   * @details     Clear USB endpoint stall state. Endpoint will respond ACK/NAK token.
   */
@@ -677,11 +674,11 @@ void USBD_SetVendorRequest(VENDOR_REQ pfnVendorReq);
 void USBD_SetConfigCallback(SET_CONFIG_CB pfnSetConfigCallback);
 void USBD_LockEpStall(uint32_t u32EpBitmap);
 
-/*@}*/ /* end of group USBD_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group USBD_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group USBD_Driver */
+/** @} */ /* end of group USBD_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

@@ -29,9 +29,8 @@ volatile uint32_t g_u32IsTestOver = 0;
 /**
  * @brief       PDMA IRQ Handler
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     ISR to handle PDMA interrupt event
  */
@@ -131,7 +130,7 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* PWM clock frequency configuration                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
-    /* Select HCLK clock source as PLL and and HCLK clock divider as 2 */
+    /* Select HCLK clock source as PLL and HCLK clock divider as 2 */
 //    CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_PLL, CLK_CLKDIV0_HCLK(2));
 
     /* PWM clock frequency can be set equal or double to HCLK by choosing case 1 or case 2 */

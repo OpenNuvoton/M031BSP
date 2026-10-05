@@ -152,7 +152,7 @@ extern "C"
 #define PWM_CLKSRC_TIMER3                        (4UL)    /*!< PWM Clock source selects to TIMER3 overflow \hideinitializer */
 
 
-/*@}*/ /* end of group PWM_EXPORTED_CONSTANTS */
+/** @} */ /* end of group PWM_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup PWM_EXPORTED_FUNCTIONS PWM Exported Functions
@@ -499,11 +499,11 @@ void PWM_SetBrakePinSource(PWM_T *pwm, uint32_t u32BrakePinNum, uint32_t u32SelA
 uint32_t PWM_GetWrapAroundFlag(const PWM_T *pwm, uint32_t u32ChannelNum);
 void PWM_ClearWrapAroundFlag(PWM_T *pwm, uint32_t u32ChannelNum);
 
-/*@}*/ /* end of group PWM_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group PWM_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group PWM_Driver */
+/** @} */ /* end of group PWM_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

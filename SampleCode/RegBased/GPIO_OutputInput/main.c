@@ -36,7 +36,7 @@ void SYS_Init(void)
     CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk;
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/

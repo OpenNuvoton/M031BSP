@@ -125,7 +125,7 @@ extern "C"
 #define PDMA_INT_ALIGN      0x00000008UL            /*!<Transfer Alignment Interrupt  \hideinitializer */
 
 
-/*@}*/ /* end of group PDMA_EXPORTED_CONSTANTS */
+/** @} */ /* end of group PDMA_EXPORTED_CONSTANTS */
 
 /** @addtogroup PDMA_EXPORTED_FUNCTIONS PDMA Exported Functions
   @{
@@ -357,11 +357,11 @@ void PDMA_EnableInt(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Mask);
 void PDMA_DisableInt(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Mask);
 
 
-/*@}*/ /* end of group PDMA_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group PDMA_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group PDMA_Driver */
+/** @} */ /* end of group PDMA_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

@@ -23,9 +23,8 @@ volatile uint8_t g_u8IsWDTWakeupINT;
 /**
  * @brief       IRQ Handler for WDT and WWDT Interrupt
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The WDT_IRQHandler is default IRQ of WDT and WWDT, declared in startup_M031Series.s.
  */

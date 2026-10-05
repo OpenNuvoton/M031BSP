@@ -13,9 +13,8 @@
 /**
  * @brief       External INT024 IRQ
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The External INT024 default IRQ, declared in startup_M031Series.s.
  */
@@ -39,9 +38,8 @@ void EINT024_IRQHandler(void)
 /**
  * @brief       External INT135 IRQ
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The External INT135 default IRQ, declared in startup_M031Series.s.
  */
@@ -88,7 +86,7 @@ void SYS_Init(void)
     CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk;
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/

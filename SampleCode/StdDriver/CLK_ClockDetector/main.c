@@ -103,7 +103,7 @@ void SYS_Init(void)
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/
@@ -165,7 +165,7 @@ int32_t main(void)
     /* Unlock protected registers */
     SYS_UnlockReg();
 
-    /* Output selected clock to CKO, CKO Clock = HCLK / 2^(1 + 1) */
+    /* Output selected clock to CKO; clock frequency = HCLK / 2^(1 + 1) */
     CLK_EnableCKO(CLK_CLKSEL1_CLKOSEL_HCLK, 1, 0);
 
     /* Set the HXT clock frequency monitor upper and lower boundary value.

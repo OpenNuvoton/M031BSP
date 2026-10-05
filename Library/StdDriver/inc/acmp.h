@@ -68,7 +68,7 @@ extern "C"
 #define ACMP_VREF_CRVSSEL_INTVREF    (1UL << ACMP_VREF_CRVSSEL_Pos)  /*!< ACMP_VREF setting for selecting internal reference voltage as the CRV source voltage \hideinitializer */
 
 
-/*@}*/ /* end of group ACMP_EXPORTED_CONSTANTS */
+/** @} */ /* end of group ACMP_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup ACMP_EXPORTED_FUNCTIONS ACMP Exported Functions
@@ -385,11 +385,11 @@ void ACMP_Close(ACMP_T *acmp, uint32_t u32ChNum);
 
 
 
-/*@}*/ /* end of group ACMP_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group ACMP_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group ACMP_Driver */
+/** @} */ /* end of group ACMP_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

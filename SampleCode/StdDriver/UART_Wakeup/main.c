@@ -181,7 +181,7 @@ void UART13_IRQHandler(void)
 /*---------------------------------------------------------------------------------------------------------*/
 void UART_CTSWakeUp(void)
 {
-    /* Enable UART nCTS wake-up frunction */
+    /* Enable UART nCTS wake-up function */
     UART1->WKCTL |= UART_WKCTL_WKCTSEN_Msk;
 
     printf("System enter to Power-down mode.\n");
@@ -253,7 +253,7 @@ void UART_RS485WakeUp(void)
     /* Enable parity source selection function */
     UART1->LINE |= (UART_LINE_PSS_Msk | UART_LINE_PBE_Msk);
 
-    /* Enable UART RS485 address match, Rx Threshold and Rx time-out wake-up frunction */
+    /* Enable UART RS485 address match, Rx Threshold and Rx time-out wake-up function */
     UART1->WKCTL |= UART_WKCTL_WKRFRTEN_Msk | UART_WKCTL_WKRS485EN_Msk | UART_WKCTL_WKTOUTEN_Msk;
 
     /* Enable UART Rx time-out function */

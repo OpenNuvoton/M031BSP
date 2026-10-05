@@ -178,22 +178,20 @@ static uint32_t bleFota_Crc32Checksum(uint32_t flash_addr, uint32_t data_len)
  *             OTA_TIMER_OTA_ERASING : Terminated the connection to erase legacy bank FW and information. \n
  *             OTA_TIMER_OTA_DISCONNECT : After valid FW received, terminated the connection and trigger system reboot when disconnection event received. \n
  *
- * @param[in] Timeout : timer timeout value (unit:sec).
- * @param[in] Type : timer type.
+ * @param[in] timeout : timer timeout value (unit: sec).
+ * @param[in] type : timer type.
  *
- * @return none
  */
-static void bleFota_TimerStart(uint8_t timout, OtaTimer type)
+static void bleFota_TimerStart(uint8_t timeout, OtaTimer type)
 {
-    ExpiryTime = timout + CurrTime;
+    ExpiryTime = timeout + CurrTime;
     TimerType = type;
 }
 
 /** The actions after FOTA timer expiry.
  *
- * @param[in] Type : expired timer type.
+ * @param[in] type : expired timer type.
  *
- * @return none
  */
 static void bleFota_TimerExpiry(OtaTimer type)
 {
@@ -250,10 +248,9 @@ static void bleFota_TimerExpiry(OtaTimer type)
  *             OTA_STEP_UPDATE : Stamp next FOTA step \n
  *             OTA_STEP_RESET : Reset current FOTA step to zero \n
  *
- * @param[in] Action : the actions for update FOTA step.
- * @param[in] ExpectAddPtr : the next expect address to program to bank.
+ * @param[in] action : the action for updating the FOTA step.
+ * @param[in] expect_add : the next expected address to program to the bank.
  *
- * @return none
  */
 static void bleFota_Step(OtaStep action, uint32_t *expect_add)
 {
@@ -332,7 +329,6 @@ FotaTimerState BleFota_TimerTick(void)
  *
  * @note       This function should be called when FOTA timer is expired.
  *
- * @return none
  */
 void BleFota_TimerExpiryHandler(void)
 {
@@ -342,7 +338,6 @@ void BleFota_TimerExpiryHandler(void)
 /** Ble FOTA parameters initialization
  *
  *
- * @return none
  */
 void BleFota_Init(void)
 {
@@ -375,7 +370,6 @@ void BleFota_Init(void)
  *             OTA_STATE_COMPLETE : System reboot for bootloader to check new FW. \n
  *             OTA_STATE_ERASING : Erase bank FW and bank information and waiting for reconnection. \n
  *
- * @return none
  */
 void BleFota_Disconnect(void)
 {
@@ -416,7 +410,6 @@ void BleFota_Disconnect(void)
  *             OTA_CMD_ERASE : Terminated the connection and erasing legacy FW and information. \n
  *             OTA_CMD_APPLY : Apply the new FW if receiving FW length and CRC matched with OTA_CMD_START. \n
  *
- * @return none
  */
 void BleFota_Cmd(uint8_t length, uint8_t *data)
 {
@@ -608,7 +601,6 @@ void BleFota_Cmd(uint8_t length, uint8_t *data)
  * @note       First 4 bytes of data payload is data header which contains the FOTA data address (3 bytes) and length (1 byte),
  *             if there were invalid data header, send notification to response it. \n
  *
- * @return none
  */
 void BleFota_Data(uint8_t length, uint8_t *data)
 {

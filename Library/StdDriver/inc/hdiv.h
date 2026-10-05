@@ -76,11 +76,11 @@ __STATIC_INLINE int16_t HDIV_Mod(int32_t x, int16_t y)
     return (int16_t)p32[1];
 }
 
-/*@}*/ /* end of group HDIV_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group HDIV_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group HDIV_Driver */
+/** @} */ /* end of group HDIV_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

@@ -79,7 +79,7 @@ void Timer_Init(void)
     /**************  TIMER1 ***************/
     /* Set PB.14 as TM1_EXT pin */
     SYS->GPB_MFPH = (SYS->GPB_MFPH & ~(SYS_GPB_MFPH_PB14MFP_Msk)) | (SYS_GPB_MFPH_PB14MFP_TM1_EXT);
-    /* Set TIMER1 in periodic mode ,frequency 2Hz and enable its interrupt */
+    /* Set TIMER1 in toggle mode, frequency 2 Hz */
     TIMER_Open(TIMER1, TIMER_TOGGLE_MODE, 2);
     /* Set TM1_EXT as TOUT pin */
     TIMER_SELECT_TOUT_PIN(TIMER1, TIMER_TOUT_PIN_FROM_TX_EXT);

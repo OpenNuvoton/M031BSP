@@ -93,7 +93,7 @@ const VECTOR_TABLE_Type __VECTOR_TABLE[] __VECTOR_TABLE_ATTRIBUTE =
     SVC_Handler,                              /*    -5 SVC Handler                                      */
     0,                                        /*    -4 Reserved                                         */
     0,                                        /*    -3 Reserved                                         */
-    PendSV_Handler,                           /*    -2 PendSV Handler Handler                           */
+    PendSV_Handler,                           /*    -2 PendSV Handler                           */
     SysTick_Handler,                          /*    -1 SysTick Handler                                  */
 
     /* Interrupts */

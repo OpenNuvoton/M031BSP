@@ -56,7 +56,7 @@ void SYS_Init(void)
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART1DIV_Msk)) | CLK_CLKDIV0_UART1(1);
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init I/O Multi-function                                                                                 */
@@ -155,7 +155,7 @@ void IrDA_FunctionTest(void)
     printf("+-------------------------------------------------------------+\n");
 
     /*
-        UART5 is set to debug port and connect with PC firstly.
+        UART0 is set to debug port and connect with PC firstly.
         The IrDA sample code needs two module board to execute.
         Set the master board is IrDA TX Mode and the other is IrDA Rx mode.
         Inputting char on terminal will be sent to the UART0 of master.

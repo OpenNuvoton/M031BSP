@@ -59,7 +59,7 @@ extern "C"
 #define USPI_TX_FULL_MASK            (0x10UL)                          /*!< TX full status mask \hideinitializer */
 #define USPI_SSLINE_STS_MASK         (0x20UL)                          /*!< USCI_SPI_SS line status mask \hideinitializer */
 
-/*@}*/ /* end of group USCI_SPI_EXPORTED_CONSTANTS */
+/** @} */ /* end of group USCI_SPI_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup USCI_SPI_EXPORTED_FUNCTIONS USCI_SPI Exported Functions
@@ -413,11 +413,11 @@ void USPI_EnableWakeup(USPI_T *uspi);
 void USPI_DisableWakeup(USPI_T *uspi);
 
 
-/*@}*/ /* end of group USCI_SPI_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group USCI_SPI_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group USCI_SPI_Driver */
+/** @} */ /* end of group USCI_SPI_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

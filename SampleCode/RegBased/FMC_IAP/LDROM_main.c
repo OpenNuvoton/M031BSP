@@ -73,7 +73,7 @@ static void SendChar_ToUART(int ch)
 
 /**
  * @brief    Routine to get a char
- * @param    None
+ * @note     No parameters.
  * @returns  Get value from UART debug port or semihost
  * @details  Wait UART debug port or semihost to input a char.
  */
@@ -100,7 +100,6 @@ static void PutString(char *str)
 /**
  * @brief       Hard fault handler
  * @param[in]   stack pointer points to the dumped registers in SRAM
- * @return      None
  * @details     Replace while(1) at the end of this function with chip reset if WDT is not enabled for end product
  */
 void Hard_Fault_Handler(uint32_t stack[])

@@ -112,7 +112,6 @@ typedef uint8_t BleDtmStatus;
 #define BLEDTM_ERROR_ILLEGAL_CONFIGURATION                 0x04         /**< Parameter out of range (legal range is function dependent). */
 #define BLEDTM_ERROR_UNINITIALIZED                         0x05         /**< DTM module has not been initialized by the application. */
 
-
 /** @} */
 
 /**************************************************************************
@@ -175,7 +174,7 @@ uint32_t BleDTM_cmd_process(uint16_t command);
  *
  * @ingroup ble_dtmFunc
  *
- * @param[out] p_dtm_event : Pointer to buffer for 16 bit event code according to DTM standard.
+ * @param[out] dtm_event : Pointer to buffer for 16 bit event code according to DTM standard.
  *
  * @return  Checking result.
  * @retval  0:  no event since last call.
@@ -191,7 +190,7 @@ uint8_t BleDTM_event_get(uint32_t *dtm_event);
  * @ingroup ble_dtmFunc
  *
  * @return  Checking result.
- * @retval  0:  no No RSSI value provided.
+ * @retval  0:  no RSSI value provided.
  * @retval  1:  the last RSSI value will be provided after BleDTM_EventGet.
 */
 uint8_t BleDTM_gui_rssiFlag_get(void);
@@ -201,4 +200,3 @@ uint8_t BleDTM_gui_rssiFlag_get(void);
 
 #endif // BLE_DTM_H__
 
-/** @} */

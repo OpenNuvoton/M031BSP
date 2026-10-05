@@ -30,9 +30,8 @@ uint32_t volatile g_u32IsTestOver = 0;
 /**
  * @brief       DMA IRQ
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The DMA default IRQ, declared in startup_M031Series.s.
  */

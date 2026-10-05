@@ -87,7 +87,7 @@ void SYS_Init(void)
     /*---------------------------------------------------------------------------------------------------------*/
     /* PWM clock frequency configuration                                                                       */
     /*---------------------------------------------------------------------------------------------------------*/
-    /* Select HCLK clock source as PLL and and HCLK clock divider as 2 */
+    /* Select HCLK clock source as PLL and HCLK clock divider as 2 */
     //CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_PLL, CLK_CLKDIV0_HCLK(2));
 
     /* PWM clock frequency can be set equal or double to HCLK by choosing case 1 or case 2 */
@@ -161,7 +161,7 @@ int32_t main(void)
     UART0_Init();
 
     printf("\n\nCPU @ %dHz(PLL@ %dHz)\n", SystemCoreClock, PllClock);
-    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "CPU" : "PLL");
+    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "PCLK" : "PLL");
     printf("+-----------------------------------------------------------------------------------+\n");
     printf("|                          PWM Driver Sample Code                                   |\n");
     printf("|                                                                                   |\n");
@@ -173,7 +173,7 @@ int32_t main(void)
 
     /*
       Configure PWM0 channel 0 init period and duty(down counter type).
-      Period is PLL / (prescaler * (CNR + 1))
+      Period is PWM clock source frequency / (prescaler * (CNR + 1))
       Duty ratio = CMR / (CNR + 1)
       Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
       Duty ratio = 100 / (199 + 1) = 50%

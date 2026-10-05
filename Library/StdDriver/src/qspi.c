@@ -150,7 +150,6 @@ uint32_t QSPI_Open(QSPI_T *qspi,
 /**
   * @brief  Disable QSPI controller.
   * @param[in]  qspi The pointer of the specified QSPI module.
-  * @return None
   * @details This function will reset QSPI controller.
   */
 void QSPI_Close(const QSPI_T *qspi)
@@ -166,7 +165,6 @@ void QSPI_Close(const QSPI_T *qspi)
 /**
   * @brief  Clear RX FIFO buffer.
   * @param[in]  qspi The pointer of the specified QSPI module.
-  * @return None
   * @details This function will clear QSPI RX FIFO buffer. The RXEMPTY (QSPI_STATUS[8]) will be set to 1.
   */
 void QSPI_ClearRxFIFO(QSPI_T *qspi)
@@ -177,7 +175,6 @@ void QSPI_ClearRxFIFO(QSPI_T *qspi)
 /**
   * @brief  Clear TX FIFO buffer.
   * @param[in]  qspi The pointer of the specified QSPI module.
-  * @return None
   * @details This function will clear QSPI TX FIFO buffer. The TXEMPTY (QSPI_STATUS[16]) will be set to 1.
   * @note The TX shift register will not be cleared.
   */
@@ -189,7 +186,6 @@ void QSPI_ClearTxFIFO(QSPI_T *qspi)
 /**
   * @brief  Disable the automatic slave selection function.
   * @param[in]  qspi The pointer of the specified QSPI module.
-  * @return None
   * @details This function will disable the automatic slave selection function and set slave selection signal to inactive state.
   */
 void QSPI_DisableAutoSS(QSPI_T *qspi)
@@ -202,7 +198,6 @@ void QSPI_DisableAutoSS(QSPI_T *qspi)
   * @param[in]  qspi The pointer of the specified QSPI module.
   * @param[in]  u32SSPinMask Specifies slave selection pins. (QSPI_SS)
   * @param[in]  u32ActiveLevel Specifies the active level of slave selection signal. (QSPI_SS_ACTIVE_HIGH, QSPI_SS_ACTIVE_LOW)
-  * @return None
   * @details This function will enable the automatic slave selection function. Only available in Master mode.
   *          The slave selection pin and the active level will be set in this function.
   */
@@ -305,7 +300,6 @@ uint32_t QSPI_SetBusClock(QSPI_T *qspi, uint32_t u32BusClock)
   * @param[in]  qspi The pointer of the specified QSPI module.
   * @param[in]  u32TxThreshold Decides the TX FIFO threshold. It could be 0 ~ 7.
   * @param[in]  u32RxThreshold Decides the RX FIFO threshold. It could be 0 ~ 7.
-  * @return None
   * @details Set TX FIFO threshold and RX FIFO threshold configurations.
   */
 void QSPI_SetFIFO(QSPI_T *qspi, uint32_t u32TxThreshold, uint32_t u32RxThreshold)
@@ -370,7 +364,6 @@ uint32_t QSPI_GetBusClock(const QSPI_T *qspi)
   *                       - \ref QSPI_FIFO_RXOV_INT_MASK
   *                       - \ref QSPI_FIFO_RXTO_INT_MASK
   *
-  * @return None
   * @details Enable QSPI related interrupts specified by u32Mask parameter.
   */
 void QSPI_EnableInt(QSPI_T *qspi, uint32_t u32Mask)
@@ -460,7 +453,6 @@ void QSPI_EnableInt(QSPI_T *qspi, uint32_t u32Mask)
   *                       - \ref QSPI_FIFO_RXOV_INT_MASK
   *                       - \ref QSPI_FIFO_RXTO_INT_MASK
   *
-  * @return None
   * @details Disable QSPI related interrupts specified by u32Mask parameter.
   */
 void QSPI_DisableInt(QSPI_T *qspi, uint32_t u32Mask)
@@ -665,7 +657,6 @@ uint32_t QSPI_GetIntFlag(const QSPI_T *qspi, uint32_t u32Mask)
   *                       - \ref QSPI_FIFO_RXOV_INT_MASK
   *                       - \ref QSPI_FIFO_RXTO_INT_MASK
   *
-  * @return None
   * @details Clear QSPI related interrupt flags specified by u32Mask parameter.
   */
 void QSPI_ClearIntFlag(QSPI_T *qspi, uint32_t u32Mask)
@@ -808,10 +799,10 @@ uint32_t QSPI_GetStatus(const QSPI_T *qspi, uint32_t u32Mask)
 
 
 
-/*@}*/ /* end of group QSPI_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group QSPI_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group QSPI_Driver */
+/** @} */ /* end of group QSPI_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/

@@ -37,7 +37,7 @@ const uint8_t gu8DeviceDescriptor[] = {
 #define u8_usbConfigDescriptorDFU_LENGTH      (18 + (9 * 1))
 /*!<USB Configure Descriptor */
 const uint8_t gu8ConfigDescriptor[] = {
-    0x09,   /* bLength: Configuation Descriptor size */
+    0x09,   /* bLength: Configuration Descriptor size */
     0x02,   /* bDescriptorType: Configuration */
     u8_usbConfigDescriptorDFU_LENGTH,   /* wTotalLength: Bytes returned */
     0x00,
@@ -60,13 +60,13 @@ const uint8_t gu8ConfigDescriptor[] = {
     0x00,   /* iInterface: */
 
     /******************** DFU Functional Descriptor********************/
-    0x09,   /*blength = 7 Bytes*/
+    0x09,   /*bLength = 9 Bytes*/
     0x21,   /* DFU Functional Descriptor*/
     0x0B,   /*bmAttributes, bitCanDnload | bitCanUpload */
     0xFF,   /*DetachTimeOut= 255 ms*/
     0x00,
     (TRANSFER_SIZE & 0x00FF),
-    (TRANSFER_SIZE & 0xFF00) >> 8, /* TransferSize = 1024 Byte*/
+    (TRANSFER_SIZE & 0xFF00) >> 8, /* TransferSize = 512 Bytes*/
     0x10,                          /* bcdDFUVersion = 1.1 */
     0x01
 };

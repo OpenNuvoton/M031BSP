@@ -62,7 +62,7 @@ extern "C"
 #define QSPI_SPIEN_STS_MASK               (0x40UL)                           /*!< SPIEN status mask \hideinitializer */
 #define QSPI_SSLINE_STS_MASK              (0x80UL)                           /*!< QSPIx_SS line status mask \hideinitializer */
 
-/*@}*/ /* end of group QSPI_EXPORTED_CONSTANTS */
+/** @} */ /* end of group QSPI_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup QSPI_EXPORTED_FUNCTIONS QSPI Exported Functions
@@ -397,11 +397,11 @@ void QSPI_ClearIntFlag(QSPI_T *qspi, uint32_t u32Mask);
 uint32_t QSPI_GetStatus(const QSPI_T *qspi, uint32_t u32Mask);
 
 
-/*@}*/ /* end of group QSPI_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group QSPI_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group QSPI_Driver */
+/** @} */ /* end of group QSPI_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

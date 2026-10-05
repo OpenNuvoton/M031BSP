@@ -52,7 +52,7 @@ void SYS_Init(void)
                    (CLK_CLKSEL1_TMR0SEL_HIRC | CLK_CLKSEL1_TMR1SEL_HIRC | CLK_CLKSEL1_TMR3SEL_HIRC);
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/

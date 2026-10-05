@@ -4,7 +4,7 @@
  * $Revision: 4 $
  * $Date: 18/07/12 9:34a $
  * @brief    Show how a master accesses a 10-bit address slave.
- *           This sample code need works with USCI_I2C_Slave_10bit.
+ *           This sample code needs to work with USCI_I2C_Slave_10bit.
  * @note
  * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
@@ -362,7 +362,7 @@ int main()
     */
     printf("+-------------------------------------------------------+\n");
     printf("|  USCI_I2C Driver Sample Code for (Master) access      |\n");
-    printf("|  10-bit address Slave. This sample code needs work    |\n");
+    printf("|  10-bit address Slave. This sample code needs to work |\n");
     printf("|  with USCI_I2C_Slave_10bit sample code.               |\n");
     printf("|      UI2C_Master(UI2C0) < - > UI2C_Slave(UI2C0)       |\n");
     printf("|  This sample code requires two boards for testing     |\n");

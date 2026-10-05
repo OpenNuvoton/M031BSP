@@ -36,7 +36,6 @@
  *                          - \ref GPIO_MODE_OUTPUT
  *                          - \ref GPIO_MODE_OPEN_DRAIN
  *                          - \ref GPIO_MODE_QUASI
- * @return      None
  * @details     This function is used to set specified GPIO operation mode.
  */
 void GPIO_SetMode(GPIO_T *port, uint32_t u32PinMask, uint32_t u32Mode)
@@ -66,7 +65,6 @@ void GPIO_SetMode(GPIO_T *port, uint32_t u32PinMask, uint32_t u32Mode)
  *                            - \ref GPIO_INT_BOTH_EDGE
  *                            - \ref GPIO_INT_HIGH
  *                            - \ref GPIO_INT_LOW
- * @return      None
  * @details     This function is used to enable specified GPIO pin interrupt.
  */
 void GPIO_EnableInt(GPIO_T *port, uint32_t u32Pin, uint32_t u32IntAttribs)
@@ -86,7 +84,6 @@ void GPIO_EnableInt(GPIO_T *port, uint32_t u32Pin, uint32_t u32IntAttribs)
  *                      It could be 0 ~ 7, and 14 for PC.
  *                      It could be 0 ~ 3, and 15 for PD.
  *                      It could be 0 ~ 6, 14, and 15 for PF.
- * @return      None
  * @details     This function is used to enable specified GPIO pin interrupt.
  */
 void GPIO_DisableInt(GPIO_T *port, uint32_t u32Pin)
@@ -99,10 +96,10 @@ void GPIO_DisableInt(GPIO_T *port, uint32_t u32Pin)
 }
 
 
-/*@}*/ /* end of group GPIO_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group GPIO_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group GPIO_Driver */
+/** @} */ /* end of group GPIO_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/

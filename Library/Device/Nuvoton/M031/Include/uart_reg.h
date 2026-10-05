@@ -616,7 +616,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[8:0]   |BRCOMP    |Baud Rate Compensation Patten
+     * |[8:0]   |BRCOMP    |Baud Rate Compensation Pattern
      * |        |          |These 9-bits are used to define the relative bit is compensated or not.
      * |        |          |BRCOMP[7:0] is used to define the compensation of UART_DAT[7:0] and BRCOM[8] is used to define the parity bit.
      * |[31]    |BRCOMPDEC |Baud Rate Compensation Decrease

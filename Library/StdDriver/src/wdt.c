@@ -45,7 +45,6 @@
   * @param[in]  u32EnableReset      Enable WDT time-out reset system function. Valid values are TRUE and FALSE.
   * @param[in]  u32EnableWakeup     Enable WDT time-out wake-up system function. Valid values are TRUE and FALSE.
   *
-  * @return     None
   *
   * @details    This function makes WDT module start counting with different time-out interval, reset delay period and choose to \n
   *             enable or disable WDT time-out reset system or wake-up system.
@@ -64,10 +63,10 @@ void WDT_Open(uint32_t u32TimeoutInterval,
     return;
 }
 
-/*@}*/ /* end of group WDT_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group WDT_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group WDT_Driver */
+/** @} */ /* end of group WDT_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/

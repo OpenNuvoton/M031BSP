@@ -22,9 +22,8 @@
 /**
  * @brief       BPWM0 IRQ Handler
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     ISR to handle BPWM0 interrupt event
  */

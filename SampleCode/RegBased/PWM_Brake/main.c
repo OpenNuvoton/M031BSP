@@ -28,9 +28,8 @@ void UART0_Init(void);
 /**
  * @brief       PWM0 IRQ Handler
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     ISR to handle PWM0 Brake0 interrupt event
  */

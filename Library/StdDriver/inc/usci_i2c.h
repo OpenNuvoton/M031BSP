@@ -94,7 +94,7 @@ enum UI2C_SLAVE_EVENT
 #define UI2C_TIMEOUT               SystemCoreClock  /*!< UI2C time-out counter (1 second time-out) \hideinitializer */
 #define UI2C_ERR_TIMEOUT           (-1L)            /*!< UI2C operation abort due to timeout error \hideinitializer */
 
-/*@}*/ /* end of group USCI_I2C_EXPORTED_CONSTANTS */
+/** @} */ /* end of group USCI_I2C_EXPORTED_CONSTANTS */
 
 extern int32_t g_UI2C_i32ErrCode;
 
@@ -324,11 +324,11 @@ uint32_t UI2C_ReadMultiBytesOneReg(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint8_t u8
 uint8_t UI2C_ReadByteTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t u16DataAddr);
 uint32_t UI2C_ReadMultiBytesTwoRegs(UI2C_T *ui2c, uint8_t u8SlaveAddr, uint16_t u16DataAddr, uint8_t *rdata, uint32_t u32rLen);
 
-/*@}*/ /* end of group USCI_I2C_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group USCI_I2C_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group USCI_I2C_Driver */
+/** @} */ /* end of group USCI_I2C_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

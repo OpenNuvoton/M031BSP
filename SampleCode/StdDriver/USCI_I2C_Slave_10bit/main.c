@@ -237,8 +237,8 @@ int main()
     */
 
     printf("+-------------------------------------------------------+\n");
-    printf("|  USCI_I2C Driver Sample Code for Master access 10-bit |\n");
-    printf("|  address (Slave). This sample code needs work with    |\n");
+    printf("|  USCI_I2C Driver Sample Code for Slave access 10-bit  |\n");
+    printf("|  address (Slave). This sample code needs to work with |\n");
     printf("|  USCI_I2C_Master_10bit sample code.                   |\n");
     printf("|      UI2C_Master(UI2C0) < - > UI2C_Slave(UI2C0)       |\n");
     printf("|  This sample code requires two boards for testing     |\n");

@@ -24,9 +24,8 @@ uint32_t volatile g_u32IsTestOver = 0;//PDMA software flag - 0: Busy/Idle , 1 = 
 /**
  * @brief       DMA IRQ
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The DMA default IRQ, declared in startup_M031Series.s.
  */
@@ -170,7 +169,7 @@ int main()
     /* Open PDMA Channel 1 based on PDMAchannel setting*/
     PDMA->CHCTL |= (1 << PDMAchannel);
 
-    /* transfer width is half word(16 bit) and transfer count is ADCDatalenght+1 */
+    /* transfer width is 8 bits (one byte) and transfer count is dPDMA_TEST_LENGTH */
     PDMA->DSCT[PDMAchannel].CTL = ((dPDMA_TEST_LENGTH-1) << PDMA_DSCT_CTL_TXCNT_Pos) | /* Transfer count is PDMA_TEST_LENGTH */ \
                                   PDMA_WIDTH_8 |  /* Transfer width is 8 bits(one byte) */ \
                                   PDMA_SAR_INC |   /* Source increment size is 8 bits(one byte)*/ \

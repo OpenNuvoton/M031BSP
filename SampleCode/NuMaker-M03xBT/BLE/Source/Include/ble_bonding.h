@@ -143,9 +143,8 @@ uint8_t *setBLE_CmdFlashBond(uint8_t opcode, uint8_t *para_data);
  *
  * @ingroup bleBondFunc
  *
- * @param[in] none
+ * @param[in,out] para_data : bonding information data buffer.
  *
- * @return none
  */
 void setBLE_FillInfoBondwithExistPID(uint8_t *para_data);
 
@@ -155,9 +154,9 @@ void setBLE_FillInfoBondwithExistPID(uint8_t *para_data);
  *
  * @ingroup bleBondFunc
  *
- * @param[in] none
+ * @param[in] para_data Bonding information data buffer.
  *
- * @return none
+ * @return The input buffer containing the restored data or an error status.
  */
 uint8_t *setBLE_RestoreDataBondwithExistHOSTID(uint8_t *para_data);
 

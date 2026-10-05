@@ -3,7 +3,7 @@
  * @version  V3.00
  * $Revision: 5 $
  * $Date: 18/06/07 9:48a $
- * @brief    M031 series Window Watchdog Timet(WWDT) driver header file
+ * @brief    M031 series Window Watchdog Timer(WWDT) driver header file
  *
  * @note
  * SPDX-License-Identifier: Apache-2.0
@@ -54,7 +54,7 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 #define WWDT_RELOAD_WORD        (0x00005AA5)                /*!< Fill this value to WWDT_RLDCNT register to reload WWDT counter \hideinitializer */
 
-/*@}*/ /* end of group WWDT_EXPORTED_CONSTANTS */
+/** @} */ /* end of group WWDT_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup WWDT_EXPORTED_FUNCTIONS WWDT Exported Functions
@@ -64,7 +64,7 @@ extern "C"
 /**
   * @brief      Clear WWDT Reset System Flag
   *
-  * @param      None
+  * @note       No parameters.
   *
   * @return     None
   *
@@ -76,7 +76,7 @@ extern "C"
 /**
   * @brief      Clear WWDT Compared Match Interrupt Flag
   *
-  * @param      None
+  * @note       No parameters.
   *
   * @return     None
   *
@@ -88,7 +88,7 @@ extern "C"
 /**
   * @brief      Get WWDT Reset System Flag
   *
-  * @param      None
+  * @note       No parameters.
   *
   * @retval     0   WWDT time-out reset system did not occur
   * @retval     1   WWDT time-out reset system occurred
@@ -101,7 +101,7 @@ extern "C"
 /**
   * @brief      Get WWDT Compared Match Interrupt Flag
   *
-  * @param      None
+  * @note       No parameters.
   *
   * @retval     0   WWDT compare match interrupt did not occur
   * @retval     1   WWDT compare match interrupt occurred
@@ -114,7 +114,7 @@ extern "C"
 /**
   * @brief      Get WWDT Counter
   *
-  * @param      None
+  * @note       No parameters.
   *
   * @return     WWDT Counter Value
   *
@@ -126,7 +126,7 @@ extern "C"
 /**
   * @brief      Reload WWDT Counter
   *
-  * @param      None
+  * @note       No parameters.
   *
   * @return     None
   *
@@ -140,11 +140,11 @@ extern "C"
 
 void WWDT_Open(uint32_t u32PreScale, uint32_t u32CmpValue, uint32_t u32EnableInt);
 
-/*@}*/ /* end of group WWDT_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group WWDT_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group WWDT_Driver */
+/** @} */ /* end of group WWDT_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

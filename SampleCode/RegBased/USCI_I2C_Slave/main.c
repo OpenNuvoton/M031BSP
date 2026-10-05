@@ -133,7 +133,7 @@ void UI2C_SlaveTRx(uint32_t u32Status)
             UI2C0->TXDAT = g_au8SlvData[slave_buff_addr];
             slave_buff_addr++;
 
-            if (slave_buff_addr > TEST_LENGTH)
+            if (slave_buff_addr >= TEST_LENGTH)
             {
                 slave_buff_addr = 0;
             }

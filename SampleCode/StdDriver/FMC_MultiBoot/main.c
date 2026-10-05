@@ -29,7 +29,7 @@ void SYS_Init(void)
     /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Select HCLK clock source as HIRC and and HCLK source divider as 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Set PLL to Power-down mode and PLLSTB bit in CLK_STATUS register will be cleared by hardware.*/
@@ -54,7 +54,7 @@ void SYS_Init(void)
 
 /**
  * @brief    Routine to get a char
- * @param    None
+ * @note     No parameters.
  * @returns  Get value from UART debug port or semihost
  * @details  Wait UART debug port or semihost to input a char.
  */
@@ -121,7 +121,6 @@ static void PutHexNumber(uint32_t u32Num)
 /**
  * @brief       Hard fault handler
  * @param[in]   stack pointer points to the dumped registers in SRAM
- * @return      None
  * @details     Replace while(1) at the end of this function with chip reset if WDT is not enabled for end product
  */
 void Hard_Fault_Handler(uint32_t stack[])

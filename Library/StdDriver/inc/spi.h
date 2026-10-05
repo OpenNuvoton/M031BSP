@@ -110,7 +110,7 @@ extern "C"
 #define SPII2S_RIGHT_ZC_INT_MASK            (0x20ul)                      /*!< Right channel zero cross interrupt mask \hideinitializer */
 #define SPII2S_LEFT_ZC_INT_MASK             (0x40ul)                      /*!< Left channel zero cross interrupt mask \hideinitializer */
 
-/*@}*/ /* end of group SPI_EXPORTED_CONSTANTS */
+/** @} */ /* end of group SPI_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup SPI_EXPORTED_FUNCTIONS SPI Exported Functions
@@ -308,7 +308,6 @@ extern "C"
   * @param[in] u32ChMask The mask for left or right channel. Valid values are:
   *                    - \ref SPII2S_RIGHT
   *                    - \ref SPII2S_LEFT
-  * @return None
   * @details This function will set RZCEN or LZCEN bit of SPI_I2SCTL register to enable zero cross detection function.
   */
 __STATIC_INLINE void SPII2S_ENABLE_TX_ZCD(SPI_T *i2s, uint32_t u32ChMask)
@@ -325,7 +324,6 @@ __STATIC_INLINE void SPII2S_ENABLE_TX_ZCD(SPI_T *i2s, uint32_t u32ChMask)
   * @param[in] u32ChMask The mask for left or right channel. Valid values are:
   *                    - \ref SPII2S_RIGHT
   *                    - \ref SPII2S_LEFT
-  * @return None
   * @details This function will clear RZCEN or LZCEN bit of SPI_I2SCTL register to disable zero cross detection function.
   */
 __STATIC_INLINE void SPII2S_DISABLE_TX_ZCD(SPI_T *i2s, uint32_t u32ChMask)
@@ -438,7 +436,6 @@ __STATIC_INLINE void SPII2S_DISABLE_TX_ZCD(SPI_T *i2s, uint32_t u32ChMask)
   * @param[in] u32Ch left or right channel. Valid values are:
   *                - \ref SPII2S_MONO_LEFT
   *                - \ref SPII2S_MONO_RIGHT
-  * @return None
   * @details This function selects the recording source channel of monaural mode.
   */
 __STATIC_INLINE void SPII2S_SET_MONO_RX_CHANNEL(SPI_T *i2s, uint32_t u32Ch)
@@ -527,11 +524,11 @@ void SPII2S_DisableMCLK(SPI_T *i2s);
 void SPII2S_SetFIFO(SPI_T *i2s, uint32_t u32TxThreshold, uint32_t u32RxThreshold);
 
 
-/*@}*/ /* end of group SPI_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group SPI_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group SPI_Driver */
+/** @} */ /* end of group SPI_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

@@ -219,7 +219,7 @@ extern "C"
 #define GPIO_DBCTL_DBCLKSEL_32768     (0xFUL<<GPIO_DBCTL_DBCLKSEL_Pos)  /*!< GPIO_DBCTL setting for sampling cycle = 32768 clocks   \hideinitializer */
 
 
-/*@}*/ /* end of group GPIO_EXPORTED_CONSTANTS */
+/** @} */ /* end of group GPIO_EXPORTED_CONSTANTS */
 
 /** @addtogroup GPIO_EXPORTED_FUNCTIONS GPIO Exported Functions
   @{
@@ -466,11 +466,11 @@ void GPIO_EnableInt(GPIO_T *port, uint32_t u32Pin, uint32_t u32IntAttribs);
 void GPIO_DisableInt(GPIO_T *port, uint32_t u32Pin);
 
 
-/*@}*/ /* end of group GPIO_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group GPIO_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group GPIO_Driver */
+/** @} */ /* end of group GPIO_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

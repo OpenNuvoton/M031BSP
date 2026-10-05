@@ -33,7 +33,6 @@ int32_t  g_FMC_i32ErrCode;
 
 /**
   * @brief Disable FMC ISP function.
-  * @return None
   */
 void FMC_Close(void)
 {
@@ -222,7 +221,6 @@ int32_t FMC_GetBootSource (void)
 
 /**
   * @brief Enable FMC ISP function
-  * @return None
   */
 void FMC_Open(void)
 {
@@ -277,7 +275,6 @@ uint32_t FMC_ReadDataFlashBaseAddr(void)
   * @param[in]  i32BootSrc
   *                1: Boot from LDROM
   *                0: Boot from APROM
-  * @return    None
   * @details   This function is used to switch APROM boot or LDROM boot. User need to call
   *            FMC_SetBootSource to select boot source first, then use CPU reset or
   *            System Reset Request to reset system.
@@ -676,7 +673,7 @@ uint32_t FMC_CheckAllOne(uint32_t u32addr, uint32_t u32count)
  * @return   -1   Program failed.
  * @return   -2   Invalid address.
  *
- * @detail     Program Multi-Word data into specified address of flash.
+ * @details     Program Multi-Word data into specified address of flash.
  * @note     Global error code g_FMC_i32ErrCode
  *           -1  Program failed or time-out
  *           -2  Invalid address 
@@ -842,11 +839,11 @@ int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len)
 }
 
 
-/*@}*/ /* end of group FMC_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group FMC_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group FMC_Driver */
+/** @} */ /* end of group FMC_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/
 

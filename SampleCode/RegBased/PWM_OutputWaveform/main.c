@@ -18,9 +18,8 @@
 /**
  * @brief       PWM0 IRQ Handler
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     ISR to handle PWM0 interrupt event
  */
@@ -164,7 +163,7 @@ int32_t main(void)
 
     /*
       Configure PWM0 channel 0 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
+      Period is PWM clock source frequency / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
       Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
       Duty ratio = (180) / (200) = 90%
@@ -179,7 +178,7 @@ int32_t main(void)
 
     /*
       Configure PWM0 channel 1 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
+      Period is PWM clock source frequency / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
       Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
       Duty ratio = (160) / (200) = 80%
@@ -193,7 +192,7 @@ int32_t main(void)
 
     /*
       Configure PWM0 channel 2 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
+      Period is PWM clock source frequency / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
       Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
       Duty ratio = (150) / (200) = 75%
@@ -208,7 +207,7 @@ int32_t main(void)
 
     /*
       Configure PWM0 channel 3 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
+      Period is PWM clock source frequency / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
       Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
       Duty ratio = (140) / (200) = 70%
@@ -222,7 +221,7 @@ int32_t main(void)
 
     /*
       Configure PWM0 channel 4 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
+      Period is PWM clock source frequency / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
       Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
       Duty ratio = (120) / (200) = 60%
@@ -237,7 +236,7 @@ int32_t main(void)
 
     /*
       Configure PWM0 channel 5 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
+      Period is PWM clock source frequency / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
       Period = 48 MHz / (1 * (199 + 1)) = 240000 Hz
       Duty ratio = (100) / (200) = 50%

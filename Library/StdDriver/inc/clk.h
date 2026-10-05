@@ -77,7 +77,7 @@ extern "C"
 #define CLK_CLKSEL0_STCLKSEL_HIRC_DIV2    (0x07UL<<CLK_CLKSEL0_STCLKSEL_Pos)    /*!< Setting SysTick clock source as internal high speed RC clock/2     \hideinitializer */
 #define CLK_CLKSEL0_STCLKSEL_HCLK         (0x01UL<<SysTick_CTRL_CLKSOURCE_Pos)  /*!< Setting SysTick clock source as HCLK                       \hideinitializer */
 
-#define CLK_CLKSEL0_USBDSEL_HIRC          (0x00UL<<CLK_CLKSEL0_USBDSEL_Pos)     /*!< Setting USBD clock source as external X'tal    \hideinitializer */
+#define CLK_CLKSEL0_USBDSEL_HIRC          (0x00UL<<CLK_CLKSEL0_USBDSEL_Pos)     /*!< Setting USBD clock source as HIRC    \hideinitializer */
 #define CLK_CLKSEL0_USBDSEL_PLL           (0x01UL<<CLK_CLKSEL0_USBDSEL_Pos)     /*!< Setting USBD clock source as PLL output        \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -441,7 +441,7 @@ extern "C"
 
 #define CLK_TIMEOUT_ERR             (-1)    /*!< Clock timeout error value \hideinitializer */
 
-/*@}*/ /* end of group CLK_EXPORTED_CONSTANTS */
+/** @} */ /* end of group CLK_EXPORTED_CONSTANTS */
 
 extern int32_t g_CLK_i32ErrCode;
 
@@ -455,7 +455,7 @@ extern int32_t g_CLK_i32ErrCode;
 
 /**
   * @brief    Get PLL Clock Output Frequency
-  * @param    None
+  * @note     No parameters.
   * @return   PLL clock output frequency
   * @details  To get actual PLL clock output frequency. The clock unit is in Hz.
   * \hideinitializer
@@ -552,7 +552,7 @@ __STATIC_INLINE int32_t CLK_SysTickDelay(uint32_t us)
 
 /**
   * @brief  Get current UART0 clock frequency.
-  * @param  None.
+  * @note   No parameters.
   * @return UART0 clock frequency. The clock UNIT is in Hz.
   * \hideinitializer
   */
@@ -627,11 +627,11 @@ void     CLK_EnableSysTick(uint32_t u32ClkSrc, uint32_t u32Count);
 void     CLK_PowerDown(void);
 void     CLK_Idle(void);
 
-/*@}*/ /* end of group CLK_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group CLK_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group CLK_Driver */
+/** @} */ /* end of group CLK_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

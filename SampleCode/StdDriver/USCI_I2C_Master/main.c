@@ -250,7 +250,7 @@ void UI2C0_Init(void)
     /* Get UI2C0 Bus Clock */
     printf("UI2C clock %d Hz\n", UI2C_GetBusClockFreq(UI2C0));
 
-    /* Set UI2C1 Slave Addresses */
+    /* Set UI2C0 Slave Addresses */
     UI2C_SetSlaveAddr(UI2C0, 0, 0x15, UI2C_GCMODE_DISABLE);   /* Slave Address : 0x15 */
 
     UI2C_ENABLE_PROT_INT(UI2C0, (UI2C_PROTIEN_ACKIEN_Msk | UI2C_PROTIEN_NACKIEN_Msk | UI2C_PROTIEN_STORIEN_Msk | UI2C_PROTIEN_STARIEN_Msk));
@@ -327,7 +327,7 @@ int main()
 
     printf("+--------------------------------------------------------+\n");
     printf("|  USCI_I2C Driver Sample Code for Master access 7-bit   |\n");
-    printf("|  address Slave. This sample code needs work with       |\n");
+    printf("|  address Slave. This sample code needs to work with    |\n");
     printf("|  USCI_I2C_Slave sample code                            |\n");
     printf("|         UI2C0(Master)  <----> UI2C0(Slave)             |\n");
     printf("|  This sample code requires two boards for testing      |\n");

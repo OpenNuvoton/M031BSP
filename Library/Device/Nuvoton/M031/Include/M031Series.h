@@ -74,7 +74,7 @@
 #define __NVIC_PRIO_BITS        2       /*!< armikcmu Supports 2 Bits for the Priority Levels     */
 #define __Vendor_SysTickConfig  0       /*!< Set to 1 if different SysTick Config is used         */
 
-/*@}*/ /* end of group CMSIS_Device */
+/** @} */ /* end of group CMSIS_Device */
 
 #include "core_cm0.h"                   /*!< Cortex-M0 processor and core peripherals             */
 #include "system_M031Series.h"          /*!< M031 System                                    */
@@ -409,7 +409,7 @@ typedef volatile unsigned short vu16;
   */
 #define inp8(port)          ((*((volatile unsigned char *)(port))))
 
-/*@}*/ /* end of group IO_ROUTINE */
+/** @} */ /* end of group IO_ROUTINE */
 
 /******************************************************************************/
 /*                Legacy Constants                                            */
@@ -487,7 +487,7 @@ typedef volatile unsigned short vu16;
 #define CHIP_SERIES_NUM_G      (0x6UL)                          /*!< Chip series number for M031_G */
 #define CHIP_SERIES_NUM_I      (0x1UL)                          /*!< Chip series number for M031_I */
 
-/*@}*/ /* end of group Legacy_Constants */
+/** @} */ /* end of group Legacy_Constants */
 
 /******************************************************************************/
 /*                         Peripheral header files                            */
@@ -521,8 +521,7 @@ typedef volatile unsigned short vu16;
 /**
  * Initialize the system clock
  *
- * @param  None
- * @return None
+ * @note   No parameters.
  *
  * @brief  Setup the microcontroller system
  *         Initialize the PLL and update the SystemFrequency variable

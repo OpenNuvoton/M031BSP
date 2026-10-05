@@ -4,7 +4,7 @@
  * $Revision: 6 $
  * $Date: 18/07/16 10:20a $
  * @brief
- *           This is a USCI_UART PDMA demo and need to connect USCI_UART TX and RX.
+ *           This USCI_UART PDMA demo requires the TX and RX pins to be connected.
  *
  * @note
  * SPDX-License-Identifier: Apache-2.0

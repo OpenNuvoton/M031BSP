@@ -133,7 +133,7 @@ void UI2C_SlaveTRx(uint32_t u32Status)
             UI2C0->TXDAT = g_au8SlvData[slave_buff_addr];
             slave_buff_addr++;
 
-            if (slave_buff_addr > TEST_LENGTH)
+            if (slave_buff_addr >= TEST_LENGTH)
             {
                 slave_buff_addr = 0;
             }
@@ -250,8 +250,8 @@ int main()
     */
 
     printf("+--------------------------------------------------------+\n");
-    printf("|  USCI_I2C Driver Sample Code for Master access 7-bit   |\n");
-    printf("|  address Slave. This sample code needs work with       |\n");
+    printf("|  USCI_I2C Driver Sample Code for Slave access 7-bit    |\n");
+    printf("|  address Slave. This sample code needs to work with    |\n");
     printf("|  USCI_I2C_Master sample code                           |\n");
     printf("|         UI2C0(Master)  <----> UI2C0(Slave)             |\n");
     printf("|  This sample code requires two boards for testing      |\n");

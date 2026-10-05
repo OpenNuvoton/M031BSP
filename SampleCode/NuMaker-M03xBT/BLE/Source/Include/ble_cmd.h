@@ -1500,7 +1500,7 @@ BleStackStatus setBLE_ConnCancel(void);
  * @par BLE Event
  * Wait for @ref BLECMD_EVENT_DISCONN_COMPLETE event which indicates the connection has been terminated.
  *
- * @param[in] HostId : the link's host id.
+ * @param[in] hostId : the link's host id.
  *
  * @retval BLESTACK_STATUS_ERR_NOT_SUPPORTED  : Command not supported.
  * @retval BLESTACK_STATUS_ERR_INVALID_HOSTID : Invalid host id.
@@ -1522,11 +1522,11 @@ BleStackStatus setBLE_Disconnect(uint8_t hostId);
  *
  * @note    Conn Interval Min/Max : @ref CONN_INTERVAL_MIN - @ref CONN_INTERVAL_MAX
  * @note    Conn Latency : @ref CONN_LATENCY_MIN - @ref CONN_LATENCY_MAX
- * @note    Conn Svision Timeout : @ref CONN_SUBTIMEOUT_MIN - @ref CONN_SUBTIMEOUT_MAX \n
- *          The Svision Timeout in milliseconds shall be larger than (1 + connLatency) * CONN_INTERVAL_MAX * 2
+ * @note    Conn Supervision Timeout : @ref CONN_SUBTIMEOUT_MIN - @ref CONN_SUBTIMEOUT_MAX \n
+ *          The Supervision Timeout in milliseconds shall be larger than (1 + connLatency) * CONN_INTERVAL_MAX * 2
  *          , where CONN_INTERVAL_MAX is given in milliseconds.
  *
- * @param[in] connId : the link's Host id.
+ * @param[in] hostId : the link's host id.
  * @param[in] connParam : a pointer to connection parameter.
  *
  * @retval BLESTACK_STATUS_ERR_NOT_SUPPORTED  : Command not supported.
@@ -1923,7 +1923,7 @@ BleStackStatus setBLEGATT_ReadCharacteristicValue(uint8_t hostId, uint16_t hdlNu
  *
  * @param[in]   hostId    : the link's host id.
  * @param[in]   hdlNum    : characteristic value handle.
- * @param[in]   hdlNum    : characteristic value handle.
+ * @param[in]   Offset   : offset in the characteristic value.
  *
  * @retval BLESTACK_STATUS_ERR_NOT_SUPPORTED                  : Command not supported.
  * @retval BLESTACK_STATUS_ERR_INVALID_HOSTID                 : Invalid host id.

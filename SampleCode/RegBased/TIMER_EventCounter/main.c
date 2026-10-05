@@ -45,7 +45,7 @@ void SYS_Init(void)
     CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_TMR0SEL_Msk) | CLK_CLKSEL1_TMR0SEL_HIRC;
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/
@@ -87,7 +87,7 @@ int main(void)
     /* Init UART0 for printf */
     UART0_Init();
 
-    printf("\nThis sample code use TM0 (PB.5) to count PB.4 input event\n");
+    printf("\nThis sample code uses TM0 (PB.5) to count pulses generated on PB.4\n");
     printf("Please connect PB.5 to PB.4, press any key to continue\n");
     getchar();
 

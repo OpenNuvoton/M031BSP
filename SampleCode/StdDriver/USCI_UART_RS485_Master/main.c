@@ -14,10 +14,10 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
-#define RS485_ADDRSS1     0xC0
-#define RS485_ADDRSS2     0xA2
-#define RS485_ADDRSS3     0xB1
-#define RS485_ADDRSS4     0xD3
+#define RS485_ADDRESS1     0xC0
+#define RS485_ADDRESS2     0xA2
+#define RS485_ADDRESS3     0xB1
+#define RS485_ADDRESS4     0xD3
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Define functions prototype                                                                              */
@@ -85,20 +85,20 @@ void RS485_9bitModeMaster(void)
     }
 
     /* Send different address and data for test */
-    printf("Send Address %x and data 0~9\n", RS485_ADDRSS1);
-    RS485_SendAddressByte(RS485_ADDRSS1);
+    printf("Send Address %x and data 0~9\n", RS485_ADDRESS1);
+    RS485_SendAddressByte(RS485_ADDRESS1);
     RS485_SendDataByte(g_u8SendDataGroup1, 10);
 
-    printf("Send Address %x and data 10~19\n", RS485_ADDRSS2);
-    RS485_SendAddressByte(RS485_ADDRSS2);
+    printf("Send Address %x and data 10~19\n", RS485_ADDRESS2);
+    RS485_SendAddressByte(RS485_ADDRESS2);
     RS485_SendDataByte(g_u8SendDataGroup2, 10);
 
-    printf("Send Address %x and data 20~29\n", RS485_ADDRSS3);
-    RS485_SendAddressByte(RS485_ADDRSS3);
+    printf("Send Address %x and data 20~29\n", RS485_ADDRESS3);
+    RS485_SendAddressByte(RS485_ADDRESS3);
     RS485_SendDataByte(g_u8SendDataGroup3, 10);
 
-    printf("Send Address %x and data 30~39\n", RS485_ADDRSS4);
-    RS485_SendAddressByte(RS485_ADDRSS4);
+    printf("Send Address %x and data 30~39\n", RS485_ADDRESS4);
+    RS485_SendAddressByte(RS485_ADDRESS4);
     RS485_SendDataByte(g_u8SendDataGroup4, 10);
 
     printf("Transfer Done\n");

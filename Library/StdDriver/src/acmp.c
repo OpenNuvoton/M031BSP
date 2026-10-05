@@ -43,7 +43,6 @@ extern "C"
   *                  - \ref ACMP_CTL_HYSTERESIS_ENABLE
   *                  - \ref ACMP_CTL_HYSTERESIS_DISABLE
   *
-  * @return     None
   *
   * @details    Configure hysteresis function, select the source of negative input and enable analog comparator.
   */
@@ -58,7 +57,6 @@ void ACMP_Open(ACMP_T *acmp, uint32_t u32ChNum, uint32_t u32NegSrc, uint32_t u32
   * @param[in]  acmp The pointer of the specified ACMP module
   * @param[in]  u32ChNum Comparator number.
   *
-  * @return     None
   *
   * @details  This function will clear ACMPEN bit of ACMP_CTL register to disable analog comparator.
   */
@@ -69,11 +67,11 @@ void ACMP_Close(ACMP_T *acmp, uint32_t u32ChNum)
 
 
 
-/*@}*/ /* end of group ACMP_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group ACMP_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group ACMP_Driver */
+/** @} */ /* end of group ACMP_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

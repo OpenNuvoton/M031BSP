@@ -418,7 +418,7 @@ typedef struct
      * |        |          |1 = External high speed crystal oscillator (HXT) clock is stable and enabled.
      * |[1]     |LXTSTB    |LXT Clock Source Stable Flag (Read Only)
      * |        |          |0 = External low speed crystal oscillator (LXT) clock is not stable or disabled.
-     * |        |          |1 = External low speed crystal oscillator (LXT) clock is stabled and enabled.
+     * |        |          |1 = External low speed crystal oscillator (LXT) clock is stable and enabled.
      * |[2]     |PLLSTB    |Internal PLL Clock Source Stable Flag (Read Only)
      * |        |          |0 = Internal PLL clock is not stable or disabled.
      * |        |          |1 = Internal PLL clock is stable and enabled.

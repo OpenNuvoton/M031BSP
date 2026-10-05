@@ -47,7 +47,6 @@
   * @param[in]  u32CmpValue     Setting the window compared value. Valid values are between 0x0 to 0x3F.
   * @param[in]  u32EnableInt    Enable WWDT interrupt function. Valid values are TRUE and FALSE.
   *
-  * @return     None
   *
   * @details    This function make WWDT module start counting with different counter period and compared window value.
   * @note       Application can call this function only once after boot up.
@@ -63,11 +62,11 @@ void WWDT_Open(uint32_t u32PreScale,
     return;
 }
 
-/*@}*/ /* end of group WWDT_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group WWDT_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group WWDT_Driver */
+/** @} */ /* end of group WWDT_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/
 

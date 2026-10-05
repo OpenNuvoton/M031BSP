@@ -284,7 +284,7 @@ int32_t main(void)
     /* Initialize NAU8822 codec */
     NAU8822_Setup();
 
-    /* Set MCLK and enable MCLK (MCLK can provide clock source to NAU882) */
+    /* Set MCLK and enable MCLK (MCLK can provide clock source to NAU8822) */
     SPII2S_EnableMCLK(SPI0, 12000000);
 
 #ifndef INPUT_IS_LIN

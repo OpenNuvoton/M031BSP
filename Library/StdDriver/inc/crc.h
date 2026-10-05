@@ -53,7 +53,7 @@ extern "C"
 #define CRC_WDATA_16    (1UL << CRC_CTL_DATLEN_Pos) /*!<CRC Write Data length is 16-bit \hideinitializer */
 #define CRC_WDATA_32    (2UL << CRC_CTL_DATLEN_Pos) /*!<CRC Write Data length is 32-bit \hideinitializer */
 
-/*@}*/ /* end of group CRC_EXPORTED_CONSTANTS */
+/** @} */ /* end of group CRC_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup CRC_EXPORTED_FUNCTIONS CRC Exported Functions
@@ -78,7 +78,7 @@ extern "C"
 /**
  * @brief       Get CRC Seed Value
  *
- * @param       None
+ * @note        No parameters.
  *
  * @return      CRC seed value
  *
@@ -102,11 +102,11 @@ extern "C"
 void CRC_Open(uint32_t u32Mode, uint32_t u32Attribute, uint32_t u32Seed, uint32_t u32DataLen);
 uint32_t CRC_GetChecksum(void);
 
-/*@}*/ /* end of group CRC_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group CRC_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group CRC_Driver */
+/** @} */ /* end of group CRC_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

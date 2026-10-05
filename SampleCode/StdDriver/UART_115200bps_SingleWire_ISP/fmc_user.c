@@ -10,13 +10,13 @@
 #include "fmc_user.h"
 
 /**
-  * @brief Execute ISP FMC_ISPCMD_PROGRAM to program a buffer to flash.
-  * @param[in]  u32Cmd for FMC program command
-  * @param[in]  u32Addr Address of the flash location to be programmed.
-  *             It must be a word aligned address.
-  * @param[in]  addr_end for last to be programmed.
-  * @param[in]  data buffer to be programmed.
-  * @return None
+  * @brief Execute an ISP command on a flash address range.
+  * @param[in]  u32Cmd ISP command to execute (program, read, or page erase).
+  * @param[in]  addr_start Starting flash address.
+  *             It must satisfy the alignment requirements of u32Cmd.
+  * @param[in]  addr_end End address (exclusive) of the flash range.
+  * @param[in,out] data Buffer used for program data or read results; may be NULL for page erase.
+  * @return 0 on success; -1 if the ISP command fails.
   */
 int FMC_Proc(unsigned int u32Cmd, unsigned int addr_start, unsigned int addr_end, unsigned int *data)
 {
@@ -67,8 +67,9 @@ int FMC_Proc(unsigned int u32Cmd, unsigned int addr_start, unsigned int addr_end
 /**
  * @brief      Program 32-bit data into specified address of flash
  *
- * @param[in]  u32addr  Flash address include APROM, LDROM, Data Flash, and CONFIG
- * @param[in]  u32data  32-bit Data to program
+ * @param[in]  u32Addr  Flash address in APROM, LDROM, Data Flash, or CONFIG
+ * @param[in]  u32Data  32-bit data to program.
+ * @return     0 on success; -1 if the ISP command fails.
  *
  * @details    To program word data into Flash include APROM, LDROM, Data Flash, and CONFIG.
  *             The corresponding functions in CONFIG are listed in FMC section of TRM.
@@ -86,9 +87,10 @@ int FMC_Write_User(unsigned int u32Addr, unsigned int u32Data)
 /**
  * @brief       Read 32-bit Data from specified address of flash
  *
- * @param[in]   u32addr  Flash address include APROM, LDROM, Data Flash, and CONFIG
+ * @param[in]   u32Addr  Flash address in APROM, LDROM, Data Flash, or CONFIG
+ * @param[out]  data     Destination for the 32-bit value read.
  *
- * @return      The data of specified address
+ * @return      0 on success; -1 if the ISP command fails.
  *
  * @details     To read word data from Flash include APROM, LDROM, Data Flash, and CONFIG.
  *
@@ -105,7 +107,8 @@ int FMC_Read_User(unsigned int u32Addr, unsigned int *data)
 /**
  * @brief      Flash page erase
  *
- * @param[in]  u32addr  Flash address including APROM, LDROM, Data Flash, and CONFIG
+ * @param[in]  u32Addr  Flash address in APROM, LDROM, Data Flash, or CONFIG
+ * @return     0 on success; -1 if the ISP command fails.
  *
  * @details    To do flash page erase. The target address could be APROM, LDROM, Data Flash, or CONFIG.
  *             The page size is 512 bytes.

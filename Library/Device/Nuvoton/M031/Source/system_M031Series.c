@@ -31,9 +31,8 @@ uint32_t PllClock         = __HSI;              /*!< PLL Output Clock Frequency 
 /**
  * @brief    Update the Variable SystemCoreClock
  *
- * @param    None
+ * @note     No parameters.
  *
- * @return   None
  *
  * @details  This function is used to update the variable SystemCoreClock
  *           and must be called whenever the core clock is changed.
@@ -76,9 +75,8 @@ void SystemCoreClockUpdate(void)
 /**
  * @brief    System Initialization
  *
- * @param    None
+ * @note     No parameters.
  *
- * @return   None
  *
  * @details  The necessary initialization of system. Global variables are forbidden here.
  */
@@ -126,7 +124,6 @@ void SystemInit(void)
  * @param[in]  file  the source file name
  * @param[in]  line  line number
  *
- * @return     None
  *
  * @details    The function prints the source file name and line number where
  *             the ASSERT_PARAM() error occurs, and then stops in an infinite loop.

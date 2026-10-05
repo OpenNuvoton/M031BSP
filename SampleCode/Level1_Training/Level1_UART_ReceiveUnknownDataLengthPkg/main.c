@@ -3,7 +3,7 @@
  * @version  V3.00
  * $Revision: 3 $
  * $Date: 18/05/30 3:53p $
- * @brief    Show how to use the UART Rx timeout function for receiving unknown data length package.
+ * @brief    Show how to use the UART Rx timeout function to receive data packets of unknown length.
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.

@@ -104,7 +104,7 @@ extern "C"
 /*--------------------------------------------------------------------------------------------------*/
 #define ADC_TIMEOUT_ERR     (-1)    /*!< ADC operation abort due to timeout error \hideinitializer */
 
-/*@}*/ /* end of group ADC_EXPORTED_CONSTANTS */
+/** @} */ /* end of group ADC_EXPORTED_CONSTANTS */
 
 extern int32_t g_ADC_i32ErrCode;
 
@@ -408,11 +408,11 @@ void ADC_SetExtendSampleTime(ADC_T *adc,
                              uint32_t u32ExtendSampleTime);
 
 
-/*@}*/ /* end of group ADC_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group ADC_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group ADC_Driver */
+/** @} */ /* end of group ADC_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

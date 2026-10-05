@@ -13,9 +13,8 @@
 /**
  * @brief       GPIO PA/PB/PG/PH IRQ
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The PA/PB/PG/PH default IRQ, declared in startup_M031Series.s.
  */
@@ -41,9 +40,8 @@ void GPABGH_IRQHandler(void)
 /**
  * @brief       GPIO PC/PD/PE/PF IRQ
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The PC/PD/PE/PF default IRQ, declared in startup_M031Series.s.
  */
@@ -90,7 +88,7 @@ void SYS_Init(void)
     CLK_EnableModuleClock(UART0_MODULE);
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/
@@ -141,7 +139,7 @@ int main(void)
     GPIO_EnableInt(PB, 2, GPIO_INT_RISING);
     NVIC_EnableIRQ(GPIO_PAPBPGPH_IRQn);
 
-    /* Configure PC.1 as Quasi-bidirection mode and enable interrupt by falling edge trigger */
+    /* Configure PC.1 as Quasi-bidirectional mode and enable interrupt by falling edge trigger */
     GPIO_SetMode(PC, BIT1, GPIO_MODE_QUASI);
     GPIO_EnableInt(PC, 1, GPIO_INT_FALLING);
     NVIC_EnableIRQ(GPIO_PCPDPEPF_IRQn);

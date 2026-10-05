@@ -245,7 +245,7 @@ uint32_t BleDTM_cmd_process(uint16_t command)
 
 /** Function for reading the result of a DTM command.
  *
- * @param[out] p_dtm_event : Pointer to buffer for 16 bit event code according to DTM standard.
+ * @param[out] dtm_event : Pointer to buffer for 16 bit event code according to DTM standard.
  *
  * @return  Checking result.
  * @retval  0:  no event since last call.

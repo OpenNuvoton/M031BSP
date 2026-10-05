@@ -224,14 +224,14 @@ int32_t main(void)
            duty ratio = (CMR+1)/(CNR+1)
            cycle time = CNR+1
            High level = CMR+1
-           PWM clock source frequency from PLL is 48,000,000
+           PWM clock source frequency from PCLK0 is 48,000,000
            (CNR+1) = PWM clock source frequency/prescaler/PWM output frequency
                    = 48,000,000/3/250 = 64,000
            (Note: CNR is 16 bits, so if calculated value is larger than 65536, user should increase prescale value.)
            CNR = 64,000
            duty ratio = 30% ==> (CMR+1)/(CNR+1) = 30%
            CMR = 19,200
-           Prescale value is 4 : prescaler= 5
+           Prescale value is 2 : prescaler = 3
         */
 
         /*Set counter as up count*/
@@ -260,7 +260,7 @@ int32_t main(void)
         /* Set the PWM0 channel 2 for capture function                                          */
         /*--------------------------------------------------------------------------------------*/
         /* If input minimum frequency is 250Hz, user can calculate capture settings by follows.
-           Capture clock source frequency = PLL = 48,000,000 in the sample code.
+           Capture clock source frequency = PCLK0 = 48,000,000 in the sample code.
            (CNR+1) = Capture clock source frequency/prescaler/minimum input frequency
                    = 48,000,000/3/250 = 64,000
            (Note: CNR is 16 bits, so if calculated value is larger than 65536, user should increase prescale value.)

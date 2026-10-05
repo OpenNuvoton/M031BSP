@@ -104,7 +104,7 @@ extern "C"
 #define BPWM_CLKSRC_TIMER2                        (3UL)    /*!< BPWM Clock source selects to TIMER2 overflow */
 #define BPWM_CLKSRC_TIMER3                        (4UL)    /*!< BPWM Clock source selects to TIMER3 overflow */
 
-/*@}*/ /* end of group BPWM_EXPORTED_CONSTANTS */
+/** @} */ /* end of group BPWM_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup BPWM_EXPORTED_FUNCTIONS BPWM Exported Functions
@@ -364,11 +364,11 @@ uint32_t BPWM_GetWrapAroundFlag(const BPWM_T *bpwm, uint32_t u32ChannelNum);
 void BPWM_ClearWrapAroundFlag(BPWM_T *bpwm, uint32_t u32ChannelNum);
 
 
-/*@}*/ /* end of group BPWM_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group BPWM_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group BPWM_Driver */
+/** @} */ /* end of group BPWM_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

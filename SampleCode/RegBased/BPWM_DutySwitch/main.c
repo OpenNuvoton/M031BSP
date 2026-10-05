@@ -141,7 +141,7 @@ int32_t main(void)
 
     /*
       Configure BPWM0 channel 0 init period and duty(up counter type).
-      Period is PLL / (prescaler * (CNR + 1))
+      Period is BPWM clock source frequency / (prescaler * (CNR + 1))
       Duty ratio = (CMR) / (CNR + 1)
       Period = 48 MHz / (1 * (38399 + 1)) = 1250 Hz
       Duty ratio = (19200) / (38399 + 1) = 50%

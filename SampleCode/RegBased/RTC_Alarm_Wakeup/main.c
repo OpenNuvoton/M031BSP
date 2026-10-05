@@ -18,9 +18,8 @@ volatile uint8_t g_u8IsRTCAlarmINT = 0;
 /**
  * @brief       IRQ Handler for RTC Interrupt
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The RTC_IRQHandler is default IRQ of RTC, declared in startup_M031Series.s.
  */

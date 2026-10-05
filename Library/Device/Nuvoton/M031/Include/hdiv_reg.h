@@ -124,7 +124,3 @@ typedef struct
 #endif
 
 #endif /* __HDIV_REG_H__ */
-
-
-/**@}*/ /* HDIV_CONST */
-/**@}*/ /* end of HDIV register group */

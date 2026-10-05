@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file     main.c
  * @version  V3.00
- * @brief    Demonstrate how to transfer 1.822 Msps conversion data from ADC to SRAM by PDMA
+ * @brief    Demonstrate how to transfer 1.882 Msps conversion data from ADC to SRAM by PDMA
  *           when ADC clock source is selected to HXT that is connected to 32 Mhz crystal.
  *
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
@@ -13,7 +13,7 @@
 /*---------------------------------------------------------------------------------------------------------*/
 /* Define global variables and constants                                                                   */
 /*---------------------------------------------------------------------------------------------------------*/
-#define ADCDatalenght 16
+#define ADCDataLength 16
 #define ADCextendSampling 0
 #define PDMAchannel 1
 
@@ -21,7 +21,7 @@ volatile uint32_t g_u32ADCounter = 0;
 volatile uint32_t g_u32IsTestOver = 0;//PDMA software flag - 0: Busy/Idle , 1 = Done ,2 = Abort
 volatile uint32_t g_u32ResultSum = 0;
 volatile uint32_t g_u32ADChannel = 0;
-int16_t  g_i32ConversionData[ADCDatalenght+1] = {0};
+int16_t  g_i32ConversionData[ADCDataLength+1] = {0};
 
 
 void SYS_Init(void)
@@ -44,20 +44,20 @@ void SYS_Init(void)
     /* Enable UART module clock */
     CLK_EnableModuleClock(UART0_MODULE);
 
-    /* Switch UART0 clock source to XTAL */
+    /* Switch UART0 clock source to HIRC */
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
 
     /* Enable ADC module clock */
     CLK_EnableModuleClock(ADC_MODULE);
 
-    /* ADC clock source is HXT 12MHz, set divider to 8, ADC clock is 12/8 MHz */
+    /* ADC clock source is HXT 32MHz, set divider to 1, ADC clock is 32/1 MHz */
     CLK_SetModuleClock(ADC_MODULE, CLK_CLKSEL2_ADCSEL_HXT, CLK_CLKDIV0_ADC(1));
 
     /* Enable PDMA clock source */
     CLK_EnableModuleClock(PDMA_MODULE);
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/
@@ -88,8 +88,8 @@ void PDMA_Init()
     /* Open PDMA Channel 1 based on PDMAchannel setting*/
     PDMA_Open(PDMA, 1 << PDMAchannel);
 
-    /* transfer width is half word(16 bit) and transfer count is ADCDatalenght+1 */
-    PDMA_SetTransferCnt(PDMA, PDMAchannel, PDMA_WIDTH_16, ADCDatalenght+1);
+    /* transfer width is half word(16 bit) and transfer count is ADCDataLength+1 */
+    PDMA_SetTransferCnt(PDMA, PDMAchannel, PDMA_WIDTH_16, ADCDataLength+1);
 
     /* Set source address as ADC data register (no increment) and destination address as g_i32ConversionData array (increment) */
     PDMA_SetTransferAddr(PDMA, PDMAchannel, (uint32_t)&ADC->ADPDMA, PDMA_SAR_FIX, (uint32_t)g_i32ConversionData, PDMA_DAR_INC);
@@ -107,8 +107,8 @@ void PDMA_Init()
 
 void ReloadPDMA()
 {
-    /* transfer width is half word(16 bit) and transfer count is ADCDatalenght+1 */
-    PDMA_SetTransferCnt(PDMA, PDMAchannel, PDMA_WIDTH_16, ADCDatalenght+1);
+    /* transfer width is half word(16 bit) and transfer count is ADCDataLength+1 */
+    PDMA_SetTransferCnt(PDMA, PDMAchannel, PDMA_WIDTH_16, ADCDataLength+1);
 
     /* Select PDMA request source as ADC RX */
     PDMA_SetTransferMode(PDMA, PDMAchannel, PDMA_ADC_RX, FALSE, (uint32_t) NULL);
@@ -196,12 +196,12 @@ void ADC_FunctionTest()
         /* Calculate average and print ADC result except first sampling data result that belongs to previous channel*/
         g_u32ResultSum = 0;
         printf("\nConversion result of channel %d:\n",g_u32ADChannel);
-        for(g_u32ADCounter = 1; (g_u32ADCounter) < (ADCDatalenght+1); g_u32ADCounter++)
+        for(g_u32ADCounter = 1; (g_u32ADCounter) < (ADCDataLength+1); g_u32ADCounter++)
         {
             g_u32ResultSum += g_i32ConversionData[g_u32ADCounter];
             printf("%2d:0x%X (%d)\n", g_u32ADCounter, g_i32ConversionData[g_u32ADCounter], g_i32ConversionData[g_u32ADCounter]);
         }
-        g_u32ResultSum /= (ADCDatalenght);
+        g_u32ResultSum /= (ADCDataLength);
         printf("Average Result : 0x%X (%d)\n",g_u32ResultSum, g_u32ResultSum);
     }
 }

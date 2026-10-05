@@ -16,10 +16,10 @@
 
 
 #define IS_USE_RS485NMM     1      //1:Select NMM_Mode , 0:Select AAD_Mode
-#define MATCH_ADDRSS1       0xC0
-#define MATCH_ADDRSS2       0xA2
-#define UNMATCH_ADDRSS1     0xB1
-#define UNMATCH_ADDRSS2     0xD3
+#define MATCH_ADDRESS1       0xC0
+#define MATCH_ADDRESS2       0xA2
+#define UNMATCH_ADDRESS1     0xB1
+#define UNMATCH_ADDRESS2     0xD3
 
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -66,7 +66,7 @@ void SYS_Init(void)
     CLK->CLKDIV0 = (CLK->CLKDIV0 & (~CLK_CLKDIV0_UART1DIV_Msk)) | CLK_CLKDIV0_UART1(1);
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
     /*---------------------------------------------------------------------------------------------------------*/
     /* Init I/O Multi-function                                                                                 */
@@ -172,7 +172,7 @@ void RS485_HANDLE()
 #if (IS_USE_RS485NMM ==1) //RS485_NMM
             /* if address match, enable RX to receive data, otherwise to disable RX. */
             /* In NMM mode,user can decide multi-address filter. In AAD mode,only one address can set */
-            if((addr == MATCH_ADDRSS1) || (addr == MATCH_ADDRSS2))
+            if((addr == MATCH_ADDRESS1) || (addr == MATCH_ADDRESS2))
             {
                 UART1->FIFO &= ~UART_FIFO_RXOFF_Msk;   /* Enable RS485 RX */
             }
@@ -272,20 +272,20 @@ void RS485_9bitModeMaster()
     }
 
     /* Send different address and data for test */
-    printf("Send Address %x and data 0~9\n", MATCH_ADDRSS1);
-    RS485_SendAddressByte(MATCH_ADDRSS1);
+    printf("Send Address %x and data 0~9\n", MATCH_ADDRESS1);
+    RS485_SendAddressByte(MATCH_ADDRESS1);
     RS485_SendDataByte(g_u8SendDataGroup1, 10);
 
-    printf("Send Address %x and data 10~19\n", UNMATCH_ADDRSS1);
-    RS485_SendAddressByte(UNMATCH_ADDRSS1);
+    printf("Send Address %x and data 10~19\n", UNMATCH_ADDRESS1);
+    RS485_SendAddressByte(UNMATCH_ADDRESS1);
     RS485_SendDataByte(g_u8SendDataGroup2, 10);
 
-    printf("Send Address %x and data 20~29\n", MATCH_ADDRSS2);
-    RS485_SendAddressByte(MATCH_ADDRSS2);
+    printf("Send Address %x and data 20~29\n", MATCH_ADDRESS2);
+    RS485_SendAddressByte(MATCH_ADDRESS2);
     RS485_SendDataByte(g_u8SendDataGroup3, 10);
 
-    printf("Send Address %x and data 30~39\n", UNMATCH_ADDRSS2);
-    RS485_SendAddressByte(UNMATCH_ADDRSS2);
+    printf("Send Address %x and data 30~39\n", UNMATCH_ADDRESS2);
+    RS485_SendAddressByte(UNMATCH_ADDRESS2);
     RS485_SendDataByte(g_u8SendDataGroup4, 10);
 
     printf("Transfer Done\n");
@@ -309,7 +309,7 @@ void RS485_9bitModeSlave()
     printf("|    Normal Multidrop Operation Mode                        |\n");
     printf("+-----------------------------------------------------------+\n");
     printf("| The function is used to test 9-bit slave mode.            |\n");
-    printf("| Only Address %x and %x,data can receive                   |\n", MATCH_ADDRSS1, MATCH_ADDRSS2);
+    printf("| Only Address %x and %x,data can receive                   |\n", MATCH_ADDRESS1, MATCH_ADDRESS2);
     printf("+-----------------------------------------------------------+\n");
 
     /* Set Receiver disabled before set RS485-NMM mode */
@@ -327,14 +327,14 @@ void RS485_9bitModeSlave()
     printf("| The function is used to test 9-bit slave mode.            |\n");
     printf("|    Auto Address Match Operation Mode                      |\n");
     printf("+-----------------------------------------------------------+\n");
-    printf("|Only Address %x,data can receive                           |\n", MATCH_ADDRSS1);
+    printf("|Only Address %x,data can receive                           |\n", MATCH_ADDRESS1);
     printf("+-----------------------------------------------------------+\n");
 
     /* Set RS485-AAD Mode, address match is 0xC0 and RS485 address detection enable */
     UART1->ALTCTL = UART_ALTCTL_RS485AAD_Msk    |
                     UART_ALTCTL_ADDRDEN_Msk |
                     UART_ALTCTL_RS485AUD_Msk    |
-                    ((uint32_t)(MATCH_ADDRSS1) << UART_ALTCTL_ADDRMV_Pos) ;
+                    ((uint32_t)(MATCH_ADDRESS1) << UART_ALTCTL_ADDRMV_Pos) ;
 
 #endif
 

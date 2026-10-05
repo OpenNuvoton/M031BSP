@@ -37,7 +37,6 @@ int32_t g_ADC_i32ErrCode = 0;   /*!< ADC global error code */
   *                       - \ref ADC_ADCR_ADMD_SINGLE_CYCLE         :Single cycle scan mode.
   *                       - \ref ADC_ADCR_ADMD_CONTINUOUS           :Continuous scan mode.
   * @param[in] u32ChMask Channel enable bit. Each bit corresponds to a input channel. Bit 0 is channel 0, bit 1 is channel 1..., bit 15 is channel 15.
-  * @return  None
   * @note M031 series MCU ADC can only convert 1 channel at a time. If more than 1 channels are enabled, only channel
   *       with smallest number will be convert.
   * @note This API does not turn on ADC power nor does trigger ADC conversion.
@@ -96,7 +95,6 @@ void ADC_Open(ADC_T *adc,
 /**
   * @brief Disable ADC module
   * @param[in] adc The pointer of the specified ADC module
-  * @return None
   */
 void ADC_Close(ADC_T *adc)
 {
@@ -120,7 +118,6 @@ void ADC_Close(ADC_T *adc)
   *                      - \ref ADC_ADCR_TRGCOND_HIGH_LEVEL    :STADC High level active
   *                      - \ref ADC_ADCR_TRGCOND_FALLING_EDGE  :STADC Falling edge active
   *                      - \ref ADC_ADCR_TRGCOND_RISING_EDGE   :STADC Rising edge active
-  * @return None
   * @note Software should disable TRGEN (ADCR[8]) and ADST (ADCR[11]) before change TRGS(ADCR[5:4]).
   */
 void ADC_EnableHWTrigger(ADC_T *adc,
@@ -147,7 +144,6 @@ void ADC_EnableHWTrigger(ADC_T *adc,
 /**
   * @brief Disable hardware trigger ADC function.
   * @param[in] adc The pointer of the specified ADC module
-  * @return None
   */
 void ADC_DisableHWTrigger(ADC_T *adc)
 {
@@ -166,7 +162,6 @@ void ADC_DisableHWTrigger(ADC_T *adc)
   *                     - \ref ADC_ADF_INT    :ADC convert complete interrupt
   *                     - \ref ADC_CMP0_INT   :ADC comparator 0 interrupt
   *                     - \ref ADC_CMP1_INT   :ADC comparator 1 interrupt
-  * @return None
   */
 void ADC_EnableInt(ADC_T *adc, uint32_t u32Mask)
 {
@@ -195,7 +190,6 @@ void ADC_EnableInt(ADC_T *adc, uint32_t u32Mask)
   *                     - \ref ADC_ADF_INT     :ADC convert complete interrupt
   *                     - \ref ADC_CMP0_INT    :ADC comparator 0 interrupt
   *                     - \ref ADC_CMP1_INT    :ADC comparator 1 interrupt
-  * @return None
   */
 void ADC_DisableInt(ADC_T *adc, uint32_t u32Mask)
 {
@@ -220,7 +214,6 @@ void ADC_DisableInt(ADC_T *adc, uint32_t u32Mask)
   * @param[in] adc The pointer of the specified ADC module.
   * @param[in] u32ModuleNum Decides the sample module number, valid value are 0.
   * @param[in] u32ExtendSampleTime Decides the extend sampling time, the range is from 0~255 ADC clock. Valid value are from 0 to 0xFF.
-  * @return None
   * @details When A/D converting at high conversion rate, the sampling time of analog input voltage may not enough if input channel loading is heavy,
   *         user can extend A/D sampling time after trigger source is coming to get enough sampling time.
   */
@@ -231,10 +224,10 @@ void ADC_SetExtendSampleTime(ADC_T *adc, uint32_t u32ModuleNum, uint32_t u32Exte
                    (u32ExtendSampleTime << ADC_ESMPCTL_EXTSMPT_Pos);
 }
 
-/*@}*/ /* end of group ADC_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group ADC_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group ADC_Driver */
+/** @} */ /* end of group ADC_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/

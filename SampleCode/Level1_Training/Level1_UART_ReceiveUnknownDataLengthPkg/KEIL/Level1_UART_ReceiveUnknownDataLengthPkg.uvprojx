@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Level1_UART_ReceiveUnknowDataLength</TargetName>
+      <TargetName>Level1_UART_ReceiveUnknownDataLength</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <uAC6>1</uAC6>
@@ -48,7 +48,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\obj\</OutputDirectory>
-          <OutputName>Level1_UART_ReceiveUnknowDataLengthPkg</OutputName>
+          <OutputName>Level1_UART_ReceiveUnknownDataLengthPkg</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>

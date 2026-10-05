@@ -60,7 +60,7 @@ void SYS_Init(void)
     CLK_EnableModuleClock(UART1_MODULE);
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*---------------------------------------------------------------------------------------------------------*/
@@ -162,7 +162,7 @@ void AutoFlow_FunctionTest(void)
     printf("+-----------------------------------------------------------+\n");
     printf("|  Description :                                            |\n");
     printf("|    The sample code needs two boards. One is Master and    |\n");
-    printf("|    the other is slave. Master will send 1k bytes data     |\n");
+    printf("|    the other is slave. Master will send 256 bytes data    |\n");
     printf("|    to slave. Slave will check if received data is correct |\n");
     printf("|  Please select Master or Slave test                       |\n");
     printf("|  [0] Master    [1] Slave                                  |\n");
@@ -186,7 +186,7 @@ void AutoFlow_FunctionTxTest(void)
     /* Enable RTS and CTS autoflow control */
     UART_EnableFlowCtrl(UART1);
 
-    /* Send 1k bytes data */
+    /* Send 256 bytes data */
     for(u32i = 0; u32i < RXBUFSIZE; u32i++)
     {
         /* Send 1 byte data */
@@ -224,7 +224,7 @@ void AutoFlow_FunctionRxTest(void)
 
     printf("\n Starting to receive data...\n");
 
-    /* Wait for receive 1k bytes data */
+    /* Wait for receive 256 bytes data */
     while(g_i32pointer < RXBUFSIZE);
 
     /* Compare Data */

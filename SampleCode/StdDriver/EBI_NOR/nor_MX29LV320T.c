@@ -14,7 +14,6 @@
   *
   * @param[in]  u32Bank         Bank number for EBI
   *
-  * @return     None
   *
   * @details    Reset MX29LV320T NOR Flash.
   */
@@ -107,7 +106,7 @@ int32_t NOR_MX29LV320T_CheckStatus(uint32_t u32DstAddr, uint16_t u16Data, uint32
   *
   * @return     Return the data
   *
-  * @details    Read date from specify EBI address.
+  * @details    Read data from the specified EBI address.
   */
 uint16_t NOR_MX29LV320T_READ(uint32_t u32Bank, uint32_t u32DstAddr)
 {
@@ -124,7 +123,7 @@ uint16_t NOR_MX29LV320T_READ(uint32_t u32Bank, uint32_t u32DstAddr)
   * @retval     0               Write command pass
   * @retval     -1              Write command fail
   *
-  * @details    Write date to specify EBI address.
+  * @details    Write data to the specified EBI address.
   */
 int32_t NOR_MX29LV320T_WRITE(uint32_t u32Bank, uint32_t u32DstAddr, uint16_t u16Data)
 {
@@ -142,9 +141,7 @@ int32_t NOR_MX29LV320T_WRITE(uint32_t u32Bank, uint32_t u32DstAddr, uint16_t u16
   * @brief      Get NOR Flash ID
   *
   * @param[in]  u32Bank         Bank number for EBI
-  * @param[out] pu16IDTable     The returned pointer is consist of Manufacture ID and Device ID
-  *
-  * @return     Return Manufacture ID and Device ID
+  * @param[out] pu16IDTable     The returned pointer contains the manufacturer ID and device ID.
   *
   * @details    Return the ID of MX29LV320T NOR flash.
   */

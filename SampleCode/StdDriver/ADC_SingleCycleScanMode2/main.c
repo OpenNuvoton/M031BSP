@@ -158,7 +158,7 @@ void SYS_Init(void)
     CLK_SetModuleClock(ADC_MODULE, CLK_CLKSEL2_ADCSEL_PCLK1, CLK_CLKDIV0_ADC(1));
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/
@@ -204,7 +204,7 @@ void ADC_FunctionTest()
     {
         printf("Select input mode:\n");
         printf("  [1] Single end input (channel 0, 1, 2 and 3)\n");
-        printf("  [2] Differential input (input channel pair 0 and 1)\n");
+        printf("  [2] Differential input on channel pair 0 and 1\n");
         printf("  Other keys: exit test\n");
         u8Option = getchar();
 

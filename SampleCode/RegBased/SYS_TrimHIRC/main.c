@@ -15,9 +15,8 @@
 /**
  * @brief       HIRC Trim IRQ
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The CKFAIL_IRQHandler default IRQ
  */
@@ -66,7 +65,7 @@ void SYS_Init(void)
     /* Switch HCLK clock source to HIRC */
     CLK->CLKSEL0 = (CLK->CLKSEL0 & ~CLK_CLKSEL0_HCLKSEL_Msk ) | CLK_CLKSEL0_HCLKSEL_HIRC ;
 
-    /* Switch UART0 clock source to XTAL */
+    /* Switch UART0 clock source to HIRC */
     CLK->CLKSEL1 = (CLK->CLKSEL1 & ~CLK_CLKSEL1_UART0SEL_Msk) | CLK_CLKSEL1_UART0SEL_HIRC;
 
     /* Enable UART0 clock */

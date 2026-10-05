@@ -105,7 +105,7 @@ void USCI_AutoBaudRate_Test()
     printf("|  Description :                                            |\n");
     printf("|    The sample code needs two boards. One is Master and    |\n");
     printf("|    the other is slave.  Master will send input pattern    |\n");
-    printf("|    0x1 with different baud rate. It can check if Slave    |\n");
+    printf("|    0x55 with different baud rate. It can check if Slave   |\n");
     printf("|    calculates correct baud rate.                          |\n");
     printf("+-----------------------------------------------------------+\n");
     printf("|  Please select Master or Slave test                       |\n");

@@ -91,7 +91,7 @@ extern "C"
 #define FMC_TIMEOUT_CHKALLONE   (SystemCoreClock / 2UL)      /*!< Check-all-one command time-out 2 s   \hideinitializer */
 
 
-/*@}*/ /* end of group FMC_EXPORTED_CONSTANTS */
+/** @} */ /* end of group FMC_EXPORTED_CONSTANTS */
 
 
 /** @addtogroup FMC_EXPORTED_MACROS FMC Exported Macros
@@ -122,7 +122,7 @@ extern "C"
 #define FMC_GET_ISP_INT_FLAG()      ((FMC->ISPSTS & FMC_ISPSTS_INTFLAG_Msk) ? 1UL : 0UL) /*!< Get ISP interrupt flag Status */
 #define FMC_CLEAR_ISP_INT_FLAG()    (FMC->ISPSTS = FMC_ISPSTS_INTFLAG_Msk) /*!< Clear ISP interrupt flag*/
 
-/*@}*/ /* end of group FMC_EXPORTED_MACROS */
+/** @} */ /* end of group FMC_EXPORTED_MACROS */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Global variables                                                                                       */
@@ -144,7 +144,7 @@ __STATIC_INLINE uint32_t FMC_GetVECMAP(void);
 
 /**
  * @brief       Get current vector mapping address.
- * @param       None
+ * @note No parameters.
  * @return      The current vector mapping address.
  * @details     To get VECMAP value which is the page address for remapping to vector page (0x0).
  * @note
@@ -157,7 +157,7 @@ __STATIC_INLINE uint32_t FMC_GetVECMAP(void)
 
 /**
   * @brief    Read company ID
-  * @param    None
+  * @note No parameters.
   * @return   The company ID (32-bit). 0xFFFFFFFF means read failed.
   * @details  The company ID of Nuvoton is fixed to be 0xDA
   *
@@ -194,7 +194,7 @@ __STATIC_INLINE uint32_t FMC_ReadCID(void)
 
 /**
   * @brief    Read product ID
-  * @param    None
+  * @note No parameters.
   * @return   The product ID (32-bit). 0xFFFFFFFF means read failed.
   * @details  This function is used to read product ID.
   *
@@ -349,11 +349,11 @@ extern uint32_t  FMC_CheckAllOne(uint32_t u32addr, uint32_t u32count);
 extern int32_t FMC_WriteMultiple(uint32_t u32Addr, uint32_t pu32Buf[], uint32_t u32Len);
 extern int32_t FMC_RemapBank(uint32_t u32BankIdx);
 
-/*@}*/ /* end of group FMC_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group FMC_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group FMC_Driver */
+/** @} */ /* end of group FMC_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 #ifdef __cplusplus
 }

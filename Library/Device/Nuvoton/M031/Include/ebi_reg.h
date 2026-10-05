@@ -112,7 +112,7 @@ typedef struct
      * |        |          |0 = Chip select pin (EBI_nCS) is active low.
      * |        |          |1 = Chip select pin (EBI_nCS) is active high.
      * |[4]     |CACCESS   |Continuous Data Access Mode
-     * |        |          |When con ttinuousenuous access mode enabled, the tASU, tALE and tLHD cycles are bypass for continuous data transfer request.
+     * |        |          |When continuous access mode enabled, the tASU, tALE and tLHD cycles are bypass for continuous data transfer request.
      * |        |          |0 = Continuous data access mode Disabled.
      * |        |          |1 = Continuous data access mode Enabled.
      * |[10:8]  |MCLKDIV   |External Output Clock Divider

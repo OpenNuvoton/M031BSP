@@ -195,7 +195,7 @@ int main(void)
 
     /* Step 1, check ID */
     NOR_MX29LV320T_GET_ID(EBI_BANK1, (uint16_t *)u16IDTable);
-    printf(">> Manufacture ID: 0x%X, Device ID: 0x%X .... ", u16IDTable[0], u16IDTable[1]);
+    printf(">> Manufacturer ID: 0x%X, Device ID: 0x%X .... ", u16IDTable[0], u16IDTable[1]);
 
     if ((u16IDTable[0] != 0xC2) || (u16IDTable[1] != 0x22A8))
     {

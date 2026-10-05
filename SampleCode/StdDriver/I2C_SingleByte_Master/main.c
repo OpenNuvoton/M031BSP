@@ -112,7 +112,7 @@ int main()
     printf("| Needs to work with I2C_Slave sample code               |\n");
     printf("|                                                        |\n");
     printf("| I2C Master (I2C0) <---> I2C Slave(I2C0)                |\n");
-    printf("| !! This sample code requires two borads to test !!     |\n");
+    printf("| !! This sample code requires two boards to test !!     |\n");
     printf("+--------------------------------------------------------+\n");
 
     printf("\n");

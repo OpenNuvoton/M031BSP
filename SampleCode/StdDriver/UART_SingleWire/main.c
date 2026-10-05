@@ -49,7 +49,7 @@ void SYS_Init(void)
     /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Select HCLK clock source as HIRC and and HCLK source divider as 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
     /* Set both PCLK0 and PCLK1 as HCLK */
@@ -72,7 +72,7 @@ void SYS_Init(void)
 
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*---------------------------------------------------------------------------------------------------------*/
@@ -90,7 +90,7 @@ void SYS_Init(void)
 
     /* The RX pin needs to pull-high for single-wire */
     /* If the external circuit doesn't pull-high, set GPIO pin as Quasi-directional mode for this purpose here */
-    PA->MODE &= (PA->MODE & ~GPIO_MODE_MODE2_Msk) | (GPIO_MODE_QUASI << GPIO_MODE_MODE2_Pos);
+    PA->MODE = (PA->MODE & ~GPIO_MODE_MODE2_Msk) | (GPIO_MODE_QUASI << GPIO_MODE_MODE2_Pos);
 
     PB->MODE = (PB->MODE & ~GPIO_MODE_MODE0_Msk) | (GPIO_MODE_QUASI << GPIO_MODE_MODE0_Pos);
 
@@ -140,7 +140,7 @@ void UART2_Init()
 /*---------------------------------------------------------------------------------------------------------*/
 /* UART Test Sample                                                                                        */
 /* Test Item                                                                                               */
-/* Debug port control the Single wire 1(UART1) send data to Single wire 2(UART2) or Single wire 2(UART1)   */
+/* Debug port control the Single wire 1(UART1) send data to Single wire 2(UART2) or Single wire 2(UART2)   */
 /* send data to Single wire 1(UART1)                                                                       */
 /*---------------------------------------------------------------------------------------------------------*/
 
@@ -313,7 +313,7 @@ void UART_FunctionTest()
     printf("|  Description :                                            |\n");
     printf("|    The sample code will print input char on terminal      |\n");
     printf("|    The user must connect the UART1 RX pin(PA2) to         |\n");
-    printf("|    UART_Rx Pin(PB0).                                      |\n");
+    printf("|    UART2 RX pin(PB0).                                     |\n");
     printf("|    Single Wire 1(PA2)send data to Single Wire 2(PB0).     |\n");
     printf("|    Single Wire 2(PB0)send data to Single Wire 1(PA2).     |\n");
     printf("|    Please enter any to start    (Press '0' to exit)       |\n");

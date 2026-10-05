@@ -5,7 +5,7 @@
  * $Date: 18/07/19 2:18p $
  * @brief    Configure SPI0 as Master mode and demonstrate how to communicate
  *           with an off-chip SPI Slave device with FIFO mode. This sample
- *           code needs to work with SPI_SlaveFifoMode sample code.
+ *           code needs to work with SPI_SlaveFIFOMode sample code.
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.

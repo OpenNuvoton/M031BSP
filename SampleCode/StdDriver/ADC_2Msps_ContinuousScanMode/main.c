@@ -51,7 +51,7 @@ void SYS_Init(void)
     CLK_EnableModuleClock(PDMA_MODULE);
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate Pll Clock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate Pll Clock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/

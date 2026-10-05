@@ -18,9 +18,8 @@
 /**
  * @brief       PWM0 IRQ Handler
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     ISR to handle PWM0 interrupt event
  */
@@ -169,7 +168,7 @@ int32_t main(void)
        duty ratio = (CMR)/(CNR+1)
        cycle time = CNR+1
        High level = CMR
-       PWM clock source frequency = PLL = 48000000
+       PWM clock source frequency = PCLK0 = 48000000
        (CNR+1) = PWM clock source frequency/prescaler/PWM output frequency
                = 48000000/2/600 = 40000
        (Note: CNR is 16 bits, so if calculated value is larger than 65536, user should increase prescale value.)
@@ -202,12 +201,12 @@ int32_t main(void)
     SYS_LockReg();
 
     /* PWM0 channel 2 frequency is 1200Hz, duty 50% */
-    /* Assume PWM output frequency is 1800Hz and duty ratio is 50%, user can calculate PWM settings by follows.
+    /* Assume PWM output frequency is 1200Hz and duty ratio is 50%, user can calculate PWM settings by follows.
        up counter type:
        duty ratio = (CMR)/(CNR+1)
        cycle time = CNR+1
        High level = CMR
-       PWM clock source frequency = PLL = 48000000
+       PWM clock source frequency = PCLK0 = 48000000
        (CNR+1) = PWM clock source frequency/prescaler/PWM output frequency
                = 48000000/2/1200 = 20000
        (Note: CNR is 16 bits, so if calculated value is larger than 65536, user should increase prescale value.)

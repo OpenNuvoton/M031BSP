@@ -39,11 +39,10 @@
   *                             - \ref CRC_WDATA_RVS
   * @param[in]  u32Seed         Seed value.
   * @param[in]  u32DataLen      CPU Write Data Length. Valid values are:
-  *                             - \ref CRC_CPU_WDATA_8
-  *                             - \ref CRC_CPU_WDATA_16
-  *                             - \ref CRC_CPU_WDATA_32
+  *                             - \ref CRC_WDATA_8
+  *                             - \ref CRC_WDATA_16
+  *                             - \ref CRC_WDATA_32
   *
-  * @return     None
   *
   * @details    This function will enable the CRC controller by specify CRC operation mode, attribute, initial seed and write data length. \n
   *             After that, user can start to perform CRC calculate by calling CRC_WRITE_DATA macro or CRC_DAT register directly.
@@ -60,7 +59,7 @@ void CRC_Open(uint32_t u32Mode, uint32_t u32Attribute, uint32_t u32Seed, uint32_
 /**
   * @brief      Get CRC Checksum
   *
-  * @param[in]  None
+  * @note       No parameters.
   *
   * @return     Checksum Result
   *
@@ -90,10 +89,10 @@ uint32_t CRC_GetChecksum(void)
     return ret;
 }
 
-/*@}*/ /* end of group CRC_EXPORTED_FUNCTIONS */
+/** @} */ /* end of group CRC_EXPORTED_FUNCTIONS */
 
-/*@}*/ /* end of group CRC_Driver */
+/** @} */ /* end of group CRC_Driver */
 
-/*@}*/ /* end of group Standard_Driver */
+/** @} */ /* end of group Standard_Driver */
 
 /*** (C) COPYRIGHT 2018 Nuvoton Technology Corp. ***/

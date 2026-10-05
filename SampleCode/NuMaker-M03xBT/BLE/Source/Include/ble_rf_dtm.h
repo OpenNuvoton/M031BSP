@@ -41,7 +41,6 @@
  *
  * @ingroup ble_dtm_phy
  *
- * @return none
 */
 void BleDTM_phy_reset(void);
 
@@ -66,7 +65,6 @@ uint8_t BleDTM_txPower_set(uint8_t power_index);
  *
  * @param[in] length: the length of TX test payload.
  *
- * @return none
 */
 void BleDTM_testPayload_set(uint32_t length);
 
@@ -77,7 +75,6 @@ void BleDTM_testPayload_set(uint32_t length);
  *
  * @param[in] headerSrcAddr: a pointer to header buffer.
  *
- * @return none
 */
 void BleDTM_txTest_enable(uint8_t *headerSrcAddr);
 
@@ -88,7 +85,6 @@ void BleDTM_txTest_enable(uint8_t *headerSrcAddr);
  *
  * @param[in] channel: physical channel.
  *
- * @return none
 */
 void BleDTM_channel_set(uint8_t channel);
 
@@ -97,7 +93,6 @@ void BleDTM_channel_set(uint8_t channel);
  *
  * @ingroup ble_dtm_phy
  *
- * @return none
 */
 void BleDTM_TR_ManualSet(void);
 
@@ -108,7 +103,6 @@ void BleDTM_TR_ManualSet(void);
  *
  * @param[in] mode: sleep mode is @ref BLEDTM_SLEEP_MODE or @ref BLEDTM_DEEP_SLEEP_MODE.
  *
- * @return none
 */
 void BleDTM_sleepMode_set(uint8_t mode);
 
@@ -141,12 +135,11 @@ uint8_t BleDTM_crc_checkResult_get(void);
  *
  * @note At start of each test: Turn off RF, clear interrupt flags of RF, initialize the radio at given RF channel.
  *
- * @param[in] mode : @ref BLEDTM_TX_MODE or @ref BLEDTM_RX_MODE.
+ * @param[in] rx : @ref BLEDTM_TX_MODE or @ref BLEDTM_RX_MODE.
  * @param[in] packet_type : packet type.
  * @param[in] radio_mode : @ref BLEDTM_RADIO_PHY_1M or @ref BLEDTM_RADIO_PHY_2M.
  * @param[in] phys_ch : physical channel.
  *
- * @return none
 */
 void BleDTM_radio_prepare(uint8_t rx, uint32_t packet_type, uint8_t radio_mode, uint32_t phys_ch);
 

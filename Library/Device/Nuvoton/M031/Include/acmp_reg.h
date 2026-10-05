@@ -124,7 +124,7 @@ typedef struct
      * |        |          |CRV = CRV source voltage * (1/6+CRVCTL/24).
      * |[6]     |CRVSSEL   |CRV Source Voltage Selection
      * |        |          |0 = AVDD is selected as CRV source voltage.
-     * |        |          |1 = VREF is selected as as CRV source voltage.
+     * |        |          |1 = VREF is selected as CRV source voltage.
      */
     __IO uint32_t CTL[2];                /*!< [0x0000~0x0004] Analog Comparator 0/1 Control Register                    */
     __IO uint32_t STATUS;                /*!< [0x0008] Analog Comparator Status Register                                */

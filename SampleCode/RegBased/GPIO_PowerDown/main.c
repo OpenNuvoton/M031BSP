@@ -33,9 +33,8 @@ void PowerDownFunction(void)
 /**
  * @brief       GPIO PA/PB/PG/PH IRQ
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     The PA/PB/PG/PH default IRQ, declared in startup_M031Series.s.
  */
@@ -84,7 +83,7 @@ void SYS_Init(void)
     CLK->APBCLK0 |= CLK_APBCLK0_UART0CKEN_Msk;
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*----------------------------------------------------------------------*/

@@ -20,9 +20,8 @@ volatile uint32_t g_u32IsTestOver = 0;
 /**
  * @brief       PDMA IRQ Handler
  *
- * @param       None
+ * @note        No parameters.
  *
- * @return      None
  *
  * @details     ISR to handle PDMA interrupt event
  */
@@ -209,7 +208,7 @@ int32_t main(void)
     UART0_Init();
 
     printf("\n\nCPU @ %dHz(PLL@ %dHz)\n", SystemCoreClock, PllClock);
-    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "CPU" : "PLL");
+    printf("PWM0 clock is from %s\n", (CLK->CLKSEL2 & CLK_CLKSEL2_PWM0SEL_Msk) ? "PCLK" : "PLL");
     printf("+------------------------------------------------------------------------+\n");
     printf("|                          PWM Driver Sample Code                        |\n");
     printf("|                                                                        |\n");
@@ -233,21 +232,21 @@ int32_t main(void)
            duty ratio = (CMR+1)/(CNR+1)
            cycle time = CNR+1
            High level = CMR+1
-           PWM clock source frequency from PLL is 48,000,000
+           PWM clock source frequency from PCLK0 is 48,000,000
            (CNR+1) = PWM clock source frequency/prescaler/PWM output frequency
                    = 48,000,000/3/250 = 64,000
            (Note: CNR is 16 bits, so if calculated value is larger than 65536, user should increase prescale value.)
            CNR = 64,000
            duty ratio = 30% ==> (CMR+1)/(CNR+1) = 30%
            CMR = 19,200
-           Prescale value is 4 : prescaler= 5
+           Prescale value is 2 : prescaler = 3
         */
 
         /*Set counter as down count*/
         PWM0->CTL1 = (PWM0->CTL1 & ~PWM_CTL1_CNTTYPE0_Msk) | 0x1;
 
         /*Set PWM Timer clock prescaler*/
-        PWM_SET_PRESCALER(PWM0, 0, 2); // Divided by 2
+        PWM_SET_PRESCALER(PWM0, 0, 2); // Divided by 3
 
         /*Set PWM Timer duty*/
         PWM_SET_CMR(PWM0, 0, 19200);
@@ -303,7 +302,7 @@ int32_t main(void)
         /* Set the PWM0 channel 2 for capture function                                          */
         /*--------------------------------------------------------------------------------------*/
         /* If input minimum frequency is 250Hz, user can calculate capture settings by follows.
-           Capture clock source frequency = PLL = 48,000,000 in the sample code.
+           Capture clock source frequency = PCLK0 = 48,000,000 in the sample code.
            (CNR+1) = Capture clock source frequency/prescaler/minimum input frequency
                    = 48,000,000/3/250 = 64,000
            (Note: CNR is 16 bits, so if calculated value is larger than 65536, user should increase prescale value.)
@@ -318,7 +317,7 @@ int32_t main(void)
         PWM0->CTL1 = (PWM0->CTL1 & ~PWM_CTL1_CNTTYPE2_Msk) | (0x1 << PWM_CTL1_CNTTYPE2_Pos);
 
         /*Set PWM0 channel 2 Timer clock prescaler*/
-        PWM_SET_PRESCALER(PWM0, 2, 2); // Divided by 2
+        PWM_SET_PRESCALER(PWM0, 2, 2); // Divided by 3
 
         /*Set PWM0 channel 2 Timer period*/
         PWM_SET_CNR(PWM0, 2, 0xFFFF);

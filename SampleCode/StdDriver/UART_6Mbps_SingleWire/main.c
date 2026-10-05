@@ -47,7 +47,7 @@ void SYS_Init(void)
     /* Wait for HIRC clock ready */
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
-    /* Select HCLK clock source as HIRC and and HCLK source divider as 1 */
+    /* Select HCLK clock source as HIRC and HCLK source divider as 1 */
     CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_HIRC, CLK_CLKDIV0_HCLK(1));
 
 
@@ -59,16 +59,16 @@ void SYS_Init(void)
     CLK_EnableModuleClock(UART2_MODULE);
 
     /* Select IP clock source */
-    /* Select UART0 clock source is HXT */
+    /* Select UART0 clock source is HIRC */
     CLK_SetModuleClock(UART0_MODULE, CLK_CLKSEL1_UART0SEL_HIRC, CLK_CLKDIV0_UART0(1));
-    /* Select UART1 clock source is HXT */
+    /* Select UART1 clock source is HIRC */
     CLK_SetModuleClock(UART1_MODULE, CLK_CLKSEL1_UART1SEL_HIRC, CLK_CLKDIV0_UART1(1));
-    /* Select UART2 clock source is HXT */
+    /* Select UART2 clock source is HIRC */
     CLK_SetModuleClock(UART2_MODULE, CLK_CLKSEL3_UART2SEL_HIRC, CLK_CLKDIV4_UART2(1));
 
 
     /* Update System Core Clock */
-    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CycylesPerUs automatically. */
+    /* User can use SystemCoreClockUpdate() to calculate PllClock, SystemCoreClock and CyclesPerUs automatically. */
     SystemCoreClockUpdate();
 
     /*---------------------------------------------------------------------------------------------------------*/
@@ -265,7 +265,7 @@ uint8_t Check_Pattern(uint32_t u32Addr0, uint32_t u32Addr1, uint32_t u32Length)
     {
         if (pAddr0[i] != pAddr1[i])
         {
-            printf("Data Error Idex=%d,tx =%d,rx=%d\n", i, pAddr0[i], pAddr1[i]) ;
+            printf("Data Error Index=%d,tx =%d,rx=%d\n", i, pAddr0[i], pAddr1[i]) ;
             result = 0;
         }
     }
@@ -286,8 +286,8 @@ void UART_FunctionTest()
     printf("+-----------------------------------------------------------+\n");
     printf("|  Description :                                            |\n");
     printf("|    The sample code will print input char on terminal      |\n");
-    printf("|    The user must connect the UART2 RX pin(PA2) to         |\n");
-    printf("|    UART1 Rx Pin(PB0) 6MSPS.                               |\n");
+    printf("|    The user must connect the UART1 RX pin(PA2) to         |\n");
+    printf("|    UART2 Rx Pin(PB0) at 6 Mbps.                           |\n");
     printf("|    Single Wire 1(PA2)sends data to Single Wire 2(PB0).    |\n");
     printf("|    Single Wire 2(PB0)sends data to Single Wire 1(PA2).    |\n");
     printf("|    Please enter any to start    (Press 'E' to exit)       |\n");
